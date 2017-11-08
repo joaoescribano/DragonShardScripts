@@ -1,0 +1,772 @@
+// Dragon Shard - T2A
+// Evento Champion Spaws
+// Staff Destiny
+// http://dgshard.com.br
+
+[DEFNAME champion_config]
+champ_uid=040b4e3a9         // UID da pedra
+
+champ_entrada=5333,1589     // Onde se encontra a Pedra Champion
+champ_saida=5206,310,36     // Para onde o Player ira quando sair do gate
+
+champ_monstros1=30           // Numero de monstros no respawn 1
+champ_monstros2=20           // Numero de monstros no respawn 2
+champ_monstros3=15           // Numero de monstros no respawn 3
+champ_monstros4=10           // Numero de monstros no respawn 4
+champ_monstros5=5           // Numero de monstros no respawn 5
+champ_monstros6=1           // Numero de Chefes
+
+champ_premio2=10             // Fator do premio do lvl 1
+champ_premio3=20             // Fator do premio do lvl 2
+champ_premio4=30             // Fator do premio do lvl 3
+champ_premio5=40             // Fator do premio do lvl 4
+champ_premio6=50             // Fator do premio do lvl 5
+
+[DEFNAME champion_spawns]
+/////////////// Level 1 Champion
+champ_lvl1_1={c_zombie 1 c_spectre 1 c_m_skeletonarcher 1 c_m_wraith 1}
+champ_lvl1_2={c_zombie 1 c_spectre 1 c_m_skeletonarcher 1 c_m_wraith 1 c_m_skeleton_knight 1 c_m_skeleton_mage 1 c_liche 1}
+champ_lvl1_3={c_m_skeleton_knight 1 c_m_skeleton_mage 1 c_liche 1 c_liche 1 c_m_liche_lord 1}
+champ_lvl1_4={c_liche 1 c_m_liche_lord 1}
+champ_lvl1_5={c_m_mummy 1 c_m_liche_lord 1 c_m_skeleton_mage 1}
+champ_lvl1_chefe={c_champion_chefe_1}
+
+/////////////// Level 2 Champion
+champ_lvl2_1={c_ettin 1 c_ettin_w_axe 1 c_m_ettin_lord 1 c_m_frost_ettin 1 c_troll 1 c_troll_w_mace 1 c_troll_w_axe 1 c_m_frost_troll 1}
+champ_lvl2_2={c_ettin 1 c_ettin_w_axe 1 c_m_ettin_lord 1 c_m_frost_ettin 1 c_troll 1 c_troll_w_mace 1 c_troll_w_axe 1 c_m_frost_troll 1 c_cyclops 1}
+champ_lvl2_3={c_cyclops 1 c_m_cyclops_king 1 c_ogre 1}
+champ_lvl2_4={c_cyclops 1 c_m_cyclops_king 1 c_ogre 1 c_m_ogre_lord 1}
+champ_lvl2_5={c_m_cyclops_king 1 c_m_ogre_lord 1}
+champ_lvl2_chefe={c_champion_chefe_2}
+
+/////////////// Level 3 Champion
+champ_lvl3_1={c_terathan_drone}
+champ_lvl3_2={c_terathan_warrior}
+champ_lvl3_3={c_terathan_matriarch}
+champ_lvl3_4={c_m_terathan_avenger}
+champ_lvl3_5={c_terathan_matriarch 1 c_m_terathan_avenger 1}
+champ_lvl3_chefe={c_champion_chefe_3}
+
+/////////////// Level 4 Champion
+champ_lvl4_1={c_ophidian_warrior}
+champ_lvl4_2={c_ophidian_warrior 1 c_ophidian_mage 1}
+champ_lvl4_3={c_m_ophidian_archmage 1 c_ophidian_warrior 1 c_ophidian_mage 1}
+champ_lvl4_4={c_m_ophidian_archmage 1 c_m_ophidian_knight 1}
+champ_lvl4_5={c_m_ophidian_knight 1 c_ophidian_queen 1}
+champ_lvl4_chefe={c_champion_chefe_4}
+
+/////////////// Level 5 Champion
+champ_lvl5_1={c_terathan_matriarch 1 c_m_terathan_avenger 1 c_m_ophidian_knight 1 c_ophidian_queen 1 c_m_cyclops_king 1 c_m_ogre_lord 1 c_m_mummy 1 c_m_liche_lord 1 c_m_skeleton_mage 1}
+champ_lvl5_2={c_terathan_matriarch 1 c_m_terathan_avenger 1 c_m_ophidian_knight 1 c_ophidian_queen 1 c_m_cyclops_king 1 c_m_ogre_lord 1 c_m_mummy 1 c_m_liche_lord 1 c_m_skeleton_mage 1 c_m_dragon_blackdrake 1 c_m_dragon_bluedrake 1 c_m_dragon_greendrake 1 c_m_dragon_copperdrake 1 c_m_dragon_golddrake 1 c_m_dragon_silverdrake 1 c_dragon_green 1 c_dragon_red 1 c_m_dragon_crystal 1 c_m_dragon_ice 1}
+champ_lvl5_3={c_m_dragon_blackdrake 1 c_m_dragon_bluedrake 1 c_m_dragon_greendrake 1 c_m_dragon_copperdrake 1 c_m_dragon_golddrake 1 c_m_dragon_silverdrake 1 c_dragon_green 1 c_dragon_red 1 c_m_dragon_crystal 1 c_m_dragon_ice 1}
+champ_lvl5_4={c_dragon_green 1 c_dragon_red 1 c_m_dragon_crystal 1 c_m_dragon_ice 1 c_m_wyvern 1 c_m_dragon_wyrm 1}
+champ_lvl5_5={c_m_wyvern 1 c_m_dragon_wyrm 1}
+champ_lvl5_chefe={c_champion_chefe_5}
+
+
+[ITEMDEF i_pedra_champion]
+id      012d8
+name    Champion Spawns
+type    t_normal
+
+ON=@CREATE
+ATTR attr_static
+COLOR 0785
+TAG0.MONSTROS 0
+TAG0.MONSTROS_MORTOS 0
+TAG0.CHAMP_LVL 0
+TAG0.CHAMP_SUBLVL 0
+TAG0.CHAMPION 1
+
+On=@DCLICK
+IF !(<src.isgm>)
+    IF (<distance> > 2) 
+        src.sysmessage @0785 Encoste na pedra para usa-la
+        return 1
+    endif
+endif
+
+IF !(<TAG0.MONSTROS_MORTOS> >= <DEF.champ_monstros<eval <TAG0.CHAMP_SUBLVL>>>)
+    src.sysmessage @07a1 Mate todos os monstros desta area.
+    return 1
+ENDIF
+
+IF (<TAG0.CHEFE_MORTO> == 1)
+    TAG0.CHAMP_SUBLVL 1
+    TAG0.CHEFE_MORTO 0
+ENDIF
+
+if (<tag0.champ_lvl> == 6)
+    TAG0.CHAMP_LVL 1
+    TAG0.CHAMP_SUBLVL 1
+    TAG0.CHEFE_MORTO 0
+endif
+limpa_corpo
+f_champ_spawn
+RETURN 1
+
+[function champion]
+var.uid=<def.champ_uid>
+
+if STRMATCH(*on*,<ARGS>)
+ TRY UID.<var.uid>.TAG0.ON 1
+ SERV.ALLCLIENTS SYSMESSAGE @07a1 Champion Spaws Aberto. Entrada na Help Room.
+ return 1
+endif
+
+if STRMATCH(*off*,<ARGS>)
+ TRY UID.<var.uid>.TAG0.ON 0
+ SERV.ALLCLIENTS SYSMESSAGE @07a1 Champion Spaws Fechado.
+ return 1
+endif
+
+src.sysmessage Use o comando assim: .champion ON ou OFF.
+return 1
+
+///////////////////////////////// Champion Gate
+
+[ITEMDEF i_champion_gate]
+ID=i_moongate_blue
+Name=Champion Spawn Gate
+TYPE=t_telepad
+
+On=@CREATE
+NAME=@07a1 Champion Spawn
+Color=color_o_adamantium
+MOREP=<DEF.champ_entrada>
+
+ON=@STEP
+VAR.UID=<EVAL <def.champ_uid>>
+IF !(<SRC.ISGM>)
+ if !(0<uid.<var.uid>.TAG0.on>)
+  src.sysmessage @07a1 Evento fechado. 
+  return 1
+ endif
+ENDIF
+RETURN 0
+
+On=@DCLICk
+IF (<SRC.ISGM>)
+SRC.SYSMESSAGE <UID>
+ENDIF
+RETURN 1
+
+ON=@CLICK
+VAR.UID=<EVAL <def.champ_uid>>
+if !(0<uid.<var.uid>.TAG0.on>)
+    MESSAGE @07a1 Champion Spanws [Fechado] 
+else
+    MESSAGE @07a1 Champion Spawns
+    MESSAGE @07a1 [Level <eval <UID.<VAR.UID>.TAG0.CHAMP_LVL>>]
+    MESSAGE @07a1 [Spawn <eval <UID.<VAR.UID>.TAG0.CHAMP_SUBLVL>>]
+endif
+RETURN 1
+
+[ITEMDEF i_champion_saida]
+ID=i_moongate_blue
+Name=Champion Spawn Gate Saida
+TYPE=t_telepad
+
+On=@CREATE
+NAME=@02e9 Champion Spawn
+Color=0b99
+MOREP=<DEF.champ_saida>
+
+ON=@STEP
+IF !(<SRC.ISGM>)
+ IF (<src.hits> < <src.str>) || (<src.mana> < <src.int>)
+  src.sysmessage @059 Somente com Status FULL.
+  return 1
+ else
+  return 0
+ endif
+endif
+
+On=@DCLICk
+IF (<SRC.ISGM>)
+SRC.SYSMESSAGE <UID>
+ENDIF
+RETURN 1
+
+[FUNCTION reset_champ]
+VAR.UID=<EVAL <def.champ_uid>>
+Go <UID.<VAR.UID>.P>
+TRY UID.<var.uid>.limpa_monstro
+TRY UID.<var.uid>.TAG0.MONSTROS=0
+TRY UID.<var.uid>.TAG0.MONSTROS_MORTOS=0
+TRY UID.<var.uid>.TAG0.CHAMP_LVL=1
+TRY UID.<var.uid>.TAG0.CHAMP_LVL2=0
+TRY UID.<var.uid>.TAG0.CHAMP_SUBLVL=1
+TRY UID.<var.uid>.F_CHAMP_SPAWN
+TRY UID.<var.uid>.timer -1
+return 1
+
+[FUNCTION limpa_monstro]
+FORITEMS 60
+ IF (<TYPE> == t_corpse)
+  REMOVE
+ ENDIF
+ENDFOR
+
+FORCHARS 8000
+    IF (<isevent.e_champion>) || (<isevent.e_champion_chefe>)
+        REMOVE
+    ENDIF
+ENDFOR
+RETURN 1
+
+[FUNCTION limpar_champ]
+FORCHARS 8000
+    IF (<isevent.e_champion>) || (<isevent.e_champion_chefe>)
+        REMOVE
+    ENDIF
+ENDFOR
+RETURN 1
+
+[FUNCTION limpa_corpo]
+FORITEMS 60
+ IF (<TYPE> == t_corpse)
+  REMOVE
+ ENDIF
+ENDFOR
+
+//////////////// Funo f_champ_spawn
+
+[FUNCTION f_champ_spawn]
+IF (<TAG0.MONSTROS>==<DEF.champ_monstros<eval <TAG0.CHAMP_SUBLVL>>>)
+ TAG0.MONSTROS=0
+ TAG0.MONSTROS_MORTOS=0
+ RETURN 1
+ELSE
+ IF (<TAG0.CHAMP_SUBLVL>==6) 
+  SERV.NEWNPC <HVAL <DEF.champ_lvl<eval <TAG0.CHAMP_LVL>>_chefe>>
+  NEW.EVENTS=+e_champion_chefe
+ ELSE
+  SERV.NEWNPC <HVAL <DEF.champ_lvl<eval <TAG0.CHAMP_LVL>>_<eval <TAG0.CHAMP_SUBLVL>>>>
+  NEW.EVENTS=+e_champion
+ ENDIF
+ IF (<NEW.KARMA> > -5)
+  NEW.KARMA -2000
+ ENDIF
+ NEW.p = <p>
+ NEW.MOVE <EVAL {-8 8}> <EVAL {-8 8}>
+ NEW.UPDATE
+ TAG0.MONSTROS=<EVAL <TAG0.MONSTROS>+1>
+ f_champ_spawn
+ RETURN 1
+ENDIF
+
+[FUNCTION explodir]
+VAR.UID     <EVAL <def.champ_uid>>
+var.lvl     <EVAL <UID.<var.uid>.tag0.champ_lvl>>
+var.premio  <def.champ_premio<eval <var.lvl>>>
+
+IF (<tag0.explodir_premio> <= <var.premio>)
+    NEWITEM=i_coin_silver
+    NEW.AMOUNT={<eval <var.premio>> <eval <var.premio>*2>}
+    NEW.P=<UID.<var.uid>.p.x>,<UID.<var.uid>.p.y>
+    NEW.MOVE <EVAL {-8 8}> <EVAL {-8 8}>
+    NEW.UPDATE
+    
+    NEWITEM=i_fire_column
+    NEW.P=<UID.<var.uid>.p.x>,<UID.<var.uid>.p.y>
+    NEW.MOVE <EVAL {-8 8}> <EVAL {-8 8}>
+    new.attr=attr_move_never|attr_decay
+    new.timer=3
+    NEW.UPDATE
+    tag0.explodir_premio += 1
+ENDIF
+
+IF (<TAG0.EXPLODIR> > <eval <var.premio>*2>)
+    TAG0.EXPLODIR=1
+    tag0.explodir_premio=1
+ELSE
+    NEWITEM=i_gold
+    NEW.AMOUNT={<eval <var.premio>*10> <eval <var.premio>*20>}
+    NEW.P=<UID.<var.uid>.p.x>,<UID.<var.uid>.p.y>
+    NEW.MOVE <EVAL {-8 8}> <EVAL {-8 8}>
+    NEW.UPDATE
+    
+    NEWITEM=i_fire_column
+    NEW.P=<UID.<var.uid>.p.x>,<UID.<var.uid>.p.y>
+    NEW.MOVE <EVAL {-8 8}> <EVAL {-8 8}>
+    new.attr=attr_move_never|attr_decay
+    new.timer=3
+    NEW.UPDATE
+
+    TAG0.EXPLODIR +=1
+    explodir
+ENDIF
+
+//////////////// Eventos e_champion
+[EVENTS e_champion]
+ON=@DEATH
+VAR.UID=<EVAL <def.champ_uid>>
+TRY UID.<VAR.UID>.TAG0.MONSTROS_MORTOS=<EVAL <UID.<VAR.UID>.TAG0.MONSTROS_MORTOS>+1>
+
+IF !(<UID.<VAR.UID>.TAG0.MONSTROS_MORTOS> >=<DEF.champ_monstros<eval <UID.<VAR.UID>.TAG0.CHAMP_SUBLVL>>>)
+ RETURN 0
+ELSE
+ IF (<UID.<VAR.UID>.TAG0.CHAMP_SUBLVL>==6)
+  TRY UID.<VAR.UID>.TAG0.CHAMP_SUBLVL=1
+  TRY UID.<VAR.UID>.TAG0.CHAMP_LVL=<EVAL <UID.<VAR.UID>.TAG0.CHAMP_SUBLVL>+1>
+
+  IF (<UID.<VAR.UID>.TAG0.CHAMP_LVL>==5)
+   TRY UID.<VAR.UID>.TAG0.CHAMP_LVL=1
+  ENDIF
+ ELSE
+  TRY UID.<VAR.UID>.TAG0.CHAMP_SUBLVL=<EVAL <UID.<VAR.UID>.TAG0.CHAMP_SUBLVL>+1>
+ ENDIF
+ENDIF
+
+RETURN 0
+
+[EVENTS e_champion_chefe]
+ON=@DEATH
+VAR.UID=<EVAL <def.champ_uid>>
+TRY UID.<VAR.UID>.TAG0.MONSTROS_MORTOS 2
+TRY UID.<VAR.UID>.TAG0.CHEFE_MORTO 1
+TRY UID.<VAR.UID>.TAG0.CHAMP_LVL = <eval <UID.<VAR.UID>.TAG0.CHAMP_LVL>+1>
+TRY UID.<VAR.UID>.explodir
+RETURN 0
+
+////////////// Chefes
+
+[CHARDEF c_champion_chefe_1]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=10,20
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+  STR=100
+  DEX=100
+  INT=100
+
+  // AI
+  tag0.ai_block_paralyze = 1
+  tag0.ai_block_paralyze_field = 1
+  tag0.ai_block_fire_field = 1
+  tag0.ai_block_poison = 1
+  tag0.ai_block_poison_field = 1
+
+  ARCHERY={90.0 140.0}
+  MAGERY={90.0 100.0}
+  Swordsmanship={90.0 100.0}
+  TACTICS={90.0 100.0}
+  PARRYING={90.0 100.0}
+  HIDING={90.0 100.0}
+  POISONING={90.0 100.0}
+
+  KARMA={-10000 -3000}
+  FAME={-10000 -3000}
+
+  NPC=brain_monster
+
+  ITEM=i_mt_horse_brown_dk
+  COLOR=color_o_rosite
+
+  ITEMNEWBIE=i_rosite_platemail_arms
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_platemail_leggings
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_platemail_gorget
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_platemail_gloves
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_platemail_chest
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_bone_harvester
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_rosite_shield_heater
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_death_bow
+  NAME=a bow
+  COLOR=color_o_rosite
+  ITEMNEWBIE=i_mask_bear
+  COLOR=color_o_rosite
+  ITEMNEWBIE=02687
+  color=color_o_rosite
+
+ON=@NPCRESTOCK
+  ITEMNEWBIE=i_spellbook
+  ADDSPELL=s_paralyze
+
+[CHARDEF c_champion_chefe_2]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,30
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+  STR=115
+  DEX=115
+  INT=115
+
+  // AI
+  tag0.ai_block_paralyze = 1
+  tag0.ai_block_paralyze_field = 1
+  tag0.ai_block_fire_field = 1
+  tag0.ai_block_poison = 1
+  tag0.ai_block_poison_field = 1
+
+  ARCHERY={90.0 140.0}
+  MAGERY={90.0 100.0}
+  Swordsmanship={90.0 100.0}
+  TACTICS={90.0 100.0}
+  PARRYING={90.0 100.0}
+  HIDING={90.0 100.0}
+  POISONING={90.0 100.0}
+
+  KARMA={-10000 -3000}
+  FAME={-10000 -3000}
+
+  NPC=brain_monster
+
+  ITEM=i_mt_horse_brown_dk
+  COLOR=color_o_onix
+
+  ITEMNEWBIE=i_onix_platemail_arms
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_platemail_leggings
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_platemail_gorget
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_platemail_gloves
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_platemail_chest
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_bone_harvester
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_onix_shield_heater
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_death_bow
+  NAME=a bow
+  COLOR=color_o_onix
+  ITEMNEWBIE=i_mask_bear
+  COLOR=color_o_onix
+  ITEMNEWBIE=02687
+  color=color_o_onix
+
+ON=@NPCRESTOCK
+  ITEMNEWBIE=i_spellbook
+  ADDSPELL=s_paralyze
+
+[CHARDEF c_champion_chefe_3]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=30,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+  STR=125
+  DEX=125
+  INT=125
+
+  // AI
+  tag0.ai_block_paralyze = 1
+  tag0.ai_block_paralyze_field = 1
+  tag0.ai_block_fire_field = 1
+  tag0.ai_block_poison = 1
+  tag0.ai_block_poison_field = 1
+
+  ARCHERY={90.0 140.0}
+  MAGERY={90.0 100.0}
+  Swordsmanship={90.0 100.0}
+  TACTICS={90.0 100.0}
+  PARRYING={90.0 100.0}
+  HIDING={90.0 100.0}
+  POISONING={90.0 100.0}
+
+  KARMA={-10000 -3000}
+  FAME={-10000 -3000}
+
+  NPC=brain_monster
+
+  ITEM=i_mt_horse_brown_dk
+  COLOR=color_o_azurite
+
+  ITEMNEWBIE=i_azurite_platemail_arms
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_platemail_leggings
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_platemail_gorget
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_platemail_gloves
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_platemail_chest
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_bone_harvester
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_azurite_shield_heater
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_death_bow
+  NAME=a bow
+  COLOR=color_o_azurite
+  ITEMNEWBIE=i_mask_bear
+  COLOR=color_o_azurite
+  ITEMNEWBIE=02687
+  color=color_o_azurite
+
+ON=@NPCRESTOCK
+  ITEMNEWBIE=i_spellbook
+  ADDSPELL=s_paralyze
+
+[CHARDEF c_champion_chefe_4]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=40,50
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+  STR=135
+  DEX=135
+  INT=135
+
+  // AI
+  tag0.ai_block_paralyze = 1
+  tag0.ai_block_paralyze_field = 1
+  tag0.ai_block_fire_field = 1
+  tag0.ai_block_poison = 1
+  tag0.ai_block_poison_field = 1
+
+  ARCHERY={90.0 140.0}
+  MAGERY={90.0 100.0}
+  Swordsmanship={90.0 100.0}
+  TACTICS={90.0 100.0}
+  PARRYING={90.0 100.0}
+  HIDING={90.0 100.0}
+  POISONING={90.0 100.0}
+
+  KARMA={-10000 -3000}
+  FAME={-10000 -3000}
+
+  NPC=brain_monster
+
+  ITEM=i_mt_horse_brown_dk
+  COLOR=color_o_titanium
+
+  ITEMNEWBIE=i_titanium_platemail_arms
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_platemail_leggings
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_platemail_gorget
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_platemail_gloves
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_platemail_chest
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_bone_harvester
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_titanium_shield_heater
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_death_bow
+  NAME=a bow
+  COLOR=color_o_titanium
+  ITEMNEWBIE=i_mask_bear
+  COLOR=color_o_titanium
+  ITEMNEWBIE=02687
+  color=color_o_titanium
+
+ON=@NPCRESTOCK
+  ITEMNEWBIE=i_spellbook
+  ADDSPELL=s_paralyze
+
+[CHARDEF c_champion_chefe_5]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=50,60
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+  STR=150
+  DEX=150
+  INT=150
+
+  // AI
+  tag0.ai_block_paralyze = 1
+  tag0.ai_block_paralyze_field = 1
+  tag0.ai_block_fire_field = 1
+  tag0.ai_block_poison = 1
+  tag0.ai_block_poison_field = 1
+
+  ARCHERY={90.0 140.0}
+  MAGERY={90.0 100.0}
+  Swordsmanship={90.0 100.0}
+  TACTICS={90.0 100.0}
+  PARRYING={90.0 100.0}
+  HIDING={90.0 100.0}
+  POISONING={90.0 100.0}
+
+  KARMA={-10000 -3000}
+  FAME={-10000 -3000}
+
+  NPC=brain_monster
+
+  ITEM=i_mt_horse_brown_dk
+  COLOR=color_o_adamantium
+
+  ITEMNEWBIE=i_adamantium_platemail_arms
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_platemail_leggings
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_platemail_gorget
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_platemail_gloves
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_platemail_chest
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_bone_harvester
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_adamantium_shield_heater
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_death_bow
+  NAME=a bow
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=i_mask_bear
+  COLOR=color_o_adamantium
+  ITEMNEWBIE=02687
+  color=color_o_adamantium
+
+ON=@NPCRESTOCK
+  ITEMNEWBIE=i_spellbook
+  ADDSPELL=s_paralyze
+
+////////////////// Champion Items
+
+////////////// Champion Robe
+
+[itemdef i_champion_robe]
+Name=Champion Robe
+id=02687
+type=t_clothing
+VALUE=150000
+DYE=1
+ARMOR=20
+
+ON=@Create
+ATTR=00004
+HITPOINTS=1000
+COLOR=07a1
+
+ON=@EQUIP
+src.modstr +=5
+src.moddex +=5
+src.modint +=5
+
+
+ON=@unequip
+src.sound=snd_SPELL_BLESS
+src.modstr -=5
+src.moddex -=5
+src.modint -=5
+
+////////////// Champion War Axe
+
+[ITEMDEF i_champion_waraxe]
+id=i_axe_war
+name=Champion War Axe
+WEIGHT=0
+TYPE=T_WEAPON_mace_smith
+FLIP=1
+DAM=30,40
+SKILL=Swordsmanship
+REQSTR=10
+TWOHANDS=N
+SPEED=35
+
+ON=@Create
+ATTR=00004
+HITPOINTS=500
+COLOR=07a1
+
+///////////////////// Bloka Biko
+
+[ITEMDEF i_blokabixo]
+ID=01ea7
+TYPE=t_eq_script
+
+ON=@CREATE
+ATTR=080
+
+ON=@STEP
+IF (<SRC.ISEVENT.e_champion>) || (<SRC.ISEVENT.e_champion_chefe>)
+ SRC.GO 5335,1614
+ENDIF
+
+[ITEMDEF i_pedra_troca_sc]
+id 0ed4
+type t_normal
+name Troca de SC
+
+ON=@Create
+color 07a1
+attr attr_static
+
+on=@dclick
+src.sysmessage @077a Sistema desativo até o novo ficar pronto.
+//src.dialog d_champion
+return 1
+
+[DIALOG d_champion]
+0,0
+page 0
+resizepic 112 73 9200 431 256
+gumppic 91 88 12 1745
+gumppic 89 87 60970 1952
+resizepic 120 81 9200 413 35
+text 131 88 52 0
+text 397 88 52 1
+gumppic 90 89 50644 1952
+text 267 137 1952 2
+text 267 221 1952 3
+text 268 136 1952 4
+text 268 220 1952 5
+text 269 135 1952 6
+text 269 219 1952 7
+text 270 135 1952 8
+text 270 219 1952 9
+htmlgump 264 160 242 29 10 1 0
+htmlgump 264 244 242 29 11 1 0
+button 467 186 4037 4036 1 0 1
+button 467 269 4037 4036 1 0 2
+
+[DIALOG d_champion text]
+Dragon Shard - T2A
+Troca de Silver Coin
+Champion Robe (20k de SC)
+Champion War Axe (15k de SC)
+Champion Robe (20k de SC)
+Champion War Axe (15k de SC)
+Champion Robe (20k de SC)
+Champion War Axe (15k de SC)
+Champion Robe (20k de SC)
+Champion War Axe (15k de SC)
+Robe pintáve NB, +5 nos status
+Arma de 1 mão NB, dano 30,40
+
+[DIALOG d_champion button]
+ON=1
+if !(0<src.restest 20000 i_coin_silver>)
+    src.sysmessage @07a1 Voce precisa de 20k de Silver Coins para trocar pelo robe.
+    return 1
+endif
+src.consume 20000 i_coin_silver
+serv.newitem i_champion_robe
+new.cont <src.uid>
+
+ON=2
+if !(0<src.restest 15000 i_coin_silver>)
+    src.sysmessage @07a1 Voce precisa de 15k de Silver Coins para trocar pelo war axe.
+    return 1
+endif
+src.consume 15000 i_coin_silver
+serv.newitem i_champion_waraxe
+new.cont <src.uid>
+
+[EOF]

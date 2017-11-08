@@ -1,0 +1,845 @@
+[FUNCTION POLYMORPH_SYS]
+//////////// DESARMAR TODOS ITEMS ////////////////
+src.findlayer(1).unequip
+src.findlayer(2).unequip
+src.findlayer(3).unequip
+src.findlayer(4).unequip
+src.findlayer(5).unequip
+src.findlayer(6).unequip
+src.findlayer(7).unequip
+src.findlayer(8).unequip
+src.findlayer(9).unequip
+src.findlayer(10).unequip
+src.findlayer(12).unequip
+src.findlayer(13).unequip
+src.findlayer(14).unequip
+src.findlayer(15).unequip
+src.findlayer(17).unequip
+src.findlayer(18).unequip
+src.findlayer(19).unequip
+src.findlayer(20).unequip
+src.findlayer(22).unequip
+src.findlayer(23).unequip
+src.findlayer(24).unequip
+SRC.SPELLEFFECT s_dispel 1000
+SRC.SPELLEFFECT s_night_sight 1000
+///////////// CAPTURAR STATUS
+SRC.TAG.POLYSTR=<SRC.STR>
+SRC.TAG.POLYDEX=<SRC.DEX>
+SRC.TAG.POLYINT=<SRC.INT>
+IF (STRMATCH(*Chicken*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=45
+SRC.TAG.POLYDEX_EX=20
+ELSEIF (STRMATCH(*Dog*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=50
+SRC.TAG.POLYDEX_EX=30
+ELSEIF (STRMATCH(*Giant Serpent*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=110
+SRC.TAG.POLYDEX_EX=65
+ELSEIF (STRMATCH(*Alligator*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=85
+SRC.TAG.POLYDEX_EX=60
+ELSEIF (STRMATCH(*Demon*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=200
+SRC.TAG.POLYDEX_EX=95
+ELSEIF (STRMATCH(*Dragon*,*<SRC.TAG.POLYID>*))
+SRC.TAG.POLYSTR_EX=250
+SRC.TAG.POLYDEX_EX=80
+ENDIF
+
+[FUNCTION GETGUILD]
+IF (<ISGM>)
+RETURN Staff
+ELSEIF (<flags>&statf_incognito) || !(<guild>)
+RETURN [nenhuma]
+ELSE
+RETURN <guild.name>
+ENDIF
+
+[FUNCTION guildlogo]
+IF (STRMATCH(<ASC http:>*,<ASC <ARGS>>))
+SRC.SYSMESSAGE Sem http://
+ELSE
+OBJ=<GUILD>
+IF (<OBJ.BASEID>==I_GUILDSTONE)
+IF (<OBJ.MASTERUID>==<SRC>)
+OBJ.TAG.LOGO=<ARGS>
+ENDIF
+ENDIF
+ENDIF
+
+[FUNCTION GUILDIMG]
+IF (<ISEMPTY <TAG.LOGO>>)
+RETURN img263.echo.cx/img263/6233/guildsemlogo1ek.jpg
+ELSE
+RETURN <TAG0.LOGO>
+ENDIF
+
+[FUNCTION guildname]
+RETURN <GETGUILD>
+
+///////////corpo elf//////////////
+[function f_corpo]
+if (<account.plevel> > 0)
+	return 0
+endif
+
+if (<body> == c_elf_male)
+ body c_man
+ id c_man
+ obody c_man
+
+ if (<findtype.t_hair>)
+  findtype.t_hair.remove
+ endif
+ 
+ if (<findtype.t_beard>)
+  findtype.t_beard.remove
+ endif
+ 
+ newitem i_hair_long
+ new.use
+ oskin <def.colors_skin>
+ color <src.oskin>
+ updatex
+endif
+
+if (<body> == c_elf_female)
+ src.body c_woman
+ src.id c_woman
+ if (<findtype.t_hair>)
+  findtype.t_hair.remove
+ endif
+ 
+ src.obody c_woman
+ newitem i_hair_long
+ new.equip
+ src.oskin <def.colors_skin>
+ src.color <src.oskin>
+ src.fix
+ src.update
+endif
+
+[ITEMDEF i_piso_ress] 
+NAME=Ress
+ID=i_floor_marble_5
+DYE=1
+TYPE=t_normal
+
+ON=@Create 
+ATTR=00090
+color=0481
+
+ON=@STEP
+SRC.RESURRECT 1
+RETURN 1
+
+[FUNCTION show]
+src.sysmessage <<args>>
+
+
+[FUNCTION showeval]
+src.sysmessage @0790 <eval <<args>>>
+
+[function dismount]
+findlayer.21.updatex
+if (<findlayer.25>)
+obj=<findlayer.25.more2>
+obj.p=<p>
+findlayer.25.remove
+flags &= ~080000000
+OBJ.SHRINK
+BOUNCE <obj.ACTARG1>&~080000000
+LOCAL.BLAH=<obj.ACTARG1>&~080000000
+IF (0<ARGN1>==1)
+TRY UID.<LOCAL.BLAH>.CONT=<FINDLAYER.29>
+FINDLAYER.29.UPDATEX
+FINDLAYER.29.OPEN
+SYSMESSAGE @07a1 Sua montaria foi pro seu banco.
+ENDIF
+findlayer.21.updatex
+updatex
+endif
+
+[FUNCTION iscriminal]
+IF (<ISPLAYER>)
+	IF (<FLAGS>&statf_criminal)
+		RETURN 1
+	ELSE
+		RETURN 0
+	ENDIF
+ENDIF
+
+IF ((<FLAGS>&statf_criminal) || (<karma> <= 0)) && (<NPC>!=brain_human)
+	RETURN 1
+ELSE
+	RETURN 0
+ENDIF
+
+[FUNCTION desparaliza]
+if (<flags>&statf_freeze) 
+flags=<flags>&~statf_freeze
+endif 
+if (<restest 1 i_rune_paralyze>) 
+consume i_rune_paralyze
+RETURN 1
+endif
+
+[function site]
+weblink=<serv.url>
+
+////////////////////////////////////////////////////
+
+[DIALOG D_JATEMESSENOME]
+0,0
+page 0
+resizepic 68 106 3600 376 368
+gumppic 411 50 10441
+tilepic 87 120 21768
+tilepic 371 322 28782
+tilepic 356 319 28780
+tilepic 334 318 28781
+text 124 127 91 0
+text 117 155 91 1
+text 117 182 91 2
+text 109 226 32 3
+text 286 275 1 4
+button 224 429 247 248 1 0 1
+
+[DIALOG D_JATEMESSENOME TEXT]
+Ja existe no shard alguem com este nome,
+por favor, mande uma page para o gm para
+que ele mude seu nome assim que possivel.
+"Dragon Shard" agradece a preferencia.
+Seja Bem Vindo.
+
+/////////////////////////////////////////////////////////
+
+///////////MUTE/////////////////////
+
+[FUNCTION MUTE]
+NEWITEM i_mute
+NEW.EQUIP
+RETURN 1
+
+[ITEMDEF i_mute]
+// Para trocar precos
+id=i_memory
+type=t_eq_script
+name=mute
+
+ON=@Create
+ATTR=attr_invis|attr_newbie
+
+ON=@equip
+target @0790 Quem voce quer mutar ?
+RETURN 1
+
+ON=@Targon_ground
+remove
+return 1
+
+ON=@Targon_char
+IF (<SRC.TARG.TAG0.MUTE> == 0)
+SRC.TARG.TAG.MUTE=1
+SRC.SYSMESSAGE @0790 Voce Mutou <SRC.TARG.NAME>.
+remove
+RETURN 1
+ENDIF
+
+IF (<SRC.TARG.TAG0.MUTE> == 1)
+SRC.TARG.TAG.MUTE=0
+SRC.SYSMESSAGE @0790 Voce DesMutou <SRC.TARG.NAME>.
+remove
+RETURN 1
+ENDIF
+
+
+ON=@Targon_cancel
+remove
+return 1
+
+ON=@Targon_item
+remove
+return 1
+
+[function becriminal]
+IF !(<iscriminal>)
+IF !(<findid.i_criminal_timer>)
+flags |= statf_criminal
+serv.newitem i_criminal_timer
+equip <new>
+sysmessage Voce esta criminal!
+ENDIF
+ENDIF
+
+[itemdef i_criminal_timer]
+ID=i_memory
+TYPE=t_eq_script
+NAME=criminal timer
+
+ON=@Equip
+timer=<HVAL 60*<SERV.CRIMINALTIMER>>
+
+ON=@Timer
+cont.flags &= ~statf_criminal
+remove
+return 1
+
+[function showuid]
+targetf showuid_
+
+[function showuid_]
+sysmessage @88 O uid de <argo.name> e <argo.uid>
+
+[function removeboat]
+IF !(0<argn2>)
+LOCAL.TRANSFER=0
+ELSE
+LOCAL.TRANSFER=<argn2>
+ENDIF
+FORCHARMEMORYTYPE 0100
+IF (<LINK.TYPE>==t_ship)
+IF (<LINK>==<ARGN1>)
+IF !(<LOCAL.TRANSFER>)
+LINK.REMOVE
+REMOVE
+RETURN 1
+ENDIF
+CONT=<LOCAL.TRANSFER>
+ENDIF
+ENDIF
+ENDFOR
+
+[FUNCTION barcos]
+IF !(<memoryfindtype.0100>)
+return 0
+ENDIF
+LOCAL.BARCOS=0
+LOCAL.TMP=<OBJ>
+OBJ=<UID>
+FORCHARMEMORYTYPE 0100
+IF (<LINK.TYPE>==t_ship)
+IF (<LINK.MORE1>==<OBJ>)
+LOCAL.BARCOS += 1
+ENDIF
+ENDIF
+ENDFOR
+return <eval <local.barcos>>
+
+[FUNCTION ispk]
+IF (<NPC>)
+IF (<KARMA> < -2000)
+RETURN 1
+ELSE
+RETURN 0
+ENDIF
+ENDIF
+IF !(<KARMA> > -8001) || (<KILLS> > <SERV.MURDERMINCOUNT>)
+RETURN 1
+ENDIF
+RETURN 0
+
+[FUNCTION ISINBANK]
+LOCAL.PUR=<UID>
+FORCONT <UID.<ARGN1>.FINDLAYER.29> 9999
+IF (<UID>==<LOCAL.PUR>)
+RETURN 1
+ENDIF
+ENDFOR
+RETURN 0
+
+[FUNCTION transfer_pet]
+IF (<ARGO.UID>)
+ OBJ = <ARGO.UID>
+ IF (<OBJ.ISITEM> == 0)
+  IF (<OBJ.NPC> == 0)
+   trysrc <OBJ> UID.<ARGS>.dialog dialog_transfer_pet
+  ENDIF
+ ENDIF
+ELSE
+ TARGETF transfer_pet <UID>
+ENDIF
+RETURN
+
+[DIALOG dialog_transfer_pet]
+0,0
+resizepic 0 0 5120 400 130
+resizepic 10 10 2620 100 100
+
+page 0
+tilepic 30 40 <DISPIDDEC> 
+
+//TEXT
+dtext 130 15 0c1 Deseja aceitar <NAME>?
+dtext 200 50 0480 Sim
+dtext 200 70 0480 Nao
+
+//BUTTONS
+button 180 75 2360 2361 1 0 0
+button 180 55 2360 2361 1 0 1
+
+[DIALOG dialog_transfer_pet BUTTON]
+ON=1
+IF (<UID>)
+ clear_memory
+ newitem i_memory
+ act.color memory_ipet
+ act.more1 04
+ act.more2 <serv.time>
+ act.morep <src.p>
+ act.link <src.uid>
+ act.cont <uid>
+ENDIF
+
+[FUNCTION closealldialogs]
+IF (<DIALOGLIST.COUNT>)
+    FOR 0 <EVAL <DIALOGLIST.COUNT>-1>
+    LOCAL.DIALOGNAME=<DIALOGLIST.<dLOCAL._FOR>.ID>
+        IF (STRCMPI(d_pages_resp_alerta,<LOCAL.DIALOGNAME>))
+        DIALOGCLOSE <LOCAL.DIALOGNAME> <ARGN2>
+        ENDIF
+    ENDFOR
+ENDIF
+
+[FUNCTION arrumar_potes]
+FORINSTANCES i_mapa_ts
+    ATTR 04
+ENDFOR
+
+[FUNCTION arrumar_mapas]
+FORINSTANCES i_mapa_tso
+    ATTR 04
+ENDFOR
+
+[FUNCTION isPlayerFullStats]
+if (<hits> == <maxhits>) && (<stam> == <maxstam>) && (<mana> == <maxmana>)
+  return 1
+else
+  return 0
+endif
+
+[FUNCTION ispk]
+if (<kills> > 1)
+	return 1
+endif
+return 0
+
+[FUNCTION ceil]
+if (<db.connected>)
+	db.query "SELECT ROUND(<args>) as val"
+	return <eval <db.row.0.val>>
+else
+	return <args>
+endif
+
+[FUNCTION ispet]
+if (0<memoryfindtype.memory_ipet>)
+ return 1
+endif
+return 0
+
+[FUNCTION isnpc]
+if (0<restest i_vendorbox>)
+ return 1
+endif
+return 0
+
+[FUNCTION isplayer]
+if (0<account>)
+ return 1
+endif
+return 0
+
+[FUNCTION closealldialogs]
+IF (<DIALOGLIST.COUNT>)
+	FOR 0 <EVAL <DIALOGLIST.COUNT>-1>
+		DIALOGCLOSE <DIALOGLIST.<dLOCAL._FOR>.ID> <ARGN2>
+	ENDFOR
+ENDIF
+
+[function ishuman]
+if (<body> == c_man) || (<body> == c_woman)
+return 1
+endif
+return 0
+
+[function isgargoyle]
+if (<body> == c_gargoyle_male) || (<body> == c_gargoyle_female)
+return 1
+endif
+return 0
+
+[function iselven]
+if (<body> == c_elf_male) || (<body> == c_elf_female)
+return 1
+endif
+return 0
+
+[function ismale]
+if (<body> == c_gargoyle_male) || (<body> == c_elf_male) || (<body> == c_man)
+return 1
+endif
+return 0
+
+[function isfemale]
+if (<body> == c_gargoyle_female) || (<body> == c_elf_female) || (<body> == c_woman)
+return 1
+endif
+return 0
+
+[FUNCTION ishumanaid]
+if (<ismale> || <isfemale>)
+RETURN 1
+endif
+RETURN 0
+
+[FUNCTION max]
+RETURN <QVAL <ARGN2> < <ARGN1>? <ARGN1> : <ARGN2>>
+
+[FUNCTION min]
+RETURN <QVAL <ARGN2> < <ARGN1>? <ARGN2> : <ARGN1>>
+
+[function abs] // Absolute value: <abs x>
+if <argn1> < 0
+	return <eval (<argn1> * -1)>
+endif
+return <argn1>
+
+[FUNCTION FTIME]
+IF (<ARGS> > 86400)
+  return <EVAL <ARGS>/86400> dias , <EVAL (<ARGS>%86400)/3600> hrs, <EVAL ((<ARGS>%86400)%3600)/60> min, <EVAL ((<ARGS>%86400)%3600)%60> seg
+ELIF (<ARGS> > 3600)
+  return <EVAL <ARGS>/3600> hrs, <EVAL (<ARGS>%3600)/60> min, <EVAL (<ARGS>%3600)%60> seg
+ELIF (<ARGS> > 60)
+  return <EVAL <ARGS>/60> min, <EVAL <ARGS>%60> seg
+ELSE
+  return <eval <ARGS>> seg
+ENDIF
+
+[FUNCTION forcelogout]
+sendpacket 0d1 01
+
+[function f_loopanim]
+if <argv[1]>>1
+	for <eval (<argv[1]>-1)>
+	timerf <eval (<local._for>*<argv[2]>)>,anim <eval <argv[0]>>
+	if !(<argv[3]> == 0)
+		timerf <eval (<local._for>*<argv[2]>)>,face <argv[3]>
+	endif
+	endfor
+endif
+anim <argv[0]>
+
+[function f_loopsound]
+if <argv[1]>>1
+	for <eval (<argv[1]>-1)>
+	timerf <eval (<local._for>*<argv[2]>)>,sound <eval <argv[0]>>
+	endfor
+endif
+sound <argv[0]>
+
+[function f_GetColor]
+serv.new<argv[0]> <argv[1]>
+local.color = <new.color>
+new.remove
+return <local.color>
+
+[FUNCTION smelt_fx]
+FORITEMS 1
+	IF (<TYPE>==t_forge)
+		SRC.sound 43
+	  	SRC.SENDPACKET 0c0 0 d0 d0 wi_fire w<P.X> w<P.Y> <eval <P.Z>+6> w<P.X> w<P.Y> <eval <P.Z>+10> 0 0 w0 2 0 d0 d0
+	  	return 1
+	ENDIF
+ENDFOR
+
+[FUNCTION JATEMCOMESSENOME]
+FOR 0 <eval <SERV.ACCOUNTS>-1>
+	IF (<SERV.ACCOUNT.<eval <local._for>>.CHARS>)
+		FOR x 0 <eval <SERV.ACCOUNT.<eval <local._for>>.CHARS>-1>
+			IF (<SERV.ACCOUNT.<eval <local._for>>.CHAR.<LOCAL.x>>!=<UID>)
+				IF !(STRCMPI(<SERV.ACCOUNT.<eval <local._for>>.CHAR.<LOCAL.x>.NAME>,<ARGS>))
+					RETURN 1
+				ENDIF
+			ENDIF
+		ENDFOR
+	ENDIF
+ENDFOR
+RETURN 0
+
+[FUNCTION F_ISSAMEPARTY] // <I>.F_ISSAMEPARTY <REF2>
+IF !<ARGS> || !<SERV.UID.<ARGS>>
+	RETURN 0
+ENDIF
+
+REF2 <ARGS>
+
+IF !<ISINPARTY> || !<REF2.ISINPARTY>
+	RETURN 0
+ENDIF
+
+FOR M 0 <EVAL <PARTY.MEMBERS>-1>
+	IF <PARTY.MEMBER.<dLOCAL.M>.UID> == <REF2>
+		RETURN 1
+	ENDIF
+ENDFOR
+
+RETURN 0
+
+[FUNCTION posempty]
+serv.newitem i_gold
+serv.new.p <args>
+serv.new.attr 094
+serv.new.update
+return <qval <UID.<serv.new.uid>.f_posempty_check <args>> == 1?0:1>
+
+[FUNCTION f_posempty_check]
+local.tem 0
+foritems 0
+    if (<eval strlen(<baseid>)> > 1) && (<baseid> != i_gold)
+        local.tem 1
+    endif
+endfor
+remove
+return <eval <local.tem>>
+
+
+// isnearof x,y,z,item,distancia
+[FUNCTION isnearof]
+serv.newitem i_gold
+serv.new.p <argv[0]>,<argv[1]>,<argv[2]>,<argv[3]>
+serv.new.attr 094
+serv.new.update
+return <UID.<serv.new.uid>.f_isnearof_check <argv[4]>,<argv[5]>>
+
+[FUNCTION f_isnearof_check]
+local.item <argv[0]>
+local.perto 0
+
+foritems <eval <argv[1]>>
+    if (<baseid> == <local.item>)
+        local.perto 1
+    endif
+endfor
+remove
+return <eval <local.perto>>
+
+[FUNCTION unequipHands]
+if (<findlayer 1>)
+	REF1 <findlayer 1>
+	REF1.CONT <findlayer.21.uid>
+	REF1.UPDATEX
+endif
+if (<findlayer 2>)
+	REF1 <findlayer 2>
+	REF1.CONT <findlayer.21.uid>
+	REF1.UPDATEX
+endif
+
+[FUNCTION dg_remove_vendors]
+forchars 8000
+	remove
+endfor
+
+foritems 8000
+	if (<uid>)
+	    if (<baseid> == i_worldgem_bit)
+	    	if (<type>)
+		    	if (<type> != t_rock)
+			    	SERV.NEWITEM=i_gold
+					NEW.P=<p>
+					NEW.ATTR=0B0
+			    	NEW.timerf 1,clear_map
+		    	endif
+	    	endif
+	    endif
+    endif
+endfor
+
+[FUNCTION clear_map]
+foritems 0
+ 	if (<type> != t_rock)
+ 		var.more=<more>
+		var.p=<p>
+		var.amount=<amount>
+		var.morex=<morex>
+		var.morey=<morey>
+		var.morez=<morez>
+ 		remove
+ 	endif
+endif
+
+SERV.NEWITEM=i_worldgem_bit
+NEW.MORE=<var.more>
+NEW.P=<var.p>
+NEW.AMOUNT=<var.amount>
+NEW.MOREX=<var.morex>
+NEW.MOREY=<var.morey>
+NEW.MOREZ=<var.morez>
+NEW.ATTR=0B0
+new.type=T_SPAWN_CHAR
+NEW.TIMER=4
+NEW.UPDATE
+
+[FUNCTION dg_respawn_all]
+foritems 8000
+    if (<baseid> == i_worldgem_bit) && (<type> == T_SPAWN_CHAR)
+    	SERV.NEWITEM=i_worldgem_bit
+		NEW.MORE=<more>
+		NEW.P=<p>
+		NEW.AMOUNT=<amount>
+		NEW.MOREX=<morex>
+		NEW.MOREY=<morey>
+		NEW.MOREZ=<morez>
+		NEW.ATTR=0B0
+		new.type=T_SPAWN_CHAR
+		NEW.TIMER=4
+		NEW.UPDATE
+    endif
+endfor
+
+[FUNCTION addSet]
+serv.newitem i_<args>_platemail_arms
+equip <new>
+serv.newitem i_<args>_platemail_leggings
+equip <new>
+serv.newitem i_<args>_platemail_helm
+equip <new>
+serv.newitem i_<args>_platemail_gorget
+equip <new>
+serv.newitem i_<args>_platemail_gloves
+equip <new>
+serv.newitem i_<args>_platemail_chest
+equip <new>
+serv.newitem i_<args>_sword_viking
+equip <new>
+serv.newitem i_<args>_shield_heater
+equip <new>
+
+[function fly]
+IF (<flags>&statf_hovering)
+flags=<flags>&~statf_hovering
+update
+return 1
+else
+flags=<flags>|statf_hovering
+update
+return 1
+endif
+
+
+// .xf_makepetof 0c4d746
+// <pet uid>.f_MakePetOf <owner uid>
+[function f_MakePetOf]
+
+consume 100 i_memory
+
+karma 2000
+fame 2000
+
+serv.newitem i_memory
+new.color = memory_ipet
+new.more1 = 04
+new.more2 = <serv.time>
+new.morep = <p>
+new.link = <args>
+new.cont = <uid>
+
+[FUNCTION clearblood]
+FORITEMS 8000
+	if (<type> == t_blood)
+		if (<link.isplayer>) || (<link.isnpc>) || (<link> == 04fffffff)
+			remove
+		endif
+	endif
+ENDFOR
+
+[FUNCTION isWeapon]
+if (<type> == t_weapon_mace_smith)
+	return 1
+elif (<type> == t_weapon_mace_sharp)
+	return 1
+elif (<type> == t_weapon_sword)
+	return 1
+elif (<type> == t_weapon_fence)
+	return 1
+elif (<type> == t_weapon_bow)
+	return 1
+elif (<type> == t_weapon_mace_staff)
+	return 1
+elif (<type> == t_weapon_mace_crook)
+	return 1
+elif (<type> == t_weapon_mace_pick)
+	return 1
+elif (<type> == t_weapon_arrow)
+	return 1
+elif (<type> == t_weapon_bolt)
+	return 1
+elif (<type> == t_weapon_axe)
+	return 1
+elif (<type> == t_weapon_xbow)
+	return 1
+elif (<type> == t_weapon_throwing)
+	return 1
+endif
+return 0
+
+[FUNCTION isArmor]
+if (<type> == t_armor)
+	return 1
+elif (<type> == t_shield)
+	return 1
+endif
+return 0
+
+[FUNCTION goldFormat]
+if (<db.connected>)
+	db.query "SELECT format(<eval <args>>,0,'de_DE') as val;"
+	return <db.row.0.val>
+else
+	return <args>
+endif
+
+[FUNCTION inwar]
+ref1 = <argv[0]>
+ref2 = <argv[1]>
+
+if (<ref1.guildfromuid.<ref2>.theywar>) && (<ref1.guildfromuid.<ref2>.wewar>)
+	return 1
+else
+	return 0
+endif
+
+// Ex: .criminaladd <uid_player> <uid_criminal>
+[FUNCTION criminaladd]
+if (<argv[0]> == 0) || (<argv[1]> == 0)
+	return 0
+endif
+
+ref1 <argv[0]>
+ref2 <argv[1]>
+
+local.already = 0
+FORCHARMEMORYTYPE memory_sawcrime
+	if (<link.uid> == <ref2.uid>)
+		local.already = 1
+	endif
+ENDFOR
+
+if (<local.already> == 1)
+	return 1
+endif
+
+serv.newitem i_memory
+new.color = memory_sawcrime
+new.more1 = 04
+new.more2 = <serv.time>
+new.morep = <p>
+new.link = <ref2.uid>
+new.cont = <ref1.uid>
+
+ref1.timerf 2,update
+ref2.timerf 2,update
+
+[EOF]

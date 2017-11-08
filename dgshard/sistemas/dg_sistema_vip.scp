@@ -1,0 +1,126 @@
+// Sistema Compras 1.0
+// By Admin Destiny - Jaum
+// staff_destiny@dgshard.com
+// Dragon Shard
+// http://www.dgshard.com
+
+[ITEMDEF i_vip] // item que determina que o player � ou n�o vip.
+ID=i_memory
+NAME=VIP Memory
+TYPE=t_eq_script
+
+ON=@CREATE
+attr=attr_newbie
+
+On=@TIMER
+TRY UID.<TAG.UID>.TAG.VIP 0
+if (<uid.<tag.uid>.region.defname> == a_mina_vip)
+  TRY UID.<TAG.UID>.sysmessage @077a,0,1 Você foi enviado para fora da Área vip já que seu tempo vip acabou.
+  TRY UID.<TAG.UID>.go help room
+endif
+REMOVE
+RETURN 1
+
+
+[FUNCTION vip]  // Fun��o para ver quantos dias o player vai ter de VIP.
+if !(0<src.tag.vip>)
+ SRC.SYSMESSAGE @07a1 Voce nao eh VIP.
+ RETURN 1
+ELSE
+ SRC.TAG0.VIP_mm 0
+ SRC.TAG0.VIP_d 0
+ SRC.TAG0.VIP_h 0
+ SRC.TAG0.VIP_m 0
+ SRC.tag0.VIP_s 0
+ SRC.DATA_VIP <eval <SRC.FINDID.i_vip.timer>>
+ IF (<src.tag0.vip_mm>)
+   SRC.SYSMESSAGE @07a1 Voce sera VIP por mais: <eval <src.tag0.VIP_MM>> Mese(s), <eval <src.tag0.VIP_D>> Dia(s), <eval <src.tag0.VIP_H>> Hora(s), <eval <src.tag0.VIP_M>> Minuto(s) e <eval <src.tag0.VIP_S>> Segundo(s).
+ ELSE
+  IF (<src.tag0.vip_d> < 2)
+   SRC.SYSMESSAGE @07a1 Voce sera VIP por mais: <eval <src.tag0.VIP_D>> Dia, <eval <src.tag0.VIP_H>> Horas, <eval <src.tag0.VIP_M>> Minutos e <eval <src.tag0.VIP_S>> Segundos.
+  ELSE
+   SRC.SYSMESSAGE @07a1 Voce sera VIP por mais: <eval <src.tag0.VIP_D>> Dias, <eval <src.tag0.VIP_H>> Horas, <eval <src.tag0.VIP_M>> Minutos e <eval <src.tag0.VIP_S>> Segundos.
+  ENDIF
+ ENDIF
+ENDIF
+RETURN 1
+
+[FUNCTION data_vip]
+if !(<args>)
+ src.sysmessage Erro. Chame a staff.
+ return 1
+endif
+
+IF (<ARGS> > 2592000)
+ src.tag0.vip_mm <eval <src.tag0.vip_mm>+1>
+ data_vip <eval <ARGS>-2592000>
+ELSE
+ data_vip_d <args>
+ENDIF
+
+[FUNCTION data_vip_d]
+if !(<args>)
+ src.sysmessage Erro. Chame a staff.
+ return 1
+endif
+
+IF (<ARGS> > 86400)
+ src.tag0.vip_d <eval <src.tag0.vip_d>+1>
+ data_vip <eval <ARGS>-86400>
+ELSE
+ data_vip_h <args>
+ENDIF
+
+[FUNCTION data_vip_h]
+if !(<args>)
+ src.sysmessage Erro. Chame a staff.
+ return 1
+endif
+
+IF (<ARGS> > 3600)
+ src.tag0.vip_h <eval <src.tag0.vip_h>+1>
+ data_vip_h <eval <ARGS>-3600>
+ELSE
+ data_vip_m <args>
+ENDIF
+
+[FUNCTION data_vip_m]
+if !(<args>)
+ src.sysmessage Erro. Chame a staff.
+ return 1
+endif
+
+IF (<ARGS> > 60)
+ src.tag0.vip_m <eval <src.tag0.vip_m>+1>
+ data_vip_m <eval <ARGS>-60>
+ELSE
+ src.tag0.vip_s <eval <args>>
+ENDIF
+
+[ITEMDEF i_gate_vip]
+id 0f6c
+name @07a1 Area VIP
+type t_normal
+
+ON=@Create
+color 0794
+attr attr_static
+
+ON=@Click
+MESSAGE @<color> Area VIP
+if !(0<src.tag.vip>)
+    MESSAGE @<color> Voce nao pode entrar!
+else
+    MESSAGE @<color> Seja bem vindo!
+endif
+return 1
+
+ON=@STEP
+if !0<src.tag.vip>)
+    src.sysmessage @<color> Voce nao pode entrar na Area VIP.
+    return 1
+endif
+src.go 5271,1936
+src.sysmessage @<color> Bem vindo a area vip!
+
+[EOF]

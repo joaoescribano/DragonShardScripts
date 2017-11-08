@@ -1,0 +1,982 @@
+[ITEMDEF i_sky_bow]
+ID=i_bow
+NAME=Sky Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=9,13
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_sky
+SKILLMAKE=50.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Sky Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_sky
+
+[ITEMDEF i_elven_bow]
+ID=i_bow
+NAME=Elven Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=10,14
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_elven
+SKILLMAKE=60.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elven Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elven
+
+
+[ITEMDEF i_mystic_bow]
+ID=i_bow
+NAME=Mystic Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=12,18
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_mystic
+SKILLMAKE=70.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Mystic Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_mystic
+
+
+[ITEMDEF i_purple_bow]
+ID=i_bow
+NAME=Purple Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=14,20
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_purple
+SKILLMAKE=80.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Purple Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_purple
+
+[ITEMDEF i_black_bow]
+ID=i_bow
+NAME=Black Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=15,22
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_black
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Black Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_black
+
+
+[ITEMDEF i_white_bow]
+ID=i_bow
+NAME=White Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=15,22
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_white
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=White Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_white
+
+
+[ITEMDEF i_fire_bow]
+ID=i_bow
+NAME=Fire Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=18,28
+SPEED=37
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Fire Bow
+
+RESOURCES=20 i_log_fire
+SKILLMAKE=100.0 BOWCRAFT
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_fire
+
+ON=@EQUIP
+	SRC.TACTICS +=3.0
+	SRC.ARCHERY +=3.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=3.0
+	SRC.ARCHERY -=3.0
+
+
+[ITEMDEF i_elfic_bow]
+ID=i_bow
+NAME=Elfic Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=20,30
+SPEED=37
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_elfic
+SKILLMAKE=105.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elfic Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elfic
+
+ON=@EQUIP
+	SRC.TACTICS +=5.0
+	SRC.ARCHERY +=5.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=5.0
+	SRC.ARCHERY -=5.0
+
+[ITEMDEF i_death_bow]
+ID=i_bow
+NAME=Death Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_arrow
+TDATA4=i_arrow_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=25,35
+SPEED=39
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=20 i_log_death
+SKILLMAKE=110.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Death Bow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_death
+
+ON=@EQUIP
+	SRC.TACTICS +=10.0
+	SRC.ARCHERY +=10.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=10.0
+	SRC.ARCHERY -=10.0
+
+//////////////// CROSSBOWS
+[ITEMDEF i_sky_crossbow]
+ID=i_crossbow
+NAME=Sky Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=9,13
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_sky, 15 i_ingot_iron
+SKILLMAKE=50.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Sky Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_sky
+
+[ITEMDEF i_elven_crossbow]
+ID=i_crossbow
+NAME=Elven Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=10,14
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_elven, 15 i_ingot_iron
+SKILLMAKE=60.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elven Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elven
+
+
+[ITEMDEF i_mystic_crossbow]
+ID=i_crossbow
+NAME=Mystic Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=12,18
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_mystic, 15 i_ingot_iron
+SKILLMAKE=70.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Mystic Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_mystic
+
+
+[ITEMDEF i_purple_crossbow]
+ID=i_crossbow
+NAME=Purple Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=14,20
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_purple, 15 i_ingot_iron
+SKILLMAKE=80.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Purple Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_purple
+
+[ITEMDEF i_black_crossbow]
+ID=i_crossbow
+NAME=Black Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=15,22
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_black, 15 i_ingot_iron
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Black Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_black
+
+
+[ITEMDEF i_white_crossbow]
+ID=i_crossbow
+NAME=White Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=15,22
+SPEED=33
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_white, 15 i_ingot_iron
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=White Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_white
+
+
+[ITEMDEF i_fire_crossbow]
+ID=i_crossbow
+NAME=Fire Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=18,28
+SPEED=37
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Fire Crossbow
+
+RESOURCES=50 i_log_fire, 15 i_ingot_iron
+SKILLMAKE=100.0 BOWCRAFT
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_fire
+
+ON=@EQUIP
+	SRC.TACTICS +=3.0
+	SRC.ARCHERY +=3.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=3.0
+	SRC.ARCHERY -=3.0
+
+
+[ITEMDEF i_elfic_crossbow]
+ID=i_crossbow
+NAME=Elfic Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=20,30
+SPEED=37
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_elfic, 15 i_ingot_iron
+SKILLMAKE=105.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elfic Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elfic
+
+ON=@EQUIP
+	SRC.TACTICS +=5.0
+	SRC.ARCHERY +=5.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=5.0
+	SRC.ARCHERY -=5.0
+
+[ITEMDEF i_death_crossbow]
+ID=i_crossbow
+NAME=Death Bow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=27,37
+SPEED=35
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=50 i_log_death, 15 i_ingot_iron
+SKILLMAKE=110.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Death Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_death
+
+ON=@EQUIP
+	SRC.TACTICS +=10.0
+	SRC.ARCHERY +=10.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=10.0
+	SRC.ARCHERY -=10.0
+
+//////////////// HEAVY CROSSBOWS
+[ITEMDEF i_sky_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Sky Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=14,18
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_sky, 25 i_ingot_iron
+SKILLMAKE=50.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Sky Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_sky
+
+[ITEMDEF i_elven_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Elven Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=15,19
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_elven, 25 i_ingot_iron
+SKILLMAKE=60.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elven Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elven
+
+
+[ITEMDEF i_mystic_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Mystic Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=17,23
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_mystic, 25 i_ingot_iron
+SKILLMAKE=70.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Mystic Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_mystic
+
+
+[ITEMDEF i_purple_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Purple Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=19,24
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_purple, 25 i_ingot_iron
+SKILLMAKE=80.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Purple Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_purple
+
+[ITEMDEF i_black_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Black Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=20,27
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_black, 25 i_ingot_iron
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Black Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_black
+
+
+[ITEMDEF i_white_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=White Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=20,27
+SPEED=26
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_white, 25 i_ingot_iron
+SKILLMAKE=90.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=White Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_white
+
+
+[ITEMDEF i_fire_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Fire Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=23,33
+SPEED=30
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Fire Heavy Crossbow
+
+RESOURCES=100 i_log_fire, 25 i_ingot_iron
+SKILLMAKE=100.0 BOWCRAFT
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_fire
+
+ON=@EQUIP
+	SRC.TACTICS +=3.0
+	SRC.ARCHERY +=3.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=3.0
+	SRC.ARCHERY -=3.0
+
+
+[ITEMDEF i_elfic_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Elfic Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=25,35
+SPEED=30
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_elfic, 25 i_ingot_iron
+SKILLMAKE=105.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Elfic Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_elfic
+
+ON=@EQUIP
+	SRC.TACTICS +=5.0
+	SRC.ARCHERY +=5.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=5.0
+	SRC.ARCHERY -=5.0
+
+[ITEMDEF i_death_crossbow_heavy]
+ID=i_crossbow_heavy
+NAME=Death Heavy Crossbow
+TYPE=t_weapon_bow
+TWOHANDS=Y
+
+CanUse=can_u_human|can_u_elf
+
+TDATA3=i_xbolt
+TDATA4=i_xbolt_x
+
+REQSTR=30
+
+FLIP=1
+SKILL=Archery
+DAM=30,40
+SPEED=30
+RANGE=2,10
+
+VALUE=20
+WEIGHT=8
+
+RESOURCES=100 i_log_death, 25 i_ingot_iron
+SKILLMAKE=110.0 BOWCRAFT
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Archery
+DESCRIPTION=Death Heavy Crossbow
+
+ON=@Create
+	HITPOINTS={700 800}
+	COLOR=color_l_death
+
+ON=@EQUIP
+	SRC.TACTICS +=10.0
+	SRC.ARCHERY +=10.0
+
+ON=@UNEQUIP
+	SRC.TACTICS -=10.0
+	SRC.ARCHERY -=10.0
+
+[EOF]

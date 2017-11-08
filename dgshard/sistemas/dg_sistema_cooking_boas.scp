@@ -1,0 +1,198 @@
+//Roast Pig
+[ITEMDEF i_good_pig_roast]
+ID=i_pig_roast
+NAME=Bom Porco Cozido
+VALUE=3
+RESOURCES=1 i_pig_roast_raw
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=4.8
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Roast Pig
+
+//Legs of Lamb
+[ITEMDEF i_good_lamb_leg]
+ID=i_lamb_leg
+NAME=Boa Coxa de Borrego
+VALUE=3
+RESOURCES=1 i_lamb_leg_raw
+SKILLMAKE=COOKING 60.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Lamb of Leg
+
+//Legs of Chicken
+[ITEMDEF i_good_chicken_leg]
+ID=i_chicken_leg
+NAME=Boa Coxa de Galinha
+VALUE=3
+RESOURCES=1 i_chicken_leg_raw
+SKILLMAKE=COOKING 60.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Chicken of Leg
+
+//Fish Cooked
+[ITEMDEF i_good_fish_cooked]
+ID=i_fish_cut_cooked
+NAME=Bom Peixe Frito
+VALUE=3
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=2.4
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Fish Cooked
+
+//Ribs Cooked
+[ITEMDEF i_good_ribs_cooked]
+ID=i_ribs_cooked
+NAME=Boa Costela Cozida
+VALUE=3
+RESOURCES=1 i_ribs_raw
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Ribs Cooked
+
+//Bird Cooked
+[ITEMDEF i_good_bird_cooked]
+ID=i_bird_cooked
+NAME=Bom passaro Cozido
+VALUE=3
+RESOURCES=1 i_bird_raw
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=good Bird Cooked
+
+//Fish Steak
+[ITEMDEF i_good_fish_cut_cooked]
+ID=i_fish_cut_cooked
+NAME=Bom File de Peixe
+VALUE=3
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 55.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Fish Steak
+
+//Apple Cake
+[ITEMDEF i_good_apple_cake]
+ID=i_cake
+NAME=Bom Bolo de Maca
+VALUE=3
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_apple
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=2.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Apple Cake
+
+ON=@CREATE
+COLOR=020
+
+//Grape Cake
+[ITEMDEF i_good_grape_cake]
+ID=i_cake
+NAME=Bom Bolo de Uva
+SKILLMAKE=COOKING 70.0
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_grapes
+VALUE=3
+TYPE=T_FOOD
+WEIGHT=2.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Grape Cake
+
+ON=@CREATE
+COLOR=070
+
+//Lemon Cake
+[ITEMDEF i_good_lemon_cake]
+ID=i_cake
+NAME=Bom Bolo de Limao
+VALUE=3
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Lemon
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=2.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Lemon Cake
+
+ON=@CREATE
+COLOR=040
+
+//Laranka Cake
+[ITEMDEF i_good_orange_cake]
+ID=i_cake
+NAME=Bom Bolo de Laranja
+VALUE=3
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_lime
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=2.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Orange Cake
+
+ON=@CREATE
+COLOR=030
+
+//banana cake
+[ITEMDEF i_good_Banana_cake]
+ID=i_cake
+NAME=Bom Bolo de Banana
+VALUE=3
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Banana
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=2.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Banana Cake
+
+ON=@CREATE
+COLOR=035
+
+//Bread Loaf
+[ITEMDEF i_good_bread_loaf]
+ID=i_bread_loaf
+NAME=Bom Pao Caseiro
+VALUE=3
+RESOURCES=1 i_flour_sack, 5 i_pitcher_water, 5 i_eggs_fresh
+SKILLMAKE=COOKING 35.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Bread Loaf
+
+// Bread French
+[ITEMDEF i_good_bread_french]
+ID=i_bread_french
+NAME=Bom Pao Frances
+VALUE=3
+RESOURCES=2 i_flour_sack, 5 i_pitcher_water, 6 i_eggs_fresh
+SKILLMAKE=COOKING 45.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Good Bread French
+
+[EOF]

@@ -1,0 +1,143 @@
+.a// Sistema de database - 3.0
+// Dragon Shard - The second age
+//
+// Owner Destiy
+// staff_destiny@dgshard.com.br
+
+[ITEMDEF i_db_autoacc]
+ID=0ED4
+NAME=Pedra
+TYPE=t_normal
+
+ON=@CREATE
+NAME @07a1 Pedra de criacao de contas automaticas
+COLOR=07a1
+TIMER=60
+attr attr_static
+
+ON=@TIMER
+db_atualizar_contas
+timer 60
+return 1
+
+On=@DCLICK
+db_atualizar_contas
+timer 60
+return 1
+
+[FUNCTION db_atualizar_contas]
+//db.connect
+db.query "select * from contas where criada=0"
+if (<eval <db.row.numrows>> >= 1)
+    for x 0 <eval <db.row.numrows>-1>
+
+        if (<eval STRLEN(<db.row.<eval <dlocal.x>>.login>>) && (<eval STRLEN(<db.row.<eval <dlocal.x>>.senha_tmp>)>))
+            serv.account add <db.row.<eval <dlocal.x>>.login> <db.row.<eval <dlocal.x>>.senha_tmp>
+            serv.account <db.row.<eval <dlocal.x>>.login> password <db.row.<eval <dlocal.x>>.senha_tmp>
+            serv.log Conta criada: <db.row.<eval <dlocal.x>>.login>
+            db.query "update contas set criada=1, senha_tmp=0 where id=<eval <db.row.<eval <dlocal.x>>.id>>"
+        endif
+    endfor
+endif
+return 1
+
+[FUNCTION db_fix_chars]
+serv.allclients db_fix_chars_2
+
+[FUNCTION db_fix_chars_2]
+//db.connect
+if (<db.aquery f_db_callback, delete from chars where uid = '<uid>'>)
+endif
+if (<db.aquery f_db_callback, delete from rank where uid = '<uid>'>)
+endif
+if (<db.aquery f_db_callback, delete from paperdoll where uid = '<uid>'>)
+endif
+tag0.cadastrado 0
+db_login
+
+
+[FUNCTION db_login]
+//db.connect
+if (<tag0.cadastrado>==1)
+    db.query "update chars set online=1,ip='<account.lastip>' where uid='<uid>' limit 1"
+else
+    if (<db.aquery f_db_callback, INSERT INTO chars (uid, conta, online, ip, region, nick, guilda, fama, karma, skills) values ('<uid>', '<account.name>', '1', '<account.lastip>', '<region.name>', '<name>', '<guild>', '<fame>', '<karma>', '<skilltotal>')>)
+		tag0.cadastrado 1
+	endif
+endif
+
+if !(<findid.i_tempo_on>)
+	serv.newitem i_tempo_on
+	new.equip
+endif
+
+// Checa se o cliente não ultrapassou o limite de contas logadas
+f_check_ip_accounts
+
+[FUNCTION db_logout]
+if (<tag0.cadastrado>==1)
+    //db.connect
+    db.query "update chars set online=0 where uid='<uid>' limit 1"
+endif
+
+[FUNCTION db_save]
+//db.connect
+db.query "INSERT INTO status (players, data) VALUES (<SERV.CLIENTS>, '<SERV.RTICKS>')"
+
+[FUNCTION db_rank]
+if (<isgm>)
+	return 1
+endif
+
+//db.connect
+if (<db.aquery f_db_callback, delete from rank where uid = '<uid>'>)
+endif
+
+if (<db.aquery f_db_callback, insert into rank (uid, data, online, kills, deaths, monstros) VALUES ('<uid>', <SERV.RTICKS>, <eval <findid.i_tempo_on.more1>>, <eval <kills>>, <eval <deaths>>, <eval <tag0.monstros_mortos>>)>)
+	sysmessage @07a1 Seu Rank foi atualizado.
+endif
+
+
+[FUNCTION db_papperdoll]
+//db.connect
+if (<db.aquery f_db_callback, delete from paperdoll where uid = '<uid>'>)
+endif
+var.query = 0
+
+for x 1 25
+    if (<findlayer.<local.x>.id> != 0)
+		if (0<var.query> == 0)
+	        var.query = "('<uid>', '<eval <findlayer.<local.x>.id>>', '<eval <findlayer.<local.x>.color>>', '<findlayer.<local.x>.name>')"
+		else
+			var.query = "<var.query>,('<uid>', '<eval <findlayer.<local.x>.id>>', '<eval <findlayer.<local.x>.color>>', '<findlayer.<local.x>.name>')"
+		endif
+    endif
+endfor
+if (0<var.query> == 0) // Provavelmente caia aqui quando o char tiver na entrada de um evento
+	return 0
+endif
+
+var.query = "insert into paperdoll (uid, item, cor, descricao) values <var.query>"
+if (<db.aquery f_db_callback, <var.query>>)
+endif
+
+RETURN 0
+
+[FUNCTION f_db_callback]
+return 0
+
+[ITEMDEF i_tempo_on]
+ID=i_memory
+NAME=Tempo On [Nao Deletar]
+TYPE=t_eq_script
+
+ON=@CREATE
+attr=attr_newbie
+timer 60
+
+On=@TIMER
+timer 60
+more1 <eval <more1>+60>
+RETURN 1
+
+[EOF]

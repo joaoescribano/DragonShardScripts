@@ -1,0 +1,25 @@
+[ITEMDEF i_spellbook_full]
+ID=0efa
+NAME=Full Spellbook
+TYPE=t_spellbook
+TDATA3=0
+TDATA4=64
+VALUE=16
+WEIGHT=3.0
+RESOURCES=10 i_scroll_blank
+SKILLMAKE=Inscription 50.0,i_pen_and_ink
+
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Books
+DESCRIPTION=Spellbook
+
+ReqStr=20
+TEVENTS=t_equipitem
+
+ON=@Create
+	COLOR=077a
+	ATTR=attr_magic|attr_newbie|attr_identified
+	MORE1=0ffffffff
+	MORE2=0ffffffff
+
+[EOF]

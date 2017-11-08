@@ -1,0 +1,309 @@
+// Menu HELP
+// Dragon Shard - The Second Age
+// http://www.dgshard.com
+
+// Por Joao Ricardo
+// Owner Destiny
+
+[DIALOG d_help_menu]
+0,0
+page 0
+resizepic 38 125 9200 445 298
+gumppictiled 50 155 170 230 2624
+gumppictiled 240 155 232 230 2624
+checkertrans 50 155 170 230
+gumppic 451 74 10441
+dhtmlgump 52 130 408 20 0 0 <def.center><serv.name> - Help Menu
+dtext 90 173 1152 Ir Para Help Room
+dtext 90 203 1152 Enviar Page
+dtext 90 233 1152 Seus Status
+dtext 90 263 1152 Status do Shard
+dtext 90 323 1152 Site
+dtext 90 353 1152 Forum
+button 70 176 2117 2118 0 1 0
+button 70 206 2117 2118 0 2 0
+button 70 236 2117 2118 0 3 0
+button 70 266 2117 2118 0 4 0
+button 70 326 2117 2118 1 0 1
+button 70 356 2117 2118 1 0 2
+checkertrans 240 155 232 230
+dtext 90 293 1152 Staffers
+button 70 296 2117 2118 1 0 3
+page 1
+dhtmlgump 244 158 226 224 8 0 <def.center>Ir para a Help Room. Caso deseje ir para a Help Room clique em Okay. e em 2 minutos vc sera teleportado, Caso esteja morto em 10 segundos voce sera teleportado e ressado. Se der o tempo e vc estiver em War mode, Poisoned, Stoned vc nao sera teleportado.
+button 409 388 247 248 1 0 4
+page 2
+dhtmlgump 244 158 226 224 9 0 <def.center>Enviar Page - A staff nao permite Flood de Pages. vc pode mandar 1 page a cada 5 minutos. Clique em Okay para enviar.
+button 409 388 247 248 1 0 5
+page 3
+dtext 250 173 132 Nick: <src.name> - ID: <eval <src.uid>>
+dtext 250 198 132 Str: <src.str> Hits: <src.hits>
+dtext 250 223 132 Int: <src.int> Mana: <src.mana>
+dtext 250 248 132 Dex: <src.dex> Stam: <src.stam>
+dtext 250 273 132 Kills: <src.kills>
+dtext 250 298 132 Deaths: <src.deaths>
+dtext 250 323 132 Fame: <src.fame>
+dtext 250 348 132 Karma: <src.karma>
+if !(0<src.tag0.vip>)
+ dtext 50 393 53 Voce nao eh VIP no shard. Acesse o site.
+else
+ dtext 50 393 67 Sua conta sera VIP por mais <eval <eval <eval <SRC.FINDID.i_vip.timer>/3600>/24>+1> Dias.
+endif
+page 4
+dhtmlgump 243 158 228 225 19 0 <def.center>Status do <serv.name>.<def.br><serv.version>.<def.br>Tempo On: <serv.timeup>.<def.br>Chars: <serv.chars>.<def.br>Items: <serv.items>.<def.br>Players On: <serv.clients>.
+
+[DIALOG d_help_menu button]
+ON=1
+WEBLINK dgshard.com.br
+
+ON=2
+WEBLINK dgshard.forumeiros.com
+
+ON=3
+src.sysmessage @07a1 Menu desativado!
+return 1
+
+ON=4
+
+if (<src.tag0.jail>)
+ src.sysmessage @0a71 Voce nao pode ir para a help room na jail.
+ return 1
+endif
+
+if (<src.isevent.e_penal_colony>)
+ src.sysmessage @044 Voce nao pode ir pra help room da Colonia Penal.
+ return 1
+endif
+
+IF (<SRC.ISEVENT.e_evento_dg>)
+ src.sysmessage @044 Voce nao pode ir para a Help Room dentro de um Evento.
+ return 1
+endif
+
+IF (<SRC.RESTEST 1  i_teleport_delay>)
+SRC.SYSMESSAGE Voce ja esta indo para a Help Room!
+RETURN 1
+ENDIF
+
+SRC.EVENTS +e_help_room
+SRC.newitem i_teleport_delay
+SRC.act.equip
+
+ if (<SRC.ISGM>)
+  SRC.FindID.i_teleport_delay.more1=1
+  RETURN 1
+ ENDIF
+
+ if (<SRC.flags> & statf_dead)
+  SRC.FindID.i_teleport_delay.more1=10
+  SRC.sysMESSAGE @0b99 Espere 10 segundos para ser teletransportado.
+ else
+  SRC.FindID.i_teleport_delay.more1=120
+  SRC.sysMESSAGE @0b99 Espere 120 segundos para ser teletransportado.
+ ENDIF
+RETURN 1
+
+ON=5
+IF (<SRC.RESTEST 1 i_page_delay>)
+SRC.SYSMESSAGE Voce so pode enviar uma page a cada 5 minutos
+RETURN 1
+ENDIF
+f_player_page
+
+[DIALOG d_help_staffers]
+0,0
+page 0
+resizepic 14 7 3600 537 398
+gumppic 294 20 1800
+gumppic 317 48 12
+page 1
+gumppic 317 44 60987 2094
+text 35 25 137 0
+text 40 115 67 1
+text 40 135 67 2
+text 40 155 67 3
+text 40 175 67 4
+text 476 371 1152 5
+button 456 374 2117 2118 0 2 0
+page 2
+gumppic 317 44 60987 2694
+text 35 25 137 6
+text 40 115 67 7
+text 40 135 67 8
+text 40 155 67 9
+text 40 175 67 10
+text 476 371 1152 11
+button 456 374 2117 2118 0 3 0
+button 89 374 2117 2118 0 1 0
+text 30 371 1913 12
+page 3
+gumppic 317 44 60987
+text 35 25 137 13
+text 40 115 67 14
+text 40 135 67 15
+text 40 155 67 16
+text 40 175 67 17
+text 476 371 1152 18
+button 456 374 2117 2118 0 4 0
+button 89 374 2117 2118 0 2 0
+text 30 371 1913 19
+page 4
+gumppic 317 44 60987
+text 35 25 137 20
+text 40 115 67 21
+text 40 135 67 22
+text 40 155 67 23
+text 40 175 67 24
+text 476 371 1152 25
+button 456 374 2117 2118 0 5 0
+button 89 374 2117 2118 0 3 0
+text 30 371 1913 26
+page 5
+gumppic 317 44 60987
+text 35 25 137 27
+text 40 115 67 28
+text 40 135 67 29
+text 40 155 67 30
+text 40 175 67 31
+text 476 371 1152 32
+button 456 374 2117 2118 0 6 0
+button 89 374 2117 2118 0 4 0
+text 30 371 1913 33
+page 6
+gumppic 317 44 60987
+text 35 25 137 34
+text 40 115 67 35
+text 40 135 67 36
+text 40 155 67 37
+text 40 175 67 38
+button 89 374 2117 2118 0 4 0
+text 30 371 1913 39
+
+[DIALOG d_help_staffers text]
+<serv.name> Staffers - Owner Dragon
+Nome: Paulo Vieira
+Plevel: Owner
+Idade: 24 Anos
+Email: Staff_Dragon@dgshard.com.br
+Proximo
+<serv.name> Staffers - Owner Anonymous
+Nome: Thiago Calil
+Plevel: Owner
+Idade: 30 Anos
+Email: thiago.calil@dgshard.com.br
+Proximo
+Anterior
+<serv.name> Staffers - GM
+Nome: #####
+Plevel: Game Master
+Idade: ###
+Email:staff_####@dgshard.com.br
+Proximo
+Anterior
+<serv.name> Staffers - Dev.
+Nome: #####
+Plevel: Developer
+Idade: ## Anos
+Email: Staff_######@dgshard.com.br
+Proximo
+Anterior
+<serv.name> Staffers - Counselor
+Nome: #####
+Plevel: Counselor
+Idade: ## Anos
+Email: Staff_######@dgshard.com.br
+Proximo
+Anterior
+<serv.name> Staffers - Counselor
+Nome: #####
+Plevel: Counselor
+Idade: ## Anos
+Email: Staff_######@dgshard.com.br
+Anterior
+
+[DIALOG d_help_staffers button]
+ON=0
+
+// page Delay
+
+[ITEMDEF i_page_delay]
+NAME=Delay Page
+ID=i_worldgem_bit
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=080
+MORE1=300
+
+ON=@Equip
+TIMER=300
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+// Teleporte Delay
+[ITEMDEF i_teleport_delay]
+NAME=Delay Teleport
+ID=i_worldgem_bit
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=080
+TIMER=1
+
+ON=@EQUIP
+TIMER=1
+
+ON=@Timer
+if (<more1>)
+ cont.sysmessage @07a1 <eval <more1>>
+ more1 -=1
+ TIMER 1
+ return 1
+endif
+
+if (<cont.isevent.e_evento_dg>)
+ cont.sysmessage @07a1 Sua ida a Help Room foi cancelada.
+else
+ cont.go Dragon Nest City
+ cont.events -e_help_room
+ 
+ if (<cont.flags> & statf_dead)
+	cont.resurrect 1
+ endif
+endif
+
+remove
+return 1
+
+[EVENTS e_help_room]
+ON=@HIT
+EVENTS -e_help_room
+CONSUME i_teleport_delay
+SYSMESSAGE @07a1 Help Room Cancelada.
+return 1
+
+ON=@GETHIT
+EVENTS -e_help_room
+CONSUME i_teleport_delay
+SYSMESSAGE @07a1 Help Room Cancelada.
+return 1
+
+ON=@DEATH
+EVENTS -e_help_room
+CONSUME i_teleport_delay
+SYSMESSAGE @07a1 Help Room Cancelada.
+return 1
+
+ON=@UserWarMode
+EVENTS -e_help_room
+CONSUME i_teleport_delay
+SYSMESSAGE @07a1 Help Room Cancelada.
+return 1
+
+[EOF]

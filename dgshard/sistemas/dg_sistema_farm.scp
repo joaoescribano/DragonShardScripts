@@ -1,0 +1,400 @@
+[ITEMDEF i_multi_farm33]
+NAME=Farm 3x3
+ID=i_gold
+TYPE=t_multi
+VALUE=5000
+CATEGORY=Multis
+SUBSECTION=Novos
+DESCRIPTION=Farm 3x3
+MULTIREGION=0,1,0,0
+COMPONENT=088b -2 0 0 0
+COMPONENT=088b -2 1 0 0
+COMPONENT=088b -2 2 0 0
+COMPONENT=088b 1 2 0 0
+COMPONENT=088b 1 1 0 0
+COMPONENT=088b 1 0 0 0
+COMPONENT=i_fence_wood_2 -1 -1 0 0
+COMPONENT=i_fence_wood_2 0 -1 0 0
+COMPONENT=i_fence_wood_2 1 -1 0 0
+COMPONENT=i_fence_wood_2 -1 2 0 0
+COMPONENT=i_fence_wood_2 1 2 0 0
+COMPONENT=031f7 -1 0 0 0
+COMPONENT=031f7 0 0 0 0
+COMPONENT=031f7 1 0 0 0
+COMPONENT=031f7 -1 1 0 0
+COMPONENT=031f7 -1 2 0 0
+COMPONENT=031f7 0 1 0 0
+COMPONENT=031f7 0 2 0 0
+COMPONENT=031f7 1 1 0 0
+COMPONENT=031f7 1 2 0 0
+COMPONENT=i_gate_wood_3 0 2 0 0
+COMPONENT=i_placa_fazenda -1 3 0 0
+
+ON=@create
+SRC.TAG0.JATENHOFARMS += 1
+fix
+
+on=@click
+if (<src.isgm>)
+message @009fb <uid.<more1>.name> (<more1>)
+else
+return 1
+endif
+
+///////////////////////
+
+[ITEMDEF i_multi_farm55]
+NAME=Farm 5x5
+ID=i_gold
+TYPE=t_multi
+VALUE=15000
+CATEGORY=Multis
+SUBSECTION=Novos
+DESCRIPTION=Farm 5x5
+MULTIREGION=0,0,0,0
+COMPONENT=088b -2 3 0 0
+COMPONENT=088b -2 4 0 0
+COMPONENT=088b -2 0 0 0
+COMPONENT=088b -2 1 0 0
+COMPONENT=088b -2 2 0 0
+COMPONENT=088b 3 3 0 0
+COMPONENT=088b 3 4 0 0
+COMPONENT=088b 3 0 0 0
+COMPONENT=088b 3 1 0 0
+COMPONENT=088b 3 2 0 0
+COMPONENT=i_fence_wood_2 -1 -1 0 0
+COMPONENT=i_fence_wood_2 0 -1 0 0
+COMPONENT=i_fence_wood_2 1 -1 0 0
+COMPONENT=i_fence_wood_2 2 -1 0 0
+COMPONENT=i_fence_wood_2 3 -1 0 0
+COMPONENT=i_fence_wood_2 -1 4 0 0
+COMPONENT=i_fence_wood_2 2 4 0 0
+COMPONENT=i_fence_wood_2 3 4 0 0
+COMPONENT=i_fence_wood_2 0 4 0 0
+COMPONENT=031f7 -1 0 0 0
+COMPONENT=031f7 0 0 0 0
+COMPONENT=031f7 1 0 0 0
+COMPONENT=031f7 2 0 0 0
+COMPONENT=031f7 3 0 0 0
+COMPONENT=031f7 -1 1 0 0
+COMPONENT=031f7 -1 2 0 0
+COMPONENT=031f7 -1 3 0 0
+COMPONENT=031f7 -1 4 0 0
+COMPONENT=031f7 0 1 0 0
+COMPONENT=031f7 0 2 0 0
+COMPONENT=031f7 0 3 0 0
+COMPONENT=031f7 0 4 0 0
+COMPONENT=031f7 1 1 0 0
+COMPONENT=031f7 1 2 0 0
+COMPONENT=031f7 1 3 0 0
+COMPONENT=031f7 1 4 0 0
+COMPONENT=031f7 2 1 0 0
+COMPONENT=031f7 2 2 0 0
+COMPONENT=031f7 2 3 0 0
+COMPONENT=031f7 2 4 0 0
+COMPONENT=031f7 3 1 0 0
+COMPONENT=031f7 3 2 0 0
+COMPONENT=031f7 3 3 0 0
+COMPONENT=031f7 3 4 0 0
+COMPONENT=i_gate_wood_3 1 4 0 0
+COMPONENT=i_placa_fazenda -1 5 0 0
+
+ON=@create
+SRC.TAG0.JATENHOFARMS += 1
+fix
+
+on=@click
+if (<src.isgm>)
+message @009fb <uid.<more1>.name> (<more1>)
+else
+return 1
+endif
+
+///////////////////////
+
+[ITEMDEF i_multi_farm77]
+NAME=Farm 7x7
+ID=i_gold
+TYPE=t_multi
+VALUE=33000
+CATEGORY=Multis
+SUBSECTION=Novos
+DESCRIPTION=Farm 7x7
+MULTIREGION=0,0,0,0
+COMPONENT=088b -2 3 0 0
+COMPONENT=088b -2 4 0 0
+COMPONENT=088b -2 5 0 0
+COMPONENT=088b -2 6 0 0
+COMPONENT=088b -2 0 0 0
+COMPONENT=088b -2 1 0 0
+COMPONENT=088b -2 2 0 0
+COMPONENT=088b 5 3 0 0
+COMPONENT=088b 5 4 0 0
+COMPONENT=088b 5 5 0 0
+COMPONENT=088b 5 6 0 0
+COMPONENT=088b 5 0 0 0
+COMPONENT=088b 5 1 0 0
+COMPONENT=088b 5 2 0 0
+COMPONENT=i_fence_wood_2 -1 -1 0 0
+COMPONENT=i_fence_wood_2 0 -1 0 0
+COMPONENT=i_fence_wood_2 1 -1 0 0
+COMPONENT=i_fence_wood_2 2 -1 0 0
+COMPONENT=i_fence_wood_2 3 -1 0 0
+COMPONENT=i_fence_wood_2 4 -1 0 0
+COMPONENT=i_fence_wood_2 5 -1 0 0
+COMPONENT=i_fence_wood_2 -1 6 0 0
+COMPONENT=i_fence_wood_2 1 6 0 0
+COMPONENT=i_fence_wood_2 3 6 0 0
+COMPONENT=i_fence_wood_2 4 6 0 0
+COMPONENT=i_fence_wood_2 5 6 0 0
+COMPONENT=i_fence_wood_2 0 6 0 0
+COMPONENT=031f7 -1 0 0 0
+COMPONENT=031f7 0 0 0 0
+COMPONENT=031f7 1 0 0 0
+COMPONENT=031f7 2 0 0 0
+COMPONENT=031f7 3 0 0 0
+COMPONENT=031f7 4 0 0 0
+COMPONENT=031f7 5 0 0 0
+COMPONENT=031f7 -1 1 0 0
+COMPONENT=031f7 -1 2 0 0
+COMPONENT=031f7 -1 3 0 0
+COMPONENT=031f7 -1 4 0 0
+COMPONENT=031f7 -1 5 0 0
+COMPONENT=031f7 -1 6 0 0
+COMPONENT=031f7 0 1 0 0
+COMPONENT=031f7 0 2 0 0
+COMPONENT=031f7 0 3 0 0
+COMPONENT=031f7 0 4 0 0
+COMPONENT=031f7 0 5 0 0
+COMPONENT=031f7 0 6 0 0
+COMPONENT=031f7 1 1 0 0
+COMPONENT=031f7 1 2 0 0
+COMPONENT=031f7 1 3 0 0
+COMPONENT=031f7 1 4 0 0
+COMPONENT=031f7 1 5 0 0
+COMPONENT=031f7 1 6 0 0
+COMPONENT=031f7 2 1 0 0
+COMPONENT=031f7 2 2 0 0
+COMPONENT=031f7 2 3 0 0
+COMPONENT=031f7 2 4 0 0
+COMPONENT=031f7 2 5 0 0
+COMPONENT=031f7 2 6 0 0
+COMPONENT=031f7 3 1 0 0
+COMPONENT=031f7 3 2 0 0
+COMPONENT=031f7 3 3 0 0
+COMPONENT=031f7 3 4 0 0
+COMPONENT=031f7 3 5 0 0
+COMPONENT=031f7 3 6 0 0
+COMPONENT=031f7 4 1 0 0
+COMPONENT=031f7 4 2 0 0
+COMPONENT=031f7 4 3 0 0
+COMPONENT=031f7 4 4 0 0
+COMPONENT=031f7 4 5 0 0
+COMPONENT=031f7 4 6 0 0
+COMPONENT=031f7 5 1 0 0
+COMPONENT=031f7 5 2 0 0
+COMPONENT=031f7 5 3 0 0
+COMPONENT=031f7 5 4 0 0
+COMPONENT=031f7 5 5 0 0
+COMPONENT=031f7 5 6 0 0
+COMPONENT=i_gate_wood_3 2 6 0 0
+COMPONENT=i_placa_fazenda -1 7 0 0
+
+ON=@create
+SRC.TAG0.JATENHOFARMS += 1
+fix
+
+on=@click
+if (<src.isgm>)
+message @009fb <uid.<more1>.name> (<more1>)
+else
+return 1
+endif
+
+/////////////////////////////////
+
+[ITEMDEF i_deed_farm33]
+NAME=Deed para Farm 3x3
+ID=i_deed
+RESOURCES=i_deed,i_multi_farm33
+VALUE={5000 5000}
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Farm Deeds
+DESCRIPTION=Farm 3x3
+
+ON=@Create
+MORE=i_multi_farm33
+
+ON=@TARGON_GROUND 
+IF (<eval <SRC.REGION.FLAGS>>&00080) 
+SRC.SYSMESSAGE @009fb Voce nao pode por uma casa tao proxima a outra estrutura!
+RETURN 1 
+ENDIF
+IF (<src.tag0.jatenhofarms> > 1)
+src.sysmessage @009fb Voce ja tem 2 farms!
+return 1
+ENDIF
+
+ON=@TargOn_Char
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+ON=@TargOn_Item
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+/////////////////////////////////
+
+[ITEMDEF i_deed_farm55]
+NAME=Deed para Farm 5x5
+ID=i_deed
+RESOURCES=i_deed,i_multi_farm33
+VALUE={15000 15000}
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Farm Deeds
+DESCRIPTION=Farm 5x5
+
+ON=@Create
+MORE=i_multi_farm55
+
+ON=@TARGON_GROUND 
+IF (<eval <SRC.REGION.FLAGS>>&00080) 
+SRC.SYSMESSAGE @009fb Voce nao pode por uma casa tao proxima a outra estrutura!
+RETURN 1 
+ENDIF
+IF (<src.tag0.jatenhofarms> > 1)
+src.sysmessage @009fb Voce ja tem 2 farms!
+return 1
+ENDIF
+
+ON=@TargOn_Char
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+ON=@TargOn_Item
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+/////////////////////////////////
+
+[ITEMDEF i_deed_farm77]
+NAME=Deed para Farm 7x7
+ID=i_deed
+RESOURCES=i_deed,i_multi_farm77
+VALUE={30000 30000}
+
+CATEGORY=Provisions - Deeds
+SUBSECTION=Farm Deeds
+DESCRIPTION=Farm 7x7
+
+ON=@CREATE
+MORE=i_multi_farm77
+
+ON=@TARGON_GROUND 
+IF (<eval <SRC.REGION.FLAGS>>&00080)
+SRC.SYSMESSAGE @009fb Voce nao pode por uma casa tao proxima a outra estrutura!
+RETURN 1 
+ENDIF
+IF (<src.tag0.jatenhofarms> > 1)
+src.sysmessage @009fb Voce ja tem 2 farms!
+return 1
+ENDIF
+
+ON=@TargOn_Char
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+ON=@TargOn_Item
+SRC.SYSMESSAGE @03b2,,1, Voce so pode por sua fazenda no chao.
+return 1
+
+
+/////////////
+/// Placa ///
+/////////////
+
+[ITEMDEF i_placa_fazenda]
+NAME Fazenda
+ID=0bd1
+TYPE=t_sign_gump
+DEFNAME=i_placa_fazenda
+
+ON=@Create
+attr=attr_static
+MORE2=0
+Color=0
+
+ON=@CLICK
+MESSAGE Fazenda Particular de <uid.<uid.<region.uid>.more1>.name>
+return 1
+endif
+
+ON=@DCLICK
+IF (STRMATCH(*farm*,<UID.<REGION.UID>.BASEID>))
+IF (<UID.<REGION.UID>.MORE1>==<SRC>) || (<SRC.ISGM>)
+SDIALOG d_farm2
+RETURN 1
+ENDIF
+ENDIF
+IF !(<TAG0.FIRSTDCLICK>)
+TAG.FIRSTDCLICK=1
+TIMER=<EVAL 60*60*24>
+ENDIF
+
+//////////////////////////////
+
+
+[DIALOG d_farm2]
+200,200
+PAGE 1
+resizepic 0 0 2600 330 330
+resizepic 70 20 3500 170 40
+dtext 100 27 0 Farm System
+resizepic 30 70 3500 270 40
+dtext 50 77 0 Dono: 
+dtext 90 77 2010 <uid.<uid.<region.uid>.more1>.name>
+resizepic 30 120 3500 270 50
+dtextentry 50 135 300 25 99 0 <name>
+button 110 175 0ef 0f0 1 0 1
+resizepic 30 220 3500 270 50
+dtext 50 235 99 Redeed (<EVAL <UID.<REGION.UID>.VALUE>/10>)
+button 110 275 0ef 0f0 1 0 2
+
+[DIALOG d_farm2 BUTTON]
+ON=1
+IF !(<ISBADSTR <ARGTXT[0]>>)
+NAME=<STRSUB 0 30 <ARGTXT[0]>>
+ENDIF
+
+ON=2
+IF !(<SRC.TOTALGOLD> > <EVAL (<UID.<REGION.UID>.VALUE>/10)-1>) && !(<SRC.ISGM>)
+src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+SDIALOG d_farm 1
+ELSE
+src.consumegold <EVAL <UID.<REGION.UID>.VALUE>/10>
+local.tmp=<obj>
+obj=<uid.<region.uid>.more1>
+obj.tag0.jatenhofarms -= 1
+IF !(<OBJ.ACCOUNT.TAG0.JATENHOFARMS>)
+obj.tag.jatenhofarms
+ENDIF
+obj=<local.tmp>
+serv.newitem i_deed_farm<strsub -2 0 <UID.<REGION.UID>.BASEID>>
+new.bounce
+try uid.<REGION.UID>.f_remove_farm
+ENDIF
+
+[FUNCTION f_remove_farm]
+LOCAL.TMP=<UID>
+OBJ=<UID>
+FORITEMS 15
+IF (<REGION.UID>==<OBJ>) && (<UID>!=<OBJ>)
+REMOVE
+ENDIF
+ENDFOR
+OBJ.REMOVE
+OBJ=<LOCAL.TMP>
+
+[EOF]

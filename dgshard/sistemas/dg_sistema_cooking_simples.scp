@@ -1,0 +1,224 @@
+[ITEMDEF 097a]
+// raw_fish
+DEFNAME=i_fish_cut_raw
+NAME=Peixe Cru
+TYPE=T_SCRIPT
+TDATA1=i_fish_cut_cooked
+VALUE=2
+WEIGHT=0.1
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Fish Steak (Raw)
+
+
+[ITEMDEF 097b]
+// Cooked_fish
+DEFNAME=i_fish_cut_cooked
+NAME=Peixe Frito
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 29.0
+TYPE=T_FOOD
+VALUE=2
+WEIGHT=0.1
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Fish Steak (Cooked)
+
+//Roast Pig
+[ITEMDEF i_simple_pig_roast]
+ID=i_pig_roast
+NAME=Porco Assado
+VALUE=2
+RESOURCES=1 i_pig_roast_raw
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=2.4
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Roast Pig
+
+//Legs of Lamb
+[ITEMDEF i_simple_lamb_leg]
+ID=i_lamb_leg
+NAME=Coxa de Borrego
+VALUE=2
+RESOURCES=1 i_lamb_leg_raw
+SKILLMAKE=COOKING 40.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Lamb Leg
+
+//Legs Chicken
+[ITEMDEF i_simple_chicken_leg]
+ID=i_chicken_leg
+NAME=Coxa de Frango
+VALUE=2
+RESOURCES=1 i_chicken_leg_raw
+SKILLMAKE=COOKING 40.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Chicken Leg
+
+//Fish Cooked
+[ITEMDEF i_simple_fish_cooked]
+ID=i_fish_cut_cooked
+NAME=File de Peixe
+VALUE=2
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 29.0
+TYPE=T_FOOD
+WEIGHT=1.2
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Fish Cooked
+
+//Ribs Cooked
+[ITEMDEF i_simple_ribs_cooked]
+ID=i_ribs_cooked
+NAME=Costelas Cozidas
+VALUE=2
+RESOURCES=1 i_ribs_raw
+SKILLMAKE=COOKING 30.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Ribs Cooked
+
+//Bird Cooked
+[ITEMDEF i_simple_bird_cooked]
+ID=i_bird_cooked
+NAME=Passaro Frito
+VALUE=2
+RESOURCES=1 i_bird_raw
+SKILLMAKE=COOKING 30.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Bird Cooked
+
+//Fish Steak
+[ITEMDEF i_simple_fish_cut_cooked]
+ID=i_fish_cut_cooked
+NAME=Peixe Frito
+VALUE=22
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 29.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Fish Steak
+
+//Apple Cake
+[ITEMDEF i_simple_Apple_cake]
+ID=i_cake
+NAME=Bolo de Maca
+VALUE=2
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_apple
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Apple Cake
+
+ON=@CREATE
+COLOR=020
+
+//Grape Cake
+[ITEMDEF i_simple_grape_cake]
+ID=i_cake
+NAME=Bolo de Uva
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_grapes
+SKILLMAKE=COOKING 50.0
+VALUE=2
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Grape Cake
+
+ON=@CREATE
+COLOR=070
+
+//Lemon Cake
+[ITEMDEF i_simple_lemon_cake]
+ID=i_cake
+NAME=Bolo de Limao
+VALUE=2
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Lemon
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Lemon Cake
+
+ON=@CREATE
+COLOR=040
+
+//Laranka Cake
+[ITEMDEF i_simple_orange_cake]
+ID=i_cake
+NAME=Bolo de Laranja
+VALUE=2
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_lime
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Orange Cake
+
+ON=@CREATE
+COLOR=030
+
+//banana cake
+[ITEMDEF i_simple_Banana_cake]
+ID=i_cake
+NAME=Bolo de Banana
+VALUE=2
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Banana
+SKILLMAKE=COOKING 50.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Banana Cake
+
+ON=@CREATE
+COLOR=035
+
+//Bread Loaf
+[ITEMDEF i_simple_bread_loaf]
+ID=i_bread_loaf
+NAME=Pao Caseiro
+VALUE=2
+RESOURCES=1 i_flour_sack, 5 i_pitcher_water, 5 i_eggs_fresh
+SKILLMAKE=COOKING 29.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Bread Loaf
+
+//Bread French
+[ITEMDEF i_simple_bread_french]
+ID=i_bread_french
+NAME=Pao Frances
+VALUE=2
+RESOURCES=2 i_flour_sack, 5 i_pitcher_water, 6 i_eggs_fresh
+SKILLMAKE=COOKING 40.0
+TYPE=T_FOOD
+WEIGHT=5.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Bread French
+
+[EOF]

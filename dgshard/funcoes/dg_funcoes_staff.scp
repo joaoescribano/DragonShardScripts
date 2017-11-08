@@ -1,0 +1,752 @@
+[ITEMDEF t2_item]
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@Create
+TIMER=20
+
+ON=@Timer
+CONT.SYSMESSAGE Teleport removido
+REMOVE
+RETURN=1
+
+ON=@Targon_ground
+SRC.GO <SRC.TARGP>
+SRC.T2
+REMOVE
+RETURN=1
+
+ON=@Targon_char
+SRC.GO <SRC.TARG.P>
+SRC.T2
+REMOVE
+RETURN=1
+
+ON=@Targon_item
+SRC.GO <SRC.TARG.P>
+SRC.T2
+REMOVE
+RETURN=1
+
+[FUNCTION gop]
+IF (<FINDID.i_gop>)
+P <FINDID.i_gop.MOREP>
+FINDID.i_gop.REMOVE
+UPDATE
+ELSE
+INVIS 1
+NEWITEM i_gop
+ACT.CONT <UID>
+ACT.MOREP <P>
+ACT.TAG.NAME <ARGS>
+ENDIF
+
+[ITEMDEF i_gop]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Go Player
+
+ON=@Create
+ATTR attr_decay
+TIMER 1
+
+ON=@Timer
+CONT.GONAME <TAG.NAME>
+IF STRMATCH(<CONT.ACT.TOPOBJ.NAME>,<TAG.NAME>)
+IF ! STRMATCH(<CONT.ACT.TOPOBJ.ACCOUNT>,)
+CONT.SYSMESSAGE <TAG.NAME> is here in <CONT.REGION.NAME>.
+REMOVE
+ENDIF
+ELIF (<CONT.ACT.TYPE> == t_eq_memory_obj)
+IF STRMATCH(<CONT.ACT.LINK.NAME>,<TAG.NAME>) && ! STRMATCH(<CONT.ACT.LINK.ACCOUNT>,)
+CONT.P <CONT.ACT.LINK.P>
+CONT.UPDATE
+CONT.SYSMESSAGE <TAG.NAME> is here in <CONT.REGION.NAME>.
+REMOVE
+ENDIF
+ENDIF
+IF (<CONT.ACT.UID> == 0<TAG.FIRST>)
+CONT.P <MOREP>
+CONT.UPDATE
+CONT.SYSMESSAGE No player named <TAG.NAME>.
+REMOVE
+ENDIF
+IF !(0<TAG.FIRST>)
+TAG.FIRST <CONT.ACT.UID>
+ENDIF
+TIMER 1
+RETURN=1
+
+[FUNCTION t]
+NEWITEM target_t
+ACT.CONT=<UID>
+EQUIP=<ACT.UID>
+ACT.TIMER=20
+MESSAGE  Selecione um player.
+ACT.DCLICK
+
+[ITEMDEF target_t]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+ATTR=attr_decay
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN=1
+
+ON=@DCLICK
+TARGET
+RETURN=1
+
+ON=@TARGON_ITEM
+LINK.GO <SRC.TARGP>
+RETURN=1
+
+ON=@TARGON_CHAR
+LINK=<SRC.TARG.UID>
+TARGETG Selecione um local para teleportar <src.targ.name>.
+RETURN=1
+
+ON=@TARGON_GROUND
+LINK.GO <SRC.TARGP>
+RETURN=1
+
+[FUNCTION t2]
+//NEWITEM target_t2
+//ACT.CONT=<UID>
+//EQUIP=<ACT.UID>
+//ACT.TIMER=20
+//MESSAGE  Teleport continuo. Pressione ESC para cancelar.
+//ACT.DCLICK
+TARGETFG teleport
+ 
+[FUNCTION teleport]
+SRC.GO <SRC.TARGP>
+SRC.T2
+
+[ITEMDEF target_t2]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30
+
+ON=@CREATE
+ATTR=attr_decay
+TIMER=30
+
+ON=@TIMER
+REMOVE
+RETURN=1
+
+ON=@DCLICK
+link=<src.uid>
+TARGETG
+RETURN=1
+
+on=@targon_item
+LINK.GO <SRC.TARGP>
+LINK.NEWITEM target_t2
+link.act.cont=<LINK.UID>
+link.equip=<LiNK.ACT.UID>
+link.act.timer=20
+link.act.dclick
+RETURN=1
+
+on=@targon_char
+LINK.GO <SRC.TARGP>
+LINK.NEWITEM target_t2
+link.act.cont=<LINK.UID>
+link.equip=<LiNK.ACT.UID>
+link.act.timer=20
+link.act.dclick
+RETURN=1
+
+
+ON=@TARGON_GROUND
+LINK.GO <SRC.TARGP>
+LINK.NEWITEM target_t2
+link.act.cont=<LINK.UID>
+link.equip=<LiNK.ACT.UID>
+link.act.timer=20
+link.act.dclick
+RETURN=1
+
+//BRing e Dismiss
+
+[FUNCTION TRAZER] 
+IF (STRMATCH(<ARGS>,)) 
+SYSMESSAGE=Voce tem que digitar o nome exato do player e ele tem que estar online'.bring (name)' 
+ELSE 
+VAR.BRINGP=<P> 
+VAR.BRINGNAME=<NAME> 
+VAR.BRINGUID=<UID> 
+SERV.ALLCLIENTS BRING2 <ARGS> 
+RETURN 0 
+ENDIF 
+
+[FUNCTION BRING2] 
+IF (STRMATCH(<name>,<args>)) 
+IF (<EVAL <TAG.BRINGBACK>>) 
+TRY UID.<VAR.BRINGUID>.SYSMESSAGE=<name> ja foi solicitado por um gm, e precisa ser dispensado antes com o comando '.dismiss <name>' 
+RETURN=1 
+ELSE 
+TAG.BRINGBACK=<P> 
+P=<VAR.BRINGP> 
+UPDATE 
+EFFECT=3,I_FIRE_COLUMN,16,16,16 
+SFX=SND_SPELL_FLAMESTRIKE 
+SYSMESSAGE=Voce foi trazido por <var.bringname>. 
+VAR.BRINGNAME= 
+VAR.BRINGP= 
+RETURN=1 
+ENDIF 
+ENDIF 
+
+
+[FUNCTION DISPENSAR] 
+IF (STRMATCH(<ARGS>,)) 
+SYSMESSAGE=Voce precisa digitar o nome exato do player que voce trouxe'.dismiss (name)' 
+ELSE 
+VAR.DISMISSNAME=<NAME> 
+VAR.DISMISSUID=<UID> 
+SERV.ALLCLIENTS DISMISS2 <ARGS> 
+RETURN=1 
+ENDIF 
+
+[FUNCTION DISMISS2] 
+IF (STRMATCH(<name>,<args>)) 
+IF (STRMATCH(<TAG.BRINGBACK>,)) 
+TRY UID.<VAR.DISMISSUID>.SYSMESSAGE=<name> nao foi trazido pra ca pra ser dispensado. 
+RETURN=1 
+ELSE 
+P=<TAG.BRINGBACK> 
+TAG.BRINGBACK= 
+UPDATE 
+EFFECT=3,I_FIRE_COLUMN,16,16,16 
+SFX=SND_SPELL_FLAMESTRIKE 
+SYSMESSAGE=Voce foi dispensado por <var.dismissname>. 
+VAR.DISMISSNAME= 
+VAR.DISMISSUID= 
+VAR.BRINGP= 
+RETURN=1 
+ENDIF 
+ENDIF
+
+[ITEMDEF i_hear_staff]
+DEFNAME i_hear_staff
+NAME=Hearing Memory [DO NOT REMOVE]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+LAYER=30
+
+[FUNCTION staff]
+IF (0<EVAL <SRC.TAG.HEARstaff>>==1)
+SRC.FINDID.i_hear_staff.REMOVE
+SRC.TAG.HEARstaff 0
+SRC.SYSMESSAGE Staff hear foi desligado.
+RETURN 1
+ELSEIF (0<src.account.PLEVEL>1)
+SRC.NEWITEM i_hear_staff
+SRC.ACT.CONT <SRC.UID>
+SRC.TAG.HEARSTAFF=1
+SRC.SYSMESSAGE Chat Staff foi ligado. Agora voce pode ouvir as mensagens enviadas pelo staff.
+RETURN 1
+
+[FUNCTION smsg]
+msgstaff <ARGS>
+RETURN 1
+
+[FUNCTION sc]
+msgstaff <ARGS>
+RETURN 1
+
+[FUNCTION msgstaff]
+IF 0<src.account.PLEVEL>=2
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Seer] <NAME>: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=3
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Counselor] <NAME>: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=4
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Game Master] <NAME>: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=5
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Admin] <NAME>: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=6
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Developer] <NAME>: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>>7
+SERV.ALLCLIENTS FINDID.i_hear_staff.CONT.SYSMESSAGE @077a [[Owner] <NAME>: <ARGS>
+Return 1
+ENDIF
+
+[function forcemsg]
+IF 0<src.account.PLEVEL>=2
+SERV.ALLCLIENTS SYSMESSAGE [[Counselor <SRC.NAME>]: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=3
+SERV.ALLCLIENTS SYSMESSAGE [[Seer <SRC.NAME>]: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=4
+SERV.ALLCLIENTS SYSMESSAGE [[Game Master <SRC.NAME>]: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=5
+SERV.ALLCLIENTS SYSMESSAGE [[Admin <SRC.NAME>]: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>=6
+SERV.ALLCLIENTS SYSMESSAGE [[Developer <SRC.NAME>]: <ARGS>
+RETURN 1
+ELSEIF 0<src.account.PLEVEL>>7
+SERV.ALLCLIENTS SYSMESSAGE [[Owner <SRC.NAME>]: <ARGS>
+Return 1
+ENDIF
+
+[function sco]
+IF <SRC.ACCOUNT.PLEVEL> > 7
+ SERV.ALLCLIENTS staff_online
+ENDIF
+RETURN 1
+
+[function staff_online]
+IF (<ACCOUNT.PLEVEL> > 1)
+ SRC.SYSMESSAGE @55 <NAME> [<ACCOUNT>, <ACCOUNT.PLEVEL>]
+ SRC.SYSMESSAGE @50 (<P.X>,<P.Y>,<P.Z> <REGION.NAME> )
+ENDIF
+RETURN 1
+
+[FUNCTION sumirdestiny]
+// fx_xtorm 1,i_arrow_x,0,1
+LOCAL.X <EVAL <P.X>-5>
+LOCAL.Y <EVAL <P.Y>>
+
+EFFECTTO i_arrow_x,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,0,0,0
+
+SERV.NEWITEM i_fx_smoke_explosiondrake
+NEW.COLOR 0
+NEW.ATTR 010
+NEW.TIMERF 2,P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>
+NEW.TIMERF 4,REMOVE
+TIMERF 2, sound 773
+timerf 2,invis
+timerf 2,FX_ROUND 10,036b0,077a
+RETURN 1
+
+[FUNCTION sumirdragon3]
+SRC.NEWITEM=i_fx_explode
+SRC.ACT.NAME=Owner DragoN
+SRC.ACT.COLOR=08b00
+//SRC.ACT.TYPE=T_EXPLOSION
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=Owner DragoN
+SRC.ACT.COLOR=08b00
+//SRC.ACT.TYPE=T_SPELL
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND 586
+INVIS
+
+[FUNCTION sumirdeath]
+SRC.NEWITEM=i_fx_explode
+SRC.ACT.NAME=Counselor Death
+SRC.ACT.COLOR=08834
+//SRC.ACT.TYPE=T_EXPLOSION
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.NEWITEM=i_fx_explode
+SRC.ACT.NAME=Counselor Death
+SRC.ACT.COLOR=08834
+//SRC.ACT.TYPE=T_SPELL
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+INVIS
+
+[FUNCTION sumirtoze]
+INVIS
+
+//[FUNCTION sumirflicker]
+//SRC.NEWITEM=i_fx_explode
+//SRC.ACT.NAME=staff_gumps
+//SRC.ACT.COLOR=0793
+////SRC.ACT.TYPE=T_EXPLOSION
+//SRC.ACT.TYPE t_normal
+//SRC.ACT.morex=20
+//SRC.ACT.morey=090
+//SRC.ACT.morez=4
+//SRC.ACT.TIMER=5
+//SRC.ACT.P=<SRC.P>
+//SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+//SRC.NEWITEM=i_fx_sparkle
+//SRC.ACT.NAME=staff_gnomo
+//SRC.ACT.COLOR=0793
+////SRC.ACT.TYPE=T_SPELL
+//SRC.ACT.TYPE t_normal
+//SRC.ACT.TIMER=3
+//SRC.ACT.P=<SRC.P>
+//SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+//SRC.SOUND 586
+//INVIS
+
+[FUNCTION sumirdragon]
+
+SRC.NEWITEM=i_fx_explode
+SRC.ACT.NAME=Owner Dragon
+SRC.ACT.COLOR=0a86
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=Owner Dragon
+SRC.ACT.COLOR=0a86
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND=230
+SRC.INVIS
+
+[FUNCTION sumirlucas]
+
+SRC.NEWITEM=i_fx_explode
+SRC.ACT.NAME=Staff ElemenT
+SRC.ACT.COLOR=0a8d
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=Staff ElemenT
+SRC.ACT.COLOR=0a8d
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND=230
+SRC.INVIS
+
+[FUNCTION sumircaty]
+SRC.NEWITEM=i_fx_curse
+SRC.ACT.NAME=Caty
+SRC.ACT.COLOR=0801
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=Caty
+SRC.ACT.COLOR=0801
+//SRC.ACT.TYPE=T_SPELL
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND=489
+INVIS
+
+
+[FUNCTION sumirsnow]
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=S n O w
+NEW.COLOR=07bf
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+
+SRC.NEWITEM=i_fx_curse
+SRC.ACT.NAME=S n O w
+SRC.ACT.COLOR=07bf
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=S n O w
+SRC.ACT.COLOR=07bf
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND=491
+INVIS
+
+
+[FUNCTION sumirfli2]
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Salsicha
+NEW.COLOR=0800
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+
+SRC.NEWITEM=i_fx_curse
+SRC.ACT.NAME=Salsicha
+SRC.ACT.COLOR=0800
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=5
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.NAME=Salsicha
+SRC.ACT.COLOR=0800
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_static|attr_move_never|attr_decay
+SRC.SOUND=491
+INVIS
+
+[FUNCTION sumirbruno]
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Game Master BrunO
+NEW.COLOR=0790
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE 3E
+
+SOUND snd_spell_reveal
+INVIS
+
+[FUNCTION sumirdragon3]
+
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE W
+
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_smoke
+NEW.NAME=Owner Dragon
+NEW.COLOR=0858
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_static|attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE 3E
+
+SOUND snd_spell_reveal
+INVIS
+
+[ITEMDEF i_sai_invis]
+ID=i_memory
+NAME=Sai Invis
+TYPE=t_eq_script
+
+ON=@EQUIP
+TIMER=1
+
+ON=@TIMER
+
+CONT.NEWITEM=i_fx_explode
+CONT.ACT.NAME=Owner Slash
+CONT.ACT.COLOR=0b5c
+CONT.ACT.TYPE t_normal
+CONT.ACT.morex=20
+CONT.ACT.morey=090
+CONT.ACT.morez=4
+CONT.ACT.TIMER=5
+CONT.ACT.P=<CONT.P>
+CONT.ACT.ATTR=attr_static|attr_move_never|attr_decay
+CONT.NEWITEM=i_fx_sparkle
+CONT.ACT.NAME=Owner Slash
+CONT.ACT.COLOR=0b5c
+CONT.ACT.TYPE t_normal
+CONT.ACT.TIMER=3
+CONT.ACT.P=<CONT.P>
+CONT.ACT.ATTR=attr_static|attr_move_never|attr_decay
+CONT.SOUND=230
+CONT.INVIS
+RETURN 0
+
+
+[EOF]

@@ -1,0 +1,450 @@
+﻿[EVENTS e_npcs]
+ON=@CLICK   //////////////// NOME E PROFISSAO AMARELOS E INVUL NPC
+IF (<ID>=c_h_traveller) // VIAJANTE
+	MESSAGE @00785 O Viajante
+	Return 1
+ELSEIF (<BRAIN>=3) || (<BRAIN>=4) || (<BRAIN>=6) || (<BRAIN>=7)
+	MESSAGE @035 [<JOB>]
+	MESSAGE @035 <NAME>
+	Return 1
+ELSEIF (<BRAIN>=5)
+	MESSAGE @80 [<JOB>]
+	MESSAGE @80 <NAME>
+	Return 1
+ENDIF
+
+ON=@Create
+	if (<isnpc> == 1)
+		serv.newitem i_restock_delay,1,<uid>,1
+		return 0
+	endif
+
+	tag0.lastattackdistance 10
+	tag0.lastpotion <serv.time>
+
+	// Remove os scrolls de spells que nao estão liberadas
+	if (<restest t_scroll>)
+		FORCONTTYPE t_scroll
+			if (<morex> > 64)
+				remove
+			endif
+		ENDFOR
+	endif
+
+	// Remove os wands
+	if (<restest t_wand>)
+		FORCONTTYPE t_wand
+			remove
+		ENDIF
+	endif
+
+	// Remove as rochas
+	if (<restest t_arock>)
+		FORCONTTYPE t_arock
+			remove
+		ENDIF
+	endif
+
+	// Cálculo e adição de Silver Coins
+	if (<tag0.ai_no_silver_coins> == 0)
+		local.sc = <ceil (<str>/100)>
+
+		if (<local.sc> > 0)
+			if (<local.sc> == 1)
+				local.sc = 2
+			endif
+
+			serv.newitem i_coin_silver
+			new.amount {<eval <local.sc>/2> <eval <local.sc>>}
+			new.cont <uid>
+		endif
+	endif
+
+	// Arruma o dano do monstro
+	if (<str> >= 1000)
+		dam 30,60
+	else
+		db.query "SELECT ROUND((<str>/10) * 0.30) as min, ROUND((<str>/10) * 0.50) as max"
+		local.min = <eval <db.row.0.min>>
+		local.max = <eval <db.row.0.max>>
+		dam <local.min>,<local.max>
+	endif
+
+	// Somente monstros com mias de 100 de dex pode correr
+	if !(<can> & MT_FLY)
+		if (<dex> > 100) && !(<CAN> & MT_RUN) && (<tag0.ai_cant_run> == 0)
+			CAN |=MT_RUN
+		elif (<CAN> & MT_RUN)
+			CAN = <CAN> - MT_RUN
+		endif
+	endif
+
+	// Regula a dex do bixo
+	if (<dex> > 150)
+		dex = 150
+		stam = 150
+	endif
+	dex = <eval (<dex> / 2) + <eval <dex>/4>>
+
+ON=@SpellFail
+	mana -= <eval <SERV.SPELL.<eval <argn1>>.MANAUSE> / 2>
+	tag0.casting 0
+
+ON=@SpellSuccess
+	mana -= <eval <SERV.SPELL.<eval <argn1>>.MANAUSE>>
+	tag0.casting 0
+
+ON=@SkillStart
+	if (<isnpc> == 1) || (<tag0.casting> == 1)
+		return 0
+	endif
+
+	tag0.count +=1
+
+	IF (<tag0.ai_drink_cure> == 1) && (<restest i_efeito_poison>)
+		tag0.lastpotion = <SERV.TIME> + 150
+
+		anim 33
+		sound=48
+		consume=i_efeito_poison
+		say @009fb Total Cure
+
+		If (<hits>><str>)
+		 	hits=<str>
+		endif
+		return 0
+	ELIF ((<tag0.ai_block_poison> == 1) || (<tag0.ai_block_poison_field> == 1)) && (<restest i_rune_poison>) && (<mana> >= <eval <SERV.SPELL.11.MANAUSE>>) && (<cancast 11>) && (<restest t_spellbook>)
+		npccast 11,<uid>
+		return 0
+	ELIF (<tag0.ai_drink_heal> == 1) && (<hits> <= <ceil (<maxhits>/100)*25>) && (rand(2)=1)
+		tag0.lastpotion = <SERV.TIME> + 150
+
+		anim 33
+		SOUND=48
+		hits=<hits>+60
+
+		say @009fb Total Heal
+
+		If (<hits>><str>)
+		 	hits=<str>
+		endif
+		return 0
+	ELIF (<tag0.ai_drink_mana> == 1) && (<mana> <= <ceil (<maxmana>/100)*25>) && (rand(2)=1) && (<src.tag0.manadrinked> == 0)
+		tag0.lastpotion = <SERV.TIME> + 150
+		tag0.manadrinked = 1
+
+		anim 33
+		MANA=<SRC.MANA>+80
+		say @009fb Total Mana Refresh
+
+		If (<hits>><str>)
+		 	hits=<str>
+		endif
+		return 0
+	ELIF (<tag0.ai_can_cure>) && (<hits> <= <ceil (<maxhits>/100)*60>) && (rand(2)==1)
+		if (<mana> >= <eval <SERV.SPELL.29.MANAUSE>>) && (<cancast 29>) && (<restest t_spellbook>)
+			npccast 29,<uid>
+			return 0
+		ENDIF
+	ELIF (<tag0.ai_can_cure>) && (<hits> <= <ceil (<maxhits>/100)*80>) && (rand(2)==1)
+		if (<mana> >= <eval <SERV.SPELL.29.MANAUSE>>) && (<cancast 29>) && (<restest t_spellbook>)
+			npccast 29,<uid>
+			return 0
+		ENDIF
+	ENDIF
+
+	IF (<ACTION>==Skill_Magery)
+		unequipHands
+		update
+		return 0
+	ENDIF 
+
+	IF ((<tag0.lastattackdistance> <= 3) && rand(2)==1
+		if (<restest t_weapon_mace_smith>)
+			findtype.t_weapon_mace_smith.equip
+		elif (<restest t_weapon_mace_sharp>)
+			findtype.t_weapon_mace_sharp.equip
+		elif (<restest t_weapon_sword>)
+			findtype.t_weapon_sword.equip
+		elif (<restest t_weapon_fence>)
+			findtype.t_weapon_fence.equip
+		elif (<restest t_weapon_mace_staff>)
+			findtype.t_weapon_mace_staff.equip
+		elif (<restest t_weapon_mace_crook>)
+			findtype.t_weapon_mace_crook.equip
+		elif (<restest t_weapon_mace_pick>)
+			findtype.t_weapon_mace_pick.equip
+		elif (<restest t_weapon_axe>)
+			findtype.t_weapon_axe.equip
+		endif
+		update
+	ENDIF
+
+	IF (<eval <tag0.lastattackdistance>> >= 4) && (<restest t_weapon_bow>) && rand(2)==1
+		if (<action> == Skill_Swordsmanship) || (<action> == Skill_Macefighting) || (<action> == Skill_Fencing) || (<action> == Skill_Wrestling)
+			ACTION=SKILL_ARCHERY
+			findtype.t_weapon_bow.equip
+			update
+		endif
+	ENDIF
+
+ON=@GetHit
+	tag0.lastattackdistance <distance>
+
+on=@SpellSelect
+	if (<isnpc> == 1)
+		return 0
+	endif
+
+	if (<tag0.casting> == 1)
+		return 1
+	endif
+
+	if (<eval <magery>> <= 100)
+		return 1
+	endif
+
+	if (<mana> >= <eval <SERV.SPELL.<eval <argn1>>.MANAUSE>>)
+		unequipHands
+
+		argn2 <eval <SERV.SPELL.<eval <argn1>>.MANAUSE>>
+		return 6
+	else
+		return 1
+	endif
+
+ON=@SpellEffect
+	if (<argn> == 38) && (<tag0.ai_block_paralyze> == 1)
+		say  I'm invulnerable to paralyze
+		return 1
+	elif (<argn> == 47) && (<tag0.ai_block_paralyze_field> == 1)
+		say  I'm invulnerable to paralyze field
+		return 1
+	elif (<argn> == 28) && (<tag0.ai_block_fire_field> == 1)
+		say  I'm invulnerable to fire field
+		return 1
+	elif (<argn> == 20) && (<tag0.ai_block_poison> == 1)
+		consume i_rune_poison
+		say  I'm invulnerable to posion
+		return 1
+	elif (<argn> == 39) && (<tag0.ai_block_poison_field> == 1)
+		consume i_rune_poison
+		say  I'm invulnerable to posion field
+		return 1
+ELif (<ARGN> == 54)&&(<REGION.FLAGS>=01192)
+SYSMESSAGE <SRC.name> casta uma magia de fora de sua edificacao...
+RETURN 1
+	endif
+
+ON=@SPELLCAST
+	if (<tag0.casting> == 1)
+		return 1
+	endif
+
+	if ((<argn1> == 38) || (<argn1> == 20)) && (<argn1> == <tag0.lastspellcast>)
+		return 1
+	endif
+
+	if (<eval <magery>> <= 100)
+		return 1
+	endif
+
+
+	tag0.casting = 1
+
+	if (<argn> == 1)
+		spell_say2 Uus Jux
+	elseif (<argn> == 3)
+		spell_say2 Rel Wis
+	elseif (<argn> == 4)
+		spell_say2 In Mani
+	elseif (<argn> == 5)
+		spell_say2 In Por Ylem
+	elseif (<argn> == 6)
+		spell_say2 In Lor
+	elseif (<argn> == 7)
+		spell_say2 Flam Sanct
+	elseif (<argn> == 8)
+		spell_say2 Des Mani
+	elseif (<argn> == 9)
+		spell_say2 Ex Uus
+	elseif (<argn> == 10)
+		spell_say2 Uus Wis
+	elseif (<argn> == 11)
+		spell_say2 An Nox
+	elseif (<argn> == 12)
+		spell_say2 An Mani
+	elseif (<argn> == 13)
+		spell_say2 In Jux
+	elseif (<argn> == 14)
+		spell_say2 An Jux
+	elseif (<argn> == 15)
+		spell_say2 Uus Sanct
+	elseif (<argn> == 16)
+		spell_say2 Uus Mani
+	elseif (<argn> == 17)
+		spell_say2 Rel Sanct
+	elseif (<argn> == 18)
+		spell_say2 Vas Flam
+	elseif (<argn> == 19)
+		spell_say2 An Por
+	elseif (<argn> == 20)
+		spell_say2 In Nox
+	elseif (<argn> == 21)
+		spell_say2 Ort Por Ylem
+	elseif (<argn> == 22)
+		spell_say2 Rel Por
+	elseif (<argn> == 23)
+		spell_say2 Ex Por
+	elseif (<argn> == 24)
+		spell_say2 In Sanct Ylem
+	elseif (<argn> == 25)
+		spell_say2 Vas An Nox
+	elseif (<argn> == 26)
+		spell_say2 Vas Uus Sanct
+	elseif (<argn> == 27)
+		spell_say2 Des Sanct
+	elseif (<argn> == 28)
+		spell_say2 In Flam Grav
+	elseif (<argn> == 29)
+		spell_say2 In Vas Mani
+	elseif (<argn> == 30)
+		spell_say2 Por Ort Grav
+	elseif (<argn> == 31)
+		spell_say2 Ort Rel
+	elseif (<argn> == 32)
+		spell_say2 Kal Ort Por
+	elseif (<argn> == 33)
+		spell_say2 In Jux Hur Ylem
+	elseif (<argn> == 34)
+		spell_say2 An Grav
+	elseif (<argn> == 35)
+		spell_say2 Kal In Ex
+	elseif (<argn> == 36)
+		spell_say2 In Jux Sanct
+	elseif (<argn> == 37)
+		action -1
+		return 1
+		spell_say2 Por Corp Wis
+	elseif (<argn> == 38)
+		spell_say2 An Ex Por
+	elseif (<argn> == 39)
+		spell_say2 In Nox Grav
+	elseif (<argn> == 40)
+		spell_say2 Kal Xen
+	elseif (<argn> == 41)
+		spell_say2 An Ort
+	elseif (<argn> == 42)
+		spell_say2 Corp Por
+	elseif (<argn> == 43)
+		spell_say2 Vas Ort Flam
+	elseif (<argn> == 44)
+		spell_say2 An Lor Xen
+	elseif (<argn> == 45)
+		spell_say2 Kal Por Ylem
+	elseif (<argn> == 46)
+		spell_say2 Vas Des Sanct
+	elseif (<argn> == 47)
+		spell_say2 In Ex Grav
+	elseif (<argn> == 48)
+		spell_say2 Wis Quas
+	elseif (<argn> == 49)
+		spell_say2 Vas Ort Grav
+	elseif (<argn> == 50)
+		spell_say2 In Sanct Grav
+	elseif (<argn> == 51)
+		spell_say2 Kal Vas Flam
+	elseif (<argn> == 52)
+		spell_say2 Vas Rel Por
+	elseif (<argn> == 53)
+		spell_say2 Ort Sanct
+	elseif (<argn> == 54)
+		spell_say2 Vas An Ort
+	elseif (<argn> == 55)
+		spell_say2 Flam Kal Des Ylem
+	elseif (<argn> == 56)
+		spell_say2 Vas Ylem Rel
+	elseif (<argn> == 57)
+		spell_say2 In Vas Por
+	elseif (<argn> == 58)
+		spell_say2 Vas Corp Por
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 59)
+		spell_say2 An Corp
+	elseif (<argn> == 60)
+		spell_say2 Kal Vas Xen Hur
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 61)
+		spell_say2 Kal Vas Xen Corp
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 62)
+		spell_say2 Kal Vas Xen Ylem
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 63)
+		spell_say2 Kal Vas Xen Flam
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 64)
+		spell_say2 Kal Vas Xen An Flam
+		if (<region.guarded>)
+			criminal 1
+		endif
+	endif
+
+ON=@DeathCorpse
+	if !(0<argo.tag0.timerpadrao>)
+		argo.tag0.timerpadrao = <eval (<argo.timer> + 1) / 2>
+		timer <argo.tag0.timerpadrao>
+	endif
+
+	argo.tag0.nome = <name>
+	argo.tag0.monstro = <id>
+	argo.tag0.body = <body>
+	argo.tag0.body_id = <dispiddec>
+	argo.tag0.brain = <brain>
+
+[TYPEDEF t_corpse]
+ON=@CREATE
+TIMER=600 /// 10 minutos
+
+ON=@Timer
+if (<eval strlen(<tag0.timerpadrao>)> > 0)
+	if !(0<tag0.flies>)
+		serv.newitem i_flies
+		serv.new.p <p>
+		serv.new.timer <tag0.timerpadrao>
+		serv.new.attr attr_move_never
+		serv.new.update
+		
+		tag0.flies = <serv.new.uid>
+		timer <tag0.timerpadrao>
+		return 1
+	else
+		TRY uid.<tag0.flies>.remove
+	endif
+endif
+remove
+
+[ITEMDEF 04b64]
+defname=i_flies
+type=t_normal
+name=Flies
+FLIP=0
+
+ON=@Timer
+remove
+return 1
+
+[function spell_say2]
+say @049 <args>
+
+[EOF]

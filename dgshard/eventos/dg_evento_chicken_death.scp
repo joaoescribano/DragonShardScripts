@@ -1,0 +1,169 @@
+// Evento Chicken of Death - V2.0 (12/04.2010)
+
+// Dragon Shard - The Second Age
+// http://www.dgshard.com.br
+
+// By Owner Destiny
+
+[Defname conf_cod]
+cod_entrada 5327,2076,0,0
+cod_chicken 5319,2067,0,0
+
+[ITEMDEF i_pedra_cod]
+ID=0ED4
+NAME=Pedra
+TYPE=t_normal
+
+ON=@CREATE
+NAME Evento Chicken of Death
+COLOR=0a8b
+TAG0.ON 0
+TAG0.PREMIO 0
+TAG0.PM 0
+TAG0.PLAYERS 0
+
+ON=@DCLICK
+VAR.UID <UID>
+
+IF (<src.isgm>)
+ dialog d_cod_fechar
+ return 1
+ENDIF
+
+if !(0<tag0.on>)
+ src.sysmessage @0a8b Evento Chicken of Death Fechado
+ return 1
+endif
+
+tag0.premio <eval <tag0.premio>+1000>
+tag0.players <eval <tag0.players>+1>
+
+src.go <def.cod_entrada>
+src.events +e_chicken
+src.tag0.uid <uid>
+src.sysmessage Aguarde o evento iniciar.
+return 1
+
+ON=@TIMER
+tag0.on 0
+serv.newnpc c_chicken_of_death
+new.p <def.cod_chicken>
+new.update 
+tag0.chicken_uid <new.uid>
+timer -1
+return 1
+
+[EVENTS e_chicken]
+ON=@HIT
+sysmessage Nao autorizado.
+return 1
+
+ON=@HITTRY
+sysmessage Nao autorizado.
+return 1
+
+ON=@ATTACK
+sysmessage Nao autorizado.
+action -1
+return 1
+
+ON=@SPELLCAST
+sysmessage Nao autorizado.
+action -1
+return 1
+
+ON=@SKILLSELECT
+sysmessage Nao autorizado.
+action -1
+return 1
+
+ON=@DEATH
+go <def.eventos_where_saida>
+try uid.<tag0.uid>.tag0.pm <eval <uid.<tag0.uid>.tag0.pm>+1>
+
+if !(<uid.<tag0.uid>.tag0.pm> >= <eval <uid.<tag0.uid>.tag0.players>>)
+ sysmessage @<uid.<tag0.uid>.color> Vc morreu e nao ganhou o evento. Obrigado.
+else
+ sysmessage @<uid.<tag0.uid>.color> Vc ganhou o Evento, Parabens. Ao sair do evento voce recebera seu premio.
+ tag0.vencedor 1
+ tag0.colocado 1
+ tag0.premio <eval <uid.<tag0.uid>.tag0.premio>>
+ 
+ try uid.<tag0.uid>.tag0.premio 0
+ try uid.<tag0.uid>.tag0.pm 0
+ try uid.<tag0.uid>.tag0.players 0
+ try uid.<tag0.uid>.tag0.on 0
+ var.cuid <uid.<tag0.uid>.tag0.chicken_uid>
+ try uid.<var.cuid>.remove
+endif
+
+events -e_chicken
+hits <maxhits>
+return 1
+
+[CHARDEF c_chicken_of_death]
+ID=c_chicken
+NAME=Chicken of Death
+SOUND=snd_ANIMALS_CHICKEN1
+ICON=i_pet_CHICKEN
+ANIM=01fff
+DAM=1000,2000
+ARMOR=1000
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+    COLOR=0799
+    NPC=brain_monster
+    STR=2000
+    DEX=2000
+    INT=2000
+    PARRYING=9999
+    MAGICRESISTANCE=9999
+    TACTICS=9999
+    WRESTLING=9999
+    TAMING=99999
+        MAGERY=0
+    FAME.admin=10000
+    KARMA=-10000
+    timerf 1,dam=1000,2000
+
+// Dialog
+
+[DIALOG d_cod_fechar]
+50,50
+resizepic 0 0 9200 335 83
+dtext 71 0 1913 Dragon Shard - The Second Age
+dtext 38 21 1952 Fechar entrada e liberar Chicken?
+button 230 50 241 243 1 0 0
+button 40 50 247 248 1 0 1
+
+[DIALOG d_cod_fechar button]
+ON=0
+return 1
+
+ON=1
+src.invis 1
+src.go <def.cod_entrada>
+timer 10
+serv.b @07a1 Evento: Chicken of Death.
+serv.b @07a1 10 segs para liberar a Chicken. Cuidado.
+return 1
+
+// Premiação do evento 1, colocado 1
+[function evento_1_1_premio]
+dinheiro <tag0.premio>
+tag0.premio 0
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Chicken of Death
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[EOF]

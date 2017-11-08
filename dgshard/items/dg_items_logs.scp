@@ -1,0 +1,156 @@
+//////////////////logs/////////////////////////////////
+[DEFNAME COLOR_LOG]
+color_l_death		07bb
+color_l_sky 		0803
+color_l_mystic 		07c2
+color_l_black 		0455
+color_l_white 		0481
+color_l_fire 		077a
+color_l_elven 		0081f
+color_l_elfic       00a1f
+color_l_purple      0206
+color_o_blackrock	0455
+
+[ITEMDEF 01bdd]
+DEFNAME=i_log
+NAME=log%s
+VALUE=5
+TYPE=T_LOG
+WEIGHT=0.5
+CATEGORY=Items by Professions
+SUBSECTION=Archers/Bowyers
+DESCRIPTION=Log (SE)
+
+ON=@Create
+attr=attr_move_always
+
+[ITEMDEF i_log_purple] 
+ID=i_log
+NAME=Purple log%s (Decoration)
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Purple Log 
+
+ON=@CREATE 
+COLOR=color_l_purple
+attr=attr_move_always
+
+[ITEMDEF i_log_elfic] 
+ID=i_log 
+NAME=Elfic log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Elfic Log 
+
+ON=@CREATE 
+COLOR=color_l_elfic
+attr=attr_move_always
+
+[ITEMDEF i_log_fire] 
+ID=i_log 
+NAME=Fire log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Fire Log 
+
+ON=@CREATE 
+COLOR=color_l_fire
+attr=attr_move_always
+
+[ITEMDEF i_log_sky] 
+ID=i_log 
+NAME=Sky log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Sky Log 
+
+ON=@CREATE 
+COLOR=color_l_sky
+attr=attr_move_always
+
+[ITEMDEF i_log_black] 
+ID=i_log 
+NAME=Black log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Black Log 
+
+ON=@CREATE 
+COLOR=color_l_black
+attr=attr_move_always
+
+[ITEMDEF i_log_white] 
+ID=i_log 
+NAME=White log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=White Log 
+
+ON=@CREATE 
+COLOR=color_l_white
+attr=attr_move_always
+
+[ITEMDEF i_log_elven] 
+ID=i_log 
+NAME=Elven log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=elven Log 
+
+ON=@CREATE 
+COLOR=color_l_elven
+attr=attr_move_always
+
+[ITEMDEF i_log_mystic] 
+ID=i_log 
+NAME=Mystic log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Mystic Log 
+
+ON=@CREATE 
+COLOR=color_l_mystic
+attr=attr_move_always
+
+[ITEMDEF i_log_death] 
+ID=i_log 
+NAME=Death log%s
+TYPE=t_log 
+WEIGHT=0.5
+CATEGORY=Items by Professions 
+SUBSECTION=Archers/Bowyers 
+DESCRIPTION=Death Log 
+
+ON=@CREATE 
+COLOR=color_l_death
+attr=attr_move_always
+
+[FUNCTION addLogs]
+serv.newitem i_log,100,<uid>
+serv.newitem i_log_purple,100,<uid>
+serv.newitem i_log_elfic,100,<uid>
+serv.newitem i_log_fire,100,<uid>
+serv.newitem i_log_sky,100,<uid>
+serv.newitem i_log_black,100,<uid>
+serv.newitem i_log_white,100,<uid>
+serv.newitem i_log_elven,100,<uid>
+serv.newitem i_log_mystic,100,<uid>
+serv.newitem i_log_death,100,<uid>
+
+[EOF]

@@ -1,0 +1,385 @@
+[AREADEF a_help_room]
+NAME=Help Room
+GROUP=Help Room
+P=5161,2014,0,0
+FLAGS=region_antimagic_all|region_antimagic_gate|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+RECT=5183,256,5279,312
+	
+[AREADEF a_area_colonia_penal]
+NAME=Colonia Penal
+GROUP=Arenas
+FLAGS=region_antimagic_gate|region_antimagic_recall_in
+P=5335,2012,0,1
+RECT=5331,1992,5363,2024,1
+EVENTS=r_default,r_colonia_penal
+
+[AREADEF a_sala_staffs]
+NAME=Sala dos Staffs
+FLAGS=region_antimagic_all|region_flag_nobuilding|region_flag_safe||region_flag_underground
+P=5326,277,15
+RECT=5315,265,5338,292
+RECT=5311,302,5330,330
+
+[AREADEF a_sala_evento]
+NAME=Sala de evento
+FLAGS=region_antimagic_all|region_flag_safe|region_flag_nobuilding|region_flag_underground
+P=5146,1775,0
+RECT=5133,1754,5157,1779,0
+RECT=5141,1780,5149,1796,0
+
+[AREADEF a_sala_premio]
+NAME=Sala de premio
+FLAGS=region_antimagic_all|region_flag_safe|region_flag_underground
+P=5166,1746,0
+RECT=5157,1738,5174,1755,0
+
+[AREADEF a_sala_saida_evento]
+NAME=Sala de saida
+FLAGS=region_antimagic_all|region_flag_safe|region_flag_underground
+P=5167,1770,0
+RECT=5168,1763,5172,1777,0
+
+[AREADEF a_area_champion]
+EVENTS=r_default,r_default,r_default_water,r_default_tree,r_default_grass
+NAME=Champion
+GROUP=Arenas
+P=5333,1590
+RECT=5328,1583,5338,1600,0
+RECT=5295,1600,5369,1632,0
+FLAGS=region_antimagic_gate|region_antimagic_recall_in
+
+//ARENAS
+
+//ARENA 1x1
+
+[AREADEF a_arena1x1]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena 1x1
+GROUP=Arenas
+P=5139,361,15
+RECT=5130,340,5147,357,0
+FLAGS=region_flag_arena
+
+//Arena 2x2
+
+[AREADEF a_arena2x2]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena 2x2
+GROUP=Arenas
+P=5136,325,15
+RECT=5129,308,5143,322,0
+FLAGS=region_flag_arena
+
+//Boxe
+
+[AREADEF a_arena_boxe]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena Boxe
+GROUP=Arenas
+P=5130,258,15
+RECT=5126,263,5134,271,0
+FLAGS=region_antimagic_all|region_antimagic_gate|region_flag_arena
+
+//Chicken Of Death
+
+[AREADEF a_arena_chicken]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena Chicken
+GROUP=Arenas
+P=5135,387,15
+RECT=5133,374,5154,395,0
+FLAGS=region_flag_arena|region_antimagic_all|region_antimagic_gate
+
+//Bomber Man 1
+
+[AREADEF a_arena_bomber_1]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena Bomber
+GROUP=Arenas
+P=5133,419,15
+RECT=5125,411,5141,427,0
+FLAGS=region_antimagic_all|region_antimagic_gate|region_flag_arena
+
+//Bomber Man 2
+
+[AREADEF a_arena_bomber_2]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Arena Bomber 2
+GROUP=Arenas
+P=5141,470,15
+RECT=5129,458,5133,482,0
+FLAGS=region_antimagic_all|region_antimagic_gate|region_flag_arena
+
+//Mercado
+
+[AREADEF mercado]
+NAME=Mercado DG Shard
+GROUP=Mercado
+P=4315,975,10
+FLAGS=region_antimagic_all|region_antimagic_gate|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+RECT=4285,947,4336,1012
+
+[ROOMDEF shopping_sala_1]
+NAME=Galeria 1
+GROUP=Mercado
+P=4292,954,10
+RECT=4286,948,4303,961,0
+
+[ROOMDEF shopping_sala_2]
+NAME=Galeria 2
+GROUP=Mercado
+P=4324,952,10
+RECT=4317,947,4335,961,0
+
+[ROOMDEF shopping_sala_3]
+NAME=Galeria 3
+GROUP=Mercado
+P=4330,971
+RECT=4325,961,4335,973,0
+
+[ROOMDEF shopping_sala_4]
+NAME=Galeria 3
+GROUP=Mercado
+P=4327,997
+RECT=4325,989,4335,1005,0
+
+[ROOMDEF shopping_sala_5]
+NAME=Galeria 5
+GROUP=Mercado
+P=4290,993
+RECT=4285,989,4295,1005,0
+
+[ROOMDEF shopping_sala_6]
+NAME=Galeria 6
+GROUP=Mercado
+P=4290,968
+RECT=4285,961,4295,979
+
+[AREADEF dragon_city]
+NAME=Dragon Nest City
+GROUP=Cities
+P=5161,2014,0,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+RECT=5130,1989,5366,2289,0
+
+[AREADEF dragon_city_cave]
+NAME=Dragon Nest City Mining Cave
+GROUP=Mines & Caves
+P=5168,2225,0,0
+RECT=5120,2195,5167,2248,0
+FLAGS=region_flag_nobuilding|region_flag_underground|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_safe|region_flag_no_pvp
+EVENTS=r_mining_default
+
+[AREADEF dragon_city_cemetery]
+NAME=Dragon Nest City Cemetery
+GROUP=Cemetery
+P=5264,2215,0,0
+RECT=5247,2162,5294,2214,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari]
+NAME=Dragon Nest City Safari
+GROUP=Safari
+P=5290,2232,0,0
+RECT=5247,2233,5342,2268,0
+FLAGS=region_flag_safe|region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_1]
+NAME=Dragon Nest City Safari Room 1
+GROUP=Safari
+p=5248,2234,0,0
+RECT=5248,2234,5260,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_2]
+NAME=Dragon Nest City Safari Room 2
+GROUP=Safari
+p=5262,2234,0,0
+RECT=5262,2234,5275,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_3]
+NAME=Dragon Nest City Safari Room 3
+GROUP=Safari
+p=5276,2234,0,0
+RECT=5276,2234,5287,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_4]
+NAME=Dragon Nest City Safari Room 4
+GROUP=Safari
+p=5293,2234,0,0
+RECT=5293,2234,5302,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_5]
+NAME=Dragon Nest City Safari Room 5
+GROUP=Safari
+p=5304,2234,0,0
+RECT=5304,2234,5319,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_6]
+NAME=Dragon Nest City Safari Room 6
+GROUP=Safari
+p=5321,2234,0,0
+RECT=5321,2234,5341,2247,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_7]
+NAME=Dragon Nest City Safari Room 7
+GROUP=Safari
+p=5248,2254,0,0
+RECT=5248,2254,5260,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_8]
+NAME=Dragon Nest City Safari Room 8
+GROUP=Safari
+p=5262,2254,0,0
+RECT=5262,2254,5275,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_9]
+NAME=Dragon Nest City Safari Room 9
+GROUP=Safari
+p=5277,2254,0,0
+RECT=5277,2254,5289,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_10]
+NAME=Dragon Nest City Safari Room 10
+GROUP=Safari
+p=5291,2254,0,0
+RECT=5291,2254,5302,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_11]
+NAME=Dragon Nest City Safari Room 11
+GROUP=Safari
+p=5304,2254,0,0
+RECT=5304,2254,5319,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_safari_12]
+NAME=Dragon Nest City Safari Room 12
+GROUP=Safari
+p=5321,2254,0,0
+RECT=5321,2254,5341,2267,0
+FLAGS=region_flag_nobuilding|region_flag_no_pvp|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport
+
+[AREADEF dragon_city_dock]
+NAME=Dragon Nest City Dock
+GROUP=Cities
+P=5295,2162,0,0
+RECT=5295,2162,5350,2214,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+EVENTS=r_default,r_default_water
+
+[AREADEF dragon_city_market]
+NAME=Dragon Nest City Player Market
+GROUP=Cities
+P=5152,2238,0,0
+RECT=5152,2238,5217,2264,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_stables]
+NAME=Dragon Nest City Stables
+GROUP=Cities
+P=5184,2199,0,0
+RECT=5184,2199,5294,2208,0
+RECT=5195,2199,5212,2215,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_dummies]
+NAME=Dragon Nest City Dummies
+GROUP=Cities
+P=5154,2193,0,0
+RECT=5154,2193,5175,2215,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_no_pvp
+
+[AREADEF dragon_city_cathedral]
+NAME=Dragon Nest City Cathedral
+GROUP=Cities
+P=5184,2165,0,0
+RECT=5184,2165,5208,2189,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_bank]
+NAME=Dragon Nest City Bank
+GROUP=Cities
+P=5187,2123,0,0
+RECT=5187,2123,5200,2130,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_hall]
+NAME=Dragon Nest City Hall
+GROUP=Cities
+P=5180,2075,0,0
+RECT=5180,2075,5205,2091,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_events]
+NAME=Dragon Nest City Event Area
+GROUP=Cities
+P=5244,2060,0,0
+RECT=5244,2060,5358,2152,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_bomberman_1]
+NAME=Arena Bomberman 1
+GROUP=Cities
+P=5290,2061,0,0
+RECT=5290,2061,5306,2082,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_bomberman_2]
+NAME=Arena Bomberman 2
+GROUP=Cities
+P=5253,2061,0,0
+RECT=5253,2061,5277,2092,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_cod]
+NAME=Arena CoD
+GROUP=Cities
+P=5317,2061,0,0
+RECT=5317,2061,5337,2085,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_boxe]
+NAME=Arena Boxe
+GROUP=Cities
+P=5332,2099,0,0
+RECT=5332,2099,5346,2117,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_pvp_1]
+NAME=Arena PVP 1
+GROUP=Cities
+P=5263,2110,0,0
+RECT=5263,2110,5285,2131,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_pvp_2]
+NAME=Arena PVP 2
+GROUP=Cities
+P=5297,2102,0,0
+RECT=5297,2102,5317,2121,0
+FLAGS=region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_flag_arena
+
+[AREADEF dragon_city_premiacao]
+NAME=Sala de premiação
+GROUP=Cities
+P=5342,2136,0,0
+RECT=5337,2122,5346,2137,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[AREADEF dragon_city_saida]
+NAME=Sala de saída
+GROUP=Cities
+P=5330,2134,0,0
+RECT=5327,2125,5334,2137,0
+FLAGS=region_antimagic_all|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_teleport|region_flag_nobuilding|region_flag_safe|region_flag_no_pvp
+
+[EOF]

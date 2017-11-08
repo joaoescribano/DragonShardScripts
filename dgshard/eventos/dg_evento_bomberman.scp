@@ -1,0 +1,499 @@
+// Evento Bomberman 2.0 (12/04/2010)
+// By Owner Destiny
+// staff_destiny@dgshard.com.br
+
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+// Configurações
+
+[DEFNAME bomberman_configuracoes]
+/// Configurações
+bomber_vidas        2            // Vidas
+bomber_potencia     1            // Potencia Inicial
+bomber_potencia_max 3            // Potencia Maxima
+bomber_bombas       1            // Bombas iniciais
+bomber_bombas_max   3            // Bombas Maxima
+
+// Where's dos players
+bomber_5_where_1    5126,412,15
+bomber_5_where_2    5126,426,15
+bomber_5_where_3    5140,426,15
+bomber_5_where_4    5140,412,15
+
+bomber_6_where_1    5130,459,15
+bomber_6_where_2    5152,459,15
+bomber_6_where_3    5152,481,15
+bomber_6_where_4    5130,481,15
+
+[ITEMDEF i_pedra_bomberman_1]
+id      0edb
+name    Bomberman (Arena 1)
+type    t_pedra_bomberman
+
+on=@create
+color   0a8c
+attr attr_static
+tag0.evento 5
+tag0.dentro 0
+
+[ITEMDEF i_pedra_bomberman_2]
+id      0edb
+name    Bomberman (Arena 2)
+type    t_pedra_bomberman
+
+on=@create
+color   0a8c
+attr attr_static
+tag0.evento 6
+tag0.dentro 0
+
+[TYPEDEF t_pedra_bomberman]
+on=@Timer
+for x 1 <eval <def.evento_<eval <tag0.evento>>_vagas>>
+    serv.newitem i_bomberman_bomba_backpack
+    new.cont <tag0.uid_<eval <local.x>>>
+endfor
+
+serv.b @077a <name>
+serv.b @07a1 BOMBAS LIBERADAS!!!!
+
+tag0.on 0
+timer -1
+return 1
+
+on=@DClick
+if (<src.isgm>)
+    dialog d_bomber_fechar
+    return 1
+endif
+
+if !(0<tag0.on>)
+    src.sysmessage @0a8b Evento <name> Fechado
+    return 1
+endif
+
+if (<tag0.dentro> == <def.evento_<eval <tag0.evento>>_vagas>)
+    src.sysmessage @<color> Evento Lotado, favor aguardar o próximo.
+    return 1
+endif
+
+tag0.dentro += 1
+tag0.uid_<eval <tag0.dentro>> <src.uid>
+
+src.tag0.uid_bomber <uid>
+src.tag0.jogador <tag0.dentro>
+
+src.go <def.bomber_<eval <tag0.evento>>_where_<eval <tag0.dentro>>>
+
+serv.newitem 02684
+new.name Bomberman Robe
+if (<eval <tag0.dentro>> == 1)
+    new.color 00026
+elseif (<eval <tag0.dentro>> == 2) 
+    new.color 0010c
+elseif (<eval <tag0.dentro>> == 3) 
+    new.color 00035
+else
+    new.color 00001
+endif
+new.equip <src> 
+
+src.tag0.bomber_vidas <def.bomber_vidas>
+src.tag0.bomber_bombas <def.bomber_bombas>
+src.tag0.bomber_potencia <def.bomber_potencia>
+
+src.events +e_bomberman
+src.dados_bomber
+
+src.sysmessage @077a Atencao:
+src.sysmessage @<color> Evento <name> 2.1c
+src.sysmessage @<color> Vidas: <src.tag0.bomber_vidas>
+src.sysmessage @<color> Bombas: <src.tag0.bomber_bombas>
+src.sysmessage @<color> Potencia: <src.tag0.bomber_potencia>
+src.sysmessage @07a1 Utilize o comando .bomberman para ver os dados de suas bombas!
+src.sysmessage @07a1 Apos a entrada de todos os jogadores, em 30 segundos vocês vao ganhar as bombas!
+return 1
+
+[EVENTS e_bomberman]
+on=@hit
+sysmessage Somente Bombas.
+return 1
+
+on=@hittry
+sysmessage Somente Bombas.
+return 1
+
+on=@attack
+sysmessage Voce nao pode atacar players dentro deste evento.
+action -1
+return 1
+
+on=@Death
+var.uid <tag0.uid_bomber>
+tag0.bomber_vidas -=1
+
+go <def.bomber_<eval <UID.<var.uid>.tag0.evento>>_where_<eval <tag0.jogador>>>
+sysmessage @077a Voce possue mais <eval <tag0.bomber_vidas>> vidas.
+
+hits <maxhits>
+
+if !(<tag0.bomber_vidas>)
+    go <def.eventos_where_saida>
+    consume i_bomberman_bomba_backpack
+    tag0.bomber_vidas=0
+    tag0.bomber_bombas=0
+    tag0.bomber_potencia=0
+    sysmessage @077a Game Over - Voce nao possue mais vidas.
+    serv.b @07a1 <name> perdeu todas as suas vidas e esta fora do evento!
+    events -e_bomberman
+else
+    serv.b @07a1 <name> morreu!!! <eval <tag0.bomber_vidas>> vidas restantes!!!!
+endif
+return 1
+
+[DIALOG d_bomber_fechar]
+50,50
+resizepic 0 0 9200 335 83
+dtext 71 0 1913 Dragon Shard - The Second Age
+dtext 38 21 1952 Fechar entrada e liberar as bombas?
+button 230 50 241 243 1 0 0
+button 40 50 247 248 1 0 1
+
+[DIALOG d_bomber_fechar button]
+ON=0
+return 1
+
+ON=1
+src.invis 1
+src.go <def.bomber_<eval <tag0.evento>>_where_1>
+timer 30
+serv.b @07a1 Evento: <name>
+serv.b @07a1 30 segs para liberar o uso das bombas. Cuidado.
+return 1
+
+// Mecanismo do evento (BOMBAS)
+
+[itemdef i_bomberman_bomba_backpack]
+id      0fae
+name    Bomba
+type    t_normal
+
+on=@create
+color   069
+
+on=@dclick
+var.uid <src.tag0.uid_bomber>
+
+if (<eval <src.tag0.bombas>> >= <eval <src.tag0.bomber_bombas>>)
+ src.sysmessage @077a Erro, Voce nao pode soltar mais do que <eval <src.tag0.bomber_bombas>> bombas. espere 1 explodir ao menos.
+ return 1
+endif
+
+src.tag0.bombas +=1
+
+serv.newitem i_bomberman_bomba
+new.p <src.p>
+new.tag0.potencia <src.tag0.bomber_potencia>
+new.tag0.dono <src>
+new.link <src>
+new.more1 3
+new.timer 1
+new.update
+return 1
+
+[itemdef i_bomberman_bomba]
+id      0fae
+name    Bomba
+type    t_normal
+
+on=@create
+color   069
+
+on=@step
+src.action -1
+return 1
+
+on=@timer
+if (<more1>)
+ say @077a <eval <more1>>
+ more1 -=1
+ timer 1
+ return 1
+endif
+
+sound snd_spell_Explosion
+sound snd_spell_flamestrike
+sound 775
+
+link.tag0.bombas -=1
+
+serv.newitem i_coluna_fogo
+new.p <p>
+new.update
+new.timer 1
+
+f_bomba <p> // faz as bombas
+
+remove
+return 1
+
+[function f_bomba]
+var.xyz <p>
+
+serv.newitem i_gold
+serv.new.attr 094
+serv.new.p <var.xyz>
+serv.new.tag0.potencia <tag0.potencia>
+serv.new.update
+serv.new.explodir_bomba
+
+[Function explodir_bomba]
+f_explosao
+for xx 1 4
+    var.continua 1
+    if (<eval <local.xx>> == 1)
+        var.pos n
+    elif (<eval <local.xx>> == 2)
+        var.pos s
+    elif (<eval <local.xx>> == 3)
+        var.pos w
+    else
+        var.pos e
+    endif
+    
+    for x 1 <eval <tag0.potencia>>
+       if (<eval <var.continua>> == 1)
+            var.explosao = <f_explosao <var.pos> <local.x>>
+            var.continua = <var.explosao>
+        endif
+    endfor
+endfor
+remove
+
+[function f_explosao]
+serv.newitem i_gold
+serv.new.p <p>
+serv.new.move <args>
+serv.new.attr 094
+var.uid <serv.new.uid>
+
+TRY UID.<var.uid>.f_checagem
+var.check = <UID.<var.uid>.tag0.check>
+TRY UID.<var.uid>.remove
+remove
+return <var.check>
+
+[function f_checagem]
+local.explode 0
+local.remove  0
+local.bloca   1
+foritems 0
+    if (<baseid> == i_bomberman_toco)
+        remove
+        serv.newitem i_bomerman_piso
+        serv.new.p <p>
+        serv.new.update
+        serv.new timer 1800
+        
+        local.explode 1
+        local.remove 1
+        local.bloca 0
+        
+        bomb_porcento
+        if (<var.x> > 8)
+            DORAND 2
+                local.item i_potencia_bomba
+                local.item i_qtd_bomba
+            ENDDO
+            serv.newitem <local.item>
+            serv.new.p <p>
+            serv.new.update
+        endif
+    elif (<baseid> == i_bomerman_piso_player) || (<baseid> == i_bomerman_piso)
+        local.explode 1
+        local.bloca 0
+    endif
+endfor
+
+forchars 0
+    if (<isevents.e_bomberman>)
+        kill
+    endif
+endfor
+
+if (<local.explode> == 1)
+    serv.newitem i_coluna_fogo
+    new.p <p>
+    new.link <link.uid>
+    new.move <args> 
+    new.timer=1
+endif
+
+if (<local.bloca> == 1)
+    tag0.check 0
+else
+    tag0.check 1
+endif
+
+[FUNCTION bomb_porcento]
+DORAND 10
+ VAR.X=<eval 1>
+ VAR.X=<eval 2>
+ VAR.X=<eval 3>
+ VAR.X=<eval 4>
+ VAR.X=<eval 5>
+ VAR.X=<eval 6>
+ VAR.X=<eval 7>
+ VAR.X=<eval 8>
+ VAR.X=<eval 9>
+ VAR.X=<eval 10>
+ENDDO
+
+[itemdef i_coluna_fogo]
+id      i_fire_column
+name    Fire
+type    t_eq_script
+
+on=@create
+attr    attr_decay
+
+on=@step
+if (<src.isevent.e_bomberman>)
+    src.kill
+endif
+
+[itemdef i_bomberman_toco]
+id      938
+name    Toco
+type    t_normal
+
+on=@create
+color   03b2
+
+[itemdef i_bomerman_piso_player]
+id      i_floor_marble
+name    Toco
+type    t_normal
+
+on=@create
+attr    094
+
+[itemdef i_bomerman_piso]
+id      i_floor_marble
+name    Toco
+type    t_normal
+
+on=@create
+attr    attr_invis
+timer   1800
+
+on=@dclick
+if (<src.isgm>)
+    foritems 100
+        if (<baseid> == i_bomerman_piso)
+            timer 1
+        endif
+    endfor
+endif
+
+on=@timer
+serv.newitem i_bomberman_toco
+new.p <p>
+new.update
+remove
+return 1
+
+[itemdef i_potencia_bomba]
+id=020aa
+name=Potencia para Bomba
+type t_normal
+
+on=@create
+attr attr_static
+timer 30
+NAME @077a Potencia para Bomba
+
+on=@timer
+remove
+return 1
+
+on=@step
+if (<src.tag0.bomber_potencia> >= <def.bomber_potencia_max>)
+ return 1
+endif
+
+src.tag0.bomber_potencia +=1
+src.sysmessage @07a1 A potencia de suas bombas foram aumentadas.
+
+remove
+return 1
+
+[itemdef i_qtd_bomba]
+id      020aa
+name    Bomba extra
+type    t_normal
+
+on=@create
+attr    attr_static
+timer   30
+NAME    @02b Bomba Extra
+
+on=@timer
+remove
+return 1
+
+on=@step
+if (<src.tag0.bomber_bombas> >= <def.bomber_bombas_max>)
+ return 1
+endif
+
+src.tag0.bomber_bombas +=1
+src.sysmessage @07a1 A quantidade de bombas foi aumentada
+
+remove
+return 1
+
+[function bomberman]
+sdialog d_dados_bomber
+
+[DIALOG d_dados_bomber]
+0,0
+page 0
+resizepic 137 46 9200 127 56
+dtext 151 54 52 Bombas: <tag0.bomber_bombas>/<def.bomber_bombas_max>
+dtext 144 71 52 Potencia: <tag0.bomber_potencia>/<def.bomber_potencia_max>
+
+[function evento_5_1_premio]
+dinheiro 30000
+tag0.premio 0
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Bomberman (Arena 1)
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[function evento_6_1_premio]
+dinheiro 30000
+tag0.premio 0
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Bomberman (Arena 2)
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[EOF]

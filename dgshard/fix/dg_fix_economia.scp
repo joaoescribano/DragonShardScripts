@@ -1,0 +1,93 @@
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+// by Owner Destiny
+// staff_destiny@dgshard.com.br
+
+// Sistema de Coleta 1.0
+
+// Configurações
+
+[DEFNAME dinheiro_configuracoes]
+// Sistema
+dinheiro_ativo            1  // Ativar o sistema? 1=sim 0=não
+dinheiro_npc            1  // Coletar % dos npc's? 1=sim 0=não
+dinheiro_p_npc            20 // % de dinheiro arrecadad pelos NPC's
+dinheiro_sistemas        1  // Coletar % dos sistemas do shard? 1=sim 0=não
+dinehiro_p_sistemas        15 // % de dinheiro arecadada pelos sistema
+
+// UID's
+dinheiro_uid            040a942f3 // UID da pedra de coleta
+
+// Pedras
+
+/// Pedra de coleta
+
+[itemdef i_pedra_coleta]
+id        0edc
+name        Pedra de Coleta
+type        t_normal
+
+on=@create
+color        07b2
+tag0.coleta    0
+
+on=@click
+if (<tag0.coleta>==0)
+ message @<color> Nenhum dinheiro na coleta
+ return 1
+endif
+message @<color> Dinheiro Coletado: [<goldFormat <tag0.coleta>>gps]
+return 1
+
+// Eventos
+[EVENTS e_coleta]
+on=@ITEMBUY
+if (<def.dinheiro_npc>==1)
+ var.total <local.totalcost>
+ if (<local.totalcost> >= 100)
+  var.soma <eval <eval <var.total>/100>*<def.dinehiro_p_npc>>
+ endif
+ f_coleta_adcionar <var.soma>
+endif
+
+/// Evento de Coleta
+[FUNCTION f_coleta_reset]
+var.uid <def.dinheiro_uid>
+try uid.<var.uid>.tag0.coleta <qval <args> ? <eval <args>> : 0>
+return 1
+
+// Verifica se tem dinheiro suficiente coletado
+[FUNCTION f_coleta_tem]
+if !(0<args>)
+	return 1
+endif
+var.uid <def.dinheiro_uid>
+var.atual <uid.<var.uid>.tag0.coleta>
+
+if (<eval <args>> <= <eval <var.atual>>)
+	return 1
+endif
+
+return 0
+
+/// Adcionar dinheiro na coleta
+[FUNCTION coleta]
+sysmessage Dinheiro atual no sistema de coleta: <eval <uid.<def.dinheiro_uid>.tag0.coleta>>gps
+
+[FUNCTION f_coleta_adcionar]
+if !(0<args>)
+ return 1
+endif
+uid.<def.dinheiro_uid>.tag0.coleta <eval <args>+<uid.<def.dinheiro_uid>.tag0.coleta>>
+
+// Remove dinheiro da coleta
+[FUNCTION f_coleta_remover]
+if !(0<args>)
+ return 1
+endif
+var.uid <def.dinheiro_uid>
+try uid.<var.uid>.tag0.coleta <eval <uid.<var.uid>.tag0.coleta>-<args>>
+return 1
+
+[EOF]

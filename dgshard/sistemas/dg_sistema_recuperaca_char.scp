@@ -1,0 +1,167 @@
+[ITEMDEF i_deed_rec_acc]
+id i_deed
+name Recuperacao de account
+type t_normal
+
+ON=@Create
+color 07a1
+
+on=@Dclick
+if (<src.isgm>)
+	src.sysmessage @07a1 Somente players!
+	return 1
+endif
+if !(0<tag0.pronto>)
+    src.sysmessage @07a1 O deed esta sem os dados da conta!
+    return 1
+endif
+
+if (<tag0.Alchemy> > 0)
+    src.Alchemy = <tag0.Alchemy>
+endif
+if (<tag0.Anatomy> > 0)
+    src.Anatomy = <tag0.Anatomy>
+endif
+if (<tag0.AnimalLore> > 0)
+    src.AnimalLore = <tag0.AnimalLore>
+endif
+if (<tag0.ItemID> > 0)
+    src.ItemID = <tag0.ItemID>
+endif
+if (<tag0.ArmsLore> > 0)
+    src.ArmsLore = <tag0.ArmsLore>
+endif
+if (<tag0.Parrying> > 0)
+    src.Parrying = <tag0.Parrying>
+endif
+if (<tag0.Begging> > 0)
+    src.Begging = <tag0.Begging>
+endif
+if (<tag0.Blacksmithing> > 0)
+    src.Blacksmithing = <tag0.Blacksmithing>
+endif
+if (<tag0.Bowcraft> > 0)
+    src.Bowcraft = <tag0.Bowcraft>
+endif
+if (<tag0.Camping> > 0)
+    src.Camping = <tag0.Camping>
+endif
+if (<tag0.Carpentry> > 0)
+    src.Carpentry = <tag0.Carpentry>
+endif
+if (<tag0.Cartography> > 0)
+    src.Cartography = <tag0.Cartography>
+endif
+if (<tag0.Cooking> > 0)
+    src.Cooking = <tag0.Cooking>
+endif
+if (<tag0.DetectingHidden> > 0)
+    src.DetectingHidden = <tag0.DetectingHidden>
+endif
+if (<tag0.Enticement> > 0)
+    src.Enticement = <tag0.Enticement>
+endif
+if (<tag0.EvaluatingIntel> > 0)
+    src.EvaluatingIntel = <tag0.EvaluatingIntel>
+endif
+if (<tag0.Healing> > 0)
+    src.Healing = <tag0.Healing>
+endif
+if (<tag0.Fishing> > 0)
+    src.Fishing = <tag0.Fishing>
+endif
+if (<tag0.Forensics> > 0)
+    src.Forensics = <tag0.Forensics>
+endif
+if (<tag0.Herding> > 0)
+    src.Herding = <tag0.Herding>
+endif
+if (<tag0.Hiding> > 0)
+    src.Hiding = <tag0.Hiding>
+endif
+if (<tag0.Inscription> > 0)
+    src.Inscription = <tag0.Inscription>
+endif
+if (<tag0.LockPicking> > 0)
+    src.LockPicking = <tag0.LockPicking>
+endif
+if (<tag0.Magery> > 0)
+    src.Magery = <tag0.Magery>
+endif
+if (<tag0.MagicResistance> > 0)
+    src.MagicResistance = <tag0.MagicResistance>
+endif
+if (<tag0.Tactics> > 0)
+    src.Tactics = <tag0.Tactics>
+endif
+if (<tag0.Snooping> > 0)
+    src.Snooping = <tag0.Snooping>
+endif
+if (<tag0.Musicianship> > 0)
+    src.Musicianship = <tag0.Musicianship>
+endif
+if (<tag0.Poisoning> > 0)
+    src.Poisoning = <tag0.Poisoning>
+endif
+if (<tag0.Archery> > 0)
+    src.Archery = <tag0.Archery>
+endif
+if (<tag0.SpiritSpeak> > 0)
+    src.SpiritSpeak = <tag0.SpiritSpeak>
+endif
+if (<tag0.Stealing> > 0)
+    src.Stealing = <tag0.Stealing>
+endif
+if (<tag0.Tailoring> > 0)
+    src.Tailoring = <tag0.Tailoring>
+endif
+if (<tag0.Taming> > 0)
+    src.Taming = <tag0.Taming>
+endif
+if (<tag0.TasteID> > 0)
+    src.TasteID = <tag0.TasteID>
+endif
+if (<tag0.Tinkering> > 0)
+    src.Tinkering = <tag0.Tinkering>
+endif
+if (<tag0.Tracking> > 0)
+    src.Tracking = <tag0.Tracking>
+endif
+if (<tag0.Veterinary> > 0)
+    src.Veterinary = <tag0.Veterinary>
+endif
+if (<tag0.Swordsmanship> > 0)
+    src.Swordsmanship = <tag0.Swordsmanship>
+endif
+if (<tag0.Macefighting> > 0)
+    src.Macefighting = <tag0.Macefighting>
+endif
+if (<tag0.Fencing> > 0)
+    src.Fencing = <tag0.Fencing>
+endif
+if (<tag0.Wrestling> > 0)
+    src.Wrestling = <tag0.Wrestling>
+endif
+if (<tag0.Lumberjacking> > 0)
+    src.Lumberjacking = <tag0.Lumberjacking>
+endif
+if (<tag0.Mining> > 0)
+    src.Mining = <tag0.Mining>
+endif
+if (<tag0.Meditation> > 0)
+    src.Meditation = <tag0.Meditation>
+endif
+if (<tag0.Stealth> > 0)
+    src.Stealth = <tag0.Stealth>
+endif
+if (<tag0.RemoveTrap> > 0)
+    src.RemoveTrap = <tag0.RemoveTrap>
+endif
+if (<tag0.Necromancy> > 0)
+    src.Necromancy = <tag0.Necromancy>
+endif
+src.sysmessage @07a1 Recuperação de Char concluida com sucesso!
+remove
+return 1 
+
+[EOF]

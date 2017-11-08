@@ -1,0 +1,117 @@
+[itemdef i_gate_life]
+NAME=Gate Status Full
+ID=i_moongate_blue
+
+ON=@Create
+Color=0825
+ATTR=attr_static
+
+ON=@STEP
+IF (0<SRC.TAG.GATE> == 0)
+  IF !(0<SRC.TAG.GATE_USE> = <UID>)
+    IF !(<SRC.HITS> >= <SRC.STR>)
+	SRC.SYSMESSAGE @0825 Voce nao esta com Status Full.
+	Return 1
+    ENDIF
+    IF !(<SRC.MANA> >= <SRC.INT>)
+	SRC.SYSMESSAGE @0825 Voce nao esta com Status Full.
+	Return 1
+    ENDIF
+   DIALOG d_new_gate
+   SRC.TAG.GATE_USE = <UID>
+  ENDIF
+  RETURN 1
+ENDIF
+IF !(<SRC.HITS> >= <SRC.STR>)
+	SRC.SYSMESSAGE @0825 Voce nao esta com Status Full.
+	Return 1
+ENDIF
+IF !(<SRC.MANA> >= <SRC.INT>)
+	SRC.SYSMESSAGE @0825 Voce nao esta com Status Full.
+	Return 1
+ENDIF
+SRC.GO <MOREP>
+RETURN 1
+
+[itemdef i_gate_nb]
+id=i_moongate_blue
+name=Area Newbie
+
+on=@create
+
+name=@0790 Area Newbie
+color=0a48
+attr=attr_static
+
+on=@step
+if (<src.isgm>)
+src.go <morep>
+return 1
+endif
+
+if (<src.skilltotal> > 20000)
+src.sysmessage @0a48 Skill total maxima permitida para acessar este local eh: 20000.
+src.go commerce room
+return 1
+endif
+
+if (<src.kills> > 3)
+src.sysmessage @0a48 Voce nao pode ter nenhuma kill para entrar neste local.
+src.go commerce room
+return 1
+endif
+
+[itemdef i_gate_vip_1]
+id=i_moongate_blue
+name=Area Vip Dragon
+
+on=@create
+name=@0790 Area Vip Dragon
+color=0790
+attr=attr_static
+
+on=@step
+if (<src.isgm>)
+  src.go <morep>
+  return 1
+endif
+
+IF (0<SRC.TAG.VIP> == 1)
+src.go 1106,414,-80,2
+ELSE
+ SRC.SYSMESSAGE Somente Players VIP's podem entrar no gate, saiba mais em "www.dgshard.com". Obrigado.
+ENDIF
+
+[ITEMDEF i_gate_mercado]
+id i_moongate_blue
+type t_normal
+name Entrada do mercado
+
+ON=@Create
+color 07aa
+attr attr_static
+
+on=@Click
+message @07aa Entrada do Mercado DG
+return 1
+
+on=@Step
+src.go 4315,975,10
+
+[ITEMDEF i_gate_mercado_saida]
+id i_moongate_blue
+type t_normal
+name Saida do mercado
+
+ON=@Create
+color 07aa
+attr attr_static
+
+on=@Click
+message @07aa Saida do Mercado DG
+return 1
+
+on=@Step
+src.go Help Room
+
+[EOF]

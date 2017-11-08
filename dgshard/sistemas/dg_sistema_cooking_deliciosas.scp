@@ -1,0 +1,198 @@
+//Delicious Roast Pig
+[ITEMDEF i_Delicius_pig_roast]
+ID=i_pig_roast
+NAME=Delicioso Porco Assado
+VALUE=4
+RESOURCES=1 i_pig_roast_raw
+SKILLMAKE=COOKING 100.0
+TYPE=T_FOOD
+WEIGHT=7.2
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Roast Pig
+
+//Delicius Legs of Lamb
+[ITEMDEF i_Delicius_lamb_leg]
+ID=i_lamb_leg
+NAME=Deliciosa COxa de Burrego
+VALUE=4
+RESOURCES=1 i_lamb_leg_raw
+SKILLMAKE=COOKING 80.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Lamb of Leg
+
+//Legs of Chicken
+[ITEMDEF i_Delicius_chicken_leg]
+ID=i_chicken_leg
+NAME=Deliciosa Coxa de Galinha
+VALUE=4
+RESOURCES=1 i_chicken_leg_raw
+SKILLMAKE=COOKING 80.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Chicken of Leg
+
+//Fish Cooked
+[ITEMDEF i_Delicius_fish_cooked]
+ID=i_fish_cut_cooked
+NAME=Delicioso File de Peixe
+VALUE=4
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=4.8
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Fish Cooked
+
+//Ribs Cooked
+[ITEMDEF i_Delicius_ribs_cooked]
+ID=i_ribs_cooked
+NAME=Deliciosa Costela Cozida
+VALUE=4
+RESOURCES=1 i_ribs_raw
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Ribs Cooked
+
+//Bird Cooked
+[ITEMDEF i_Delicius_bird_cooked]
+ID=i_bird_cooked
+NAME=Delicioso Passaro Cozido
+VALUE=4
+RESOURCES=1 i_bird_raw
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Bird Cooked
+
+//Fish Steak
+[ITEMDEF i_delicius_fish_cut_cooked]
+ID=i_fish_cut_cooked
+NAME=Delicioso Peixe Frito
+VALUE=4
+RESOURCES=1 i_fish_cut_raw
+SKILLMAKE=COOKING 75.0
+TYPE=T_FOOD
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicius Fish Steak
+
+//Apple Cake
+[ITEMDEF i_delicius_Apple_cake]
+ID=i_cake
+NAME=Delicioso Bolo de Maca
+VALUE=4
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_apple
+SKILLMAKE=COOKING 100.0
+TYPE=T_FOOD
+WEIGHT=3.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Apple Cake
+
+ON=@CREATE
+COLOR=020
+
+//Grape Cake
+[ITEMDEF i_delicius_grape_cake]
+ID=i_cake
+NAME=Delicioso Bolo de Uva
+VALUE=4
+SKILLMAKE=COOKING 100.0
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_grapes
+TYPE=T_FOOD
+WEIGHT=3.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Grape Cake
+
+ON=@CREATE
+COLOR=070
+
+//Lemon Cake
+[ITEMDEF i_delicius_lemon_cake]
+ID=i_cake
+NAME=Delicioso Bolo de Limao
+VALUE=4
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Lemon
+SKILLMAKE=COOKING 100.0
+TYPE=T_FOOD
+WEIGHT=3.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Lemon Cake
+
+ON=@CREATE
+COLOR=040
+
+//Laranka Cake
+[ITEMDEF i_delicius_Orange_cake]
+ID=i_cake
+NAME=Delicioso Bolo de Laranja
+VALUE=4
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_lime
+SKILLMAKE=COOKING 100.0
+TYPE=T_FOOD
+WEIGHT=3.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Orange Cake
+
+ON=@CREATE
+COLOR=030
+
+//banana cake
+[ITEMDEF i_delicius_Banana_cake]
+ID=i_cake
+NAME=Delicioso Bolo de Banana
+VALUE=4
+RESOURCES=1 i_flour_sack, 5 i_pitcher_milk, 10 i_fruit_Banana
+SKILLMAKE=COOKING 100.0
+TYPE=T_FOOD
+WEIGHT=3.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Simple Banana Cake
+
+ON=@CREATE
+COLOR=035
+
+//Bread Loaf
+[ITEMDEF i_delicius_bread_loaf]
+ID=i_bread_loaf
+NAME=Delicioso Pao Caseiro
+VALUE=4
+RESOURCES=1 i_flour_sack, 5 i_pitcher_water, 5 i_eggs_fresh
+SKILLMAKE=COOKING 60.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicious Bread Loaf
+
+//Bread French
+[ITEMDEF i_delicius_bread_french]
+ID=i_bread_french
+NAME=Delicioso Pao Frances
+VALUE=4
+RESOURCES=2 i_flour_sack, 5 i_pitcher_water, 6 i_eggs_fresh
+SKILLMAKE=COOKING 70.0
+TYPE=T_FOOD
+WEIGHT=1.5
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Delicious Bread French
+
+[EOF]

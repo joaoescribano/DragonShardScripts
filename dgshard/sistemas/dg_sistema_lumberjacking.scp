@@ -1,0 +1,710 @@
+// Sistema de lumberjacking [Skill 47]
+// Ultima Online Brasil
+
+[DEFNAME config_lumberjacking]
+lumberjack.logs = 10
+lumberjack.maxdistance = 1
+
+lumberjack.logs.1.id = i_log
+lumberjack.logs.1.min = 1.0
+lumberjack.logs.1.rate = 1.0
+lumberjack.logs.1.amount = 4
+
+lumberjack.logs.2.id = i_log_sky
+lumberjack.logs.2.min = 50.0
+lumberjack.logs.2.rate = 40.0
+lumberjack.logs.2.amount = 2
+
+lumberjack.logs.3.id = i_log_elven
+lumberjack.logs.3.min = 60.0
+lumberjack.logs.3.rate = 50.0
+lumberjack.logs.3.amount = 2
+
+lumberjack.logs.4.id = i_log_mystic
+lumberjack.logs.4.min = 70.0
+lumberjack.logs.4.rate = 60.0
+lumberjack.logs.4.amount = 2
+
+lumberjack.logs.5.id = i_log_purple
+lumberjack.logs.5.min = 75.0
+lumberjack.logs.5.rate = 70.0
+lumberjack.logs.5.amount = 2
+
+lumberjack.logs.6.id = i_log_black
+lumberjack.logs.6.min = 90.0
+lumberjack.logs.6.rate = 80.0
+lumberjack.logs.6.amount = 2
+
+lumberjack.logs.7.id = i_log_white
+lumberjack.logs.7.min = 90.0
+lumberjack.logs.7.rate = 85.0
+lumberjack.logs.7.amount = 2
+
+lumberjack.logs.8.id = i_log_fire
+lumberjack.logs.8.min = 100.0
+lumberjack.logs.8.rate = 90.0
+lumberjack.logs.8.amount = 1
+
+lumberjack.logs.9.id = i_log_elfic
+lumberjack.logs.9.min = 100.0
+lumberjack.logs.9.rate = 95.0
+lumberjack.logs.9.amount = 1
+
+lumberjack.logs.10.id = i_log_death
+lumberjack.logs.10.min = 110.0
+lumberjack.logs.10.rate = 100.0
+lumberjack.logs.10.amount = 1
+
+[FUNCTION lumber_gain]
+if (<src.lumberjacking> < 1000) && (rand(1000) > <eval <src.lumberjacking>/2>)
+	src.lumberjacking +=1
+endif
+
+[FUNCTION f_lumberjack_resources]
+local.teste = <argn1>
+local.melhor = 0
+local.logid = 0
+
+FOR x 1 <eval <def.lumberjack.logs>>
+	if (<fval <local.teste>> >= <fval <def.lumberjack.logs.<eval <local.x>>.rate>>)
+		if (<fval <local.melhor>> < <fval <def.lumberjack.logs.<eval <local.x>>.rate>>)
+			local.item = <def.lumberjack.logs.<eval <local.x>>.id>
+			local.logid = <eval <local.x>>
+		endif
+	endif
+ENDFOR
+
+if (rand(10) <= 2)
+	local.item = i_log
+	local.logid = 1
+endif
+
+local.amount = <eval <def.lumberjack.logs.<eval <local.logid>>.amount>>
+return <local.item>,<qval <local.amount> > 0 ? <eval <local.amount> + (RAND(<src.luck>) / 10)> : 1>
+
+[TYPEDEF t_tree]
+ON=@Timer
+if !(<tag0.folhagem> == 0)
+    serv.newitem <tag0.folhagem>
+    new.attr |= attr_static
+    new.p = <p>
+    new.update
+endif
+return 1
+
+[TYPEDEF t_leaf]
+ON=@Timer
+remove
+return 1
+
+[TYPEDEF t_tree_growing]
+ON=@TIMER
+serv.newitem <tag0.arvore>
+new.p = <p>
+new.attr |= attr_static
+
+if strmatch("*Mina Vip*","<region.name>")
+	new.cor
+endif
+
+new.update
+
+if !(<tag0.folhagem> == 0)
+	serv.newitem <tag0.folhagem>
+	new.p = <p>
+	new.attr |= attr_static
+	new.update
+endif
+remove
+return 1
+
+[TYPEDEF t_tree_chopped]
+ON=@Timer
+remove
+return 1
+
+[TYPEDEF t_weapon_axe]
+ON=@DClick
+if !(<src.tag0.lumberjacking> == 1)
+	src.tag0.lumberjacking 0
+endif
+
+if !(<src.tag0.lumberjacking> == 0) && (<eval <src.tag0.lumberjacking>> == 1)
+	src.sysmessage Espere sua ultima acao terminar.
+	return 1
+endif
+
+ON=@TargOn_Item
+local.pos.x = <argo.p.x>
+local.pos.y = <argo.p.y>
+local.pos.z = <argo.p.z>
+
+if !(<src.tag0.lumberjacking> == 0) && (<eval <src.tag0.lumberjacking>> == 1)
+	src.sysmessage Espere sua ultima acao terminar.
+	return 1
+elif (<argo.distance <src>> > 1)
+	src.sysmessage Voce precisa estar mais perto para cortar.
+elif (<argo.type> == t_tree_chopped) // Arvore caida!
+	// Verifica se não tem outra pessoa coletando recursos na mesma árvore
+	if !(<argo.tag0.locked> == 0) || (<eval <argo.tag0.locked>> == 1)
+		src.sysmessage Outro player esta colentando toras nessa arvore, procure por outra ou aguarde.
+	elif !(<argo.tag0.amount> == 0) && (<eval <argo.tag0.amount>> > 0)
+		// Atualiza os contadores
+		src.tag0.lumberjacking = 1
+		src.tag0.lumberjacking_ids = <argo.tag0.ids>
+		f_lumberjack_lock_peaces 1,<argo.tag0.ids>
+
+		src.events=+e_lumberjacking
+		
+		src.timerf 1, f_lumberjacking_distance <argo.p>
+		src.timerf 2, f_lumberjacking_distance <argo.p>
+		src.timerf 3, f_lumberjacking_distance <argo.p>
+
+		src.f_loopanim 12,3,1,<argo.uid>
+		src.f_loopsound 013e,4,1
+
+		src.timerf 3, f_lumberjack_harvest <eval <argo.tag0.amount>-1>,<argo.tag0.ids>,<argo.tag0.log>,<src.uid>
+	else
+		src.sysmessage Nao ha mais toras para serem coletadas.
+	endif
+elif (<argo.type> == t_tree_growing)
+	// Arvore em crescimento
+	src.sysmessage Esta arvore nao esta pronta para ser cortada.
+elif (<argo.type> == t_tree) || (<argo.type> == t_foliage)
+	local.folhagem = 0
+	local.arvore = 0
+
+	src.tag0.lumberjacking = 1
+	src.events=+e_lumberjacking
+
+	src.timerf 1, f_lumberjacking_distance <argo.p>
+	src.timerf 2, f_lumberjacking_distance <argo.p>
+	src.timerf 3, f_lumberjacking_distance <argo.p>
+
+	// Verifica se a folhagem já foi removida
+	foritems 1
+		if (<p.x> == <local.pos.x>) && (<p.y> == <local.pos.y>)
+			if (<type> == t_foliage)
+					local.folhagem = <uid>
+			endif
+			if (<type> == t_tree)
+					local.arvore = <uid>
+			endif
+		endif
+	endfor
+
+	if !(<local.folhagem> == 0) && !(<local.arvore> == 0)
+		// Se existir a folhagem, remove ela primeiro gravando na arvore o ID para substituição posterior
+		foritems 1
+			if (<p.x> == <local.pos.x>) && (<p.y> == <local.pos.y>)
+				if (<type> == t_foliage)
+					src.tag0.lumber_tree = <argo.uid>
+
+					src.f_loopanim 12,2,1,<uid>
+					src.f_loopsound 013f,3,1
+					src.f_lumberjacking_fall_leaf
+					src.timerf 1,f_lumberjacking_fall_leaf
+					src.timerf 2,f_lumberjacking_fall_leaf
+					
+					timerf 2,remove
+					
+					src.timerf 2,tag0.lumberjacking = 0
+					src.timerf 2,events=-e_lumberjacking
+					src.timerf 2,lumber_gain
+					src.timerf 2,sysmessage Voce retirou a folhagem da arvore
+				endif
+			endif
+		endfor
+
+		TRY UID.<local.arvore>.timer = 180 // 3 mim
+		TRY UID.<local.arvore>.tag0.folhagem = <uid.<local.folhagem>.baseid>
+	elif !(<local.folhagem> == 1) && !(<local.arvore> == 0)
+		// Se não tiver mais folhagem, derruba a arvore
+
+		local.bonus = 0
+
+		if strmatch("*Mina Vip*","<region.name>") && (<src.tag0.vip> == 1)
+			local.bonus = 25 //{<fval <src.lumberjacking> / 10> <fval <src.lumberjacking> / 5>}
+		endif
+
+		foritems 1
+			if (<p.x> == <local.pos.x>) && (<p.y> == <local.pos.y>)
+				if (<type> == t_tree)
+					src.tag0.lumber_tree = <argo.uid>
+
+					local.teste = <fval (RAND(<src.lumberjacking> - 100)) + (RAND(<src.luck>)) + <local.bonus>>
+
+					if (<local.teste> > <src.lumberjacking>)
+						local.teste = <src.lumberjacking>
+					endif
+
+					local.itens = <src.f_lumberjack_resources <local.teste>>
+					timerf 3, f_lumberjack_grow <uid>,<local.itens>
+					src.f_loopanim 12,3,1,<uid>
+					src.f_loopsound 013e,4,1
+					src.timerf 3,tag0.lumberjacking = 0
+					src.timerf 3,events=-e_lumberjacking
+					src.timerf 3,lumber_gain
+					src.timerf 3,sysmessage Voce derrubou a arvore
+				endif
+			endif
+		endfor
+	else
+		src.tag0.lumberjacking = 0
+		src.events=-e_lumberjacking
+	endif
+else
+	src.sysmessage Utilize o machado em arvores.
+endif
+return 1
+
+[FUNCTION f_lumberjack_harvest]
+if !(<argv[0]>) || (<eval <argv[0]>> <= 0)
+	TRY UID.<argv[1]>.dispid = 0e56
+	TRY UID.<argv[1]>.update
+	TRY UID.<argv[2]>.remove
+	TRY UID.<argv[3]>.remove
+	TRY UID.<argv[4]>.remove
+
+	if strmatch("*Mina Vip*","<region.name>") && (<tag0.vip> == 1)
+		TRY UID.<argv[1]>.timer 0
+	endif
+else
+	TRY UID.<argv[2]>.tag0.amount = <eval <UID.<argv[2]>.tag0.amount>-1>
+	TRY UID.<argv[2]>.tag0.locked = 0
+	TRY UID.<argv[3]>.tag0.amount = <eval <UID.<argv[3]>.tag0.amount>-1>
+	TRY UID.<argv[3]>.tag0.locked = 0
+	TRY UID.<argv[4]>.tag0.amount = <eval <UID.<argv[4]>.tag0.amount>-1>
+	TRY UID.<argv[4]>.tag0.locked = 0
+endif
+
+// Adiciona o log na bolsa do player
+if (RAND(100) >= <eval 85 - (RAND(<src.luck>)/10)> )
+	TRY UID.<argv[6]>.sysmessage Voce bateu na madeira mas nao encontrou nada.
+else
+	serv.newitem <argv[5]>
+	TRYSRC <argv[6]> NEW.BOUNCE
+endif
+
+// Remove as flags e os eventos
+if (<UID.<argv[6]>>)
+	TRY UID.<argv[6]>.tag0.lumberjacking = 0
+	TRY UID.<argv[6]>.events=-e_lumberjacking
+	TRY UID.<argv[6]>.lumber_gain
+endif
+
+return 1
+
+[FUNCTION f_lumberjack_grow]
+ref1 = <argv[0]>
+local.logs = <argv[1]>
+local.amount = <argv[2]>
+local.cor = <f_GetColor item,<local.logs>>
+local.arvore = <baseid>
+local.folhagem = <ref1.tag0.folhagem>
+
+serv.newitem 0e57
+new.attr |= attr_static
+new.tag0.arvore = <local.arvore>
+new.tag0.folhagem = <local.folhagem>
+new.p <eval <p.x>>,<eval <p.y>>,<eval <p.z>>
+new.type t_tree_growing
+new.timer 300 // 5 mim
+
+local.id_toco = <new.uid>
+
+serv.newitem 0cf5
+if !(0<local.logs> == 0)
+	new.tag0.log = <local.logs>
+	new.tag0.amount = <local.amount>
+	new.color = <local.cor>
+endif
+new.type t_tree_chopped
+new.attr |= attr_static
+new.timer 180 // 3 mim
+new.p <eval <p.x> - 3>,<eval <p.y>>,<eval <p.z>>
+new.update
+
+local.id_topo = <new.uid>
+
+serv.newitem 0cf6
+if !(0<local.logs> == 0)
+	new.tag0.log = <local.logs>
+	new.tag0.amount = <local.amount>
+	new.color = <local.cor>
+endif
+new.attr |= attr_static
+new.type t_tree_chopped
+new.timer 180 // 3 mim
+new.p <eval <p.x> - 2>,<eval <p.y>>,<eval <p.z>>
+new.update
+
+local.id_meio = <new.uid>
+
+serv.newitem 0cf7
+if !(0<local.logs> == 0)
+	new.tag0.log = <local.logs>
+	new.tag0.amount = <local.amount>
+	new.color = <local.cor>
+endif
+new.attr |= attr_static
+new.type t_tree_chopped
+new.timer 180 // 3 mim
+new.p <eval <p.x> - 1>,<eval <p.y>>,<eval <p.z>>
+new.update
+
+local.id_fim = <new.uid>
+
+TRY UID.<local.id_toco>.tag0.ids = <local.id_toco>,<local.id_topo>,<local.id_meio>,<local.id_fim>
+TRY UID.<local.id_topo>.tag0.ids = <local.id_toco>,<local.id_topo>,<local.id_meio>,<local.id_fim>
+TRY UID.<local.id_meio>.tag0.ids = <local.id_toco>,<local.id_topo>,<local.id_meio>,<local.id_fim>
+TRY UID.<local.id_fim>.tag0.ids = <local.id_toco>,<local.id_topo>,<local.id_meio>,<local.id_fim>
+remove
+
+return 1
+
+[FUNCTION f_lumberjack_lock_peaces]
+TRY UID.<argv[2]>.tag0.locked = <argv[0]>
+TRY UID.<argv[3]>.tag0.locked = <argv[0]>
+TRY UID.<argv[4]>.tag0.locked = <argv[0]>
+
+[EVENTS e_lumberjacking]
+ON=@Atack
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@SkillStart
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@HIT
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@GETHIT
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@DEATH
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@UserWarMode
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@SpellCast
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@SpellEffect
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@TradeAccepted
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+ON=@TradeCreate
+sysmessage Voce perdeu a concentracao e parou de coletar madeira.
+f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+
+//ON=@Logout
+//timerf clear
+//tag0.lumberjacking = 0
+//events=-e_lumberjacking
+
+[FUNCTION f_lumberjacking_cancelar]
+timerf clear
+tag0.lumberjacking = 0
+
+TRY UID.<tag0.lumber_tree>.timerf clear
+
+if (<eval <argv[1]>> == 0) || (<eval <argv[2]>> == 0) || (<eval <argv[3]>> == 0)
+	return 1
+endif
+
+TRY UID.<argv[1]>.timerf clear
+TRY UID.<argv[2]>.timerf clear
+TRY UID.<argv[3]>.timerf clear
+f_lumberjack_lock_peaces 0,<args>
+return 1
+
+[FUNCTION f_lumberjacking_distance]
+if (<distance <args>> > <def.lumberjack.maxdistance>)
+	f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+	sysmessage Voce se afastou demais da arvore
+endif
+return 1
+
+[function f_lumberjacking_fall_leaf]
+foritems 1
+	if (<type> == t_foliage)
+		FOR PX <eval <p.x> - 1> <eval <p.x> + 1>
+			FOR PY <eval <p.y> - 1> <eval <p.y> + 1>
+				if (<eval RAND(100)> >= 70)
+					local.x=<local.px>
+					local.y=<local.py>
+					local.z=<p.z>
+					local.folha = {6943 1 6944 1 6945 1 6946 1}
+
+					forchars 10
+						if (<isplayer>)
+							sendpacket 0c0 00 D0 D0 W<eval <local.folha>> W<dlocal.x> W<dlocal.y> B<eval(<local.z>+15)> W<local.x> W<local.y> B<local.z> B0 B1 00 00 00 B0 D468 D0
+						endif
+					endfor
+
+					serv.newitem <eval <local.folha>>
+					new.type t_leaf
+					new.p <dlocal.x>,<dlocal.y>,<dlocal.z>
+					new.color 468
+					new.timer 30
+					new.update
+				endif
+			endfor
+		endfor
+	endif
+endfor
+return 1
+
+[FUNCTION testara]
+if (<args> == 0cd4)
+	return 1
+elif (<args> == 0cd1)
+	return 1
+elif (<args> == 0cce)
+	return 1
+elif (<args> == 0ce7)
+	return 1
+elif (<args> == 0d9b)
+	return 1
+elif (<args> == 0ce4)
+	return 1
+elif (<args> == 0ccf)
+	return 1
+elif (<args> == 0ce1)
+	return 1
+elif (<args> == 0cd2)
+	return 1
+elif (<args> == 0ce2)
+	return 1
+elif (<args> == 0ce5)
+	return 1
+elif (<args> == 0d99)
+	return 1
+elif (<args> == 0ce8)
+	return 1
+elif (<args> == 0cd5)
+	return 1
+elif (<args> == 0d97)
+	return 1
+elif (<args> == 0cdd)
+	return 1
+elif (<args> == 0cdf)
+	return 1
+elif (<args> == 0cd3)
+	return 1
+elif (<args> == 0cd0)
+	return 1
+elif (<args> == 0ccd)
+	return 1
+elif (<args> == 0cd8)
+	return 1
+elif (<args> == 0cd6)
+	return 1
+elif (<args> == 0cd9)
+	return 1
+elif (<args> == 0ce6)
+	return 1
+elif (<args> == 0ce3)
+	return 1
+elif (<args> == 0ce0)
+	return 1
+elif (<args> == 0cda)
+	return 1
+elif (<args> == 0cdb)
+	return 1
+elif (<args> == 0ccb)
+	return 1
+elif (<args> == 0cde)
+	return 1
+elif (<args> == 0cdd)
+	return 1
+elif (<args> == 0cdf)
+	return 1
+elif (<args> == 0cd3)
+	return 1
+elif (<args> == 0cd0)
+	return 1
+elif (<args> == 0ccd)
+	return 1
+elif (<args> == 0cd8)
+	return 1
+elif (<args> == 0cd6)
+	return 1
+elif (<args> == 0cd9)
+	return 1
+elif (<args> == 0ce6)
+	return 1
+elif (<args> == 0ce3)
+	return 1
+elif (<args> == 0ce0)
+	return 1
+elif (<args> == 0cda)
+	return 1
+elif (<args> == 0cdb)
+	return 1
+elif (<args> == 0ccb)
+	return 1
+elif (<args> == 0cde)
+	return 1
+elif (<args> == 0cdc)
+	return 1
+elif (<args> == 0cd4)
+	return 1
+elif (<args> == 0cd1)
+	return 1
+elif (<args> == 0cce)
+	return 1
+elif (<args> == 0ce7)
+	return 1
+elif (<args> == 0d9b)
+	return 1
+elif (<args> == 0ce4)
+	return 1
+elif (<args> == 0ccf)
+	return 1
+elif (<args> == 0ce1)
+	return 1
+elif (<args> == 0cd2)
+	return 1
+elif (<args> == 0ce2)
+	return 1
+elif (<args> == 0ce5)
+	return 1
+elif (<args> == 0d99)
+	return 1
+elif (<args> == 0ce8)
+	return 1
+elif (<args> == 0cd5)
+	return 1
+elif (<args> == 0d97)
+	return 1
+elif (<args> == 0ce9)
+	return 1
+elif (<args> == 0cea)
+	return 1
+elif (<args> == 0cd7)
+	return 1
+elif (<args> == 0c9e)
+	return 1
+elif (<args> == 0d98)
+	return 1
+elif (<args> == 0d94)
+	return 1
+elif (<args> == 0d9a)
+	return 1
+elif (<args> == 01b7e)
+	return 1
+elif (<args> == 0d96)
+	return 1
+elif (<args> == 0cca)
+	return 1
+elif (<args> == 0d9c)
+	return 1
+elif (<args> == 0ccc)
+	return 1
+elif (<args> == 0cc9)
+	return 1
+elif (<args> == 0da7)
+	return 1
+elif (<args> == 0da2)
+	return 1
+elif (<args> == 0da0)
+	return 1
+elif (<args> == 0dab)
+	return 1
+elif (<args> == 0da8)
+	return 1
+elif (<args> == 0da2)
+	return 1
+elif (<args> == 0da0)
+	return 1
+elif (<args> == 0d95)
+	return 1
+elif (<args> == 0da5)
+	return 1
+elif (<args> == 0da4)
+	return 1
+elif (<args> == 0d9d)
+	return 1
+else
+	return 0
+endif
+
+[FUNCTION criararvores]
+var.total = 0
+FOR X 1 7167
+	FOR Y 1 4095
+	IF <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS>
+		FOR I 0 <EVAL <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS>-1>
+			IF !<ISEMPTY <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.TYPE>>
+				if (0<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>> > 0)
+					if (<eval <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>> > 0)
+						IF (<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.TYPE> == T_TREE)
+							serv.log <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>
+							if (<testara <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>> == 1)
+								SERV.NEWITEM <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>
+								NEW.P <dLOCAL.X>,<dLOCAL.Y>,<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.Z>,0
+								NEW.ATTR |=attr_static
+								NEW.FIX
+
+								var.total = <eval <var.total>+1>
+							endif
+						ENDIF
+						IF (<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.TYPE> == T_FOLIAGE)
+							if (<testara <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>> == 1)
+								//serv.log Foliage: <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID> (<dLOCAL.X>,<dLOCAL.Y>,<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.Z>,0)
+								SERV.NEWITEM <SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.ID>
+								NEW.P <dLOCAL.X>,<dLOCAL.Y>,<SERV.MAP(<dLOCAL.X>,<dLOCAL.Y>,0,0).STATICS.<dLOCAL.I>.Z>,0
+								NEW.ATTR |=attr_static
+								NEW.FIX
+
+								var.total = <eval <var.total>+1>
+							endif
+						ENDIF
+
+						if (<eval <var.total>> >= 5000)
+							serv.savestatics
+							serv.save
+							var.total = 0
+						endif
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDFOR
+	ENDIF
+	ENDFOR
+ENDFOR
+serv.log Arvores criadas!
+RETURN 1
+
+
+[FUNCTION test_lumber_rate]
+for x 1 20
+	local.bonus = 0
+
+	if strmatch("*Mina Vip*","<region.name>") && (<tag0.vip> == 1)
+		local.bonus = 25 //{<fval <lumberjacking> / 20> <fval <lumberjacking> / 15>}
+	endif
+
+	local.teste = <fval (RAND(<lumberjacking> - 100)) + (RAND(<luck>)) + <local.bonus>>
+	if (<local.teste> > <lumberjacking>)
+		local.teste = <lumberjacking>
+	endif
+
+	if (<local.teste> > 105.0)
+		sysmessage @020 Teste <eval <local.x>>: <f_lumberjack_resources <local.teste>> [<fval <local.teste>>]
+	endif
+endfor
+[EOF]

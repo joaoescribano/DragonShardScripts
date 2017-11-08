@@ -1,0 +1,479 @@
+[defname defnames_shop_sell]
+vendor_limit_sell           255     //amount of items displayed in the sell list
+vendor_limit_buy            255     //amount of items displayed in the buy list
+vendor_limit_names          50       //limit of characters of item names in vendor list
+vendor_limit_packet_size    2048    //limit of characters per packet
+vendor_sell_pets_shrunk     1       //Sell pets shrunk? 1 = Yes, 0 = No
+vendor_restock_minutes      10      // How many minutes to the world restock
+
+[function new_buy]
+if (<src.isgm>) && (<isnpc> == 1) && (<restest i_restock_delay>)
+    src.sysmessage @07a1,0,1 Próximo restock em <ftime <findid.i_restock_delay.timer>>
+endif
+
+if (<src.isgm>) || (<src.ischar>)
+    face=<src.uid>
+    src.f_packet_0x09e 0,<uid> //buy
+endif
+return 1
+
+[function new_sell]
+if (<src.isgm>) && (<isnpc> == 1) && (<restest i_restock_delay>)
+    src.sysmessage @077a,0,1 Dinheiro disponível: <goldFormat <tag0.ai_npc_gold>>gps
+endif
+if (<src.isgm>) || (<src.ischar>)
+    face=<src.uid>
+    src.f_packet_0x09e 1,<uid>,<src.uid> //sell
+endif
+return 1
+
+[function f_packet_0x09e]
+if (<uid.<argn2>.ischar>)
+    if (<uid.<argn2>.npc>==brain_vendor) || (<uid.<argn2>.npc> == brain_animal_trainer)
+        ctag.buysell=<argn1>
+        if (<dargn1>==1)
+            if (<uid.<argn2>.findlayer.28.rescount>)
+                local.itens = 0
+
+                FORCONT <FINDLAYER.21.UID>
+                    if (<uid.<argn2>.findlayer.28.findid.<baseid>>)
+                        if (<tag0.override.value>) || (<value>)
+                        
+                            IF !(STRMATCH(*<baseid>*, <local.itens>))
+                                local.itens = <local.itens> <baseid>
+                                
+                                if (<dlocal.x> < <ddef0.vendor_limit_buy>)
+                                    local.x += 1
+                                    local.uid<dlocal.x>=<uid>
+                                    local.uid<dlocal.x>.amount=<uid.<argn3>.f_count_itens <baseid>,21>
+                                    
+                                    if (<tag0.override.value>)
+                                        db.query "SELECT ROUND(<fval <eval <tag0.override.value> * 0.8>>) as val"
+                                        if (<db.row.numrows> > 0)
+                                            local.tmp_val = <eval <db.row.0.val>>
+                                        else
+                                            local.tmp_val = <value>
+                                        endif
+                                        local.uid<dlocal.x>.value=<fval <local.tmp_val>>
+                                    else
+                                        db.query "SELECT ROUND(<fval <eval <value> * 0.8>>) as val"
+                                        if (<db.row.numrows> > 0)
+                                            local.tmp_val = <eval <db.row.0.val>>
+                                        else
+                                            local.tmp_val = <value>
+                                        endif
+                                        local.uid<dlocal.x>.value=<fval <local.tmp_val>>
+                                    endif
+                                endif
+                            ENDIF
+                        endif
+                    endif
+                ENDFOR
+
+                if (<local.x>)
+                    for x 1 <local.x>
+                        if (strmatch(<local.packet>,0))
+                            local.packet=d<local.uid<dlocal.x>> w<uid.<local.uid<dlocal.x>>.dispiddec> w<uid.<local.uid<dlocal.x>>.color> w<local.uid<dlocal.x>.amount> w<local.uid<dlocal.x>.value> w<qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <eval strlen(<uid.<local.uid<dlocal.x>>.name>)>:<ddef0.vendor_limit_names>> <qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <asc <uid.<local.uid<dlocal.x>>.name>>:<strsub 0 <eval <eval <ddef0.vendor_limit_names> *4> +-1> <asc <uid.<local.uid<dlocal.x>>.name>>>>
+                            local.packetlength += <eval <qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <eval strlen(<uid.<local.uid<dlocal.x>>.name>)>:<ddef0.vendor_limit_names>> +14>
+                            local.items += 1
+                        else
+                            if (<eval strlen(<local.packet> d<local.uid<dlocal.x>> w<uid.<local.uid<dlocal.x>>.dispiddec> w<uid.<local.uid<dlocal.x>>.color> w<local.uid<dlocal.x>.amount> w<local.uid<dlocal.x>.value> w<qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <eval strlen(<uid.<local.uid<dlocal.x>>.name>)>:<ddef0.vendor_limit_names>> <qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <asc <uid.<local.uid<dlocal.x>>.name>>:<strsub 0 <eval <eval <ddef0.vendor_limit_names> *4> +-1> <asc <uid.<local.uid<dlocal.x>>.name>>>>)> < <ddef0.vendor_limit_packet_size>)
+                                local.packet=<local.packet> d<local.uid<dlocal.x>> w<uid.<local.uid<dlocal.x>>.dispiddec> w<uid.<local.uid<dlocal.x>>.color> w<local.uid<dlocal.x>.amount> w<local.uid<dlocal.x>.value> w<qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <eval strlen(<uid.<local.uid<dlocal.x>>.name>)>:<ddef0.vendor_limit_names>> <qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <asc <uid.<local.uid<dlocal.x>>.name>>:<strsub 0 <eval <eval <ddef0.vendor_limit_names> *4> +-1> <asc <uid.<local.uid<dlocal.x>>.name>>>>
+                                local.packetlength += <eval <qval <eval strlen(<uid.<local.uid<dlocal.x>>.name>)> < <ddef0.vendor_limit_names> ? <eval strlen(<uid.<local.uid<dlocal.x>>.name>)>:<ddef0.vendor_limit_names>> +14>
+                                local.items += 1
+                            endif
+                        endif
+                    endfor
+                    sendpacket 09e w<eval <local.packetlength> +9> d<argn2> w<local.items> <local.packet>
+                else
+                    uid.<argn2>.say Sorry you have nothing of interest.
+                endif
+            else
+                uid.<argn2>.say Sorry I am not buying any items at this time.
+            endif
+        else
+            local.itens = 0
+            if (<uid.<argn2>.findlayer.26.rescount>)
+                forcont <uid.<argn2>.findlayer.26>
+                    IF !(STRMATCH(*<baseid>*, <local.itens>))
+                        local.itens = <local.itens> <baseid>
+
+                        if (<tag0.override.value>) || (<value>)
+                            if (<dlocal.x> < <ddef0.vendor_limit_sell>)
+                                local.x += 1
+                                local.uid<dlocal.x>=<uid>
+                                
+                                if (<tag0.override.value>)
+                                    local.uid<dlocal.x>.value=<eval <tag0.override.value>>
+                                else
+                                    local.uid<dlocal.x>.value=<eval <value>>
+                                endif
+
+                                local.uid<dlocal.x>.amount=<uid.<argn2>.f_count_itens <baseid>,26>
+                            endif
+                        endif
+                    endif
+                endfor
+            endif
+
+            if (<local.x>)
+                local.items = 0
+
+                for x 1 <local.x>
+                    if (<eval <local.uid<dlocal.x>.amount>> > 0)
+                        if (strmatch(<local.packet>,0))
+                            local.packet=d<local.uid<dlocal.x>> w<uid.<local.uid<dlocal.x>>.dispiddec> w<uid.<local.uid<dlocal.x>>.color> w<local.uid<dlocal.x>.amount> w<eval <local.uid<dlocal.x>.value>> w<eval strlen(<uid.<local.uid<dlocal.x>>.name>)> <asc <uid.<local.uid<dlocal.x>>.name>>
+                            local.packetlength += <eval strlen(<uid.<local.uid<dlocal.x>>.name>) + 14>
+                            local.items += 1
+                        else
+                            local.tmppacket = d<local.uid<dlocal.x>> w<uid.<local.uid<dlocal.x>>.dispiddec> w<uid.<local.uid<dlocal.x>>.color> w<local.uid<dlocal.x>.amount> w<eval <local.uid<dlocal.x>.value>> w<eval strlen(<uid.<local.uid<dlocal.x>>.name>)> <asc <uid.<local.uid<dlocal.x>>.name>>
+
+                            if (<eval strlen(<local.packet> <local.tmppacket>)> < <ddef0.vendor_limit_packet_size>)
+                                local.packet=<local.packet> <local.tmppacket>
+
+                                local.packetlength += <eval strlen(<uid.<local.uid<dlocal.x>>.name>) + 14>
+                                local.items += 1
+                            endif
+                        endif
+                    endif
+                endfor
+
+                ctag.buysell=
+
+                if (<eval <local.items>> > 0)
+                    sendpacket 09e w<eval <local.packetlength> +9> d<argn2> w<local.items> <local.packet>
+                else
+                    uid.<argn2>.say Sorry I don't have any items for sale at this time.
+                endif
+            else
+                uid.<argn2>.say Sorry I do not have any items for sale at this time.
+            endif
+        endif
+    endif
+endif
+return 1
+
+[FUNCTION f_count_itens]
+local.total = 0
+local.amount = 0
+
+FORCONT <FINDLAYER.<argv[1]>.UID>
+    IF (STRMATCH(*<argv[0]>*, <baseid>))
+        local.total +=1
+        local.amount += <amount>
+    ENDIF
+ENDFOR
+
+if (<local.amount> == 0) && (<local.total> == 1)
+    return 0
+endif
+
+if (<local.total> < <local.amount>)
+    return <eval <local.amount>>
+else
+    return <eval <local.total>>
+endif
+
+[function f_packet_0x9f]
+ref1=<local.char>
+ref2=((<local.6> | (<local.5> * 256)) | (( <local.4> | (<local.3> * 256)) * 65536))
+
+for x 1 <local.8>
+    local.item<dlocal.x>=((<local.<eval <local.item> +12>> | (<local.<eval <local.item> +11>> * 256)) | (( <local.<eval <local.item> +10>> | (<local.<eval <local.item> +9>> * 256)) * 65536))
+    local.item<dlocal.x>.amount=<local.<eval <local.item> +13>><STRSUB 1 0 <local.<eval <local.item> +14>>>
+    local.item += 6
+endfor
+
+if (<ref1.ctag0.buysell>)
+    for x 1 <local.x>
+        if (<ref1.findlayer.21.finduid.<local.item<dlocal.x>>>)
+        
+            if (<ref1.findlayer.21.finduid.<local.item<dlocal.x>>.tag0.override.value>)
+                db.query "SELECT ROUND(<fval <eval <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.tag0.override.value> * 0.8>>) as val"
+                if (<db.row.numrows> > 0)
+                    local.tmp_val = <eval <db.row.0.val>>
+                else
+                    local.tmp_val = <eval <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.tag0.override.value>>
+                endif
+                local.value += <eval <local.tmp_val> * <local.item<dlocal.x>.amount>>
+            else
+                db.query "SELECT ROUND(<fval <eval <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.value> * 0.8>>) as val"
+                if (<db.row.numrows> > 0)
+                    local.tmp_val = <eval <db.row.0.val>>
+                else
+                    local.tmp_val = <eval <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.value>>
+                endif
+                local.value += <eval <local.tmp_val> * <local.item<dlocal.x>.amount>>
+            endif
+        endif
+    endfor
+    
+    if (<local.value>)
+        // Bloqueia a venda caso o NPC não tenha dinheiro suficiente
+        if (<ref2.tag0.ai_npc_gold> >= <local.value>)
+            for x 1 <local.x>
+                if (<ref1.findlayer.21.finduid.<local.item<dlocal.x>>>)
+                    ref1.consume <local.item<dlocal.x>.amount> <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.baseid>
+
+                    serv.newitem <ref1.findlayer.21.finduid.<local.item<dlocal.x>>.baseid>,<local.item<dlocal.x>.amount>,<ref2.findlayer.26.uid>,0
+                endif
+            endfor
+            
+            ref2.timerf 1, say I have bought your items for <dlocal.value> gold pieces.
+
+            if (<dlocal.value>==1)
+                ref2.sound=53
+            elseif (<dlocal.value> < 5)
+                ref2.sound=54
+            else
+                ref2.sound=55
+            endif
+            
+            ref2.tag0.ai_npc_gold -= <local.value>
+
+            while (<dlocal.value> >= 65535)
+                serv.newitem=i_gold
+                new.amount=65535
+                new.cont=<ref1.findlayer.21>
+                local.value -= 65535
+            endwhile
+            if (<local.value> > 0)
+                serv.newitem=i_gold
+                new.amount=<local.value>
+                new.cont=<ref1.findlayer.21>
+            endif
+            ref2.timerf 1, say Thank you.
+        else
+            ref2.timerf 1, say I can not afford to purchase that from  you, i have only <eval <ref2.tag0.ai_npc_gold>>gps
+        endif
+    else
+        ref2.timerf 1, say Sorry, your items have no value to me.
+    endif
+else
+    for x 1 <local.x>
+        if (<uid.<local.item<dlocal.x>>.tag0.override.value>)
+            local.cost += <eval <uid.<local.item<dlocal.x>>.tag0.override.value> *<local.item<dlocal.x>.amount>>
+        else
+            local.cost += <eval <strarg <uid.<local.item<dlocal.x>>.value>> *<local.item<dlocal.x>.amount>>
+        endif
+    endfor
+    
+    if !(<ref1.isgm>)
+        if (<serv.payfrompackonly>)
+            if (<ref1.findlayer.21.rescount i_gold> >= <dlocal.cost>)
+                ref2.tag0.ai_npc_gold += <local.cost>
+                if (<ref2.tag0.ai_npc_gold> > <ref2.findlayer.29.more2>)
+                    ref2.tag0.ai_npc_gold=<ref2.findlayer.29.more2>
+                endif
+                local.costx=<local.cost>
+                forcont <ref1.findlayer.21>
+                    if (<local.costx>)
+                        if (<type>==t_gold)
+                            if (<amount> > <local.costx>)
+                                amount -= <local.costx>
+                                update
+                                local.costx=
+                            else
+                                local.costx -= <amount>
+                                remove
+                            endif
+                        endif
+                    endif
+                endfor
+            else
+                // Se o player não tiver dinheiro bloqueia a venda
+                local.costx=999999999999999
+            endif
+        else
+            if (<eval <ref1.findlayer.21.rescount i_gold> + <ref1.findlayer.29.rescount i_gold>> >= <dlocal.cost>)
+                ref2.tag0.ai_npc_gold += <local.cost>
+                if (<ref2.tag0.ai_npc_gold> > <ref2.findlayer.29.more2>)
+                    ref2.tag0.ai_npc_gold=<ref2.findlayer.29.more2>
+                endif
+                local.costx=<local.cost>
+                forcont <ref1.findlayer.21>
+                    if (<local.costx>)
+                        if (<type>==t_gold)
+                            if (<amount> > <local.costx>)
+                                amount -= <local.costx>
+                                update
+                                local.costx=
+                            else
+                                local.costx -= <amount>
+                                remove
+                            endif
+                        endif
+                    endif
+                endfor
+                if (<local.costx>)
+                    forcont <ref1.findlayer.29>
+                        if (<local.costx>)
+                            if (<type>==t_gold)
+                                if (<amount> > <local.costx>)
+                                    amount -= <local.costx>
+                                    update
+                                    local.costx=
+                                else
+                                    local.costx -= <amount>
+                                    remove
+                                endif
+                            endif
+                        endif
+                    endfor
+                endif
+            else
+                // Se o player não tiver dinheiro bloqueia a venda
+                local.costx=999999999999999
+            endif
+        endif
+    else
+        local.costx=
+    endif
+    
+    if (<dlocal.costx> < 1)
+        for x 1 <local.x>
+            if (<uid.<local.item<dlocal.x>>.type>==t_figurine)
+                if !(<def0.vendor_sell_pets_shrunk>)
+                    for <local.item<dlocal.x>.amount>
+                        serv.newnpc=<uid.<local.item<dlocal.x>>.tdata3>
+                        local.uid=<new.uid>
+                        serv.newitem=i_memory
+                        new.color=memory_ipet
+                        new.link=<ref1.uid>
+                        new.cont=<local.uid>
+                        uid.<local.uid>.p=<ref2.p>
+                        uid.<local.uid>.update
+                        uid.<local.uid>.bark 1
+                    endfor
+                elseif ( <uid.<local.item<dlocal.x>>.can> & 0100 )
+                    serv.newitem=<uid.<local.item<dlocal.x>>.baseid>
+                    new.amount=<local.item<dlocal.x>.amount>
+                    new.cont=<ref1.findlayer.21>
+                else
+                    for <local.item<dlocal.x>.amount>
+                        serv.newitem=<uid.<local.item<dlocal.x>>.baseid>
+                        new.cont=<ref1.findlayer.21>
+                    endfor
+                endif
+            else
+                if ( <uid.<local.item<dlocal.x>>.can> & 0100 )
+                    serv.newitem=<uid.<local.item<dlocal.x>>.baseid>
+                    new.amount=<local.item<dlocal.x>.amount>
+                    new.cont=<ref1.findlayer.21>
+                else
+                    for <local.item<dlocal.x>.amount>
+                        serv.newitem=<uid.<local.item<dlocal.x>>.baseid>
+                        new.cont=<ref1.findlayer.21>
+                    endfor
+                endif
+            endif
+            
+            if (strmatch(<local.items>,0))
+                local.items=<uid.<local.item<dlocal.x>>.name>
+            else
+                if !(<local.item<eval <local.x> +1>>)
+                    local.items=<local.items>, and <uid.<local.item<dlocal.x>>.name>
+                else
+                    local.items=<local.items>, <uid.<local.item<dlocal.x>>.name>
+                endif
+            endif
+
+            ref2.findlayer.26.contconsume <uid.<local.item<dlocal.x>>.baseid> <local.item<dlocal.x>.amount>
+        endfor
+
+        if (<def.dinheiro_npc>==1)
+            db.query "SELECT ROUND((<eval <dlocal.cost>> * 0.20)) as val"
+
+            if (<db.row.numrows> > 0)
+                local.soma = <eval <db.row.0.val>>
+            else
+                local.soma = 0
+            endif
+
+            if (<local.soma> >= 0)
+                f_coleta_adcionar <local.soma>
+            endif
+
+            ref2.tag0.ai_npc_gold += <eval <dlocal.cost> - <local.soma>>
+        else
+            ref2.tag0.ai_npc_gold += <dlocal.cost>
+        endif
+
+        ref2.timerf 1, say Here <qval <dlocal.x>==1 ?is:are> <qval <dlocal.x>==1 ?your:your items> <local.items>.
+        ref2.timerf 1, say That will be <dlocal.cost> gold.
+        if (<dlocal.value>==1)
+            ref2.sound=53
+        elseif (<dlocal.value> < 5)
+            ref2.sound=54
+        else
+            ref2.sound=55
+        endif
+        ref2.timerf 1, say Thank you very much!
+    else
+        if (<serv.payfrompackonly>)
+            ref2.timerf 1, say Sorry but you can not afford that.  You are missing <eval <local.cost> +-<ref1.findlayer.21.rescount i_gold>> gold pieces.
+        else
+            ref2.timerf 1, say Sorry but you can not afford that.  You are missing <eval <local.cost> +-<eval <ref1.findlayer.21.rescount i_gold> +<ref1.findlayer.29.rescount i_gold>>> gold pieces.
+        endif
+    endif
+endif
+ref2.updatex
+return 1
+
+[ITEMDEF i_pedra_restock]
+ID=i_gravestone_17
+NAME=Pedra de restock (Restock no mundo)
+TYPE=t_normal
+
+ON=@Create
+    color=077f
+    attr=attr_invis|attr_static
+
+ON=@DClick
+    if (<src.isgm>)
+        FORCHARS 6144
+            if !(<region.tag0.NoRestock>)
+                region.tag0.NoRestock=1
+            endif
+
+            IF (<BRAIN> == brain_vendor)
+                if (<restest i_restock_delay>)
+                    findid.i_restock_delay.timer 1
+                else
+                    serv.newitem i_restock_delay,1,<uid>,1
+                endif
+            ENDIF
+        ENDFOR
+        timer <eval <def.vendor_restock_minutes>*60>
+    endif
+    return 1
+
+[FUNCTION f_new_restock]
+restock 1
+serv.newitem i_restock_delay,1,<uid>,1
+
+[ITEMDEF i_restock_delay]
+NAME=Restock delay
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=attr_invis|attr_decay
+
+ON=@Equip
+timer 1
+
+ON=@Timer
+if (<cont.isnpc>)
+    //serv.log Restocking <cont.name> (<cont.uid> / <cont.baseid> / <cont.id>)
+    cont.restock 1
+    cont.tag0.ai_npc_gold = 10000
+    timer <eval <def.vendor_restock_minutes>*60>
+else
+    remove
+endif
+return 1
+
+[eof]

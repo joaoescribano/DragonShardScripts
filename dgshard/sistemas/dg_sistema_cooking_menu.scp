@@ -1,0 +1,1636 @@
+//Menu de cooking
+
+[ITEMDEF i_mem_cooking]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Cook
+
+ON=@EQUIP
+TIMER=3
+ATTR=attr_decay // | attr_invis
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[MENU menu_s_cook]
+Cooking Menu
+
+ON=i_bread_french Massas
+MENU m_massas
+
+ON=i_pig_roast Carnes
+MENU m_carnes
+
+ON=i_cake Bolos
+MENU m_doces
+
+ON=i_Crystal_Ball Comidas Magicas
+MENU m_magic_food
+
+[MENU m_massas]
+Menu de massas
+
+ON=i_bread_loaf Massas Simples
+MENU m_massas_s
+
+ON=i_bread_loaf Boas Massas
+MENU m_massas_g
+
+ON=i_bread_loaf Massas Deliciosas
+MENU m_massas_d
+
+[MENU m_massas_s]
+Massas
+
+ON=i_simple_bread_loaf <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><290
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 5 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 5 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_bread_loaf
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_simple_bread_french <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><400
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 2 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 6 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 2 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 6 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_bread_french
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_massas_g]
+Massas Boas
+
+ON=i_Good_bread_loaf <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><350
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 5 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 5 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_bread_loaf
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Good_bread_french <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><450
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 2 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 6 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 2 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 6 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_bread_french
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_massas_d]
+Massas Deliciosas
+
+ON=i_delicius_bread_loaf <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><600
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 5 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 5 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_delicius_bread_loaf
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_delicius_bread_french <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 2 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_water>) && (<SRC.RESTEST 6 i_eggs_fresh>)
+	SRC.SOUND 84
+	SRC.CONSUME 2 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_water
+	SRC.CONSUME 6 i_eggs_fresh
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_delicius_bread_french
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_doces]
+Menu de Doces
+
+ON=i_cake Bolos Simples
+MENU m_doces_s
+
+ON=i_cake Bolos Bons
+MENU m_doces_g
+
+ON=i_cake Bolos Deliciosos
+MENU m_doces_d
+
+[MENU m_doces_s]
+Bolos Simples
+
+ON=i_simple_apple_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_apple>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_apple 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_apple_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_simple_Lemon_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Lemon>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Lemon 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_Lemon_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_simple_Orange_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_lime>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_lime
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_Orange_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_simple_Banana_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Banana>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Banana
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_Banana_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_doces_g]
+Bolos Bons
+
+ON=i_Good_apple_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_apple>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_apple 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_apple_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Good_Lemon_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Lemon>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Lemon 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_Lemon_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Good_Orange_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_lime>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_lime
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_Orange_cake
+	SRC.cooking_gain 2
+	SRC.ACT.BOUNCE
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Good_Banana_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) &&  (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Banana>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Banana
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_Banana_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_doces_d]
+Bolos Deliciosos
+
+ON=i_Delicius_apple_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) &&  (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_apple>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_apple 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_apple_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Delicius_Lemon_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Lemon>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Lemon 
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_Lemon_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Delicius_Orange_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_lime>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_lime
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_Orange_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_Delicius_Banana_cake <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF (<SRC.RESTEST 1 i_flour_sack>) && (<SRC.RESTEST 5 i_pitcher_milk>) && (<SRC.RESTEST 10 i_fruit_Banana>)
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_flour_sack
+	SRC.CONSUME 5 i_pitcher_milk
+	SRC.CONSUME 10 i_fruit_Banana
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_Banana_cake
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_carnes]
+Menu de carnes
+
+ON=i_pig_roast Carnes Simples
+MENU m_carnes_s
+
+ON=i_pig_roast Carnes Boas
+MENU m_carnes_g
+
+ON=i_pig_roast Carnes Deliciosas
+MENU m_Carnes_d
+
+[MENU m_carnes_s]
+Carnes Simples
+
+ON=i_pig_roast <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_pig_roast_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_pig_roast_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_pig_roast
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_lamb_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><400
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_lamb_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_lamb_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_lamb_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_chicken_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><400
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_chicken_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_chicken_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_chicken_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_fish_cut_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><290
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_fish_cut_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_simple_fish_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_ribs_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><300
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_ribs_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_ribs_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_simple_ribs_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_bird_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><300
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_bird_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_bird_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_simple_bird_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_fish_cut_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><290
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_fish_cut_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_simple_fish_cut_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 1
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_Carnes_g]
+Carne Boa
+
+ON=i_pig_roast <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_pig_roast_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_pig_roast_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_good_pig_roast
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_lamb_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><600
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_lamb_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_lamb_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_lamb_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_chicken_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><600
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_chicken_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_chicken_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_chicken_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_fish_cut_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_fish_cut_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Good_fish_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_ribs_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_ribs_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_ribs_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Good_ribs_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_bird_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_bird_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_bird_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Good_bird_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_fish_cut_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><500
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_fish_cut_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Good_fish_cut_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 2
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_Carnes_d]
+Deliciosas Carnes
+
+ON=i_pig_roast <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_pig_roast_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_pig_roast_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_pig_roast
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_lamb_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_lamb_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_lamb_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_lamb_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_chicken_leg <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_chicken_leg_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_chicken_leg_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM i_Delicius_chicken_leg
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_ribs_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_ribs_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_ribs_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Delicius_ribs_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_bird_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 I_bird_RAW>
+	SRC.SOUND 84
+	SRC.CONSUME 1 I_bird_RAW
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Delicius_bird_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+ON=i_fish_cut_cooked <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><700
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SOUND 84
+	SRC.CONSUME 1 i_fish_cut_raw
+	SRC.NEWITEM i_mem_cooking
+	SRC.ACT.EQUIP
+	SRC.NEWITEM=i_Delicius_fish_cut_cooked
+	SRC.ACT.BOUNCE
+	SRC.cooking_gain 3
+	RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+RETURN 1
+
+[MENU m_magic_food]
+Comidas Magicas
+
+ON=i_magic_pig_roast_bless Porco Cozido of Bless
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1100
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 100 i_reag_garlic>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 100 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 i_pig_roast_RAW
+SRC.CONSUME 100 i_reag_garlic
+SRC.CONSUME 100 i_reag_mandrake_root
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_bless
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_fish_cut_cooked File de Peixe de Mana
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1100
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.ALCHEMY><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 i_fish_cut_raw>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_Eye_of_newt>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 i_fish_cut_raw
+SRC.CONSUME 10 i_reag_Eye_of_newt
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_fish_mana
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_pig_roast Comidas +5 
+Src.menu m_magic_food5
+
+ON=i_pig_roast Comidas +10
+Src.menu m_magic_food10
+
+ON=i_pig_roast Comidas +15
+Src.menu m_magic_food15
+
+[MENU m_magic_food5]
+Comidas +5
+
+ON=i_magic_pig_roast_str5 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_nightshade>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 10 i_reag_mandrake_root
+SRC.CONSUME 10 i_reag_nightshade
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_str5
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_dex5 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_blood_moss>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 10 i_reag_mandrake_root
+SRC.CONSUME 10 i_reag_blood_moss
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_dex5
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_int5 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><800
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 10 i_reag_ginseng>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 10 i_reag_mandrake_root
+SRC.CONSUME 10 i_reag_ginseng
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_int5
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+[MENU m_magic_food10]
+Comidas +10
+
+ON=i_magic_pig_roast_str10 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><900
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_nightshade>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 30 i_reag_mandrake_root
+SRC.CONSUME 30 i_reag_nightshade
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_str10
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_dex10 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><900
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_blood_moss>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 30 i_reag_mandrake_root
+SRC.CONSUME 30 i_reag_blood_moss
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_dex10
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_int10 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><900
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 30 i_reag_ginseng>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 30 i_reag_mandrake_root
+SRC.CONSUME 30 i_reag_ginseng
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_int10
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+[MENU m_magic_food15]
+Comidas +15
+
+ON=i_magic_pig_roast_str15 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_nightshade>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 50 i_reag_mandrake_root
+SRC.CONSUME 50 i_reag_nightshade
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_str15
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_dex15 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><1000
+SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_blood_moss>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 50 i_reag_mandrake_root
+SRC.CONSUME 50 i_reag_blood_moss
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_dex15
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+ON=i_magic_pig_roast_int15 <name>
+IF <SRC.RESTEST 1 i_mem_cooking>
+	SRC.SYSMESSAGE=Voce nao pode cozinhar tao rapido!
+	RETURN 1
+ENDIF
+
+IF <SRC.COOKING><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF <SRC.MAGERY><1000
+	SRC.SYSMESSAGE Voce nao sabe cozinhar isto!
+	RETURN 1
+ENDIF
+
+IF !<SRC.RESTEST 1 I_pig_roast_RAW>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_mandrake_root>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+IF !<SRC.RESTEST 50 i_reag_ginseng>
+	SRC.SYSMESSAGE Voce nao tem os ingredientes necessarios para fazer isso!
+	return 1
+endif
+
+SRC.NEWITEM=i_fx_glow_spike
+SRC.ACT.ATTR=attr_static|attr_decay 
+SRC.ACT.TIMER=1 
+SRC.ACT.P=<SRC.TARG.P>
+SRC.ACT.NUDGEUP=10  
+SRC.SOUND 84
+SRC.CONSUME 1 I_pig_roast_RAW
+SRC.CONSUME 50 i_reag_mandrake_root
+SRC.CONSUME 50 i_reag_ginseng
+SRC.NEWITEM i_mem_cooking
+SRC.ACT.EQUIP
+SRC.NEWITEM=i_magic_pig_roast_int15
+SRC.ACT.BOUNCE
+SRC.cooking_gain 4
+RETURN 1
+
+[ITEMDEF i_pig_roast_raw]
+ID=i_pig_roast
+NAME=Porco Cru
+VALUE=300
+TYPE=T_script
+SKILLMAKE=cooking 40.0
+WEIGHT=45
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Pig Raw
+
+ON=@Create
+Color=02e7
+
+[FUNCTION cooking_gain]
+if (<src.cooking> < 1000) && (rand(100) > <qval <args> == 1 ? 50 : <qval <args> == 2 ? 70 : 90>>)
+	src.cooking +=1
+endif
+
+[EOF]

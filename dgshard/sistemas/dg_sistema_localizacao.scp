@@ -1,0 +1,549 @@
+//	Version: 0.2
+//	Author: uowj
+//	Email: jquerywj@qq.com
+//	--------------------------------
+//	Revision: 0.2, Follow suggestion of Lazarus, the navigator can find the Ankh or healer after the player died. 
+//			0.1, This is a navigator in town for player, especially for the newbie.
+//				It will provide a dialog including the direction and distance of the destination nearby (less than 500tiles).
+//	-----------------------------------------------------------------------------------------------------------------------------------------------------------
+//	Note: 1, The navigator find the destination by the "DEFNAME" of the trade signs, Ankh and healer.
+//			So please be sure the trade signs, Ankh and healer have the "DEFNAME" in the ITEMDEF part of your script.
+//		2, If the trade signs, Ankh and healer have the "DEFNAME" in the ITEMDEF part, 
+//			but they are different with the DEFNAME value that list as below,
+//			please change the VALUE of DEFNAME here to your NEFNAME. 
+//			For example, change the value ("i_sign_library") to your DEFNAME, maybe "i_YourLibrarySignDefname"
+//	---------------------------------------------------------------------------------------------------------------------------------------------------
+//	Guide: The "f_uowj_Navigator" is the main interface. It can be invoked by any trigger of the player. 
+//			And then if the player is alive, it will show the trade signs page, it the player is dead, it will show the Healer and Ankh page.
+//	-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[DEFNAME def_uowj_Navi_Signs]
+i_uowj_Navi_sign_Library		i_sign_library
+i_uowj_Navi_sign_Bakery			i_sign_bakery
+i_uowj_Navi_sign_Tailor			i_sign_tailor
+i_uowj_Navi_sign_Tinker			i_sign_tinker
+i_uowj_Navi_sign_Butcher		i_sign_butcher
+i_uowj_Navi_sign_Healer			i_sign_healer
+i_uowj_Navi_sign_Mage			i_sign_mage
+i_uowj_Navi_sign_Woodworker		i_sign_woodwork
+i_uowj_Navi_sign_Customs		i_sign_customs
+i_uowj_Navi_sign_Inn			i_sign_inn
+i_uowj_Navi_sign_Shipwright		i_sign_shipwright
+i_uowj_Navi_sign_Stables		i_sign_stables
+i_uowj_Navi_sign_BarberShop		i_sign_barbershop
+i_uowj_Navi_sign_Bard			i_sign_bard
+i_uowj_Navi_sign_Fletcher		i_sign_fletcher
+i_uowj_Navi_sign_Armourer		i_sign_armourer
+i_uowj_Navi_sign_Jeweler		i_sign_jeweler
+i_uowj_Navi_sign_Tavern			i_sign_tavern
+i_uowj_Navi_sign_ReagentShop	i_sign_reagentshop
+i_uowj_Navi_sign_Blacksmith		i_sign_blacksmith
+i_uowj_Navi_sign_Painter		i_sign_painter
+i_uowj_Navi_sign_Provisioner	i_sign_provisioner
+i_uowj_Navi_sign_Bowyer			i_sign_bowyer
+i_uowj_Navi_sign_Bank			i_sign_bank
+i_uowj_Navi_sign_Theatre		i_sign_theatre
+i_uowj_Navi_sign_Beekeeper		i_sign_beekeeper
+
+[DEFNAME def_uowj_Navi_Healers]
+c_uowj_Navi_healer_wander		c_heal_wander
+c_uowj_Navi_healer_wander_f		c_heal_wander_f
+c_uowj_Navi_healer_guild		c_guild_healer
+c_uowj_Navi_healer_guild_f		c_guild_healer_f
+c_uowj_Navi_healer				c_healer
+c_uowj_Navi_healer_f			c_healer_f
+
+[DEFNAME def_uowj_Navi_Ankhs]
+i_uowj_Navi_ankh				i_ankh
+
+
+[FUNCTION onde]
+if (<flags> & statf_dead)
+	SDIALOG d_uowj_Navi_DesSelect 3
+else
+	SDIALOG d_uowj_Navi_DesSelect 1
+endif
+
+[FUNCTION f_uowj_Navi_TimerCircle]
+dialogclose d_uowj_Navigator
+REF1 = <src.ctag0.uowj.navi.des.uid>
+if ((<REF1.p.m> == <src.p.m>) && (<src.ctag0.uowj.navi.dis> <= 550))
+	SDIALOG d_uowj_Navigator
+	src.timerf 1 f_uowj_Navi_TimerCircle
+else
+	src.ctag0.uowj.navi.dis =
+	src.ctag0.uowj.navi.des.uid = 
+	src.ctag0.uowj.navi.des =
+	src.sysmessage Distance is out of range, Navigator is closed
+endif
+
+
+[DIALOG	d_uowj_Navi_DesSelect]
+50,50
+PAGE 0
+gumppic 0 15 1226
+gumppic 174 1 5021
+text 41 19 0 0
+button 140 277 242 241 1 0 0
+
+PAGE 1
+checkertrans 23 47 182 221
+button 21 277 247 248 1 0 100
+
+radio 25 50 2361 2360 0 1
+tooltip 1022965
+tilepic 35 45 2965	//Library
+radio 90 50 2361 2360 0 2
+tooltip 1022979
+tilepic 100 45 2979	//Bakery
+radio 155 50 2361 2360 0 3
+tooltip 1022981
+tilepic 165 45 2981	//Tailor
+
+radio 25 75 2361 2360 0 4
+tooltip 1022983
+tilepic 35 70 2983	//Tinker
+radio 90 75 2361 2360 0 5
+tooltip 1022985
+tilepic 100 70 2985	//Butcher
+radio 155 75 2361 2360 0 6
+tooltip 1022987
+tilepic 165 70 2987	//Healer
+
+radio 25 100 2361 2360 0 7
+tooltip 1022989
+tilepic 35 95 2989	//Mage
+radio 90 100 2361 2360 0 8
+tooltip 1022991
+tilepic 100 95 2991	//Woodworker
+radio 155 100 2361 2360 0 9
+tooltip 1022993
+tilepic 165 95 2993	//Customs
+
+radio 25 125 2361 2360 0 10
+tooltip 1022995
+tilepic 35 120 2995	//Inn
+radio 90 125 2361 2360 0 11
+tooltip 1022997
+tilepic 100 120 2997	//Shipwright
+radio 155 125 2361 2360 0 12
+tooltip 1022999
+tilepic 165 120 2999	//Stables
+
+radio 25 150 2361 2360 0 13
+tooltip 1023001
+tilepic 35 145 3001	//BarberShop
+radio 90 150 2361 2360 0 14
+tooltip 1023003
+tilepic 100 145 3003	//Bard
+radio 155 150 2361 2360 0 15
+tooltip 1023005
+tilepic 165 145 3005	//Fletcher
+
+radio 25 175 2361 2360 0 16
+tooltip 1023007
+tilepic 35 170 3007	//Armourer
+radio 90 175 2361 2360 0 17
+tooltip 1023009
+tilepic 100 170 3009	//Jeweler
+radio 155 175 2361 2360 0 18
+tooltip 1023011
+tilepic 165 170 3011	//Tavern
+
+radio 25 200 2361 2360 0 19
+tooltip 1023013
+tilepic 35 195 3013	//ReagentShop
+radio 90 200 2361 2360 0 20
+tooltip 1023015
+tilepic 100 195 3015	//Blacksmith
+radio 155 200 2361 2360 0 21
+tooltip 1023017
+tilepic 165 195 3017	//Painter
+
+radio 25 225 2361 2360 0 22
+tooltip 1023019
+tilepic 35 220 3019	//Provisioner
+radio 90 225 2361 2360 0 23
+tooltip 1023021
+tilepic 100 220 3021	//Bowyer
+radio 155 225 2361 2360 0 24
+tooltip 1023083
+tilepic 165 220 3083	//Bank
+
+radio 25 250 2361 2360 0 25
+tooltip 1023085
+tilepic 35 245 3085	//Theatre
+radio 90 250 2361 2360 0 26
+tooltip 1023139
+tilepic 100 245 3139	//Beekeeper
+
+PAGE 2
+text 34 50 0 1
+text 34 70 0 2
+text 34 120 0 3
+text 34 140 0 4
+text 34 190 0 5
+text 34 210 0 6
+text 34 230 0 7
+text 34 250 0 8
+button 21 277 247 248 0 1 0
+
+PAGE 3
+button 21 277 247 248 1 0 300
+
+radio 25 105 2361 2360 0 32
+tooltip 1020004
+tilepic 45 80 4	//Ankh
+tilepic 67 80 5	//Ankh
+text 100 100 0 9
+
+radio 25 200 2361 2360 0 33
+tooltip 1016456
+tilepic 45 190 2987	//Healer
+text 100 200 0 10
+
+PAGE 4
+text 34 50 0 1
+text 34 70 0 2
+text 34 120 0 3
+text 34 140 0 4
+text 34 190 0 5
+text 34 210 0 6
+text 34 230 0 7
+text 34 250 0 8
+button 21 277 247 248 0 3 0
+
+[DIALOG d_uowj_Navi_DesSelect TEXT]
+O que procura?
+O que voce procura
+nao foi encontrado.
+Ok para selecionar
+outro destino.
+Nota: Se chegar ao mar
+talvez precise dar a
+volta ou ter de usar
+um barco.
+Ankh
+Healer Hut
+
+[DIALOG d_uowj_Navi_DesSelect BUTTON]
+ON=0
+	dialogclose d_uowj_Navi_DesSelect
+	
+ON=100
+	if (<ARGCHKID> = -1)
+		dialogclose d_uowj_Navi_DesSelect
+		SDIALOG d_uowj_Navi_DesSelect 1
+	ELSE
+		doswitch <ARGCHKID> - 1
+			src.ctag0.uowj.navi.des = 2965
+			src.ctag0.uowj.navi.des = 2979
+			src.ctag0.uowj.navi.des = 2981
+			src.ctag0.uowj.navi.des = 2983
+			src.ctag0.uowj.navi.des = 2985
+			src.ctag0.uowj.navi.des = 2987
+			src.ctag0.uowj.navi.des = 2989
+			src.ctag0.uowj.navi.des = 2991
+			src.ctag0.uowj.navi.des = 2993
+			src.ctag0.uowj.navi.des = 2995
+			src.ctag0.uowj.navi.des = 2997
+			src.ctag0.uowj.navi.des = 2999
+			src.ctag0.uowj.navi.des = 3001
+			src.ctag0.uowj.navi.des = 3003
+			src.ctag0.uowj.navi.des = 3005
+			src.ctag0.uowj.navi.des = 3007
+			src.ctag0.uowj.navi.des = 3009
+			src.ctag0.uowj.navi.des = 3011
+			src.ctag0.uowj.navi.des = 3013
+			src.ctag0.uowj.navi.des = 3015
+			src.ctag0.uowj.navi.des = 3017
+			src.ctag0.uowj.navi.des = 3019
+			src.ctag0.uowj.navi.des = 3021
+			src.ctag0.uowj.navi.des = 3083
+			src.ctag0.uowj.navi.des = 3085
+			src.ctag0.uowj.navi.des = 3139
+		enddo
+		f_uowj_Navi_GetLocation
+		if (<src.ctag0.uowj.navi.des.uid>)
+			dialogclose d_uowj_Navi_DesSelect
+			f_uowj_Navi_TimerCircle		
+		else
+			dialogclose d_uowj_Navi_DesSelect
+			SDIALOG d_uowj_Navi_DesSelect, 2
+		endif
+	endif
+
+ON=300
+	if (<ARGCHKID> = -1)
+		dialogclose d_uowj_Navi_DesSelect
+		SDIALOG d_uowj_Navi_DesSelect 3
+	ELSE
+		doswitch <ARGCHKID> - 31
+			src.ctag0.uowj.navi.des = 8454
+			src.ctag0.uowj.navi.des = 4
+			src.ctag0.uowj.navi.des = 2987
+		enddo
+		f_uowj_Navi_GetLocation
+		if (<src.ctag0.uowj.navi.des.uid>)
+			dialogclose d_uowj_Navi_DesSelect
+			f_uowj_Navi_TimerCircle		
+		else
+			dialogclose d_uowj_Navi_DesSelect
+			SDIALOG d_uowj_Navi_DesSelect, 4
+		endif
+	endif
+
+
+[DIALOG	d_uowj_Navigator]
+50,50
+PAGE 0
+	resizepic 30 30 9200 140 140
+	//checkertrans 30 30 140 140
+	gumppic 0 0 9007
+	if (<src.ctag0.uowj.navi.des> == 8454)
+		tilepic 78 79 8323
+	elseif (<src.ctag0.uowj.navi.des> == 4)
+		tilepic 78 79 8378
+	else
+		tilepic 79 87 <src.ctag0.uowj.navi.des>
+	endif
+	resizepic 20 187 9200 163 16
+	text 26 185 0 0
+	REF1 = <src.ctag0.uowj.navi.des.uid>
+	local.demoDis = <f_uowj_Navi_CheckDistance <REF1.p.x>,<REF1.p.y>>
+	src.ctag0.uowj.navi.dis = <local.demoDis>
+	f_uowj_Navi_DrawDistance <local.demoDis>
+	if (<local.demoDis> > 2)
+		f_uowj_Navi_DrawDirection <f_uowj_Navi_CheckDirection <REF1.p.x>,<REF1.p.y>>	
+	endif
+
+[DIALOG d_uowj_Navigator TEXT]
+Distancia
+
+[DIALOG d_uowj_Navigator BUTTON]
+ON=0
+	src.timerf stop f_uowj_Navi_TimerCircle
+
+[FUNCTION f_uowj_Navi_GetLocation]
+//Base on the selection of the player to get all the locations.
+//Then call the function(CheckDistance) to get the nearest one.
+local.instIndex = 0
+if (<src.ctag0.uowj.navi.des> == 2965)
+	local.inst0 = i_uowj_Navi_sign_Library
+elseif (<src.ctag0.uowj.navi.des> == 2979)
+	local.inst0 = i_uowj_Navi_sign_Bakery
+elseif (<src.ctag0.uowj.navi.des> == 2981)
+	local.inst0 = i_uowj_Navi_sign_Tailor
+elseif (<src.ctag0.uowj.navi.des> == 2983)
+	local.inst0 = i_uowj_Navi_sign_Tinker
+elseif (<src.ctag0.uowj.navi.des> == 2985)
+	local.inst0 = i_uowj_Navi_sign_Butcher
+elseif (<src.ctag0.uowj.navi.des> == 2987)
+	local.inst0 = i_uowj_Navi_sign_Healer
+elseif (<src.ctag0.uowj.navi.des> == 2989)
+	local.inst0 = i_uowj_Navi_sign_Mage
+elseif (<src.ctag0.uowj.navi.des> == 2991)
+	local.inst0 = i_uowj_Navi_sign_Woodworker
+elseif (<src.ctag0.uowj.navi.des> == 2993)
+	local.inst0 = i_uowj_Navi_sign_Customs
+elseif (<src.ctag0.uowj.navi.des> == 2995)
+	local.inst0 = i_uowj_Navi_sign_Inn
+elseif (<src.ctag0.uowj.navi.des> == 2997)
+	local.inst0 = i_uowj_Navi_sign_Shipwright
+elseif (<src.ctag0.uowj.navi.des> == 2999)
+	local.inst0 = i_uowj_Navi_sign_Stables
+elseif (<src.ctag0.uowj.navi.des> == 3001)
+	local.inst0 = i_uowj_Navi_sign_BarberShop
+elseif (<src.ctag0.uowj.navi.des> == 3003)
+	local.inst0 = i_uowj_Navi_sign_Bard
+elseif (<src.ctag0.uowj.navi.des> == 3005)
+	local.inst0 = i_uowj_Navi_sign_Fletcher
+elseif (<src.ctag0.uowj.navi.des> == 3007)
+	local.inst0 = i_uowj_Navi_sign_Armourer
+elseif (<src.ctag0.uowj.navi.des> == 3009)
+	local.inst0 = i_uowj_Navi_sign_Jeweler
+elseif (<src.ctag0.uowj.navi.des> == 3011)
+	local.inst0 = i_uowj_Navi_sign_Tavern
+elseif (<src.ctag0.uowj.navi.des> == 3013)
+	local.inst0 = i_uowj_Navi_sign_ReagentShop
+elseif (<src.ctag0.uowj.navi.des> == 3015)
+	local.inst0 = i_uowj_Navi_sign_Blacksmith
+elseif (<src.ctag0.uowj.navi.des> == 3017)
+	local.inst0 = i_uowj_Navi_sign_Painter
+elseif (<src.ctag0.uowj.navi.des> == 3019)
+	local.inst0 = i_uowj_Navi_sign_Provisioner
+elseif (<src.ctag0.uowj.navi.des> == 3021)
+	local.inst0 = i_uowj_Navi_sign_Bowyer
+elseif (<src.ctag0.uowj.navi.des> == 3083)
+	local.inst0 = i_uowj_Navi_sign_Bank
+elseif (<src.ctag0.uowj.navi.des> == 3085)
+	local.inst0 = i_uowj_Navi_sign_Theatre
+elseif (<src.ctag0.uowj.navi.des> == 3139)
+	local.inst0 = i_uowj_Navi_sign_Beekeeper
+elseif (<src.ctag0.uowj.navi.des> == 8454)
+	local.instIndex = 5
+	local.inst0 = c_uowj_Navi_healer_wander
+	local.inst1 = c_uowj_Navi_healer_wander_f
+	local.inst2 = c_uowj_Navi_healer_guild
+	local.inst3 = c_uowj_Navi_healer_guild_f
+	local.inst4 = c_uowj_Navi_healer
+	local.inst5 = c_uowj_Navi_healer_f
+elseif (<src.ctag0.uowj.navi.des> == 4)
+	local.inst0 = i_uowj_Navi_ankh
+endif
+
+
+
+
+local.disMin = 9999
+src.ctag0.uowj.navi.des.uid =
+for x 0 <local.instIndex>
+	FORINSTANCES <local.inst<dlocal.x>>
+		if (<P.M> == <SRC.P.M>)
+			local.disDemo = <f_uowj_Navi_CheckDistance <P.X>, <P.Y>>
+			if (<local.disDemo> < <local.disMin>)
+				local.disMin = <local.disDemo>
+				src.ctag0.uowj.navi.des.uid = <uid>
+			endif
+		endif
+	ENDFOR
+endfor	
+if ( <local.disMin> > 500)
+	src.ctag0.uowj.navi.des.uid =
+endif
+
+
+[FUNCTION f_uowj_Navi_CheckDirection]
+//Base on the location of the player to check the direction of the destination that selected by player.
+//ARGN1: x coordinate of destination.
+//ARGN2: y coordinate of destination.
+//RETURN: The direction of the destination to the player.
+//		0: North, 1: NorthEast, 2: East, 3: SouthEast, 4: South, 5: SouthWest, 6: West, 7: NorthWest
+//		8: Same Point
+local.dX = <EVAL <ARGN1> - <src.p.x>>
+local.dY = <EVAL <src.p.y> - <ARGN2>>
+if ((<local.dX> == 0) && (<local.dY> == 0))
+	return 8
+elseif ((<local.dX> == 0) && (<local.dY> > 0))
+	return 0
+elseif ((<local.dX> == 0) && (<local.dY> < 0))
+	return 4
+elseif ((<local.dY> == 0) && (<local.dX> < 0))
+	return 6
+elseif ((<local.dY> == 0) && (<local.dX> > 0))
+	return 2
+elseif ((<local.dY> != 0) && (<local.dX> != 0))
+	local.dir = <FLOATVAL <dlocal.dY> / <dlocal.dX>>
+	if ((<local.dY> > 0) && ((<local.dir> > <FLOATVAL 2.414>) || (<local.dir> < <FLOATVAL -2.414>)))
+		return 0
+	elseif ((<local.dX> > 0) && (<local.dY> > 0) && (<local.dir> >= <FLOATVAL 0.414>) && (<local.dir> <= <FLOATVAL 2.414>))
+		return 1
+	elseif ((<local.dX> > 0) && (<local.dir> > <FLOATVAL -0.414>) && (<local.dir> < <FLOATVAL 0.414>))
+		return 2
+	elseif ((<local.dX> > 0) && (<local.dY> < 0) && (<local.dir> >= <FLOATVAL -2.414>) && (<local.dir> <= <FLOATVAL -0.414>))
+		return 3
+	elseif ((<local.dY> < 0) && ((<local.dir> > <FLOATVAL 2.414>) || (<local.dir> < <FLOATVAL -2.414>)))
+		return 4
+	elseif ((<local.dX> < 0) && (<local.dY> < 0) && (<local.dir> >= <FLOATVAL 0.414>) && (<local.dir> <= <FLOATVAL 2.414>))
+		return 5
+	elseif ((<local.dX> < 0) && (<local.dir> > <FLOATVAL -0.414>) && (<local.dir> < <FLOATVAL 0.414>))
+		return 6
+	elseif ((<local.dX> < 0) && (<local.dY> > 0) && (<local.dir> >= <FLOATVAL -2.414>) && (<local.dir> <= <FLOATVAL -0.414>))
+		return 7
+	endif
+endif
+
+[FUNCTION f_uowj_Navi_DrawDirection]
+//Draw the direction mark.
+//ARGN1: The direction code that return from "f_uowj_Navi_CheckDirection".
+doswitch <ARGN1>
+	gumppic 106 47 4501
+	gumppic 117 76 4502
+	gumppic 103 106 4503
+	gumppic 76 118 4504
+	gumppic 46 106 4505
+	gumppic 34 76 4506
+	gumppic 45 45 4507
+	gumppic 76 34 4500
+enddo
+
+[FUNCTION f_uowj_Navi_CheckDistance]
+//Base on the location of the player to check the distance of the destination that selected by player.
+//ARGN1: x coordinate of destination.
+//ARGN2: y coordinate of destination.
+//RETURN: The value of the distance.
+local.dis = <EVAl SQRT(<EVAL ((<ARGN1> - <src.p.x>)@2) + ((<ARGN2> - <src.p.y>)@2)>)>
+return <local.dis>
+
+[FUNCTION f_uowj_Navi_DrawDistance]
+//Draw the distance mark.
+//ARGN1: The distance value that return from "f_uowj_Navi_CheckDistance".
+if ((<ARGN1> >= 0) && (<ARGN1> <= 2))
+	tilepic 61 190 12694
+	tilepic 76 190 12694
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 2) && (<ARGN1> <= 5))
+	tilepic 61 190 12697
+	tilepic 76 190 12694
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 5) && (<ARGN1> <= 11))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 11) && (<ARGN1> <= 23))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 23) && (<ARGN1> <= 47))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 47) && (<ARGN1> <= 95))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 95) && (<ARGN1> <= 191))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12697
+	tilepic 151 190 12694
+elseif (<ARGN1> > 191)
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12697
+	tilepic 151 190 12697
+endif
+
+
+
+[EOF]

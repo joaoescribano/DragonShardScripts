@@ -1,0 +1,276 @@
+// Evento 1x1 - V2.0
+
+// Dragon Shard - The Second Age
+// http://www.dgshard.com.br
+
+// By Staff Destiny
+
+// Fix da versão
+
+// 2.0
+// Adaptado para o novo sistema de eventos
+
+// 1.4
+// Atualizei para a nova versão do shard.
+
+// 1.3
+// Configurei para o novo sistema de eventos do shard.
+
+// 1.2
+// Adcionei a pedra i_pedra_1x1_batalha
+// 2x Click mostra o nome do char!
+// Deixei o evento como se fosse um torneio, so o ultimo vivo ganha o trofeu.
+
+// 1.1
+// Impedi o comando .reset_1x1 de usar numeros impares.
+
+[DEFNAME 1x1_config]
+1x1_where_entrada   5126,336,15
+1x1_where_player_1  5133,343,15
+1x1_where_player_2  5143,353,15
+
+// Pedra de entrda dos Players
+
+[ITEMDEF i_pedra_1x1]
+ID=0ed4
+NAME=Pedra
+TYPE=t_normal
+
+On=@CREATE
+attr=attr_static
+COLOR=07b1
+NAME Camp 1x1
+tag0.on 0
+tag0.dentro 0
+
+ON=@CLICK
+if !(0<tag0.on>)
+    message @7a1 Aguarde o fechamento da entrada do evento!
+    return 1
+endif
+MESSAGE @077a Camp 1x1
+MESSAGE @07a1 Dentro [<eval <tag0.dentro>>]
+return 0
+
+On=@DCLICK
+IF (<src.isgm>)
+    src.go <def.1x1_where_entrada>
+ return 1
+endif
+
+if !(0<tag0.on>)
+    src.sysmessage @07a1 Evento Camp 1x1 Fechado
+    return 1
+endif
+
+TAG0.DENTRO ++
+
+src.tag0.1x1_uid <uid>
+src.tag0.liberado 0
+src.events=+e_1x1
+src.kit_1x1
+
+src.go <def.1x1_where_entrada>
+src.sysmessage @044 Bem vindo ao Camp 1x1, aguarde o GM.
+return 1
+
+// pedra de entrada para batalha
+
+[ITEMDEF i_pedra_1x1_batalha]
+ID=0ed4
+NAME=Pedra
+TYPE=t_normal
+
+On=@CREATE
+NAME Entrada para Batalha
+TAG0.DENTRO 0
+COLOR=07b1
+
+On=@DCLICK
+src.tag0.1x1_b_uid <uid>
+if !(0<tag0.player_1>)
+    tag0.player_1 <src.uid>
+ 
+    src.tag0.player 1
+    src.go <def.1x1_where_player_1>
+elif !(0<tag0.player_2>)
+    tag0.player_2 <src.uid>
+ 
+    src.tag0.player 2
+    src.go <def.1x1_where_player_2>
+endif
+
+src.tag0.liberado 1
+src.newitem i_kit_magia_1x1
+new.cont <src.uid>
+new.bounce
+return 1
+
+serv.b @07a1 <uid.<tag0.player_1>.tag0.nome> -- VS -- <uid.<tag0.player_2>.tag0.nome>
+serv.b @077a PVP Liberado na arena!
+return 1
+
+// Eventos
+
+[EVENTS e_1x1]
+ON=@UserWarmode
+IF !(0<tag0.liberado>)
+    SYSMESSAGE @077a Aguarde sua batalha!
+    return 1
+ENDIF
+
+On=@DEATH
+var.uid <tag0.1x1_b_uid>
+tag0.perdedor 1 
+tag0.liberado 0
+events=-e_1x1
+
+if (<tag0.player>==1)
+    var.vencedor <UID.<var.uid>.TAG0.player_2>
+else
+    var.vencedor <UID.<var.uid>.TAG0.player_1>
+endif
+
+TRY UID.<var.vencedor>.tag0.liberado 0
+TRY UID.<var.vencedor>.hits <UID.<var.vencedor>.maxhits>
+TRY UID.<var.vencedor>.limpa_magia_1x1
+TRY UID.<var.vencedor>.go <def.1x1_where_entrada>
+
+serv.b @077a Camp 1x1
+serv.b @07a1 <name> morreu para <uid.<var.vencedor>.name>
+
+TRY UID.<var.uid>.tag0.player_1 0
+TRY UID.<var.uid>.tag0.player_2 0
+HITS <maxhits>
+
+go <def.eventos_where_saida>
+tag0.player 0
+return 1
+
+[FUNCTION limpa_magia_1x1]
+findid.i_bag.remove
+findid.i_bandage.remove
+findid.i_scroll_flamestrike.remove
+findid.i_potion_refreshtotal.remove
+findid.i_potion_healtotal.remove
+findid.i_potion_manatotal.remove
+findid.i_spellbook_full.remove
+
+[FUNCTION kit_1x1]
+var.cor 0
+while !(0<var.cor>)
+    local.cor = <trofeu_cor>
+    if !(0<UID.<tag0.1x1_uid>.tag0.cor_<local.cor>>)
+        TRY UID.<tag0.1x1_uid>.tag0.cor_<local.cor> 1
+        var.cor <local.cor>
+     else
+        var.cor 0
+    endif
+endwhile
+
+SERV.NEWITEM=i_silver_plate_helm
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+VAR.COR=<NEW.COLOR>
+
+SERV.NEWITEM=i_silver_heater_shield
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Escudo Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_silver_platemail_gorget
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_silver_platemail
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_silver_platemail_arms
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_silver_platemail_gauntlets
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_silver_platemail_leggings
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_champion_robe
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Robe Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_sword_viking_vanq
+NEW.NAME=Viking Sword de Evento
+NEW.COLOR=<VAR.COR>
+NEW.EQUIP
+
+SERV.NEWITEM=i_sash_str
+NEW.NAME=Sash of Str de Evento
+NEW.COLOR=<VAR.COR>
+NEW.EQUIP
+
+SERV.NEWITEM=i_pet_llama
+NEW.NAME=Llama de Evento
+NEW.COLOR=<VAR.COR>
+NEW.BOUNCE
+
+[TEMPLATE i_kit_magia_1x1]
+CONTAINER=i_bag
+NAME=Kit Camp 1x1
+ITEM=i_bandage
+AMOUNT=10
+COLOR=0
+ITEM=i_scroll_flamestrike
+AMOUNT=10
+ITEM=i_potion_refreshtotal
+AMOUNT=5
+ITEM=i_potion_healtotal
+AMOUNT=5
+ITEM=i_potion_manatotal
+AMOUNT=5
+ITEM=i_spellbook_full
+NAME=Spell Book de Evento
+COLOR=0810
+ATTR=0
+
+[function evento_3_1_premio]
+dinheiro 40000
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Camp 1x1
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[function evento_3_2_premio]
+dinheiro 20000
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Segundo lugar no Camp 1x1
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[EOF]

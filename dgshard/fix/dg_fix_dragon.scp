@@ -1,0 +1,554 @@
+﻿// Dragon Shard - The Second Age
+// http://dgshard.com.br
+// By Owner Destiny
+// staff_desyiny@dgshard.com.br
+// Versão: 2.0
+
+[FUNCTION f_do_login_proccess]
+//IF ((<ACCOUNT.PLEVEL> <= 1) && (<VAR0.MANUTENCAO> == 1))
+//  SRC.SYSMESSAGE @66 Server em manutencao SRC.SYSMESSAGE @66 Server em manutencao
+//  RETURN 1
+//ENDIF
+
+//Eventos
+EVENTS=+e_logs          // Char Logs
+EVENTS=+e_fix_dgshard         // Fix do shard (nao usado pelo visto)
+EVENTS=+e_magia_color     // Castar magia colorida
+EVENTS=+e_poison            // Sistema de poison
+EVENTS=+e_StaffTitle          // Nome dos Staffers
+EVENTS=+e_animal_attack       // Fix do ataque dos animais
+EVENTS=+e_coleta                // Sistema de coleta do shard
+EVENTS=+e_fix_items             // Sistema para converter os itens antigos para os novos.
+EVENTS=-e_lumberjacking       // Sistema de lumber
+
+if (<tag0.lumberjacking_ids> > 0)
+  f_lumberjacking_cancelar <tag0.lumberjacking_ids>
+endif
+
+if (<luck> < 20)
+    luck {<def.sorte_ini_min> <def.sorte_ini_max>}
+    tag0.temSorte 1
+endif
+
+//Dialog Entrada
+IF (<src.tag0.firstlogin> < 1)
+    src.tag.firstlogin=1
+    src.str 100
+    src.dex 100
+    src.int 100
+    src.hits 100
+    src.mana 100
+    src.stam 100
+    src.maxhits 100
+    src.maxmana 100
+    src.maxstam 100
+    src.modstr 0
+    src.modint 0
+    src.moddex 0
+    serv.newitem i_spellbook_full,1,<src.uid>
+    DIALOG d_entrada
+endif
+
+f_ajusta_skills         // Arruma as skills do player
+f_corpo                 // Arruma o body dos players
+f_fix_antics            // Inciia o anti-cs
+f_fix_status            // Corrige o erro dos status bugados
+check_contrasenha            // Inciia o anti-cs
+hasRightPlevel      // Sistema de segurança anti-plevel
+db_login              // MySQL do shard
+
+if (<var0.clients> > 0)
+  IF (<SERV.CLIENTS> > <VAR0.CLIENTS>)
+    VAR.CLIENTS = <SERV.CLIENTS>
+    SERV.ALLCLIENTS SYSMESSAGE @07a1 Novo recorde de player online no Dragon Shard!!!
+    SERV.ALLCLIENTS SYSMESSAGE @07a1 Agora: <EVAL(<VAR.CLIENTS>)> Clientes Online.
+  ENDIF
+ENDIF
+
+IF (<FLAGS>&statf_war)
+  FLAGS = <SRC.FLAGS>&~statf_war
+ENDIF
+
+IF (<MAXFOLLOWER> <= 5)
+  MAXFOLLOWER = 5
+endif
+
+[EVENTS e_fix_dgshard]
+ON=@Hunger
+IF (<ARGN1> < 1)
+  DAMAGE 5
+ELSEIF (<ARGN1> < 3)
+  DAMAGE 3
+ELSEIF (<ARGN1> < 5)
+  DAMAGE 1
+ENDIF
+
+ON=@HitTry
+IF (<REGION.FLAGS> & region_flag_no_pvp)
+  IF (<SRC.ISPLAYER>)
+    FORCHARMEMORYTYPE 04
+      IF (<SRC.UID> == <LINK>
+        COLOR = 0
+        TIMER = 0
+      ENDIF
+    ENDFOR
+    
+    ACTION = -1
+    RETURN 1
+  ENDIF
+ENDIF
+
+IF (<REGION.FLAGS> & region_flag_safe)
+  WARMODE 0
+  ACTION=-1
+ENDIF
+
+IF (<SRC.UID> == <UID>)
+  IF (<FLAGS> & 000000020)
+    FLAGS=<FLAGS>&~statf_war
+  ENDIF
+  
+  SYSMESSAGE Sistema de protecao
+  ACTION=-1
+ENDIF
+
+ON=@UserWarMode
+IF (<REGION.FLAGS> & region_flag_safe)
+  IF !(<FLAGS> & 000000020)
+    RETURN 1
+  ENDIF
+ENDIF
+
+ON=@SpellCast
+if (<src.isplayer>  && <src.isgm> != 1)
+  if ((<ARGN> == 33) || (<ARGN> == 40) || (<ARGN> == 58) || (<ARGN> == 60) || (<ARGN> == 61) || (<ARGN> == 62) || (<ARGN> == 63) || (<ARGN> == 64))
+    if (<SRC.REGION.FLAGS> & region_flag_guarded)
+      SRC.SYSMESSAGE Voce nao pode soltar summon em area com guardas.
+      SRC.ACTION=-1
+      RETURN 1
+    endif
+  endif
+endif
+
+//Nao soltar magia paralizado ou stoned
+if (<src.flags>&statf_stone)
+	src.sysmessage @07a1 Voce nao pode usar magias stoned!
+	src.action -1
+	return 1
+endif
+
+
+ON=@ITEMCLICK
+IF (<ACT.ATTR> & attr_newbie)
+  ACT.MESSAGE @0 (newbie)
+ENDIF
+
+//ON=@ITEMDCLICK
+//IF (<ACT.TOPOBJ.UID> == <SRC.UID>)
+//  LOCAL.CONTAINER = <ACT.CONT>
+//  LOCAL.LOCAL.OLD_CONTAINER = <ACT.CONT>
+//  
+//  WHILE (<LOCAL.CONTAINER> != <SRC.UID>)
+//    LOCAL.OLD_CONTAINER = <LOCAL.CONTAINER>
+//    LOCAL.CONTAINER = <UID.<LOCAL.CONTAINER>.CONT>
+//  ENDWHILE
+//  
+//  IF ((<LOCAL.OLD_CONTAINER> == <FINDLAYER(29).UID>) && (<ACT.TYPE> != t_container))
+//    SRC.SYSMESSAGE Voce nao pode usar isso do banco.
+//    RETURN 1
+//  ENDIF
+//ENDIF
+
+//IF ((<SRC.ACTION> == SKILL_MINING) || (<SRC.ACTION> == SKILL_LUMBERJACK) || (<SRC.ACTION> == SKILL_FISHING))
+//  SRC.SYSMESSAGE Voce deve esperar para executar outra acao.
+//  RETURN 1
+//ENDIF
+
+///////////////remover pet de dragons
+[FUNCTION f_remover_bits]
+FORINSTANCES i_worldgem_bit
+  if (<type> == t_rock)
+    remove
+  endif
+ENDFOR
+
+[FUNCTION ADDENTICEMENTTIMER]
+IF !(<ISPLAYER>)
+ IF (<FINDID.i_ENTICEMENT_timer>)
+  SRC.SYSMESSAGE <NAME> ja esta seduzido.
+ ELSE
+  NEWITEM i_ENTICEMENT_timer
+  NEW.MORE1 = <STR>
+  NEW.MORE2 = <DEX>
+  NEW.MOREX = <INT>
+  NEW.TIMER = 60
+  NEW.CONT <UID>
+  STR = <STR> - ((((<SRC.enticement>*20) / 1000) * <STR>) / 100)
+  DEX = <DEX> - ((((<SRC.enticement>*20) / 1000) * <DEX>) / 100)
+  INT = <INT> - ((((<SRC.enticement>*20) / 1000) * <INT>) / 100)
+  SRC.SYSMESSAGE <NAME> foi seduzido.
+ ENDIF
+ENDIF
+RETURN 0
+
+[FUNCTION f_ajusta_skills]
+ IF (<Alchemy> < 290)
+  Alchemy = 290
+ ENDIF
+ IF (<Anatomy> < 290)
+  Anatomy = 290
+ ENDIF
+ IF (<AnimalLore> < 290)
+  AnimalLore = 290
+ ENDIF
+ IF (<Taming> < 290)
+  Taming = 290
+ ENDIF
+ IF (<Archery> < 290)
+  Archery = 290
+ ENDIF
+ IF (<Armslore> < 290)
+  Armslore = 290
+ ENDIF
+ IF (<Begging> < 290)
+  Begging = 290
+ ENDIF
+ IF (<Blacksmithing> < 290)
+  Blacksmithing = 290
+ ENDIF
+ IF (<Bowcraft> < 290)
+  Bowcraft = 290
+ ENDIF
+ IF (<Camping> < 290)
+  Camping = 290
+ ENDIF
+IF (<Carpentry> < 290)
+  Carpentry = 290
+ ENDIF
+ IF (<Cartography> < 290)
+  Cartography = 290
+ ENDIF
+ IF (<Cooking> < 290)
+  Cooking = 290
+ ENDIF
+ IF (<DetectingHidden> < 290)
+  DetectingHidden = 290
+ ENDIF
+ IF (<Enticement> < 290)
+  Enticement = 290
+ ENDIF
+ IF (<EvaluatingIntel> < 290)
+  EvaluatingIntel = 290
+ ENDIF
+ IF (<Fencing> < 290)
+  Fencing = 290
+ ENDIF
+ IF (<Fishing> < 290)
+  Fishing = 290
+ ENDIF
+ IF (<Forensics> < 290)
+  Forensics = 290
+ ENDIF
+ IF (<Healing> < 290)
+  Healing = 290
+ ENDIF
+ IF (<Herding> < 290)
+  Herding = 290
+ ENDIF
+ IF (<Hiding> < 290)
+  Hiding = 290
+ ENDIF
+ IF (<Inscription> < 290)
+  Inscription = 290
+ ENDIF
+ IF (<ItemID> < 290)
+   ItemID= 290
+ ENDIF
+ IF (<LockPicking> < 290)
+  LockPicking = 290
+ ENDIF
+ IF (<Lumberjacking> < 290)
+  Lumberjacking = 290
+ ENDIF
+ IF (<Macefighting> < 290)
+  Macefighting = 290
+ ENDIF
+ IF (<Magery> < 290)
+  Magery = 290
+ ENDIF
+ IF (<MagicResistance> < 290)
+  MagicResistance = 290
+ ENDIF
+ IF (<Meditation> < 290)
+  Meditation = 290
+ ENDIF
+ IF (<Mining> < 290)
+  Mining = 290
+ ENDIF
+ IF (<Musicianship> < 290)
+  Musicianship = 290
+ ENDIF
+ IF (<Parrying> < 290)
+  Parrying = 290
+ ENDIF
+ IF (<Peacemaking> < 290)
+  Peacemaking = 290
+ ENDIF
+ IF (<Poisoning> < 290)
+  Poisoning = 290
+ ENDIF
+ IF (<Provocation> < 290)
+  Provocation = 290
+ ENDIF
+ IF (<RemoveTrap> < 290)
+  RemoveTrap = 290
+ ENDIF
+ IF (<Snooping> < 290)
+  Snooping = 290
+ ENDIF
+ IF (<SpiritSpeak> < 290)
+  SpiritSpeak = 290
+ ENDIF
+ IF (<Stealing> < 290)
+  Stealing = 290
+ ENDIF
+ IF (<Stealth> < 290)
+  Stealth = 290
+ ENDIF
+ IF (<Swordsmanship> < 290)
+  Swordsmanship = 290
+ ENDIF
+ IF (<Tactics> < 290)
+  Tactics = 290
+ ENDIF
+ IF (<Tailoring> < 290)
+  Tailoring = 290
+ ENDIF
+ IF (<TasteID> < 290)
+  TasteID = 290
+ ENDIF
+ IF (<Tinkering> < 290)
+  Tinkering = 290
+ ENDIF
+ IF (<Tracking> < 290)
+  Tracking = 290
+ ENDIF
+ IF (<Veterinary> < 290)
+  Veterinary = 290
+ ENDIF
+ IF (<Wrestling> < 290)
+  Wrestling = 290
+ ENDIF
+ IF (<Necromancy> < 290)
+  Necromancy = 290
+ ENDIF
+
+[EVENTS e_fix_magia_casa]
+ON=@SpellEffect
+IF (<ARGN> == 49)&&(<REGION.FLAGS>&0E) // CHAIN LIGHT
+  SYSMESSAGE <SRC.name> tenta te atacar mais sua edificacao lhe protege...
+  RETURN 1
+ELSEIF (<ARGN> == 54)&&(<REGION.FLAGS>&0E) // Meteoro Swar
+  SYSMESSAGE <SRC.name> tenta te atacar mais sua edificacao lhe protege...
+  RETURN 1
+ELSEIF (<ARGN> == 55)&&(<REGION.FLAGS>&0E) // Meteoro Swar
+  SYSMESSAGE <SRC.name> tenta te atacar mais sua edificacao lhe protege...
+  RETURN 1
+ELSEIF (<ARGN> == 57)&&(<REGION.FLAGS>&0E) // EARTQUAKE
+  SYSMESSAGE <SRC.name> tenta te atacar mais sua edificacao lhe protege...
+  RETURN 1
+ENDIF
+
+[FUNCTION f_packet_0xad]
+//ref1 = <local.char>
+//if (<ref1.isgm> == 1) || (<ref1.tag0.noflood> == 1)
+//  return 0
+//endif
+
+//if (<ref1.restest i_protecao_anti_flood>)
+// ref1.sysmessage @07a1 DG Shard anti-flood:
+// ref1.sysmessage @077a Aguarde um pouco para enviar a mensagem.
+// ref1.findid.i_protecao_anti_flood.timer 1
+// return 1
+//endif
+
+//serv.newitem i_protecao_anti_flood
+//new.timer = 1
+//new.cont  = <ref1.uid>
+//return 0
+
+//[ITEMDEF i_protecao_anti_flood]
+//NAME=Anti-Flood Protection
+//ID=i_memory 
+//TYPE=t_eq_script 
+//LAYER=layer_special 
+
+//ON=@Create 
+//more1=0 
+//attr=attr_decay|attr_invis|attr_newbie
+
+//ON=@Timer 
+//remove
+
+// Emote self
+// UTEXT -1,0,0,0,020,texo bacana
+// Emote area
+// UTEXT 0,0,0,0,020,texo bacana
+// Sysmessage
+// UTEXT -1,6,0,0,0388,texo bacana
+
+[DEFNAME emote_colors]
+emote_red 022
+emote_gay 388
+
+[FUNCTION emoteNew]
+IF (<ARGV> < 2)
+  local.color = <def.emote_red>
+else
+  local.color = <argv[1]>
+endif
+
+var.text=<argv[0]>
+utext -1,2,0,<name>,<local.color>,"*<var.text>*"
+utext 0,2,0,<name>,<local.color>,"*<var.text>*",<uid>
+return 1
+
+[FUNCTION UTEXT]
+//SYNTAX: .utex forclients, talkmode, serial, name, color, text
+
+IF (<ARGV> < 6)
+    RETURN 0
+ENDIF
+LOCAL.TALKMODE=0<ARGV[1]>
+LOCAL.SERIAL=0<ARGV[2]>
+IF !(<LOCAL.SERIAL>)
+    LOCAL.SERIAL=<UID>
+ENDIF
+if (0<argv[3]> == -1)
+  LOCAL.NAME=You see
+else
+  IF (<ISNUM <LOCAL.NAME>>)
+      IF !(<LOCAL.NAME>)
+          LOCAL.NAME=<NAME>
+      ENDIF
+  ENDIF
+endif
+LOCAL.NAME=<ASCPAD 30, <LOCAL.NAME>>
+
+LOCAL.COLOR=0<ARGV[4]>
+LOCAL.GRAPHIC=W<getid>
+LOCAL.FONT=00 03
+LOCAL.LANGUAGE=00 00 00 00 //no localization
+LOCAL.RANGE=0<ARGV[0]>
+
+if (<ARGV[1]> == 6)
+  LOCAL.RANGE = -1
+  local.ff = <HVAL 255>
+  LOCAL.TEXT = <ASC <ARGV[5]>>
+  LOCAL.LEN=<hval (STRLEN(<ARGV[5]>)+45)>
+  LOCAL.PACKET=01C W<LOCAL.LEN> <local.ff> <local.ff> <local.ff> <local.ff> <local.ff> <local.ff> 06 W<LOCAL.COLOR> <LOCAL.FONT> <LOCAL.NAME> <LOCAL.TEXT> 00
+elif (<ARGV[1]> == 2)
+  LOCAL.TEXT = <ASC <ARGV[5]>>
+  LOCAL.LEN=<hval (STRLEN(<ARGV[5]>)+45)>
+  LOCAL.PACKET=01C W<LOCAL.LEN> D<UID> <LOCAL.GRAPHIC> 02 W<LOCAL.COLOR> <LOCAL.FONT> <LOCAL.NAME> <LOCAL.TEXT> 00
+else
+  LOCAL._TEXT=<ASC <ARGV[5]>>
+  LOCAL._TEXTLEN=<HVAL STRLEN(<LOCAL._TEXT>)>
+  LOCAL.TEXT=00 <STRARG <LOCAL._TEXT>>
+  LOCAL._TEXT=<STREAT <LOCAL._TEXT>>
+  FOR 2 <LOCAL._TEXTLEN>
+      LOCAL.TEXT=<LOCAL.TEXT> 00 <STRARG <LOCAL._TEXT>>
+      LOCAL._TEXT=<STREAT <LOCAL._TEXT>>
+  ENDFOR
+  LOCAL.TEXT=<LOCAL.TEXT> 00 00
+  LOCAL._TEXTLEN += 1
+  LOCAL.LEN=( (<LOCAL._TEXTLEN>*2)+48)
+  LOCAL.PACKET=0AE W<LOCAL.LEN> D<LOCAL.SERIAL> <LOCAL.GRAPHIC> <LOCAL.TALKMODE> w<LOCAL.COLOR> <LOCAL.FONT> <LOCAL.LANGUAGE> <LOCAL.NAME> <LOCAL.TEXT>
+endif
+
+IF (<LOCAL.RANGE> == -1)
+  if (<ischar> || <isnpc>)
+    SENDPACKET <LOCAL.PACKET>
+  endif
+ELSE
+    IF (<LOCAL.RANGE> > 100)
+        LOCAL.RANGE=100
+    ELSEIF !(<LOCAL.RANGE>)
+        LOCAL.RANGE=16
+    ENDIF
+
+    FORCLIENTS <LOCAL.RANGE>
+        if (<ARGV[1]> == 2)
+          if (<uid> != <ARGV[6]>)
+            SENDPACKET <LOCAL.PACKET>
+          endif
+        else
+          SENDPACKET <LOCAL.PACKET>
+        endif
+    ENDFOR
+ENDIF
+RETURN 1
+
+[FUNCTION SYSMESSAGEEXT]
+//like SYSMESSAGE, but you can specify the "sender" name
+//i'm using it for the EC, so there is not a parameter for the color because it won't work, but you can easily add it if you need
+//SYNTAX: SYSMESSAGEEXT senderName, text
+IF (<ARGV> < 2)
+    sysmessage @077a Erro
+    RETURN 0
+ENDIF
+LOCAL.NAME=<ARGV[0]>
+IF (<ISNUM <LOCAL.NAME>>)
+    IF !(<LOCAL.NAME>)
+        LOCAL.NAME=System
+    ENDIF
+ENDIF
+RETURN <UTEXT -1,1,0,<LOCAL.NAME>,0,<ARGV[1]>>
+
+[FUNCTION removeArea]
+foritems
+  remove
+endfor
+forchars 16
+  remove
+endif
+
+[events e_nodroptrade]
+ON=@ItemDropOn_Trade
+if (<act.attr>&attr_nodroptrade)
+  sysmessage=You can't trade this item.
+  return 1
+endif
+if (<act.type>==t_container) && (<act.FindNODROPTRADE>==1)
+  sysmessage=You can't trade NODROPTRADE items.
+  return 1
+endif
+ON=@ItemDropOn_Item
+IF ((<argo.type>==t_container) && (<argo.IsInTrade>==1)
+  sysmessage=You can't trade this item.
+  return 1
+endif
+
+[function isintrade]
+ref1=<cont>
+while <ref1.cont.isitem>
+  say cont.name=<ref1.cont.name>
+  if (<ref1.isitem>)
+    if (<ref1.type>==t_eq_trade_window)
+      return 1
+    endif
+  endif
+  ref1=<qval <ref1.cont.isitem>?<ref1.cont>:<src>>
+  local._for --
+endfor
+return 0
+
+[function findnodroptrade]
+forcont <uid>
+  if (<attr>&attr_nodroptrade)
+    return 1
+  endif
+endfor
+return 0
+
+[EOF]

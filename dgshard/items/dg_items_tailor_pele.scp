@@ -1,0 +1,310 @@
+/////////////////HIDES////////////////////////
+
+[ITEMDEF i_hide_dragon]
+ID=i_hide
+NAME=Couro de Dragao
+WEIGHT=1
+VALUE=1.0
+TDATA1=i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+
+[ITEMDEF i_wyrm_hide]
+ID=i_hide
+NAME=Couro de Wyrm
+WEIGHT=1.0
+VALUE=10
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+
+////////////////////////ARMADURAS DE COURO DE DRAGAO///////////////
+
+[ITEMDEF i_tunica_dragao]
+ID=i_leather_tunic
+NAME=Tunica de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=30 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=3
+
+ON=@UNEQUIP
+SRC.MODDEX -=3
+
+[ITEMDEF i_luva_dragao]
+ID=i_leather_gloves
+NAME=Luva de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=2
+
+ON=@UNEQUIP
+SRC.MODDEX -=2
+
+[ITEMDEF i_ombreira_dragao]
+ID=i_leather_sleeves
+NAME=Ombreira de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=20 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=3
+
+ON=@UNEQUIP
+SRC.MODDEX -=3
+
+[ITEMDEF i_gorgel_dragao]
+ID=i_leather_gorget
+NAME=Gorgel de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=2
+
+ON=@UNEQUIP
+SRC.MODDEX -=2
+
+[ITEMDEF i_touca_dragao]
+ID=i_leather_cap
+NAME=Touca de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=3
+
+ON=@UNEQUIP
+SRC.MODDEX -=3
+
+[ITEMDEF i_calca_dragao]
+ID=i_leather_leggings
+NAME=Calca de Couro de Dragao
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=20 i_hide_dragon
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Dragao
+DESCRIPTION=Couro de Dragao
+
+ON=@CREATE
+COLOR=007f7
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=3
+
+ON=@UNEQUIP
+SRC.MODDEX -=3
+
+///////////////Armadura de Couro de Wyrm///////////////////////
+
+[ITEMDEF i_tunica_wyrm]
+ID=i_leather_tunic
+NAME=Tunica de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=30 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=4
+
+ON=@UNEQUIP
+SRC.MODDEX -=4
+
+[ITEMDEF i_luva_wyrm]
+ID=i_leather_gloves
+NAME=Luva de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=2
+
+ON=@UNEQUIP
+SRC.MODDEX -=2
+
+[ITEMDEF i_ombreira_wyrm]
+ID=i_leather_sleeves
+NAME=Ombreira de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=20 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=4
+
+ON=@UNEQUIP
+SRC.MODDEX -=4
+
+[ITEMDEF i_gorgel_wyrm]
+ID=i_leather_gorget
+NAME=Gorgel de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=2
+
+ON=@UNEQUIP
+SRC.MODDEX -=2
+
+[ITEMDEF i_touca_wyrm]
+ID=i_leather_cap
+NAME=Touca de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=10 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=4
+
+ON=@UNEQUIP
+SRC.MODDEX -=4
+
+[ITEMDEF i_calca_wyrm]
+ID=i_leather_leggings
+NAME=Calca de Couro de Wyrm
+WEIGHT=2.0
+VALUE=350.
+ARMOR=60
+SKILLMAKE=100.0 TAILORING, 100.0 ItemID, t_sewing_kit
+RESOURCES=20 i_wyrm_hide
+
+CATEGORY=Novos Itens diversos
+SUBSECTION=Couro de Wyrm
+DESCRIPTION=Couro de Wyrm
+
+ON=@CREATE
+COLOR=0a82
+HITPOINTS={200 300}
+
+ON=@EQUIP
+SRC.MODDEX +=4
+
+ON=@UNEQUIP
+SRC.MODDEX -=4
+
+[EOF]

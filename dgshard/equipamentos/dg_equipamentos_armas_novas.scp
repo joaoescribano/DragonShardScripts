@@ -1,0 +1,275 @@
+///////////////////////Espada Viking do inferno/////////////
+
+[ITEMDEF i_sword_viking_inferno]
+DEFNAME=i_sword_viking_inferno
+ID=i_sword_viking
+NAME=Espada Viking do Inferno
+SKILLMAKE=BLACKSMITHING 95.0
+RESOURCES=20 i_ingot_iron
+REQSTR=110
+WEIGHT=4.0
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Viking Sword INferno
+DAM=40,70
+
+ON=@Create
+HITPOINTS=999
+COLOR=025
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.fxt 036b0, 025, 2
+RETURN 0
+
+
+////////////////////Lança do Vento////////////////////////
+
+[ITEMDEF i_PITCHFORK_Vento]
+DEFNAME=i_PITCHFORK_vento
+ID=i_PITCHFORK
+NAME=Lanca do Vento
+SKILLMAKE=BLACKSMITHING 95.0
+RESOURCES=20 i_ingot_azurite
+REQSTR=110
+WEIGHT=4.0
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Pitchfork Vento
+DAM=39,57
+
+ON=@Create
+HITPOINTS=999
+COLOR=06060
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_spirits
+RETURN 0
+
+
+//////////////////Maca do Gelo///////////////////////
+
+[ITEMDEF i_mace_war_gelo]
+DEFNAME=i_mace_war_gelo
+ID=i_mace_war
+NAME=War Mace de Gelo
+SKILLMAKE=BLACKSMITHING 95.0
+RESOURCES=20 i_ingot_azurite
+REQSTR=110
+WEIGHT=4.0
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=War Mace Gelo
+DAM=50,65
+
+
+ON=@Create
+HITPOINTS=999
+COLOR=0b22
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_ice_winds
+RETURN 0
+
+
+//////////////////Alabarda da escuridao////////////
+
+[ITEMDEF i_HALBERD_escuridao]
+DEFNAME=i_HALBERD_escuridao
+ID=i_halberd
+NAME=Alabarda da escuridao
+SKILLMAKE=BLACKSMITHING 95.0
+RESOURCES=20 i_ingot_azurite
+REQSTR=110
+WEIGHT=4.0
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Halberd Ecuridao
+DAM=40,60
+
+ON=@Create
+HITPOINTS=999
+COLOR=01
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_escuridao
+RETURN 0
+
+///////////////////Cimitarra Energia do Mal//////////////////
+
+[ITEMDEF i_SCIMITAR_energia]
+DEFNAME=i_SCIMITAR_energia
+ID=i_scimitar
+NAME=Cimitarra Energia do Mal
+SKILLMAKE=BLACKSMITHING 95.0
+RESOURCES=20 i_ingot_azurite
+REQSTR=100
+WEIGHT=4.0
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Scimitar Energia
+DAM=46,68
+
+ON=@Create
+HITPOINTS=999
+COLOR=00786
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_energia_mal
+RETURN 0
+
+
+/////////////////////Nakrhiin Blade///////////////////////////
+
+[ITEMDEF i_nakrin_blade]
+DEFNAME=i_nakrin_blade
+ID=i_staff_bladed_double
+NAME=Nakhriin Blade
+TYPE=t_weapon_fence
+DAM=47,69
+SKILL=Fencing
+REQSTR=110
+TWOHANDS=Y
+WEIGHT=4.0
+SPEED=49
+SKILLMAKE=BLACKSMITHING 45.0
+RESOURCES=16 i_ingot_iron
+RANGE=2
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Nakrin Blade
+
+ON=@Create
+HITPOINTS=999
+COLOR=0079c
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_nakrin
+RETURN 0
+
+/////////////////////Lava Blade/////////////////////
+
+[ITEMDEF i_lava_blade]
+DEFNAME=i_lava_blade
+ID=i_crescent_blade
+NAME=Lava Blade
+TYPE=t_weapon_sword
+DAM=45,70
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=BLACKSMITHING 45.0
+WEIGHT=4.0
+SPEED=47
+VALUE=110
+DUPELIST=026cb
+REQSTR=110
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Lava Blade
+
+ON=@Create
+HITPOINTS=999
+COLOR=007ad
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_lava
+RETURN 0
+
+////////////////////Divine Sword/////////////////
+
+[ITEMDEF i_divine_sword]
+DEFNAME=i_divine_sword
+ID=i_sword_paladin
+NAME=Espada Divina
+TYPE=t_weapon_sword
+SKILL=swordsmanship
+DAM=45,69
+REQSTR=110
+SPEED=31
+SKILLMAKE=BLACKSMITHING 46.0
+RESOURCES=16 i_ingot_iron
+WEIGHT=6.0
+VALUE=210
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Divine
+
+ON=@Create
+HITPOINTS=999
+COLOR=00ac4
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_divine
+RETURN 0
+
+
+////////////////////Garfo do Trovão///////////////////////
+
+[ITEMDEF i_WAR_FORK_trovao]
+DEFNAME=i_WAR_FORK_trovao
+ID=I_WAR_FORK
+NAME=Garfo do Trovao
+SKILLMAKE=BLACKSMITHING 110.0
+RESOURCES=20 i_ingot_adamantium 
+DAM=46,69
+REQSTR=110
+WEIGHT=6.0
+VALUE=210
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Trovao
+
+ON=@Create
+HITPOINTS=999
+COLOR=00bad
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.spelleffect s_lightning 45,0
+RETURN 0
+
+/////////////////Machado Elemental//////////////////////
+
+[ITEMDEF i_axe_double_facas]
+DEFNAME=i_axe_double_facas
+ID=i_axe_double
+NAME=Machado Mil Facas
+SKILLMAKE=BLACKSMITHING 110.0
+RESOURCES=20 i_ingot_adamantium 
+DAM=46,68
+REQSTR=110
+
+CATEGORY=Provisions - Weapons
+SUBSECTION=Armas Tesouros
+DESCRIPTION=Facas
+
+ON=@Create
+HITPOINTS=999
+COLOR=00ab0
+ATTR=attr_magic
+
+ON=@DAMAGE
+SRC.SOUND=SND_SPELL_MAGIC_UNTRAP
+src.ef_facas
+RETURN 0
+
+[EOF]

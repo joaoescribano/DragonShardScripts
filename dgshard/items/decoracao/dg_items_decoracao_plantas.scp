@@ -1,0 +1,1142 @@
+/////////Plantas Para decoração Roxas////////////////////
+
+[ITEMDEF i_planta_deco_roxa]
+ID=i_tree_small_potted_2
+NAME=Purple Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Plant of Decoration
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa2]
+ID=i_flower_potted_small
+NAME=Purple Plant Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Plant Small
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa3]
+ID=i_plant_potted_small
+NAME=Purple Plant Potted Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Plant Potted Small
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa4]
+ID=i_tree_small_potted
+NAME=Purple Tree Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Tree Small
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa5]
+ID=i_tree_large_potted
+NAME=Purple Tree Large
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Tree Large
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa6]
+ID=i_plant_snake
+NAME=Purple Plant Snake
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Plant Snake
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa7]
+ID=i_plant_bulrushes
+NAME=Purple Bulrushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Bulrushe
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa8]
+ID=i_plant_elephantear
+NAME=Purple Elephant ear Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Elephant ear Plant
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa9]
+ID=i_flower_redpoppies
+NAME=Purple Poppies
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Poppies
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa10]
+ID=i_flower_white
+NAME=Purple Flowers
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Flowers
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa11]
+ID=i_flower_white_2
+NAME=Purple Flowers Two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Flowers Two
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa12]
+ID=i_plant_pampasgrass
+NAME=Purple Pampas Grass
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Pampas Grass
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa13]
+ID=i_plant_rushes
+NAME=Purple Rushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Rushes
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa14]
+ID=i_plant_weed
+NAME=Purple Weed
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Weed
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa15]
+ID=i_plant_juniper
+NAME=Purple Juniper Bush
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Juniper Bush
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_planta_deco_roxa16]
+ID=i_plant_century_2
+NAME=Purple Century Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Century Plant
+
+ON=@Create
+COLOR=00206
+
+/////////////////////Cactus Roxo//////////////////
+
+[ITEMDEF i_cactu_deco]
+ID=i_plant_cactus_potted
+NAME=Purple Cactus
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco2]
+ID=i_plant_cactus_potted_2
+NAME=Purple Cactus POtted 2
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus 2
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco3]
+ID=i_plant_cactus_potted_3
+NAME=Purple Cactus POtted 3
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus 3
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco4]
+ID=i_plant_cactus_potted_4
+NAME=Purple Cactus POtted 4
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus 4
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco5]
+ID=i_plant_cactus_potted_5
+NAME=Purple Cactus POtted 5
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus 5
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco6]
+ID=i_plant_cactus_potted_6
+NAME=Purple Cactus POtted 6
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus 6
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco7]
+ID=i_plant_cactus
+NAME=Purple Cactus one
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco8]
+ID=i_plant_cactus_2
+NAME=Purple Cactus two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus Two
+
+ON=@Create
+COLOR=00206
+
+[ITEMDEF i_cactu_deco9]
+ID=i_plant_cactus_3
+NAME=Purple Cactus Three
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_purple
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Purple Cactus Three
+
+ON=@Create
+COLOR=00206
+
+
+
+//////////Plantas de Decoração Laranja/////////////////////
+
+[ITEMDEF i_planta_deco_laranja]
+ID=i_tree_small_potted_2
+NAME=Orange Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Plant of Decoration
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja2]
+ID=i_flower_potted_small
+NAME=Orange Plant Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Plant Small
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja3]
+ID=i_plant_potted_small
+NAME=Orange Plant POtted Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Plant Potted Small
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja4]
+ID=i_tree_small_potted
+NAME=Orange Tree Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Tree Small
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja5]
+ID=i_tree_large_potted
+NAME=Orange Tree Large
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Tree Large
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja6]
+ID=i_plant_snake
+NAME=Orange Plant Snake
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Plant Snake
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja7]
+ID=i_plant_bulrushes
+NAME=Orange Bulrushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Bulrushes
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja8]
+ID=i_plant_elephantear
+NAME=Orange Elephant ear Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Elephant ear Plant
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja9]
+ID=i_flower_redpoppies
+NAME=Orange Poppies
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Poppies
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja10]
+ID=i_flower_white
+NAME=Orange Flower
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Flower
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja11]
+ID=i_flower_white_2
+NAME=Orange Flower Two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Flower Two
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja12]
+ID=i_plant_pampasgrass
+NAME=Orange Pampas Grass
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Pampas Grass
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja13]
+ID=i_plant_rushes
+NAME=Orange Rushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Rushes
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja14]
+ID=i_plant_weed
+NAME=Orange Weed
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Weed
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja15]
+ID=i_plant_juniper
+NAME=Orange Juniper Bush
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Juniper Bush
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_planta_deco_laranja16]
+ID=i_plant_century_2
+NAME=Orange Century Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Century Plant
+
+ON=@Create
+COLOR=0bb2
+
+//////////////Cactus Laranja/////////////////
+
+[ITEMDEF i_cactu_deco_laranja]
+ID=i_plant_cactus_potted
+NAME=Orange Cactus
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja2]
+ID=i_plant_cactus_potted_2
+NAME=Orange Cactus POtted 2
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus 2
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja3]
+ID=i_plant_cactus_potted_3
+NAME=Orange Cactus POtted 3
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus 3
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja4]
+ID=i_plant_cactus_potted_4
+NAME=Orange Cactus POtted 4
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus 4
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja5]
+ID=i_plant_cactus_potted_5
+NAME=Orange Cactus POtted 5
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus 5
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja6]
+ID=i_plant_cactus_potted_6
+NAME=Orange Cactus POtted 6
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus 6
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja7]
+ID=i_plant_cactus
+NAME=Orange Cactus 7
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja8]
+ID=i_plant_cactus_2
+NAME=Orange Cactus two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Cactus Two
+
+ON=@Create
+COLOR=0bb2
+
+[ITEMDEF i_cactu_deco_laranja9]
+ID=i_plant_cactus_3
+NAME=Orange Cactus Three
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log, 30 i_reag_nightshade
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=Orange Three
+
+ON=@Create
+COLOR=0bb2
+
+///////////////////////Plantas para decoração Brancas////////////////////
+
+[ITEMDEF i_planta_deco_branca]
+ID=i_tree_small_potted_2
+NAME=White Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Plant of Decoration
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca2]
+ID=i_flower_potted_small
+NAME=White Plant Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Plant Small
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca3]
+ID=i_plant_potted_small
+NAME=White Plant POtted Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Plant Potted Small
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca4]
+ID=i_tree_small_potted
+NAME=White Tree Small
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Tree Small
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca5]
+ID=i_tree_large_potted
+NAME=White Tree Large
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Tree Large
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca6]
+ID=i_plant_snake
+NAME=White Plant Snake
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Plant Snake
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca7]
+ID=i_plant_bulrushes
+NAME=White Bulrushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Bulrushe
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca8]
+ID=i_plant_elephantear
+NAME=White Elephant ear Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Elephant ear Plant
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca9]
+ID=i_flower_redpoppies
+NAME=White Poppies
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Poppies
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca10]
+ID=i_flower_white
+NAME=White Flower
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Flower
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca11]
+ID=i_flower_white_2
+NAME=White White Two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Flower Two
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca12]
+ID=i_plant_pampasgrass
+NAME=White Pampas Grass
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Pampas Grass
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca13]
+ID=i_plant_rushes
+NAME=White Rushes
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Rushes
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca14]
+ID=i_plant_weed
+NAME=White Weed
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Weed
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_planta_deco_branca15]
+ID=i_plant_juniper
+NAME=White Juniper Bush
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Juniper Bush
+
+ON=@Create
+COLOR=00481
+
+
+[ITEMDEF i_planta_deco_branca16]
+ID=i_plant_century_2
+NAME=White Century Plant
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Century Plant
+
+ON=@Create
+COLOR=00481
+
+////////////Cactus Branco///////////////////
+
+[ITEMDEF i_cactu_deco_branco]
+ID=i_plant_cactus_potted
+NAME=White Cactus
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco2]
+ID=i_plant_cactus_potted_2
+NAME=White Cactus POtted 2
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus 2
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco3]
+ID=i_plant_cactus_potted_3
+NAME=White Cactus POtted 3
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus 3
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco4]
+ID=i_plant_cactus_potted_4
+NAME=White Cactus POtted 4
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus 4
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco5]
+ID=i_plant_cactus_potted_5
+NAME=White Cactus POtted 5
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus 5
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco6]
+ID=i_plant_cactus_potted_6
+NAME=White Cactus POtted 6
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus 6
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco7]
+ID=i_plant_cactus
+NAME=White Cactus 7
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco8]
+ID=i_plant_cactus_2
+NAME=White Cactus Two
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus Two
+
+ON=@Create
+COLOR=00481
+
+[ITEMDEF i_cactu_deco_branco9]
+ID=i_plant_cactus_3
+NAME=White Cactus Three
+TYPE=t_normal
+WEIGHT=1
+SKILLMAKE=110.0 Carpentry, 100.0 Herding, t_carpentry
+RESOURCES=20 i_log_white
+
+CATEGORY=Items Decorations
+SUBSECTION=Decorations
+DESCRIPTION=White Cactus Three
+
+ON=@Create
+COLOR=00481
+
+
+[EOF]

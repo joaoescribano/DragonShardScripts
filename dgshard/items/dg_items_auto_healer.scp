@@ -1,0 +1,33 @@
+[FUNCTION autohealoff]
+consume 10 i_auto_heal
+
+[FUNCTION autoheal]
+SERV.NEWITEM i_auto_heal
+EQUIP <new>
+RETURN 1
+
+[ITEMDEF i_auto_heal]
+id=i_memory
+type=t_eq_script
+name=Auto Heal
+
+ON=@Create
+ATTR=attr_invis|attr_newbie
+
+ON=@Equip
+timer 1
+
+ON=@Timer
+if (<cont.hits> < <cont.maxhits>)
+	cont.hits = <cont.maxhits>
+endif
+if (<cont.mana> < <cont.maxmana>)
+	cont.mana = <cont.maxmana>
+endif
+if (<cont.stam> < <cont.maxstam>)
+	cont.stam = <cont.maxstam>
+endif
+timer 1
+return 1
+
+[EOF]

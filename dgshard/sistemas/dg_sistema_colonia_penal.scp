@@ -1,0 +1,514 @@
+// Dragon Shard - The Second Age
+// Sistema de Seguran�a - Colonia Penal e Jail
+// Vers�o 2.0
+// http://www.dgshard.com
+// By Admin Destiny
+
+[DEFNAME cp_configuration]
+pc_where_1 5335,2012,0,1
+pc_where_2 5221,282,45
+pc_id i_ingot_iron_colonia_penal
+pc_id_food i_delicius_pig_roast
+pc_food_amount 3
+pc_mim 0
+pc_max 150000
+pc_jail 9
+pc_jail_time 10
+pc_jail_bail 0
+pc_anti_macro 1
+pc_kit_time 12
+
+pc_txt_01 Sistema Colonia Penal e Jail.
+pc_txt_02 Informacoes
+pc_txt_03 Por na CP
+pc_txt_04 Por na Jail
+pc_txt_05 Com este Sistema voce pode mandar o Player para a Jail e para a Colonia Penal.<br>www.dgshard.com.br<br><br>Script por Owner Destiny
+pc_txt_06 Indique quantos Ingots o player vai ter que pegar para sair da CP.
+pc_txt_07 Colonia Penal - Mandar Player
+pc_txt_08 Escreva a Razao:
+pc_txt_09 Escolha a pena para o Player.<br>
+pc_txt_10 Escolha para qual Jail o player ira, quanto tempo e se houver fianca.<br>Se nao houver fianca ponha 0 no preco da fianca.
+pc_txt_11 Jail - Mandar Player
+pc_txt_12 Escolha o numero da Jail.
+pc_txt_13 Escolha o tempo de Jail (em minutos).
+pc_txt_14 Escolha o pre�o da fianca (1=1.000 gps).
+pc_txt_15 Escolher e mandar o player para a jail Agora!
+pc_txt_16 Colonia Penal
+pc_txt_17 Pegar Kit
+pc_txt_18 Sair da CP
+pc_txt_19 CP
+
+pc_book_name Livro GM
+pc_cant Voce n�o pode usar este Livro.
+pc_targ_wrong  Voce so pode mandar Players.
+pc_targ_pc Selecione o player que voce quer mandar para a Colonia Penal
+pc_targ_jail Selecione o player que voce quer mandar para a jail.
+pc_empty Voce precisa completar o formulario.
+pc_mim_wrong Voce escolheu uma pena menor que a Minima.
+pc_max_wrong Voce escolheu uma pena maior que a Maxima.
+
+pc_txt_jailed_01 voce esta preso por mais
+pc_txt_jailed_02 minuto(s)
+pc_txt_jailed_03 vc pode
+pc_txt_jailed_04 nao pode
+pc_txt_jailed_05 pagar fianca.
+pc_txt_jailed_06 Voce foi preso. Clique duplo na pedra da jail para ver sua pena (sua pena se inicia dps de dar os 2 cliques).
+pc_txt_jailed_07 segundo(s)
+pc_txt_jailed_08 Voce foi solto da jail.
+pc_txt_jailed_09 Pagar a Fianca
+pc_txt_jailed_10 Abrir o banco
+pc_txt_jailed_11 Voce pagou a fianca. Espere 15 segundos para sair.
+pc_txt_jailed_12 Voce nao possue dinheiro suficiente em sua Backpack. Abra o banco e pegue mais dinheiro.
+
+pc_txt_pc_01 Voce foi enviado para a Colonia Penal.
+pc_txt_pc_02 Motivo:
+pc_txt_pc_03 Pena:
+pc_txt_pc_04 Voce foi preso pelo: GM
+pc_txt_pc_05 Voce esta preso porque:
+pc_txt_pc_06 <br>Voce precisa minerar:
+pc_txt_pc_07 Iron Ingots
+pc_txt_pc_08 <br><br>Para sair da Colonia Penal voce precisa minerar.
+pc_txt_pc_09 (macros permitidos)
+pc_txt_pc_10 (macros nao permitidos)
+pc_txt_pc_11 Um Kit contem 1 Pickaxe e comida. Voce pode pegar um Kit a cada
+pc_txt_pc_12 horas
+pc_txt_pc_13 Voce nao possue ingots suficientes em sua backpack.
+pc_txt_pc_14 Voce possue os ingots suficientes para sair daqui. Clique em OK para sair.
+pc_txt_pc_15 Voce ja pegou um Kit. voce deve esperar
+pc_txt_pc_16 horas para pegar outro Kit.
+pc_txt_pc_17 Voce pegou um novo kit.
+pc_txt_pc_18 Escreva este codigo no campo para continuar.<br><br>
+pc_txt_pc_19 Somente numeros.
+pc_txt_pc_20 Codigo recusado.
+pc_txt_pc_21 Codigo aceito.
+
+// The Book / O livro
+
+[ITEMDEF i_pc_book]
+ID=01c13
+NAME=Book
+TYPE=t_normal
+
+On=@CREATE
+NAME=<def.pc_book_name>
+TAG.UID=0
+COLOR=07a1
+
+ON=@DCLICK
+IF (<TAG.UID>==0)
+ TAG.UID=<SRC.UID>
+ NAME=<SRC.NAME>'s <def.pc_book_name>
+ENDIF
+
+IF (<SRC.UID>==<TAG.UID>)
+DIALOG d_pc_jail
+ELSE
+SRC.SYSMESSAGE @07a1 <def.pc_cant>
+ENDIF
+return 1
+
+ON=@TARGON_ITEM
+SRC.SYSMESSAGE @07a1 <def.pc_targ_wrong>
+MOREY=0
+return 1
+
+ON=@TARGON_GROUND
+SRC.SYSMESSAGE @b99 <def.pc_targ_wrong>
+MOREY=0
+return 1
+
+ON=@TARGON_CHAR
+IF (<MOREY>=1)
+ SRC.TARG.FINDLAYER(layer_hand1).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_hand2).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_shoes).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_pants).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_shirt).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_helm).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_gloves).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_ring).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_collar).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_half_apron).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_chest).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_wrist).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_tunic).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_ears).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_arms).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_cape).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_robe).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_skirt).CONT=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_legs).cont=<src.TARG.findlayer.layer_pack.uid>
+ SRC.TARG.FINDLAYER(layer_horse).REMOVE
+ SRC.TARG.FINDLAYER(layer_pack).ATTR=00008
+ SRC.TARG.FINDLAYER(layer_pack).CONT=<src.TARG.findlayer.29.uid>
+ SRC.TARG.FINDLAYER(layer_pack).ATTR=00008
+ SRC.TARG.BANKSELF 
+ SRC.TARG.Go <def.pc_where_1>
+ SRC.TARG.TAG.PC=1 // With that Tag you can block the palyer to use the help menu for exemple, use: if (<src.tag.pc>=1) RETURN 1. / Com esta Tag voce podo bloquear o player de usar o menu Help por exemplo, usando: if (<src.tag.pc>=1) RETURN 1.
+ SRC.TARG.TAG.REASON=<TAG.1>
+ SRC.TARG.TAG.PUNISH=<TAG.2>
+ SRC.TARG.TAG.GM=<SRC.NAME>
+ SRC.TARG.EVENTS=+e_penal_colony
+ SRC.TARG.SYSMESSAGE @07a1 <SRC.TARG.NAME> <def.pc_txt_pc_01>
+ SRC.TARG.SYSMESSAGE @07a1 <def.pc_txt_pc_02> <SRC.TARG.TAG.REASON>
+ SRC.TARG.SYSMESSAGE @07a1 <def.pc_txt_pc_03> <eval <SRC.TARG.TAG.PUNISH>> Iron Ingots.
+ SRC.TARG.SYSMESSAGE @07a1 <def.pc_txt_pc_04> <SRC.TARG.TAG.GM>
+ELSEIF (<MOREY>=2)
+ SRC.TARG.TAG0.JAIL 1
+ SRC.TARG.GO JAIL<EVAL <TAG.1>>
+ SRC.TARG.ACCOUNT.PRIV 00800
+ SRC.TARG.SYSMESSAGE @07a1 <def.pc_txt_jailed_06>.
+ SRC.TARG.TAG.2=<TAG.2>
+ SRC.TARG.TAG.3=<TAG.3>
+IF (<SRC.ACCOUNT.PLEVEL> < 7)
+ serv.log @GM <SRC.NAME>(<SRC.UID>) Enviado <SRC.TARG.NAME>(<SRC.TARG.UID>) para jail <eval <TAG.1>> por <eval <TAG.2>> minutos com pena de <eval <TAG.3>> k's de ingots.
+ENDIF
+ENDIF
+MOREY=0
+RETURN 1
+
+// Event / Evento
+
+[EVENTS e_penal_colony]
+ON=@CLICK
+IF !(0<TAG.PC>)
+ELSE
+IF (<TAG.PC>)
+MESSAGE @07a1 <NAME> [PC]
+RETURN 1
+ENDIF
+
+// Dialogs
+
+[DIALOG d_pc_jail]
+50,50
+page 0
+resizepic 50 50 9200 469 152
+gumppictiled 67 85 142 101 2624
+gumppictiled 222 85 282 101 2624
+checkertrans 67 85 142 101
+checkertrans 222 85 282 101
+dhtmlgump 68 57 434 40 0 0 <def.center><serv.name> - <def.pc_txt_01><def.centere>
+dtext 105 100 1152 <def.pc_txt_02>
+dtext 105 125 1152 <def.pc_txt_03>
+dtext 105 150 1152 <def.pc_txt_04>
+button 80 102 9702 9703 0 1 0
+button 80 128 9702 9703 0 2 0
+button 80 153 9702 9703 0 3 0
+
+page 1
+dhtmlgump 222 85 282 100 1 0 <def.center><def.pc_txt_05><def.centere>
+
+page 2
+dhtmlgump 222 85 282 100 5 0 <def.center><def.pc_txt_06><def.centere>
+resizepic 50 202 9200 469 185
+gumppictiled 66 230 436 140 2624
+resizepic 69 233 3500 432 136
+dhtmlgump 68 208 434 40 0 0 <def.center><serv.name> - <def.pc_txt_07><def.centere>
+checkertrans 67 230 436 140
+dtextentry 88 265 203 88 1913 1 
+dtext 93 246 1152 <def.pc_txt_08>
+if (<def.pc_max>==0)
+dhtmlgump 300 251 178 62 10 0 <def.center><def.pc_txt_09>(Min: <eval <def.pc_mim>>).<def.centere>
+else
+dhtmlgump 300 251 178 62 10 0 <def.center><def.pc_txt_09>(Min: <eval <def.pc_mim>>, Max: <eval <def.pc_max>>).<def.centere>
+endif
+gumppic 298 321 2440
+dtextentry 305 323 152 20 1913 2 <eval <def.pc_mim>>
+button 467 322 9903 9905 1 0 1
+
+[DIALOG d_pc_jail button]
+on=0
+return 1
+
+on=1
+TAG.1=<ARGTXT[1]>
+TAG.2=<eval <ARGTXT[2]>>
+IF !(<ISEMPTY <argtxt[1]>>)
+ IF !(<ISEMPTY <argtxt[2]>>)
+  IF (<TAG.2> > <eval <DEF.pc_mim>-1>)
+   IF !(<def.pc_max>==0)
+    IF (<TAG.2> > <def.pc_max>)
+     SRC.SYSMESSAGE @07a1 <def.pc_max_wrong>
+     RETURN 1
+    ELSE
+     TARGET @07a1 <def.pc_targ_pc>
+     MOREY=1
+     RETURN 1
+    ENDIF
+   ELSE
+    TARGET @07a1 <def.pc_targ_pc>
+    MOREY=1
+    RETURN 1
+   ENDIF
+  ELSE
+   SRC.SYSMESSAGE @07a1 <def.pc_mim_wrong>
+   RETURN 1
+  ENDIF
+ ELSE
+  SRC.SYSMESSAGE @07a1 <def.pc_empty>
+  RETURN 1
+ ENDIF
+ELSE
+SRC.SYSMESSAGE @07a1 <def.pc_empty>
+RETURN 1
+ENDIF
+
+// Penal Colony Stone / Pedra Colonia Penal
+
+[ITEMDEF i_pc_stone]
+ID=0edd // i_guildstone
+NAME=Penal Colony Stone // pedra Colonia Penal
+TYPE=t_normal
+
+On=@CREATE
+COLOR=0bb3
+
+ON=@DCLICK
+SRC.DIALOG d_pc
+RETURN 1
+
+// Dialog d_pc
+
+[DIALOG d_pc]
+50,50
+page 0
+resizepic 50 50 9200 150 175
+resizepic 200 50 9200 275 175
+resizepic 50 20 9200 425 30
+gumppictiled 60 62 130 150 2624
+checkertrans 60 62 130 150
+gumppictiled 211 62 252 150 2624
+checkertrans 211 62 252 150
+resizepic 212 64 3500 250 148
+dhtmlgump 60 26 250 29 0 0 <def.center><serv.name> - <def.pc_txt_16><def.centere>
+dtext 85 70 1152 <def.pc_txt_02>
+dtext 85 95 1152 <def.pc_txt_17>
+dtext 85 120 1152 <def.pc_txt_18>
+button 95 175 241 243 1 0 0
+button 65 73 1209 1210 0 1 0
+button 65 98 1209 1210 0 2 0
+button 65 123 1209 1210 0 3 0
+page 1
+if (<def.pc_anti_macro>=0)
+dhtmlgump 220 80 235 275 0 0 <def.center><def.pc_txt_pc_05> <SRC.TAG.REASON>.<def.pc_txt_pc_06> <eval <SRC.TAG.PUNISH>> <def.pc_txt_pc_07> <def.pc_txt_pc_09><def.centere>
+ELSE
+dhtmlgump 220 80 235 275 0 0 <def.center><def.pc_txt_pc_05> <SRC.TAG.REASON>.<def.pc_txt_pc_06> <eval <SRC.TAG.PUNISH>> <def.pc_txt_pc_07> <def.pc_txt_pc_10><def.centere>
+ENDIF
+page 2
+dhtmlgump 229 85 213 110 0 0 <def.center><def.pc_txt_pc_11> <eval <def.pc_kit_time>> <def.pc_txt_pc_12><def.centere>
+button 375 175 247 248 1 0 1
+page 3
+
+if !(<src.restest <eval <src.tag.punish>> <def.pc_ID>>)
+dhtmlgump 233 84 208 90 1 0 <def.center><def.pc_txt_pc_13><def.centere>
+button 390 179 2453 2454 1 0 0
+ELSE
+dhtmlgump 233 84 208 90 1 0 <def.center><def.pc_txt_pc_14><def.centere>
+button 390 179 2450 2451 1 0 2
+ENDIF
+
+[DIALOG d_pc button]
+ON=1
+if (<src.restest i_pc_kit_delay>)
+SRC.SYSMESSAGE @07a1 <def.pc_txt_pc_15> <eval <def.pc_kit_time>> <def.pc_txt_pc_16>
+RETURN 1
+ELSE
+SRC.NEWITEM i_pickaxe_pc
+SRC.ACT.EQUIP
+SRC.NEWITEM <def.pc_id_food>
+SRC.ACT.AMOUNT <def.pc_food_amount>
+SRC.ACT.BOUNCE
+SRC.NEWITEM i_pc_kit_delay
+SRC.ACT.TIMER <eval <def.pc_kit_time>*3600>
+SRC.ACT.EQUIP
+SRC.SYSMESSAGE @07a1 <def.pc_txt_pc_17>
+ENDIF
+RETURN 1
+
+ON=2
+SRC.FINDLAYER(layer_hand1).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_hand2).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_shoes).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_pants).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_shirt).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_helm).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_gloves).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_ring).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_collar).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_half_apron).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_chest).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_wrist).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_tunic).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_ears).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_arms).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_cape).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_robe).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_skirt).CONT=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_legs).cont=<src.findlayer.layer_pack.uid>
+SRC.FINDLAYER(layer_pack).REMOVE
+IF (<SRC.RESTEST 1 i_pc_kit_delay>)
+SRC.CONSUME i_pc_kit_delay
+ENDIF
+SRC.Go <def.pc_where_2>
+SRC.TAG.PC=0 // With that Tag you can block the palyer to use the help menu for exemple, use: if (<src.tag.pc>=1) RETURN 1. / Com esta Tag voce podo bloquear o player de usar o menu Help por exemplo, usando: if (<src.tag.pc>=1) RETURN 1.
+SRC.TAG.REASON=0
+SRC.TAG.PUNISH=0
+SRC.TAG.GM=0
+SRC.EVENTS=-e_penal_colony
+RETURN 1
+
+// Function pc_code
+
+[FUNCTION pc_code]
+DORAND 10
+ VAR.code=<eval 1>
+ VAR.code=<eval 2>
+ VAR.code=<eval 3>
+ VAR.code=<eval 4>
+ VAR.code=<eval 5>
+ VAR.code=<eval 6>
+ VAR.code=<eval 7>
+ VAR.code=<eval 8>
+ VAR.code=<eval 9>
+ VAR.code=<eval 0>
+ENDDO
+
+// i_pickaxe_pc
+
+[ITEMDEF i_pickaxe_pc]
+ID=i_pickaxe
+TYPE=T_WEAPON_MACE_PICK
+NAME=Pickaxe
+
+ON=@CREATE
+NAME=<def.pc_txt_19>'s Pickaxe
+COLOR=0bb6
+TAG.USES=0
+TIMER=15*60
+ATTR=attr_newbie
+COLOR=0455
+HITPOINTS=99999
+
+ON=@TIMER
+IF (<DEF.pc_anti_macro>=1)
+ TAG.AMACRO 1
+ RETURN 1
+ELSE
+ RETURN 1
+ENDIF
+
+ON=@DCLICK
+IF (<DEF.pc_anti_macro>=1)
+ IF !(0<TAG.AMACRO>)
+ ELSE
+  pc_time_macro
+  TIMER=60*<VAR.MTIME>
+  pc_code
+  TAG.CODE=<VAR.CODE>
+  pc_code
+  TAG.CODE=<TAG.CODE><VAR.CODE>
+  pc_code
+  TAG.CODE=<TAG.CODE><VAR.CODE>
+  pc_code
+  TAG.CODE=<TAG.CODE><VAR.CODE>
+  pc_code
+  TAG.CODE=<TAG.CODE><VAR.CODE>
+  pc_code
+  TAG.CODE=<TAG.CODE><VAR.CODE>
+  SRC.STONE
+  SRC.EVENTS=+e_anti_macro_loggout
+  dialog d_anti_macro
+  TAG.AMACRO=0
+  RETURN 1
+ ENDIF
+ENDIF
+
+// Event pc_time_macro
+
+[FUNCTION pc_time_macro]
+DORAND 14
+ VAR.MTIME=<eval 2>
+ VAR.MTIME=<eval 3>
+ VAR.MTIME=<eval 4>
+ VAR.MTIME=<eval 5>
+ VAR.MTIME=<eval 6>
+ VAR.MTIME=<eval 7>
+ VAR.MTIME=<eval 8>
+ VAR.MTIME=<eval 9>
+ VAR.MTIME=<eval 10>
+ VAR.MTIME=<eval 11>
+ VAR.MTIME=<eval 12>
+ VAR.MTIME=<eval 13>
+ VAR.MTIME=<eval 14>
+ VAR.MTIME=<eval 15>
+ENDDO
+
+// Dialog d_anti_macro
+
+[DIALOG d_anti_macro]
+50,50
+NOCLOSE
+NOMOVE
+page 0
+resizepic 50 50 9200 291 160
+dhtmlgump 59 57 274 20 0 0 <def.center><serv.name> - <def.pc_txt_16> Anti Macro
+dhtmlgump 62 83 269 77 1 0 <def.center><def.pc_txt_pc_18><eval <TAG.CODE>>
+gumppic 88 168 2440
+dtextentry 92 169 156 20 0 0 0
+button 264 167 247 248 1 0 1
+
+[DIALOG d_anti_macro BUTTON]
+ON=1
+IF STRMATCH(*a*,<ARGTXT[0]>) || STRMATCH(*b*,<ARGTXT[0]>) || STRMATCH(*c*,<ARGTXT[0]>) || STRMATCH(*d*,<ARGTXT[0]>) || STRMATCH(*e*,<ARGTXT[0]>) || STRMATCH(*f*,<ARGTXT[0]>) || STRMATCH(*g*,<ARGTXT[0]>) || STRMATCH(*h*,<ARGTXT[0]>) || STRMATCH(*i*,<ARGTXT[0]>) || STRMATCH(*j*,<ARGTXT[0]>) || STRMATCH(*k*,<ARGTXT[0]>) || STRMATCH(*l*,<ARGTXT[0]>) || STRMATCH(*m*,<ARGTXT[0]>) || STRMATCH(*n*,<ARGTXT[0]>) || STRMATCH(*o*,<ARGTXT[0]>) || STRMATCH(*p*,<ARGTXT[0]>) || STRMATCH(*q*,<ARGTXT[0]>) || STRMATCH(*r*,<ARGTXT[0]>) || STRMATCH(*s*,<ARGTXT[0]>) || STRMATCH(*t*,<ARGTXT[0]>) || STRMATCH(*u*,<ARGTXT[0]>) || STRMATCH(*u*,<ARGTXT[0]>) || STRMATCH(*x*,<ARGTXT[0]>) || STRMATCH(*z*,<ARGTXT[0]>) || STRMATCH(*w*,<ARGTXT[0]>) || STRMATCH(*y*,<ARGTXT[0]>) || STRMATCH(*k*,<ARGTXT[0]>) || STRMATCH(*�*,<ARGTXT[0]>) || STRMATCH(* *,<ARGTXT[0]>) || STRMATCH(*@*,<ARGTXT[0]>) || STRMATCH(*EOF*,<ARGTXT[0]>) || STRMATCH(*eof*,<ARGTXT[0]>)
+SRC.SYSMESSAGE @07a1 <def.pc_txt_pc_19>
+DIALOG d_anti_macro
+RETURN 1
+ENDIF
+IF (<ARGTXT[0]>=<TAG.CODE>)
+ IF (<SRC.STONE>)
+ SRC.STONE
+ ENDIF
+ SRC.SYSMESSAGE @07a1 <def.pc_txt_pc_21>
+ SRC.EVENTS=-e_anti_macro_loggout
+ return 1
+else
+ dialog d_anti_macro
+ SRC.SYSMESSAGE @07a1 <def.pc_txt_pc_20>
+endif
+
+// Event e_anti_macro_loggout
+
+[EVENTS e_anti_macro_loggout]
+ON=@LOGIN
+IF (<STONE>)
+ pc_code
+ TAG.CODE=<VAR.CODE>
+ pc_code
+ TAG.CODE=<TAG.CODE><VAR.CODE>
+ pc_code
+ TAG.CODE=<TAG.CODE><VAR.CODE>
+ pc_code
+ TAG.CODE=<TAG.CODE><VAR.CODE>
+ pc_code
+ TAG.CODE=<TAG.CODE><VAR.CODE>
+ pc_code
+ TAG.CODE=<TAG.CODE><VAR.CODE>
+ DIALOG d_anti_macro
+ENDIF
+
+// i_pc_kit_delay
+
+[ITEMDEF i_pc_kit_delay]
+id=i_memory
+type=t_eq_script
+NAME=Kit Delay
+
+ON=@CREATE
+attr=attr_newbie
+
+ON=@timer
+REMOVE
+
+
+[EOF]

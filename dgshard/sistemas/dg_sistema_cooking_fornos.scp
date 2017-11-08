@@ -1,0 +1,38 @@
+//Forno de Arenito
+
+[ITEMDEF i_Forno_sandstone]
+ID=i_oven_sandstone
+RESOURCES=20 i_ingot_iron, 300 i_stone_sand, 25 i_stone_marble
+TYPE=T_FIRE
+CATEGORY=Fireplaces, Chimneys & Ovens
+SUBSECTION=Sandstone Oven
+
+ON=@DCLICK
+menu menu_s_cook
+return 1
+
+[ITEMDEF i_forno_sandstone_2]
+ID=0462
+RESOURCES=20 i_ingot_iron, 300 i_stone_sand, 25 i_stone_marble
+TYPE=T_FIRE
+CATEGORY=Fireplaces, Chimneys & Ovens
+SUBSECTION=Sandstone Oven
+
+ON=@DCLICK
+menu menu_s_cook
+return 1
+
+[ITEMDEF i_deed_forno_Sandstone]
+DEFNAME=I_DEED_FORNO_SANDSTONE
+NAME=Deed Forno Sandstone
+ID=i_deed
+RESOURCES=i_deed,i_forno_sandstone,i_forno_sandstone_2
+CATEGORY=Provisions - Deeds
+SUBSECTION=Item Deeds
+DESCRIPTION=Anvil
+
+ON=@Create
+	MORE=i_forno_Sandstone,i_forno_sandstone_2
+
+
+[EOF]

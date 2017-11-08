@@ -1,0 +1,121 @@
+//////////////////////////////////////////
+//       AOS HOUSE SYSTEM UPDATER	//
+//					//
+//  Created by Coruja			//
+//  coruja747 @ sphereserver.net forum	//
+//  Plase don't remove this header	//
+//					//
+//////////////////////////////////////////
+//					//
+//            	WARNING!!		//
+//					//
+// This script is used only to update	//
+// the AOS House System from old	//
+// versions to the newest one.		//
+// To update, make sure that you're	//
+// already using latest script version,	//
+// so just type 'UpdateHouseSystem' and	//
+// the script will be automatically	//
+// updated in just some seconds.	//
+//					//
+// After update success, I recommend	//
+// delete this updater, this will not	//
+// affect AOS House System performance	//
+// and will not cause any problem on it	//
+// functionality.			//
+//					//
+//////////////////////////////////////////
+
+[FUNCTION UpdateHouseSystem]
+SERV.NEWITEM i_gold
+FOR 0 4
+ NEW.P 1,1,0,<dLOCAL._FOR>
+ NEW.f_update_house_access_players
+ NEW.f_update_house_access_items
+ NEW.f_update_house_vendors
+ENDFOR
+NEW.REMOVE
+SYSMESSAGE @,,1 Update complete!
+
+[FUNCTION f_update_house_access_players]
+FORITEMS 9000
+  IF (<BASEID>==i_sign_brass)
+    FOR <DEF.MAX_HOUSE_BANS>
+     IF (<TAG0.BAN_<dLOCAL._FOR>> != 0)
+      TRY TAG.Access.<TAG.BAN_<dLOCAL._FOR>>=-1,<dLOCAL._FOR>
+      TAG.BAN_<dLOCAL._FOR>=
+      TAG0.Access.Total.-1 += 1
+     ENDIF
+    ENDFOR
+    FOR <DEF.MAX_HOUSE_ACCESS>
+     IF (<TAG0.ACCESS_<dLOCAL._FOR>> != 0)
+      TRY TAG.Access.<TAG.ACCESS_<dLOCAL._FOR>>=1,<dLOCAL._FOR>
+      TAG.ACCESS_<dLOCAL._FOR>=
+      TAG0.Access.Total.1 += 1
+     ENDIF
+    ENDFOR
+    FOR <DEF.MAX_HOUSE_FRIENDS>
+     IF (<TAG0.FRIEND_<dLOCAL._FOR>> != 0)
+      TRY TAG.Access.<TAG.FRIEND_<dLOCAL._FOR>>=2,<dLOCAL._FOR>
+      TAG.FRIEND_<dLOCAL._FOR>=
+      TAG0.Access.Total.2 += 1
+     ENDIF
+    ENDFOR
+    FOR <DEF.MAX_HOUSE_COOWNERS>
+     IF (<TAG0.CO_OWNER_<dLOCAL._FOR>> != 0)
+      TRY TAG.Access.<TAG.CO_OWNER_<dLOCAL._FOR>>=3,<dLOCAL._FOR>
+      TAG.CO_OWNER_<dLOCAL._FOR>=
+      TAG0.Access.Total.3 += 1
+     ENDIF
+    ENDFOR
+  ENDIF
+ENDFOR
+
+
+[TYPEDEF t_access_owner]
+[TYPEDEF t_access_coowner]
+[TYPEDEF t_access_friend]
+[TYPEDEF t_access_guild]
+
+[FUNCTION f_update_house_access_items]
+FORITEMS 9000
+IF (<ISEVENT.t_access_owner>)
+  EVENTS=-t_access_owner
+  EVENTS=+t_locked_down
+  TAG.Access=4
+ELIF (<ISEVENT.t_access_coowner>)
+  EVENTS=-t_access_coowner
+  EVENTS=+t_locked_down
+  TAG.Access=3
+ELIF (<ISEVENT.t_access_friend>)
+  EVENTS=-t_access_friend
+  EVENTS=+t_locked_down
+  TAG.Access=2
+ELIF (<ISEVENT.t_access_guild>)
+  EVENTS=-t_access_guild
+  EVENTS=+t_locked_down
+  TAG.Access=5
+ENDIF
+ENDFOR
+
+
+[FUNCTION f_update_house_vendors]
+FORITEMS 9000
+  IF (<BASEID>==i_sign_brass)
+   FOR x <HouseMaxVendors>
+    TRY TAG.VENDOR<dLOCAL.X>=
+   ENDFOR
+   TAG.VENDORS=
+  ENDIF
+ENDFOR
+FORCHARS 9000
+  IF (<IsHouseVendor>)
+   EVENTS -e_aos_house_vendor
+   LOCAL.P=<P>
+   GO 1,1,1,0
+   TIMERF 1,GO <LOCAL.P>
+   TIMERF 2,EVENTS +e_aos_house_vendor
+  ENDIF
+ENDFOR
+
+[EOF]

@@ -1,0 +1,7 @@
+[Events e_Abbreviation]
+ON=@click
+IF <memoryfindtype.memory_guild.link.uid>
+	message @0004e [<memoryfindtype.memory_guild.link.abbrev>]
+ENDIF
+
+[eof]

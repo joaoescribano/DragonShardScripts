@@ -1,0 +1,911 @@
+[ITEMDEF i_runebook_dgshard]
+id=022c5
+RESOURCES=80 I_pARCHMENT, 1 I_HidE, 1 I_CLOTH
+TYPE=t_normal
+VALUE=5000
+WEIGHT=1
+DYE=1
+LAYER=1
+NAME=Runebook
+
+ON=@CREATE
+color=00
+attr=attr_newbie
+
+ON=@DCLICK
+if (<src.tag0.jail>) || (<src.tag0.pc>)
+ 	src.sysmessage @077a,0,1 Você não pode usar este livro enquanto estiver preso.
+ 	return 1
+endif
+
+if (<db.connected>)
+	db.query "SELECT id FROM runebook WHERE uid = '<uid>'"
+	if (<db.row.numrows> <= 0)
+		// Verifica se o player não tem um runebook cadastrado na conta (fix da atualização)
+		db.query "SELECT id FROM runebook WHERE uid = '<src.account.name>'"
+		if (<db.row.numrows> >= 1)
+			db.query "UPDATE runebook SET uid='<uid>' WHERE uid = '<src.account.name>';"
+			src.sysmessage @077a,0,1 Atenção: Seu livro foi atualizado para o novo sistema.
+			src.sysmessage @077a,0,1 Abra novamente seu runebook para usa-lo.
+			return 1
+		else
+			db.query "INSERT INTO runebook (uid, abas) VALUES ('<uid>', 1);"
+		endif
+	endif
+
+	src.sound 85
+	SDIALOG d_runebook,1
+else
+	src.sysmessage @077a,0,1 Desculpe, mas este item não pode ser usado neste momento.
+endif
+return 1
+
+[ITEMDEF i_runebook_validador]
+id=0eed
+NAME=Validador Runebook
+TYpE=T_GOLD
+VALUE=1
+CATEGORY=Runebook
+SUBSECTION=area
+DESCRIpTION=Validador
+
+on=@timer
+remove
+
+ON=@Create
+ATTR=attr_invis|attr_decay
+timer=05
+
+[ITEMDEF i_runebook_delay]
+NAME=Runebook delay
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Createf
+ATTR=attr_invis|attr_decay
+
+ON=@Equip
+TIMER=4
+cont.EVENTS=+e_runebook_breaker
+//cont.sysmessage @077a,0,1 Recallando para: <tag0.destino> [<morep>]
+
+ON=@Timer
+if (<cont.REGION.FLAGS> & region_antimagic_recall_out)
+    cont.sysmessage @077a,0,1 Você não pode recallar desta área.
+    cont.EVENTS=-e_runebook_breaker
+    REMOVE
+    RETURN 1
+ENDIF
+
+if ( <cont> )
+    if ( <more1> )
+        more1=<more1>-1
+        TIMER=1
+        return 1
+    else
+        cont.GO <morep>
+    endif
+endif
+
+cont.EVENTS=-e_runebook_breaker
+REMOVE
+RETURN 1
+
+[itemdef i_runebook_delay_gate]
+name=Runebook gate delay
+id=i_handr_1
+type=t_eq_script
+weight=0
+layer=layer_special
+
+on=@create
+attr=attr_invis|attr_decay
+//cont.sysmessage @077a,0,1 Abrindo gate para: <tag0.destino> [<morep>]
+
+on=@equip
+timer=5
+cont.events=+e_runebook_breaker
+
+on=@timer
+if (<cont.region.flags> & region_antimagic_gate)
+    cont.sysmessage @077a,0,1 Você não pode abrir gate desta área.
+    cont.events=-e_runebook_breaker
+   
+    remove
+    return 1
+endif
+if (<cont.region.flags> & region_antimagic_recall_out)
+    cont.sysmessage @077a,0,1 Você não pode abrir gate desta área.
+    cont.events=-e_runebook_breaker
+   
+    remove
+    return 1
+endif
+if (<cont.region.flags> & region_antimagic_recall_in)
+    cont.sysmessage @077a,0,1 Você não pode abrir gate desta área.
+    cont.events=-e_runebook_breaker
+   
+    remove
+    return 1
+endif
+if ( <cont> )
+    if ( <more1> )
+        more1=<more1>-1
+        timer=1
+        return 1
+    else
+        serv.newitem i_runebook_gate
+        new.p=<morep>
+        new.timer=40
+    	new.tag0.morep=<tag0.patcall>
+    	new.tag0.owner=<cont.uid>
+        
+    	local.uid1 <new.uid>
+
+        if <cont.region.guarded>=1
+            new.color=0b0a
+        else
+            new.color=07b1
+        endif
+        
+        local.holder=<new.region.guarded>
+        
+        serv.newitem i_runebook_gate
+        new.timer=40
+    	new.tag0.morep=<morep>
+        new.p=<tag0.patcall>
+        new.tag0.owner=<new.uid>
+
+        local.uid2 <new.uid>
+        
+        if <local.holder>=1
+            new.color=0b0a
+        else
+            new.color=07b1
+        endif
+    
+    	try uid.<local.uid1>.link <local.uid2>
+    	try uid.<local.uid2>.link <local.uid1>
+
+        cont.sound=535
+    endif
+endif
+cont.events=-e_runebook_breaker
+remove
+return 1
+
+[ITEMDEF i_runebook_gate]
+ID=0f6c
+RESOURCES=i_scroll_gate_travel
+TYPE=t_normal
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Moongates
+DESCRIPTION=Runebokk Gate
+
+ON=@TIMER
+if ( <more1> )
+ more1=<more1>-1
+ TIMER=1
+ return 1
+else
+ SOUND=528
+ REMOVE
+ENDIF
+RETURN 1
+
+ON=@CLICK
+message @<color> <serv.map(<Morex>,<morey>,<morem>).region.name> (<uid.<tag0.owner>.name>)
+return 1
+
+ON=@Create
+MORE1=10
+ATTR=attr_static
+
+ON=@STEP
+if (<eval <src.tag0.gate_time> + 3> <= <eval <serv.rticks>>)
+	IF (<SRC.TAG0.GATE> == 0)
+		if (<src.ISDIALOGOPEN.d_gate_confirmacao> == 0)
+			DIALOG d_gate_confirmacao
+	    	SRC.TAG0.GATE_USE <UID>
+	    endif
+	ELSE
+		// Update gate timer
+		src.tag0.gate_time = <eval <serv.rticks>>
+		SRC.GO <tag0.morep>
+	ENDIF
+endif
+
+IF (<TIMER> == -1)
+	REMOVE
+	RETURN 1
+ENDIF
+
+ON=@SpellEffect
+IF (<ARGN>==41) || (<ARGN> == 54)
+    LINK.REMOVE
+    REMOVE
+    RETURN 1
+ENDIF
+
+[ITEMDEF i_memory_renomear_runa]
+ID=i_memory
+name=memory
+type=t_script
+
+ON=@DCLICK
+local.id <tag0.id>
+if (<db.connected>)
+	db.query "SELECT a.id, a.nome, a.morep FROM runebook_runas a, runebook b WHERE a.runebook = b.id AND a.id = <eval <local.id>>"
+
+	if (<db.row.numrows> > 0)
+		tag0.nome <db.row.0.nome>
+		dialog d_renomear_runa
+	else
+		src.sysmessage @077a,0,1 Desculpe, algum erro ocorreu tente novamente ou contate a staff.
+		return 1
+	endif
+else
+	src.sysmessage @077a,0,1 Desculpe, mas este item não pode ser utilizado neste momento. por favor Aguarde. 
+endif
+return 1
+
+[DIALOG d_gate_confirmacao]
+100,200
+page 0
+resizepic 140 0 5120 240 90
+dtext 198 20 351 Entrar no Gate?
+dtext 200 58 100 Sim
+dtext 300 58 100 Nao
+button 180 60 1210 1210 1 0 1
+button 280 60 1209 1210 1 0 2 
+
+[DIALOG d_gate_confirmacao BUTTON]
+ON=0
+SRC.TAG0.GATE_USE =
+
+ON=1
+IF (<DISTANCE <src.tag0.gate_use>> >= 1)
+	SRC.SYSMESSAGE @077a,0,1 Você se afastou da entrada do gate.
+ELSE
+ IF (<SRC.HITS> <= 40)
+ 	SRC.SYSMESSAGE @077a,0,1 Você deve estar com mais de 40 de vida para entrar no gate!
+ 	RETURN 1
+ ENDIF
+ // Update gate timer
+ src.tag0.gate_time = <eval <serv.rticks>>
+ src.go <uid.<src.tag0.gate_use>.tag0.morep>
+ENDIF
+
+SRC.TAG0.GATE_USE =
+
+ON=2
+SRC.SYSMESSAGE @077a,0,1 Cancelado.
+SRC.TAG0.GATE_USE =
+
+[DIALOG d_renomear_runa]
+150,150
+resizepic 190 175 5054 335 150
+resizepic 200 185 3000 315 130
+resizepic 220 235 3000 270 22
+htmlgump 220 200 200 20 0 0 0 //text 215 200 995 0
+text 255 275 0000 1
+button 220 275 4005 4006 1 0 1
+text 435 275 0000 2
+button 400 275 4017 4018 1 0 0
+textentry 225 237 253 25 0 0 3
+
+[DIALOG d_renomear_runa TEXT]
+Digite um nome para a runa
+Continuar
+Cancelar
+<tag0.nome>
+
+[DIALOG d_renomear_runa BUTTON]
+ON=1
+db.query UPDATE runebook_runas SET nome = "<argtxt[0]>" WHERE id = <eval <tag0.id>> and nome = "<tag0.nome>"
+src.sysmessage @077a,0,1 Runa renomeada para <ARGTXT[0]>.
+RETURN 1
+
+[DIALOG d_comprar_pagina]
+0,0
+page 0
+gumppic 183 91 2220
+dtext 275 100 0 Runebook
+dtext 440 100 0 DG Shard
+dtext 240 115 0 Compra Pagina Extra
+dhtmlgump 397 122 137 161 0 0 Cada pagina extra adiquirida, sua conta podera guardar mais 10 runas. A cada pagina comprada, o valor de compra da proxima aumenta 15k. Maximo: 10 páginas ou 100 runas por conta
+CALL f_dados_runebook
+
+[DIALOG d_comprar_pagina button]
+ON=1
+if (<db.connected>)
+	db.query "SELECT id, abas FROM runebook a WHERE a.uid = '<uid>';"
+	
+	local.abas <db.row.0.abas>
+
+	if (<local.abas> >= 10)
+		src.sysmessage @077a,0,1 Sua conta já possuí o máximo de páginas permitidas pelo servidor.
+		return 1
+	endif
+
+	if (<src.restest <eval <local.abas> * 15000> i_gold>)
+		src.consume <eval <local.abas> * 15000> i_gold
+
+		db.query "UPDATE runebook SET abas=<eval <local.abas> + 1> WHERE uid = '<uid>'"
+		src.sysmessage @077a,0,1 Compra efetuada com sucesso!
+		src.sysmessage @077a,0,1 Uma nova pagina foi adicionada no seu runebook, novos 10 espaços para runas estão disponíveis.
+	else
+		src.sysmessage @077a,0,1 Desculpe, mas você precisa ter <eval <local.abas> * 15000>gp em sua bag para efetuar a compra.
+	endif
+	return 1
+else
+	src.sysmessage @077a,0,1 Desculpe, mas esta funcionalidade não pode ser utilizada neste momento. por favor Aguarde.
+endif
+return 1
+
+[FUNCTION f_dados_runebook]
+if (<db.connected>)
+	db.query "SELECT id, abas FROM runebook a WHERE a.uid = '<uid>';"
+
+	dtext 240 145 0 Atualmente: <eval <db.row.0.abas> * 10> runas
+	if (<db.row.0.abas> < 10)
+		dtext 240 170 0 Ao Comprar: <eval (<db.row.0.abas> + 1) * 10> runas
+		dtext 240 195 0 Custo: <qval <db.row.0.abas> >= 10 ? 0 : <goldFormat <eval (<db.row.0.abas> * 15000)>>>gp
+		dtext 254 246 0 Comprar?
+		button 326 239 4037 4036 1 0 1
+	endif
+endif
+
+[DIALOG d_runebook]
+0,0
+page 0
+gumppic 183 91 2220
+dtext 275 100 0 Runebook
+dtext 440 100 0 DG Shard
+
+dtext 420 266 0 Adicionar Runa
+dtext 260 266 0 Comprar pagina
+button 236 270 2224 2224 1 0 9001
+
+dtext 274 235 0 Gate
+dtext 263 250 0 Recall
+dtext 243 235 0 |  |_
+dtext 243 245 0 |__
+
+
+dtext 444 235 0 Renomear _|
+dtext 487 250 0 Tirar
+dtext 529 235 0 |
+dtext 521 245 0 _|
+CALL paginas_runebook <uid>,<qval <argn1> ? <argn1> : 1>
+
+[DIALOG d_runebook button]
+ONBUTTON=1 9000
+src.sound=85
+src.sysmessage @077a,0,1 Escolha a runa que você quer adicionar ao Runebook.
+targetf runebook_add_runa <argn1>,<uid>
+
+ONBUTTON=9001
+dialog d_comprar_pagina
+
+ONBUTTON=9002
+src.sysmessage @077a,0,1 Runa em branco, impossível executar a acao.
+
+ONBUTTON=1000000 1999999
+if (<src.restest i_runebook_validador>) ||  (<src.restest i_runebook_delay>) || (<src.restest i_runebook_delay_gate>)
+	src.sysmessage @077a,0,1 Você ja está utilizando o runebook.
+	return 1
+endif
+local.id <eval <argn> - 1000000>
+src.runebook_recall <local.id>
+
+ONBUTTON=2000000 2999999
+if (<src.restest i_runebook_validador>) ||  (<src.restest i_runebook_delay>) || (<src.restest i_runebook_delay_gate>)
+	src.sysmessage @077a,0,1 Você ja está utilizando o runebook.
+	return 1
+endif
+local.id <eval <argn> - 2000000>
+src.runebook_gate <local.id>
+
+ONBUTTON=3000000 3999999
+local.id <eval <argn> - 3000000>
+
+src.newitem i_memory_renomear_runa
+src.new.tag0.id <local.id>
+new.trigger @dclick
+return 1
+
+ONBUTTON=4000000 4999999
+local.id <eval <argn> - 4000000>
+src.runebook_remover <local.id>
+
+ONBUTTON=5000000 5999999
+local.id <eval <argn> - 5000000>
+SDIALOG d_runebook,<local.id>
+
+[FUNCTION paginas_runebook]
+local.uid <argn1>
+local.pagina <argn2>
+
+if (<db.connected>)
+	db.query "SELECT id, abas FROM runebook a WHERE a.uid = '<uid>';"
+	if (<db.row.numrows> <= 0)
+		db.query "INSERT INTO runebook (uid, abas) VALUES ('<uid>', 1);"
+		db.query "SELECT id, abas FROM runebook a WHERE a.uid = '<uid>';"
+	endif
+
+	local.abas <eval <db.row.0.abas>>
+	local.bid <eval <db.row.0.id>>
+
+	button 510 270 2223 2223 1 0 <eval <local.pagina>>
+
+	dtext 282 115 0 <eval <local.pagina>> / <eval <local.abas>>
+	if (<eval <local.pagina>> > 1)
+        button 233 99 2205 2205 1 0 <eval 5000000+<local.pagina>-1> // pagina anterior
+    endif
+
+    if (<eval <local.pagina> + 1> <= <eval <local.abas>>)
+        button 504 99 2206 2206 1 0 <eval <local.pagina>+5000001> // proxima pagina
+    endif
+
+    // pagina esquerda
+    local.startx1 240
+    local.startx2 255
+    local.startx3 272
+    local.startx4 348
+    local.startx5 363
+
+    // pagina Direita
+    local.startx21 402
+    local.startx22 417
+    local.startx23 434
+    local.startx24 510
+    local.startx25 525
+
+    local.starty 137
+	
+	local.runa 1
+
+	db.query "SELECT id, nome FROM runebook_runas WHERE aba = <eval <local.pagina>> AND runebook = <eval <local.bid>>"
+	local.runas = <eval <db.row.numrows>>
+
+    for xx 1 10
+    	if (<local.runa> <= 5)
+    		if (<local.runa> <= <local.runas>)
+			    button <eval <local.startx1>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2361 2361 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 1000000>
+				button <eval <local.startx2>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2362 2362 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 2000000>
+				dtext <eval <local.startx3>> <eval (<local.starty>-5) + <eval (<local.runa>-1) * 21>>  0 <strsub 0 12 <db.row.<eval <local.runa> - 1>.nome>>
+				button <eval <local.startx4>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2103 2104 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 3000000>
+				button <eval <local.startx5>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2360 2360 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 4000000>
+			else
+				button <eval <local.startx1>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2361 2361 1 0 9002
+				button <eval <local.startx2>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2362 2362 1 0 9002
+				dtext <eval <local.startx3>> <eval (<local.starty>-5) + <eval (<local.runa>-1) * 21>>  0 Em Branco
+				button <eval <local.startx4>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2103 2104 1 0 9002
+				button <eval <local.startx5>> <eval <local.starty> + <eval (<local.runa>-1) * 21>> 2360 2360 1 0 9002
+			endif
+    	else
+	    	if (<local.runa> <= <local.runas>)
+	    		button <eval <local.startx21>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2361 2361 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 1000000>
+				button <eval <local.startx22>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2362 2362 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 2000000>
+				dtext <eval <local.startx23>> <eval (<local.starty>-5) + <eval (<local.runa> - 6) * 21>>  0 <strsub 0 12 <db.row.<eval <local.runa> - 1>.nome>>
+				button <eval <local.startx24>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2103 2104 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 3000000>
+				button <eval <local.startx25>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2360 2360 1 0 <eval <eval <db.row.<eval <local.runa> - 1>.id>> + 4000000>
+    		else
+    			button <eval <local.startx21>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2361 2361 1 0 9002
+				button <eval <local.startx22>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2362 2362 1 0 9002
+				dtext <eval <local.startx23>> <eval (<local.starty>-5) + <eval (<local.runa> - 6) * 21>>  0 Em Branco
+				button <eval <local.startx24>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2103 2104 1 0 9002
+	    		button <eval <local.startx25>> <eval <local.starty> + <eval (<local.runa> - 6) * 21>> 2360 2360 1 0 9002
+    		endif
+    	endif
+    	local.runa <eval <local.runa>+1>
+	endfor
+else
+	sysmessage @077a,0,1 Desculpe, mas este item não pode ser utilizado neste momento. por favor Aguarde.
+endif
+
+[FUNCTION runebook_add_runa]
+local.pagina <ARGV[0]>
+local.book <ARGV[1]>
+
+if (<argo>) && (<argo.type> == t_rune)
+	if (<argo.morex>==0)
+		sysmessage @077a,0,1 Esta runa ainda não foi marcada.
+		uid.<local.book>.SDIALOG d_runebook,<local.pagina>
+		return 1
+	endif
+
+	// Verifica se existe espaço na página
+	db.query "SELECT id, abas FROM runebook a WHERE a.uid = '<local.book>';"
+
+	local.bid <eval <db.row.0.id>>
+
+	db.query "SELECT count(1) as total from runebook_runas WHERE runebook = <eval <local.bid>> and aba = <eval <local.pagina>>"
+
+	if (<db.row.0.total> >= 10)
+		sysmessage @077a,0,1 página lotada, por favor selecione outra ou adiquira mais páginas para seu runebook.
+		uid.<local.book>.SDIALOG d_runebook,<local.pagina>
+		return 1
+	endif
+
+	db.query INSERT INTO runebook_runas (runebook, aba, nome, morep) VALUES (<eval <local.bid>>, <eval <local.pagina>>, "<argo.name>", '<argo.morex>,<argo.morey>,<argo.morez>,<argo.morem>')
+
+	argo.remove
+	SOUND=79
+	sysmessage @077a,0,1 Runa adicionada no runebook com sucesso.
+
+	uid.<local.book>.SDIALOG d_runebook,<local.pagina>
+	return 1
+else
+	sysmessage @077a,0,1 O item selecionado não é uma runa
+	uid.<local.book>.SDIALOG d_runebook,<local.pagina>
+endif
+
+[FUNCTION runebook_recall]
+local.id <argn1>
+
+if (<db.connected>)
+	db.query "SELECT a.id, a.nome, a.morep FROM runebook_runas a, runebook b WHERE a.runebook = b.id AND a.id = <eval <local.id>>"
+
+	if (<db.row.numrows> > 0)
+		if !<src.isgm>
+			if (<checkMapFlagsRecallOut <db.row.0.morep>> == 1)
+				src.sysmessage @077a,0,1 Um campo anti-magia está te atrapalhando.
+				src.sound=85
+				return 1
+			endif
+
+			if (<serv.reagentsrequired>=01) &! (<src.restest 1 i_reag_black_pearl>) |! (<src.restest 1 i_reag_mandrake_root>) |! (<src.restest 1 i_reag_blood_moss>)
+				src.sound=0108
+				src.message A magia falhou!
+				src.sysmessage @077a,0,1 Você não tem os reagente requeridos para esta magia.
+				src.sound=85
+				return 1
+			endif
+
+			if (<src.MANA><11)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Você não tem mana suficiente.
+				return 1
+			endif
+
+			if (<src.magery><=400)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Você não tem habilidade suficiente para esta magia.
+				src.sound=85
+				return 1
+			endif
+
+			if (<checkMapIsHouse <db.row.0.morep>> == 1)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Esta área está bloqueada.
+				src.sound=85
+				return 1
+			endif
+
+			if <src.flags> & 04
+				if <src.findlayer(1).id>!=0
+					src.bow
+					return 1
+				endif
+				if <src.findlayer(2).id>!=0
+					src.bow
+					return 1
+				endif
+			endif
+
+			src.sound snd_spell_recall
+			src.say @049 Kal Ort por
+			src.ANIM=17
+			
+			if (<src.flags> & statf_hidden) && !(<src.restest i_rune_invisibility>)
+				src.reveal statf_hidden
+			endif
+
+			src.unequipHands
+			
+			src.MANA=(<src.MANA>+-5)
+			src.newitem i_runebook_validador
+
+			src.act.p <db.row.0.morep>
+
+			if (<src.act.region.flags> & region_antimagic_recall_in)
+				src.sysmessage @077a,0,1 Esta área esta bloqueada
+				return 1
+			endif
+
+			src.MANA=(<src.MANA>+-6)
+
+			if <serv.reagentsrequired>=01
+				src.consume=1 i_reag_black_pearl
+				src.consume=1 i_reag_blood_moss
+				src.consume=1 i_reag_mandrake_root
+			endif
+		endif
+
+		src.sound=85
+		src.newitem i_runebook_delay
+		src.act.tag0.destino <db.row.0.nome>
+		src.act.morep=<db.row.0.morep>
+		src.act.more1=1
+		src.act.equip
+		src.sound=85
+		return 1
+	else
+		sysmessage @077a,0,1 Desculpe, algum erro ocorreu tente novamente ou contate a staff.
+		return 1
+	endif
+else
+	sysmessage @077a,0,1 Desculpe, mas este item não pode ser utilizado neste momento. por favor Aguarde. 
+endif
+
+[FUNCTION runebook_gate]
+local.id <argn1>
+
+if (<db.connected>)
+	db.query "SELECT a.id, a.nome, a.morep FROM runebook_runas a, runebook b WHERE a.runebook = b.id AND a.id = <eval <local.id>>"
+
+	if (<db.row.numrows> > 0)
+		if !<src.isgm>
+			if (<checkMapFlagsRecallOut <db.row.0.morep>> == 1) || (<checkMapFlagsRecallGate <db.row.0.morep>> == 1)
+				src.sysmessage @077a,0,1 Um campo anti-magia está te atrapalhando.
+				src.sound=85
+				return 1
+			endif
+			
+			if (<serv.reagentsrequired>=01) &! (<src.restest 1 i_reag_mandrake_root>) |! (<src.restest 1 i_reag_sulfur_ash>) |! (<src.restest 1 i_reag_black_pearl>)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Você não tem os reagente requeridos para esta magia.
+				src.sound=85
+				return 1
+			endif
+
+			if (<src.mana><40)
+				src.sound=0108
+				src.sysmessage @077a,0,1 @077a,0,1 Você não tem mana suficiente.
+				return 1
+			endif
+
+			if (<src.magery><=650
+				src.sound=0108
+				src.sysmessage @077a,0,1 Você não tem habilidade suficiente para esta magia.
+				src.sound=85
+				return 1
+			endif
+
+			if (<checkMapIsHouse <db.row.0.morep>> == 1)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Esta área esta bloqueada.
+				src.sound=85
+				return 1
+			endif
+
+			if (<src.region.isevent.r_house_system> == 1)
+				src.sound=0108
+				src.sysmessage @077a,0,1 Você não pode abrir gates dentro de uma casa.
+				src.sound=85
+				return 1
+			endif
+
+			if (<src.act.region.flags> & region_antimagic_recall_in)
+				src.sysmessage Esta área esta bloqueada
+				src.sound 0108
+				return 1
+			endif
+
+			src.sound snd_spell_gate_travel
+			src.say @049 Vas Rel Por
+
+			if (<src.flags> & statf_hidden) && !(<src.restest i_rune_invisibility>)
+				src.reveal statf_hidden
+			endif
+
+			src.disarm
+			
+			src.anim=17
+			src.mana=(<src.mana>+-15)
+			src.newitem i_runebook_validador
+			src.act.p <db.row.0.morep>
+
+			src.mana=(<src.mana>+-25)
+
+			src.unequipHands
+
+			if <serv.reagentsrequired>=01
+				src.consume=1 i_reag_black_pearl
+				src.consume=1 i_reag_mandrake_root
+				src.consume=1 i_reag_sulfur_ash
+			endif
+		endif
+
+		src.newitem i_runebook_delay_gate
+		src.act.tag0.destino <db.row.0.nome>
+		src.act.morep=<db.row.0.morep>
+		src.act.tag0.patcall <src.p>
+		src.act.more1=1
+		src.act.equip
+		return 1
+	else
+		sysmessage @077a,0,1 Desculpe, algum erro ocorreu tente novamente ou contate a staff.
+		return 1
+	endif
+else
+	sysmessage @077a,0,1 Desculpe, mas este item não pode ser utilizado neste momento. por favor Aguarde. 
+endif
+
+[FUNCTION runebook_remover]
+local.id <argn1>
+
+if (<db.connected>)
+	db.query "SELECT a.id, a.nome, a.morep FROM runebook_runas a, runebook b WHERE a.runebook = b.id AND a.id = <eval <local.id>>"
+
+	if (<db.row.numrows> > 0)
+		src.sound=43
+		src.sysmessage @077a,0,1 Runa removida do runebook e colocada em sua bolsa.
+		
+		src.newitem=i_rune_marker
+		src.act.more1=02
+		src.act.bounce
+		src.act.morep=<db.row.0.morep>
+		src.act.name=<db.row.0.nome>
+
+		db.query "DELETE from runebook_runas WHERE id = <eval <db.row.0.id>>"
+	else
+		sysmessage @077a,0,1 Desculpe, algum erro ocorreu tente novamente ou contate a staff.
+		return 1
+	endif
+else
+	sysmessage @077a,0,1 Desculpe, mas este item não pode ser utilizado neste momento. por favor Aguarde. 
+endif
+
+[FUNCTION gate]
+IF (<SRC.TAG0.GATE> == 0)
+ SRC.TAG0.GATE = 1
+ SRC.SYSMESSAGE @077a,0,1 Você desativou a janela de confirmação de entrada de gates.
+ELSEIF (<SRC.TAG0.GATE> == 1)
+ SRC.TAG0.GATE = 0
+ SRC.SYSMESSAGE @077a,0,1 Você re-ativou ativou a janela de confirmação de entrada de gates.
+ENDIF
+RETURN 1
+
+[EVENTS e_runebook_breaker]
+ON=@GetHit
+	MESSAGE A magia falhou
+	EFFECT 3 i_fx_smoke_small 1 40 0
+	SOUND 92
+
+	consume i_runebook_validador
+	consume i_runebook_delay
+	consume i_runebook_delay_gate
+
+	newitem 03735
+	act.attr=attr_decay|attr_move_never
+	act.timer=01
+	act.p=<p>
+	
+	EVENTS=-e_runebook_breaker
+	RETURN 0
+
+ON=@SpellEffect
+	IF (<ARGN> == 1) || (<ARGN> == 3) || (<ARGN> == 5) || (<ARGN> == 8) || (<ARGN> == 12) || (<ARGN> == 18) || (<ARGN> == 20) || (<ARGN> == 27) || (<ARGN> == 28) || (<ARGN> == 30) || (<ARGN> == 31) || (<ARGN> == 34) || (<ARGN> == 37) || (<ARGN> == 38) || (<ARGN> == 39) || (<ARGN> == 41) || (<ARGN> == 42) || (<ARGN> == 43) || (<ARGN> == 46) || (<ARGN> == 47) || (<ARGN> == 49) || (<ARGN> == 50) || (<ARGN> == 51) || (<ARGN> == 53) || (<ARGN> == 54) || (<ARGN> == 55) || (<ARGN> == 57)
+		MESSAGE A magia falhou
+		EFFECT 3 i_fx_smoke_small 1 40 0
+		SOUND 92
+
+		consume i_runebook_validador
+		consume i_runebook_delay
+		consume i_runebook_delay_gate
+
+		newitem 03735
+		act.attr=attr_decay|attr_move_never
+		act.timer=01
+		act.p=<p>
+		
+		EVENTS=-e_runebook_breaker
+		RETURN 0
+	ENDIF
+	RETURN 0
+
+ON=@SpellCast
+	MESSAGE A magia falhou
+	EFFECT 3 i_fx_smoke_small 1 40 0
+	SOUND 92
+
+	consume i_runebook_validador
+	consume i_runebook_delay
+	consume i_runebook_delay_gate
+
+	newitem 03735
+	act.attr=attr_decay|attr_move_never
+	act.timer=01
+	act.p=<p>
+	
+	EVENTS=-e_runebook_breaker
+	RETURN 0
+
+ON=@SkillStart
+	MESSAGE A magia falhou
+	EFFECT 3 i_fx_smoke_small 1 40 0
+	SOUND 92
+
+	consume i_runebook_validador
+	consume i_runebook_delay
+	consume i_runebook_delay_gate
+
+	newitem 03735
+	act.attr=attr_decay|attr_move_never
+	act.timer=01
+	act.p=<p>
+	
+	EVENTS=-e_runebook_breaker
+	RETURN 0
+
+ON=@Hit
+	MESSAGE A magia falhou
+	EFFECT 3 i_fx_smoke_small 1 40 0
+	SOUND 92
+
+	consume i_runebook_validador
+	consume i_runebook_delay
+	consume i_runebook_delay_gate
+
+	newitem 03735
+	act.attr=attr_decay|attr_move_never
+	act.timer=01
+	act.p=<p>
+	
+	EVENTS=-e_runebook_breaker
+	RETURN 0
+
+//ON=@LogOut
+//	EFFECT 3 i_fx_smoke_small 1 40 0
+//	SOUND 92
+//
+//	consume i_runebook_validador
+//	consume i_runebook_delay
+//	consume i_runebook_delay_gate
+//
+//	newitem 03735
+//	act.attr=attr_decay|attr_move_never
+//	act.timer=01
+//	act.p=<p>
+//	
+//	EVENTS=-e_runebook_breaker
+//	RETURN 0
+
+ON=@UserWarMode
+	MESSAGE A magia falhou
+	EFFECT 3 i_fx_smoke_small 1 40 0
+	SOUND 92
+
+	consume i_runebook_validador
+	consume i_runebook_delay
+	consume i_runebook_delay_gate
+
+	newitem 03735
+	act.attr=attr_decay|attr_move_never
+	act.timer=01
+	act.p=<p>
+	
+	EVENTS=-e_runebook_breaker
+	RETURN 0
+
+[FUNCTION checkMapFlagsRecallIn]
+return <qval <serv.map(<args>).region.flags>&region_antimagic_recall_in ? 1 : 0>
+
+[FUNCTION checkMapFlagsRecallOut]
+return <qval <serv.map(<args>).region.flags>&region_antimagic_recall_out ? 1 : 0>
+
+[FUNCTION checkMapFlagsRecallGate]
+return <qval <serv.map(<args>).region.flags>&region_antimagic_gate ? 1 : 0>
+
+[FUNCTION checkMapGuarded]
+return <qval <serv.map(<args>).region.guarded> ? 1 : 0>
+
+[FUNCTION checkMapIsHouse]
+return <qval <serv.map(<args>).region.isevent.r_house_system> ? 1 : 0>
+
+[EOF]

@@ -1,0 +1,336 @@
+//Itens da nova skill Decoration
+//Criado por Owner Dragon
+//Dragon Easy Shard
+//www.dgshard.com
+
+///////////////////////////CORTINAS////////////////////////////////
+
+[ITEMDEF i_cortina_1]
+ID=0980
+NAME=Cortina Vermelha 1
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+DYE=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 01
+DESCRIPTION=Cortina
+
+[ITEMDEF i_cortina_2]
+//CURTAIN=Red, straight against NE wall
+ID=0981
+NAME=Cortina Vermelha 2
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_3]
+//CURTAIN=Red. ruffled against NE wall
+ID=0982
+NAME=Cortina Vermelha 3
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_4]
+//CURTAIN=Reg, gathered to right bottom with black cord against NE wall
+ID=0983
+NAME=Cortina Vermelha 4
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_5]
+//curtains skinny red NE wall
+ID=0984
+NAME=Cortina Vermelha 5
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_6]
+//curtains Red, str. slight wafting bottom left crnr against NE wall
+ID=0985
+NAME=Cortina Vermelha 6
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_7]
+//curtains
+ID=0986
+NAME=Cortina Vermelha 7
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_8]
+//curtains skinny red NE wall, slight wafting at bottom
+ID=0987
+NAME=Cortina Vermelha 8
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_9]
+//CURTAIN=Red, straight against Nw wall
+ID=0988
+NAME=Cortina Vermelha 9
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_10]
+//curtains red looks like 1/4th a curtain panel
+//Diagonal brown sashed curtain on NW wall
+ID=0989
+NAME=Cortina Vermelha 10
+RESOURCES=10 I_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+////////////////////////////////Cortinas Brancas///////////////////
+
+[ITEMDEF i_cortina_branca]
+ID=012da
+NAME=Cortina Branca
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+WEIGHT=10
+DYE=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 02
+DESCRIPTION=Cortina Branca
+
+[ITEMDEF i_cortina_branca_2]
+ID=012db
+//curtain white fluffy floorlength being drawn
+NAME=Cortina Branca 2
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_3]
+ID=012dc
+//curtain side to w. white floorlength
+NAME=Cortina Branca 3
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_4]
+ID=012dd
+//curtain white skinny
+NAME=Cortina Branca 4
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_5]
+ID=012de
+//curtain white animated drawing back right to left against NW wall
+NAME=Cortina Branca 5
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_6]
+ID=012df
+//curtain fluffy white being drawn back nw wall
+NAME=Cortina Branca 6
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_7]
+ID=012e0
+//curtain
+NAME=Cortina Branca 7
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+[ITEMDEF i_cortina_branca_8]
+ID=012e1
+//curtain
+NAME=Cortina Branca 8
+RESOURCES=10 i_CLOTH
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+
+////////////////Cortina Sash
+
+[ITEMDEF 012e2]
+DEFNAME=i_curtain_white_02_1_sash
+NAME=Cortina Sash
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+RESOURCES=10 i_CLOTH
+WEIGHT=10
+DYE=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 02
+DESCRIPTION=Curtain Sash
+
+[ITEMDEF 012e3]
+DEFNAME=i_curtain_white_02_1_sash_2
+NAME=Cortina Sash
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+RESOURCES=10 i_CLOTH
+WEIGHT=10
+DYE=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 02
+DESCRIPTION=Curtain Sash
+
+[ITEMDEF 012e4]
+DEFNAME=i_curtain_white_02_1_sash_3
+NAME=Cortina Sash
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+RESOURCES=10 i_CLOTH
+WEIGHT=10
+DYE=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 02
+DESCRIPTION=Curtain Sash
+
+[ITEMDEF 012e5]
+DEFNAME=i_curtain_white_02_2_sash_3
+NAME=Cortina Sash
+SKILLMAKE=Tailoring 50.0, t_sewing_kit
+RESOURCES=10 i_CLOTH
+WEIGHT=10
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 03
+DESCRIPTION=@
+DUPELIST=012e6,012e7,012e8,012e9,012ea,012eb,012ec
+
+[ITEMDEF 012e6]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012e7]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012e8]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012e9]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012ea]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012eb]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012ec]
+//curtain
+DUPEITEM=012e5
+
+[ITEMDEF 012ed]
+DEFNAME=i_curtain_white_02_2_sash_4
+RESOURCES=10 i_CLOTH
+WEIGHT=10
+CATEGORY=Decoration - Curtains
+SUBSECTION=Curtain 03
+DESCRIPTION=Curtain Sash
+
+[ITEMDEF 0154e]
+DEFNAME=i_CURTAIN_FREESTANDING
+RESOURCES=3 i_ingot_iron, 8 i_CLOTH
+WEIGHT=6
+CATEGORY=Decoration - Curtains
+SUBSECTION=Single Red
+DESCRIPTION=@
+DUPELIST=0154f,01557
+
+[ITEMDEF 0154f]
+//curtains
+DUPEITEM=0154e
+
+[ITEMDEF 01557]
+//curtain
+DUPEITEM=0154e
+
+[ITEMDEF 0159e]
+DEFNAME=i_curtain_banner_nw
+RESOURCES=1 i_LOG, 1 i_board_dg, 1 i_CLOTH, 1 i_THREAD, 1 i_NAILS
+WEIGHT=3
+CATEGORY=Decoration - Curtains
+SUBSECTION=Single White
+DESCRIPTION=@
+DUPELIST=0159f
+
+[ITEMDEF 0159f]
+DEFNAME=i_curtain_banner_ne
+DUPEITEM=0159e
+
+[ITEMDEF 015f6]
+DEFNAME=i_plain_white_curtain
+RESOURCES=1 i_CLOTH
+WEIGHT=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Small White
+DESCRIPTION=@
+DUPELIST=015f7
+
+[ITEMDEF 015f7]
+//curtain
+DUPEITEM=015f6
+
+[ITEMDEF 0160d]
+DEFNAME=i_single_red_curtain
+RESOURCES=2 i_CLOTH, 1 i_THREAD
+WEIGHT=2
+CATEGORY=Decoration - Curtains
+SUBSECTION=Single Red
+DESCRIPTION=@
+DUPELIST=0160e
+
+[ITEMDEF 0160e]
+//curtain
+DUPEITEM=0160d
+
+[ITEMDEF 01638]
+DEFNAME=i_CURTAIN_PLAIN_RED
+RESOURCES=1 i_CLOTH
+WEIGHT=1
+CATEGORY=Decoration - Curtains
+SUBSECTION=Small Red
+DESCRIPTION=@
+DUPELIST=01639
+
+[ITEMDEF 01639]
+//curtain
+DUPEITEM=01638
+
+///////////////////////////////////////SKILL MENU//////////////////
+
+//Cortinas
+
+ON=i_curtain_2 Cortinas
+SKILLMENU=sm_cortinas
+
+[SKILLMENU sm_cortinas]
+Cortinas
+
+ON=i_cortina_1 <name> (<resmake>)
+MAKEITEM=i_cortina_1
+
+ON=i_cortina_2 <name> (<resmake>)
+MAKEITEM=i_cortina_2
+
+ON=i_cortina_3 <name> (<resmake>)
+MAKEITEM=i_cortina_3
+
+ON=i_cortina_4 <name> (<resmake>)
+MAKEITEM=i_cortina_4
+
+ON=i_cortina_5 <name> (<resmake>)
+MAKEITEM=i_cortina_5
+
+ON=i_cortina_6 <name> (<resmake>)
+MAKEITEM=i_cortina_6
+
+ON=i_cortina_7 <name> (<resmake>)
+MAKEITEM=i_cortina_7
+
+ON=i_cortina_8 <name> (<resmake>)
+MAKEITEM=i_cortina_8
+
+ON=i_cortina_9 <name> (<resmake>)
+MAKEITEM=i_cortina_9
+
+ON=i_cortina_10 <name> (<resmake>)
+MAKEITEM=i_cortina_10
+
+
+[EOF]

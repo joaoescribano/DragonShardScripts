@@ -1,0 +1,1978 @@
+// Ore: Iron - Weapons
+
+[ITEMDEF i_iron_bone_machete]
+ID=i_bone_machete
+NAME=Iron Bone Machete
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_iron,1 i_bone
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_exec]
+ID=i_axe_exec
+NAME=Iron Executioner's Axe
+TYPE=t_weapon_axe
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_battle]
+ID=i_axe_battle
+NAME=Iron Battle Axe
+TYPE=t_weapon_axe
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe]
+ID=i_axe
+NAME=Iron Axe
+TYPE=t_weapon_axe
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_double]
+ID=i_axe_double
+NAME=Iron Double Axe
+TYPE=t_weapon_axe
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_bardiche]
+ID=i_bardiche
+NAME=Iron Bardiche
+TYPE=t_weapon_sword
+DAM=11,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_dagger]
+ID=i_dagger
+NAME=Iron Dagger
+TYPE=t_weapon_fence
+DAM=6,7
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_mace]
+ID=i_mace
+NAME=Iron Mace
+TYPE=t_weapon_mace_smith
+DAM=8,9
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_broad]
+ID=i_sword_broad
+NAME=Iron Broad Sword
+TYPE=t_weapon_sword
+DAM=9,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_long]
+ID=i_sword_long
+NAME=Iron Long Sword
+TYPE=t_weapon_sword
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_spear]
+ID=i_spear
+NAME=Iron Spear
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_war]
+ID=i_axe_war
+NAME=Iron War Axe
+TYPE=t_weapon_axe
+DAM=9,9
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_scimitar]
+ID=i_scimitar
+NAME=Iron Scimitar
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_long_b]
+ID=i_sword_long_b
+NAME=Iron Long Sword
+TYPE=t_weapon_sword
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_viking]
+ID=i_sword_viking
+NAME=Iron Viking Sword
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Iron Large Battle Axe
+TYPE=t_weapon_axe
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_katana]
+ID=i_katana
+NAME=Iron Katana
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_kryss]
+ID=i_kryss
+NAME=Iron Kryss
+TYPE=t_weapon_sword
+DAM=6,8
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_spear_short]
+ID=i_spear_short
+NAME=Iron Short Spear
+TYPE=t_weapon_fence
+DAM=6,8
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_war_fork]
+ID=i_war_fork
+NAME=Iron War Fork
+TYPE=t_weapon_fence
+DAM=8,8
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_mace_war]
+ID=i_mace_war
+NAME=Iron War Mace
+TYPE=t_weapon_mace_smith
+DAM=10,11
+SKILL=Macefighting
+SPEED=26
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_hammer_war]
+ID=i_hammer_war
+NAME=Iron War Hammer
+TYPE=t_weapon_mace_smith
+DAM=11,11
+SKILL=Macefighting
+SPEED=28
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_maul]
+ID=i_maul
+NAME=Iron Maul
+TYPE=t_weapon_mace_smith
+DAM=9,10
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_hammer_pick]
+ID=i_hammer_pick
+NAME=Iron Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_halberd]
+ID=i_halberd
+NAME=Iron Halberd
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=24
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_cutlass]
+ID=i_cutlass
+NAME=Iron Cutlass
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Iron Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_scythe]
+ID=i_scythe
+NAME=Iron Scythe
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_bone_harvester]
+ID=i_bone_harvester
+NAME=Iron Bone Harvester
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_scepter]
+ID=i_scepter
+NAME=Iron Scepter
+TYPE=t_weapon_mace_smith
+DAM=9,11
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_staff_bladed]
+ID=i_staff_bladed
+NAME=Iron Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_pike]
+ID=i_pike
+NAME=Iron Pike
+TYPE=t_weapon_fence
+DAM=9,10
+SKILL=Fencing
+SPEED=36
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Iron Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=8,8
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_lance]
+ID=i_lance
+NAME=Iron Lance
+TYPE=t_weapon_fence
+DAM=11,11
+SKILL=Fencing
+SPEED=21
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_crescent_blade]
+ID=i_crescent_blade
+NAME=Iron Crescent Blade
+TYPE=t_weapon_sword
+DAM=7,9
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_paladin]
+ID=i_sword_paladin
+NAME=Iron Paladin Sword
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=N
+RESOURCES=24 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_no_dachi]
+ID=i_no_dachi
+NAME=Iron No-dachi
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_wakizashi]
+ID=i_wakizashi
+NAME=Iron Wakizashi
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_tetsubo]
+ID=i_tetsubo
+NAME=Iron Testsubo
+TYPE=t_weapon_mace_smith
+DAM=8,9
+SKILL=Macefighting
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Macefighting
+DESCRIPTION=Iron Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_lajatang]
+ID=i_lajatang
+NAME=Iron Lajatang
+TYPE=t_weapon_fence
+DAM=10,11
+SKILL=Fencing
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_daisho]
+ID=i_daisho
+NAME=Iron Daisho
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_tekagi]
+ID=i_tekagi
+NAME=Iron Tekagi
+TYPE=t_weapon_fence
+DAM=6,8
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_kama]
+ID=i_kama
+NAME=Iron Kama
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sai]
+ID=i_sai
+NAME=Iron Sai
+TYPE=t_weapon_fence
+DAM=6,7
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Iron Elven Spellblade
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Iron Assassin Spike
+TYPE=t_weapon_fence
+DAM=6,8
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Iron Leaf Bladed
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Iron War Cleaver
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Fencing
+DESCRIPTION=Iron War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_mace_diamond]
+ID=i_mace_diamond
+NAME=Iron Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_rune_blade]
+ID=i_rune_blade
+NAME=Iron Rune Blade
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Iron Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_ornate_axe]
+ID=i_ornate_axe
+NAME=Iron Ornate Axe
+TYPE=t_weapon_axe
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+[ITEMDEF i_iron_elven_machete]
+ID=i_elven_machete
+NAME=Iron Elven Machete
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_iron,1 i_log
+SKILLMAKE=Blacksmithing 29.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Iron
+SUBSECTION=Swordsmanship
+DESCRIPTION=Iron Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+
+// Ore: Iron - Armors
+
+[ITEMDEF i_iron_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Iron Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Chainmails
+DESCRIPTION=Iron Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Iron Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Chainmails
+DESCRIPTION=Iron Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Iron Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Chainmails
+DESCRIPTION=Iron Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Iron Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Ringmails
+DESCRIPTION=Iron Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Iron Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Ringmails
+DESCRIPTION=Iron Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Iron Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Ringmails
+DESCRIPTION=Iron Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Iron Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Ringmails
+DESCRIPTION=Iron Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_arms]
+ID=i_platemail_arms
+NAME=Iron Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Iron Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_helm]
+ID=i_platemail_helm
+NAME=Iron Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Iron Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Iron Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_platemail_chest]
+ID=i_platemail_chest
+NAME=Iron Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Platemails
+DESCRIPTION=Iron Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_helm_closed]
+ID=i_helm_closed
+NAME=Iron Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_helm_open]
+ID=i_helm_open
+NAME=Iron Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_bascinet]
+ID=i_bascinet
+NAME=Iron Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_iron_helm_nose]
+ID=i_helm_nose
+NAME=Iron Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_iron_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Iron Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Iron Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Helmets
+DESCRIPTION=Iron Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Iron Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_buckler]
+ID=i_shield_buckler
+NAME=Iron Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Iron Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_heater]
+ID=i_shield_heater
+NAME=Iron Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Iron Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_iron,2 i_log
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Iron Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_iron
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_iron_shield_dupre]
+ID=i_shield_dupre
+NAME=Iron Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_iron,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 29.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Iron
+SUBSECTION=Shields
+DESCRIPTION=Iron Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_iron
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+

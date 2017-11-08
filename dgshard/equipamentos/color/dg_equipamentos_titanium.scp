@@ -1,0 +1,1978 @@
+// Ore: Titanium - Weapons
+
+[ITEMDEF i_titanium_bone_machete]
+ID=i_bone_machete
+NAME=Titanium Bone Machete
+TYPE=t_weapon_sword
+DAM=24,27
+SKILL=Swordsmanship
+SPEED=47
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_titanium,1 i_bone
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_exec]
+ID=i_axe_exec
+NAME=Titanium Executioner's Axe
+TYPE=t_weapon_axe
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=41
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_battle]
+ID=i_axe_battle
+NAME=Titanium Battle Axe
+TYPE=t_weapon_axe
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe]
+ID=i_axe
+NAME=Titanium Axe
+TYPE=t_weapon_axe
+DAM=26,29
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_double]
+ID=i_axe_double
+NAME=Titanium Double Axe
+TYPE=t_weapon_axe
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=41
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_bardiche]
+ID=i_bardiche
+NAME=Titanium Bardiche
+TYPE=t_weapon_sword
+DAM=31,33
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_dagger]
+ID=i_dagger
+NAME=Titanium Dagger
+TYPE=t_weapon_fence
+DAM=18,20
+SKILL=Fencing
+SPEED=56
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_mace]
+ID=i_mace
+NAME=Titanium Mace
+TYPE=t_weapon_mace_smith
+DAM=22,26
+SKILL=Macefighting
+SPEED=47
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_broad]
+ID=i_sword_broad
+NAME=Titanium Broad Sword
+TYPE=t_weapon_sword
+DAM=26,27
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_long]
+ID=i_sword_long
+NAME=Titanium Long Sword
+TYPE=t_weapon_sword
+DAM=27,29
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_spear]
+ID=i_spear
+NAME=Titanium Spear
+TYPE=t_weapon_fence
+DAM=24,27
+SKILL=Fencing
+SPEED=47
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_war]
+ID=i_axe_war
+NAME=Titanium War Axe
+TYPE=t_weapon_axe
+DAM=26,27
+SKILL=Swordsmanship
+SPEED=41
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_scimitar]
+ID=i_scimitar
+NAME=Titanium Scimitar
+TYPE=t_weapon_sword
+DAM=24,27
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_long_b]
+ID=i_sword_long_b
+NAME=Titanium Long Sword
+TYPE=t_weapon_sword
+DAM=27,29
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_viking]
+ID=i_sword_viking
+NAME=Titanium Viking Sword
+TYPE=t_weapon_sword
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Titanium Large Battle Axe
+TYPE=t_weapon_axe
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_katana]
+ID=i_katana
+NAME=Titanium Katana
+TYPE=t_weapon_sword
+DAM=20,24
+SKILL=Swordsmanship
+SPEED=50
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_kryss]
+ID=i_kryss
+NAME=Titanium Kryss
+TYPE=t_weapon_sword
+DAM=18,22
+SKILL=Swordsmanship
+SPEED=56
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_spear_short]
+ID=i_spear_short
+NAME=Titanium Short Spear
+TYPE=t_weapon_fence
+DAM=18,24
+SKILL=Fencing
+SPEED=56
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_war_fork]
+ID=i_war_fork
+NAME=Titanium War Fork
+TYPE=t_weapon_fence
+DAM=22,24
+SKILL=Fencing
+SPEED=50
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_mace_war]
+ID=i_mace_war
+NAME=Titanium War Mace
+TYPE=t_weapon_mace_smith
+DAM=29,31
+SKILL=Macefighting
+SPEED=32
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_hammer_war]
+ID=i_hammer_war
+NAME=Titanium War Hammer
+TYPE=t_weapon_mace_smith
+DAM=31,33
+SKILL=Macefighting
+SPEED=35
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_maul]
+ID=i_maul
+NAME=Titanium Maul
+TYPE=t_weapon_mace_smith
+DAM=26,29
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_hammer_pick]
+ID=i_hammer_pick
+NAME=Titanium Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_halberd]
+ID=i_halberd
+NAME=Titanium Halberd
+TYPE=t_weapon_sword
+DAM=33,35
+SKILL=Swordsmanship
+SPEED=29
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_cutlass]
+ID=i_cutlass
+NAME=Titanium Cutlass
+TYPE=t_weapon_sword
+DAM=20,24
+SKILL=Swordsmanship
+SPEED=50
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Titanium Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=29,31
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_scythe]
+ID=i_scythe
+NAME=Titanium Scythe
+TYPE=t_weapon_sword
+DAM=27,33
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_bone_harvester]
+ID=i_bone_harvester
+NAME=Titanium Bone Harvester
+TYPE=t_weapon_sword
+DAM=24,27
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_scepter]
+ID=i_scepter
+NAME=Titanium Scepter
+TYPE=t_weapon_mace_smith
+DAM=26,31
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_staff_bladed]
+ID=i_staff_bladed
+NAME=Titanium Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=26,29
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_pike]
+ID=i_pike
+NAME=Titanium Pike
+TYPE=t_weapon_fence
+DAM=26,29
+SKILL=Fencing
+SPEED=44
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Titanium Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=22,24
+SKILL=Swordsmanship
+SPEED=53
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_lance]
+ID=i_lance
+NAME=Titanium Lance
+TYPE=t_weapon_fence
+DAM=31,33
+SKILL=Fencing
+SPEED=26
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_crescent_blade]
+ID=i_crescent_blade
+NAME=Titanium Crescent Blade
+TYPE=t_weapon_sword
+DAM=20,26
+SKILL=Swordsmanship
+SPEED=50
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_paladin]
+ID=i_sword_paladin
+NAME=Titanium Paladin Sword
+TYPE=t_weapon_sword
+DAM=29,33
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_no_dachi]
+ID=i_no_dachi
+NAME=Titanium No-dachi
+TYPE=t_weapon_sword
+DAM=29,33
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_wakizashi]
+ID=i_wakizashi
+NAME=Titanium Wakizashi
+TYPE=t_weapon_sword
+DAM=20,24
+SKILL=Swordsmanship
+SPEED=50
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_tetsubo]
+ID=i_tetsubo
+NAME=Titanium Testsubo
+TYPE=t_weapon_mace_smith
+DAM=22,26
+SKILL=Macefighting
+SPEED=50
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Macefighting
+DESCRIPTION=Titanium Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_lajatang]
+ID=i_lajatang
+NAME=Titanium Lajatang
+TYPE=t_weapon_fence
+DAM=29,33
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_daisho]
+ID=i_daisho
+NAME=Titanium Daisho
+TYPE=t_weapon_sword
+DAM=24,27
+SKILL=Swordsmanship
+SPEED=47
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_tekagi]
+ID=i_tekagi
+NAME=Titanium Tekagi
+TYPE=t_weapon_fence
+DAM=18,22
+SKILL=Fencing
+SPEED=56
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_kama]
+ID=i_kama
+NAME=Titanium Kama
+TYPE=t_weapon_sword
+DAM=17,20
+SKILL=Swordsmanship
+SPEED=56
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sai]
+ID=i_sai
+NAME=Titanium Sai
+TYPE=t_weapon_fence
+DAM=17,20
+SKILL=Fencing
+SPEED=56
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Titanium Elven Spellblade
+TYPE=t_weapon_fence
+DAM=22,26
+SKILL=Fencing
+SPEED=50
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Titanium Assassin Spike
+TYPE=t_weapon_fence
+DAM=18,22
+SKILL=Fencing
+SPEED=56
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Titanium Leaf Bladed
+TYPE=t_weapon_fence
+DAM=24,27
+SKILL=Fencing
+SPEED=47
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Titanium War Cleaver
+TYPE=t_weapon_fence
+DAM=24,27
+SKILL=Fencing
+SPEED=47
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Fencing
+DESCRIPTION=Titanium War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_mace_diamond]
+ID=i_mace_diamond
+NAME=Titanium Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=26,31
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_rune_blade]
+ID=i_rune_blade
+NAME=Titanium Rune Blade
+TYPE=t_weapon_sword
+DAM=27,31
+SKILL=Swordsmanship
+SPEED=44
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Titanium Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=22,26
+SKILL=Swordsmanship
+SPEED=50
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_ornate_axe]
+ID=i_ornate_axe
+NAME=Titanium Ornate Axe
+TYPE=t_weapon_axe
+DAM=33,36
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+[ITEMDEF i_titanium_elven_machete]
+ID=i_elven_machete
+NAME=Titanium Elven Machete
+TYPE=t_weapon_sword
+DAM=24,27
+SKILL=Swordsmanship
+SPEED=47
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_titanium,1 i_log
+SKILLMAKE=Blacksmithing 105.0
+CanUse=can_u_human|can_u_elf
+ReqStr=95
+
+CATEGORY=Provisions - Weapons - Titanium
+SUBSECTION=Swordsmanship
+DESCRIPTION=Titanium Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+
+// Ore: Titanium - Armors
+
+[ITEMDEF i_titanium_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Titanium Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Chainmails
+DESCRIPTION=Titanium Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_titanium_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Titanium Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Chainmails
+DESCRIPTION=Titanium Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_titanium_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Titanium Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Chainmails
+DESCRIPTION=Titanium Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_titanium_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Titanium Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Ringmails
+DESCRIPTION=Titanium Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_titanium_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Titanium Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Ringmails
+DESCRIPTION=Titanium Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_titanium_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Titanium Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Ringmails
+DESCRIPTION=Titanium Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_titanium_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Titanium Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Ringmails
+DESCRIPTION=Titanium Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_arms]
+ID=i_platemail_arms
+NAME=Titanium Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Titanium Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_helm]
+ID=i_platemail_helm
+NAME=Titanium Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Titanium Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Titanium Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_platemail_chest]
+ID=i_platemail_chest
+NAME=Titanium Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Platemails
+DESCRIPTION=Titanium Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_helm_closed]
+ID=i_helm_closed
+NAME=Titanium Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_titanium_helm_open]
+ID=i_helm_open
+NAME=Titanium Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_bascinet]
+ID=i_bascinet
+NAME=Titanium Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=17
+    RESPOISON=0
+
+[ITEMDEF i_titanium_helm_nose]
+ID=i_helm_nose
+NAME=Titanium Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_titanium_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Titanium Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Titanium Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Helmets
+DESCRIPTION=Titanium Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=12
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Titanium Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_buckler]
+ID=i_shield_buckler
+NAME=Titanium Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Titanium Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_heater]
+ID=i_shield_heater
+NAME=Titanium Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Titanium Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_titanium,2 i_log
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Titanium Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_titanium
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_titanium_shield_dupre]
+ID=i_shield_dupre
+NAME=Titanium Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_titanium,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 105.0
+canuse=can_u_human|can_u_elf
+ReqStr=95
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Titanium
+SUBSECTION=Shields
+DESCRIPTION=Titanium Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_titanium
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+

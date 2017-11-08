@@ -1,0 +1,485 @@
+// Evento 2x2 - V1.4
+
+// Dragon Shard - The Second Age
+// http://www.dgshard.com.br
+
+// By Owner Destiny
+
+//            5 -----------
+//            |            |
+//      ------|------      |
+//      |            |     |
+//      |            |     |
+//   1      2     3     4  |
+//   |      |     |     |  |---- vencedor
+//    ------       -----   |
+//      |            |     |
+//      |            |     |
+//       ------------      |
+//            |            |
+//            |            |
+//            --------------
+
+[DEFNAME 2x2_config]
+2x2_uid_1	040007a28
+2x2_uid_2	040007a06
+2x2_where_gm	5904,3979
+
+// Where's da arena
+
+// arena Time 1
+2x2_player_1	5899,3995
+2x2_player_2	5899,3996
+
+// arena Time 2
+2x2_player_3	5908,3988
+2x2_player_4	5908,3987
+
+// Time 1
+2x2_where_011	5888,3985 // 01
+2x2_where_012	5889,3985 // 02
+// Time 2
+2x2_where_021	5888,3987 // 03
+2x2_where_022	5889,3987 // 04
+// Time 3
+2x2_where_031	5888,3989 // 05
+2x2_where_032	5889,3989 // 06
+// Time 4
+2x2_where_041	5888,3991 // 07
+2x2_where_042	5889,3991 // 08
+// Time 5
+2x2_where_051	5888,3993 // 09
+2x2_where_052	5889,3993 // 10
+// Time 6
+2x2_where_061	5888,3995 // 11
+2x2_where_062	5889,3995 // 12
+// Time 7
+2x2_where_071	5888,3997 // 13
+2x2_where_072	5889,3997 // 14
+// Time 8
+2x2_where_081	5888,3999 // 15
+2x2_where_082	5889,3999 // 16
+// Time 9
+2x2_where_091	5888,4001 // 17
+2x2_where_092	5889,4001 // 18
+// Time 10
+2x2_where_101	5888,4003 // 19
+2x2_where_102	5889,4003 // 20
+
+
+2x2_cor_01	07a1
+2x2_cor_02	07a2
+2x2_cor_03	07a3
+2x2_cor_04	07a4
+2x2_cor_05	07a5
+2x2_cor_06	07a6
+2x2_cor_07	07a7
+2x2_cor_08	07a8
+2x2_cor_09	07a9
+2x2_cor_10	07b1
+
+// Pedra de entrda dos Players
+
+[ITEMDEF i_pedra_2x2]
+ID=0ed4
+NAME=Pedra
+TYPE=t_normal
+
+On=@CREATE
+VAR.COR={077a 07a1 07a2 07a3 07a4 07a5 07a6 07a7 07a8 07a9 07b1 07b2 07b3 07b4 07b5 07b6 07b7 07b8 07b9 0481 0790 0791 0792 0793 0794 0795 0796 0797 0798 0799 0800 0801 0802 0803 0804 0805 0806 0807 0808 0809 0810}
+NAME @07a1 Entrada para evento 2x2
+TAG0.VAGAS 20
+TAG0.DENTRO 0
+COLOR=<var.cor>
+
+ON=@CLICK
+MESSAGE @044 Vagas [<eval <tag0.vagas>>]
+MESSAGE @044 Dentro [<eval <tag0.dentro>>]
+return 0
+
+On=@DCLICK
+IF (<src.isgm>)
+ src.go <def.2x2_where_gm>
+ return 1
+endif
+
+if (<tag0.dentro> == <tag0.vagas>)
+ src.sysmessage @044 Evento Lotado, favor aguardar na Commerce Room
+ src.go help room 2
+ return 1
+endif
+
+TAG0.DENTRO <eval <TAG0.DENTRO>+1>
+
+if (<tag0.dentro>==1)
+ src.go <def.2x2_where_011>
+ src.kit_2x2 <def.2x2_cor_01>
+ src.tag0.time 1
+endif
+if (<tag0.dentro>==2)
+ src.go <def.2x2_where_012>
+ src.kit_2x2 <def.2x2_cor_01>
+ src.tag0.time 1
+endif
+if (<tag0.dentro>==3)
+ src.go <def.2x2_where_021>
+ src.kit_2x2 <def.2x2_cor_02>
+ src.tag0.time 2
+endif
+if (<tag0.dentro>==4)
+ src.go <def.2x2_where_022>
+ src.kit_2x2 <def.2x2_cor_02>
+ src.tag0.time 2
+endif
+if (<tag0.dentro>==5)
+ src.go <def.2x2_where_031>
+ src.kit_2x2 <def.2x2_cor_03>
+ src.tag0.time 3
+endif
+if (<tag0.dentro>==6)
+ src.go <def.2x2_where_032>
+ src.kit_2x2 <def.2x2_cor_03>
+ src.tag0.time 3
+endif
+if (<tag0.dentro>==7)
+ src.go <def.2x2_where_041>
+ src.kit_2x2 <def.2x2_cor_04>
+ src.tag0.time 4
+endif
+if (<tag0.dentro>==8)
+ src.go <def.2x2_where_042>
+ src.kit_2x2 <def.2x2_cor_04>
+ src.tag0.time 4
+endif
+if (<tag0.dentro>==9)
+ src.go <def.2x2_where_051>
+ src.kit_2x2 <def.2x2_cor_05>
+ src.tag0.time 5
+endif
+if (<tag0.dentro>==10)
+ src.go <def.2x2_where_052>
+ src.kit_2x2 <def.2x2_cor_05>
+ src.tag0.time 5
+endif
+if (<tag0.dentro>==11)
+ src.go <def.2x2_where_061>
+ src.kit_2x2 <def.2x2_cor_06>
+ src.tag0.time 6
+endif
+if (<tag0.dentro>==12)
+ src.go <def.2x2_where_062>
+ src.kit_2x2 <def.2x2_cor_06>
+ src.tag0.time 6
+endif
+if (<tag0.dentro>==13)
+ src.go <def.2x2_where_071>
+ src.kit_2x2 <def.2x2_cor_07>
+ src.tag0.time 7
+endif
+if (<tag0.dentro>==14)
+ src.go <def.2x2_where_072>
+ src.kit_2x2 <def.2x2_cor_07>
+ src.tag0.time 7
+endif
+if (<tag0.dentro>==15)
+ src.go <def.2x2_where_081>
+ src.kit_2x2 <def.2x2_cor_08>
+ src.tag0.time 8
+endif
+if (<tag0.dentro>==16)
+ src.go <def.2x2_where_082>
+ src.kit_2x2 <def.2x2_cor_08>
+ src.tag0.time 8
+endif
+if (<tag0.dentro>==17)
+ src.go <def.2x2_where_091>
+ src.kit_2x2 <def.2x2_cor_09>
+ src.tag0.time 9
+endif
+if (<tag0.dentro>==18)
+ src.go <def.2x2_where_092>
+ src.kit_2x2 <def.2x2_cor_09>
+ src.tag0.time 9
+endif
+if (<tag0.dentro>==19)
+ src.go <def.2x2_where_101>
+ src.kit_2x2 <def.2x2_cor_10>
+ src.tag0.time 10
+endif
+if (<tag0.dentro>==20)
+ src.go <def.2x2_where_102>
+ src.kit_2x2 <def.2x2_cor_10>
+ src.tag0.time 10
+endif
+
+src.tag0.2x2_player <tag0.dentro>
+src.events +e_2x2
+src.sysmessage @044 Bem vindo ao evento 2x2, aguarde o GM.
+return 1
+
+// Pedra Saida
+
+[ITEMDEF i_pedra_2x2_saida]
+ID=0ed5
+NAME Pedra
+TYPE t_normal
+
+on=@create
+VAR.COR={077a 07a1 07a2 07a3 07a4 07a5 07a6 07a7 07a8 07a9 07b1 07b2 07b3 07b4 07b5 07b6 07b7 07b8 07b9 0481 0790 0791 0792 0793 0794 0795 0796 0797 0798 0799 0800 0801 0802 0803 0804 0805 0806 0807 0808 0809 0810}
+NAME @07a1 Saida do evento 2x2
+COLOR=<var.cor>
+
+On=@DCLICK
+if (<src.isgm>)
+ src.go sala evento
+ return 1
+endif
+
+src.flags 00
+src.tag0.player 0
+src.f_2x2_tirar_items
+src.events -e_2x2
+src.go <def.eve_where_psair>
+src.sysmessage @044 Obrigado!!!!
+return 1
+
+// pedra de entrada para batalha
+
+[ITEMDEF i_pedra_2x2_batalha]
+ID=0ed4
+NAME=Pedra
+TYPE=t_normal
+
+On=@CREATE
+VAR.COR={077a 07a1 07a2 07a3 07a4 07a5 07a6 07a7 07a8 07a9 07b1 07b2 07b3 07b4 07b5 07b6 07b7 07b8 07b9 0481 0790 0791 0792 0793 0794 0795 0796 0797 0798 0799 0800 0801 0802 0803 0804 0805 0806 0807 0808 0809 0810}
+NAME @07a1 Entrada para Batalha 2x2
+TAG0.DENTRO 0
+COLOR=<var.cor>
+
+On=@CLICK
+IF (<tag0.player_4>)
+  src.sysmessage @07a1 <uid.<tag0.player_1>.tag0.nome> e  <uid.<tag0.player_2>.tag0.nome>
+  src.sysmessage @044 Contra: 
+  src.sysmessage @07a1 <uid.<tag0.player_3>.tag0.nome> e <uid.<tag0.player_4>.tag0.nome>
+endif
+
+On=@DCLICK
+if (<src.isgm>)
+  src.sysmessage @07a1 <uid.<tag0.player_1>.tag0.nome> e  <uid.<tag0.player_2>.tag0.nome>
+  src.sysmessage @044 Contra: 
+  src.sysmessage @07a1 <uid.<tag0.player_3>.tag0.nome> e <uid.<tag0.player_4>.tag0.nome>
+ return 1
+endif
+
+if !(0<tag0.player_1>)
+ tag0.player_1 <src.uid>
+ src.tag0.player 1
+ src.go <def.2x2_player_1>
+ return 1
+endif
+
+if !(0<tag0.player_2>)
+ tag0.player_2 <src.uid>
+ src.tag0.player 2
+ src.go <def.2x2_player_2>
+ return 1
+endif
+
+if !(0<tag0.player_3>)
+ tag0.player_3 <src.uid>
+ src.tag0.player 3
+ src.go <def.2x2_player_3>
+ return 1
+endif
+
+if !(0<tag0.player_4>)
+ tag0.player_4 <src.uid>
+ src.tag0.player 4
+ src.go <def.2x2_player_4>
+ return 1
+endif
+
+  src.sysmessage @07a1 <uid.<tag0.player_1>.tag0.nome> e  <uid.<tag0.player_2>.tag0.nome>
+  src.sysmessage @044 Contra: 
+  src.sysmessage @07a1 <uid.<tag0.player_3>.tag0.nome> e <uid.<tag0.player_4>.tag0.nome>
+return 1
+
+// Eventos
+
+[EVENTS e_2x2]
+On=@DEATH
+VAR.UID <def.2x2_uid_2>
+
+if (<tag0.player>==1) || (<tag0.player>==2)
+ TRY UID.<var.uid>.tag0.mortos1 <eval <UID.<var.uid>.tag0.mortos1>+1>
+ if !(<uid.<var.uid>.tag0.mortos1>==2)
+  hits 105
+  GO 5393,1180
+  return 1
+ else
+  var.parceiro1 <UID.<var.uid>.TAG0.player_1>
+  var.parceiro2 <UID.<var.uid>.TAG0.player_2>
+
+  TRY UID.<var.parceiro1>.GO <def.eventos_where_saida>
+  TRY UID.<var.parceiro1>.tag0.perdedor 1
+  TRY UID.<var.parceiro2>.GO <def.eventos_where_saida>
+  TRY UID.<var.parceiro2>.tag0.perdedor 1
+ endif
+endif
+
+if (<tag0.player>==3) || (<tag0.player>==4)
+ TRY UID.<var.uid>.tag0.mortos2 <eval <UID.<var.uid>.tag0.mortos2>+1>
+ if !(<uid.<var.uid>.tag0.mortos2>==2)
+  GO 5393,1180
+  hits 105
+  return 1
+ else
+  var.parceiro1 <UID.<var.uid>.TAG0.player_3>
+  var.parceiro2 <UID.<var.uid>.TAG0.player_4>
+
+  TRY UID.<var.parceiro1>.GO <def.eventos_where_saida>
+  TRY UID.<var.parceiro1>.tag0.perdedor 1
+  TRY UID.<var.parceiro2>.GO <def.eventos_where_saida>
+  TRY UID.<var.parceiro2>.tag0.perdedor 1
+ endif
+endif
+
+TRY UID.<var.UID>.tag0.player_1 0
+TRY UID.<var.UID>.tag0.player_2 0
+TRY UID.<var.UID>.tag0.player_3 0
+TRY UID.<var.UID>.tag0.player_4 0
+
+TRY UID.<var.UID>.tag0.mortos1 0
+TRY UID.<var.UID>.tag0.mortos2 0
+
+HITS 105
+return 1
+
+// Funções
+[FUNCTION reset_2x2]
+IF !(0<args>)
+ src.sysmessage @044 Use o comando assim: .reset_2x2 #
+ src.sysmessage @044 (#=N de vagas)
+ return 1
+endif
+
+IF (<args> > 20)
+ src.sysmessage @044 Maximo de 20 Vagas para o evento.
+ return 1
+endif
+
+IF (<args> < 4)
+ src.sysmessage @044 Minimo 4 vagas (2 times)
+ return 1
+endif
+
+IF (<args> == 1) || (<args> == 3) || (<args> == 5) || (<args> == 7) || (<args> == 9) || (<args> == 11) || (<args> == 13) || (<args> == 15) || (<args> == 17) || (<args> == 19)
+ src.sysmessage @044 Somente numeros pares.
+ return 1
+endif
+
+VAR.UID <def.2x2_uid_1>
+VAR.UID2 <def.2x2_uid_2>
+
+TRY UID.<var.uid>.TAG0.VAGAS <args>
+TRY UID.<var.uid>.TAG0.DENTRO 0
+
+TRY UID.<var.uid2>.tag0.player_1 0
+TRY UID.<var.uid2>.tag0.player_2 0
+TRY UID.<var.uid2>.tag0.player_3 0
+TRY UID.<var.uid2>.tag0.player_4 0
+return 1
+
+// Tirar items
+
+[FUNCTION f_2x2_tirar_items]
+SRC.FINDLAYER(1).REMOVE
+SRC.FINDLAYER(2).REMOVE
+SRC.FINDLAYER(3).REMOVE
+SRC.FINDLAYER(4).REMOVE
+SRC.FINDLAYER(5).REMOVE
+SRC.FINDLAYER(6).REMOVE
+SRC.FINDLAYER(7).REMOVE
+SRC.FINDLAYER(8).REMOVE
+SRC.FINDLAYER(9).REMOVE
+SRC.FINDLAYER(10).REMOVE
+SRC.FINDLAYER(12).REMOVE
+SRC.FINDLAYER(13).REMOVE
+SRC.FINDLAYER(14).REMOVE
+SRC.FINDLAYER(17).REMOVE
+SRC.FINDLAYER(18).REMOVE
+SRC.FINDLAYER(19).REMOVE
+SRC.FINDLAYER(20).REMOVE
+SRC.FINDLAYER(21).REMOVE
+SRC.FINDLAYER(22).REMOVE
+SRC.FINDLAYER(23).REMOVE
+SRC.FINDLAYER(24).REMOVE
+SRC.FINDLAYER(25).REMOVE
+return 1
+
+// Kit
+
+[FUNCTION kit_2x2]
+VAR.COR=<args>
+
+SERV.NEWITEM=i_mytheril_plate_helm
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+VAR.COR=<NEW.COLOR>
+
+SERV.NEWITEM=i_mytheril_heater_shield
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Escudo Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_mytheril_platemail_gorget
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_mytheril_platemail
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_mytheril_platemail_arms
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_mytheril_platemail_gauntlets
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_mytheril_platemail_leggings
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Armadura Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_champion_robe
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Robe Evento
+NEW.EQUIP
+
+SERV.NEWITEM=i_sword_viking_vanq
+NEW.NAME=Viking Sword de Evento
+NEW.COLOR=<VAR.COR>
+NEW.EQUIP
+
+SERV.NEWITEM=i_sash_str
+NEW.NAME=Sash of Str de Evento
+NEW.COLOR=<VAR.COR>
+NEW.EQUIP
+
+SERV.NEWITEM=i_pet_llama
+NEW.NAME=Llama de Evento
+NEW.COLOR=<VAR.COR>
+NEW.BOUNCE
+
+SERV.NEWITEM=i_kit_magia
+NEW.COLOR=<VAR.COR>
+NEW.BOUNCE
+
+[EOF]

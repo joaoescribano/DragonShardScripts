@@ -1,0 +1,117 @@
+[ITEMDEF i_w_rb_gate]
+ID=01af3//0f6c
+TYPE=t_telepad
+
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Moongates
+DESCRIPTION=RB Gate
+
+ON=@TIMER
+if ( <more1> )
+  more1=<more1>-1
+  TIMER=1
+  return 1
+else
+  SOUND=528
+  REMOVE
+ENDIF
+RETURN 1
+
+ON=@Create
+COLOR=032
+MORE1=36
+ATTR=attr_static
+
+on=@Step
+IF (<SRC.NPC> >= 1)
+ RETURN 1
+ENDIF
+
+IF !(<SRC.Z> == <Z>)
+ RETURN 1
+ENDIF
+
+IF (0<SRC.TAG.GATE> == 0)
+ SRC.Z=<Z> + 1
+ LINK=<UID>
+ LINK.DIALOG D_GATE
+ RETURN 1
+ENDIF
+
+[DIALOG d_gate] 
+100,200 
+page 0
+resizepic 140 0 5120 240 90
+text 198 20 351 0 // texto enter this gate
+text 200 58 100 1 // texto sim
+text 300 58 100 2 // texto nao
+button 180 60 1210 1210 1 0 1 // button sim
+button 280 60 1209 1210 1 0 2 // buton nao
+
+[DIALOG d_gate TEXT] 
+Entrar no Gate?
+Yes
+No
+
+[DIALOG d_gate BUTTON] 
+ON=0 
+RETURN 1
+
+ON=1
+
+IF <LINK.DISTANCE> >= 2
+ SRC.SYSMESSAGE Voce se afastou demais do gate.
+ RETURN 1
+ENDIF
+
+SRC.GOPLACE <morep>
+FIX
+SRC.Z=<SRC.Z> + 1
+RETURN 1
+
+ON=2
+SRC.SYSMESSAGE Cancelado.
+RETURN 1
+
+[ITEMDEF 0f6c]
+//blue moongate
+DEFNAME=i_moongate_blue
+TYPE=t_telepad
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Moongates
+DESCRIPTION=Blue Moongate
+DUPELIST=0f6d,0f6e,0f6f,0f70
+
+
+[ITEMDEF 0dda]
+//red moongate animated (full)
+DEFNAME=i_moongate_red
+RESOURCES=i_scroll_gate_travel
+TYPE=t_telepad
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Moongates
+DESCRIPTION=Red Moongate (Animated)
+DUPELIST=0ddb,0ddc,0ddd,0dde
+
+
+[ITEMDEF 01ae5]
+DEFNAME=i_moongate_red_fx
+TYPE=t_light_lit
+TDATA4=i_moongate_red_fx
+CATEGORY=Animations
+SUBSECTION=Moongate Summoning (Red)
+DESCRIPTION=@
+DUPELIST=01ae6,01ae7,01ae8,01ae9,01aea,01aeb,01aec,01aed
+
+
+[ITEMDEF 01af3]
+DEFNAME=i_moongate_blue_fx
+TYPE=t_light_lit
+TDATA4=0
+CATEGORY=Animations
+SUBSECTION=Moongate Summoning (Blue)
+DESCRIPTION=@
+DUPELIST=01af4,01af5,01af6,01af7,01af8,01af9,01afa,01afb
+
+
+[EOF]

@@ -1,0 +1,163 @@
+// Created 3/6/2008 00:40:35, with Gump Studio.
+// Exported with with SphereExporter ver 1.1.
+// Script for 0.56/Revisions
+
+[DIALOG pedra_kill]
+0,0
+page 0
+resizepic 92 61 9200 455 442
+gumppictiled 101 69 436 425 2624
+checkertrans 101 69 436 425
+resizepic 124 86 9200 392 388
+gumppictiled 168 94 306 43 2624
+checkertrans 168 94 306 43
+resizepic 175 100 9200 294 31
+text 213 106 32 0
+button 140 170 4005 4006 1 0 1
+button 140 220 4005 4006 1 0 2
+button 140 270 4005 4006 1 0 3
+button 140 320 4005 4006 1 0 4
+button 140 370 4005 4006 1 0 5
+button 140 420 4005 4006 1 0 6
+text 180 170 32 1
+text 180 220 32 2
+text 180 270 32 3
+text 180 320 32 4
+text 180 370 32 5
+text 180 420 32 6
+gumppic 74 27 10400
+gumppic 74 195 10401
+gumppic 74 381 10402
+gumppic 483 25 10410
+gumppic 484 195 10411
+gumppic 484 381 10412
+gumppic 335 179 14
+gumppic 335 178 60970 1931
+gumppic 335 178 60992 1913
+gumppic 334 180 50930 1913
+button 458 440 2640 2641 1 0 7
+
+[DIALOG pedra_kill text]
+Pedra de Kills - Dragon Shard
+Pagar 1 Kill - 10 k
+Pagar 5 Kills - 30 k
+Pagar 10 Kills - 50 k
+Pagar 15 Kills - 65 k
+Pagar 30 Kills - 130 k
+Pagar 50 Kills - 300 k
+
+[DIALOG pedra_kill button]
+ON=7
+SRC.SYSMESSAGE Menu de kills fechado
+return 1
+
+ON=1
+
+if (<src.KILLS> < 1)
+	src.sysmessage @009fb Voce nao tem kill.
+	return 1
+endif
+
+If !(<src.restest 10000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 10000 i_gold
+src.KILLS=(<src.kills> -1)
+Src.message Voce perdeu 1 kill 
+
+ON=2
+
+if (<src.KILLS> < 5)
+	src.sysmessage @009fb Voce nao tem 5 kills.
+	return 1
+endif
+
+If !(<src.restest 30000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 30000 i_gold
+src.KILLS=(<src.kills> -5)
+Src.message Voce perdeu 5 kills
+
+ON=3
+
+if (<src.KILLS> < 10)
+	src.sysmessage @009fb Voce nao tem 10 kills.
+return 1
+endif
+
+If !(<src.restest 50000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 50000 i_gold
+src.KILLS=(<src.kills> -10)
+Src.message Voce perdeu 10 kills
+
+ON=4
+
+if (<src.KILLS> < 15)
+	src.sysmessage @009fb Voce nao tem 15 kills.
+return 1
+endif
+
+If !(<src.restest 65000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 65000 i_gold
+src.KILLS=(<src.kills> -15)
+Src.message Voce perdeu 15 kills
+
+ON=5
+
+if (<src.KILLS> < 30)
+	src.sysmessage @009fb Voce nao tem 30 kills.
+return 1
+endif
+
+If !(<src.restest 130000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 130000 i_gold
+src.KILLS=(<src.kills> -30)
+Src.message Voce perdeu 30 kills
+
+ON=6
+
+if (<src.KILLS> < 50)
+	src.sysmessage @009fb Voce nao tem 50 kills.
+return 1
+endif
+
+If !(<src.restest 300000 i_gold>) 
+	src.sysmessage @009fb Voce nao tem dinheiro suficiente.
+	return 1
+endif
+
+src.consume = 300000 i_gold
+src.KILLS=(<src.kills> -50)
+Src.message Voce perdeu 50 kills
+
+//////////////////////////////////////////////////Pedra//////////////////////////////////////////////////
+
+[ITEMDEF i_pedrakills]
+id=3796
+type=t_normal
+name=Pedra de Kills
+ON=@CREATE
+attr=08000
+color=020
+ON=@DCLICK
+DIALOG pedra_kill
+return 1
+
+[EOF]

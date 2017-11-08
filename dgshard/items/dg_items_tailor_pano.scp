@@ -1,0 +1,405 @@
+//Explosion bag
+
+[ITEMDEF i_bag_explosion]
+ID=i_bag
+Name=Explosion Bag
+TDATA2=03D
+FLIP=1
+WEIGHT=2.0
+SKILLMAKE=Tailoring 50.0, ItemID 100.0, t_sewing_kit
+RESOURCES=10 i_hide, 5 i_potion_explosionless
+
+ON=@CREATE
+color=077a
+
+on=@dclick
+src.hits -= 6
+src.sound = snd_spell_explosion
+SRC.EFFECT= 3,14089,6,15,1 
+Src.anim 20
+Return 1
+
+
+//**************//Masks comuns//**************
+
+//***//Polar//***
+
+[ITEMDEF i_mask_polar_bear]
+ID=i_mask_bear
+Name=Mask Polar Bear
+WEIGHT=2.0
+DYE=0
+ 
+ON=@CREATE
+color=0481
+HITPOINTS={999 999}
+
+//***//Black//***
+
+[ITEMDEF i_mask_black_bear]
+ID=i_mask_bear
+Name=Mask Black Bear
+WEIGHT=2.0
+DYE=0
+ 
+ON=@CREATE
+color=0901
+HITPOINTS={400 1000}
+
+//***//Brown//***
+
+[ITEMDEF i_mask_Brown_bear]
+ID=i_mask_bear
+Name=Mask Brown Bear
+WEIGHT=2.0
+DYE=0
+ 
+ON=@CREATE
+color=01bb
+HITPOINTS={400 1000}
+
+//************//Masks Magics//*****************
+
+//
+// Magic Polar Bear
+//
+
+[ITEMDEF i_mask_polar_bear_magic]
+ID=i_mask_bear
+NAME=Mask Polar Bear Magic
+WEIGHT=2.0
+DYE=0
+TYPE=T_CLOTHING
+SKILLMAKE=Tailoring 100.0, Magery 80.0, t_sewing_kit
+RESOURCES=10 i_hide, 1 i_mask_polar_bear, 100 i_reag_mandrake_root
+
+ON=@CREATE
+HITPOINTS={400 1000}
+color=0481
+
+ON=@EQUIP
+SRC.MODSTR += 5
+
+ON=@UNEQUIP
+SRC.MODSTR -= 5
+
+//
+// Magic Black Bear
+//
+
+[ITEMDEF i_mask_black_bear_magic]
+ID=i_mask_bear
+Name=Mask Black Bear Magic
+WEIGHT=2.0
+DYE=0
+TYPE=T_CLOTHING
+SKILLMAKE=Tailoring 100.0, Magery 80.0, t_sewing_kit
+RESOURCES=10 i_hide, 1 i_mask_black_bear, 100 i_reag_ginseng
+
+ON=@CREATE
+HITPOINTS={400 1000}
+color=0901
+
+ON=@EQUIP
+SRC.MODINT += 5
+
+ON=@UNEQUIP
+SRC.MODINT -= 5
+
+//
+// Magic Brown Bear
+//
+
+[ITEMDEF i_mask_brown_bear_magic]
+ID=i_mask_bear
+Name=Mask Brown Bear Magic
+WEIGHT=2.0
+DYE=0
+TYPE=T_CLOTHING
+SKILLMAKE=Tailoring 100.0, Magery 80.0, t_sewing_kit
+RESOURCES=10 i_hide, 1 i_mask_brown_bear, 100 i_reag_nightshade
+
+ON=@CREATE
+HITPOINTS={400 1000}
+color=01bb
+
+ON=@EQUIP
+SRC.MODDEX += 5
+
+ON=@UNEQUIP
+SRC.MODDEX -= 5
+
+//
+// Mana Mask Tribal
+//
+
+//[ITEMDEF i_mana_mask]
+//ID=i_mask_blue
+//NAme=Mana Mask Tribal
+//WEIGHT=2
+//SKILLMAKE=Tailoring 100.0, Magery 80.0, Meditation 100.0, t_sewing_kit
+//RESOURCES=20 i_hide, 300 i_reag_eye_of_newt
+
+//ON=@CREATE
+//HITPOINTS={400 1000}
+//color=0480
+
+//ON=@EQUIP
+// SRC.STR -= 10
+//IF (<SRC.Meditation> < 700)
+// SRC.SYSMESSAGE Voce nao tem 70.0 de Meditation, a mask nao fara efeito.
+// TIMER -1
+//ELSE
+// TIMER 2
+//ENDIF
+
+//ON=@UNEQUIP
+// TIMER=-1
+// SRC.STR += 10
+//ENDIF
+
+//ON=@TIMER
+//IF ((<CONT.MANA>+2) < <CONT.INT>)
+//CONT.MANA += 2
+//ENDIF
+//TIMER=2
+//RETURN 1
+
+//
+// Mana Bear Mask
+//
+
+//[ITEMDEF i_mana_mask_bear]
+//ID=i_mask_bear
+//NAme=Mana Mask Bear
+//WEIGHT=2
+//SKILLMAKE=Tailoring 100.0, Magery 80.0, t_sewing_kit
+//RESOURCES=20 i_hide, 1 i_mask_bear, 300 i_reag_eye_of_newt
+
+//CATEGORY=Novos itens tailor
+//SUBSECTION=Masks
+//DESCRIPTION=Mana Mask Bear
+
+//ON=@CREATE
+//HITPOINTS={400 1000}
+//color=0480
+
+//ON=@EQUIP
+// SRC.STR -= 10
+//IF (<SRC.Meditation> < 700)
+// SRC.SYSMESSAGE Voce nao tem 70.0 de Meditation, a mask nao fara efeito.
+// TIMER -1
+//ELSE
+// TIMER 2
+//ENDIF
+
+//ON=@UNEQUIP
+// TIMER=-1
+// SRC.STR += 10
+//ENDIF
+
+//ON=@TIMER
+//IF ((<CONT.MANA>+2) < <CONT.INT>)
+//CONT.MANA += 2
+//ENDIF
+//TIMER=2
+//RETURN 1
+
+
+//[ITEMDEF i_mana_mask_black_bear]
+//ID=i_mask_bear
+//NAme=Mana Mask Bear
+//WEIGHT=2
+//SKILLMAKE=Tailoring 100.0, Magery 80.0, t_sewing_kit
+//RESOURCES=20 i_hide, 1 i_mask_black_bear, 300 i_reag_eye_of_newt
+
+//CATEGORY=Novos itens tailor
+//SUBSECTION=Masks
+//DESCRIPTION=Mana Mask Black Bear
+
+//ON=@CREATE
+//HITPOINTS={400 1000}
+//color=0480
+
+//ON=@EQUIP
+// SRC.STR -= 10
+//IF (<SRC.Meditation> < 700)
+// SRC.SYSMESSAGE Voce nao tem 70.0 de Meditation, a mask nao fara efeito.
+// TIMER -1
+//ELSE
+// TIMER 2
+//ENDIF
+
+//ON=@UNEQUIP
+// TIMER=-1
+// SRC.STR += 10
+//ENDIF
+
+//ON=@TIMER
+//IF ((<CONT.MANA>+2) < <CONT.INT>)
+//CONT.MANA += 2
+//ENDIF
+//TIMER=2
+//RETURN 1
+
+//
+// Robe Regeneration
+// 
+
+[ITEMDEF i_regen_robe] 
+ID=i_robe
+NAME=Robe de Regeneracao
+
+SKILLMAKE=100.0 TAILORING, 60.0 Magery, t_sewing_kit
+RESOURCES=50 i_cloth, 100 i_reag_ginseng
+WEIGHT=2.0
+ON=@CREATE 
+HITPOINTS=1000
+
+ON=@EQUIP
+ TIMER 2
+
+ON=@UNEQUIP
+TIMER=-1
+
+ON=@TIMER
+IF ((<CONT.HITS>+2) < <CONT.STR>)
+CONT.HITS += 2
+ENDIF
+TIMER=2
+RETURN 1
+
+
+//Robe of bless
+
+[itemdef i_bless_robe] 
+ID=i_robe
+NAME=Robe of Bless
+WEIGHT=2.0
+SKILLMAKE=100.0 Tailoring, 100.0 magery, t_sewing_kit
+RESOURCES=50 i_cloth,50 i_reag_garlic, 50 i_reag_mandrake_root
+
+on=@create 
+HITPOINTS=1000
+ 
+
+ON=@EQUIP 
+src.modstr += 5
+src.moddex += 5
+src.modint += 5
+SRC.SOUND=snd_SPELL_BLESS
+
+
+on=@unequip 
+src.modstr -= 5
+src.moddex -= 5
+src.modint -= 5
+SRC.SOUND=snd_SPELL_BLESS
+
+
+//Robe Wizard
+
+[itemdef i_robe_wizard] 
+ID=i_robe
+NAME=Robe of Wizard
+WEIGHT=2.0
+SKILLMAKE=95.0 Tailoring, 100.0 Magery, t_sewing_kit
+RESOURCES=50 i_cloth, 50 i_reag_Ginseng, 50 i_reag_Nightshade
+
+on=@create 
+HITPOINTS=1000
+
+
+ON=@EQUIP 
+src.magery += 100
+Src.SOUND=snd_SPELL_PROTECTION
+
+on=@unequip 
+Src.SOUND=snd_SPELL_PROTECTION
+src.magery -= 100
+
+
+//[ITEMDEF i_robe_cure] 
+//NAME=Cure Robe
+//ID=i_robe
+//WEIGHT=1
+//SKILLMAKE=95.0 Tailoring, 100.0 Magery, t_sewing_kit
+//RESOURCES=50 i_cloth, 50 i_reag_Garlic
+//DYE=0
+//ARMOR=10
+
+//ON=@create 
+//HITPOINTS=1200
+//COLOR=044
+
+//ON=@EQUIP
+//IF (<src.restest i_efeito_poison>)
+// SRC.CONSUME i_efeito_poison
+// SRC.EFFECT = 3,i_fx_heal_effect, 0,20,1
+//ENDIF
+
+//If (<src.restest i_rune_poison>) 
+// src.consume 1 i_rune_poison
+// SRC.EFFECT = 3,i_fx_heal_effect, 0,20,1
+//endif
+
+
+//Cape Meditation
+
+[itemdef i_cape_med]
+ID=i_cape
+NAME=Capa da Meditacao
+WEIGHT=2.0
+SKILLMAKE=95.0 TAILORING, 70.0 Meditation
+RESOURCES=50 i_cloth
+
+on=@create 
+HITPOINTS=1000
+ 
+
+ON=@EQUIP 
+src.meditation += 100
+src.modint += 5
+
+
+on=@unequip 
+src.meditation -= 100
+src.modint -= 5
+
+//Sash of Str
+
+[itemdef i_sash_str] 
+ID=i_sash
+NAME=Faixa de Str
+SKILLMAKE=95.0 TAILORING,t_sewing_kit
+RESOURCES=50 i_cloth
+WEIGHT=2.0
+on=@create 
+HITPOINTS=1000
+
+
+ON=@EQUIP 
+src.modstr += 5
+
+on=@unequip 
+src.modstr -= 5
+
+// Wizards Hat
+
+[itemdef i_wiz_hat] 
+ID=i_hat_wizards
+NAME=Chapeu de Mago
+TYPE=T_CLOTHING
+SKILLMAKE=TAILORING 95.0,t_sewing_kit
+RESOURCES=50 i_cloth
+WEIGHT=2.0
+on=@create 
+HITPOINTS=1000
+
+ON=@EQUIP 
+src.modint += 5
+
+on=@unequip 
+src.modint -= 5
+
+[EOF]

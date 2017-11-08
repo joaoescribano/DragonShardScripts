@@ -1,0 +1,20 @@
+[Itemdef i_oldaccs_cleaner]
+NAME=Old Accounts Deleter
+ID=0ed8
+TYPE=t_normal
+
+on=@create
+attr=attr_decay|attr_static
+color=07a0
+timer=86400
+
+ON=@timer
+serv.account unused 60 delete
+timer=86400
+return 1
+
+ON=@dclick
+src.sysmessage @036 Faltam <eval <timer>/3600> horas para o proximo delete!
+return 1
+
+[EOF]

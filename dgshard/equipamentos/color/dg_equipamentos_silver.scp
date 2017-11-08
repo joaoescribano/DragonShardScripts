@@ -1,0 +1,1978 @@
+// Ore: Silver - Weapons
+
+[ITEMDEF i_silver_bone_machete]
+ID=i_bone_machete
+NAME=Silver Bone Machete
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_silver,1 i_bone
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_exec]
+ID=i_axe_exec
+NAME=Silver Executioner's Axe
+TYPE=t_weapon_axe
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_battle]
+ID=i_axe_battle
+NAME=Silver Battle Axe
+TYPE=t_weapon_axe
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe]
+ID=i_axe
+NAME=Silver Axe
+TYPE=t_weapon_axe
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_double]
+ID=i_axe_double
+NAME=Silver Double Axe
+TYPE=t_weapon_axe
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_bardiche]
+ID=i_bardiche
+NAME=Silver Bardiche
+TYPE=t_weapon_sword
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_dagger]
+ID=i_dagger
+NAME=Silver Dagger
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_mace]
+ID=i_mace
+NAME=Silver Mace
+TYPE=t_weapon_mace_smith
+DAM=9,10
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_broad]
+ID=i_sword_broad
+NAME=Silver Broad Sword
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_long]
+ID=i_sword_long
+NAME=Silver Long Sword
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_spear]
+ID=i_spear
+NAME=Silver Spear
+TYPE=t_weapon_fence
+DAM=10,11
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_war]
+ID=i_axe_war
+NAME=Silver War Axe
+TYPE=t_weapon_axe
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_scimitar]
+ID=i_scimitar
+NAME=Silver Scimitar
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_long_b]
+ID=i_sword_long_b
+NAME=Silver Long Sword
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_viking]
+ID=i_sword_viking
+NAME=Silver Viking Sword
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Silver Large Battle Axe
+TYPE=t_weapon_axe
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_katana]
+ID=i_katana
+NAME=Silver Katana
+TYPE=t_weapon_sword
+DAM=8,10
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_kryss]
+ID=i_kryss
+NAME=Silver Kryss
+TYPE=t_weapon_sword
+DAM=7,9
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_spear_short]
+ID=i_spear_short
+NAME=Silver Short Spear
+TYPE=t_weapon_fence
+DAM=7,10
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_war_fork]
+ID=i_war_fork
+NAME=Silver War Fork
+TYPE=t_weapon_fence
+DAM=9,10
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_mace_war]
+ID=i_mace_war
+NAME=Silver War Mace
+TYPE=t_weapon_mace_smith
+DAM=12,12
+SKILL=Macefighting
+SPEED=26
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_hammer_war]
+ID=i_hammer_war
+NAME=Silver War Hammer
+TYPE=t_weapon_mace_smith
+DAM=12,13
+SKILL=Macefighting
+SPEED=28
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_maul]
+ID=i_maul
+NAME=Silver Maul
+TYPE=t_weapon_mace_smith
+DAM=10,12
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_hammer_pick]
+ID=i_hammer_pick
+NAME=Silver Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_halberd]
+ID=i_halberd
+NAME=Silver Halberd
+TYPE=t_weapon_sword
+DAM=13,14
+SKILL=Swordsmanship
+SPEED=24
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_cutlass]
+ID=i_cutlass
+NAME=Silver Cutlass
+TYPE=t_weapon_sword
+DAM=8,10
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Silver Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=12,12
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_scythe]
+ID=i_scythe
+NAME=Silver Scythe
+TYPE=t_weapon_sword
+DAM=11,13
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_bone_harvester]
+ID=i_bone_harvester
+NAME=Silver Bone Harvester
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_scepter]
+ID=i_scepter
+NAME=Silver Scepter
+TYPE=t_weapon_mace_smith
+DAM=10,12
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_staff_bladed]
+ID=i_staff_bladed
+NAME=Silver Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_pike]
+ID=i_pike
+NAME=Silver Pike
+TYPE=t_weapon_fence
+DAM=10,12
+SKILL=Fencing
+SPEED=36
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Silver Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_lance]
+ID=i_lance
+NAME=Silver Lance
+TYPE=t_weapon_fence
+DAM=12,13
+SKILL=Fencing
+SPEED=21
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_crescent_blade]
+ID=i_crescent_blade
+NAME=Silver Crescent Blade
+TYPE=t_weapon_sword
+DAM=8,10
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_paladin]
+ID=i_sword_paladin
+NAME=Silver Paladin Sword
+TYPE=t_weapon_sword
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_no_dachi]
+ID=i_no_dachi
+NAME=Silver No-dachi
+TYPE=t_weapon_sword
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_wakizashi]
+ID=i_wakizashi
+NAME=Silver Wakizashi
+TYPE=t_weapon_sword
+DAM=8,10
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_tetsubo]
+ID=i_tetsubo
+NAME=Silver Testsubo
+TYPE=t_weapon_mace_smith
+DAM=9,10
+SKILL=Macefighting
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Macefighting
+DESCRIPTION=Silver Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_lajatang]
+ID=i_lajatang
+NAME=Silver Lajatang
+TYPE=t_weapon_fence
+DAM=12,13
+SKILL=Fencing
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_daisho]
+ID=i_daisho
+NAME=Silver Daisho
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_tekagi]
+ID=i_tekagi
+NAME=Silver Tekagi
+TYPE=t_weapon_fence
+DAM=7,9
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_kama]
+ID=i_kama
+NAME=Silver Kama
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sai]
+ID=i_sai
+NAME=Silver Sai
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Silver Elven Spellblade
+TYPE=t_weapon_fence
+DAM=9,10
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Silver Assassin Spike
+TYPE=t_weapon_fence
+DAM=7,9
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Silver Leaf Bladed
+TYPE=t_weapon_fence
+DAM=10,11
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Silver War Cleaver
+TYPE=t_weapon_fence
+DAM=10,11
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Fencing
+DESCRIPTION=Silver War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_mace_diamond]
+ID=i_mace_diamond
+NAME=Silver Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_rune_blade]
+ID=i_rune_blade
+NAME=Silver Rune Blade
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Silver Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_ornate_axe]
+ID=i_ornate_axe
+NAME=Silver Ornate Axe
+TYPE=t_weapon_axe
+DAM=13,14
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+[ITEMDEF i_silver_elven_machete]
+ID=i_elven_machete
+NAME=Silver Elven Machete
+TYPE=t_weapon_sword
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_silver,1 i_log
+SKILLMAKE=Blacksmithing 60.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Silver
+SUBSECTION=Swordsmanship
+DESCRIPTION=Silver Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+
+// Ore: Silver - Armors
+
+[ITEMDEF i_silver_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Silver Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Chainmails
+DESCRIPTION=Silver Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_silver_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Silver Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Chainmails
+DESCRIPTION=Silver Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_silver_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Silver Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Chainmails
+DESCRIPTION=Silver Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_silver_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Silver Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Ringmails
+DESCRIPTION=Silver Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_silver_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Silver Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Ringmails
+DESCRIPTION=Silver Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_silver_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Silver Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Ringmails
+DESCRIPTION=Silver Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_silver_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Silver Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Ringmails
+DESCRIPTION=Silver Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_arms]
+ID=i_platemail_arms
+NAME=Silver Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Silver Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_helm]
+ID=i_platemail_helm
+NAME=Silver Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Silver Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Silver Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_platemail_chest]
+ID=i_platemail_chest
+NAME=Silver Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Platemails
+DESCRIPTION=Silver Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_helm_closed]
+ID=i_helm_closed
+NAME=Silver Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_silver_helm_open]
+ID=i_helm_open
+NAME=Silver Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_bascinet]
+ID=i_bascinet
+NAME=Silver Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_silver_helm_nose]
+ID=i_helm_nose
+NAME=Silver Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_silver_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Silver Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Silver Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Helmets
+DESCRIPTION=Silver Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Silver Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_buckler]
+ID=i_shield_buckler
+NAME=Silver Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Silver Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_heater]
+ID=i_shield_heater
+NAME=Silver Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Silver Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_silver,2 i_log
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Silver Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_silver_shield_dupre]
+ID=i_shield_dupre
+NAME=Silver Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_silver,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 60.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Silver
+SUBSECTION=Shields
+DESCRIPTION=Silver Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_silver
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+

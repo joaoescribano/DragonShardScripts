@@ -1,0 +1,7 @@
+[typedef t_food_raw]
+ON=@DCLICK
+src.menu menu_s_cook
+return 1
+
+[EOF]
+

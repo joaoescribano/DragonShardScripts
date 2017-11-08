@@ -1,0 +1,9 @@
+[TYPEDEF t_scissors]
+ON=@DClick
+ON=@TargOn_Item
+if (<src.targ.baseid> == i_hide_dragon) || (<src.targ.baseid> == i_wyrm_hide)
+	src.sysmessage @077a,0,1 Este <src.targ.name> é tão duro, que sua tesoura não tem efeito.
+	return 1
+endif
+
+[EOF]

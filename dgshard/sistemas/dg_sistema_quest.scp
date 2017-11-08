@@ -1,0 +1,641 @@
+[function quest]
+if (<src.hits><1)
+SRC.SYSMESSAGE @,3,1 Voce nao pode usar isso nesse Estado.
+return 1
+endif
+if (<src.tag0.questall><1)
+    if (<src.tag0.quest1>=1) && (<src.tag0.quest2>=1) && (<src.tag0.quest3>=1) && (<src.tag0.quest4>=1) && (<src.tag0.quest5>=1) && (<src.tag0.quest6>=1) && (<src.tag0.quest7>=1) && (<src.tag0.quest8>=1) && (<src.tag0.quest9>=1) && (<src.tag0.quest10>=1) && (<src.tag0.quest11>=1) && (<src.tag0.quest12>=1) && (<src.tag0.quest13>=1) 
+    src.newitem i_gold
+        new.amount 50000
+        new.bounce
+    src.newitem i_gold
+        new.amount 50000
+        new.bounce
+        src.newitem i_gold
+        new.amount 50000
+        new.bounce
+    src.newitem i_gold
+        new.amount 50000
+        new.bounce
+        SRC.MESSAGE @,3,1 Voce completou todas as Quests, voce e um grande Guerreiro, aqui esta sua recompensa.
+        src.tag.questall=1
+        else
+        src.dialog d_quest
+        endif
+else
+    SRC.SYSMESSAGE @,3,1 Voce ja completou todas as Quests.
+endif
+
+
+[Dialog d_quest]
+50, 50
+PAGE 0
+gumppic 0 0 2202
+text 40 10 270 0
+button 25 10 2117 2118 1 0 1
+text 40 30 270 1
+button 25 30 2117 2118 1 0 2
+text 40 50 270 2
+button 25 50 2117 2118 1 0 3
+text 40 70 270 3
+button 25 70 2117 2118 1 0 4
+text 40 90 270 4
+button 25 90 2117 2118 1 0 5
+text 40 110 270 5
+button 25 110 2117 2118 1 0 6
+text 40 130 270 6
+button 25 130 2117 2118 1 0 7
+text 40 150 270 11
+button 25 150 2117 2118 1 0 12
+text 40 170 270 12
+button 25 170 2117 2118 1 0 13
+text 200 10 270 7
+button 185 10 2117 2118 1 0 8
+text 200 30 270 8
+button 185 30 2117 2118 1 0 9
+text 200 50 270 9
+button 185 50 2117 2118 1 0 10
+text 200 70 270 10
+button 185 70 2117 2118 1 0 11
+text 195 90 240 13
+text 195 110 240 14
+text 195 130 240 15
+text 195 150 240 16
+text 195 170 240 17
+
+[Dialog d_quest text]
+Zombie Quest
+Skeleton Quest
+Gazer Quest
+Earth Elemental
+Liche Quest
+Daemon Quest
+Young Dragon Quest
+Ice Elemental
+Fire Elemental
+Snow Elemental
+Poison Elemental
+Troll Quest
+Gargole Quest
+Complete as quests,
+e ganhe itens,armas
+especiais,e muito
+DINHEIRO!!!
+
+Dragon Shard
+
+[Dialog d_quest button]
+ON=1
+if (<EVAL <TAG.quest1>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Zombie Quest.
+return 1
+endif
+
+if !(<src.restest 10 i_head_zombie>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Zombie Head para completar a quest.
+else
+src.newitem i_gold
+new.amount 10000
+new.bounce
+src.tag.quest1=1
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+consume 10 i_head_zombie
+endif
+
+
+ON=2
+if (<EVAL <TAG.quest2>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Skeleton Quest.
+return 1
+endif
+if !(<src.restest 10 i_helm_skeleton>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Skeleton Helm para completar a quest.
+else
+src.newitem i_gold
+new.amount 10000
+new.bounce
+src.tag.quest2=1
+src.newitem i_potion_skeletonarmor
+new.bounce
+consume 10 i_helm_skeleton
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=3
+if (<EVAL <TAG.quest3>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Gazer Quest.
+return 1
+endif
+if !(<src.restest 10 i_book_gazer>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Gazer Book para completar a quest.
+else
+src.newitem i_gold
+new.amount 12000
+new.bounce
+src.tag.quest3=1
+src.newitem i_spellbook
+new.more1 0ffffffff
+//new.attr 04
+new.bounce
+consume 10 i_book_gazer
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=4
+if (<EVAL <TAG.quest4>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Earth Elemental Quest.
+return 1
+endif
+if !(<src.restest 10 i_sword_elemental>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Elemental Sword para completar a Quest.
+else
+src.newitem i_gold
+new.amount 8000
+new.bounce
+src.tag.quest4=1
+src.newitem i_iron_sword_paladin
+new.name Elemental Sword
+new.color 0492
+new.bounce
+src.newitem i_iron_shield_round_bronze
+new.name Elemental Shield
+new.color 0492
+new.bounce
+consume 10 i_sword_elemental
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=5
+if (<EVAL <TAG.quest5>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Liche Quest.
+return 1
+endif
+if !(<src.restest 10 i_staff_mage>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Mage Staff para completar a Quest.
+else
+src.newitem i_gold
+new.amount 8000
+new.bounce
+src.tag.quest5=1
+src.newitem random_staff
+new.name Magician Staff
+new.color 07a1
+new.bounce
+consume 10 i_staff_mage
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=6
+if (<EVAL <TAG.quest6>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Daemon Quest.
+return 1
+endif
+if !(<src.restest 10 i_sword_daemon>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Deamon Sword para completar a Quest.
+else
+src.newitem i_gold
+new.amount 10000
+new.bounce
+src.tag.quest6=1
+src.newitem i_sword_viking_ruin
+new.name Daemon Sword
+new.color 0b94
+new.bounce
+consume 10 i_sword_daemon
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=7
+if (<EVAL <TAG.quest7>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Young Dragon Quest.
+return 1
+endif
+if !(<src.restest 10 i_hide_dragon_quest>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Dragon Hide para completar a Quest.
+else
+src.newgold 50000
+src.tag.quest7=1
+src.newitem t_dragonarmor
+new.name Young Dragon Leather Set
+new.bounce
+consume 10 i_hide_dragon_quest
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=8
+if (<EVAL <TAG.quest8>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Elemental Quest.
+return 1
+endif
+if !(<src.restest 10 i_gem_iceelem>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Ice Elemental Gem para completar a Quest.
+else
+src.newitem i_gold
+new.amount 8000
+new.bounce
+src.tag.quest8=1
+src.newitem i_robe
+new.name Ice Elemental Robe
+new.color 0480
+new.attr 04
+new.bounce
+consume 10 i_gem_iceelem
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=9
+if (<EVAL <TAG.quest9>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Fire Elemental Quest.
+return 1
+endif
+if !(<src.restest 10 i_gem_fireelem>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Fire Elemental Gem para completar a Quest.
+else
+src.newitem i_gold
+new.amount 15000
+new.bounce
+src.tag.quest9=1
+src.newitem i_robe
+new.name Fire Elemental Robe
+new.color 00823
+new.attr 04
+new.bounce
+consume 10 i_gem_fireelem
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=10
+if (<EVAL <TAG.quest10>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Snow Elemental Quest.
+return 1
+endif
+if !(<src.restest 10 i_gem_snowelem>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Snow Elemental Gem para completar a Quest.
+else
+src.newitem i_gold
+new.amount 15000
+new.bounce
+src.tag.quest10=1
+src.newitem i_robe
+new.name Snow Elemental Robe
+new.color 0481
+new.attr 04
+new.bounce
+consume 10 i_gem_snowelem
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=11
+if (<EVAL <TAG.quest11>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Poison Elemental Quest.
+return 1
+endif
+if !(<src.restest 10 i_dagger_poisonelem>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 poison dagger para completar a Quest.
+else
+src.newitem i_gold
+new.amount 15000
+new.bounce
+src.tag.quest11=1
+src.newitem i_dagger_poisonquest
+new.bounce
+consume 10 i_dagger_poisonelem
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=12
+if (<EVAL <TAG.quest12>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Troll Quest.
+return 1
+endif
+if !(<src.restest 10 i_axe_troll_quest>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 troll axe para completar a Quest.
+else
+src.newitem i_gold
+new.amount 20000
+new.bounce
+src.tag.quest12=1
+src.newitem random_axe
+new.name Troll Axe
+new.tag0.physicaldamage 25
+new.tag0.firedamage 2
+new.tag0.colddamage 2
+new.tag0.poisondamage 2
+new.tag0.energydamage 2
+new.color 0900
+new.bounce
+consume 10 i_axe_troll_quest
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+ON=13
+if (<EVAL <TAG.quest13>>>0)
+src.SYSMESSAGE @,3,1 Voce ja completou a Gargole Quest.
+return 1
+endif
+if !(<src.restest 10 i_weapon_gargole>)
+src.SYSMESSAGE @,3,1 Voce precisa de 10 Gargole Sword para completar a Quest.
+else
+src.newitem i_gold
+new.amount 25000
+new.bounce
+src.tag.quest13=1
+src.newitem random_weapon
+new.name Gargole Sword
+new.tag0.physicaldamage 25
+new.tag0.firedamage 2
+new.tag0.colddamage 2
+new.tag0.poisondamage 2
+new.tag0.energydamage 2
+new.color 066d
+new.bounce
+consume 10 i_weapon_gargole
+src.SYSMESSAGE @,3,1 Voce completou a Quest.
+endif
+
+
+//////////////////////////////// QUEST ITEMS ////////////////////////////
+
+[itemdef i_dagger_poisonelem]
+ID=i_dagger
+NAME=Poison Dagger [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=300
+
+ON=@CREATE
+COLOR=07a5
+
+[itemdef i_axe_troll_quest]
+ID=i_axe_troll
+NAME=Troll Axe [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=150
+
+ON=@CREATE
+COLOR=0900
+
+[itemdef i_weapon_gargole]
+ID=i_sword_viking
+NAME=Gargole Sword [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=150
+
+ON=@CREATE
+COLOR=066d
+
+[itemdef i_dagger_poisonquest]
+ID=i_dagger
+NAME=Poison Dagger
+WEIGHT=1
+DAM=1,3
+VALUE=5000
+TYPE=t_weapon_fence
+TAG.POISONDAMAGE=100
+
+ON=@CREATE
+COLOR=07a5
+HITPOINTS={20 40}
+
+ON=@DCLICK
+if (<src.poisoning><980)
+src.SYSMESSAGE @,3,1 You must be Grandmaster Assassin to use this.
+unequip
+return 1
+endif
+
+ON=@EQUIP
+if (<src.poisoning><980)
+src.SYSMESSAGE @,3,1 You must be Grandmaster Assassin to use this.
+unequip
+return 1
+endif
+
+[itemdef i_head_zombie]
+ID=i_flesh_head
+NAME=Zombie Head [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=100
+
+ON=@CREATE
+COLOR=0900
+
+[itemdef i_helm_skeleton]
+ID=i_bone_helmet
+NAME=Skeleton Helm 
+WEIGHT=0
+TYPE=t_script
+VALUE=150
+
+ON=@CREATE
+COLOR=0b52
+
+[itemdef i_potion_skeletonarmor]
+ID=i_bottle_empty
+NAME=Skeleton Armor Potion
+WEIGHT=0
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0900
+//ATTR=04
+
+ON=@DCLICK
+if (<src.str><60)
+src.SYSMESSAGE @,3,1 Voce precisa ter 60 de STR para usar a pocao.
+return 1
+endif
+if (<src.findid.i_skel1>)
+src.findid.i_skel1.remove
+src.findid.i_skel2.remove
+src.findid.i_skel3.remove
+src.findid.i_skel4.remove
+src.findid.i_skel5.remove
+return 1
+else
+src.newitem i_skel1
+new.bounce
+new.equip
+src.newitem i_skel2
+new.bounce
+new.equip
+src.newitem i_skel3
+new.bounce
+new.equip
+src.newitem i_skel4
+new.bounce
+new.equip
+src.newitem i_skel5
+new.bounce
+new.equip
+return 1
+endif
+
+[itemdef i_skel1]
+ID=i_bone_chest
+NAME=Skeleton Armor
+WEIGHT=4
+ARMOR=16
+
+ON=@CREATE
+COLOR=0900
+////ATTR=04|08050
+HITPOINTS={30,50}
+
+[itemdef i_skel2]
+ID=i_bone_leggings
+NAME=Skeleton Armor
+WEIGHT=4
+ARMOR=16
+
+ON=@CREATE
+COLOR=0900
+////ATTR=04|08050
+HITPOINTS={30,50}
+
+
+[itemdef i_skel3]
+ID=i_bone_arms
+NAME=Skeleton Armor
+WEIGHT=4
+ARMOR=16
+
+ON=@CREATE
+COLOR=0900
+////ATTR=04|08050
+HITPOINTS={30,50}
+
+
+[itemdef i_skel5]
+ID=i_bone_gloves
+NAME=Skeleton Armor
+WEIGHT=4
+ARMOR=16
+
+ON=@CREATE
+COLOR=0900
+////ATTR=04|08050
+HITPOINTS={30,50}
+
+[itemdef i_skel4]
+ID=i_bone_helmet
+NAME=Skeleton Armor
+WEIGHT=4
+ARMOR=16
+
+ON=@CREATE
+COLOR=0900
+////ATTR=04|08050
+HITPOINTS={30,50}
+
+[itemdef i_book_gazer]
+ID=i_spellbook
+NAME=Gazer Book [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=300
+
+ON=@CREATE
+COLOR=0900
+
+[itemdef i_sword_elemental]
+ID=i_sword_paladin
+NAME=Elemental Sword [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=40
+
+ON=@CREATE
+COLOR=0492
+
+[itemdef i_staff_mage]
+ID=i_staff_gnarled
+NAME=Mage Staff [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=500
+
+ON=@CREATE
+COLOR=0b52
+
+[itemdef i_sword_daemon]
+ID=i_sword_viking
+NAME=Daemon Sword [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=750
+
+ON=@CREATE
+COLOR=0b94
+
+[itemdef i_hide_dragon_quest]
+ID=i_hide
+NAME=Young Dragon Hide [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=1000
+
+ON=@CREATE
+COLOR=0079c
+
+[itemdef i_gem_iceelem]
+ID=i_cannon_ball
+NAME=Ice Elemental Gem [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=500
+
+ON=@CREATE
+COLOR=0480
+
+[itemdef i_gem_fireelem]
+ID=i_cannon_ball
+NAME=Fire Elemental Gem [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=500
+
+ON=@CREATE
+COLOR=00823
+
+[itemdef i_gem_snowelem]
+ID=i_cannon_ball
+NAME=Snow Elemental Gem [Quest Item]
+WEIGHT=0
+TYPE=t_script
+VALUE=500
+
+ON=@CREATE
+COLOR=0481
+
+
+[TEMPLATE t_dragonarmor]
+CONTAINER=i_backpack
+ITEM=i_tunica_dragao
+NAME=Young Dragon Leather Tunic
+//ATTR=04
+
+ITEM=i_calca_dragao
+NAME=Young Dragon Leather Leggings
+//ATTR=04
+
+ITEM=i_luva_dragao
+NAME=Young Dragon Leather Arms
+//ATTR=04
+
+ITEM=i_ombreira_dragao
+NAME=Young Dragon Leather Sleeves
+//ATTR=04
+
+ITEM=i_gorgel_dragao
+NAME=Young Dragon Leather Gorget
+//ATTR=04
+
+ITEM=i_touca_dragao
+NAME=Young Dragon Leather Cap
+//ATTR=04
+
+[EOF]

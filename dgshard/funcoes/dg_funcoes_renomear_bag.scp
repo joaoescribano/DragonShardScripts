@@ -1,0 +1,60 @@
+[FUNCTION renomearbag]
+src.newitem i_memory_rename
+new.trigger @dclick
+return 1
+
+[ITEMDEF i_memory_rename]
+ID=i_memory
+name=memory
+type=t_script
+
+ON=@DCLICK
+target @,3,1 Selecione a bag que ira renomear:
+return 1
+
+ON=@TARGON_CHAR
+SRC.MESSAGE @,3,1 Voce so pode renomear Bags.
+RETURN 1
+
+ON=@Targon_Item
+if !(<SRC.TARG.BASEID>==i_bag)
+SRC.MESSAGE @,3,1 Isto nao e uma bag.
+remove
+return 1
+endif
+IF ( <SRC.TARG.TOPOBJ.UID> != <SRC.UID> )
+src.SYSMESSAGE @,3,1 <src.targ.name> so pode ser renomeado na sua Mochila.
+remove
+RETURN 1
+ENDIF
+src.dialog d_name_bag
+remove
+return 1
+
+[DIALOG d_name_bag]
+150,150
+nomove
+resizepic 190 175 5054 335 150
+resizepic 200 185 3000 315 130
+resizepic 220 235 3000 270 22
+htmlgump 220 200 200 20 0 0 0 //text 215 200 995 0
+text 255 275 0000 1
+button 220 275 4005 4006 1 0 1
+text 435 275 0000 2
+button 400 275 4017 4018 1 0 0
+textentry 225 237 253 25 0 0 3
+
+[DIALOG d_name_bag TEXT]
+Digite um nome para a Bag
+Continuar
+Cancelar
+<src.targ.name>
+
+[DIALOG d_name_bag BUTTON]
+ON=0
+ON=1
+SRC.SYSMESSAGE @,3,1 Bag renomeada para <ARGTXT[0]>.
+SRC.TARG.NAME <ARGTXT[0]>
+RETURN 1
+
+[EOF]

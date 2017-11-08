@@ -1,0 +1,121 @@
+[ITEMDEF i_chao_uni]
+ID=017bd
+NAME=snow
+RESOURCES=25 i_water
+CATEGORY=Buildings - Floors
+SUBSECTION=Blue Floor
+DESCRIPTION=snow
+DUPELIST=017be,017bf
+
+ON=@CREATE
+
+ATTR=080
+
+ON=@STEP
+if (<src.isplayer>)
+	src.go 5784,2311,43
+endif
+/////SUBIDA E DESCIDA BANK BRITAIN ITEM
+
+[ITEMDEF i_chao_BANK_BRIT]
+ID=017bd
+NAME=subida bank brit
+RESOURCES=25 i_water
+CATEGORY=Buildings - Floors
+SUBSECTION=Blue Floor
+DESCRIPTION=snow
+DUPELIST=017be,017bf
+
+ON=@CREATE
+
+ATTR=080
+
+ON=@STEP
+if (<src.isplayer>)
+	src.go 1431,1688,21
+endif
+
+[ITEMDEF i_chao_BANK_BRIT_2]
+ID=017bd
+NAME=descida bank brit
+RESOURCES=25 i_water
+CATEGORY=Buildings - Floors
+SUBSECTION=Blue Floor
+DESCRIPTION=snow
+DUPELIST=017be,017bf
+
+ON=@CREATE
+
+ATTR=080
+
+ON=@STEP
+if (<src.isplayer>)
+	src.go 1431,1696
+endif
+
+////////////SUBIDA E DESCIDA BANK minoc ITEM
+
+[ITEMDEF i_chao_BANK_MINOC]
+ID=017bd
+NAME=subida bank brit
+RESOURCES=25 i_water
+CATEGORY=Buildings - Floors
+SUBSECTION=Blue Floor
+DESCRIPTION=snow
+DUPELIST=017be,017bf
+
+ON=@CREATE
+
+ATTR=080
+
+ON=@STEP
+if (<src.isplayer>)
+	src.go 2509,546,27
+endif
+
+[ITEMDEF i_chao_BANK_MINOC_2]
+ID=017bd
+NAME=descida bank brit
+RESOURCES=25 i_water
+CATEGORY=Buildings - Floors
+SUBSECTION=Blue Floor
+DESCRIPTION=snow
+DUPELIST=017be,017bf
+
+ON=@CREATE
+
+ATTR=080
+
+ON=@STEP
+if (<src.isplayer>)
+	src.go 2514,550
+endif
+
+
+////////////GATE CIDADE PROIBIDA
+
+[ITEMDEF i_gate_proibida]
+ID=i_moongate_blue
+Name=Moongate Cidade Proibida
+TYPE=t_telepad
+
+On=@CREATE
+NAME=@02e9 Cidade Proibida
+Color=0b99
+MOREP=426,3024,-5
+
+ON=@STEP
+IF !(<SRC.ISGM>)
+ IF (<src.hits> < <src.str>) || (<src.mana> < <src.int>)
+  src.sysmessage @059 Somente com Status FULL.
+  return 1
+ else
+  return 0
+ endif
+endif
+
+On=@DCLICk
+IF (<SRC.ISGM>)
+SRC.SYSMESSAGE <UID>
+ENDIF
+RETURN 1

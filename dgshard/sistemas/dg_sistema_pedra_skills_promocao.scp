@@ -1,0 +1,164 @@
+// Dragon Shard - T2A
+// Pedra de Skills Inicio
+// Obs:DIALOG d_set_skill mudar local onde o player ira ou tirar 
+
+[ITEMDEF i_pedra_set_skill]
+id=i_gravestone_17
+name=Selecione suas skills novato!
+type=t_normal
+
+ON=@Create
+color=07a1
+timer=3
+
+ON=@timer
+say @07a1 Clique aqui para selicionar suas skills iniciais, novatos!
+timer 20
+return 1
+
+on=@dclick
+if (<src.tag0.selection> == 0)
+	src.tag0.selecting 1
+	src.tag0.setskilllevel 1
+	src.tag0.setskill 700
+	src.dialog d_set_skill
+else
+	src.sysmessage @07a1 Erro, chama um staff!
+endif
+return 1
+
+[DIALOG d_set_skill]
+-50, -65
+noclose
+nomove
+nodispose
+resizepic 50 63 5170 640 480
+dtext 200 65 1195 Dragon Shard - T2A - Escolha outra skill para ser <eval <src.tag0.setskill>/10>.0
+dtext 100 100 1195 Alchemy
+dtext 250 100 1195 Anatomy
+dtext 400 100 1195 Animal Lore
+dtext 550 100 1195 Animal Taming
+dtext 100 130 1195 Archery
+dtext 250 130 1195 Armslore
+dtext 400 130 1195 Begging
+dtext 550 130 1195 Blacksmithing
+dtext 100 160 1195 Bowcraft
+dtext 250 160 1195 Camping
+dtext 400 160 1195 Carpentry
+dtext 550 160 1195 Cartography
+dtext 100 190 1195 Cooking
+dtext 250 190 1195 Detecting Hidden
+dtext 400 190 1195 Enticement
+dtext 550 190 1195 Evaluat. Intel.
+dtext 100 220 1195 Fencing
+dtext 250 220 1195 Fishing
+dtext 400 220 1195 Forensics
+dtext 550 220 1195 Healing
+dtext 100 250 1195 Herding
+dtext 250 250 1195 Hiding
+dtext 400 250 1195 Inscription
+dtext 550 250 1195 Item ID
+dtext 100 280 1195 Lockpicking
+dtext 250 280 1195 Lumberjacking
+dtext 400 280 1195 Mace Fighting
+dtext 550 280 1195 Magery
+dtext 100 310 1195 Magic Resistance
+dtext 250 310 1195 Meditation
+dtext 400 310 1195 Mining
+dtext 550 310 1195 Musicianship
+dtext 100 340 1195 (off) Necromancy
+dtext 250 340 1195 Parrying
+dtext 400 340 1195 Peacemaking
+dtext 550 340 1195 Poisoning
+dtext 100 370 1195 (off) Provocation
+dtext 250 370 1195 Remove Trap
+dtext 400 370 1195 Snooping
+dtext 550 370 1195 Spirit Speak
+dtext 400 430 1195 Tinkering
+dtext 100 400 1195 Stealing
+dtext 250 400 1195 Stealth
+dtext 400 400 1195 Swordsmanship
+dtext 550 400 1195 Tactics
+dtext 100 430 1195 Tailoring
+dtext 250 430 1195 Taste ID
+dtext 550 430 1195 Tracking
+dtext 100 460 1195 Veterinary
+dtext 250 460 1195 Wrestling
+button 80 100 2117 2118 1 0 1
+button 230 100 2117 2118 1 0 2
+button 380 100 2117 2118 1 0 3
+button 530 100 2117 2118 1 0 36
+button 80 130 2117 2118 1 0 32
+button 230 130 2117 2118 1 0 5
+button 380 130 2117 2118 1 0 7
+button 530 130 2117 2118 1 0 8
+button 80 160 2117 2118 1 0 9
+button 230 160 2117 2118 1 0 11
+button 380 160 2117 2118 1 0 12
+button 530 160 2117 2118 1 0 13
+button 80 190 2117 2118 1 0 14
+button 230 190 2117 2118 1 0 15
+button 380 190 2117 2118 1 0 16
+button 530 190 2117 2118 1 0 17
+button 80 220 2117 2118 1 0 43
+button 230 220 2117 2118 1 0 19
+button 380 220 2117 2118 1 0 20
+button 530 220 2117 2118 1 0 18
+button 80 250 2117 2118 1 0 21
+button 230 250 2117 2118 1 0 22
+button 380 250 2117 2118 1 0 24
+button 530 250 2117 2118 1 0 4
+button 80 280 2117 2118 1 0 25
+button 230 280 2117 2118 1 0 45
+button 380 280 2117 2118 1 0 42
+button 530 280 2117 2118 1 0 26
+button 80 310 2117 2118 1 0 27
+button 230 310 2117 2118 1 0 47
+button 380 310 2117 2118 1 0 46
+button 530 310 2117 2118 1 0 30
+button 80 340 2117 2118 1 0 50
+button 230 340 2117 2118 1 0 6
+button 380 340 2117 2118 1 0 10
+button 530 340 2117 2118 1 0 31
+//button 80 370 2117 2118 0 0 23
+button 230 370 2117 2118 1 0 49
+button 380 370 2117 2118 1 0 29
+button 530 370 2117 2118 1 0 33
+button 80 400 2117 2118 1 0 34
+button 230 400 2117 2118 1 0 48
+button 380 400 2117 2118 1 0 41
+button 530 400 2117 2118 1 0 28
+button 80 430 2117 2118 1 0 35
+button 230 430 2117 2118 1 0 37
+button 380 430 2117 2118 1 0 38
+button 530 430 2117 2118 1 0 39
+button 80 460 2117 2118 1 0 40
+button 230 460 2117 2118 1 0 44
+
+[DIALOG d_set_skill BUTTON]
+ON=0
+src.dialog d_set_skill
+RETURN 0
+
+ON=1 50
+src.sysmessage @07a1 <argn1>
+local.skill = <eval <argn1>-1>
+
+if (<src.<local.skill>> >= <src.tag0.setskill>)m
+	src.sysmessage @077a voce ja escolheu esta skill
+	src.dialog d_set_skill
+	return 0
+endif
+
+src.<local.skill> <src.tag0.setskill>
+
+if (<src.tag0.setskilllevel> == 3)
+	src.go help room
+	src.tag0.setskill 0
+	src.tag0.setskilllevel 0
+else
+	src.tag0.setskill 500
+	src.tag0.setskilllevel <eval <src.tag0.setskilllevel>+1>
+	src.dialog d_set_skill
+endif
+return 1

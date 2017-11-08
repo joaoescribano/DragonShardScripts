@@ -1,0 +1,167 @@
+[function spell_say]
+say @049 <args>
+
+[EVENTS e_magia_color]
+ON=@SPELLCAST
+	if (<argn> == 1)	
+		spell_say Uus Jux
+	elseif (<argn> == 2) 
+		spell_say In Mani Ylem
+	elseif (<argn> == 3)	
+		spell_say Rel Wis
+	elseif (<argn> == 4)	
+		spell_say In Mani
+	elseif (<argn> == 5)	
+		spell_say In Por Ylem
+	elseif (<argn> == 6)	
+		spell_say In Lor
+	elseif (<argn> == 7)	
+		spell_say Flam Sanct
+	elseif (<argn> == 8)	
+		spell_say Des Mani
+	elseif (<argn> == 9)	
+		spell_say Ex Uus
+	elseif (<argn> == 10)	
+		spell_say Uus Wis
+	elseif (<argn> == 11)	
+		spell_say An Nox
+	elseif (<argn> == 12)
+		spell_say An Mani
+	elseif (<argn> == 13)	
+		spell_say In Jux
+		return 1
+	elseif (<argn> == 14)	
+		spell_say An Jux
+		return 1
+	elseif (<argn> == 15)	
+		spell_say Uus Sanct
+	elseif (<argn> == 16)	
+		spell_say Uus Mani
+	elseif (<argn> == 17)	
+		spell_say Rel Sanct
+	elseif (<argn> == 18)	
+		spell_say Vas Flam
+	elseif (<argn> == 19)	
+		spell_say An Por
+		return 1
+	elseif (<argn> == 20)	
+		spell_say In Nox
+	elseif (<argn> == 21)	
+		spell_say Ort Por Ylem
+	elseif (<argn> == 22)	
+		spell_say Rel Por
+	elseif (<argn> == 23)	
+		spell_say Ex Por
+		return 1
+	elseif (<argn> == 24)	
+		spell_say In Sanct Ylem
+	elseif (<argn> == 25)	
+		spell_say Vas An Nox
+	elseif (<argn> == 26)	
+		spell_say Vas Uus Sanct
+	elseif (<argn> == 27)	
+		spell_say Des Sanct
+	elseif (<argn> == 28)	
+		spell_say In Flam Grav
+	elseif (<argn> == 29)	
+		spell_say In Vas Mani
+	elseif (<argn> == 30)	
+		spell_say Por Ort Grav
+	elseif (<argn> == 31)	
+		spell_say Ort Rel
+	elseif (<argn> == 32)	
+		spell_say Kal Ort Por
+	elseif (<argn> == 33)	
+		spell_say In Jux Hur Ylem
+	elseif (<argn> == 34)	
+		spell_say An Grav
+	elseif (<argn> == 35)	
+		spell_say Kal In Ex
+	elseif (<argn> == 36)	
+		spell_say In Jux Sanct
+	elseif (<argn> == 37)	
+		spell_say Por Corp Wis
+	elseif (<argn> == 38)	
+		spell_say An Ex Por
+	elseif (<argn> == 39)	
+		spell_say In Nox Grav
+	elseif (<argn> == 40)	
+		spell_say Kal Xen
+	elseif (<argn> == 41)	
+		spell_say An Ort
+	elseif (<argn> == 42)	
+		spell_say Corp Por
+	elseif (<argn> == 43)	
+		spell_say Vas Ort Flam
+	elseif (<argn> == 44)	
+		spell_say An Lor Xen
+	elseif (<argn> == 45)	
+		spell_say Kal Por Ylem
+	elseif (<argn> == 46)	
+		spell_say Vas Des Sanct
+	elseif (<argn> == 47)	
+		spell_say In Ex Grav
+	elseif (<argn> == 48)	
+		spell_say Wis Quas
+	elseif (<argn> == 49)	
+		spell_say Vas Ort Grav
+	elseif (<argn> == 50)	
+		spell_say In Sanct Grav
+	elseif (<argn> == 51)	
+		spell_say Kal Vas Flam
+	elseif (<argn> == 52)	
+		spell_say Vas Rel Por
+	elseif (<argn> == 53)	
+		spell_say Ort Sanct
+		return 1
+	elseif (<argn> == 54)	
+		spell_say Vas An Ort
+	elseif (<argn> == 55)	
+		spell_say Flam Kal Des Ylem
+	elseif (<argn> == 56)	
+		spell_say Vas Ylem Rel
+	elseif (<argn> == 57)	
+		spell_say In Vas Por
+	elseif (<argn> == 58)	
+		spell_say Vas Corp Por
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 59)	
+		spell_say An Corp
+
+	elseif (<argn> == 60)	
+		spell_say Kal Vas Xen Hur
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 61)	
+		spell_say Kal Vas Xen Corp
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 62)	
+		spell_say Kal Vas Xen Ylem
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 63)	
+		spell_say Kal Vas Xen Flam
+		if (<region.guarded>)
+			criminal 1
+		endif
+	elseif (<argn> == 64)	
+		spell_say Kal Vas Xen An Flam
+		if (<region.guarded>)
+			criminal 1
+		endif
+	endif
+
+ON=@HIT
+	IF (<flags>&statf_freeze)
+		action 1
+		return 1
+	endif
+
+
+[EOF]

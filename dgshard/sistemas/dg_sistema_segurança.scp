@@ -1,0 +1,444 @@
+////////////////////////////////////////////
+//                                        //
+//           Sistema de Segurança         // 
+//                   1.2                  //
+//             By Owner Destiny           //
+//          http://www.dgshard.com        //
+//                                        //
+////////////////////////////////////////////
+//                                        //
+// Adcione estas linhas no fim do arquivo //
+// sphere_skills.scp                      //
+//                                        //
+// ON=@LOGIN                              //
+// EVENTS=+e_contrasenha                  //
+//                                        //
+// Para limpar a Contra senha de algum    //
+// player em caso de emergencia, use o    //
+// comando .rec_cs e digite o ID dele     //
+// que é mostrado no menu HELP            //
+//                                        //
+////////////////////////////////////////////
+
+[DEFNAME config_security]
+dg_inicio 5161,2014,0,0   //help room // where de onde o character criado vai quando entrar no shard a primeira vez
+//sec_txt_01 NAO USA MAIS ESSE DEF!
+sec_txt_02 Sistema de Segurança
+sec_txt_03 Contra Senha
+sec_txt_04 Senha
+sec_txt_05 Voce nao possue contra senha, por favor digite uma (somente numeros).
+sec_txt_06 Digite sua Contra Senha.
+sec_txt_07 Somente Numeros.
+sec_txt_08 Sua contra senha foi ativada.
+sec_txt_09 Erro: Escreva alguma contra senha (somente numeros)!
+sec_txt_10 Contra Senha Valida. Bem
+
+[FUNCTION check_contrasenha]
+if (<src.tag0.lastip>)
+ if (strmatch(<src.tag0.lastip>,<src.account.lastip>)
+  return 0
+ endif
+endif
+
+IF (<SRC.STONE>=0)
+ SRC.STONE=1
+ENDIF
+
+SRC.SYSMESSAGE @009fb Digite sua contra senha ou ira ser desconectado em 15 Segundos!
+
+IF !(0<SRC.TAG0.CONTRASENHA>)
+ SRC.DIALOG d_seguranca
+ELSE
+  IF !(<SRC.FINDID.i_check>)
+   SRC.FLAGS=<SRC.FLAGS>|08000
+   SRC.NEWITEM i_check
+   SRC.ACT.LINK=<SRC.UID>
+   SRC.ACT.EQUIP
+  ENDIF
+ SRC.DIALOG d_seguranca
+ENDIF
+
+[ITEMDEF i_check]
+ID=i_memory
+TYPE=t_comm_crystal
+NAME=Check
+
+ON=@CREATE
+TYPE=t_eq_script
+
+ON=@EQUIP
+TIMER=15
+
+ON=@TIMER
+LINK.FLAGS=<LINK.FLAGS>&~08000
+LINK.DISCONNECT
+REMOVE
+RETURN 1
+
+[ITEMDEF i_unstone]
+ID=i_memory
+TYPE=t_comm_crystal
+NAME=Unstone
+
+ON=@CREATE
+TYPE=t_eq_script
+
+ON=@EQUIP
+TIMER=1
+
+ON=@TIMER
+LINK.STONE=0
+REMOVE
+RETURN 1
+
+[DIALOG d_seguranca]
+50,50
+NOCLOSE
+NODISPOSE
+page 0
+resizepic 0 0 5054 365 127
+gumppictiled 12 50 340 64 2624
+gumppictiled 12 12 340 24 2624
+checkertrans 12 12 340 24
+checkertrans 12 50 340 64
+dtext 45 14 1152 <serv.name> - <def.sec_txt_02>
+resizepic 15 54 9200 335 25
+IF !(0<SRC.TAG0.CONTRASENHA>)
+  src.go <def.dg_inicio>
+  dhtmlgump 18 58 325 16 0 0 <DEF.CENTER><def.sec_txt_05>
+ELSE
+  dhtmlgump 18 58 325 16 0 0 <DEF.CENTER><def.sec_txt_06>
+ENDIF
+resizepic 109 86 3000 191 23
+dtext 20 88 1152 <def.sec_txt_03>
+dtextentry 112 87 183 20 1913 0 <def.sec_txt_04>
+button 310 82 2152 2154 1 0 1
+
+[DIALOG d_seguranca TEXT]
+Senha
+
+[DIALOG d_seguranca button]
+ON=1
+IF !(0<SRC.TAG0.CONTRASENHA>)
+ IF !(<ISEMPTY <argtxt[0]>>)
+  IF !(<ISNUM <argtxt[0]>>) || STRMATCH(*/*,<argtxt[0]>) || STRMATCH(*\*,<argtxt[0]>) || STRMATCH(*EOF*,<argtxt[0]>) || STRMATCH(*@*,<argtxt[0]>) || STRMATCH(*senha*,<argtxt[0]>)
+   SRC.SYSMESSAGE @07a1 <def.sec_txt_07>
+   SRC.DIALOG d_seguranca
+   RETURN 1
+  ELSE
+   SYSMESSAGE @0b99 <def.sec_txt_08>
+   TAG0.CONTRASENHA=<ARGTXT[0]>
+   TAG0.LASTIP <account.lastip>
+    NEWITEM i_unstone
+    ACT.LINK=<SRC.UID>
+    ACT.EQUIP
+  ENDIF
+ ELSE
+  SYSMESSAGE @07a1 <def.sec_txt_09>
+  DIALOG d_seguranca
+  RETURN 1
+ ENDIF
+ RETURN 1
+ELSE
+ IF STRMATCH(*<TAG0.CONTRASENHA>*,<argtxt[0]>) || STRMATCH(*<eval <TAG0.CONTRASENHA>>*,<eval <argtxt[0]>>)
+  SYSMESSAGE @0b99 <def.sec_txt_10> <SEX Vindo/Vinda> ao <serv.name>
+  CONSUME 1 i_check
+   TAG0.LASTIP <account.lastip>
+   NEWITEM i_unstone
+   ACT.LINK=<SRC.UID>
+   ACT.EQUIP
+ ELSE
+  DIALOG d_seguranca
+  RETURN 1
+ ENDIF
+ENDIF
+
+/////////////////// Sistema de recuperação de conta.
+
+[FUNCTION rec_cs]
+dialog d_rec_cs
+
+[DIALOG d_rec_cs]
+0,0
+page 0
+resizepic 15 10 9200 275 95
+resizepic 20 15 9200 265 85
+dtext 70 15 1152 Recuperar Contra Senha - 1
+gumppic 29 71 2501
+dhtmlgump 31 38 244 24 1 0 <def.center>Informe abaixo o ID do player.
+dtextentry 34 71 132 20 0 1 ID
+button 194 71 247 248 1 0 1
+
+[DIALOG d_rec_cs button]
+ON=1
+if strmatch(*ID*,<argtxt[1]>)
+ src.sysmessage @07a1 Informe o ID do player
+ src.dialog d_rec_cs
+ return 1
+endif
+
+var.id <eval <argtxt[1]>>
+src.dialog d_rec_cs2
+return 1
+
+[DIALOG d_rec_cs2]
+0,0
+page 0
+resizepic 15 10 9200 275 95
+resizepic 20 15 9200 265 85
+text 70 15 1152 0
+htmlgump 31 33 244 45 1 1 0
+button 31 75 247 248 1 0 1
+button 211 75 241 242 1 0 0
+
+[DIALOG d_rec_cs2 text]
+Recuperar Contra Senha - 2
+<def.center>Player: <uid.<var.id>.name><def.br>Limpar Contra Senha? Sim ou NÃ£o
+
+[DIALOG d_rec_cs2 button]
+ON=0
+return 1
+
+ON=1
+var.id = <var.id>
+TRY UID.<VAR.ID>.TAG0.CONTRASENHA 0
+SRC.SYSMESSAGE @07a1 Contra Senha Limpa!!!
+return 1
+
+//////////////////////////// Escolha de Skills ////////////////////////////
+[ITEMDEF i_pedra_skills]
+ID=01184
+NAME Stone
+TYPE t_normal
+
+On=@CREATE
+COLOR=07b1
+NAME Escolha 3 Skills Combats para ficar GM!
+attr=attr_static
+
+ON=@DCLICK
+IF !(<src.tag0.skills> >= 3)
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+src.sysmessage @07a1 Voce ja escolheu as 3 skills, caso fique preso aqui va para a help room no menu Help do papperdoll! Obrigado.
+return 1
+
+[DIALOG d_selecionar_skills]
+50,50
+NOCLOSE
+NOMOVE
+page 0
+resizepic 50 50 9200 263 234
+text 60 50 1152 0
+text 92 256 37 1
+button 65 85 1209 1210 1 0 1
+button 65 110 1209 1210 1 0 2
+button 65 135 1209 1210 1 0 3
+button 65 160 1209 1210 1 0 4
+button 65 185 1209 1210 1 0 5
+button 65 210 1209 1210 1 0 6
+button 65 235 1209 1210 1 0 7
+text 85 82 52 2
+text 85 107 52 3
+text 85 132 52 4
+text 85 157 52 5
+text 85 182 52 6
+text 85 207 52 7
+text 85 232 52 8
+
+[DIALOG d_selecionar_skills text]
+Dragon Shard - Selecione as Skills
+Selecione mais <eval 3-<src.tag0.skills>> Skill(s)
+Archery
+Fencing
+Mace Fighting
+Parrying
+Swordsmanship
+Tactics
+Wrestling
+
+[DIALOG d_selecionar_skills button]
+ON=1
+IF (<src.archery> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.archery 100.0
+ src.sysmessage @07a1 Skill Archery Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=2
+IF (<src.fencing> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.fencing 100.0
+ src.sysmessage @07a1 Skill Fencing Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=3
+IF (<src.Macefighting> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.Macefighting 100.0
+ src.sysmessage @07a1 Skill Mace Fighting Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=4
+IF (<src.Parrying> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.Parrying 100.0
+ src.sysmessage @07a1 Skill Parrying Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=5
+IF (<src.Swordsmanship> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.Swordsmanship 100.0
+ src.sysmessage @07a1 Skill Swordsmanship Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=6
+IF (<src.Tactics> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.Tactics 100.0
+ src.sysmessage @07a1 Skill Tactics Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+ON=7
+IF (<src.Wrestling> == 100.0)
+ src.sysmessage @07a1 Skill ja esta GM
+ src.dialog d_selecionar_skills
+ RETURN 1
+ENDIF
+
+if (<src.tag0.skills> < 3)
+ src.Wrestling 100.0
+ src.sysmessage @07a1 Skill Wrestling Escolhinda.
+ src.tag0.skills <eval <src.tag0.skills>+1>
+ IF !(<src.tag0.skills> == 3)
+  src.dialog d_selecionar_skills
+ ELSE
+  src.go help room
+  src.str 100
+  src.int 100
+  src.dex 100
+  src.hits 100
+  src.mana 100
+  src.stam 100
+  DIALOG d_entrada
+ ENDIF
+ RETURN 1
+endif
+
+[EOF]

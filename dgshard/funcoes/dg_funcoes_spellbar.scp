@@ -1,0 +1,132 @@
+[function spellbar]
+if <tag0.spellbar>
+   sdialog d_spellbar 0,<getarg 1,<tag.spellbar_setup>>,<getarg 2,<tag.spellbar_setup>>,<getarg 3,<tag.spellbar_setup>>,<getarg 4,<tag.spellbar_setup>>,<getarg 5,<tag.spellbar_setup>>,<getarg 6,<tag.spellbar_setup>>
+else
+   spellbar_setup 1
+endif
+
+[function spellbar_setup]
+if <tag0.spellbar_setup>
+   sdialog d_spellbar_setup <argn>,<getarg 1,<tag.spellbar_setup>>,<getarg 2,<tag.spellbar_setup>>,<getarg 3,<tag.spellbar_setup>>,<getarg 4,<tag.spellbar_setup>>,<getarg 5,<tag.spellbar_setup>>,<getarg 6,<tag.spellbar_setup>>
+else
+   sdialog d_spellbar_setup <argn>,0,600,44,44,1,10
+endif
+
+[dialog d_spellbar]  //(page),x,y,spellsize-width,spellsize-height,horizontal?(1=YES),spells in line
+0,0
+if <tag0.spellbar>
+   local.index=1
+   local.cnt=<getargcnt <tag0.spellbar>>
+   for i 0 <eval <local.cnt>/<argv[5]>>
+      for j 1 <dargv[5]>
+         local.spellid=<getarg <dlocal.index>,<tag.spellbar>>
+         local.s=<eval 2239+<local.spellid>>
+         if <argv[4]>
+            button <eval <argv[0]>+((<local.j>-1)*<argv[2]>)> <eval <argv[1]>+(<local.i>*<argv[3]>)> <local.s> <local.s> 1 0 <dlocal.spellid>
+         else
+            button <eval <argv[0]>+(<local.i>*<argv[3]>)> <eval <argv[1]>+((<local.j>-1)*<argv[2]>)> <local.s> <local.s> 1 0 <dlocal.spellid>
+         endif
+         local.index +=1
+      endfor
+   endfor
+endif
+
+[dialog d_spellbar button]
+on=1 100
+   cast <argn1>
+   spellbar
+
+[dialog d_spellbar_setup]
+0,0
+resizepic 100 100 01400 220 230
+page 0
+dtext 120 120 20 Spellbar setup
+dtext 120 160 20 Position X - 
+dtext 120 180 20 Position Y -
+dtext 120 200 20 Size of button width - 
+dtext 120 220 20 Size of button height - 
+dtext 120 240 20 Horizontal -
+dtext 120 260 20 Spells in line -
+dtextentrylimited 200 160 80 20 0 0 4 <argv[0]>
+dtextentrylimited 200 180 80 20 0 1 4 <argv[1]>
+dtextentrylimited 270 200 80 20 0 2 3 <argv[2]>
+dtextentrylimited 270 220 80 20 0 3 3 <argv[3]>
+checkbox 200 240 02342 02343 <argv[4]> 0
+dtextentrylimited 220 260 80 20 0 4 2 <argv[5]>
+button 165 295 0ef 0f0 1 0 100
+button 240 295 0f7 0f9 1 0 101
+
+resizepic 330 100 01400 520 230
+dtext 360 305 20 reset spells
+button 340 307 1209 1210 1 0 102
+local.x=350
+local.y=125
+local.cnt=1
+for p 1 2
+   page <dlocal.p>
+   for i 0 3
+      for j 1 8
+         dcroppedtext <dlocal.x> <eval <local.y>+(20*<local.j>)> 80 20 0 <serv.spell.<local.cnt>.name>
+         button <eval <dlocal.x>+90> <eval 2+<local.y>+(20*<local.j>)> 1209 1210 1 <dlocal.p> <dlocal.cnt>
+         local.cnt +=1   
+      endfor
+      dtext <eval <dlocal.x>+10> <eval <local.y>-10> 20 Circle <eval <local.cnt>/8> 
+      local.x +=120
+   endfor
+   local.x=350
+   button  <qval <local.p>==1 ? 800 307 08b0 08b0 0 2 : 796 307 08af 08af 0 1> 
+endfor
+
+[dialog d_spellbar_setup button]
+on=1 64
+   if <tag0.spellbar_setup>
+      f_spell_add <argn1>
+      dialogclose d_spellbar 0
+      spellbar
+   else
+      sysmessage Save settings first.   
+   endif
+   spellbar_setup <qval <argn1> < 33 ? 1:2>
+on=100 101
+   for 0 4
+      if !(<isnum <argtxt[<dlocal._for>]>>)
+         sysmessage Use only numbers pls.
+         spellbar_setup 2
+         return       
+      endif
+   endfor  
+   sysmessage Succesfuly saved!
+   tag.spellbar_setup=<argtxt[0]>,<argtxt[1]>,<argtxt[2]>,<argtxt[3]>,<argchk[0]>,<argtxt[4]>
+   if <argn1>==100
+      spellbar_setup 1
+   endif
+   if <tag0.spellbar>
+      dialogclose d_spellbar 0
+      spellbar
+   endif
+ 
+on=102
+   tag.spellbar=
+   dialogclose d_spellbar 0
+   spellbar_setup 1
+
+[function f_spell_add]
+local.x=<argn>
+if !<tag0.spellbar>
+   tag.spellbar=<local.x>
+elif !(strmatch(*<local.x>*,<tag.spellbar>))
+   tag.spellbar=<tag.spellbar>,<local.x>
+else
+   sysmessage This spell has already been in spellbar.
+endif
+
+[function getarg]  //one-based
+return <argv[<argv[0]>]>
+
+[function getargcnt]
+if <argv> > 0
+   return <argv>
+endif
+return <eval 0>
+
+[eof]

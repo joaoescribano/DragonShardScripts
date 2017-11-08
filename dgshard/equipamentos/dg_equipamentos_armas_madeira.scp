@@ -1,0 +1,148 @@
+//Viking
+
+[ITEMDEF i_vsword_madeira]
+NAME=Viking Sword de Treino
+WEIGHT=2
+TYPE=T_WEAPON_SWORD
+FLIP=1
+ID=013b9
+SPEED=35
+REQSTR=10
+SKILL=Swordsmanship
+SUBSECTION=Sword Teste
+DESCRIPTION=Especial Viking Sword
+RESOURCES=25 i_log
+SKILLMAKE=CARPENTRY 50.0, t_carpentry
+DAM=1,1
+
+ON=@Create
+HITPOINTS=999
+COLOR=444
+
+ON=@CLICK
+MESSAGE (<DAM>)
+MESSAGE <NAME>
+return 1
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Kryss
+
+[ITEMDEF i_kryss_madeira]
+NAME=Kryss de Treino
+WEIGHT=8
+TYPE=T_WEAPON_SWORD
+FLIP=1
+SPEED=45
+ID=i_kryss
+REQSTR=10
+TWOHANDS=N
+SKILL=Swordsmanship
+CATEGORY=Provisions - Weapons
+SUBSECTION=Swords
+DESCRIPTION=Especial Viking Sword
+DUPELIST=013ba
+RESOURCES=25 i_log
+SKILLMAKE=CARPENTRY 50.0, t_carpentry
+DAM=1,1
+
+ON=@Create
+HITPOINTS=999
+COLOR=444
+
+ON=@CLICK
+MESSAGE (<DAM>)
+MESSAGE <NAME>
+return 1
+
+[ITEMDEF i_spear_madeira]
+NAME=Spear de Treino
+WEIGHT=8
+TYPE=T_WEAPON_FENCE
+FLIP=1
+SPEED=45
+ID=i_spear
+REQSTR=10
+TWOHANDS=N
+SKILL=Fencing
+CATEGORY=Provisions - Weapons
+SUBSECTION=Swords
+DESCRIPTION=Especial Spear Sword
+DUPELIST=013ba
+RESOURCES=25 i_log
+SKILLMAKE=CARPENTRY 50.0, t_carpentry
+DAM=1,1
+
+ON=@Create
+HITPOINTS=999
+COLOR=444
+
+ON=@CLICK
+MESSAGE (<DAM>)
+MESSAGE <NAME>
+return 1
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Maces
+
+
+[ITEMDEF i_Mace_Madeira]
+NAME=Mace de Treino
+WEIGHT=8
+TYPE=T_WEAPON_MACE_SMITH
+FLIP=1
+SPEED=30
+ID=i_mace_war
+REQSTR=10
+TWOHANDS=N
+SKILL=Mace Fighting
+CATEGORY=Provisions - Weapons
+SUBSECTION=Swords
+DESCRIPTION=Especial Viking Sword
+DUPELIST=013ba
+RESOURCES=25 i_log
+SKILLMAKE=CARPENTRY 50.0, t_carpentry
+DAM=1,1
+
+ON=@Create
+HITPOINTS=999
+COLOR=444
+
+ON=@CLICK
+MESSAGE (<DAM>)
+MESSAGE <NAME>
+return 1
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Bow
+
+
+[ITEMDEF i_bow_Madeira]
+NAME=Bow de Treino
+WEIGHT=2
+TYPE=T_WEAPON_BOW
+FLIP=1
+SPEED=30
+ID=i_bow
+SKILL=Archery
+REQSTR=10
+TWOHANDS=N
+CATEGORY=Provisions - Weapons
+SUBSECTION=Swords
+DESCRIPTION=Especial Viking Sword
+RESOURCES=25 i_log
+SKILLMAKE=BOWCRAFT 50.0
+DAM=1,1
+
+ON=@Create
+HITPOINTS=999
+COLOR=444
+
+ON=@CLICK
+MESSAGE (<DAM>)
+MESSAGE <NAME>
+return 1
+
+[EOF]

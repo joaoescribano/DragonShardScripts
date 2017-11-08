@@ -1,0 +1,468 @@
+﻿//****************************************************************************
+// SPHERE by : Menasoft ©1997-2014
+// www.sphereserver.net
+// All SPHERE script files and formats are copyright Menasoft & Partners.
+// This file may be freely edited for personal use, but may not be distributed
+// in whole or in part, in any format without express written permission from
+// Menasoft & Partners.  All donations and contributions
+// become the property of Menasoft & Partners.
+//****************************************************************************
+// FILE LAST UPDATED: Monday, May 19, 2014
+//
+VERSION=0.56c
+
+[COMMENT sphere_terrain_types]
+This file contains the definition of each "Terrain" TYPEDEF (water, rock,
+dirt, grass, lava, snow, swamp, jungle, forest, acid,...)
+
+NOTE: The TERRAIN numbers below (if there are two of them, its a range of
+numbers) are not item tiles.
+
+For more information on how these special TYPEDEFs are used in the harvesting
+of resources, check the COMMENT section of the sphere_region.scp file.
+
+
+[TYPEDEF t_water]
+TERRAIN = 0a8	0ab
+TERRAIN = 0136	0137
+TERRAIN = 05797	0579c
+TERRAIN = 0746e	07485
+TERRAIN = 07490	074ab
+TERRAIN = 074b5	075d5
+
+[TYPEDEF t_rock]
+TERRAIN = 0dc	0e7
+TERRAIN = 0ec	0f7
+TERRAIN = 0fc	0107
+TERRAIN = 010c	0117
+TERRAIN = 011e	0129
+TERRAIN = 0141	0144
+TERRAIN = 01d3	01da
+TERRAIN = 01dc	01e7
+TERRAIN = 01ec	01ef
+TERRAIN = 021f	0243
+TERRAIN = 0245	0259
+TERRAIN = 0262	0265
+TERRAIN = 06cd	06dd
+TERRAIN = 06eb	06fe
+TERRAIN = 0709	0720
+TERRAIN = 0727	073e
+TERRAIN = 0745	075c
+TERRAIN = 07bd	07d4
+TERRAIN = 07ec	07f1
+TERRAIN = 0834	0839
+TERRAIN = 0453b 0454f
+
+[TYPEDEF t_dirt]
+TERRAIN	= 09	015		
+TERRAIN	= 0150	015c
+
+[TYPEDEF t_grass]
+TERRAIN = 0003	0006
+TERRAIN = 007d	008c
+TERRAIN = 00c0	00db
+TERRAIN = 00f8	00fb
+TERRAIN = 015d	0164
+TERRAIN = 01a4	01a7
+TERRAIN = 0231	0234
+TERRAIN = 0239	0243
+TERRAIN = 0324	032b
+TERRAIN = 036f	0376
+TERRAIN = 037b	037e
+TERRAIN = 03bf	03c6
+TERRAIN = 03cb	03ce
+TERRAIN = 0579	0580
+TERRAIN = 058b	058c
+TERRAIN = 05e3	0604
+TERRAIN = 066b	066e
+TERRAIN = 067d	0684
+TERRAIN = 0695	069c
+TERRAIN = 06a1	06c2
+TERRAIN = 06d2	06d9
+TERRAIN = 06de	06e1
+
+[TYPEDEF t_lava]
+TERRAIN = 01f4	01f7
+
+[TYPEDEF t_snow]
+TERRAIN = 010c	011d
+TERRAIN = 0385	03ac
+TERRAIN = 0745	0773
+
+[TYPEDEF t_swamp]
+TERRAIN = 07dc	0808
+TERRAIN = 083b	0867
+TERRAIN = 03d65
+TERRAIN = 03dc0	03df1
+TERRAIN = 03ef0
+
+[TYPEDEF t_sand]
+TERRAIN = 016	03e
+TERRAIN = 044	04b
+TERRAIN = 011e	012d
+TERRAIN = 0192
+TERRAIN = 01a8	01ab
+TERRAIN = 01b9	01d1
+TERRAIN = 0282	0291
+TERRAIN = 0335	0354
+TERRAIN = 0359	035c
+TERRAIN = 03b7	03ca
+TERRAIN = 05a7	05ba
+TERRAIN = 064b	066a
+TERRAIN = 066f	0672
+
+[TYPEDEF t_jungle]
+TERRAIN = 0ac	0bf
+TERRAIN = 0ec
+TERRAIN = 0fc	0103
+TERRAIN = 0108	010b
+TERRAIN = 01f1	01f3
+TERRAIN = 026e	0271
+TERRAIN = 0276	027d
+TERRAIN = 0286	0289
+TERRAIN = 0292	0295
+TERRAIN = 0581	058a
+TERRAIN = 058d	0590
+TERRAIN = 059f	05a5
+TERRAIN = 05b3	05b9
+TERRAIN = 05f5	05f8
+TERRAIN = 0605	0610
+TERRAIN = 0615	0617
+TERRAIN = 0727	072a
+TERRAIN = 0733	073a
+
+[TYPEDEF t_forest]
+TERRAIN = 0c4	0d7
+TERRAIN = 0ed	0f3
+TERRAIN = 0f8	0fb
+TERRAIN = 015d	0168
+TERRAIN = 0324	032a
+TERRAIN = 054f	0552
+TERRAIN = 05f1	05f4
+TERRAIN = 05f9	0603
+TERRAIN = 0611	0614
+TERRAIN = 0653	0655
+TERRAIN = 065b	0662
+TERRAIN = 066b	066e
+TERRAIN = 06af	06b4
+TERRAIN = 06bb	06be
+TERRAIN = 0709	070c
+TERRAIN = 0715	071c
+
+[TYPEDEF t_acid]
+TERRAIN = 02e02	02e5f
+TERRAIN = 03f45	03f50
+
+[TYPEDEF t_forge]
+ON=@DCLICK
+return 1
+
+////[TYPEDEF T_POTION]
+///on=@dclick
+///IF (<ATTR> & attr_move_never)
+///    SRC.SYSMESSAGE @009fb Voce nao pode tomar esta pocao.
+///    RETURN 1
+///endif
+//if (<src.action> != -1)
+//    src.sysmessage Termine sua acao para usar a potion.
+//    return 1
+//endif
+
+[TYPEDEF T_KEY]
+ON=@DCLICK
+if (<link.type> == t_ship)
+    if (<src.flags> & statf_freeze) || (<src.flags> & statf_war)
+        src.sysmessage Voce nao pode usar recall neste estado.
+        return 0
+    endif
+    if (<src.magery> < 50.0)
+        src.sysmessage Voce nao tem skill suficiente para usar a magia Recall.
+        return 0
+    endif
+    if (<src.restest 1 i_teleport_barco_delay>)
+        src.sysmessage Voce nao pode dar recall tao rapido.
+        return 0
+    endif
+    if (<src.mana> >= 11 )
+        src.mana -= 11
+        src.anim 18
+        src.sound snd_SPELL_RECALL
+        src.spell_say2 Kal Ort Por
+        src.events =+e_tele_barco
+        src.newitem i_teleport_barco_delay
+        new.cont <src.uid>
+        new.timer 4
+        new.tag0.link <link>
+        new.equip
+    else
+        src.sysmessage Voce nao tem mana suficiente para usar recall.
+    endif
+endif
+RETURN 1
+
+ON=@CLICK
+IF !<more>
+return 0
+else
+message @044 <uid.<more>.region.name> em <uid.<more>.p>
+RETURN 1
+
+[EVENTS e_tele_barco]
+ON=@SkillStart
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+sysmessage @07a1 Recall para o barco cancelado.
+
+ON=@Hit
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@GetHit
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@Death
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@UserWarMode
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@SpellCast
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+[ITEMDEF i_teleport_barco_delay]
+NAME=Delay Barco Tele
+ID=i_worldgem_bit
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=080
+TIMER=1
+
+ON=@Timer
+cont.f_tele_barco <tag0.link>
+cont.events -e_tele_barco
+remove
+return 1
+
+[TYPEDEF t_ore]
+ON=@DCLICK
+    IF <AMOUNT> < 2
+        SRC.SYSMESSAGE "Voce precisa de 2 ores"
+        RETURN 1
+    ENDIF
+    RETURN 0
+
+[TYPEDEF t_figurine]
+ON=@DCLICK
+if (<cont.uid> != <src.findlayer(21).uid>)
+    src.sysmessage Voce so pode usar este item dentro da backpack.
+    return 1
+endif
+RETURN 0
+
+
+[TYPEDEF t_campfire]
+ON=@DCLICK
+    MENU=menu_s_cook
+    RETURN 1
+
+[TYPEDEF t_fire]
+ON=@DCLICK
+    MENU menu_s_cook
+
+[TYPEDEF T_SHIP_PLANK]
+ON=@DCLICK
+if (<distance> > 10)
+    src.sysmessage @07a1 Voce esta muito longe para usar a prancha.
+    return 1
+endif
+
+[TYPEDEF t_thrown_explosive]
+ON=@SpellEffect
+if (<argn1> == 5) || (<argn1> == 18) || (<argn1> == 28) || (<argn1> == 51)
+    src.SFX 519
+    SERV.NEWITEM=i_fx_explode
+    NEW.TYPE=t_explosion
+    NEW.ATTR=attr_move_never|attr_can_decay
+    NEW.LINK=<src>
+    NEW.MOREX=<R<STRARG <TAG0.Damage>>,<STREAT <TAG0.Damage>>>
+    NEW.MOREY=dam_fire|dam_general
+    NEW.MOREZ=<TAG0.Range>
+    
+    if (<cont.uid> == <src.findlayer(21).uid>)
+        new.p=<src.p>
+    else
+        new.p <p>
+    endif
+    
+    NEW.TIMERD=1
+    REMOVE
+endif
+
+ON=@DClick
+   IF (<SRC.RESTEST i_throw_delay>)
+      SRC.SYSMESSAGE You must wait a moment to throw this potion.
+   ELSE
+      SERV.NEWITEM i_throw_delay,1,<SRC>
+      NEW.TIMER=1
+      LINK=<SRC>
+      TARGETG Which target do you wish to throw this at?
+   ENDIF
+   RETURN 1
+   
+ON=@Targon_Ground
+   IF !(<SRC.CANSEELOS <SRC.TARGP>>)
+      SRC.SYSMESSAGE Your can't see the target.
+   ELSEIF (<SRC.DISTANCE <SRC.TARGP>> < 3)
+      SRC.SYSMESSAGE Your target is too close!
+   ELSEIF (<SRC.DISTANCE <SRC.TARGP>> > 10)
+      SRC.SYSMESSAGE Your target is too far!
+   ELSE
+      SRC.SPELLEFFECT s_reveal,100.0,<SRC>
+      SRC.ANIM 11
+      P=<SRC.TARGP>
+      MORE2=4
+      TIMER=1
+      EFFECT 0,0f0d,8,16
+   ENDIF
+   RETURN 1
+   
+ON=@Targon_Char
+   IF !(<SRC.CANSEELOS <SRC.TARGP>>)
+      SRC.SYSMESSAGE Your can't see the target.
+   ELSEIF (<SRC.TARG>==<SRC>)
+      SRC.SYSMESSAGE You can't throw this at yourself.
+   ELSE
+      SRC.SPELLEFFECT s_reveal,100.0
+      SRC.ANIM 11
+      P=<SRC.TARGP>
+      MORE2=4
+      TIMER=1
+      EFFECT 0,0f0d,8,16
+   ENDIF
+   RETURN 1
+
+ON=@Targon_Item
+   SRC.SYSMESSAGE You can not target that!
+   RETURN 1
+   
+ON=@Timer
+   MORE2 --
+   IF (<MORE2>)
+      SAY <dMORE2>
+      TIMER=1
+   ELSE
+      REMOVE
+      LINK.SFX 519
+      SERV.NEWITEM=i_fx_explode
+      NEW.TYPE=t_explosion
+      NEW.ATTR=attr_move_never|attr_can_decay
+      NEW.LINK=<LINK>   //this should link the explosion to thrower - possibly making them a criminal
+      NEW.MOREX=<R<STRARG <TAG0.Damage>>,<STREAT <TAG0.Damage>>>
+      NEW.MOREY=dam_fire|dam_general
+      NEW.MOREZ=<TAG0.Range>
+      NEW.P=<P>
+      NEW.TIMERD=1
+   ENDIF
+RETURN 1
+   
+[ITEMDEF i_throw_delay]
+ID=i_handr_1
+NAME=throwing delay
+TYPE=t_eq_script
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+   ATTR=attr_invis|attr_decay
+   MORE1=4
+
+ON=@Equip
+   TIMER=1
+   
+ON=@Timer
+   IF (<CONT>)
+      IF (<MORE1>)
+         MORE1 --
+         TIMER=1
+         RETURN 1
+      ENDIF
+   ENDIF
+   REMOVE
+   RETURN 1
+
+[TYPEDEF t_scroll_blank]
+ON=@DCLICK
+src.menu sm_inscription
+
+[TYPEDEF t_ingot]
+ON=@DClick
+if (<cont.uid> != <src.findlayer(21).uid>)
+  src.sysmessage @077a,0,1 Você só pode usar o <name> em sua bolsa.
+  return 1
+endif
+
+if (<src.findlayer(1).type> == t_weapon_mace_smith)
+  local.forja = 0
+  local.anvil = 0
+
+  foritems 1
+    if (<type> = t_forge)
+      local.forja = <uid>
+    elif (<type> == t_anvil)
+      local.anvil = <uid>
+    endif
+  endfor
+
+  if (<local.forja> == 0) && (<local.anvil> == 0)
+    src.sysmessage @077a,0,1 Você precisa estar perto de uma forja e de uma bigorna.
+    return 1
+  endif
+
+  if (<local.forja> == 0)
+    src.sysmessage @077a,0,1 Você precisa estar perto de uma forja.
+    return 1
+  endif
+
+  if (<local.anvil> == 0)
+    src.sysmessage @077a,0,1 Você precisa estar perto de uma bigorna.
+    return 1
+  endif
+  
+  src.menu sm_blacksmith
+else
+  src.sysmessage @077a,0,1 Você precisa ter um martelo ou algo do tipo para moldar o metal.
+  return 1
+endif
+
+[TYPEDEF t_log]
+ON=@Click
+if !(<attr> & attr_move_always)
+  attr |=attr_move_always
+endif
+
+[TYPEDEF t_fish]
+ON=@DropOn_Ground
+timer 30
+
+ON=@PickUp_Ground
+timer -1
+
+ON=@Timer
+if (<cont.type> == 0)
+  remove
+endif
+return 1
+
+[EOF]

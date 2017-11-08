@@ -1,0 +1,486 @@
+// Evento Paintball 2.0 (15/04/2010)
+// By Owner Destiny
+// staff_destiny@dgshard.com.br
+
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+// Configuracoes
+
+[DEFNAME paintball_configuracoes]
+paintball_where_1   2276,1197,20,1
+paintball_where_2   2212,1113,40,1
+paintball_where_1_espera   2275,1199,40,1
+paintball_where_2_espera   2212,1116,60,1
+
+[ITEMDEF i_pedra_paintball]
+id      i_guildstone
+name    Paintball
+type    t_normal
+
+ON=@Create
+color           0799
+tag0.atual      1
+tag0.time1      0
+tag0.time2      0
+tag0.mortos_1   0
+tag0.mortos_2   0
+
+on=@Timer
+if (<tag0.on> == 1)
+    if (<eval <tag0.time1>-<tag0.mortos_1>> == 0)
+        timer -1
+        return 1
+    elif (<eval <tag0.time2>-<tag0.mortos_2>> == 0)
+        timer -1
+        return 1
+    endif
+    serv.b @0799 Time Vermelho: <eval <tag0.time1>-<tag0.mortos_1>>/<eval <tag0.time1>>
+    serv.b @07a1       VS
+    serv.b @06 Time Azul: <eval <tag0.time2>-<tag0.mortos_2>>/<eval <tag0.time2>>
+    
+    timer 60
+endif
+return 1
+
+on=@click
+message @0799 Evento Paintball
+return 1
+
+on=@dclick
+if !(0<tag0.on>)
+    src.sysmessage @0799 Aguarde o fechamento da entrada do evento.
+    return 1
+endif
+
+IF (<src.isgm>)
+    sdialog d_paintball_fechar
+    return 1
+endif
+
+if (<eval <tag0.atual> == 1>
+    tag0.time1 +=1
+    tag0.atual 2
+    
+    src.tag0.time 1
+    src.tag0.uid_paintball <uid>
+
+    src.newitem i_paintball_gun
+    src.new.color 0799
+    src.new.equip
+
+    src.newitem i_bala_paintball
+    src.new.amount 50
+    src.new.color 0799
+    src.new.cont <src>
+
+    src.newitem i_paintball_mask
+    src.new.color 0799
+    src.new.equip
+
+    src.newitem i_paintball_robe
+    src.new.color 0799
+    src.new.equip
+
+    src.newitem i_paintball_boots
+    src.new.color 0799
+    src.new.equip
+
+    src.newitem i_paintball_apron
+    src.new.color 0799
+    src.new.equip
+
+    src.newitem i_paintball_gloves
+    src.new.color 0799
+    src.new.equip
+
+    src.sysmessage @077a Dragon Shard - T2A
+    src.sysmessage @0791 Evento - Paintball 2.0
+    src.sysmessage @077a Aguarde a liberacao do GM para sair da base!
+
+    src.events=+e_paintball
+
+    src.go <def.paintball_where_1_espera>
+else
+    tag0.time2 +=1
+    tag0.atual 1
+
+    src.tag0.time 2
+    src.tag0.uid_paintball <uid>
+
+    src.newitem i_paintball_gun
+    src.new.color 0805
+    src.new.equip
+
+    src.newitem i_bala_paintball
+    src.new.amount 50
+    src.new.color 0805
+    src.new.cont <src>
+
+    src.newitem i_paintball_mask
+    src.new.color 0805
+    src.new.equip
+
+    src.newitem i_paintball_robe
+    src.new.color 0805
+    src.new.equip
+
+    src.newitem i_paintball_boots
+    src.new.color 0805
+    src.new.equip
+
+    src.newitem i_paintball_apron
+    src.new.color 0805
+    src.new.equip
+
+    src.newitem i_paintball_gloves
+    src.new.color 0805
+    src.new.equip
+
+    src.sysmessage @077a Dragon Shard - T2A
+    src.sysmessage @0791 Evento - Paintball 2.0
+    src.sysmessage @077a Aguarde a liberacao do GM para sair da base!
+
+    src.events=+e_paintball
+
+    src.go <def.paintball_where_2_espera>
+endif
+return 1
+
+[ITEMDEF i_paintball_limpador_1]
+ID=i_paver_stone
+NAME=Limpador de Roupas
+TYPE=t_limpador
+
+ON=@create
+tag0.time   1
+attr        attr_static
+color       0799
+
+[ITEMDEF i_paintball_limpador_2]
+ID=i_paver_stone
+NAME=Limpador de Roupas
+TYPE=t_limpador
+
+ON=@create
+tag0.time   2
+attr        attr_static
+color       0805
+
+[TYPEDEF t_limpador]
+on=@click
+src.sysmessage @07a1 Passe por cima e limpe suas roupas.
+return 1
+
+on=@step
+if (<src.tag0.time> != <tag0.time>)
+    src.sysmessage @07a1 Voce so pode se limpar na sua base!
+    return 1
+endif
+
+if (<src.restest i_limpador_delay>)
+    src.sysmessage @07a1 Voce nao pode se limpar tao rapido.
+    return 1
+endif
+
+src.newitem i_bala_paintball
+src.new.amount 30
+src.new.update
+
+src.findid.i_paintball_robe.color <color>
+src.findid.i_paintball_apron.color <color>
+src.findid.i_paintball_boots.color <color>
+src.findid.i_paintball_gloves.color <color>
+src.newitem i_limpador_delay
+src.act.equip
+
+serv.b @07a1 <src.name>, acaba de limpar das tintas!
+return 1
+
+[ITEMDEF i_limpador_delay]
+ID=i_memory
+TYPE=t_script
+NAME=Paintball Limpador Delay
+
+ON=@CREATE
+TIMER=60
+TYPE=t_eq_script
+ATTR=080
+
+ON=@TIMER
+remove
+return 1
+
+[ITEMDEF i_paintball_gun]
+ID=i_crossbow_heavy
+NAME=Paintball Gun
+TYPE=T_WEAPON_XBOW
+
+TWOHANDS=Y
+SKILL=Archery
+DAM=0
+WEIGHT=0
+SPEED=50
+
+TDATA3=i_bala_paintball
+TDATA4=i_bala_paintball
+
+ON=@EQUIP
+if (<cont.tag0.time> == 1)
+    var.cor 020
+else
+    var.cor 02
+endif
+
+TAG0.OVERRIDE.AMMOANIM i_cannon_ball
+TAG0.OVERRIDE.AMMOANIMHUE <var.cor>
+
+ON=@UNEQUIP
+return 1
+
+ON=@Damage
+hits <maxhits>
+return 1
+
+[ITEMDEF i_bala_paintball]
+id      i_cannon_ball
+name    Bala de Paintball
+WEIGHT  0
+TYPE   T_WEAPON_BOLT
+
+ON=@CREATE
+ATTR=0
+
+[FUNCTION f_limpar_paintball]
+FORCLIENTS 6144
+    tag0.uid_paintball 0
+    tag0.time 0
+    tag0.liberado 0
+    events=-e_paintball
+ENDFOR
+
+[FUNCTION f_liberar_paintball]
+serv.newitem i_gold
+serv.new.attr 04
+serv.new.p <def.paintball_where_1>
+serv.new.update
+serv.new.f_liberar_paintball_acao
+// Libera o timer
+timer 15
+
+[FUNCTION f_liberar_paintball_acao]
+forclients 6144
+    if (<isevent.e_paintball> == 1)
+        serv.newitem i_mem_paintball
+        new.cont <uid>
+        new.timer 10
+    endif
+endfor
+remove
+
+[itemdef i_mem_paintball]
+id=i_memory
+NAME=Paintball Delay
+type=t_eq_script
+layer=30
+
+on=@create
+attr=08
+morex=4
+
+on=@timer
+cont.tag0.liberado 1
+cont.go <def.paintball_where_<eval <cont.tag0.time>>>
+cont.sysmessage @077a Evento Paintball Liberado!
+cont.sysmessage @07a1 Bom Evento!
+remove
+return 1
+
+[EVENTS e_paintball]
+ON=@UserWarmode
+if !(0<tag0.liberado>)
+    sysmessage @07a1 Aguarde a liberacao do evento!
+    return 1
+endif
+
+ON=@Hit
+if (<tag0.time> == <src.tag0.time>)
+    sysmessage @077a Voce nao pode atacar jogadores do seu time!
+    return 1
+endif
+
+if (<argo.type> != t_weapon_xbow)
+    sysmessage @07a1 Somente dano com a arma de paintball
+    return 1
+endif
+
+if (<src.tag0.time> == 1)
+    var.cor 0805
+else
+    var.cor 0799
+endif
+
+if (<src.findid.i_paintball_robe.color> != <var.cor>)
+    src.findid.i_paintball_robe.color = <var.cor>
+elif (<src.findid.i_paintball_apron.color> != <var.cor>)
+    src.findid.i_paintball_apron.color = <var.cor>
+elif (<src.findid.i_paintball_boots.color> != <var.cor>)
+    src.findid.i_paintball_boots.color = <var.cor>
+elif (<src.findid.i_paintball_gloves.color> != <var.cor>)
+    src.findid.i_paintball_gloves.color = <var.cor>
+else
+    TRY UID.<tag0.uid_paintball>.tag0.mortos_<eval <src.tag0.time>> = <eval <UID.<tag0.uid_paintball>.tag0.mortos_<eval <src.tag0.time>>>+1>
+
+    src.sysmessage @077a Voce perdeu, aguarde o termino do evento para saber se seu time venceu.
+    src.consume i_paintball_gun
+    src.tag0.liberado 0 // Bloqueia o uso de war mode
+    src.go <def.paintball_where_<eval <src.tag0.time>>_espera>
+    
+    f_paintball_verificar_vitoria <tag0.uid_paintball> //Verifica no mundo 1
+endif
+return 1
+
+[FUNCTION f_paintball_verificar_vitoria]
+local.uid   <argn1>
+
+if !(0<local.uid>)
+    return 1
+endif
+
+local.time1     <UID.<local.uid>.tag0.time1>
+local.time2     <UID.<local.uid>.tag0.time2>
+local.mortos_1  <UID.<local.uid>.tag0.mortos_1>
+local.mortos_2  <UID.<local.uid>.tag0.mortos_2>
+
+if (<eval <local.mortos_1>> >= <eval <local.time1>>)
+    f_paintball_vencedor 2
+elif (<eval <local.mortos_2>> >= <eval <local.time2>>)
+    f_paintball_vencedor 1
+endif
+
+return 1
+
+[FUNCTION f_paintball_vencedor]
+local.vencedor <argn1>
+
+if !(0<local.vencedor>)
+    return 1
+endif
+
+forclients 6144
+    if (<isevent.e_paintball> == 1)
+        serv.b <name>
+        tag0.vencedor 1
+        if (<tag0.time> == <local.vencedor>)
+            sysmessage @77a Seu time venceu!!!! parabens!
+            tag0.colocado 1
+        else
+            sysmessage @77a Seu time pegou em segundo lugar.
+            tag0.colocado 2
+        endif
+        sysmessage @07a1 Obrigado por participar!
+        // limpa os dados do evento
+        events=-e_paintball
+        tag0.uid_paintball 0
+        tag0.time 0
+        tag0.liberado 0
+        // Tira o player do evento
+        go <def.eventos_where_saida>
+    endif
+endfor
+
+serv.b @077a Dragon Shard - T2A
+serv.b @07a1 Paintball Urbano
+if (<local.vencedor> == 1)
+    serv.b @07a1 Time Vermelho saiu vitorioso!!! Parabens!
+else
+    serv.b @07a1 Time Azul saiu vitorioso!!! Parabens!
+endif
+return 1
+
+[ITEMDEF i_paintball_robe]
+ID=i_robe
+NAME=Paintball Robe
+WEIGHT=0
+
+ON=@CREATE
+ATTR=attr_static
+HITPOINTS=200
+
+[ITEMDEF i_paintball_mask]
+ID=i_mask_blue
+NAME=Paintball Mask
+WEIGHT=0
+
+ON=@CREATE
+ATTR=attr_static
+HITPOINTS=200
+
+[ITEMDEF i_paintball_apron]
+ID=i_apron_half
+NAME=Paintball Half Apron
+WEIGHT=0
+
+ON=@CREATE
+ATTR=attr_static
+HITPOINTS=200
+
+[ITEMDEF i_paintball_boots]
+ID=i_boots_Calf
+NAME=Paintball Boots
+WEIGHT=0
+
+ON=@CREATE
+ATTR=attr_static
+HITPOINTS=200
+
+[ITEMDEF i_paintball_gloves]
+ID=i_leather_gloves
+NAME=Paintball Gloves
+WEIGHT=0
+
+ON=@CREATE
+ATTR=attr_static
+HITPOINTS=200
+
+[DIALOG d_paintball_fechar]
+50,50
+resizepic 0 0 9200 335 83
+dtext 71 0 1913 Dragon Shard - The Second Age
+dtext 38 21 1952 Fechar entrada e liberar o paintball?
+button 230 50 241 243 1 0 0
+button 40 50 247 248 1 0 1
+
+[DIALOG d_paintball_fechar button]
+ON=0
+return 1
+
+ON = 1
+f_liberar_paintball
+src.invis 1
+src.go <def.paintball_where_1>
+serv.b @07a1 Evento: Paintball.
+serv.b @07a1 10 segs para liberar o uso das armas.
+return 1
+
+[Function evento_8_1_premio]
+dinheiro 20000
+tag0.premio 0
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Paintball Urbano
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[Function evento_8_2_premio]
+dinheiro 5000
+tag0.premio 0
+
+[EOF]

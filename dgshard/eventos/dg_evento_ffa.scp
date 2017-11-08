@@ -1,0 +1,141 @@
+ // Evento FFa 1.1
+// Por Owner Destiny
+// Draon Shard - The Second Age
+// http://dgshard.com.br
+
+[DEFNAME FFA_config]
+ffa_where_1 5193,1363    // Arena FFA
+
+// Pedra entrada
+[ITEMDEF i_entrada_ffa]
+ID=0ed4
+NAME=FFa
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=07b7
+NAME=@07b7 FFA
+TAG0.ON 0
+TAG0.DENTRO 0
+
+ON=@CLICK
+if (<tag0.on>)
+ message @07b7 Dentro [<eval <tag0.dentro>>]
+endif
+return 0
+
+ON=@DCLICK
+IF (<src.isgm>)
+ src.go <def.ffa_where_1>
+ return 1
+endif
+
+tag0.dentro +=1
+src.go <def.ffa_where_1>
+src.arrumar_ffa
+src.tag0.uid_ffa <uid>
+return 1
+
+[FUNCTION arrumar_ffa]
+var.cores={077a 07a1 07a2 07a3 07a4 07a5 07a6 07a7 07a8 07a9 07b1 07b2 07b3 07b4 07b5 07b6 07b7 07b8 07b9 0481 0790 0791 0792 0793 0794 0795 0796 0797 0798 0799 0800 0801 0802 0803 0804 0805 0806 0807 0808 0809 0810}
+
+serv.newitem i_onix_platemail_arms
+new.name Armadura de evento
+new.color <var.cores>
+equip <new>
+
+var.cor = <new.color>
+
+serv.newitem i_onix_platemail_leggings
+new.name Armadura de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_platemail_helm
+new.name Armadura de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_platemail_gorget
+new.name Armadura de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_platemail_gloves
+new.name Armadura de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_platemail_chest
+new.name Armadura de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_sword_viking
+new.name Espada de evento
+new.color <var.cor>
+equip <new>
+
+serv.newitem i_onix_shield_heater
+new.name Escudo de evento
+new.color <var.cor>
+equip <new>
+
+SERV.NEWITEM=i_sash_str
+NEW.NAME=Sash of Str do evento
+NEW.COLOR=<VAR.COR>
+NEW.EQUIP
+
+SERV.NEWITEM=i_pet_llama
+NEW.NAME=Llama do evento
+NEW.COLOR=<VAR.COR>
+NEW.BOUNCE
+
+SERV.NEWITEM=i_kit_magia_ffa
+NEW.COLOR=<VAR.COR>
+NEW.BOUNCE
+
+SERV.NEWITEM=02687
+NEW.COLOR=<VAR.COR>
+NEW.NAME=Robe de evento
+NEW.EQUIP
+
+events +e_ffa
+
+sysmessage @07a1,0,1 Aguarde liberação do GM.
+return 1
+
+[EVENTS e_ffa]
+ON=@SKILLSELECT
+if (<argn>==21) || (<argn>==47)
+ sysmessage @07a1 Skill nao autorizada.
+ action -1
+ return 1
+endif
+
+ON=@DEATH
+go <def.eventos_where_saida>
+hits 100
+events -e_ffa
+return 1
+
+[TEMPLATE i_kit_magia_ffa]
+CONTAINER=i_bag
+NAME=Kit Evento FFA
+ITEM=i_bandage
+AMOUNT=50
+COLOR=0
+ITEM=i_scroll_flamestrike
+AMOUNT=100
+ITEM=i_potion_refreshtotal
+AMOUNT=25
+ITEM=i_potion_healtotal
+AMOUNT=25
+ITEM=i_potion_manatotal
+AMOUNT=25
+ITEM=i_spellbook_full
+NAME=Spell Book de Evento
+COLOR=0810
+ATTR=0
+
+[EOF]

@@ -1,0 +1,55 @@
+// Sistema de controle de IP's logados no shard
+// Criado por: João Escribano <joao.escribano@gmail.com>
+
+[DEFNAME sistema_seguranca_ip]
+seg_max_chars_ip 2
+seg_ignore_vip 1
+
+[FUNCTION f_reset_db_online_chars]
+//db.connect
+db.query "UPDATE chars SET online=0 where online=1"
+serv.log MySQL debug: All chars has been updated to online=0 at the database
+serv.allclients db_login
+
+[FUNCTION f_check_ip_accounts]
+if (<account.plevel> == 0)
+	//db.connect
+	db.query "select id,uid,conta as online from chars where online=1 and ip = '<account.lastip>'"
+	local.contas <db.row.numrows>
+
+	if (<def.seg_ignore_vip> == 1)
+		for x 0 <eval <db.row.numrows>-1>
+			local.uid = <db.row.<eval <local.x>>.uid>
+			local.account = <db.row.<eval <local.x>>.conta>
+
+			if (<uid.<local.uid>.tag0.vip> == 1) && (<eval <uid.<local.uid>.restest i_vip>> > 0) && (<eval <uid.<local.uid>.findid.i_vip.timer>> > 0)
+				local.contas -=1
+			endif
+		endfor
+	endif
+
+	if (<eval <local.contas>> > <eval <def.seg_max_chars_ip>>)
+		log_ip_connection "Deslogado, maximo de <eval <def.seg_max_chars_ip>> contas logadas ao mesmo tempo!"
+		forcelogout
+	endif
+endif
+return 1
+
+[function log_ip_connection]
+if (<file.inuse>)
+    return 1
+endif
+
+file.mode.append 1
+
+if (<file.open logs/loginFailed.txt>)
+    file.writeline [<serv.rtime.format %d/%m/%Y - %H:%M:%S>] <name> [<uid>] (<account.name>) :: <args>
+    serv.log MySQL debug: Player <name> [<uid>] (<account.name>) :: Disconnected due reach max chars logged from same IP <account.lastip>
+else
+    serv.log ERRO: Ao tentar salvar o arquivo de log de contas tentando logar "logs/loginFailed.txt"
+endif
+
+file.close
+return 1
+
+[EOF]

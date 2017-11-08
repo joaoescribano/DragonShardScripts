@@ -1,0 +1,10 @@
+[EVENTS e_guardiao_montaria]
+on=@DEATH
+serv.newnpc <tag0.montaria>
+new.p <p>
+new.update
+
+ON=@DeathCorpse
+argo.remove
+
+[EOF]

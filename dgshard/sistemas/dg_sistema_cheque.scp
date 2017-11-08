@@ -1,0 +1,103 @@
+[FUNCTION CHEQUE]
+IF (<ARGN> <= 0)
+	SRC.SYSMESSAGE 	Voce deve por uma quantidade.
+	RETURN 1
+ELSEIF (<SRC.BANKBALANCE> >= <ARGN>)
+	VAR.AMNX=<ARGN>
+	CONSUMEBANK <ARGN>
+	SRC.NEWITEM=i_cashiers_check
+	SRC.ACT.MORE=<ARGN>
+	SRC.ACT.CONT=<SRC.FINDLAYER.29.UID>
+	SRC.SYSMESSAGE Um cheque de <ARGN> gold foi posto em seu banco.
+	SRC.SOUND=04f
+	RETURN 1
+ELSE
+SRC.SYSMESSAGE Nao tem gold suficiente!
+RETURN 1
+ENDIF
+
+//#####################################################
+
+[FUNCTION consumebank]
+IF (<VAR.AMNX> >= 50000)
+	act=<SRC.FINDLAYER(layer_bankbox).uid>
+	act.layer=layer_pack
+	act.type=t_container
+	act.equip
+	src.consume 50000 i_gold
+	VAR.AMNX=(<VAR.AMNX>+-50000)
+	act.layer=layer_bankbox
+	act.type=t_eq_bank_box
+	act.equip
+	consumebank <VAR.AMNX>
+	RETURN 1
+ELSEIF (<VAR.AMNX> <= 0)
+	VAR.AMNX=
+	RETURN 1
+ELSE
+	act=<SRC.FINDLAYER(layer_bankbox).uid>
+	act.layer=layer_pack
+	act.type=t_container
+	act.equip
+	src.consume <VAR.AMNX> i_gold
+	VAR.AMNX=
+	act.layer=layer_bankbox
+	act.type=t_eq_bank_box
+	act.equip
+	RETURN 1
+ENDIF
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[ITEMDEF i_cashiers_check]
+ID=i_deed
+Name=Cheque
+TYPE=t_normal
+
+CATEGORY=Ferals Stuff 
+SUBSECTION=Misc 
+DESCRIPTION=Cashiers Check (blank)
+
+ON=@CREATE
+ATTR=04
+COLOR=035
+
+ON=@CLICK
+MESSAGE <NAME> de: <MORE> gold
+RETURN 1
+
+ON=@DCLICK
+IF (<MORE> <= 0)
+	REMOVE
+	RETURN 1
+ELSE
+	VAR.AMNT=<MORE>
+	GIVEGOLD
+	SRC.SOUND=037
+	SRC.SYSMESSAGE <MORE> gold foi colocado em seu banco.
+	REMOVE
+	RETURN 1
+ENDIF
+
+
+[FUNCTION Givegold]
+IF (<VAR.AMNT> >= 50000)
+	SRC.NEWITEM=i_gold
+	SRC.ACT.AMOUNT=50000
+	SRC.ACT.CONT=<SRC.FINDLAYER.29.UID>
+	VAR.AMNT=(<VAR.AMNT>+-50000)
+	GIVEGOLD
+	RETURN 1
+ELSEIF (<VAR.AMNT> <= 0)
+	VAR.AMNT=
+	RETURN 1
+ELSE
+	SRC.NEWITEM=i_gold
+	SRC.ACT.AMOUNT=<VAR.AMNT>
+	SRC.ACT.CONT=<SRC.FINDLAYER.29.UID>
+	VAR.AMNT=
+	RETURN 1
+ENDIF
+
+
+[EOF]

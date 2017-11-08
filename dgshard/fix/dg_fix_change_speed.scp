@@ -1,0 +1,126 @@
+[FUNCTION f_fix_antics]
+if <findid.i_timer_movement_analyse>
+  findid.i_timer_movement_analyse.remove
+endif
+
+//serv.newitem i_timer_movement_analyse
+//new.timer = 60
+//new.cont  = <uid>
+//ctag0.movement.occurrences = 0
+
+[FUNCTION f_packet_02]
+if (<argn1> != 02) || (!<local.char>)
+    return 0
+endif
+
+ref1 = <local.char>
+
+if !<ref1.findid.i_timer_movement_analyse>
+    return 0
+elseif !<ref1.f_canbeginmove>
+    return 0
+elseif !<ref1.f_canmove <local.1>>
+    return 0
+endif
+if (<serv.rticks> > <ref1.ctag0.movement.last>)   
+    ref1.ctag0.movement.steps = 0
+    ref1.ctag0.movement.last = <eval <serv.rticks> + 01>
+else
+    ref1.ctag0.movement.steps ++
+    local.steps = <ref1.ctag0.movement.steps>
+    if (<local.steps> >= <eval 20>)
+            ref1.ctag0.movement.result = <ref1.ctag0.movement.result>,<local.steps>
+        if (<eval <serv.time> - <ref1.ctag0.movement.occ>> > 10)
+            ref1.ctag0.movement.occ = <serv.time>
+            ref1.ctag0.movement.occurrences += 1
+                endif
+           if ((<local.steps> > 19) && (<ref1.ctag0.movement.occurrences> > 4)) || (<local.steps> > 21)
+             ref1.updatex
+             return 1
+           endif
+    endif
+endif
+return 0
+
+[FUNCTION f_canbeginmove]
+if (<stam> == 0) || (<speedmode> == 4) || (<flags> & statf_freeze) || (<flags> & statf_stone)
+    return 0
+endif
+return 1
+
+[FUNCTION f_canmove]
+local.dir = <args>
+if (<local.dir> & 080)
+    local.dir &= ~080
+endif
+return <canmove <dlocal.dir>>
+    
+/////////////////////////////////////
+    
+[ITEMDEF i_timer_movement_analyse]
+NAME  = "Movement Timer"
+ID    = i_memory
+TYPE  = t_eq_script
+LAYER = layer_special
+
+on=@Create
+    attr = attr_decay|attr_invis|attr_newbie
+        tag.analise = 1
+    
+on=@Timer
+if (<cont>)
+  if (<cont.ctag0.movement>)
+    if (<cont.ctag0.movement.result>)
+      f_gera_results_cs <cont.ctag0.movement.result>
+      if (<cont.ctag0.movement.occurrences> > 4) || (<tag0.occ.22>)
+         f_show_results_cs
+      endif
+      CONT.CLEARCTAGS movement 
+      cleartags
+      timer = 60
+      return 1
+    endif
+  endif
+endif
+
+[FUNCTION f_gera_results_cs]
+FOR 1 <ARGV>
+  tag0.occ.<dARGV[<dlocal._FOR>]> += 1
+ENDFOR
+return 1
+
+[FUNCTION f_show_results_cs]
+serv.allclients f_staff_notify, SUSPEITA! Relatorio de <CONT.NAME>
+f_gera_arquivo_cs <cont.name>, -
+f_gera_arquivo_cs <cont.name>, Relatorio de <Serv.RTIME>
+FOR 20 30
+    if <tag0.occ.<dlocal._FOR>>
+      serv.allclients f_staff_notify, <dlocal._FOR> passos: <dtag.occ.<dlocal._FOR>> vezes.
+      f_gera_arquivo_cs <cont.name>, <dlocal._FOR> passos: <dtag.occ.<dlocal._FOR>> vezes.
+    endif
+ENDFOR
+return 1
+
+[FUNCTION f_gera_arquivo_cs]
+local.ws_id_file=csLogs/<SERV.RTIME.FORMAT %d>_<SERV.RTIME.FORMAT %m>_<ARGV[0]>.txt
+IF (<FILE.INUSE>)
+  FILE.CLOSE
+ENDIF
+
+FILE.MODE.SETDEFAULT
+FILE.MODE.CREATE=1
+FILE.MODE.WRITE=1
+FILE.MODE.READLFLAG=1
+FILE.MODE.APPEND=1
+
+if (<FILE.OPEN <local.ws_id_file>>)
+  FILE.WRITELINE <ARGV[1]>
+  FILE.CLOSE
+ENDIF
+
+[FUNCTION f_staff_notify]
+if <account.plevel> > 1
+    sysmessage @32,,1 [CS] <args>
+endif
+
+[EOF]

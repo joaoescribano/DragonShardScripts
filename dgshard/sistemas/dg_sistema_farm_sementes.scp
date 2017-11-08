@@ -1,0 +1,260 @@
+// Sistema de fazendas e plantações
+// Ultima Online Brasil
+
+[DEFNAME cond_sementes]
+// Algodão
+semente.i_semente_algodao.nome          Algodao
+semente.i_semente_algodao.cor           07a1
+semente.i_semente_algodao.colheita      200
+semente.i_semente_algodao.fases         3
+semente.i_semente_algodao.item          i_cotton
+semente.i_semente_algodao.fase.0.id     0d2b
+semente.i_semente_algodao.fase.0.timer  300
+semente.i_semente_algodao.fase.1.id     0c51
+semente.i_semente_algodao.fase.1.timer  300
+semente.i_semente_algodao.fase.2.id     0c53
+semente.i_semente_algodao.fase.2.timer  300
+semente.i_semente_algodao.fase.3.id     0c4f
+semente.i_semente_algodao.fase.3.timer  300
+
+// Trigo
+semente.i_semente_trigo.nome            Trigo
+semente.i_semente_trigo.cor             01c0
+semente.i_semente_trigo.colheita        50
+semente.i_semente_trigo.fases           4
+semente.i_semente_trigo.item            i_wheat_sheaf
+semente.i_semente_trigo.fase.0.id       0d2b
+semente.i_semente_trigo.fase.0.timer    200
+semente.i_semente_trigo.fase.1.id       01ebe
+semente.i_semente_trigo.fase.1.timer    200
+semente.i_semente_trigo.fase.2.id       0c55
+semente.i_semente_trigo.fase.2.timer    200
+semente.i_semente_trigo.fase.3.id       0c57
+semente.i_semente_trigo.fase.3.timer    300
+semente.i_semente_trigo.fase.4.id       0c5a
+semente.i_semente_trigo.fase.4.timer    300
+
+// Madrake Roots
+semente.i_semente_mandrake.nome         Mandrake Roots
+semente.i_semente_mandrake.cor          01d3
+semente.i_semente_mandrake.colheita     350
+semente.i_semente_mandrake.fases        2
+semente.i_semente_mandrake.item         i_reag_mandrake_root
+semente.i_semente_mandrake.fase.0.id    0d2b
+semente.i_semente_mandrake.fase.0.timer 200
+semente.i_semente_mandrake.fase.1.id    018E0
+semente.i_semente_mandrake.fase.1.timer 800
+semente.i_semente_mandrake.fase.2.id    018dd
+semente.i_semente_mandrake.fase.2.timer 200
+
+// Garlic
+semente.i_semente_garlic.nome           Garlic
+semente.i_semente_garlic.cor            1993
+semente.i_semente_garlic.colheita       100
+semente.i_semente_garlic.fases          2
+semente.i_semente_garlic.item           i_reag_garlic
+semente.i_semente_garlic.fase.0.id      0d2b
+semente.i_semente_garlic.fase.0.timer   200
+semente.i_semente_garlic.fase.1.id      018e1
+semente.i_semente_garlic.fase.1.timer   800
+semente.i_semente_garlic.fase.2.id      018e3
+semente.i_semente_garlic.fase.2.timer   200
+
+// Nightshade
+semente.i_semente_nightshade.nome           Nightshade
+semente.i_semente_nightshade.cor            0df
+semente.i_semente_nightshade.colheita       350
+semente.i_semente_nightshade.fases          2
+semente.i_semente_nightshade.item           i_reag_nightshade
+semente.i_semente_nightshade.fase.0.id      0d2b
+semente.i_semente_nightshade.fase.0.timer   200
+semente.i_semente_nightshade.fase.1.id      018e5
+semente.i_semente_nightshade.fase.1.timer   800
+semente.i_semente_nightshade.fase.2.id      018e7
+semente.i_semente_nightshade.fase.2.timer   200
+
+// Ginseng
+semente.i_semente_ginseng.nome          Ginseng
+semente.i_semente_ginseng.cor           021
+semente.i_semente_ginseng.colheita      350
+semente.i_semente_ginseng.fases         2
+semente.i_semente_ginseng.item          i_reag_ginseng
+semente.i_semente_ginseng.fase.0.id     0d2b
+semente.i_semente_ginseng.fase.0.timer  200
+semente.i_semente_ginseng.fase.1.id     018e9
+semente.i_semente_ginseng.fase.1.timer  800
+semente.i_semente_ginseng.fase.2.id     018eb
+semente.i_semente_ginseng.fase.2.timer  200
+
+[TYPEDEF t_growing]
+ON=@Click
+if (<timer> == 0)
+    timer 1 // Fix
+endif
+message <name>
+message <ftime <more1>>
+return 1
+
+ON=@Dclick
+if (<timer> == 0)
+    timer 1 // Fix
+endif
+if !(<tag0.colheita>)
+    src.sysmessage @07a1,0,1 Sua <name> não está pronta para ser colhida.
+else
+    local.base_colheita <def.semente.<tag0.semente>.colheita>
+    local.porcentagem <fval ((<tag0.contagem>*100) / ((<tag0.ticks>*100)/1000))>
+    local.colheita <ceil <fval ((<local.base_colheita>*100)/1000) * (<local.porcentagem>/10)>>
+
+    if (<local.colheita> <= 0)
+        local.colheita = 1
+    endif
+
+    if (<src.uid> != <link>)
+        SAY CRIMINAL!
+        link.sysmessage @07a1,0,1 Sua colheita foi roubada pelo player: <src.name>
+    endif
+
+    serv.newitem <def.semente.<tag0.semente>.item>,<local.colheita>,<src.findlayer.21.uid>,0
+    remove
+endif
+return 1
+
+ON=@Timer
+if (<more1> <= 1)
+    if (<tag0.colheita>)
+        link.sysmessage  @07a1,0,1 Você demorou demais para colher sua <name>.
+        link.sysmessage  @07a1,0,1 Sua <name> secou e foi perdida.
+        remove
+        return 1
+    elif (<tag0.fase> < <def.semente.<tag0.semente>.fases>)
+        tag0.fase +=1
+        dispid <def.semente.<tag0.semente>.fase.<eval <tag0.fase>>.id>
+        more1 <def.semente.<tag0.semente>.fase.<eval <tag0.fase>>.timer>
+        color 00
+        update
+        link.sysmessage @07a1,0,1 Sua <name> cresceu.
+    elif (<tag0.fase> == <def.semente.<tag0.semente>.fases>)
+        more1 600
+        tag0.colheita 1
+        link.sysmessage @07a1,0,1 Sua <name> está pronta para a colheita.
+    else
+        SAY ERRO!!!!
+    endif
+else
+    // Aumenta a colheita
+    if (<eval rand(0,100)> >= <eval (50 - (rand(0,<link.herding>/100))) - (rand(0,<link.luck>))>)
+        tag0.contagem += 1
+    endif
+endif
+
+tag0.ticks +=1
+more1 -=1
+timer 1
+return 1
+
+[TYPEDEF t_semente]
+ON=@DClick
+if !(<cont.uid> == <src.findlayer(21).uid>)
+    src.sysmessage @07a1,0,1 A <name> precisa estar em sua bolsa.
+else
+    targetg Selecione onde deseja plantar esta <name>
+endif
+return 1
+
+ON=@TargOn_Ground
+local.distancia = <eval 1+(<ceil <fval (<src.herding>/20)>>)>
+if (<local.distancia> > 5)
+    local.distancia 5
+endif
+
+if (<src.distance <src.targp>> <= 2)
+    if (<serv.map(<src.targp.x>,<src.targp.y>,<src.targp.z>,<src.targp.m>).type> == t_dirt)
+        if (<posempty <src.targp>>)
+            //if (<isnearof <src.targp.x>,<src.targp.y>,<src.targp.z>,<src.targp.m>,i_scarecrow,<local.distancia>>) || (<isnearof <src.targp.x>,<src.targp.y>,<src.targp.z>,<src.targp.m>,i_scarecrow_2,<local.distancia>>)
+                serv.newitem <def.semente.<baseid>.fase.0.id>
+                new.type t_growing
+                new.name Plantacao de <def.semente.<baseid>.nome>
+                new.color <color>
+                new.tag0.semente <baseid>
+                new.tag0.fase 0
+                new.p <src.targp>
+                new.link <src>
+                new.more1 <def.semente.<baseid>.fase.0.timer>
+                new.attr attr_move_never
+                new.update
+
+                new.timer 1
+
+                src.sysmessage @07a1,0,1 A sua <serv.new.name> foi semeada.
+                src.consume 1 <baseid>
+            //else
+            //    src.sysmessage @07a1,0,1 Você precisa plantar pelo menos <eval <local.distancia>> tiles perto de um espantalho.
+            //endif
+        else
+            src.sysmessage @07a1,0,1 O local ja está ocupado.
+        endif
+    else
+        src.sysmessage @07a1,0,1 Você só pode plantar sementes em terra.
+    endif
+else
+    src.sysmessage @07a1,0,1 Você esta tentando plantar muito longe de voce.
+endif
+return 1
+// Sementes
+
+[ITEMDEF i_semente_algodao]
+ID=5932
+NAME=Semente%s% de Algodao
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_algodao.cor>
+
+[ITEMDEF i_semente_trigo]
+ID=5932
+NAME=Semente%s% de Trigo
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_trigo.cor>
+
+[ITEMDEF i_semente_mandrake]
+ID=5932
+NAME=Semente%s% de Mandrake Roots
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_mandrake.cor>
+
+[ITEMDEF i_semente_garlic]
+ID=5932
+NAME=Semente%s% de Garlic
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_garlic.cor>
+
+[ITEMDEF i_semente_nightshade]
+ID=5932
+NAME=Semente%s% de Nightshade
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_nightshade.cor>
+
+[ITEMDEF i_semente_ginseng]
+ID=5932
+NAME=Semente%s% de Ginseng
+TYPE=t_semente
+VALUE={1000 1000}
+
+ON=@Create
+color <def.semente.i_semente_ginseng.cor>
+
+[EOF]

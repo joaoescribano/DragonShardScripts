@@ -1,0 +1,758 @@
+[EVENTS e_npc_prisma]
+on=@Spellcast
+	argN1=43 // EXPLOSION
+	return 0
+
+ON=@EnvironChange
+	IF !(<RESTEST i_drake_bow>)
+		SERV.NEWITEM=i_drake_bow
+		new.color = <color>
+		new.name <name> Bow
+		NEW.BOUNCE
+		NEW.ATTR=ATTR_NEWBIE
+	ENDIF
+
+	IF !(<RESTEST i_adamantium_sword_viking>)
+		SERV.NEWITEM=i_adamantium_sword_viking
+		new.color = <color>
+		new.name <name> Sword
+		NEW.BOUNCE
+		NEW.ATTR=ATTR_NEWBIE
+	ENDIF
+
+	SERV.newitem=i_spellbook
+	new.attr attr_newbie
+	new.ADDSPELL=s_fire_bolt
+	new.ADDSPELL=s_flamestrike
+	new.ADDSPELL=s_meteor_swarm
+	new.ADDSPELL=s_mass_dispel
+	new.ADDSPELL=s_mana_vampire
+	new.ADDSPELL=s_chain_lightning
+	new.bounce
+
+	MODAR +=75
+	RESPHYSICAL += 50
+	RESFIRE +=50
+	RESPOISON +=50
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+
+[CHARDEF c_prisma_fire]
+NAME=Dragao do Fogo
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+RESOURCES=2 i_pele_prisma_4
+DAM=60,95
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE|MT_USEHANDS
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Fire Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=00a6b
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+
+
+
+[CHARDEF c_prisma_obscure]
+NAME=Dragao Obscuro
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_2
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Obscure Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=082f
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 2000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+/////Nao esta no shard
+
+[CHARDEF c_prisma_gray]
+NAME=Dragon True Gray Prisma
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=i_tinta_gray, 20000 i_gold, 20000 i_gold, 200 i_coin_silver
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Gray Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0810
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+
+[CHARDEF c_prisma_white]
+NAME=Dragao Branco
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_9
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True White Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0481
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+[CHARDEF c_prisma_black]
+DEFNAME=c_prismab
+NAME=Dragao Negro
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_3
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Black Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0455
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+[CHARDEF c_prisma_Venon]
+NAME=Dragao Venon
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_5
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Venon Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=07a5
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+[CHARDEF c_prisma_Ice]
+NAME=Dragao do Gelo
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_1
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Ice Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0b22
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+//////Nao está no shard
+
+[CHARDEF c_prisma_Gold]
+NAME=Dragon True Golden Prisma
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=i_tinta_golden, 20000 i_gold, 1 i_ovo_mantle, 200 i_coin_silver
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Gold Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=color_o_Gold
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+
+[CHARDEF c_prisma_Rose]
+NAME=Dragao Violeta
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_6
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Rose Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0a4c
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+/////Nao está no shard
+
+[CHARDEF c_prisma_Lava]
+NAME=Dragon True Lava Prisma
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=i_tinta_lava, 20000 i_gold, 1 i_ovo_mantle, 200 i_coin_silver
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Lava Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=078c
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+
+
+[CHARDEF c_prisma_Water]
+NAME=Dragao da Agua
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_10
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Water Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0812
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+[CHARDEF c_prisma_blood]
+NAME=Dragao de Sangue
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_7
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True Blood Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=07b1
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+[CHARDEF c_prisma_pacific]
+NAME=Dragao Pacifico
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=2 i_pele_prisma_8
+DAM=60,95
+ARMOR=70
+range=1
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=True PAcific Monster
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=0b0a
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+ON=@NpcRestock
+ITEM=i_gold,{15000 20000}
+ITEM=i_sash_str,R4
+ITEM=i_ore_titanium,R6
+ITEM=i_ore_blooddiamond,R6
+ITEM=i_anel_str,R10
+
+///////////////////////PRISMA DE QUEST//////////////////
+
+[CHARDEF c_prisma_quest]
+NAME=Dragon Especial Quest Prisma
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_daemon
+DAM=60
+ARMOR=60
+RESOURCES=5 i_ovo_mantle
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=c_DAEMON,i_gold,t_wand
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=Dragon Especial Quest Prisma
+SUBSECTION=Prismas
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=00a44
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+
+NPC=brain_monster
+
+
+/////////////////////////Monstros Vips////////////////////////////
+
+[CHARDEF c_vip_monster]
+NAME=Monster Vip
+ID=c_dragon_stygian
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_dragon
+DAM=60
+ARMOR=60
+
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE
+DESIRES=i_gold
+AVERSIONS=r_water,r_mountains
+
+DESCRIPTION=Vip Monster
+SUBSECTION=Vip Monster
+CATEGORY=Novos monstros
+
+
+ON=@Create
+events=+e_npc_prisma
+COLOR=007e5
+STR={2000 2200}
+DEX={550 650}
+INT={200 400}
+MAXHITS={5200 6500}
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=200.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+NPC=brain_monster
+
+ON=@npcrestock
+ITEM=i_gold,{5000 50000}
+
+[EOF]

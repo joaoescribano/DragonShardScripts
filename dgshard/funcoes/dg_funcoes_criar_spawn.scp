@@ -1,0 +1,53 @@
+/// Npc Creator Tabajara ///
+///
+/// By: Pedokas ///
+///
+/// Jogue Esse Arquivo na pasta do Sphere/Script e de Resinc depois ///
+/// digite in-game .CRIARNPC ///
+/// 86400
+
+[Function Criarnpc]
+Dialog d_criar_npc_menu
+
+[DIALOG d_criar_npc_menu]
+0, 0
+PAGE 0
+resizepic 36 52 3600 311 283
+resizepic 51 67 3500 282 252
+text 80 126 95 0
+text 80 144 95 1
+text 80 163 95 2
+text 80 180 95 3
+text 81 198 95 4
+text 125 286 152 5
+text 116 76 162 6
+//Text´s Entry´s
+textentry 145 126 253 25 40 1 7
+textentry 150 144 253 25 40 2 7
+textentry 175 163 253 25 40 3 7
+textentry 175 180 253 25 40 4 7
+textentry 200 198 253 25 40 5 7
+button 220 285 249 248 1 0 1
+
+[DIALOG d_criar_npc_menu TEXT]
+Npc Id : 
+Amount : 
+Min Time : 
+Max Time : 
+Max Distance : 
+By: Pedokas
+Npc Creator Tabajara
+NADA
+
+[DIALOG d_criar_npc_menu BUTTON]
+On=1
+src.newitem i_worldgem_bit
+src.act.p <src.P>
+src.act.type 34
+src.act.amount <ARGTXT[2]>
+src.act.more <ARGTXT[1]>
+src.act.morep <ARGTXT[3]> <ARGTXT[4]> <ARGTXT[5]>
+src.act.attr 00b0
+src.act.timer 1
+
+[EOF]

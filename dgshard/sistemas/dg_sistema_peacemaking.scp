@@ -1,0 +1,80 @@
+[Function adicionar_peace]
+ref1 <argo>     // Bixo
+ref2 <argn1>    // Player
+ref3 <argn2>    // Instrumento
+
+if (<ref1.isitem>)
+    src.sysmessage Voce nao pode acalmar isso.
+    return 1
+endif
+if !((<ref1.brain> == brain_animal) || (<ref1.brain> == brain_dragon) || (<ref1.brain> == brain_monster))
+    src.sysmessage Voce nao pode acalmar isso.
+    return 1
+endif
+if (<ref1.findid.i_peacemaking_timer>)
+    src.sysmessage Aguarde para tentar novamente.
+    return 1
+endif
+if (<ref1.karma> >= 0)
+    src.sysmessage O animal parece estar calmo.
+    return 1
+endif
+
+local.chance = <eval (<ref2.peacemaking> / 2) + (<ref2.musicianship> / 2)>
+local.bonus  = <eval ((<ref2.peacemaking>+<ref2.musicianship>)/10)/2>
+
+if <r<local.chance>> > 600 // 40% de chance de acerto
+    ref2.sound <ref3.tdata1>
+    local.formula <eval (<r<eval <ref1.karma>*-1>>+<r<eval <local.bonus>>>)/2>
+else
+    ref2.sound <ref3.tdata2>
+    local.formula <eval (<r<eval <ref1.karma>*-1>>+<r<eval <local.bonus>>>)/4>
+endif
+
+ref1.newitem i_peacemaking_timer
+ref1.new.timer 4
+ref1.new.tag0.formula <eval <local.formula>+<local.bonus>>
+ref1.new.link <ref2>
+ref1.new.cont <ref1>
+
+[Itemdef i_peacemaking_timer]
+id      i_memory
+NAME    Peacemaking Delay
+type    t_eq_script
+layer   30
+
+on=@create
+attr    08
+
+ON=@Timer
+if !(0<tag0.formula>)
+    remove
+    return 1
+endif
+
+cont.karma = <eval <cont.karma>+<eval <tag0.formula>>>
+if (<cont.karma> >= 0)
+    cont.karma = 0
+    cont.flags = <cont.flags> &~ statf_war
+    cont.update
+    
+    link.emote Acalmou a/o <cont.name>
+    link.sysmessage @07a1 Voce acalmou o animal completamente.
+else
+    link.sysmessage @07a1 O animal se acalmou um pouco, mas ainda parece bravo!
+endif
+
+// Aumenta a skill do player
+if (<link.peacemaking> < 1000)
+    if (<r100> > 40) 
+        link.peacemaking +=1
+        // fix do sistema de pericias
+        //link.tag0.pericias_skill +=1
+        //link.f_atualizar_skills
+    endif
+endif
+
+remove
+return 1
+
+[EOF]

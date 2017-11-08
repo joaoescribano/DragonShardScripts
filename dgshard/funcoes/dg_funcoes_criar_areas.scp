@@ -1,0 +1,334 @@
+[DEFNAME MAPFILE]
+
+MAPDEF_PATH C:\areas.txt 
+g_btn_green_ok    081a    
+
+[FUNCTION mapdef]
+    dialog d_mapdef
+
+[DIALOG d_mapdef]
+5,5
+
+src.dialogclose d_mapdef
+page 0  
+resizepic 0 0 2620 550 245
+gumppictiled 5 5 200 225 2604
+
+gumppictiled 5 5 200 25 2624 
+gumppictiled 5 35 200 145 2624
+
+gumppictiled 5 185 200 45 2624
+checkertrans 5 5 540 387
+resizepic 210 0 2620 150 255 // Name and Group
+checkertrans 215 5 140 245
+
+resizepic 210 0 2620 150 100 // Defname Area and Room
+checkertrans 215 5 140 90
+
+resizepic 355 0 2620 245 370 // RegionFlags
+checkertrans 360 5 235 360
+
+resizepic 500 363 2620 100 40 // OK Button Window
+checkertrans 505 368 90 30
+button 530 373 <ddef0.g_btn_green_ok> <ddef0.g_btn_green_ok> 1 0 6
+
+
+resizepic 0 238 2620 215 200 // Events
+checkertrans 5 243 205 190
+
+page 1
+dtext 40 10 455 MAPDEF GENERATOR
+dtext 40 50 052 First Coordinate: 
+dtext 40 70 455 <dctag0.statik_koordinate_1_x>, <dctag0.statik_koordinate_1_y>, <dctag0.statik_koordinate_2_z>
+button 15 54 0837 0838 1 0 1
+
+dtext 40 95 052 Second Coordinate: 
+dtext 40 115 455 <dctag0.statik_koordinate_2_x>,<dctag0.statik_koordinate_2_y>, <dctag0.statik_koordinate_2_z>
+button 15 99 0837 0838 1 0 2
+
+f_mapdef_mittelpunkt
+dtext 40 140 052 Center: 
+dtext 40 160 455 <dctag0.statiken_mittelpunkt_x>,<dctag0.statiken_mittelpunkt_y>, <dctag0.statiken_mittelpunkt_z>
+
+dtext 40 190 052 delete first coordinate
+button 15 194 0837 0838 1 0 3
+
+dtext 40 210 052 delete second coordinate
+button 15 214 0837 0838 1 0 4
+
+Group 1
+dtext 260 10 455 DEFNAME
+dtext 230 40 052 AREADEF
+radio 300 40 210 211 1 1
+dtext 230 70 052 ROOMDEF
+radio 300 70 210 211 0 2
+
+Group 2
+
+dtext 218 105 455 DEF,NAME,GROUP,TITLE
+IF (<isempty <ctag.defname>>)
+    dtextentry 230 130 100 25 2523 1 DEFNAME
+  ELSE
+    dtextentry 230 130 100 25 2523 1 <ctag.defname>
+ENDIF
+
+IF (<isempty <ctag.roomdef>>)
+    dtextentry 230 160 100 25 2523 2 NAME
+  ELSE
+    dtextentry 230 160 100 25 2523 2 <ctag.roomdef>
+ENDIF
+
+IF (<isempty <ctag.areadef>>)
+    dtextentry 230 190 100 25 2523 3 GROUP
+  ELSE
+    dtextentry 230 190 100 25 2523 3 <ctag.areadef>
+ENDIF
+  IF (<isempty <ctag.title>>)
+    dtextentry 230 220 100 25 2523 4 TITLE
+  ELSE
+    dtextentry 230 220 100 25 2523 4 <ctag.title>
+ENDIF
+
+button 320 220 211 211 1 0 5
+
+dtext 410 10 455 REGION FLAGS
+
+checkbox 365 40 210 211 1 3
+dtext 400 40 052 No Magery
+
+checkbox 365 70 210 211 1 4
+dtext 400 70 052 No Recal In
+
+checkbox 365 100 210 211 1 5
+dtext 400 100 052 No Recal Out
+
+checkbox 365 130 210 211 1 6
+dtext 400 130 052 No Gate
+
+checkbox 365 160 210 211 1 7
+dtext 400 160 052 No Teleport
+
+checkbox 365 190 210 211 1 8
+dtext 400 190 052 No Harm
+
+checkbox 365 220 210 211 1 9
+dtext 400 220 052 No Buildings
+
+checkbox 365 250 210 211 1 10
+dtext 400 250 052 Instant Logout
+
+checkbox 365 280 210 211 1 11
+dtext 400 280 052 Underground
+
+checkbox 365 310 210 211 1 12
+dtext 400 310 052 No Decay
+
+checkbox 365 340 210 211 1 13
+dtext 400 340 052 Safe
+
+dtext 55 250 455 REGION EVENTS
+
+checkbox 15 280 210 211 1 13
+dtext 50 280 052 Jail
+
+checkbox 15 310 210 211 1 14
+dtext 50 310 052 Rock
+
+checkbox 15 340 210 211 1 15
+dtext 50 340 052 Water
+
+checkbox 15 370 210 211 1 16
+dtext 50 370 052 Tree
+
+checkbox 15 400 210 211 1 17
+dtext 50 400 052 Gras
+
+checkbox 105 280 210 211 1 18
+dtext 140 280 052 Green Actres
+
+checkbox 105 310 210 211 1 19
+dtext 140 310 052 Dungeon
+
+checkbox 105 340 210 211 1 20
+dtext 140 340 052 Elfenmetal
+
+checkbox 105 370 210 211 1 21
+dtext 140 370 052 Stone New
+
+checkbox 105 400 210 211 0 22
+dtext 140 400 052 Spooky
+
+[DIALOG d_mapdef Button]
+ON=1
+    ctag0.statik_koordinate_1=<p>
+    ctag0.statik_koordinate_1_x=<p.x>
+    ctag0.statik_koordinate_1_y=<p.y>
+    ctag0.statik_koordinate_1_z=<p.z>
+    dialog d_mapdef
+    
+ON=2
+    smsg @0,3 Second Coordinate choosen by <p>,0
+    ctag0.statik_koordinate_2=<p>
+    ctag0.statik_koordinate_2_x=<p.x>
+    ctag0.statik_koordinate_2_y=<p.y>
+    ctag0.statik_koordinate_2_z=<p.z>
+    dialog d_mapdef
+ON=3
+    smsg @0,3 First Coodinate deleted
+    ctag0.statik_koordinate_1=
+    ctag0.statik_koordinate_1_x=
+    ctag0.statik_koordinate_1_y=
+    ctag0.statik_koordinate_1_z=
+    dialog d_mapdef
+ON=4
+    smsg @0,3 Second Coodinate delete
+    ctag0.statik_koordinate_2=
+    ctag0.statik_koordinate_2_x=
+    ctag0.statik_koordinate_2_y=
+    ctag0.statik_koordinate_2_z=
+    dialog d_mapdef
+    
+ON=5
+    ctag.defname=<argtxt[1]>
+    ctag.roomdef=<argtxt[2]> 
+    ctag.areadef=<argtxt[3]>
+    ctag.title=<argtxt[4]>
+    dialog d_mapdef
+
+ON=6 // OK Button
+IF !(<FILE.INUSE>)
+FILE.MODE.APPEND=1
+IF (<FILE.OPEN <DEF0.MAPDEF_PATH>>)
+IF (<argchk[1]> == 1)
+    FILE.WRITELINE [AREADEF <argtxt[1]>]
+  ELSEIF (<argchk[2]> == 1)
+    FILE.WRITELINE [ROOMDEF <argtxt[1]>]
+ENDIF
+    FILE.WRITELINE NAME=<argtxt[2]>
+    FILE.WRITELINE GROUP=<argtxt[3]>
+    FILE.WRITELINE TITLE=<argtxt[4]>
+    FILE.WRITELINE P=<dctag0.statiken_mittelpunkt_x>,<dctag0.statiken_mittelpunkt_y>,<dctag0.statiken_mittelpunkt_z>,0  
+    FILE.WRITELINE RECT=<dctag0.statik_koordinate_1_x>,<dctag0.statik_koordinate_1_y>,<dctag0.statik_koordinate_2_x>,<dctag0.statik_koordinate_2_y>
+    FILE.WRITE EVENTS=
+
+IF (<argchk[13]> == 1)
+       ctag.events=<ctag.events>r_jail_new,
+ENDIF
+
+IF (<argchk[14]> == 1)
+    ctag.events=<ctag.events>r_default_rock,
+    ctag.resources=<ctag.resources>r_default_rock,
+ENDIF
+IF (<argchk[15]> == 1)
+    ctag.events=<ctag.events>r_default_water,
+    ctag.resources=<ctag.resources>r_default_water,
+ENDIF
+IF (<argchk[16]> == 1)
+    ctag.events=<ctag.events>r_default_tree,
+    ctag.resources=<ctag.resources>r_default_tree,
+ENDIF
+IF (<argchk[17]> == 1)
+    ctag.events=<ctag.events>r_default_grass,
+    ctag.resources=<ctag.resources>r_default_grass,
+ENDIF
+IF (<argchk[18]> == 1)
+    ctag.events=<ctag.events>r_grey_actres,
+ENDIF
+IF (<argchk[19]> == 1)
+    ctag.events=<ctag.events>r_dungeon,
+ENDIF
+IF (<argchk[20]> == 1)
+    ctag.events=<ctag.events>r_elfenmetalle,
+    ctag.resources=<ctag.resources>r_elfenmetalle,
+ENDIF
+IF (<argchk[21]> == 1)
+    ctag.events=<ctag.events>r_steine_alle,
+    ctag.resources=<ctag.resources>r_steine_alle,
+ENDIF
+IF (<argchk[22]> == 1)
+    ctag.events=<ctag.events>r_spooky,
+    ctag.resources=<ctag.resources>r_spooky,
+ENDIF
+    local.len=<eval strlen(<ctag.events>)>
+    local.len -= 1
+    ctag.events=<STRSUB 0 <dlocal.len> <ctag.events>> 
+    FILE.WRITELINE <ctag.events>
+    ctag.events=
+    
+    FILE.WRITE RESOURCES=
+    local.len=<eval strlen(<ctag.resources>)>
+    local.len -= 1
+    ctag.resources=<STRSUB 0 <dlocal.len> <ctag.resources>> 
+    FILE.WRITELINE <ctag.resources>
+    ctag.resources=
+    
+    FILE.WRITE FLAGS= 
+IF (<argchk[3]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_all,
+ENDIF
+IF (<argchk[4]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_recall_in,
+ENDIF
+IF (<argchk[5]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_recall_out,
+ENDIF
+IF (<argchk[6]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_gate,
+ENDIF
+IF (<argchk[7]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_teleport,
+ENDIF
+IF (<argchk[8]> == 1)
+    ctag.flags=<ctag.flags>region_antimagic_damage,
+ENDIF
+IF (<argchk[9]> == 1)
+    ctag.flags=<ctag.flags>region_flag_nobuilding,
+ENDIF
+IF (<argchk[10]> == 1)
+    ctag.flags=<ctag.flags>region_flag_insta_logout,
+ENDIF
+IF (<argchk[11]> == 1)
+    ctag.flags=<ctag.flags>region_flag_underground,
+ENDIF
+IF (<argchk[12]> == 1)
+    ctag.flags=<ctag.flags>region_flag_nodecay,
+ENDIF
+IF (<argchk[13]> == 1)
+    ctag.flags=<ctag.flags>region_flag_safe,
+ENDIF
+    local.len=<eval strlen(<ctag.flags>)>
+    local.len -= 1
+    ctag.flags=<STRSUB 0 <dlocal.len> <ctag.flags>> 
+    FILE.WRITELINE <ctag.flags>
+    ctag.flags=
+    FILE.WRITELINE " "
+FILE.CLOSE
+ENDIF
+ENDIF
+smsg @0,0 Mapfile created
+
+[FUNCTION f_mapdef_mittelpunkt]
+    var0.koordinate_x=<dctag0.statik_koordinate_1_x> 
+      var0.koordinate_x -= <dctag0.statik_koordinate_2_x>
+       var0.koordinate_y=<dctag0.statik_koordinate_1_y>
+      var0.koordinate_y -= <dctag0.statik_koordinate_2_y>
+      
+   IF (<dvar0.koordinate_x> < 0)
+       var0.koordinate_x *= -1 
+   ENDIF
+       var0.koordinate_x = <eval <var0.koordinate_x>/2>
+       
+   IF (<dvar0.koordinate_y> < 0)
+       var0.koordinate_y *= -1 
+   ENDIF
+      var0.koordinate_y = <eval <var0.koordinate_y>/2>
+      ctag0.statiken_mittelpunkt_x=<eval <ctag0.statik_koordinate_1_x>+<var0.koordinate_x>>
+      ctag0.statiken_mittelpunkt_y=<eval <ctag0.statik_koordinate_2_y>+<var0.koordinate_y>>
+      ctag0.statiken_mittelpunkt_z=<dctag0.statik_koordinate_1_z>
+    ctag0.statiken_mittelpunkt_z -= <dctag0.statik_koordinate_2_z>
+   IF (<ctag0.statiken_mittelpunkt_z> < 0)
+       ctag0.statiken_mittelpunkt_z *= -1 
+   ENDIF
+
+
+[EOF]

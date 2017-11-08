@@ -1,0 +1,1978 @@
+// Ore: Bronze - Weapons
+
+[ITEMDEF i_bronze_bone_machete]
+ID=i_bone_machete
+NAME=Bronze Bone Machete
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_bronze,1 i_bone
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_exec]
+ID=i_axe_exec
+NAME=Bronze Executioner's Axe
+TYPE=t_weapon_axe
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_battle]
+ID=i_axe_battle
+NAME=Bronze Battle Axe
+TYPE=t_weapon_axe
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe]
+ID=i_axe
+NAME=Bronze Axe
+TYPE=t_weapon_axe
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_double]
+ID=i_axe_double
+NAME=Bronze Double Axe
+TYPE=t_weapon_axe
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_bardiche]
+ID=i_bardiche
+NAME=Bronze Bardiche
+TYPE=t_weapon_sword
+DAM=9,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_dagger]
+ID=i_dagger
+NAME=Bronze Dagger
+TYPE=t_weapon_fence
+DAM=5,6
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_mace]
+ID=i_mace
+NAME=Bronze Mace
+TYPE=t_weapon_mace_smith
+DAM=6,7
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_broad]
+ID=i_sword_broad
+NAME=Bronze Broad Sword
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_long]
+ID=i_sword_long
+NAME=Bronze Long Sword
+TYPE=t_weapon_sword
+DAM=8,8
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_spear]
+ID=i_spear
+NAME=Bronze Spear
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_war]
+ID=i_axe_war
+NAME=Bronze War Axe
+TYPE=t_weapon_axe
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_scimitar]
+ID=i_scimitar
+NAME=Bronze Scimitar
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_long_b]
+ID=i_sword_long_b
+NAME=Bronze Long Sword
+TYPE=t_weapon_sword
+DAM=8,8
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_viking]
+ID=i_sword_viking
+NAME=Bronze Viking Sword
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Bronze Large Battle Axe
+TYPE=t_weapon_axe
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_katana]
+ID=i_katana
+NAME=Bronze Katana
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_kryss]
+ID=i_kryss
+NAME=Bronze Kryss
+TYPE=t_weapon_sword
+DAM=5,6
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_spear_short]
+ID=i_spear_short
+NAME=Bronze Short Spear
+TYPE=t_weapon_fence
+DAM=5,7
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_war_fork]
+ID=i_war_fork
+NAME=Bronze War Fork
+TYPE=t_weapon_fence
+DAM=6,7
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_mace_war]
+ID=i_mace_war
+NAME=Bronze War Mace
+TYPE=t_weapon_mace_smith
+DAM=8,9
+SKILL=Macefighting
+SPEED=26
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_hammer_war]
+ID=i_hammer_war
+NAME=Bronze War Hammer
+TYPE=t_weapon_mace_smith
+DAM=9,9
+SKILL=Macefighting
+SPEED=28
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_maul]
+ID=i_maul
+NAME=Bronze Maul
+TYPE=t_weapon_mace_smith
+DAM=7,8
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_hammer_pick]
+ID=i_hammer_pick
+NAME=Bronze Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_halberd]
+ID=i_halberd
+NAME=Bronze Halberd
+TYPE=t_weapon_sword
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=24
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_cutlass]
+ID=i_cutlass
+NAME=Bronze Cutlass
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Bronze Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_scythe]
+ID=i_scythe
+NAME=Bronze Scythe
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_bone_harvester]
+ID=i_bone_harvester
+NAME=Bronze Bone Harvester
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_scepter]
+ID=i_scepter
+NAME=Bronze Scepter
+TYPE=t_weapon_mace_smith
+DAM=7,9
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_staff_bladed]
+ID=i_staff_bladed
+NAME=Bronze Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_pike]
+ID=i_pike
+NAME=Bronze Pike
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=36
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Bronze Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_lance]
+ID=i_lance
+NAME=Bronze Lance
+TYPE=t_weapon_fence
+DAM=9,9
+SKILL=Fencing
+SPEED=21
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_crescent_blade]
+ID=i_crescent_blade
+NAME=Bronze Crescent Blade
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_paladin]
+ID=i_sword_paladin
+NAME=Bronze Paladin Sword
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_no_dachi]
+ID=i_no_dachi
+NAME=Bronze No-dachi
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_wakizashi]
+ID=i_wakizashi
+NAME=Bronze Wakizashi
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_tetsubo]
+ID=i_tetsubo
+NAME=Bronze Testsubo
+TYPE=t_weapon_mace_smith
+DAM=6,7
+SKILL=Macefighting
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Macefighting
+DESCRIPTION=Bronze Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_lajatang]
+ID=i_lajatang
+NAME=Bronze Lajatang
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_daisho]
+ID=i_daisho
+NAME=Bronze Daisho
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_tekagi]
+ID=i_tekagi
+NAME=Bronze Tekagi
+TYPE=t_weapon_fence
+DAM=5,6
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_kama]
+ID=i_kama
+NAME=Bronze Kama
+TYPE=t_weapon_sword
+DAM=5,6
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sai]
+ID=i_sai
+NAME=Bronze Sai
+TYPE=t_weapon_fence
+DAM=5,6
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Bronze Elven Spellblade
+TYPE=t_weapon_fence
+DAM=6,7
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Bronze Assassin Spike
+TYPE=t_weapon_fence
+DAM=5,6
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Bronze Leaf Bladed
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Bronze War Cleaver
+TYPE=t_weapon_fence
+DAM=7,8
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Fencing
+DESCRIPTION=Bronze War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_mace_diamond]
+ID=i_mace_diamond
+NAME=Bronze Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=7,9
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_rune_blade]
+ID=i_rune_blade
+NAME=Bronze Rune Blade
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Bronze Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=6,7
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_ornate_axe]
+ID=i_ornate_axe
+NAME=Bronze Ornate Axe
+TYPE=t_weapon_axe
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+[ITEMDEF i_bronze_elven_machete]
+ID=i_elven_machete
+NAME=Bronze Elven Machete
+TYPE=t_weapon_sword
+DAM=7,8
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_bronze,1 i_log
+SKILLMAKE=Blacksmithing 10.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Bronze
+SUBSECTION=Swordsmanship
+DESCRIPTION=Bronze Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+
+// Ore: Bronze - Armors
+
+[ITEMDEF i_bronze_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Bronze Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Chainmails
+DESCRIPTION=Bronze Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Bronze Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Chainmails
+DESCRIPTION=Bronze Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Bronze Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Chainmails
+DESCRIPTION=Bronze Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Bronze Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Ringmails
+DESCRIPTION=Bronze Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Bronze Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Ringmails
+DESCRIPTION=Bronze Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Bronze Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Ringmails
+DESCRIPTION=Bronze Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Bronze Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Ringmails
+DESCRIPTION=Bronze Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_arms]
+ID=i_platemail_arms
+NAME=Bronze Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Bronze Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_helm]
+ID=i_platemail_helm
+NAME=Bronze Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Bronze Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Bronze Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_platemail_chest]
+ID=i_platemail_chest
+NAME=Bronze Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Platemails
+DESCRIPTION=Bronze Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_helm_closed]
+ID=i_helm_closed
+NAME=Bronze Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_helm_open]
+ID=i_helm_open
+NAME=Bronze Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_bascinet]
+ID=i_bascinet
+NAME=Bronze Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_bronze_helm_nose]
+ID=i_helm_nose
+NAME=Bronze Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+
+[ITEMDEF i_bronze_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Bronze Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Bronze Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Helmets
+DESCRIPTION=Bronze Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Bronze Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_buckler]
+ID=i_shield_buckler
+NAME=Bronze Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Bronze Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_heater]
+ID=i_shield_heater
+NAME=Bronze Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Bronze Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_bronze,2 i_log
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Bronze Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_bronze
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+
+[ITEMDEF i_bronze_shield_dupre]
+ID=i_shield_dupre
+NAME=Bronze Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_bronze,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 10.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Bronze
+SUBSECTION=Shields
+DESCRIPTION=Bronze Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_bronze
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=1
+    RESPOISON=0
+

@@ -1,0 +1,57 @@
+[function chaton]
+tag.chat=1 
+sysmessage @045 Chat Ativado
+return 1
+
+[function chatoff]
+tag.chat=
+sysmessage @045 Chat Desativado
+return 1
+
+[function Chatsysmessage] 
+Tag.chatText=<args> 
+Sysmessage <Tag.ChatText> 
+
+[FUNCTION c]
+//sysmessage @077a Chat Desativado Temporariamente.
+//return 1
+
+if !(<tag0.chat>) 
+    sysmessage @080 Seu Chat esta desativado, use o .chaton para liga-lo!
+    Sysmessage @009fb Comando Desabilitado no momento!
+    return 1 
+elseif (<isempty <args>>) 
+    sysmessage @090 Voce deve digitar algo para enviar!
+    return 1 
+else
+    if (!<restest i_mem_chat>) || (<isgm>)
+        serv.newitem i_mem_chat
+        new.equip
+        serv.allclients chatmessage <args>
+    else
+        sysmessage @090 Espere 10 segundos para mandar outra mensagem
+        return 1
+    endif
+endif
+
+[itemdef i_mem_chat]
+id=i_memory
+NAME=Chat Delay
+type=t_eq_script
+layer=30
+
+on=@create
+attr=08
+timer=10
+
+on=@timer
+remove
+return 1
+
+[FUNCTION chatmessage] 
+if (<tag0.chat>==1)
+sysmessage @035,,1 <src.name>: <args>
+endif
+endif
+
+[eof]

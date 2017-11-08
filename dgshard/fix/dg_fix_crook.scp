@@ -1,0 +1,25 @@
+[TYPEDEF T_WEAPON_MACE_CROOK]
+ON=@DClick
+if (<src.flags> & statf_war) || (<src.flags> & 000000004)  || (<src.flags> & 000000008) || (<src.flags> & 000000004)  || (<src.flags> & 000040000)  || (<src.flags> & 000800000) 
+    src.sysmessage Voce nao pode usar este item neste estado.
+    return 1
+endif
+
+ON=@TargOn_char
+if (<baseid> != i_cajado_tamming)
+	if (<src.flags> & statf_war) || (<src.flags> & 000000004)  || (<src.flags> & 000000008) || (<src.flags> & 000000004)  || (<src.flags> & 000040000)  || (<src.flags> & 000800000) 
+	    src.sysmessage Voce nao pode usar este item neste estado.
+	    return 1
+	endif
+
+	if (<src.targ.distance> > 5)
+	    src.sysmessage Voce esta muito longe do animal.
+	    return 1
+	endif
+
+	if (<src.targ.taming> >= 80.0)
+	   src.sysmessage Voce nao pode mandar neste animal, ele tem vontade propria! 
+	   return 1
+	endif
+endif
+[EOF]

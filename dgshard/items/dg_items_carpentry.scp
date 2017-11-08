@@ -1,0 +1,126 @@
+////////////////Roda de Tecer////////////////
+
+[ITEMDEF i_roda_tecer]
+DEFNAME=i_roda_tecer
+ID=i_spinning_wheel
+NAME=Roda de Tecer
+TYPE=T_SPINWHEEL
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+WEIGHT=15.0
+
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Spinning Wheel
+
+[ITEMDEF i_roda_tecer2]
+DEFNAME=i_roda_tecer2
+ID=01019
+NAME=Roda de Tecer
+TYPE=T_SPINWHEEL
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+WEIGHT=15.0
+
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Spinning Wheel
+
+
+[ITEMDEF i_deed_roda_tecer]
+DEFNAME=i_deed_roda_tecer
+ID=i_deed
+NAME=Deed para Roda de Tecer
+SKILLMAKE=Carpentry 100.0, TAILORING 65.0, T_CARPENTRY
+RESOURCES=200 i_log
+WEIGHT=0.1
+CATEGORY=Provisions - Deeds
+SUBSECTION=Item Deeds
+DESCRIPTION=Spinning Wheel
+
+ON=@Create
+   MORE=i_spinning_wheel
+
+/////////MAquina de Desfiar////////////
+[ITEMDEF i_maquina_desfiarw]
+DEFNAME=i_maquina_desfiarw
+ID=0105f
+NAME=Maquina de Desfiar
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+TYPE=T_LOOM
+WEIGHT=20.0
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Upright Loom
+
+
+[ITEMDEF i_maquina_desfiarw2]
+// loom - N piece - W
+DEFNAME=i_maquina_desfiarw2
+ID=01060
+NAME=Maquina de Desfiar
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+TYPE=T_LOOM
+WEIGHT=20.0
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Upright Loom
+
+[ITEMDEF i_maquina_desfiarw3]
+// loom - N piece - W
+DEFNAME=i_maquina_desfiarw3
+ID=01061
+NAME=Maquina de Desfiar
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+TYPE=T_LOOM
+WEIGHT=20.0
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Upright Loom
+
+[ITEMDEF ITEMDEF i_maquina_desfiarw4]
+// loom - E piece - N
+DEFNAME=i_maquina_desfiarw4
+ID=01062
+NAME=Maquina de Desfiar
+RESOURCES=100 i_log
+SKILLMAKE=CARPENTRY 100.0, TAILORING 65.0, T_CARPENTRY
+TYPE=T_LOOM
+WEIGHT=20.0
+CATEGORY=Items by Professions
+SUBSECTION=Tailor
+DESCRIPTION=Upright Loom
+
+
+///////////////////////Forge////////////
+
+[ITEMDEF i_forge_1]
+DEFNAME=i_forge_1
+ID=i_forge
+Name=Forge Pequena
+RESOURCES=50 i_log, 100 i_ingot_iron
+SKILLMAKE=BLACKSMITHING 90.0, MINING 80.0
+TYPE=t_forge
+WEIGHT=10.0
+CATEGORY=Items by Professions
+SUBSECTION=Mining
+DESCRIPTION=Forge
+
+[ITEMDEF i_anvil_1]
+DEFNAME=i_anvil_1
+ID=i_anvil
+Name=Bigorna
+RESOURCES=50 i_log, 100 i_ingot_iron
+SKILLMAKE=BLACKSMITHING 90.0, MINING 80.0
+TYPE=t_anvil
+WEIGHT=10.0
+CATEGORY=Items by Professions
+SUBSECTION=Mining
+DESCRIPTION=Bigorna
+
+
+
+[EOF]

@@ -1,0 +1,2655 @@
+//****************************************************************************
+// SPHERE by : Menasoft ©1997-2007
+// www.sphereserver.net
+// All SPHERE script files and formats are copyright Menasoft & Partners.
+// This file may be freely edited for personal use, but may not be distributed
+// in whole or in part, in any format without express written permission from
+// Menasoft & Partners.  All donations and contributions
+// become the property of Menasoft & Partners.
+//****************************************************************************
+// FILE LAST UPDATED: Wednesday, October 1, 2014
+//
+VERSION=0.56c
+
+[ITEMDEF i_keg_potion]
+NAME=empty potion Keg
+ID=i_KEG_WOOD
+TYPE=t_script
+VALUE={200 300}
+WEIGHT=40
+RESOURCES=8 i_board_dg, 1 i_BARREL_TAP, 1 i_BARREL_HOOPS
+SKILLMAKE=TINKERING 65.0,t_tinker_tools
+
+CATEGORY=Unique Items
+SUBSECTION=Tinker
+DESCRIPTION=empty potion Keg
+
+ON=@Create
+    MOREP=0 0 0    //number of potions stored in keg
+    MORE1=0     //store BASEID of first potion (i_potion_heal)
+    MORE2=0        //store skillvalue off added potion
+
+ON=@DCLICK
+    SRC.SYSMESSAGE What potion would you like to fill the keg with?
+    TARGET
+    return 1
+
+ON=@TARGON_ITEM
+    if (<src.action> != -1 )
+        SRC.SYSMESSAGE You can't use this yet!
+        return 1
+    elseif <src.targ.baseid>==i_bottle_empty
+        if 0 >= <morex>
+            SRC.SYSMESSAGE You can't use this on a empty keg!
+            return 1
+        endif
+        if ( <src.targ.topobj.uid> != <src.uid> )
+            SRC.SYSMESSAGE The empty bottle should be in your backpack!
+            return 1
+        endif
+        SRC.SYSMESSAGE You fill an empty bottle.
+        SOUND=snd_Z_END_LIQUID
+        SRC.NEWITEM=<MORE1>
+        SRC.ACT.MORE2=<MORE2> //restore skillvalue 
+        SRC.ACT.AMOUNT <MOREX>
+        SRC.ACT.ATTR=0
+        SRC.ACT.TIMER=-1
+        SRC.ACT.BOUNCE
+        MOREX=0 
+        IF (<MOREX> == 0)
+            NAME=    //set original name
+            MORE1=0    //clear potion id    
+            MORE2=0    //clear makeskillvalue
+        ELSE
+            NAME=a <SRC.ACT.NAME> Keg(<MOREX>)
+        ENDIF
+        src.targ.CONSUME <MOREX>
+        RETURN 1
+    elseif <SRC.TARG.TYPE> != T_POTION
+        SRC.SYSMESSAGE Thats not a potion!
+        RETURN 1
+    elseif <MORE1> && (<SRC.TARG.BASEID>!=<MORE1>)
+        SRC.SYSMESSAGE You can't mix potion types!
+        RETURN 1
+    elseif (<MOREX> > 99) //max 100 potion
+        SRC.SYSMESSAGE There's no space for further potions!
+        RETURN 1
+    elseif (<MOREX>==0)
+        MORE1=<SRC.TARG.BASEID> // store potion baseid i_potion_xxx
+    elseif (<MORE1>!=<SRC.TARG.BASEID>)
+        SRC.SYSMESSAGE You can't fill up the keg with this potions!
+        RETURN 1
+    endif
+    MORE2=(<MORE2>*<MOREX>)
+    MOREX=(<MOREX> + <SRC.TARG.AMOUNT>)
+    MORE2=(<MORE2> + <SRC.TARG.MORE2>) //store average makeskillvalue
+    MORE2=(<MORE2> / <MOREX>)
+    NAME=a <SRC.TARG.NAME> Keg(<MOREX>)
+    SRC.SOUND=snd_Z_END_LIQUID
+    SRC.SYSMESSAGE You fill up the keg with a <SRC.TARG.NAME> Potion!
+    SRC.TARG.REMOVE
+    SRC.NEWITEM=i_bottle_empty
+    SRC.ACT.AMOUNT <MOREX>
+    SRC.ACT.ATTR=0
+    SRC.ACT.TIMER=-1
+    SRC.ACT.BOUNCE
+    return 1
+
+[ITEMDEF i_potion_explosionless]
+ID=0e25
+NAME=Lesser explosion
+TYPE=t_thrown_explosive
+VALUE=10
+WEIGHT=10
+RESOURCES=3 i_reag_sulfur_ash,1 i_bottle_empty
+SKILLMAKE=Alchemy 10.0, t_mortar
+
+ON=@Create
+   COLOR=07b2
+   TAG0.Damage=6,8
+   TAG0.Range=1
+
+//######################Delay Potion#####################
+
+[ITEMDEF i_delay_potion]      
+NAME=Delay Potion
+ID=i_handr_1 
+TYPE=T_EQ_SCRIPT 
+WEIGHT=0 
+LAYER=0 
+
+ON=@Equip
+TIMER=10
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+
+
+//######################Poisons######################
+
+[ITEMDEF i_potion_poisonless]
+NAME=Lesser Poison
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+VALUE=10
+RESOURCES=3 i_reag_nightshade, 1 i_bottle_empty
+SKILLMAKE=Alchemy 10.0, t_mortar
+
+
+ON=@Create
+COLOR=044
+MORE2=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Lesser Poison
+
+ON=@CLICK
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+ON=@DCLICK
+
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+IF (<SRC.POISONING><10.0)
+SRC.SYSMESSAGE Voce precisa de 10.0 de Poisoning.
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><50.0)
+More=01
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+IF (<SRC.POISONING><80.0)
+More=02
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+IF (<SRC.POISONING><90.0)
+More=03
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><100.0)
+More=04
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+More=05
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+return 1
+
+
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+
+ON=@TARGON_ITEM
+
+if <src.region.safe> =1
+src.sysmessage Voce nao pode aplicar veneno em safe area.
+return 1
+endif
+
+
+//IF (0<SRC.TARG.MOREY> >= 20.0>)
+//SRC.SYSMESSAGE=Voce nao pode aplicar veneno nessa arma.
+//RETURN=1
+//ENDIF
+
+// IF ((0<SRC.TARG.MORE2>=24) || (0<SRC.TARG.MORE2>=25) || (0<SRC.TARG.MORE2>=26) || (0<SRC.TARG.MORE2>=27)) 
+// SRC.SYSMESSAGE Isto ja esta envenenado. Limpe o item com cloth box para envenenar novamente.
+// RETURN=1
+// ENDIF
+
+IF !((<SRC.TARG.TYPE>==t_weapon_sword) || (<SRC.TARG.TYPE>==t_weapon_fence) || (<SRC.TARG.TYPE>==t_weapon_mace_smith) || (<SRC.TARG.TYPE>==t_weapon_mace_sharp))
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+ENDIF
+
+IF (<SRC.TARG.AMOUNT>>1)
+SRC.SYSMESSAGE Separe de um em um para envenenar.
+RETURN=1
+ENDIF
+
+
+if (0<src.targ.tag0.poison_cat> > 0)
+  if (<src.targ.tag0.poison_cat> != 1)
+    src.sysmessage Esta arma ja esta envenenada com <src.targ.tag0.poison_tipo>.
+    return 1
+  endif
+endif
+
+//src.sysmessage @07a1 Desabilitado para correcao, por Staff Destiny
+//return 1
+
+if (<eval <src.targ.tag0.poison_cargas>> >= 10)
+  src.sysmessage A arma ja esta cheia de veneno
+  return=1
+endif
+
+
+IF (<MORE>==01) 
+
+
+ If (RAND(3))
+ SRC.TARG.MORE2=24
+ SRC.SOUND=583
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+SRC.TARG.tag0.poison_name <src.targ.name>
+src.targ.tag0.poison_tipo Lesser Poison
+src.targ.tag0.poison_cat 1
+if (<eval <src.targ.tag0.poison_cargas>> == 1)
+ SRC.TARG.NAME=Lesser poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+endif
+ src.consume i_potion_poisonless
+ //AMOUNT=<AMOUNT>+ (-1)
+
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==2)
+
+ If (RAND(5))
+ SRC.TARG.MORE2=24
+ SRC.SOUND=583
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  SRC.TAG0.pericias_skill +=1
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Lesser Poison
+ src.targ.tag0.poison_cat 1
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Lesser poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisonless
+ //AMOUNT=<AMOUNT>+ (-1)
+  
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==3)
+
+ If (RAND(10))
+ SRC.TARG.MORE2=24
+ SRC.SOUND=583
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Lesser Poison
+ src.targ.tag0.poison_cat 1
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Lesser poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisonless
+ //AMOUNT=<AMOUNT>+ (-1)
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==4)
+
+ If (RAND(15))
+ SRC.TARG.MORE2=24
+ SRC.SOUND=583
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Lesser Poison
+ src.targ.tag0.poison_cat 1
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Lesser poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisonless
+ //AMOUNT=<AMOUNT>+ (-1)
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==5)
+
+SRC.SOUND=583
+SRC.TARG.MORE2=24
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+SRC.TARG.tag0.poison_name <src.targ.name>
+src.targ.tag0.poison_tipo Lesser Poison
+src.targ.tag0.poison_cat 1
+if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Lesser poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+endif
+ src.consume i_potion_poisonless
+//AMOUNT=<AMOUNT>+ (-1)
+  SRC.NEWITEM=i_delay_poisoning
+SRC.ACT.EQUIP
+SRC.RESEND 
+RETURN=1
+
+ENDIF
+
+
+
+
+SRC.SOUND=583
+SRC.SYSMESSAGE=Voce aplicou uma dose de veneno muito fraca e nao obteve sucesso.
+return 1
+
+
+
+
+[ITEMDEF i_potion_Poison]
+NAME=Poison
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+VALUE=10
+RESOURCES=5 i_reag_nightshade, 1 i_bottle_empty
+SKILLMAKE=Alchemy 50.0, t_mortar
+
+ON=@Create
+COLOR=0787
+more2=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Poison
+
+ON=@CLICK
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+ON=@DCLICK
+
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+IF (<SRC.POISONING><50.0)
+SRC.SYSMESSAGE Voce precisa de 50.0 de Poisoning.
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><80.0)
+More=02
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+IF (<SRC.POISONING><90.0)
+More=03
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><100.0)
+More=04
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+More=05
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+return 1
+
+
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+
+ON=@TARGON_ITEM
+
+if <src.region.safe> =1
+src.sysmessage Voce nao pode aplicar veneno em safe area.
+return 1
+endif
+
+
+
+
+// IF ((<SRC.TARG.MORE2>=24) || (<SRC.TARG.MORE2>=25) || (<SRC.TARG.MORE2>=26) || (<SRC.TARG.MORE2>=27)) 
+// SRC.SYSMESSAGE Isto ja esta envenenado. Limpe o item com cloth box para envenenar novamente. 
+// RETURN=1
+// ENDIF
+
+IF !((<SRC.TARG.TYPE>==t_weapon_sword) || (<SRC.TARG.TYPE>==t_weapon_fence) || (<SRC.TARG.TYPE>==t_weapon_mace_smith) || (<SRC.TARG.TYPE>==t_weapon_mace_sharp))
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+ENDIF
+
+IF (<SRC.TARG.AMOUNT>>1)
+SRC.SYSMESSAGE Separe de um em um para envenenar.
+RETURN=1
+ENDIF
+
+if (0<src.targ.tag0.poison_cat> > 0)
+  if (<src.targ.tag0.poison_cat> != 2)
+    src.sysmessage Esta arma ja esta envenenada com <src.targ.tag0.poison_tipo>.
+    return 1
+  endif
+endif
+
+//src.sysmessage @07a1 Desabilitado para correcao, por Staff Destiny
+//return 1
+
+if (<eval <src.targ.tag0.poison_cargas>> >= 10)
+  src.sysmessage A arma ja esta cheia de veneno
+  return=1
+endif
+
+
+
+
+
+
+IF (<MORE>==2)
+
+ If (RAND(5))
+ SRC.TARG.MORE2=25
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Poisoned
+ src.targ.tag0.poison_cat 2
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poison
+ //AMOUNT=<AMOUNT>+ (-1)
+   
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==3)
+
+ If (RAND(10))
+ SRC.TARG.MORE2=25
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Poisoned
+ src.targ.tag0.poison_cat 2
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poison
+ //AMOUNT=<AMOUNT>+ (-1)
+   
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==4)
+
+ If (RAND(15))
+ SRC.TARG.MORE2=25
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Poisoned
+ src.targ.tag0.poison_cat 2
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poison
+ //AMOUNT=<AMOUNT>+ (-1)
+   
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==5)
+
+SRC.SOUND=583
+SRC.TARG.MORE2=25
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+SRC.TARG.tag0.poison_name <src.targ.name>
+src.targ.tag0.poison_tipo Poisoned
+src.targ.tag0.poison_cat 2
+if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+endif
+ src.consume i_potion_poison
+//AMOUNT=<AMOUNT>+ (-1)
+SRC.NEWITEM=i_delay_poisoning
+SRC.ACT.EQUIP
+SRC.RESEND
+RETURN=1
+
+ENDIF
+
+SRC.SOUND=583
+SRC.SYSMESSAGE=Voce aplicou uma dose de veneno muito fraca e nao obteve sucesso.
+return 1
+
+
+[ITEMDEF i_potion_PoisonGreat]
+NAME=Greater Poison
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+VALUE=10
+RESOURCES=10 i_reag_nightshade, 1 i_bottle_empty
+SKILLMAKE=Alchemy 80.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=044
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Greater Poison
+
+ON=@CLICK
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+ON=@DCLICK
+
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+IF (<SRC.POISONING><80.0)
+SRC.SYSMESSAGE Voce precisa de 80.0 de Poisoning.
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><90.0)
+More=03
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+IF (<SRC.POISONING><100.0)
+More=04
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+RETURN=1
+ENDIF
+
+
+
+More=05
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+return 1
+
+
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+
+ON=@TARGON_ITEM
+
+if <src.region.safe> =1
+src.sysmessage Voce nao pode aplicar veneno em safe area.
+return 1
+endif
+
+
+
+
+// IF ((<SRC.TARG.MORE2>=24) || (<SRC.TARG.MORE2>=25) || (<SRC.TARG.MORE2>=26) || (<SRC.TARG.MORE2>=27)) 
+// SRC.SYSMESSAGE Isto ja esta envenenado. Limpe o item com cloth box para envenenar novamente. 
+// RETURN=1
+// ENDIF
+
+IF !((<SRC.TARG.TYPE>==t_weapon_sword) || (<SRC.TARG.TYPE>==t_weapon_fence) || (<SRC.TARG.TYPE>==t_weapon_mace_smith) || (<SRC.TARG.TYPE>==t_weapon_mace_sharp))
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+ENDIF
+
+IF (<SRC.TARG.AMOUNT>>1)
+SRC.SYSMESSAGE Separe de um em um para envenenar.
+RETURN=1
+ENDIF
+
+if (0<src.targ.tag0.poison_cat> > 0)
+  if (<src.targ.tag0.poison_cat> != 3)
+    src.sysmessage Esta arma ja esta envenenada com <src.targ.tag0.poison_tipo>.
+    return 1
+  endif
+endif
+
+//src.sysmessage @07a1 Desabilitado para correcao, por Staff Destiny
+//return 1
+
+if (<eval <src.targ.tag0.poison_cargas>> >= 10)
+  src.sysmessage A arma ja esta cheia de veneno
+  return=1
+endif
+
+
+
+
+
+IF (<MORE>==01) 
+
+
+ If (RAND(3))
+ SRC.TARG.MORE2=26
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Greater Poison
+ src.targ.tag0.poison_cat 3
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Greater poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisongreat
+ //AMOUNT=<AMOUNT>+ (-1)
+
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==2)
+
+ If (RAND(5))
+ SRC.TARG.MORE2=26
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Greater Poison
+ src.targ.tag0.poison_cat 3
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Greater poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisongreat
+ //AMOUNT=<AMOUNT>+ (-1)
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==3)
+
+ If (RAND(10))
+ SRC.TARG.MORE2=26
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Greater Poison
+ src.targ.tag0.poison_cat 3
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Greater poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisongreat
+ //AMOUNT=<AMOUNT>+ (-1)
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==4)
+
+ If (RAND(15))
+ SRC.TARG.MORE2=26
+ SRC.SOUND=583
+  SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ SRC.POISONING=<SRC.POISONING> +1
+  //SRC.TAGO.pericias_skill = <eval <SRC.TAGO.pericias_skill>+1>
+ //SRC.f_atualizar_skills
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Greater Poison
+ src.targ.tag0.poison_cat 3
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Greater poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisongreat
+ //AMOUNT=<AMOUNT>+ (-1)
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+ENDIF
+
+IF (<MORE>==5)
+
+SRC.SOUND=583
+SRC.TARG.MORE2=26
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+SRC.TARG.tag0.poison_name <src.targ.name>
+src.targ.tag0.poison_tipo Greater Poison
+src.targ.tag0.poison_cat 3
+if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Greater poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+endif
+ src.consume i_potion_poisongreat
+//AMOUNT=<AMOUNT>+ (-1)
+SRC.NEWITEM=i_delay_poisoning
+SRC.ACT.EQUIP
+SRC.RESEND
+RETURN=1
+
+ENDIF
+
+
+
+
+SRC.SOUND=583
+SRC.SYSMESSAGE=Voce aplicou uma dose de veneno muito fraca e nao obteve sucesso.
+return 1
+
+
+
+
+
+[ITEMDEF i_potion_PoisonDeadly]
+NAME=Deadly Poison
+ID=0f0e
+TYPE=T_POTION
+VALUE=10
+TDATA1=i_bottle_empty
+RESOURCES=20 i_reag_nightshade, 1 i_bottle_empty
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0787
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Deadly Poison
+
+
+ON=@CLICK
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+ON=@DCLICK
+
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+
+IF <AMOUNT>=0
+REMOVE
+SRC.RESEND
+RETURN=1
+ENDIF
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+
+IF (<SRC.POISONING><100.0)
+SRC.SYSMESSAGE Voce precisa de 100.0 de Poisoning.
+RETURN=1
+ENDIF
+
+
+More=05
+TARGET
+SRC.SYSMESSAGE Aonde deseja aplicar o veneno?
+return 1
+
+ON=@TARGON_CHAR
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+
+ON=@TARGON_ITEM
+
+if <src.region.safe> =1
+src.sysmessage Voce nao pode aplicar veneno em safe area.
+return 1
+endif
+
+// IF ((<SRC.TARG.MORE2>=24) || (<SRC.TARG.MORE2>=25) || (<SRC.TARG.MORE2>=26) || (<SRC.TARG.MORE2>=27)) 
+// SRC.SYSMESSAGE Isto ja esta envenenado. Limpe para envenenar novamente. 
+// RETURN=1
+// ENDIF
+
+IF !((<SRC.TARG.TYPE>==t_weapon_sword) || (<SRC.TARG.TYPE>==t_weapon_fence) || (<SRC.TARG.TYPE>==t_weapon_mace_smith) || (<SRC.TARG.TYPE>==t_weapon_mace_sharp))
+SRC.SYSMESSAGE=Voce so pode aplicar veneno em armas.
+RETURN=1
+ENDIF
+
+IF (<SRC.TARG.AMOUNT>>1)
+SRC.SYSMESSAGE Separe de um em um para envenenar.
+RETURN=1
+ENDIF
+
+if (0<src.targ.tag0.poison_cat> > 0)
+  if (<src.targ.tag0.poison_cat> != 4)
+    src.sysmessage Esta arma ja esta envenenada com <src.targ.tag0.poison_tipo>.
+    return 1
+  endif
+endif
+
+//src.sysmessage @07a1 Desabilitado para correcao, por Staff Destiny
+//return 1
+
+if (<eval <src.targ.tag0.poison_cargas>> >= 10)
+  src.sysmessage A arma ja esta cheia de veneno
+  return=1
+endif
+
+
+
+
+
+ If (RAND(15))
+ SRC.TARG.MORE2=27
+ SRC.SOUND=583
+ SRC.SYSMESSAGE Voce aplicou uma boa dose de veneno em <src.targ.name>
+ src.targ.tag0.poison_cargas <eval <src.targ.tag0.poison_cargas>+1>
+ SRC.TARG.tag0.poison_name <src.targ.name>
+ src.targ.tag0.poison_tipo Deadly Poison
+ src.targ.tag0.poison_cat 4
+ if (<eval <src.targ.tag0.poison_cargas>> == 1)
+  SRC.TARG.NAME=Deadly poisoned <SERV.ITEMDEF.<src.targ.baseid>.name>
+ endif
+ src.consume i_potion_poisondeadly
+ //AMOUNT=<AMOUNT>+ (-1)
+   
+ SRC.NEWITEM=i_delay_poisoning
+ SRC.ACT.EQUIP
+ SRC.RESEND
+ return 1
+ Endif
+
+
+
+SRC.SOUND=583
+SRC.SYSMESSAGE=Voce aplicou uma dose de veneno muito fraca e nao obteve sucesso.
+return 1
+
+
+[ITEMDEF i_potion_antidote]
+NAME=Antidote potion
+ID=0F0E
+WEIGHT=7
+RESOURCES=5 i_reag_nox_crystal, 1 i_bottle_empty
+SKILLMAKE=Alchemy 60.0, t_mortar
+VALUE=15
+
+ON=@CREATE
+more2=100
+COLOR=0806
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Antidote potion
+
+ON=@DCLICK
+
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage @07ad Use a pocao na bag.
+return 1
+endif
+
+TARGET @07ad Selecione o Cloth Box.
+RETURN=1
+
+ON=@TARGON_CHAR
+RETURN=1
+
+ON=@TARGON_ITEM
+
+IF !(<SRC.TARG.BASEID>==i_cloth_box)
+SRC.SYSMESSAGE=@07ad Isto nao eh um Cloth box.
+RETURN=1
+ENDIF
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+Src.sysmessage @07ad Use o clothbox na bag.
+return 1
+endif
+
+IF (<SRC.TARG.AMOUNT><100)
+SRC.SYSMESSAGE=@07ad Aplique o Antidote em 100 Cloth Boxs.
+RETURN=1
+ENDIF
+
+
+//SRC.TARG.AMOUNT=<SRC.TARG.AMOUNT>-100
+SRC.CONSUME 100 i_cloth_box
+SRC.NEWITEM=i_cloth_box_antidote
+SRC.ACT.AMOUNT=100
+SRC.ACT.BOUNCE
+Src.Consume i_potion_antidote
+Src.newitem i_bottle_empty
+Src.act.bounce
+RETURN=1
+
+
+
+//##########################Cures########################
+
+[ITEMDEF i_potion_CureLess]
+ID=0f0e
+TYPE=T_POTION
+NAME=Lesser Cure
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+
+RESOURCES=2 i_reag_garlic, 1 i_bottle_empty
+SKILLMAKE=Alchemy 30.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=01e0
+
+ON=@DCLICK
+  if ! (<CONT.UID> == <src.findlayer(21).UID>)
+    Src.sysmessage Use a pocao na bag.
+    return 1
+  endif
+
+  If (<src.tag0.potiontimer> > <serv.time>)
+     Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+    return 1
+  endif
+
+  If (<src.restest i_rune_poison>) && !(<SRC.FINDID.i_rune_poison.MORE1>=6969)
+    Src.sysmessage Voce esta envenenado com magia, a pocao nao tem efeito.
+    return 1
+  endif
+
+  if (<src.restest i_efeito_poison> == 0) && (<src.restest i_rune_poison> == 0)
+    src.sysmessage Voce nao esta envenenado para usar esta pocao
+    return 1
+  endif
+
+  IF (<src.findid.i_efeito_poison.more> >= 6)
+    src.sysmessage Voce nao pode neutralizar este veneno com esta potion.
+    return 1
+  ENDIF
+
+  SRC.CONSUME=i_rune_poison
+
+  Src.anim 33
+  SOUND=48
+
+  Src.consume=i_efeito_poison
+  Src.consume=i_potion_cureless
+
+  Serv.Newitem i_bottle_empty
+  Src.bounce <new>
+
+  Src.sysmessage Voce esta curado.
+
+  SRC.TAG0.POTIONTIMER=<SERV.TIME> +150
+
+  src.message @009fb Lesser Cure
+
+  return 1
+
+[ITEMDEF i_potion_Cure]
+NAME=Cure
+ID=0f0e
+TYPE=T_POTION
+VALUE=10
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+
+RESOURCES=3 i_reag_garlic, 1 i_bottle_empty
+SKILLMAKE=Alchemy 40.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0002c
+
+ON=@DCLICK
+  if ! (<CONT.UID> == <src.findlayer(21).UID>)
+  Src.sysmessage Use a pocao na bag.
+  return 1
+  endif
+
+  If (<src.tag0.potiontimer> > <serv.time>)
+     Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+    return 1
+  endif
+
+  If (<src.restest i_rune_poison>) && !(<SRC.FINDID.i_rune_poison.MORE1>=6969)
+    Src.sysmessage Voce esta envenenado com magia, a pocao nao tem efeito.
+    return 1
+  ENDIF
+
+  IF (<src.findid.i_efeito_poison.more> >= 7)
+    src.sysmessage Voce nao pode neutralizar este veneno com esta potion.
+    return 1
+  ENDIF
+
+  if (<src.restest i_efeito_poison> == 0) && (<src.restest i_rune_poison> == 0)
+    src.sysmessage Voce nao esta envenenado para usar esta pocao
+    return 1
+  endif
+
+  SRC.CONSUME=i_rune_poison
+
+  Src.anim 33
+  SOUND=48
+
+  Src.consume=i_efeito_poison
+  Src.consume=i_potion_cure
+
+  src.message @009fb Cure
+
+  Serv.Newitem i_bottle_empty
+  Src.bounce <new>
+
+  Src.sysmessage Voce esta curado.
+
+  SRC.TAG0.POTIONTIMER=<SERV.TIME> +150
+
+  return 1
+
+[ITEMDEF i_potion_CureGreat]
+NAME=Greater Cure
+ID=0f0e
+TYPE=T_POTION
+VALUE=10
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+
+RESOURCES=5 i_reag_garlic, 1 i_bottle_empty
+SKILLMAKE=Alchemy 60.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0002c
+
+ON=@DCLICK
+  if ! (<CONT.UID> == <src.findlayer(21).UID>)
+    Src.sysmessage Use a pocao na bag.
+    return 1
+  endif
+
+  If (<src.tag0.potiontimer> > <serv.time>)
+     Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+  return 1
+  endif
+
+  If (<src.restest i_rune_poison>) && !(<SRC.FINDID.i_rune_poison.MORE1>=6969)
+    Src.sysmessage Voce esta envenenado com magia, a pocao nao tem efeito.
+    return 1
+  endif
+
+  IF (<src.findid.i_efeito_poison.more> >= 8)
+    src.sysmessage Voce nao pode neutralizar este veneno com esta potion.
+    return 1
+  ENDIF
+
+  if (<src.restest i_efeito_poison> == 0) && (<src.restest i_rune_poison> == 0)
+    src.sysmessage Voce nao esta envenenado para usar esta pocao
+    return 1
+  endif
+
+  SRC.CONSUME=i_rune_poison
+
+  Src.anim 33
+  SOUND=48
+
+  Src.consume=i_efeito_poison
+  Src.consume=i_potion_CureGreat
+
+  src.message @009fb Cure
+
+  Serv.Newitem i_bottle_empty
+  Src.bounce <new>
+
+  Src.sysmessage Voce esta curado.
+
+  SRC.TAG0.POTIONTIMER=<SERV.TIME> +150
+  return 1
+
+[ITEMDEF i_potion_Curetotal]
+NAME=Total Cure
+ID=0f0e
+VALUE=10
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+
+RESOURCES=10 i_reag_garlic, 1 i_bottle_empty
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@Create
+COLOR=0002c
+more2=100
+
+ON=@DCLICK
+  if !(<CONT.UID> == <src.findlayer(21).UID>)
+    Src.sysmessage Use a pocao na bag.
+    return 1
+  endif
+
+  If (<src.tag0.potiontimer> > <serv.time>)
+     Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+    return 1
+  endif
+
+  If (<src.restest i_rune_poison>) && !(<SRC.FINDID.i_rune_poison.MORE1>=6969)
+    Src.sysmessage Voce esta envenenado com magia, a pocao nao tem efeito.
+    return 1
+  ENDIF
+
+  if (<src.restest i_efeito_poison> == 0) && (<src.restest i_rune_poison> == 0)
+    src.sysmessage Voce nao esta envenenado para usar esta pocao
+    return 1
+  endif
+
+  IF (<src.findid.i_efeito_poison.more> >= 9)
+    src.sysmessage Voce nao pode neutralizar este veneno com esta potion.
+    return 1
+  ENDIF
+
+  SRC.CONSUME=i_rune_poison
+
+  Src.anim 33
+  SOUND=48
+
+  Src.consume=i_efeito_poison
+  Src.consume=i_potion_Curetotal
+
+  src.message @009fb Total Cure
+
+  Serv.Newitem i_bottle_empty
+  Src.bounce <new>
+
+  Src.sysmessage Voce esta curado.
+
+  SRC.TAG0.POTIONTIMER=<SERV.TIME> +150
+  return 1
+
+//##########################Heals########################
+
+[ITEMDEF i_potion_HealLess]
+NAME=Lesser Heal
+ID=0f0e
+RESOURCES=2 i_reag_ginseng, 1 i_bottle_empty
+SKILLMAKE=Alchemy 50.0, t_mortar
+TYPE=T_POTION
+VALUE=10
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+
+ON=@Create
+more2=100
+COLOR=0ff
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Lesser Heal
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+  Src.sysmessage Use a pocao na bag.
+  return 1
+endif
+
+If !(<Src.hits><<Src.str>)
+  Src.sysmessage Voce ja esta com Hits Full.
+  return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+  return 1
+endif
+
+Src.anim 33
+SOUND=48
+
+Src.hits=<src.hits>+15
+
+Src.consume i_potion_healless
+
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+
+src.message @009fb Lesser Heal
+
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+If (<Src.hits>><Src.str>)
+  Src.hits=<Src.str>
+  return 1
+endif
+
+RETURN 1
+
+[ITEMDEF i_potion_Heal]
+NAME=Heal
+ID=0f0e
+VALUE=10
+RESOURCES=3 i_reag_ginseng, 1 i_bottle_empty
+SKILLMAKE=Alchemy 60.0, t_mortar
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+
+ON=@Create
+more2=100
+COLOR=0ff
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Heal
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If !(<Src.hits><<Src.str>)
+  Src.sysmessage Voce ja esta com Hits Full.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+
+Src.hits=<src.hits>+30
+
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+
+Src.consume i_potion_heal
+
+src.message @009fb Heal Potion
+
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+If (<Src.hits>><Src.str>)
+  Src.hits=<Src.str>
+  return 1
+endif
+RETURN 1
+
+[ITEMDEF i_potion_HealGreat]
+NAME=Greater Heal
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+RESOURCES=10 i_reag_ginseng, 1 i_bottle_empty
+SKILLMAKE=Alchemy 70.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0ff
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Greater Heal
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If !(<Src.hits><<Src.str>)
+  Src.sysmessage Voce ja esta com Hits Full.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+Src.hits=<src.hits>+40
+
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+Src.consume i_potion_healgreat
+src.message @009fb Greater Heal
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+If (<Src.hits>><Src.str>)
+  Src.hits=<Src.str>
+  return 1
+endif
+RETURN 1
+
+
+[ITEMDEF i_potion_Healtotal]
+NAME=Total Heal
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=12 i_reag_ginseng, 1 i_bottle_empty
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=07ad
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Total Heal
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If !(<Src.hits><<Src.str>)
+  Src.sysmessage Voce ja esta com Hits Full.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+Src.hits=<src.hits>+60
+
+Src.consume i_potion_healtotal
+
+src.message @009fb Total Heal
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+If (<Src.hits>><Src.str>)
+  Src.hits=<Src.str>
+  return 1
+endif
+RETURN 1
+
+//######################################Nightsight######################################
+
+[ITEMDEF i_potion_Nightsight]
+NAME=Nightsight
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=1 i_reag_spider_silk, 1 i_bottle_empty
+SKILLMAKE=Alchemy 29.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0455
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Nightsight
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+Src.Spelleffect=s_night_sight,100
+Effect = 3,i_fx_heal_effect, 0,20,1
+
+Src.consume i_potion_Nightsight
+src.message @009fb Nightsight
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+return 1
+
+
+//##################Refreshs##################
+
+[ITEMDEF i_potion_Refresh]
+NAME=Refresh
+ID=0f0e
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+VALUE=10
+WEIGHT=0.1
+RESOURCES=5 i_reag_black_pearl, 1 i_bottle_empty
+SKILLMAKE=Alchemy 40.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=012
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Refresh
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+Src.STAM += 80
+Effect = 3,i_fx_heal_effect, 0,20,1
+
+Src.consume i_potion_Refresh
+src.message @009fb Refresh
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+IF (<SRC.STAM> > <SRC.DEX>)
+  SRC.STAM=<SRC.DEX>
+ENDIF
+
+return 1
+
+
+[ITEMDEF i_potion_RefreshTotal]
+ID=0f0e
+NAME=Total Refresh
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=10 i_reag_black_pearl, 1 i_bottle_empty
+SKILLMAKE=Alchemy 60.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0823
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Total Refresh
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+Src.STAM=<SRC.DEX>
+Effect = 3,i_fx_heal_effect,0,20,1
+
+Src.consume i_potion_Refreshtotal
+src.message @009fb Total Refresh
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+IF (<SRC.STAM> > <SRC.DEX>)
+  SRC.STAM=<SRC.DEX>
+ENDIF
+
+return 1
+
+//##################Invis Potion###############
+
+[ITEMDEF i_potion_Invisibility]
+ID=0f0e
+NAME=Invisibility
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=5 i_reag_wyrm_heart, 1 i_bottle_empty
+SKILLMAKE=Alchemy 65.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=07a1
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Invisibility
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+Src.Spelleffect=s_invisibility,100
+
+Src.consume i_potion_Invisibility
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+//Src.newitem i_delay_potion
+//Src.act.equip
+
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+src.message @009fb Invisibility
+return 1
+
+[ITEMDEF i_potion_magicreflection]
+ID=0f0e
+NAME=Magic Reflection
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=5 i_reag_garlic 5, i_reag_mandrake_root 5, i_reag_spider_silk, 1 i_bottle_empty
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=0801
+
+ON=@DCLICK
+if ! (<CONT.UID>==<src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+Src.anim 33
+SOUND=48
+Src.Spelleffect=s_magic_reflection,100
+src.message @009fb Magic Reflection Potion
+Src.consume i_potion_magicreflection
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+return 1
+
+
+//###############Mana Potion#################
+
+[ITEMDEF i_potion_Mana]
+ID=0f0e
+NAME=Mana Refresh
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+VALUE=10
+WEIGHT=0.1
+RESOURCES=3 i_reag_eye_of_newt, 1 i_bottle_empty
+SKILLMAKE=Alchemy 75.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=07a0
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Mana Refresh
+
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+If (<src.mana>=<src.int>)
+Src.sysmessage Voce ja esta com mana full.
+return 1
+endif
+
+Src.anim 33
+Src.MANA=<SRC.MANA>+45
+
+Src.consume i_potion_mana
+src.message @009fb Mana Refresh
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+IF (<SRC.MANA> > <SRC.INT>)
+  SRC.MANA=<SRC.INT>
+ENDIF
+return 1
+
+[ITEMDEF i_potion_ManaTotal]
+ID=0f0e
+NAME=Total Mana Refresh
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+WEIGHT=0.1
+VALUE=10
+RESOURCES=6 i_reag_eye_of_newt, 1 i_bottle_empty
+SKILLMAKE=Alchemy 98.0, t_mortar
+
+ON=@Create
+more2=100
+COLOR=007c0
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Novas Potions
+DESCRIPTION=Total Mana Refresh
+
+
+ON=@DCLICK
+if ! (<CONT.UID> == <src.findlayer(21).UID>)
+Src.sysmessage Use a pocao na bag.
+return 1
+endif
+
+If (<src.tag0.potiontimer> > <serv.time>)
+   Src.message [<eval (<serv.time> - <src.tag0.potiontimer>)/-10> Segs]
+return 1
+endif
+
+If (<src.mana>=<src.int>)
+Src.sysmessage Voce ja esta com mana full.
+return 1
+endif
+
+Src.anim 33
+Src.MANA=<SRC.MANA>+80
+
+Src.consume i_potion_manatotal
+src.message @009fb Total Mana Refresh
+Serv.Newitem i_bottle_empty
+Src.bounce <new>
+SRC.TAG.POTIONTIMER=<SERV.TIME> +150
+IF (<SRC.MANA> > <SRC.INT>)
+  SRC.MANA=<SRC.INT>
+ENDIF
+return 1
+
+[ITEMDEF i_potion_shrink] 
+ID=i_bottle_empty
+NAME=Shrink Potion 
+TYPE=T_POTION 
+TDATA1=i_bottle_empty 
+VALUE=10
+RESOURCES=2 i_reag_batwing, 1 i_bottle_empty 
+SKILLMAKE=Alchemy 60.0 , t_mortar
+WEIGHT=0.1
+
+CATEGORY=Other
+SUBSECTION=Potions
+DESCRIPTION=Shrink Potion
+
+ON=@Create  
+MORE2=100.0 
+COLOR=079c
+
+ON=@DCLICK
+IF <SRC.RESTEST 1 i_potion_shrink>
+TARGET Clique no animal que quer shrinkar. 
+RETURN 1
+ELSE
+SRC.SYSMESSAGE A potion deve estar dentro da bag.
+RETURN 1
+ENDIF
+
+ON=@TARGON_ITEM 
+SRC.MESSAGE Voce nao pode shrinkar items. 
+RETURN 1 
+
+ON=@TARGON_CHAR 
+IF (<src.targ.npc> == 1) || (<src.targ.npc> == 13)
+    IF <SRC.TARG.ISMYPET>
+        IF <SRC.TARG.FINDID.i_rune_summon_creature>
+            SRC.SYSMESSAGE @0790 Voce nao pode shrinkar animais summonados.
+            RETURN 1
+        ENDIF
+        SRC.NEWITEM=<SRC.TARG.ICON>
+        SRC.ACT.NAME=<SRC.TARG.NAME> 
+        SRC.ACT.COLOR=<SRC.TARG.COLOR> 
+        SRC.ACT.MORE1=<SRC.TARG.ID> 
+        if (0<src.targ.tag0.vidas>)
+            src.act.tag0.vidas <src.targ.tag0.vidas>
+            src.act.tag0.name <src.targ.name>
+            src.act.tag0.fame <src.targ.fame>
+            src.act.tag0.karma <src.targ.karma>
+            src.act.tag0.food <src.targ.food>
+            src.act.tag0.dono <src.targ.tag0.dono>
+            src.act.tag0.id <src.targ.id>
+            src.act.tag0.icon <src.targ.icon>
+            src.act.more2 1 // Fix
+            src.act.type t_animal_vida
+            src.act.attr 04
+        endif
+        SRC.ACT.BOUNCE 
+        SRC.TARG.REMOVE 
+        SRC.CONSUME=1 i_potion_shrink
+        Src.Newitem i_bottle_empty
+        Src.act.bounce
+        src.message @009fb Shrink Potion
+        RETURN 1
+    ELSE 
+        SRC.MESSAGE @0790 Esse animal nao lhe pertence!
+        RETURN 1
+    ENDIF
+ENDIF
+SRC.SYSMESSAGE=@0790 Voce soh pode shrinkar animais.
+RETURN 1
+ENDIF 
+
+
+// Extended potions.
+
+[ITEMDEF i_potion_Beastform]
+// This potion polymorphs you into an animal for a while.
+// The animal it turns you into is determined when you make the potion (you can use taste id to determine which animal it does).
+ID=i_bottle_WHITE
+NAME=Beastform
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+
+RESOURCES=i_reag_blood_moss, i_reag_ginseng, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_BeastForm
+MORE2=60.0
+
+[ITEMDEF i_potion_Chameleon]
+// This potion makes your skin match the colors of whatever is behind you.
+ID=i_bottle_WHITE
+NAME=Chameleon skin
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+
+RESOURCES=i_reag_garlic, i_reag_spider_silk, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_Chameleon
+MORE2=60.0
+
+[ITEMDEF i_potion_Clever]
+// This potion gives a temporary boost to intelligence.
+ID=i_bottle_WHITE
+NAME=Cleverness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_fertile_dirt, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_Cunning
+MORE2=70.0
+
+[ITEMDEF i_potion_Clever_Great]
+// This potion gives a temporary boost to intelligence.
+ID=i_bottle_WHITE
+NAME=Great Cleverness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=2 i_reag_fertile_dirt, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_Cunning
+MORE2=100.0
+
+[ITEMDEF i_potion_Clumsiness]
+// This potion lowers your dexterity temporarily.
+ID=i_bottle_WHITE
+NAME=Clumsiness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+
+RESOURCES=i_reag_blood_moss, i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_Clumsy
+MORE2=70.0
+
+[ITEMDEF i_potion_Confusion]
+// This potion lowers your intelligence temporarily.
+ID=i_bottle_WHITE
+NAME=Confusion
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+
+RESOURCES=i_reag_Nightshade, i_reag_fertile_dirt, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_feeblemind
+MORE2=50.0
+
+[ITEMDEF i_potion_Forget_Less]
+ID=i_bottle_WHITE
+NAME=Lesser Forgetfulness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_forget
+MORE2=40.0
+
+[ITEMDEF i_potion_Forget]
+ID=i_bottle_WHITE
+NAME=Forgetfulness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_blackmoor, i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 30.1, t_mortar
+
+ON=@Create
+MORE1=s_forget
+MORE2=60.0
+
+[ITEMDEF i_potion_Forget_Great]
+// This potion permanently lowers one skill.
+// You can tell which skill the potion lowers by tasting it.
+ID=i_bottle_WHITE
+NAME=Geeater Forgetfulness
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_blackmoor, 2 i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 70.1, t_mortar
+
+ON=@Create
+MORE1=s_forget
+MORE2=100.0
+
+[ITEMDEF i_potion_Gender]
+// This potion permanently changes your gender.
+ID=i_bottle_WHITE
+NAME=Gender swap
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_blood_moss, i_reag_ginseng, i_reag_mandrake_root, i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Gender_Swap
+MORE2=100.0
+
+[ITEMDEF i_potion_Trance]
+// This potion temporarily increases your meditation skill.
+ID=i_bottle_WHITE
+NAME=Trance
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_black_pearl,  2 i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Trance
+MORE2=50.0
+
+[ITEMDEF i_potion_Trance_Great]
+// This potion temporarily increases your meditation skill.
+ID=i_bottle_WHITE
+NAME=Greater Trance
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_black_pearl, i_reag_mandrake_root, 2 i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Trance
+MORE2=100.0
+
+[ITEMDEF i_potion_Restore]
+// This potion increases both your hit points and your stamina.
+RESOURCES=i_reag_black_pearl, i_reag_mandrake_root, 1 i_bottle_empty
+ID=i_bottle_WHITE
+NAME=Restoration
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Restore
+MORE2=50.0
+
+[ITEMDEF i_potion_Restore_Great]
+// This potion increases both your hit points and your stamina.
+RESOURCES=i_reag_black_pearl, 2 i_reag_mandrake_root, 1 i_bottle_empty
+ID=i_bottle_WHITE
+NAME=Restoration
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Restore
+MORE2=100.0
+
+[ITEMDEF i_potion_Sustenance]
+// This potion serves to fill you up. (Remember, healing rate depends on how well fed you are!)
+// It comes in multiple strengths:
+// Greater: RESOURCES=2 i_reag_ginseng, 2 i_reag_mandrake_root, 1 i_bottle_empty
+NAME=Sustenance
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_ginseng, i_reag_mandrake_root, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Sustenance
+MORE2=60.0
+
+[ITEMDEF i_potion_Monster]
+// This potion polymorphs you into a monster for a while.
+// The monster it turns you into is determined when you make the potion (you can use taste id to determine which animal it does).
+NAME=Monster form
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_blood_moss, i_reag_mandrake_root, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Monster_Form
+MORE2=100.0
+
+[ITEMDEF i_potion_Particle]
+// This potion turns you into an immobile, but untargetable particle system for a while.
+NAME=Particle form
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_black_pearl, i_reag_blood_moss, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Particle_Form
+MORE2=60.0
+
+[ITEMDEF i_potion_Shield]
+// This potion erects a temporary force field around you. Nobody approaching will be able to get within 1 tile of you, though you can move close to them if you wish.
+NAME=Shield
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_garlic, i_reag_sulfur_ash, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Shield
+MORE2=100.0
+
+[ITEMDEF i_potion_Steelskin]
+// This potion turns your skin into steel, giving a boost to your AR.
+NAME=Steelskin
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_garlic, i_reag_ginseng, 2 i_reag_mandrake_root, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Steelskin
+MORE2=100.0
+
+[ITEMDEF i_potion_Stoneskin]
+// This potion turns your skin into stone, giving a boost to your AR.
+NAME=Stoneskin
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_Garlic, i_reag_ginseng, i_reag_mandrake_root, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Stoneskin
+MORE2=100.0
+
+[ITEMDEF i_potion_Weakness]
+// This potion temporarily lowers your strength.
+NAME=Weakness
+ID=i_bottle_WHITE
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=i_reag_mandrake_root, i_reag_blackmoor, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_weaken
+MORE2=100.0
+
+[COMMENT ITEMDEF i_potion_FloatLess]
+ID=i_bottle_WHITE
+NAME=Lesser Float
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_reag_pumice, 1 i_bottle_empty
+SKILLMAKE=Alchemy 15.1, t_mortar
+
+ON=@Create
+MORE1=s_Float
+MORE2=30.0
+COLOR=COLOR_CYAN
+
+[COMMENT ITEMDEF i_potion_Float]
+ID=i_bottle_WHITE
+NAME=Float
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=3 i_reag_pumice, 1 i_bottle_empty
+SKILLMAKE=Alchemy 35.1, t_mortar
+
+ON=@Create
+MORE1=s_Float
+MORE2=50.0
+COLOR=COLOR_CYAN
+
+[COMMENT ITEMDEF i_potion_FloatGreat]
+ID=i_bottle_WHITE
+NAME=Greater Float
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=6 i_reag_pumice, 1 i_bottle_empty
+SKILLMAKE=Alchemy 65.1, t_mortar
+
+ON=@Create
+MORE1=s_Float
+MORE2=100.0
+COLOR=COLOR_CYAN
+
+[COMMENT ITEMDEF i_potion_Lava]
+ID=i_bottle_RED
+NAME=Lava Bomb
+TYPE=T_POTION
+TDATA1=0
+
+RESOURCES=6 i_reag_volcanic_ash, 1 i_bottle_empty
+SKILLMAKE=Alchemy 95.1, t_mortar
+
+ON=@Create
+MORE1=s_lava
+MORE2=50.0
+COLOR=color_violet_lt
+
+
+
+////////////////////////////////////KEGS///////////////////////////////////////////////
+
+
+
+[ITEMDEF i_keg_poisonlesser]
+NAME=Keg Lesser Poison Potions
+ID=i_keg_wood
+RESOURCES=300 i_reag_nightshade, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 50.0, t_mortar
+
+ON=@CREATE
+COLOR=0787
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_PoisonLess
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_poison]
+NAME=Keg Poison Potions
+ID=i_keg_wood
+RESOURCES=500 i_reag_nightshade, 1 i_keg_small
+TYPE=t_normal 
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 75.0, t_mortar
+
+ON=@CREATE
+COLOR=0787
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_Poison
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_poisongreat]
+NAME=Keg Greater Poison Potions
+ID=i_keg_wood
+RESOURCES=1000 i_reag_nightshade, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 90.0, t_mortar
+
+ON=@CREATE
+COLOR=0787
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_Poisongreat
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_poisondeadly]
+NAME=Keg Deadly Poison Potions
+ID=i_keg_wood
+RESOURCES=2000 i_reag_nightshade, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=0787
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_poisondeadly
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_shrink]
+NAME=Keg Shrink Potions
+ID=i_keg_wood
+RESOURCES=200 i_reag_batwing, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=079c
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_shrink
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_manatotal]
+NAME=Keg Total Mana Potions
+ID=i_keg_wood
+RESOURCES=600 i_reag_eye_of_newt, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=07a0
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_manatotal
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_healtotal]
+NAME=Keg Total Heal Potions
+ID=i_keg_wood
+RESOURCES=1200 i_reag_ginseng, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=07ad
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_Healtotal
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_refreshtotal]
+NAME=Keg Total Refresh Potions
+ID=i_keg_wood
+RESOURCES=1000 i_reag_black_pearl, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=0823
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_refreshtotal
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_invisibility]
+NAME=Keg Invisibility Potions
+ID=i_keg_wood
+RESOURCES=500 i_reag_wyrm_heart, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=07a1
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_invisibility
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF i_keg_mana]
+NAME=Keg Mana Potions
+ID=i_keg_wood
+RESOURCES=300 i_reag_eye_of_newt, 1 i_keg_small
+TYPE=t_normal
+FLIP=0
+WEIGHT=3
+SKILLMAKE=Alchemy 100.0, t_mortar
+
+ON=@CREATE
+COLOR=0480
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM i_potion_mana
+SRC.ACT.AMOUNT 100
+SRC.ACT.BOUNCE
+REMOVE
+
+[ITEMDEF 0f06]
+//Potion (Black)
+DEFNAME=i_bottle_black
+TYPE=t_potion
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Black)(Nightsite)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=S_Night_Sight
+  MORE2={ 30.0 90.0 }
+
+[ITEMDEF 0f07]
+//Potion (Orange)
+DEFNAME=i_bottle_orange
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Orange)(Cure)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_cure
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f08]
+//Potion (Blue)
+DEFNAME=i_bottle_blue
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Blue)(Agility)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_agility
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f09]
+//Potion (White)
+DEFNAME=i_bottle_white
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (White)(Strength)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_Strength
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f0a]
+//Potion (Green)
+DEFNAME=i_bottle_green
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Green)(Poison)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_Poison
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f0b]
+//Potion (Red)
+DEFNAME=i_bottle_red
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Red)(Refresh)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_refresh
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f0c]
+//Potion (Yellow)
+DEFNAME=i_bottle_yellow
+TYPE=T_POTION
+TDATA1=i_bottle_empty
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Yellow)(Heal)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_heal
+  MORE2={ 300 900 }
+
+[ITEMDEF 0f0d]
+//Potion (Purple)
+DEFNAME=i_bottle_purple
+TYPE=T_POTION
+TDATA1=0
+RESOURCES=1 i_bottle_empty
+SKILLMAKE=Alchemy 200.0, t_mortar
+WEIGHT=1
+DESCRIPTION=Potion (Purple)(Explosion)
+SUBSECTION=Potions
+CATEGORY=Provisions - Alchemy & Magic
+
+ON=@Create
+  MORE1=s_explosion
+  MORE2={ 30.0 80.0 }
+
+[EOF]

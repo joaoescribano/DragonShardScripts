@@ -1,0 +1,9 @@
+[ITEMDEF i_invisivel]
+ID=3216
+NAME=Barreira invisivel
+
+ON=@CREATE
+ATTR=080
+
+
+[EOF]

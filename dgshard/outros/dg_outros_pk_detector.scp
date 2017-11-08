@@ -1,0 +1,377 @@
+////////////////////////////////////
+// 				   					/
+//      Script de PK Detector       /
+//    By Staff Obliver ( ForSek)    /
+//				   					/
+//      Para Dragon Shard           /
+//	21/01/2008 - terca         		/
+//				   					/
+////////////////////////////////////
+
+[ITEMDEF i_avisopk2]
+ID=i_floor_marble
+NAME=PK Detector
+TYPE=t_script
+
+ON=@CREATE 
+	COLOR=026
+	attr=attr_static
+
+ON=@STEP
+	if (<src.isplayer> == 0) && (<src.isnpc> == 0)
+		return 1
+	endif
+
+	IF (<SRC.KILLS> > 2)
+		IF (<SRC.FINDID.i_avisopk_2.uid>)
+			SRC.SYSMESSAGE Voce tem que esperar <SRC.FINDID.i_avisopk_2.TIMER> segundos.
+			return 0
+		endif
+
+		SRC.NEWITEM i_avisopk_2
+		SRC.ACT.CONT=<SRC.UID>
+		src.act.timer 20
+		SRC.ACT.EQUIP
+		
+		SERV.ALLCLIENTS sysmessage @026 PK Ponte de Britain!!! PK Ponte de Britain!!!
+	ENDIF
+
+[ITEMDEF i_avisopk_2]
+
+NAME=Delay Ponte
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=attr_invis|attr_decay
+MORE1=0
+
+ON=@Equip
+TIMER=1
+
+ON=@Timer
+if ( <cont> )
+if ( <more1> )
+more1=<more1>-1
+TIMER=1
+return 1
+endif
+endif
+remove
+return 1
+
+
+// Created 21/11/2012 14:47:19, with Gump Studio.
+// Exported with with SphereExporter ver 1.1.
+// Script for 0.56/Revisions
+
+[ITEMDEF i_pedra_beta_2]
+name Itens Beta
+id        0edb
+type        t_normal
+
+ON=@CREATE
+color 07a1
+
+on=@DCLICK
+src.allskills 1000
+dialog d_beta_2
+
+
+[DIALOG d_beta_2]
+0,0
+page 0
+resizepic 115 225 9200 443 218
+checkertrans 119 234 432 202
+htmlgump 113 127 443 100 0 1 1
+button 120 240 9720 9721 1 0 1
+button 120 280 9720 9721 1 0 2
+button 120 320 9720 9721 1 0 3
+button 120 360 9720 9721 1 0 4
+text 165 245 0 1
+text 165 285 0 2
+text 165 365 0 3
+text 165 325 0 4
+gumppictiled 524 68 83 150 10410
+gumppictiled 525 217 55 165 10411
+gumppictiled 525 367 68 99 10412
+button 120 400 9720 9721 1 0 5
+text 165 405 0 5
+tilepic 499 362 5402
+
+[DIALOG d_beta_2 text]
+Aqui será possível pegar todos os materiais existentes no shard, para poder fazer os itens que voces quiserem, assim testando todos os tipos de itens existentes no shard!
+Minerios
+Madeiras
+Bandagens
+Itens Magicos
+Reagentes
+
+[DIALOG d_beta_2 button]
+ON=1
+src.newitem i_ingot_barro
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_onix
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_glass
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_azurite
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_titanium
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_blooddiamond
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_gold
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_silver
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_rosite
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_ingot_bronze
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+ON=2
+
+src.newitem i_log
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_purple
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_elfic
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_fire
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_sky
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_black
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_white
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_elven
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_mystic
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////
+
+src.newitem i_log_death
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+ON=3
+
+serv.newitem i_kit_ferramentas_2
+new.cont <src.uid>
+
+////////////////////////
+
+ON=4
+
+src.newitem i_bandage
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+ON=5
+
+src.newitem i_reag_garlic
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_spider_silk
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_sulfur_ash
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_blood_moss
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_nightshade
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_ginseng
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_mandrake_root
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_black_pearl
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_nox_crystal
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_worm_heart
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_eye_of_newt
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+src.newitem i_reag_batwing
+src.act.amount 200
+src.act.bounce
+src.act.fix
+
+////////////////////////////
+
+
+
+[TEMPLATE i_kit_ferramentas_2]
+CONTAINER=i_bag
+NAME=@07a1 Kit Ferramentas
+COLOR=07a1
+ITEM=i_golden_pickaxe
+ATTR=04
+ITEM=i_golden_hammer
+ATTR=04
+ITEM=i_golden_hatchet
+ATTR=04
+ITEM=i_golden_dagger
+ATTR=04
+ITEM=i_amu_golden_carpentry
+ATTR=04
+ITEM=i_amu_golden_poison
+ATTR=04
+ITEM=i_amu_golden_taming
+ATTR=04
+ITEM=i_amu_golden_cooking
+ATTR=04
+
+[EOF]

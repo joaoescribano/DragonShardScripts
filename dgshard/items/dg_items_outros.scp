@@ -1,0 +1,39 @@
+[ITEMDEF 021a3]
+
+TYPE=t_normal
+
+
+
+//////////////////////////////////////////////////////////////////////
+////////////////////// TRACKING SKILL UP ////////////////////////////
+////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+[ITEMDEF i_delay_tracking]
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+NAME=Tracking Timer
+
+ON=@CREATE
+ATTR=attr_decay
+TIMER=4
+
+ON=@EQUIP
+TIMER=3
+
+ON=@TIMER
+MORE2=100
+REMOVE
+RETURN 1
+
+ON=@UNEQUIP
+IF (<SRC.Tracking> < 100.0)&&(<MORE2>=100)
+DORAND 3
+RETURN 0
+RETURN 0
+SRC.Tracking=(<SRC.Tracking>+0.1)
+ENDDO
+ENDIF
+
+[EOF]

@@ -1,0 +1,598 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////// AUTO ANIMAIS EXOTICS - BY DANIEL MULLER
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[FUNCTION VERANIMAL]
+SRC.SYSMESSAGE Ultimo animal solto em: <var.LOCALANIMAL>
+
+[ITEMDEF i_robe_animals]
+ID=i_robe
+NAME=Robe Auto Animals
+WEIGHT=2
+TYPE=T_CLOTHING
+DYE=1
+ARMOR=3
+CATEGORY=Provisions - Clothes
+SUBSECTION=Hats
+DESCRIPTION=Floppy Hat
+SKILLMAKE=TAILORING 6.8, t_sewing_kit
+//RESOURCES2=5 i_cloth,1 i_thread
+
+ON=@CREATE
+ATTR=00084
+HITPOINTS=200
+MORE1=10
+
+ON=@EQUIP
+TIMER=10
+
+ON=@TIMER
+IF (<MORE1>=10)
+TIMER=30800
+CONT.ANIMALSMYSTARA
+MORE1=20
+ELSEIF (<MORE1>=20)
+TIMER=30800
+CONT.ANIMALSMYSTARA
+MORE1=30
+ELSEIF (<MORE1>=30)
+TIMER=30800
+CONT.ANIMALSMYSTARA
+MORE1=40
+Return 1
+ELSEIF (<MORE1>=40)
+TIMER=30800
+CONT.ANIMALSMYSTARA
+MORE1=10
+Return 1
+ENDIF
+
+[ITEMDEF i_autoanimals]
+ID=i_paver_stone
+NAME=Colocador de TIMER ANIMALS
+Type=0
+
+ON=@STEP
+SERV.NEWITEM=i_timer_ANIMALS
+NEW.EQUIP
+var.animalsname=<SRC.NAME>
+SRC.homedist=100
+REMOVE
+
+[ITEMDEF i_timer_ANIMALS]
+NAME=Delay ANIMALS
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@CREATE
+COLOR=024
+MORE1=10
+
+ON=@EQUIP
+TIMER=300
+var.animaltemposay=30
+SRC.TAG.VISTO=00
+
+ON=@UNEQUIP
+IF (<MORE2>==100) // REMOVER NPC
+SRC.REMOVE
+ELSE
+ENDIF
+
+ON=@TIMER
+IF (<MORE1>==10)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] <var.animalsname> esta solta por mais 25 minutos! Encontre em <var.animallocal>!
+MORE1=20
+TIMER=600
+var.animaltemposay=25
+Return 1
+ELSEIF (<MORE1>==20)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] <var.animalsname> esta solta por mais 15 minutos! Encontre em <var.animallocal>!
+MORE1=30
+TIMER=600
+var.animaltemposay=15
+Return 1
+ELSEIF (<MORE1>==30)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] <var.animalsname> esta solta por mais 10 minutos! Encontre em <var.animallocal>!
+MORE1=100
+TIMER=300
+var.animaltemposay=10
+Return 1
+ELSEIF (<MORE1>==100)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] <var.animalsname> nao foi domesticado e some na floresta...
+more2=100 // REMOVER
+REMOVE
+Return 1
+ENDIF
+
+[EVENTS E_AUTO_ANIMALS]
+ON=@NPCSeeNewPlayer
+TAG.VISTO=(<TAG.VISTO>+01)
+IF (<TAG.VISTO>==01)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Player <SRC.NAME> localizou o <var.animalsname> em <var.animallocal>!
+SAY <SRC.NAME> voce tem menos de <EVAL(<var.animaltemposay>)> minutos para me domesticar!
+ELSE
+SAY <SRC.NAME> voce tem menos de <EVAL(<var.animaltemposay>)> minutos para me domesticar!
+ENDIF
+
+ON=@DCLICK
+CONSUME=i_timer_ANIMALS
+EVENTS=-E_AUTO_ANIMALS
+
+[FUNCTION LOCALANIMAL]
+IF (<var.animallocalnr>==01)
+var.LOCALANIMAL=3047,234
+var.animallocal=Vesper Territory
+ELSEIF (<var.animallocalnr>==02)
+var.LOCALANIMAL=3609,2847,50
+var.animallocal=Ocllo Territory
+ELSEIF (<var.animallocalnr>==03)
+var.LOCALANIMAL=950,458
+var.animallocal=Yew Territory
+ELSEIF (<var.animallocalnr>==04)
+var.LOCALANIMAL=1808,3349
+var.animallocal=Trisinc Territory
+ELSEIF (<var.animallocalnr>==05)
+var.LOCALANIMAL=4388,3740
+var.animallocal=Fire Island
+ELSEIF (<var.animallocalnr>==06)
+var.LOCALANIMAL=1836,493
+var.animallocal=Northern Territory
+ELSEIF (<var.animallocalnr>==07)
+var.LOCALANIMAL=1324,2464,5
+var.animallocal=Felluca
+ELSEIF (<var.animallocalnr>==08)
+var.LOCALANIMAL=4064,540
+var.animallocal=Ice Isle
+ELSEIF (<var.animallocalnr>==09)
+var.LOCALANIMAL=1511,924
+var.animallocal=Nothern Territory
+ELSEIF (<var.animallocalnr>==10)
+var.LOCALANIMAL=1192,2963
+var.animallocal=Destard Territory
+ELSEIF (<var.animallocalnr>==11)
+var.LOCALANIMAL=200,1452
+var.animallocal=Yew Territory
+ELSEIF (<var.animallocalnr>==12)
+var.LOCALANIMAL=1976,3272,10
+var.animallocal=Trisinc Territory
+ENDIF
+
+[FUNCTION ANIMALSMYSTARA]
+DORAND 12
+var.animallocalnr=01 // Vesper Territory
+var.animallocalnr=02 // Occlo Territory
+var.animallocalnr=03 // Yew Territory
+var.animallocalnr=04 // Trisinc Territory
+var.animallocalnr=05 // Fire Island
+var.animallocalnr=06 // Nothern Territory
+var.animallocalnr=07 // Felluca
+var.animallocalnr=08 // Ice Isle
+var.animallocalnr=09 // Nothern Territory Sul
+var.animallocalnr=10 // Pantano Destard
+var.animallocalnr=11 // Yew Territory
+var.animallocalnr=12 // Trisinc Territory
+ENDDO
+DORAND 35
+var.autoanimalsnpc=c_urso_agua
+var.autoanimalsnpc=c_zostrich_agua
+var.autoanimalsnpc=c_orn_agua
+var.autoanimalsnpc=c_lhama_agua
+var.autoanimalsnpc=c_cavalo_agua
+var.autoanimalsnpc=c_cavalo_floresta
+var.autoanimalsnpc=c_lhama_floresta
+var.autoanimalsnpc=c_orn_floresta
+var.autoanimalsnpc=c_zostrich_floresta
+var.autoanimalsnpc=c_urso_floresta
+var.autoanimalsnpc=c_cavalo_fogo
+var.autoanimalsnpc=c_lhama_fogo
+var.autoanimalsnpc=c_orn_fogo
+var.autoanimalsnpc=c_zostrich_fogo
+var.autoanimalsnpc=c_urso_fogo
+var.autoanimalsnpc=c_cavalo_gelo
+var.autoanimalsnpc=c_lhama_gelo
+var.autoanimalsnpc=c_orn_gelo
+var.autoanimalsnpc=c_zostrich_gelo
+var.autoanimalsnpc=c_urso_gelo
+var.autoanimalsnpc=c_cavalo_pacifico
+var.autoanimalsnpc=c_lhama_pacifico
+var.autoanimalsnpc=c_orn_pacifico
+var.autoanimalsnpc=c_zostrich_pacifico
+var.autoanimalsnpc=c_urso_pacifico
+var.autoanimalsnpc=c_cavalo_rosite
+var.autoanimalsnpc=c_lhama_rosite
+var.autoanimalsnpc=c_orn_rosite
+var.autoanimalsnpc=c_zostrich_rosite
+var.autoanimalsnpc=c_urso_rosite
+var.autoanimalsnpc=c_cavalo_vento
+var.autoanimalsnpc=c_lhama_vento
+var.autoanimalsnpc=c_orn_vento
+var.autoanimalsnpc=c_zostrich_vento
+var.autoanimalsnpc=c_urso_vento
+ENDDO
+
+LOCALANIMAL // COLOCAR O LOCAL CERTO
+
+IF (<var.autoanimalsnpc>==c_urso_agua)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso da Agua solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_agua
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_agua)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich da Agua solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_agua
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_agua)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn da Agua solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_agua
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_agua)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama da Agua solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_agua
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_agua)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo da Agua solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_agua
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_floresta)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo da Floresta solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_floresta
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_floresta)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama da Floresta solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_floresta
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_floresta)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn da Floresta solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_floresta
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_floresta)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich da Floresta solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_floresta
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_floresta)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso da Floresta solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_floresta
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_fogo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo de Fogo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_fogo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_fogo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama de Fogo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_fogo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_fogo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn de Fogo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_fogo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_fogo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich de Fogo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_fogo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_fogo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso de Fogo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_fogo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_gelo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo de Gelo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_gelo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_gelo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama de Gelo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_gelo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_gelo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn de Gelo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_gelo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_gelo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich de Gelo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_gelo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_gelo)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso de Gelo solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_gelo
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_pacifico)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama do Pacifico solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_pacifico
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_pacifico)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo do Pacifico solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_pacifico
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_pacifico)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn do Pacifico solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_pacifico
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_pacifico)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich do Pacifico solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_pacifico
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_pacifico)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso do Pacifico solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_pacifico
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_rosite)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo de Rosite solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_rosite
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_rosite)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama de Rosite solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_rosite
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_rosite)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn de Rosite solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_rosite
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_rosite)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich de Rosite solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_rosite
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_rosite)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso de Rosite solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_rosite
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_cavalo_vento)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Cavalo do Vento solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_cavalo_vento
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_lhama_vento)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Llama do Vento solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_lhama_vento
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_orn_vento)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Orn do Vento solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_orn_vento
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_zostrich_vento)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Zostrich do Vento solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_zostrich_vento
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+
+ELSEIF (<var.autoanimalsnpc>==c_urso_vento)
+SERV.ALLCLIENTS sysmessage @95 [Montaria Solta] Urso do Vento solto por 30 minutos em <var.animallocal>!
+SERV.NEWNPC=c_urso_vento
+NEW.TAG.VISTO=00
+var.animaltemposay=30
+NEW.EVENTS=+E_AUTO_ANIMALS
+NEW.P=<var.LOCALANIMAL>
+SERV.NEWITEM=i_autoanimals
+NEW.P=<var.LOCALANIMAL>
+ENDIF
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[Itemdef i_lixeira]
+ID=i_barrel_open
+NAME=Lixeira
+
+On=@dclick
+EMPTY
+sfx=snd_WEAPONS_GILOTIN1
+Src.targ.say A lixeira foi esvaziada por <src.name>
+return 1
+
+[ITEMDEF i_deed_lixeira]
+DEFNAME=i_deed_lixeira
+NAME=Deed to a Lixeira
+ID=i_Deed
+RESOURCES=i_deed, i_lixeira
+
+ON=@Create
+MORE=i_lixeira
+
+CATEGORY=Provisons - Deeds
+SUBSECTION=Custom Deeds
+DESCRIPTION=Deed to Lixeira
+
+[EOF]

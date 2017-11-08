@@ -1,0 +1,771 @@
+// Sistema de eventos 3.0a (11/01/2013)
+// By Owner Destiny
+// joao.escribano@dgshard.com.br
+
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+[DEFNAME conf_eventos]
+eventos_where_entrada   5146,1757             // Where onde os players irao depois de entrar na help room.
+eventos_where_saida     dragon_city_saida     // Where onde esta a pedra de saida de evento.
+eventos_where_premio    dragon_city_premiacao // Where da sala de pr�mios
+eventos_where_pedra     5146,1793             // Where da pedra de entrada dos eventos
+eventos_pedra_uid       040cb5c70             // UID da pedra de eventos
+eventos_qtd             9                     // Quantidade de eventos do shard
+
+// Bloco de conf de evento
+evento_1_nome   Chicken of Death
+evento_1_pedra  i_pedra_cod
+evento_1_vagas  0
+evento_1_premi  1
+evento_1_grupo  0
+evento_1_descr  Arena aonde os player tem de fugir da galinha da morte! o Ultimo a morrer vence e ganha 1k/player dentro do evento
+
+evento_2_nome   Free For All
+evento_2_pedra  i_entrada_ffa
+evento_2_vagas  0
+evento_2_premi  1
+evento_2_grupo  0
+evento_2_descr  Arena de PVP aonde todos os players tiram PVP juntos, cada um por si.
+
+evento_3_nome   Camp 1x1
+evento_3_pedra  i_pedra_1x1
+evento_3_vagas  0
+evento_3_premi  3
+evento_3_grupo  0
+evento_3_descr  Arena de PVP 1x1, evento tipo "torneio" aonde os 3 melhores recebem premio!
+
+evento_4_nome   Camp 2x2
+evento_4_pedra  i_pedra_2x2
+evento_4_vagas  0
+evento_4_premi  3
+evento_4_grupo  1
+evento_4_descr  Arena de PVP 2x2, evento tipo "torneio" aonde as 3 melhores duplas recebem premio!
+
+evento_5_nome   Bomberman (arena 1)
+evento_5_pedra  i_pedra_bomberman_1
+evento_5_vagas  4
+evento_5_premi  1
+evento_5_grupo  0
+evento_5_descr  Arena classica de bomberman! Somente 1 sai vencedor!
+
+evento_6_nome   Bomberman (arena 2)
+evento_6_pedra  i_pedra_bomberman_2
+evento_6_vagas  4
+evento_6_premi  1
+evento_6_grupo  0
+eventi_6_descr  Arena DG Style de bomberman! Somente 1 sai vencedor!
+
+evento_7_nome   Camp de Boxe
+evento_7_pedra  i_pedra_boxe
+evento_7_vagas  0
+evento_7_premi  3
+evento_7_grupo  0
+evento_7_descr  Arena de boxe, aonde os 3 melhores boxeadores recebem premios!
+
+evento_8_nome   Paintball Urbano
+evento_8_pedra  i_pedra_paintball
+evento_8_vagas  0
+evento_8_premi  1
+evento_8_grupo  1
+evento_8_descr  Paintball Urbano é mais um evento exclusivo DG Shard, Jogue paintball na cidade!!!
+
+evento_9_nome   Ataque Zumbi
+evento_9_pedra  i_pedra_zumbi
+evento_9_vagas  0
+evento_9_premi  1
+evento_9_grupo  1
+evento_9_descr  Evento de sobrevivencia contra um ataque zumbi, os sobreviventes recebem premios!
+
+// Pedra de entrada (pedra 1)
+[itemdef i_pedra_eventos_entrada]
+ID      0ed5
+type    t_normal
+name    Eventos DG Shard
+
+on=@create
+color   07a1
+attr    attr_static
+
+on=@Timer
+if (<tag0.aberto> == 1) && (<tag0.evento> > 0)
+    if (<eval <tag0.dentro>> < <eval <def.evento_<eval <tag0.evento>>_vagas>>) || (<eval <def.evento_<eval <tag0.evento>>_vagas>> == 0)
+        if (<def.evento_<eval <tag0.evento>>_vagas> == 0)
+            local.vagas Ilimitadas
+        else
+            local.vagas <eval <def.evento_<eval <tag0.evento>>_vagas>-<eval <tag0.dentro>>>
+        endif
+    
+        serv.b @077a Dragon Shard - T2A
+        serv.b @07a1 Evento <def.evento_<eval <tag0.evento>>_nome>
+        serv.b @07a1 Vagas: <local.vagas>
+        serv.b @07a1 Entrada na Help Room, utilize o comando .evento para ver detalhes!
+        
+        timer 15
+    endif
+endif
+return 1
+
+on=@Click
+if (<tag0.aberto> == 1) && (<tag0.evento> > 0)
+    message @07a1 Evento <def.evento_<eval <tag0.evento>>_nome>
+    if (<eval <tag0.dentro>> < <eval <def.evento_<eval <tag0.evento>>_vagas>>) || (<eval <def.evento_<eval <tag0.evento>>_vagas>> == 0)
+        if (<def.evento_<eval <tag0.evento>>_vagas> == 0)
+            message @07a1 [<eval <tag0.dentro>>]
+        else
+            message @07a1 [<eval <tag0.dentro>>/<eval <def.evento_<eval <tag0.evento>>_vagas>]
+        endif
+    else
+        message @07a1 Lotado!
+    endif
+else
+    message @07a1 Nenhum evento aberto
+endif
+return 1
+
+on=@DClick
+if (<tag0.aberto> == 1) && (<tag0.evento> > 0)
+    if (<src.isgm>)
+        src.fechar_evento
+    elif (<eval <tag0.dentro>> < <eval <def.evento_<eval <tag0.evento>>_vagas>>) || (<eval <def.evento_<eval <tag0.evento>>_vagas>> == 0)
+        if !(0<tag0.dentro>)
+            tag0.dentro = 1
+        else
+            tag0.dentro +=1
+        endif
+        src.por_no_evento <tag0.evento>
+    else
+        src.sysmessage @07a1 Evento lotado, por favor aguarde o próximo!
+    endif
+else
+    if (<src.isgm>)
+        dialog_conf_evento <uid>
+    endif
+endif
+return 1
+
+[itemdef i_pedra_eventos_saida]
+ID      0ed5
+type    t_normal
+name    Saida dos Eventos DG Shard
+
+on=@create
+color   0799
+attr    attr_static
+
+on=@click
+message @0799 Clique 2x para sair do evento!
+return 1
+
+on=@dclick
+if (<src.isgm>)
+    return 1
+endif
+if !(0<src.tag0.evento>)
+    src.sysmessage @0799 Algum problea aconteceu, chama o GM para prosseguir!
+    return 1
+endif
+
+// Remove os eventos dos players
+src.events=-e_1x1
+src.events=-e_2x2
+src.events=-e_bomberman
+src.events=-e_boxe
+src.events=-e_chicken
+src.events=-e_ffa
+src.events=-e_paintball
+
+if !(0<src.tag0.vencedor>)
+    src.sair_do_evento
+else
+    src.go <def.eventos_where_premio>
+endif
+
+return 1
+
+[itemdef i_pedra_eventos_premio]
+ID      0ed5
+type    t_normal
+name    Receber preimo dos Eventos DG Shard
+
+on=@create
+color   079a
+attr    attr_static
+
+on=@click
+message @079a Clique 2x para receber seu premio!
+return 1
+
+on=@dclick
+if (<src.isgm>)
+    return 1
+endif
+if !(0<src.tag0.evento>)
+    src.sysmessage @0799 Algum problema aconteceu, chame o GM para prosseguir!
+    return 1
+endif
+
+if !(0<src.tag0.vencedor>)
+    src.sair_do_evento
+else
+    src.dar_premio
+endif
+return 1
+
+[function trofeu_id]
+DORAND 13
+    local.trofeu 012d9
+    local.trofeu 012cb
+    local.trofeu 01227
+    local.trofeu 01228
+    local.trofeu 01226
+    local.trofeu 01227
+    local.trofeu 01225
+    local.trofeu 01224
+    local.trofeu 01223
+    local.trofeu 0139a
+    local.trofeu 0139b
+    local.trofeu 0139c
+    local.trofeu 0139d
+ENDDO
+return <local.trofeu>
+
+[function trofeu_cor]
+DORAND 41
+    local.cor 077a
+    local.cor 07a1
+    local.cor 07a2
+    local.cor 07a3
+    local.cor 07a4
+    local.cor 07a5
+    local.cor 07a6
+    local.cor 07a7
+    local.cor 07a8
+    local.cor 07a9
+    local.cor 07b1
+    local.cor 07b2
+    local.cor 07b3
+    local.cor 07b4
+    local.cor 07b5
+    local.cor 07b6
+    local.cor 07b7
+    local.cor 07b8
+    local.cor 07b9
+    local.cor 0481
+    local.cor 0790
+    local.cor 0791
+    local.cor 0792
+    local.cor 0793
+    local.cor 0794
+    local.cor 0795
+    local.cor 0796
+    local.cor 0797
+    local.cor 0798
+    local.cor 0799
+    local.cor 0800
+    local.cor 0801
+    local.cor 0802
+    local.cor 0803
+    local.cor 0804
+    local.cor 0805
+    local.cor 0806
+    local.cor 0807
+    local.cor 0808
+    local.cor 0809
+    local.cor 0810
+ENDDO
+return <local.cor>
+
+[function dar_premio]
+var.evento    <tag0.evento>
+var.colocado  <tag0.colocado>
+sair_do_evento
+timerf 2,evento_<eval <var.evento>>_<eval <var.colocado>>_premio
+
+var.grupo <eval <def.evento_<eval <var.evento>>_<eval <var.colocado>>_grupo>>
+
+if (<var.colocado> == 1)
+  if (<var.grupo> == 1)
+    serv.b @077a Parabens ao <name>, vencedor do evento junto com seu time!!
+  else
+    serv.b @077a Parabens ao <name>, vencedor do evento!!
+  endif
+elif (<var.colocado> == 2)
+  if (<var.grupo> == 1)
+    serv.b @077a Parabens ao <name>, segundo colocado do evento junto com seu time!!
+  else
+    serv.b @077a Parabens ao <name>, segundo colocado do evento!!
+  endif
+elif (<var.colocado> == 3)
+  if (<var.grupo> == 1)
+    serv.b @077a Parabens ao <name>, terceiro colocado do evento junto com seu time!!
+  else
+    serv.b @077a Parabens ao <name>, terceiro colocado do evento!!
+  endif
+endif
+
+[FUNCTION dinheiro]
+SERV.NEWITEM i_bag
+NEW.COLOR=065
+NEW.NAME Premio de Evento
+NEW.CONT <src.uid>
+NEW.f_dinheiro <ARGS>
+f_coleta_remover <args>
+
+[FUNCTION f_dinheiro]
+IF (<ARGS> > 0)
+   SERV.NEWITEM i_gold
+     IF (<ARGS> > 65000)
+      NEW.AMOUNT=65000
+      NEW.CONT=<UID>
+      f_dinheiro <eval <ARGS>-<NEW.AMOUNT>>
+     ELSE
+      NEW.AMOUNT=<ARGS>
+      NEW.CONT=<UID>
+     ENDIF
+ENDIF
+
+[FUNCTION f_dinheiro_sc]
+IF (<ARGS> > 0)
+   SERV.NEWITEM i_coin_silver
+     IF (<ARGS> > 65000)
+      NEW.AMOUNT=65000
+      NEW.CONT=<UID>
+      f_dinheiro_sc <eval <ARGS>-<NEW.AMOUNT>>
+     ELSE
+      NEW.AMOUNT=<ARGS>
+      NEW.CONT=<UID>
+     ENDIF
+ENDIF
+
+[function dialog_conf_evento]
+sdialog d_conf_evento
+
+[DIALOG d_conf_evento]
+0,0
+page 0
+resizepic 86 225 9350 195 185
+dtext 120 230 52 Dragon Shard - T2A
+dtext 122 244 52 Sistema de Eventos
+checkertrans 100 269 165 104
+CALL pagina_eventos <uid>
+
+[DIALOG d_conf_evento button]
+ON=1 99
+abrir_evento <argn1> <uid>
+
+[FUNCTION pagina_eventos]
+local.uid <argn1>
+local.paginas = <eval <def.eventos_qtd>>
+
+local.pagina 1
+local.y=70
+local.evento=1
+
+for x 1 <eval <local.paginas>>
+    page <eval <local.x>>
+    
+    dtext 118 280 52 <def.evento_<eval <local.evento>>_nome>
+    if (<eval <def.evento_<eval <local.evento>>_vagas>> == 0)
+        local.vagas Ilimitadas
+    else
+        local.vagas <def.evento_<eval <local.evento>>_vagas>
+    endif
+    dtext 118 311 52 Vagas: <local.vagas>
+    dtext 118 343 52 N. Vencedores: <eval <def.evento_<eval <local.evento>>_premi>>
+    
+    button 165 380 4024 4025 1 0 <eval <local.evento>>
+    
+    if (<local.pagina> > 1)
+        button 90 380 4014 4015 0 <eval <local.pagina>-1> 0 // Pagina anterior
+    endif
+    if (<eval <local.pagina>+1> <= <eval <local.paginas>>)
+        button 245 380 4005 40060 0 <eval <local.pagina>+1> 0 // Proxima pagina
+    endif
+        
+    local.evento +=1
+    local.y = 70
+    local.pagina +=1
+endfor
+
+[Function abrir_evento]
+if !(0<argn1>)
+   return 1 
+endif
+
+serv.newitem i_gold
+serv.new.p <def.eventos_where_pedra>
+serv.new.update
+serv.new.por_pedra <argn1> <uid>
+
+// Abre o evento
+tag0.aberto 1
+tag0.dentro 0
+tag0.evento <argn1>
+timer 1
+
+[Function por_pedra]
+if !(0<argn1>)
+    return 1
+endif
+// Tira as pedras antigas
+foritems 0
+    remove
+endfor
+// Adiciona a pedra do evento novo
+serv.newitem <def.evento_<eval <argn1>>_pedra>
+serv.new.p <def.eventos_where_pedra>
+serv.new.update
+
+[FUNCTION por_no_evento]
+if (<findlayer.25>)
+  tag0.petid <findlayer.25.more1>
+  tag0.peticon <uid.<findlayer.25.more2>.icon>
+  tag0.petkarma <uid.<findlayer.25.more2>.karma>
+  tag0.petfame <uid.<findlayer.25.more2>.fame>
+  tag0.petfood <uid.<findlayer.25.more2>.food>
+  tag0.petcolor <uid.<findlayer.25.more2>.color>
+  tag0.petname <findlayer.25.name>
+ 
+  serv.newitem <tag0.peticon>
+  new.type t_shrinkado
+  new.tag0.name <tag0.petname>
+  new.tag0.fame <tag0.petfame>
+  new.tag0.karma <tag0.petkarma>
+  new.tag0.food <tag0.petfood>
+  new.tag0.id <tag0.petid>
+  new.tag0.icon <tag0.peticon>
+  new.dispid <tag0.peticon>
+  new.name <uid.<findlayer.25.more2>.name>
+  new.color <tag0.petcolor>
+  new.cont <uid>
+  new.more2 1
+  findlayer.25.remove
+endif
+
+arrumar
+ 
+events +e_evento_dg
+
+tag0.evento <argn1>
+tag0.vencedor 0
+tag0.colocado 0
+tag0.bp=<findlayer.21>
+
+findlayer.21.ATTR=0
+findlayer.21.CONT <FINDLAYER.29>
+
+go <def.eventos_where_entrada>
+
+SYSMESSAGE @077a .:: Dragons Shard - The Second Age ::.
+SYSMESSAGE @035 Atencao. Sua Backpack Original foi para seu banco. Ao sair do evento, ela voltara para voce.
+SYSMESSAGE @044 Divirta-se no Evento.
+
+[FUNCTION sair_do_evento]
+tag0.evento 0
+tag0.vencedor 0
+tag0.colocado 0
+
+events=-e_evento_dg
+
+arrumar
+ 
+FINDLAYER(25).remove
+findlayer.21.remove
+ 
+EQUIP <tag0.bp>
+tag0.bp=0
+go dragon_city
+sysmessage @077a Obrigado por participar do evento!
+sysmessage @044 Sua Backpack esta com voce novamente.
+
+[EVENTS e_evento_dg] // Evento para bloquear o HELP MENU e mudar o nick
+ON=@CLICK
+if (<kills> > 2)
+ message @020 <name> [Evento]
+else
+ message @03 <name> [Evento]
+endif
+return 1
+
+[TYPEDEF t_trofeu]
+ON=@CLICK
+MESSAGE @<COLOR> <NAME>
+return 1
+
+ON=@DCLICK
+src.sysmessage @<color> Dono: <uid.<tag0.uid>.name>
+src.sysmessage @<color> Data do evento: <tag0.data>
+src.sysmessage @<color> Ano/Mes/Dia/Horario
+return 1
+
+[TYPEDEF t_shrinkado]
+on=@click
+if (<more2>)
+ message  <tag0.name>
+ return 1
+else
+ message <name>
+ return 1
+endif
+
+on=@dclick
+if (<more2>)
+    serv.newnpc <tag0.id>
+    new.name <tag0.name>
+    new.karma <tag0.karma>
+    new.fame <tag0.fame>
+    new.food <tag0.food>
+    new.color <color>
+    new.p <src.p>
+    new.anim 5
+    new.bark 3
+
+    local.montariauid = <new.uid>
+
+    serv.newitem i_memory
+    new.color = memory_ipet
+    new.more1 = 04
+    new.more2 = <serv.time>
+    new.morep = <p>
+    new.link = <src.uid>
+    new.cont = <local.montariauid>
+
+    remove
+    return 1
+else
+    return 1
+endif
+
+[Function evento]
+if (<UID.<def.eventos_pedra_uid>.tag0.aberto> == 1) && (<UID.<def.eventos_pedra_uid>.tag0.evento> > 0)
+    if (<eval <UID.<def.eventos_pedra_uid>.tag0.dentro>> < <eval <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_vagas>>) || (<eval <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.aberto>>_vagas>> == 0)
+        sdialog d_evento_detalhes
+    else
+        sysmessage @07a1 Evento lotado, por favor aguarde o proximo!
+    endif
+else
+    sysmessage @07a1 Nenhum evento aberto no momento!
+endif
+
+[DIALOG d_evento_detalhes]
+0,0
+page 0
+resizepic 144 86 9200 305 305
+gumppic 94 46 10440
+dtext 221 90 52 Dragon Shard - T2A
+dtext 285 355 52 Ir para o evento?
+button 405 355 4023 4024 1 0 1
+CALL pagina_evento_detalhes
+
+[DIALOG d_evento_detalhes button]
+ON=1
+if (<src.tag0.jail>)
+    src.sysmessage @0a71 Voce nao pode ir para o evento na jail.
+ return 1
+endif
+
+if (<src.isevent.e_penal_colony>)
+    src.sysmessage @044 Voce nao pode ir pra o evento da Colonia Penal.
+ return 1
+endif
+
+IF (<SRC.ISEVENT.e_evento_dg>)
+    src.sysmessage @044 Voce nao pode ir para um evento dentro de outro evento.
+ return 1
+endif
+
+IF (<SRC.RESTEST 1  i_teleport_delay>)
+    SRC.SYSMESSAGE Voce ja esta indo para o evento!
+    RETURN 1
+ENDIF
+
+SRC.EVENTS +e_help_room
+SRC.newitem i_teleport_delay
+SRC.act.equip
+
+SRC.FindID.i_teleport_delay.more1=10
+RETURN 1
+
+[function pagina_evento_detalhes]
+if !(0<def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_vagas>)
+    dtext 180 140 52 Vagas: Ilimitadas
+else
+    dtext 180 140 52 Vagas: <eval <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_vagas>>
+endif
+
+dtext 180 120 52 Evento: <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_nome>
+dtext 180 160 52 Participando: <eval <UID.<def.eventos_pedra_uid>.tag0.dentro>>
+dtext 180 180 52 Descrição:
+dhtmlgump 180 200 233 137 1 0 <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_descr>
+
+[function fechar_evento]
+var.uid <def.eventos_pedra_uid>
+if !(0<UID.<var.uid>.tag0.evento>)
+    sysmessage @0799 Nenhum evento aberto no momento!
+    return 1
+endif
+sdialog d_eventos_fechar
+
+[DIALOG d_eventos_fechar]
+50,50
+resizepic 0 0 9200 335 83
+dtext 71 0 1913 Dragon Shard - The Second Age
+dtext 38 21 1952 Deseja fechar a entrada do evento???
+button 230 50 241 243 1 0 0
+button 40 50 247 248 1 0 1
+
+[DIALOG d_eventos_fechar button]
+ON=0
+return 1
+
+ON=1
+var.uid <def.eventos_pedra_uid>
+serv.b @07a1 Evento <def.evento_<eval <uid.<var.uid>.tag0.evento>>_nome>
+serv.b @077a Entrada FECHADA!
+TRY UID.<var.uid>.timer             -1
+TRY UID.<var.uid>.tag0.evento       0
+TRY UID.<var.uid>.tag0.dentro       0
+TRY UID.<var.uid>.tag0.aberto       0
+src.go <def.eventos_where_entrada>
+abrir_entrada
+return 1
+
+[Function abrir_entrada]
+serv.newitem i_gold
+serv.new.p <def.eventos_where_pedra>
+serv.new.update
+serv.new.abrir_pedra <serv.new.uid>
+
+[Function abrir_pedra]
+foritems 0
+    tag0.on 1
+endfor
+TRY UID.<argn1>.remove
+
+[FUNCTION admin_evento]
+sdialog d_admin_evento
+
+[DIALOG d_admin_evento]
+0,0
+page 0
+resizepic 70 40 9200 300 144
+resizepic 90 70 9200 260 30
+
+dtext 160 45 52 Dragon Shard - T2A
+dtext 100 75 52 Evento: <def.evento_<eval <UID.<def.eventos_pedra_uid>.tag0.evento>>_nome> (<eval <UID.<def.eventos_pedra_uid>.tag0.dentro>> players)
+
+page 1
+dtext 135 110 52 Incluir player no evento
+dtext 135 130 52 Declarar perdedor (tirar do evento)
+dtext 135 150 52 Declarar vencedores
+button 100 110 4005 4006 1 0 1
+button 100 131 4005 4006 1 0 2
+button 100 152 4005 4006 0 2 3
+
+page 2
+dtext 135 110 52 Declarar o primeiro lugar
+dtext 135 130 52 Declarar o segundo lugar
+dtext 135 150 52 Declarar o terceiro lugar
+button 100 110 4005 4006 1 0 4
+button 100 131 4005 4006 1 0 5
+button 100 152 4005 4006 1 0 6
+
+[DIALOG d_admin_evento button]
+ON=1
+local.uid <def.eventos_pedra_uid>
+
+if !(0<UID.<local.uid>.tag0.evento>)
+    sysmessage @0799 Nenhum evento aberto no momento!
+    return 1
+endif
+sysmessage @07a1 Selecione o player que deseja incluir no evento
+targetf adicionar_evento <eval <UID.<local.uid>.tag0.evento>>
+
+ON=2
+local.uid <def.eventos_pedra_uid>
+
+if !(0<UID.<local.uid>.tag0.evento>)
+    sysmessage @0799 Nenhum evento aberto no momento!
+    return 1
+endif
+sysmessage @07a1 Selecione o player que deseja declarar perdedor no evento
+targetf remover_evento <eval <UID.<local.uid>.tag0.evento>>
+
+ON=4
+local.uid <def.eventos_pedra_uid>
+
+sysmessage @07a1 Selecione o jogador para declarar como vencedor em primeiro lugar
+targetf vencedor_evento 1
+
+ON=5
+local.uid <def.eventos_pedra_uid>
+
+sysmessage @07a1 Selecione o jogador para declarar como vencedor em segundo lugar
+targetf vencedor_evento 2
+
+ON=6
+local.uid <def.eventos_pedra_uid>
+
+sysmessage @07a1 Selecione o jogador para declarar como vencedor em terceiro lugar
+targetf vencedor_evento 3
+
+[function vencedor_evento]
+if !(0<args>)
+    return 1
+endif
+
+if !(0<argo.tag0.evento>)
+    sysmessage @07a1 Este player nao esta participando de nenhum evento
+    return 1
+endif
+
+serv.b @077a Dragon Shard - T2A
+if (<args> == 1)
+    serv.b <argo.name> pegou o primeiro lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+    argo.sysmessage @07a1 Parabens! Voce pegou o primeiro lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+elif (<args> == 2)
+    serv.b <argo.name> pegou o segundo lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+    argo.sysmessage @07a1 Parabens! Voce pegou o segundo lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+elif (<args> == 3)
+    serv.b <argo.name> pegou o terceiro lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+    argo.sysmessage @07a1 Parabens! Voce pegou o terceiro lugar no evento <def.evento_<eval <uid.<local.uid>.tag0.evento>>_nome>
+endif
+
+argo.tag0.vencedor 1
+argo.tag0.colocado <eval <args>>
+argo.go <def.eventos_where_saida>
+
+return 1
+
+[function remover_evento]
+if !(0<argo.tag0.evento>)
+    sysmessage @07a1 Este player nao esta participando de nenhum evento
+    return 1
+endif
+local.uid <def.eventos_pedra_uid>
+TRY UID.<local.uid>.tag0.dentro <eval <UID.<local.uid>.tag0.dentro>-1>
+
+TRY UID.<argo.uid>.sysmessage @077a Dragon Shard - T2A
+TRY UID.<argo.uid>.sysmessage @07a1 Voce foi retirado do evento
+TRY UID.<argo.uid>.tag0.perdedor 1
+TRY UID.<argo.uid>.go <def.eventos_where_saida>
+return 1
+
+[function adicionar_evento]
+if !(0<argo.tag0.evento>)
+    local.uid <def.eventos_pedra_uid>
+
+    if !(0<UID.<local.uid>.tag0.dentro>)
+        TRY UID.<local.uid>.tag0.dentro 1
+    else
+        TRY UID.<local.uid>.tag0.dentro <eval <UID.<local.uid>.tag0.dentro>+1>
+    endif
+
+    TRY UID.<argo.uid>.por_no_evento <argn1>
+else
+    sysmessage @07a1 Este player ja esta participando de um evento
+endif
+return 1
+
+[EOF]

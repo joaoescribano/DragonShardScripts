@@ -1,0 +1,47 @@
+[EVENTS e_mina_minoc]
+ON=@HIT
+RETURN 1
+
+ON=@HITTRY
+RETURN 1
+
+ON=@SPELLCAST
+src.action -1
+return 1
+
+ON=@DAMAGE
+return 1
+
+on=@spelleffect
+RETURN 1
+
+[EVENTS e_mina_safe]
+ON=@GETHIT
+return 1
+
+ON=@HIT
+return 1
+
+ON=@SPELLEFFECT
+return 1
+
+[REGIONTYPE r_mina_safe]
+ON=@ENTER
+if !(<src.isgm>)
+ if !(<src.npc>)
+   src.events=+e_mina_safe
+  endif
+ endif
+endif
+return 0
+
+ON=@EXIT
+if !(<src.isgm>)
+ if !(<src.npc>)
+   src.events=-e_mina_safe
+  endif
+ endif
+endif
+return 0
+
+[EOF]

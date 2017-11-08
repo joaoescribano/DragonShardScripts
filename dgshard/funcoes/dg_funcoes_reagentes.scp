@@ -1,0 +1,29 @@
+[DIALOG d_reagents]
+0,0
+PAGE 0
+gumppic 100 110 39 92
+gumppic 125 149 54 72
+gumppic 275 149 53 72
+dtext 125 170 0 Mandrake Root:
+dtext 275 170 0 <RESCOUNT i_reag_mandrake_root>
+dtext 125 191 0 Black Pearl:
+dtext 275 191 0 <RESCOUNT i_reag_black_pearl>
+dtext 125 212 0 Spider's Silk:
+dtext 275 212 0 <RESCOUNT i_reag_spider_silk>
+dtext 125 233 0 Sulphurous Ash:
+dtext 275 233 0 <RESCOUNT i_reag_sulfur_ash>
+dtext 125 254 0 Blood Moss:
+dtext 275 254 0 <RESCOUNT i_reag_blood_moss>
+dtext 125 275 0 Garlic:
+dtext 275 275 0 <RESCOUNT i_reag_garlic>
+dtext 125 296 0 Ginseng:
+dtext 275 296 0 <RESCOUNT i_reag_ginseng>
+dtext 125 317 0 Nightshade:
+dtext 275 317 0 <RESCOUNT i_reag_nightshade>
+gumppic 200 333 51 55
+dtext 205 345 0 <RESCOUNT t_reagent>
+
+[FUNCTION regs]
+SDIALOG d_reagents
+
+[EOF]

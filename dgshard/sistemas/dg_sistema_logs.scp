@@ -1,0 +1,106 @@
+// Dragon Shard - T2A
+// Sistema de logs
+// Por Staff Destiny
+// http://dgshard.com.br
+
+[Events e_logs]
+ON=@ItemPickUp_Ground
+log Pegou <ARGN1> <ACT.NAME> (<ACT.UID>) do chao nas coordenadas <ACT.P>
+
+ON=@ItemPickUp_Pack
+IF !(<ARGO.TYPE> = t_container)
+    log Pegou <ARGN1> <ACT.NAME> (<ACT.UID>) do container <ACT.CONT.NAME> (<ACT.CONT.UID>)
+ENDIF
+
+ON=@ItemPickUp_Self
+log Pegou <ARGO.AMOUNT> <ARGO.NAME> (<ARGO.UID>) do container <ACT.NAME> (<ACT.UID>)
+
+ON=@ItemPickUp_Stack
+log Pegou <ACT.AMOUNT> <ACT.NAME> (<ACT.UID>) do monte de <ARGO.NAME> (<ARGO.UID>)
+
+ON=@ItemDropOn_Char
+log Dropou <act.amount> <ACT.NAME> (<ACT.UID>) NO PLAYER <ARGO.NAME> (ACC: <ARGO.ACCOUNT>)
+
+ON=@ItemDropOn_GrouND
+log Dropou <act.amount> <ACT.NAME> (<ACT.UID>) no chao (<ARGS>)
+
+ON=@ItemDropOn_Item
+IF !(<ARGO.TYPE> = t_container)
+    log Dropou <act.amount> <ACT.NAME> (<ACT.UID>) no item <ARGO.NAME> (<ARGO.UID>)
+ENDIF
+
+ON=@ItemDropOn_Self
+log Dropou <ARGO.amount> <ARGO.NAME> (<ARGO.UID>) no container <NAME> (<UID>) [<P>]
+
+ON=@Create
+src.log Criou <AMOUNT> <NAME> (<UID>) [<P>]
+
+ON=@ItemCreate
+log Criou <UID.<ARGO.UID>.amount> <ARGO.NAME> (<ARGO.UID>)
+
+ON=@Rename
+log Renomeou <ARGO.NAME> (<ARGO.UID>) [<ARGO.Account>]
+
+ON=@ItemBuy
+src.log Comprou <ARGN1> <ACT.NAME> (<ACT.UID>) no NPC '<ARGO.NAME> - <ARGO.UID>' (<REGION.NAME> <ARGO.P>) por <ARGN2>gps [Total: <EVAL <LOCAL.TOTALCOST>>]
+
+ON=@ItemSell
+src.log Vendeu <ARGN1> <ACT.NAME> (<ACT.UID>) no NPC '<ARGO.NAME> - <ARGO.UID>' (<REGION.NAME> <ARGO.P>) por <ARGN2>gps [Total: <EVAL <LOCAL.TOTALCOST>>]
+
+ON=@SkillMakeItem
+log Produziu <act.amount> <act.name> (<act.uid>) com a tool <argo.name> (<argo.uid>)
+
+ON=@SeeCrime
+log Viu um crime causado por <src.name> (<src.uid>) contra <argo.name> (<argo.uid>) 
+
+ON=@TradeCreate
+log Iniciou uma troca com <src.name> (<src.uid>)
+
+ON=@TradeClose
+log Cancelou a troca com <src.name> (<src.uid>)
+
+ON=@TradeAccepted
+if (<eval <argn1>> > 0)
+    log Aceitou uma troca vinda do jogador <src.name> (<eval <argn1>> itens)
+    FOR X 1 <eval <argn1>>
+        log Item <eval <local.x>>: <ref<eval <local.x>>.amount> <ref<eval <local.x>>.name> (<ref<eval <local.x>>.uid>)
+    ENDFOR
+else
+    log Fez uma troca com o player <src.name> (<src.uid>)
+endif
+
+ON=@UserExtCmd
+log Usou um comando externo '<args>' (<ARGN1>)
+
+ON=@Death
+log Morreu em <region.name> (<p>), morto por: <act.name> (<act.uid>)
+
+ON=@Kill
+src.log Matou <ARGO.name> (<ARGO.UID>) em <region.name> (<ARGO.P>) (Envolvidos: <argn1>)
+
+// Função que passa sobre os comandos do shard
+[FUNCTION f_oncommand]
+if (<targ.uid>)
+    log Utilizou o comando: <args> em <targ.name> (<targ.uid>)
+else
+    log Utilizou o comando: <args>
+endif
+
+// Função que gera o LOG dos chars
+[Function log]
+if (<file.inuse>)
+    return 1
+endif
+
+file.mode.append 1
+
+if (<file.open charLogs/<account.name>_<name>.txt>)
+    file.writeline [<serv.rtime.format %d/%m/%Y - %H:%M:%S>] <name> (<uid>) :: <args>
+else
+    serv.log ERRO: Ao tentar salvar o arquivo de log "charLogs/<account.name>_<name>.txt"
+endif
+
+file.close
+return 1
+
+[EOF]

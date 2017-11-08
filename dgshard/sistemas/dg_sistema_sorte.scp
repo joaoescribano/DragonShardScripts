@@ -1,0 +1,57 @@
+// Sistema de sorte 1.0
+// Dragon Shard - The second age
+// Por Staff Destiny
+
+// Implementado
+// - Sorte no login
+// - Dano critico baseado em sorte e skill
+
+[Defname dg_sorte]
+sorte_ini_min 20
+sorte_ini_max 30
+
+[Events e_sorte]
+ON=@HIT
+if (<tag0.temSorte>)
+    var.bonus 0
+    if (<anatomy> >= 100.0 && <tactics> >= 100.00)
+        var.bonus += 5
+        if (<argo.type> == t_weapon_sword) && (<swordsmanship> >= 100.0)
+            var.bonus +=10
+        else if (<argo.type> == t_weapon_fence) && (<fencing> >= 100.0)
+            var.bonus +=10
+        else if (<argo.type> == t_weapon_mace_smith) && (<macefighting> >= 100.0)
+            var.bonus +=10
+        else if (<argo.type> == t_weapon_bow) && (<archery> >= 100.0)
+            var.bonus +=10
+        else if (<argo.type> == t_weapon_xbow) && (<archery> >= 100.0)
+            var.bonus +=10
+        endif
+    endif
+    var.bonus +=<eval {0 (<luck>/2)}>
+    if (<f_critico <luck>,<eval <var.bonus>>> == 1)
+        // var.base <eval (<findlayer(1).dam.hi> * 1.2)/10>
+        var.base <eval ((<argn1> * 2)/2)>
+        var.dano {<ARGN1> <eval <var.base>>}
+
+        if (<var.dano> > <eval <findlayer(1).dam.hi> + <dam.hi>>)
+            src.damage <eval <var.dano>>,dam_physical,<uid>,0,0,0,0,0
+            sysmessage @077a,0,1 Você deferiu um acerto crítico contra <src.name>
+            return 1
+        endif
+    endif
+endif
+
+[Function f_critico]
+// <argn1> = Sorte
+// <argn2> = Bonus
+var.numero <eval {70 100} - <argn2>>
+var.sorte <eval (<argn1> + <argn2>)>
+
+if (<var.sorte> >= <var.numero>)
+    return 1
+else
+    return 0
+endif
+
+[EOF]

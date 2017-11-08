@@ -1,0 +1,333 @@
+////////////////////////////// TRAVELLING /////////////////////////
+
+[CHARDEF c_h_traveller]
+ID=c_man
+NAME=@00785 O Viajante
+TSPEECH=spk_traveller
+
+ON=@CREATE
+DORAND 2
+    ID=c_man
+    ID=c_woman
+ENDDO
+    NPC=brain_vendor
+    COLOR=colors_skin
+    NEED=i_gold
+    STR={66 80}
+    DEX=90
+    INT={66 80}
+    FENCING={15.0 38.0}
+    PARRYING={45.0 68.0}
+    SWORDSMANSHIP={15.0 38.0}
+    WRESTLING={15.0 38.0}
+    MACEFIGHTING={15.0 38.0}
+    MAGICRESISTANCE={45.0 68.0}
+    TACTICS={45.0 68.0}
+    ITEMNEWBIE=i_lantern
+    ITEMNEWBIE=random_male_hair
+    COLOR=colors_hair
+    ITEMNEWBIE=random_facial_hair
+    COLOR=match_hair
+    ITEMNEWBIE=i_shirt_plain
+    COLOR=colors_all
+    ITEMNEWBIE=random_pants
+    COLOR=colors_all
+    ITEMNEWBIE=random_shoes
+    COLOR=colors_neutral
+
+ON=@GetHit
+return 1
+
+on=@hittry
+return 1
+
+ON=@DEATH
+hits=<str>
+action -1
+return 1
+
+ON=@Attack
+return 1
+
+on=@spelleffect
+return 1
+
+ON=@NPCSEENEWPLAYER
+say @,3,1 Ola <src.name>, deseja viajar? Para viajar diga "viajar".
+
+[SPEECH spk_traveller]
+ON=oi*
+say @,3,1 Ola <src.name>, para viajar diga "viajar".
+
+ON=ola*
+say @,3,1 Ola <src.name>.
+
+ON=viajar*
+if !(<src.hits> == <src.str>) & (<src.mana> == <src.int>)
+  src.message @,3,1 Voce precisa estar com seus status completos.
+  return 1
+endif
+
+if !(<src.restest 500 i_gold>)
+  say @,3,1 Voce nao tem 500 gps. Me desculpe <src.name>.
+else
+  src.tag0.lasttraveller=<uid>
+  src.DIALOGCLOSE d_traveller
+  src.dialog d_traveller
+  say @,3,1 Aonde deseja ir <src.name>?
+endif
+
+ON=trabalho"
+say @,3,1 Eu estou trabalhando no <serv.name> agora.
+
+[DIALOG d_traveller]
+100,100
+
+resizepic 0 0 3500 300 300
+text 25 20 920 0
+text 25 35 920 1
+button 35 83 1210 1210 1 0 1
+text 50 120 920 2
+button 35 103 1210 1210 1 0 2
+text 50 80 137 3
+button 35 123 1210 1210 1 0 3
+text 50 140 920 4
+button 35 143 1210 1210 1 0 4
+text 50 100 137 5
+button 35 163 1210 1210 1 0 5
+text 50 160 920 6
+button 35 183 1210 1210 1 0 6
+text 50 180 920 7
+button 35 203 1210 1210 1 0 7
+text 50 200 920 8
+button 35 223 1210 1210 1 0 8
+text 50 220 920 9
+button 35 243 1210 1210 1 0 9
+text 50 240 920 10
+
+[DIALOG d_traveller text]
+Aonde deseja ir?
+Para viajar e preciso 500 gps.
+Britain
+Serpent's Hold (Sem Guards)
+Moonglow
+Cove (Sem Guards)
+Trinsic
+Vesper
+Jhelom
+Minoc
+Dragon Nest City [+1000 gps.]
+
+[DIALOG d_traveller button]
+ON=1
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 3010,3372,15
+  SRC.MESSAGE @009fb Bem vindo a Serpent's Hold Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=2
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 2254,1203
+  SRC.MESSAGE @009fb Bem Vindo a Cove Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=3
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 1444,1699
+  SRC.Message @009fb Bem vindo a Britain Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=4
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 4459,1124
+  SRC.MESSAGE @009fb Bem Vindo a Moonglow Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=5
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 1868,2779
+  SRC.MESSAGE @009fb Bem Vindo a Trinsic Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=6
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 2856,867
+  SRC.MESSAGE @009fb Vem Vindo a Vesper Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=7
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 1428,3707
+  SRC.MESSAGE @009fb Bem Vindo a Jhelom Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+ON=8
+if !(<src.restest 500 i_gold>)
+  src.message @,3,1 Voce nao tem 500 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go 2516,537
+  SRC.MESSAGE @009fb Bem Vindo a Minoc Viajante
+  src.consume 500 i_gold
+  return 1
+endif
+
+on=9
+if !(<src.restest 1000 i_gold>)
+  src.message @,3,1 Voce nao tem 1000 gps.
+else
+  if (<src.restest 1 i_mem_viajante>)
+     src.message @,3,1 Voce nao pode viajar tao rapido. 
+     return 1
+  endif
+
+  if (<distance <tag0.lasttraveller>> > 2)
+    src.sysmessage @077a Voce se afastou demais do viajante.
+    return 1
+  endif
+
+  src.newitem i_mem_viajante
+  src.new.equip
+  src.go help room
+  SRC.MESSAGE @009fb Bem Vindo a Dragon Nest City Viajante
+  src.consume 1000 i_gold
+return 1
+
+[itemdef i_mem_viajante]
+id=i_memory
+NAME=Viajante Delay
+type=t_eq_script
+layer=30
+
+on=@create
+attr=08
+timer=10
+
+on=@timer
+remove
+return 1
+
+[EOF]

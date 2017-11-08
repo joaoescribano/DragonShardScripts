@@ -1,0 +1,67 @@
+//****************************************************************************
+//SPHERE by : Menasoft ©1997-2007
+//www.sphereserver.net
+// All SPHERE script files and formats are copyright Menasoft & Partners.
+// This file may be freely edited for personal use, but may not be distributed
+// in whole or in part, in any format without express written permission from
+// Menasoft & Partners.  All donations and contributions
+// become the property of Menasoft & Partners.
+//****************************************************************************
+// FILE LAST UPDATED: Friday, April 28, 2000
+
+// Purpose: UNKNOWN
+// Notes:  General Shopkeeper Speech File.
+// Current Keyword List:
+//	buy, supplies, wares, sell, *thou*purchase*, *you*purchase*, *you*buy*
+//	*I*sale*, *what*thou*sell*, *what*thou*sale*, *what*you*sell*, *what*you*sale*,
+//	*can*you*sell*, *can*you*sale*
+//
+[SPEECH spk_shopkeep]
+
+ON=*what*thou*sell*
+ON=*what*thou*sale*
+ON=*what*you*sell*
+ON=*what*you*sale*
+ON=*can*you*sell*
+ON=*can*you*sale*
+	DORAND 4
+		SAY Why, I sell the same things that any other <JOB> would sell.
+		SAY If thou dost look around my shop, I'm sure it will become obvious to thee.
+		SAY I am a <JOB>.  What wouldst thou expect me to sell?
+		SAY I sell fairy dust.  What dost thou think a <JOB> would sell?
+	ENDDO
+
+ON=*sell*
+ON=*thou*purchase*
+ON=*you*purchase*
+ON=*you*buy*
+ON=*I*sale*
+	NEW_SELL
+	//SELL
+
+ON=*buy*
+ON=*supplies*
+ON=*wares*
+	NEW_BUY
+	//BUY
+
+//PROVISIONER
+
+ON=Hi
+ON=Hello
+ON=Hail
+ON=Greet
+	SAY=Greetings, adventurer.
+
+ON=Bye
+ON=Goodbye
+ON=Farewell
+	SAY=Fare thee well.
+	BYE
+	return 1
+
+ON=What do you do
+ON=Job
+	SAY=I equip adventurers for their travels.
+
+[EOF]

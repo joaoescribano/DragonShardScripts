@@ -1,0 +1,70 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// System Loot Auto - ///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[TYPEDEF T_CORPSE]
+ON=@PICKUP_SELF
+IF (<SRC.FINDID.i_delay_antiLoot.TIMER>=-1) /// SISTEMA ANTI SPHERE (MEIO DOIDO MELHOR PREVINIR)
+SRC.CONSUME=i_delay_antiLoot
+ENDIF
+
+IF (<SRC.RESTEST i_delay_antiLoot>)
+SRC.SYSMESSAGE @0481,,1 Anti Auto Loot Dragon Shard 2017 - Aguarde para retirar novamente...
+Return 1
+ELSE
+SERV.NEWITEM=i_delay_antiLoot
+NEW.EQUIP
+ENDIF
+
+[ITEMDEF i_delay_antiLoot]
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+NAME=Delay Loot
+
+ON=@CREATE
+ATTR=attr_decay
+TIMER=2
+
+ON=@EQUIP
+TIMER=2
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+[events e_antiloot] 
+ON=@itemPICKUP_GROUND 
+If <findid.i_guard_inject> 
+	obj <findid.i_guard_inject.uid> 
+	If (<findid.i_guard_inject.more1> >= 4) 
+		stone
+		Title Pego Usando Auto Loot, chame a staff
+	else 
+		Obj.more1 +=1 
+		sysmessage @0480 Voce nao pode ser tao Rapido Assim.
+	endif 
+	return 1 
+endif 
+
+serv.newitem=i_guard_inject 
+new.equip 
+new.timer 5 
+
+[itemdef i_guard_inject] 
+NAME=Ant injection 
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=layer_special 
+
+ON=@Create 
+more1=0 
+attr=attr_invis|attr_decay 
+
+ON=@Timer 
+return 1 
+
+[EOF]

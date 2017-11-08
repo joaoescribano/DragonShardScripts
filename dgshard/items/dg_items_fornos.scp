@@ -1,0 +1,63 @@
+[ITEMDEF i_forno_1]
+ID=0461
+NAME=Forno de Barro
+RESOURCES=100 i_ingot_iron
+TYPE=T_NORMAL
+
+SKILLMAKE=CARPENTRY 100.0, T_CARPENTRY
+CATEGORY=Fireplaces, Chimneys & Ovens
+SUBSECTION=Sandstone Oven
+DESCRIPTION=Forno
+
+ON=@CREATE
+COLOR=0
+
+ON=@Dclick
+src.menu menu_s_cook
+return 1
+
+[ITEMDEF i_forno_2]
+ID=0462
+NAME=Forno de Barro
+RESOURCES=100 i_ingot_iron
+TYPE=T_NORMAL
+SKILLMAKE=CARPENTRY 100.0, T_CARPENTRY
+
+CATEGORY=Fireplaces, Chimneys & Ovens
+SUBSECTION=Sandstone Oven
+DESCRIPTION=Forno
+
+ON=@CREATE
+COLOR=0
+
+ON=@Dclick
+src.menu menu_s_cook
+return 1
+
+[ITEMDEF i_deed_forno_1]
+DEFNAME=i_deed_forno
+ID=i_deed
+NAME=Deed para Forno Tipo 1
+SKILLMAKE=Carpentry 100.0, T_CARPENTRY
+RESOURCES=100 i_log, 100 i_ingot_iron
+CATEGORY=Provisions - Deeds
+SUBSECTION=Item Deeds
+DESCRIPTION=Spinning Wheel
+
+ON=@Create
+	MORE=i_forno_1
+
+[ITEMDEF i_deed_forno_2]
+DEFNAME=i_deed_forno
+ID=i_deed
+NAME=Deed para Forno Tipo 2
+SKILLMAKE=Carpentry 100.0, T_CARPENTRY
+RESOURCES=100 i_log, 100 i_ingot_iron
+CATEGORY=Provisions - Deeds
+SUBSECTION=Item Deeds
+DESCRIPTION=Spinning Wheel
+
+ON=@Create
+	MORE=i_forno_2
+
+[EOF]

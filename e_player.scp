@@ -1,0 +1,593 @@
+﻿//EVENTO de logar
+[DIALOG d_entrada]
+0,0
+nomove
+noclose
+page 0
+resizepic 92 61 9200 455 442
+gumppictiled 101 69 436 425 2624
+checkertrans 101 69 436 425
+resizepic 124 85 9200 392 388
+gumppictiled 168 94 306 43 2624
+checkertrans 168 94 306 43
+resizepic 175 100 9200 294 31
+text 200 106 100 0
+gumppic 74 27 10400
+gumppic 74 195 10401
+gumppic 74 381 10402
+gumppic 483 25 10410
+htmlgump 160 158 328 276 1 1 1
+gumppic 484 195 10411
+gumppic 484 381 10412
+button 307 447 4023 4025 1 0 0
+
+[DIALOG d_entrada text]
+Seja Bem Vindo ao "Dragon Shard - The Second Age"
+Muito obrigado por escolher o Dragon Shard, gostariamos de lhe agradecer por ser nosso player. Esperamos que goste do shard e que continue conosco. Nesse novo conceito de shard jamais visto no Brasil misturamos RPG com Diversao, muito PVP e PVM. Comece agora essa aventura! Nao deixe de visitar o nosso site para maiores informacões: www.dgshard.com.br
+
+[DIALOG d_entrada button]
+ON=0
+src.message @3,1 Seja Bem Vindo ao <serv.name> <src.name>
+
+IF <src.tag0.firstlogin><1
+src.tag.firstlogin=1
+DIALOG d_entrada
+else
+endif
+
+[FUNCTION f_party_criminal_remove]
+if (<findlayer(43)> != 0)
+  findlayer(43).remove
+  update
+endif
+
+[EVENTS e_player]
+
+on=@SpellSuccess  ///////////// ATACAR POS MAGIA
+IF (<SRC.FINDID.i_memory.LINK>=<ACT.UID>)
+SRC.TIMERF 1,SRC.ATTACK <SRC.FINDID.i_memory.LINK>
+ENDIF
+
+ON=@HitTry  //////// SISTEMA DE ANTI-FPS PATCH by Daniel Muller
+IF (<SRC.CanSeeLos <UID>>)
+///TAG.FPS=
+ELSE
+///SYSMESSAGE <SRC.NAME> nao tem linha de visao com voce!
+ACTION=-1
+///SAY @0481,,1 : : : Sistema Anti FPS Patch, desligue ou sera preso!
+///FPS_C
+Return 1
+ENDIF
+
+ON=@Logout
+timerf clear
+// Tries to detect if player still with anti cs flags
+
+if <findid.i_timer_movement_analyse>
+  findid.i_timer_movement_analyse.remove
+endif
+
+// Execute the mysql command to mark player as offline at the database
+db_logout
+
+ON=@KILL
+if (<ISINPARTY> == 1) && (<argo.ISINPARTY> == 1)
+  if (<PARTY.ISSAMEPARTYOF <argo.uid>>)
+
+    if (<kills> > 0)
+      kills = <eval <kills>-1>
+    endif
+
+    argo.timerf 1,f_party_criminal_remove
+
+    IF (<argo.memoryfindtype.memory_sawcrime.uid>) || (<argo.memoryfindtype.memory_fight.uid>) || (<argo.memoryfindtype.memory_harmedby.uid>)
+      argo.memoryfindtype.memory_fight.remove
+      argo.memoryfindtype.memory_sawcrime.remove
+      argo.memoryfindtype.memory_harmedby.remove
+    ENDIF
+
+    if (<argo.flags>&statf_criminal)
+      argo.flags = <argo.flags> - statf_criminal
+    endif
+
+    timerf 1,f_party_criminal_remove
+    IF (<memoryfindtype.memory_sawcrime.uid>) || (<memoryfindtype.memory_fight.uid>) || (<memoryfindtype.memory_harmedby.uid>)
+      memoryfindtype.memory_fight.remove
+      memoryfindtype.memory_sawcrime.remove
+      memoryfindtype.memory_harmedby.remove
+    ENDIF
+    if (<flags>&statf_criminal)
+      flags = <flags> - statf_criminal
+    endif
+
+    update
+    argo.update
+  endif
+endif
+
+on=@mount
+if (<argo.memoryfindtype.memory_ipet>)
+  IF ((<argo.FLAGS> & statf_freeze) || (<argo.FLAGS> & statf_stone)) || (<argo.flags> & statf_poisoned)
+    sysmessage @07a1 Voce nao pode montar com o animal neste estado.
+    return 1
+  endif
+endif
+
+if (<eval <argo.karma>> < 2000)
+  argo.karma 2000
+endif
+
+if (<eval <argo.fame>> < 2000)
+  argo.fame 2000
+endif
+
+on=@dismount
+if (<argo.isevent.e_animal_vida>)
+  // Fix auto-shrink
+  serv.NEWITEM=<argo.ICON>
+  new.NAME=<argo.NAME> 
+  new.COLOR=<argo.COLOR> 
+  new.MORE1=<argo.ID>
+
+  if (0<argo.tag0.vidas>)
+      new.tag0.vidas <argo.tag0.vidas>
+      new.tag0.name <argo.name>
+      new.tag0.fame <argo.fame>
+      new.tag0.karma <argo.karma>
+      new.tag0.food <argo.food>
+      new.tag0.dono <argo.tag0.dono>
+      new.tag0.id <argo.id>
+      new.tag0.icon <argo.icon>
+      new.more2 1 // Fix
+      new.type t_animal_vida
+      new.attr 04
+  endif
+
+  src.bounce <new.uid>
+
+  argo.REMOVE
+
+  return 1
+endif
+
+/////////////////////// POLY SYSTEM by Daniel Muller
+on=@ItemEquip
+IF (<ACT.DISPID>=i_rune_polymorph)
+SRC.STR=<SRC.TAG.POLYSTR_EX>
+SRC.DEX=<SRC.TAG.POLYDEX_EX>
+
+if (<act.type> == t_weapon_mace_smith) || (<act.type> == t_weapon_mace_sharp) || (<act.type> == t_weapon_sword) || (<act.type> == t_weapon_fence) || (<act.type> == t_weapon_mace_staff) || (<act.type> == t_weapon_mace_crook) || (<act.type> == t_weapon_mace_pick) || (<act.type> == t_weapon_axe)
+  CombatBonusStat=0
+  CombatBonusPercent=30
+elif (<act.type> == t_weapon_bow)
+  CombatBonusStat=2
+  CombatBonusPercent=30
+endif
+
+on=@ItemUnequip
+/////////////////////// POLY SYSTEM by Daniel Muller
+IF (<ACT.DISPID>=i_rune_polymorph)
+//////////// DESARMAR TODOS ITEMS ////////////////
+REF1=<UID>
+
+FOR x 1 24
+    if !(<eval <local.x>> == 11) && !(<eval <local.x>> == 15) && !(<eval <local.x>> == 16) && !(<eval <local.x>> == 21) && !(<eval <local.x>> == 21)
+        ref1.findlayer(<eval <local.x>>).cont <ref1.findlayer(21).uid>
+        ref1.findlayer(<eval <local.x>>).updatex
+    endif
+endfor
+ref1.findlayer(21).updatex
+
+str 100
+modstr 0
+maxhits 100
+
+dex 100
+moddex 0
+maxstam 100
+
+int 100
+modint 0
+maxmana 100
+
+RESPHYSICAL 0
+RESCOLD 0
+RESFIRE 0
+RESENERGY 0
+RESPOISON 0
+
+updatex
+ENDIF
+
+if (<act.type> == t_weapon_mace_smith) || (<act.type> == t_weapon_mace_sharp) || (<act.type> == t_weapon_sword) || (<act.type> == t_weapon_fence) || (<act.type> == t_weapon_mace_staff) || (<act.type> == t_weapon_mace_crook) || (<act.type> == t_weapon_mace_pick) || (<act.type> == t_weapon_axe) || (<act.type> == t_weapon_bow)
+  SRC.CombatBonusStat
+  SRC.CombatBonusPercent
+endif
+
+on=@ItemDclick
+if (<act.type> != t_container) && (<act.isevent.t_locked_down>) && (<act.type> != t_loom) && (<act.type> != t_spinwheel) && (<act.type> != t_forge) && (<act.type> != t_anvil) && (<act.type> != t_normal) && (<act.type> != t_aquarium)
+ sysmessage @07a1 Voce nao pode usar itens travado no chao.
+ return 1
+endif
+
+ON=@MurderDecay
+RETURN 1
+
+ON=@PersonalSpace
+if (<src.isplayer> == 0) && (<src.isnpc> == 0)
+  return 1
+endif
+
+reveal statf_hidden
+
+if !(<FLAGS> & statf_dead)
+  IF !((<FLAGS> & statf_hidden) || (<FLAGS> & statf_invisible))
+    IF (<SRC.STAM> != <SRC.DEX>)
+      RETURN 1
+    ENDIF
+  ENDIF
+ENDIF
+
+ON=@GetHit
+  if (<uid> != <src.uid>)
+    if (<argn1> == dam_slash) || (<argn1> == dam_pierce)
+      if (<eval <Parrying>> < 1000) && (rand(10) > 7) && (<flags>&statf_hasshield)
+        Parrying +=1
+      endif
+    endif
+  endif
+
+ON=@Hit
+IF (<Wrestling> < 100.0)&&(<action>==Skill_Wrestling) //// SKILL ATAQUES NAO SOBEM
+DORAND 3
+Return 0
+Return 0
+Wrestling=(<Wrestling>+0.1)
+ENDDO   
+ELSEIF (<ARCHERY> < 100.0)&&(<action>==Skill_ARCHERY) //// SKILL ATAQUES NAO SOBEM
+DORAND 2
+Return 0
+ARCHERY=(<ARCHERY>+0.1)
+ENDDO   
+ELSEIF (<Swordsmanship> < 100.0)&&(<action>==Skill_Swordsmanship) /// SKILL ATAQUES NAO SOBEM
+DORAND 3
+Return 0
+Return 0
+Swordsmanship=(<Swordsmanship>+0.1)
+ENDDO   
+ELSEIF (<Macefighting> < 100.0)&&(<action>==Skill_Macefighting) /// SKILL ATAQUES NAO SOBEM
+DORAND 3
+Return 0
+Return 0
+Macefighting=(<Macefighting>+0.1)
+ENDDO   
+ELSEIF (<Fencing> < 100.0)&&(<action>==Skill_Fencing) /// SKILL ATAQUES NAO SOBEM
+DORAND 3
+Return 0
+Return 0
+Fencing=(<Fencing>+0.1)
+ENDDO   
+ELSEIF (<Tactics> < 100.0)
+DORAND 3
+Return 0
+Return 0
+Tactics=(<Tactics>+0.1)
+ENDDO   
+ELSEIF (<Parrying> < 100.0)&&(<FINDLAYER(2).type> == t_shield) /// SKILL ATAQUES NAO SOBEM
+DORAND 5
+Return 0
+Return 0
+Return 0
+Return 0
+Parrying=(<Parrying>+0.1)
+ENDDO   
+ENDIF
+
+  // Fix para ganhar skill com arma de treino (skill da arma e tactics 30% de chance de ganhar por hit)
+  if (<argo.baseid> == i_vsword_madeira) || (<argo.baseid> == i_kryss_madeira) || (<argo.baseid> == i_Mace_Madeira) || (<argo.baseid> == i_bow_Madeira)
+    if (<tactics> > 1000)
+      tactics = 1000
+    endif
+    if (<eval <<argo.skill>>> < 1000)
+      if (rand(10) > 7)
+        <argo.skill> +=1
+        if (<eval <tactics>> < 1000)
+          tactics +=1
+        endif
+      endif
+    endif
+  endif
+
+  // Player sendo atacado
+  ref1 = <src.uid>
+
+  // Se o player for criminal ou PK, ignorar
+  if (<iscriminal> == 1) || (<ispk> == 1) || (<ref1.iscriminal> == 1) || (<ref1.ispk> == 1)
+    return 0
+  endif
+
+  // Se o player for da mesma GS, ignorar
+  if (<guild> != 0) && (<ref1.guild> != 0) && (<guild> == <ref1.guild>)
+    return 0
+  endif
+
+  // Se o player estiver em party, ignorar
+  if (<ISINPARTY> == 1) && (<ref1.ISINPARTY> == 1)
+    if (<PARTY.ISSAMEPARTYOF <ref1.uid>>)
+      return 0
+    endif
+  endif
+
+  // Se o player estiver em GW, ignorar
+  if (<guild> != 0) && (<ref1.guild> != 0) && (<inwar <guild>,<ref1.guild>> == 1)
+    return 0
+  endif
+
+  // Se cortar em região com guards, o criminal é geral
+  if (<region.guarded>)
+    CRIMINAL 1
+    return 0
+  endif
+
+  // Se cortar em região aberta, o criminal é apenas para o dono do corpo
+  criminaladd <ref1>,<uid>
+  return 0
+
+ON=@ITEMCLICK
+if (<act.attr>&attr_magic)
+ act.message @,3,1 [magico]
+endif
+
+if (STRCMP(<act.tag0.poison_tipo>,Lesser Poison) == 0) || (STRCMP(<act.tag0.poison_tipo>,Poisoned) == 0) || (STRCMP(<act.tag0.poison_tipo>,Greater Poison) == 0) || (STRCMP(<act.tag0.poison_tipo>,Deadly Poison) == 0)
+  sysmessage O item esta envenenado com <act.tag0.poison_tipo> e tem <eval <act.tag0.poison_cargas>> cargas.
+endif
+
+////ON=@DEATH
+///if (<account.tag0.pack_death> == 1)
+///	sendpacket 02c 02
+////endif
+
+ON=@DeathCorpse
+if !(0<argo.tag0.timerpadrao>)
+  argo.tag0.timerpadrao = <eval (<argo.timer> + 1) / 2>
+  timer <argo.tag0.timerpadrao>
+endif
+
+ON=@SkillMenu
+if (<restest i_craft_delay>)
+  sysmessage @077a,0,1 Proteção anti-crash: aguarde 1 segundo para abrir o menu novamente.
+  return 1
+else
+  serv.newitem i_craft_delay
+  equip <new>
+endif
+return 0
+
+ON=@SKILLSELECT
+if (<argn>==35)
+ src.sysmessage @07a1 Taming somente com o cajado!!!
+ return 1
+endif
+
+if (<argn>==23)
+SKILLMENU sm_inscription
+return 1
+endif
+
+if (<argn>==33)
+  src.sysmessage @009fb Skill desabilitada por tempo inderteminado!
+return 1
+endif
+
+On=@SpellSelect
+IF (<ARGN> > 64)
+  SRC.SYSMESSAGE Sistema anti bug!
+  Return 1
+ENDIF
+
+if (<src.hits><1)
+    SRC.SYSMESSAGE @,3,1 Voce nao pode usar magia quando esta morto!
+    return 1
+endif
+
+IF ((<FLAGS> & statf_sleeping) || (<FLAGS> & statf_stone) || (<FLAGS> & statf_dead))
+  sysmessage @07a1 Voce nao pode castar uma magia nesse estado!
+  RETURN 1
+ENDIF
+
+FLAGS <FLAGS>
+return 0
+
+
+ON=@SPELLEFFECT
+IF (<uid> != <src.uid>)
+  IF (<SERV.SPELL.<ARGN1>.FLAGS>&spellflag_resist)
+    if (<eval <tag0.resist_time> + <tag0.resist_rand>> <= <eval <serv.rticks>>)
+      
+      tag0.resist_time = <eval <serv.rticks>>
+      tag0.resist_rand <eval RAND(30,60)>
+
+      IF (<EVAL <MAGICRESISTANCE>-((<SRC.EVALUATINGINTEL>*<<ARGN1> / 8>)/15)>
+      	IF rand(4)=1
+         	SYSMESSAGE Voce sente seu corpo resistindo a magia.
+         	EMOTE resistindo a magia.
+        	SKILLGAIN MAGICRESISTANCE 60
+        	EFFECT 3 i_fx_bless_effect, 16, 16
+         	SRC.SYSMESSAGE @,3,1 <name> resistiu a magia.
+         	ARGN3 -= RAND(<MAGICRESISTANCE>/6,<MAGICRESISTANCE>/4)
+        	RETURN 1
+      	ENDIF
+      ELSE
+        ARGN3 -= RAND(0,<MAGICRESISTANCE>/7)
+        SKILLGAIN MAGICRESISTANCE 100
+      ENDIF
+    endif
+  ENDIF
+ENDIF
+
+on=@spellcast
+if (<src.hits><1)
+    SRC.SYSMESSAGE @,3,1 Voce nao pode usar magia quando esta morto!
+    action -1
+    return 1
+endif
+
+if ((<flags>&statf_stone)
+  action -1
+  return 1
+endif
+
+if (<flags>&statf_freeze)
+  if (<FINDLAYER(layer_hand1)>) || (<FINDLAYER(layer_hand2)>)
+    SRC.SYSMESSAGE @,3,1 Voce nao pode usar magia neste estado.
+    action -1
+    return 1
+  endif
+endif
+
+//Quando soltar magia desarmar as maos
+unequipHands
+
+ON=@CallGuards
+IF (<FLAGS>&statf_dead)
+  RETURN 1
+ENDIF
+
+IF (<kills> > 1) || (<flags>&statf_criminal)
+ sysmessage @36 PKs e criminals nao podem chamar guardas.
+ RETURN 1
+ENDIF
+
+IF (<GUILD>)
+ IF (<SRC.ISPLAYER>)
+  IF (<SRC.GUILD>==<GUILD>)
+   RETURN 1
+  ENDIF
+ ENDIF
+ENDIF
+
+ON=@UserGuildButton
+if (!<src.memoryfindtype.memory_guild>)
+  SRC.SYSMESSAGE @,3,1 Voce nao esta em uma guilda.
+else
+  dialog d_Guild_Main
+endif
+
+ON=@itemTargon_Item
+if (<argo.type> == t_ingot)
+  sysmessage @077a,0,1 Você só pode abrir o menu de Blacksmith clicando 2x no ingot dentro de sua bolsa.
+  return 1
+endif
+
+IF (<ACT.TYPE>==t_weapon_sword) || (<ACT.TYPE>==t_weapon_mace_sharp) || (<ACT.TYPE>==t_weapon_fence) || (<ACT.TYPE>==t_weapon_axe)
+  IF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.TARG.DISTANCE>>4)
+    SRC.SYSMESSAGE That is too far away.
+    RETURN 1
+  ELSEIF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.REGION.SAFE>==1)
+    SRC.SYSMESSAGE You can not cut corpses here.  
+    RETURN 1
+  ELSEIF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.TARG.LINK>==04fffffff)
+    RETURN 0
+  ELSEIF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.TARG.DISPID>=i_bones) 
+    SRC.MESSAGE @0,0,1 Este ja é o <src.targ.name> e não pode ser cortado!
+    Return 1
+  ELSEIF (<SRC.TARG.TYPE>==T_CORPSE) && (<SRC.TARG.LINK.ISPLAYER>==1)
+
+    FORCONT <src.targ.uid>
+      if (<type> != t_hair) && (<type> != t_beard)
+        p <src.targ.p>
+      endif
+    ENDFOR
+
+    SERV.NEWITEM=i_flesh_head
+    NEW.NAME=Head of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+    SERV.NEWITEM=01db1
+    NEW.NAME=Left leg of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+    SERV.NEWITEM=01db2
+    NEW.NAME=Right leg of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+    SERV.NEWITEM=01daf
+    NEW.NAME=Left arm of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+    SERV.NEWITEM=01db0
+    NEW.NAME=Right arm of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+    SERV.NEWITEM=01dad
+    NEW.NAME=Torso of <src.targ.link.name>
+    NEW.LINK=<SRC.TARG.LINK.UID>
+    NEW.TIMER=60
+    NEW.P=<SRC.TARG.P>
+
+    updatex
+    SRC.SOUND 244
+
+    // Player dono do corpo
+    ref1 = <src.targ.link.uid>
+
+    // Se o player for criminal ou PK, ignorar
+    if (<iscriminal> == 1) || (<ispk> == 1) || (<ref1.iscriminal> == 1) || (<ref1.ispk> == 1)
+      src.targ.remove
+      return 1
+    endif
+
+    // Se o player for da mesma GS, ignorar
+    if (<guild> != 0) && (<ref1.guild> != 0) && (<guild> == <ref1.guild>)
+      src.targ.remove
+      return 1
+    endif
+
+    // Se o player estiver em party, ignorar
+    if (<ISINPARTY> == 1) && (<ref1.ISINPARTY> == 1)
+      if (<PARTY.ISSAMEPARTYOF <ref1.uid>>)
+        src.targ.remove
+        return 1
+      endif
+    endif
+
+    // Se o player estiver em GW, ignorar
+    if (<inwar <guild>,<ref1.guild>> == 1)
+      src.targ.remove
+      return 1
+    endif
+
+    // Se cortar em região com guards, o criminal é geral
+    if (<region.guarded>)
+      src.targ.remove
+      CRIMINAL 1
+      return 1
+    endif
+
+    // Se cortar em região aberta, o criminal é apenas para o dono do corpo
+    criminaladd <ref1>,<uid>
+    src.targ.remove
+    RETURN 1
+  ELSE
+    RETURN 0
+  ENDIF
+ENDIF
+
+[itemdef i_craft_delay]
+ID=i_memory
+TYPE=t_eq_script
+NAME=craft timer
+
+ON=@Equip
+timer=1
+
+ON=@Timer
+remove
+return 1
+
+[EOF]

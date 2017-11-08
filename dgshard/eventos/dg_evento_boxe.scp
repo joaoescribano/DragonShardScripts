@@ -1,0 +1,157 @@
+// Evento Boxe 2.0 (17/01/2013)
+// By Owner Destiny
+// joao.escribano@dgshard.com.br
+
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+[DEFNAME boxe_config]
+boxe_where_entrada 5122,260,15
+boxe_where_1       5127,264,20
+boxe_where_2       5133,270,20
+
+// Pedra entrada
+[ITEMDEF i_pedra_boxe]
+ID      0ed4
+NAME    Boxe
+TYPE    t_normal
+
+ON=@CREATE
+COLOR       07a1
+TAG0.ON     0
+TAG0.DENTRO 0
+TAG0.MORTOS 0
+
+ON=@CLICK
+message @07a1 Camp Boxe
+if !(0<tag0.on>)
+    src.sysmessage @7a1 Aguarde o fechamento da entrada do evento!
+    return 1
+endif
+message @07a1 Dentro [<eval <tag0.dentro>>]
+return 1
+
+ON=@DCLICK
+IF (<src.isgm>)
+ src.go <def.boxe_where_1>
+ return 1
+endif
+
+tag0.dentro +=1
+
+src.go <def.boxe_where_entrada>
+src.tag0.uid_boxe <uid>
+src.tag0.liberado 0
+src.events=+e_boxe
+src.arrumar_boxe
+return 1
+
+ON=@Timer
+if !(0<tag0.ganhador>)
+    timer -1
+    return 1
+endif
+
+if (<eval <tag0.mortos>> >= <eval <tag0.dentro>-1>)
+    TRY UID.<tag0.ganhador>.events=-e_boxe
+    TRY UID.<tag0.ganhador>.tag0.vencedor 1
+    TRY UID.<tag0.ganhador>.tag0.colocado 1
+    TRY UID.<tag0.ganhador>.tag0.uid_boxe 0
+    TRY UID.<tag0.ganhador>.sysmessage @077a Dragon Shard - T2A
+    TRY UID.<tag0.ganhador>.sysmessage @07a1 Parabens, voce ganhou o evento Camp Boxe
+    TRY UID.<tag0.ganhador>.go <def.eventos_where_saida>
+endif
+
+tag0.ganhador 0
+
+timer -1
+return 1
+
+[FUNCTION arrumar_boxe]
+var.cor 0
+while !(0<var.cor>)
+    local.cor = <trofeu_cor>
+    if !(0<UID.<tag0.uid_boxe>.tag0.cor_<local.cor>>)
+        TRY UID.<tag0.uid_boxe>.tag0.cor_<local.cor> 1
+        var.cor <local.cor>
+     else
+        var.cor 0
+    endif
+endwhile
+
+newitem i_bandana
+new.color=<var.cor>
+new.equip
+newitem i_leather_gloves
+new.color=<var.cor>
+new.equip
+newitem i_shoes_plain
+new.color=<var.cor>
+new.equip
+newitem i_shirt_plain
+new.color=<var.cor>
+new.equip
+newitem i_pants_short
+new.color=<var.cor>
+new.equip
+
+events +e_boxe
+sysmessage @07a1 Aguarde sua luta sem PVP.
+return 1
+
+[EVENTS e_boxe]
+ON=@UserWarmode
+IF !(0<tag0.liberado>)
+    SYSMESSAGE @077a Somente no Ring!
+    return 1
+ENDIF
+
+ON=@SkillSelect
+action -1
+sysmessage @077a Sem Skills no boxe!
+return 1
+
+ON=@SpellCast
+action -1
+sysmessage @077a Sem magias no boxe!
+return 1
+
+ON=@KILL
+serv.b @077a Evento Camp Boxe
+serv.b @07a1 <name> derrotou o jogador <argo.name> no ring!
+
+tag0.liberado 0
+go <def.boxe_where_entrada>
+
+TRY UID.<tag0.uid_boxe>.tag0.ganhador = <uid>
+TRY UID.<tag0.uid_boxe>.timer 5
+
+return 0
+
+ON=@DEATH
+TRY UID.<tag0.uid_boxe>.TAG0.MORTOS <eval <UID.<tag0.uid_boxe>.TAG0.MORTOS>+1>
+
+tag0.liberado 0
+tag0.uid_boxe 0
+events -e_boxe
+hits 100
+
+go <def.eventos_where_saida>
+return 1
+
+[function evento_7_1_premio]
+dinheiro 15000
+local.trofeu <trofeu_id>
+local.cor <trofeu_cor>
+local.data <serv.rtime>
+
+SERV.NEWITEM <local.trofeu>
+NEW.COLOR=<local.cor>
+NEW.NAME <name> Vencedor do Camp Boxe
+NEW.TYPE t_trofeu
+NEW.TAG0.DATA <local.data>
+NEW.TAG0.UID <uid>
+NEW.ATTR 04
+NEW.BOUNCE
+
+[EOF]

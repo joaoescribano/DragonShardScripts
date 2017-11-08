@@ -1,0 +1,1978 @@
+// Ore: Blood Diamound - Weapons
+
+[ITEMDEF i_blooddiamond_bone_machete]
+ID=i_bone_machete
+NAME=Blood Diamound Bone Machete
+TYPE=t_weapon_sword
+DAM=19,21
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_blooddiamond,1 i_bone
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_exec]
+ID=i_axe_exec
+NAME=Blood Diamound Executioner's Axe
+TYPE=t_weapon_axe
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=37
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_battle]
+ID=i_axe_battle
+NAME=Blood Diamound Battle Axe
+TYPE=t_weapon_axe
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe]
+ID=i_axe
+NAME=Blood Diamound Axe
+TYPE=t_weapon_axe
+DAM=20,23
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_double]
+ID=i_axe_double
+NAME=Blood Diamound Double Axe
+TYPE=t_weapon_axe
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=37
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_bardiche]
+ID=i_bardiche
+NAME=Blood Diamound Bardiche
+TYPE=t_weapon_sword
+DAM=24,26
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_dagger]
+ID=i_dagger
+NAME=Blood Diamound Dagger
+TYPE=t_weapon_fence
+DAM=14,16
+SKILL=Fencing
+SPEED=51
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_mace]
+ID=i_mace
+NAME=Blood Diamound Mace
+TYPE=t_weapon_mace_smith
+DAM=17,20
+SKILL=Macefighting
+SPEED=43
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_broad]
+ID=i_sword_broad
+NAME=Blood Diamound Broad Sword
+TYPE=t_weapon_sword
+DAM=20,21
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_long]
+ID=i_sword_long
+NAME=Blood Diamound Long Sword
+TYPE=t_weapon_sword
+DAM=21,23
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_spear]
+ID=i_spear
+NAME=Blood Diamound Spear
+TYPE=t_weapon_fence
+DAM=19,21
+SKILL=Fencing
+SPEED=43
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_war]
+ID=i_axe_war
+NAME=Blood Diamound War Axe
+TYPE=t_weapon_axe
+DAM=20,21
+SKILL=Swordsmanship
+SPEED=37
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_scimitar]
+ID=i_scimitar
+NAME=Blood Diamound Scimitar
+TYPE=t_weapon_sword
+DAM=19,21
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_long_b]
+ID=i_sword_long_b
+NAME=Blood Diamound Long Sword
+TYPE=t_weapon_sword
+DAM=21,23
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_viking]
+ID=i_sword_viking
+NAME=Blood Diamound Viking Sword
+TYPE=t_weapon_sword
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Blood Diamound Large Battle Axe
+TYPE=t_weapon_axe
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_katana]
+ID=i_katana
+NAME=Blood Diamound Katana
+TYPE=t_weapon_sword
+DAM=16,19
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_kryss]
+ID=i_kryss
+NAME=Blood Diamound Kryss
+TYPE=t_weapon_sword
+DAM=14,17
+SKILL=Swordsmanship
+SPEED=51
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_spear_short]
+ID=i_spear_short
+NAME=Blood Diamound Short Spear
+TYPE=t_weapon_fence
+DAM=14,19
+SKILL=Fencing
+SPEED=51
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_war_fork]
+ID=i_war_fork
+NAME=Blood Diamound War Fork
+TYPE=t_weapon_fence
+DAM=17,19
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_mace_war]
+ID=i_mace_war
+NAME=Blood Diamound War Mace
+TYPE=t_weapon_mace_smith
+DAM=23,24
+SKILL=Macefighting
+SPEED=29
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_hammer_war]
+ID=i_hammer_war
+NAME=Blood Diamound War Hammer
+TYPE=t_weapon_mace_smith
+DAM=24,26
+SKILL=Macefighting
+SPEED=32
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_maul]
+ID=i_maul
+NAME=Blood Diamound Maul
+TYPE=t_weapon_mace_smith
+DAM=20,23
+SKILL=Macefighting
+SPEED=35
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_hammer_pick]
+ID=i_hammer_pick
+NAME=Blood Diamound Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_halberd]
+ID=i_halberd
+NAME=Blood Diamound Halberd
+TYPE=t_weapon_sword
+DAM=26,27
+SKILL=Swordsmanship
+SPEED=27
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_cutlass]
+ID=i_cutlass
+NAME=Blood Diamound Cutlass
+TYPE=t_weapon_sword
+DAM=16,19
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Blood Diamound Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=23,24
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_scythe]
+ID=i_scythe
+NAME=Blood Diamound Scythe
+TYPE=t_weapon_sword
+DAM=21,26
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_bone_harvester]
+ID=i_bone_harvester
+NAME=Blood Diamound Bone Harvester
+TYPE=t_weapon_sword
+DAM=19,21
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_scepter]
+ID=i_scepter
+NAME=Blood Diamound Scepter
+TYPE=t_weapon_mace_smith
+DAM=20,24
+SKILL=Macefighting
+SPEED=35
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_staff_bladed]
+ID=i_staff_bladed
+NAME=Blood Diamound Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=20,23
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_pike]
+ID=i_pike
+NAME=Blood Diamound Pike
+TYPE=t_weapon_fence
+DAM=20,23
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Blood Diamound Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=17,19
+SKILL=Swordsmanship
+SPEED=48
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_lance]
+ID=i_lance
+NAME=Blood Diamound Lance
+TYPE=t_weapon_fence
+DAM=24,26
+SKILL=Fencing
+SPEED=24
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_crescent_blade]
+ID=i_crescent_blade
+NAME=Blood Diamound Crescent Blade
+TYPE=t_weapon_sword
+DAM=16,20
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_paladin]
+ID=i_sword_paladin
+NAME=Blood Diamound Paladin Sword
+TYPE=t_weapon_sword
+DAM=23,26
+SKILL=Swordsmanship
+SPEED=32
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_no_dachi]
+ID=i_no_dachi
+NAME=Blood Diamound No-dachi
+TYPE=t_weapon_sword
+DAM=23,26
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_wakizashi]
+ID=i_wakizashi
+NAME=Blood Diamound Wakizashi
+TYPE=t_weapon_sword
+DAM=16,19
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_tetsubo]
+ID=i_tetsubo
+NAME=Blood Diamound Testsubo
+TYPE=t_weapon_mace_smith
+DAM=17,20
+SKILL=Macefighting
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Macefighting
+DESCRIPTION=Blood Diamound Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_lajatang]
+ID=i_lajatang
+NAME=Blood Diamound Lajatang
+TYPE=t_weapon_fence
+DAM=23,26
+SKILL=Fencing
+SPEED=35
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_daisho]
+ID=i_daisho
+NAME=Blood Diamound Daisho
+TYPE=t_weapon_sword
+DAM=19,21
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_tekagi]
+ID=i_tekagi
+NAME=Blood Diamound Tekagi
+TYPE=t_weapon_fence
+DAM=14,17
+SKILL=Fencing
+SPEED=51
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_kama]
+ID=i_kama
+NAME=Blood Diamound Kama
+TYPE=t_weapon_sword
+DAM=13,16
+SKILL=Swordsmanship
+SPEED=51
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sai]
+ID=i_sai
+NAME=Blood Diamound Sai
+TYPE=t_weapon_fence
+DAM=13,16
+SKILL=Fencing
+SPEED=51
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Blood Diamound Elven Spellblade
+TYPE=t_weapon_fence
+DAM=17,20
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Blood Diamound Assassin Spike
+TYPE=t_weapon_fence
+DAM=14,17
+SKILL=Fencing
+SPEED=51
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Blood Diamound Leaf Bladed
+TYPE=t_weapon_fence
+DAM=19,21
+SKILL=Fencing
+SPEED=43
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Blood Diamound War Cleaver
+TYPE=t_weapon_fence
+DAM=19,21
+SKILL=Fencing
+SPEED=43
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Fencing
+DESCRIPTION=Blood Diamound War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_mace_diamond]
+ID=i_mace_diamond
+NAME=Blood Diamound Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=20,24
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_rune_blade]
+ID=i_rune_blade
+NAME=Blood Diamound Rune Blade
+TYPE=t_weapon_sword
+DAM=21,24
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Blood Diamound Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=17,20
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_ornate_axe]
+ID=i_ornate_axe
+NAME=Blood Diamound Ornate Axe
+TYPE=t_weapon_axe
+DAM=26,28
+SKILL=Swordsmanship
+SPEED=35
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+[ITEMDEF i_blooddiamond_elven_machete]
+ID=i_elven_machete
+NAME=Blood Diamound Elven Machete
+TYPE=t_weapon_sword
+DAM=19,21
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_blooddiamond,1 i_log
+SKILLMAKE=Blacksmithing 100.0
+CanUse=can_u_human|can_u_elf
+ReqStr=90
+
+CATEGORY=Provisions - Weapons - Blood Diamound
+SUBSECTION=Swordsmanship
+DESCRIPTION=Blood Diamound Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+
+// Ore: Blood Diamound - Armors
+
+[ITEMDEF i_blooddiamond_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Blood Diamound Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Chainmails
+DESCRIPTION=Blood Diamound Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Blood Diamound Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Chainmails
+DESCRIPTION=Blood Diamound Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Blood Diamound Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Chainmails
+DESCRIPTION=Blood Diamound Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Blood Diamound Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Ringmails
+DESCRIPTION=Blood Diamound Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Blood Diamound Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Ringmails
+DESCRIPTION=Blood Diamound Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Blood Diamound Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Ringmails
+DESCRIPTION=Blood Diamound Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Blood Diamound Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Ringmails
+DESCRIPTION=Blood Diamound Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_arms]
+ID=i_platemail_arms
+NAME=Blood Diamound Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Blood Diamound Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_helm]
+ID=i_platemail_helm
+NAME=Blood Diamound Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Blood Diamound Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Blood Diamound Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_platemail_chest]
+ID=i_platemail_chest
+NAME=Blood Diamound Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Platemails
+DESCRIPTION=Blood Diamound Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_helm_closed]
+ID=i_helm_closed
+NAME=Blood Diamound Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_helm_open]
+ID=i_helm_open
+NAME=Blood Diamound Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_bascinet]
+ID=i_bascinet
+NAME=Blood Diamound Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=14
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_helm_nose]
+ID=i_helm_nose
+NAME=Blood Diamound Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Blood Diamound Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Blood Diamound Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Helmets
+DESCRIPTION=Blood Diamound Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Blood Diamound Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_buckler]
+ID=i_shield_buckler
+NAME=Blood Diamound Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Blood Diamound Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_heater]
+ID=i_shield_heater
+NAME=Blood Diamound Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Blood Diamound Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_blooddiamond,2 i_log
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Blood Diamound Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_blooddiamond
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_blooddiamond_shield_dupre]
+ID=i_shield_dupre
+NAME=Blood Diamound Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_blooddiamond,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 100.0
+canuse=can_u_human|can_u_elf
+ReqStr=90
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Blood Diamound
+SUBSECTION=Shields
+DESCRIPTION=Blood Diamound Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_blooddiamond
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+

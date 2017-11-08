@@ -1,0 +1,138 @@
+[ITEMDEF i_deed_nome]
+ID=i_deed
+RESOURCES=80 I_PARCHMENT, 1 I_HIDE, 1 I_CLOTH
+VALUE=200000
+TYPE=t_script//Stores tags but unequipable
+WEIGHT=1
+LAYER=1 // this is wrong in TILEDATA ?
+NAME=Deed de mudanca de nome.
+
+// Lord, Lady
+
+ON=@CREATE
+COLOR=04
+
+ON=@DCLICK
+dialog d_troca_name
+Return 1 
+
+[DIALOG d_troca_name]
+0,0
+nomove
+resizepic 190 175 5054 335 150
+resizepic 200 185 3000 315 130
+resizepic 220 235 3000 270 22
+text 215 200 995 0
+text 255 275 0000 1
+button 220 275 4005 4006 1 0 1
+text 435 275 0000 2
+button 400 275 4005 4006 1 0 0
+textentry 225 237 253 25 0 0 3
+
+[DIALOG d_troca_name TEXT]
+Digite seu novo nome.
+Continue
+Cancelar
+<src.name>
+
+[DIALOG d_troca_name BUTTON]
+ON=0
+SRC.MESSAGE Abortado.
+ON=1
+
+IF (STRMATCH(*EOF*,<ARGTXT[0]>))
+ SRC.SYSMESSAGE=Nome Invalido.
+ RETURN 1
+ENDIF
+
+IF (STRMATCH(*@*,<ARGTXT[0]>))
+ SRC.SYSMESSAGE=Nome Invalido.
+ RETURN 1
+ENDIF
+
+IF (STRMATCH(*  *,<ARGTXT[0]>))
+ SRC.SYSMESSAGE=Nome Invalido.
+ RETURN 1
+ENDIF
+
+ SRC.SYSMESSAGE <SRC.NAME> mudou o nome para <ARGTXT[0]>!
+ SRC.NAME <ARGTXT[0]>
+ REMOVE
+
+RETURN 1
+
+
+
+[ITEMDEF i_deed_sex]
+ID=i_deed
+RESOURCES=80 I_PARCHMENT, 1 I_HIDE, 1 I_CLOTH
+VALUE=200000
+TYPE=t_script//Stores tags but unequipable
+WEIGHT=1
+LAYER=1 // this is wrong in TILEDATA ?
+NAME=Deed de mudanca de sexo uiiiii.
+
+ON=@CREATE
+COLOR=020
+ 
+ON=@DCLICK
+
+IF (<SRC.BODY>=c_man)
+ SRC.BODY=c_woman
+ SRC.OBODY=c_woman
+ SRC.resync
+ SRC.MESSAGE Voce agora e uma mulher.
+ remove
+ELSE
+ SRC.BODY=c_man
+ SRC.OBODY=c_man
+ SRC.resync
+ SRC.MESSAGE Voce agora e um homem.
+ remove
+ENDIF
+
+RETURN 1
+
+
+[DIALOG d_cadastra_email]
+0,0
+nomove
+noclose
+resizepic 190 175 5054 335 150
+resizepic 200 185 3000 315 130
+resizepic 220 235 3000 270 22
+text 215 200 995 0
+text 255 275 0000 1
+button 220 275 4005 4006 1 0 1
+text 435 275 0000 2
+button 400 275 4005 4006 1 0 0
+textentry 225 237 253 25 0 0 3
+
+[DIALOG d_cadastra_email TEXT]
+Digite seu e-mail.
+Continue
+Cancelar
+email@dominio.com.br
+
+[DIALOG d_cadastra_email BUTTON]
+ON=0
+SRC.SYSMESSAGE <SRC.NAME> cadastre seu e-mail
+RETURN 1
+
+ON=1
+IF (STRMATCH(*EOF*,<ARGTXT[0]>))
+ SRC.SYSMESSAGE=E-mail Invalido.
+ RETURN 1
+ENDIF
+
+IF (STRMATCH(*@*,<ARGTXT[0]>))
+ SRC.SYSMESSAGE <SRC.NAME> cadastrou e-mail <ARGTXT[0]>!
+ SRC.TAG.EMAIL=1
+ SRC.TAG.EMAILE=<ARGTXT[0]>
+ELSE
+ SRC.SYSMESSAGE=E-mail Invalido.
+ENDIF
+
+RETURN 1
+
+[EOF]

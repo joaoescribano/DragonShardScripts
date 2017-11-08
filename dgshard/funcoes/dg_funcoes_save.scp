@@ -1,0 +1,22 @@
+[DIALOG d_saving_dlg]
+180, 180
+NOCLOSE
+NOMOVE
+NODISPOSE
+resizepic 50 50 5120 150 171
+checkertrans 50 50 150 171
+dtext 67 55 55 Dragon Shard - T2A
+dtext 70 195 1152 Salvando o Mundo
+DORAND 3
+ dhtmlgump 58 82 137 111 1 0 Contas VIP:<def.br>Mundo novo.<def.br>Items novos.<def.br>Monstros Novos.<def.center>contasvip@dgshard.com
+ dhtmlgump 58 82 137 111 1 0 Tabelas.<def.br>Macros.<def.br>Cadastro.<def.br><def.center>www.dgshard.com.br
+ dhtmlgump 58 82 137 111 1 0 Duvidas.<def.br>Denuncias.<def.br>Noticias.<def.br><def.center>Acesse o forum!
+ENDDO
+
+[FUNCTION CLOSESAVINGDLG]
+TRYSRC <UID> SRC.DIALOGCLOSE D_SAVING_DLG
+
+[FUNCTION dialog_up]
+TRYSRC <UID> SRC.SDIALOG <ARGS>
+
+[EOF]

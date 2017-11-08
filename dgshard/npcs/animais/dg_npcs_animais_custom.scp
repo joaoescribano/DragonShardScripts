@@ -1,0 +1,19 @@
+
+[CHARDEF c_lion_never_use]
+ID=c_PANTHER
+SOUND=snd_ANIMALS_LION1
+NAME=Mountain Lion
+ICON=i_pet_PANTHER
+CAN=MT_WALK|MT_RUN
+DAM=2,12
+ARMOR=8
+RESOURCES=6 i_ribs_raw,2 i_fur_dark
+FOODTYPE=15 t_meat_raw
+DESIRES=C_A_Lion,r_foliage
+//SHELTER=r_caves,r_mountains,r_forests
+AVERSIONS=r_civilization,r_water
+DESCRIPTION=Lion
+SUBSECTION=Land (Wild)
+CATEGORY=Animals
+
+[EOF]

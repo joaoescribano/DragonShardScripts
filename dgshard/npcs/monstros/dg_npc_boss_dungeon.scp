@@ -1,0 +1,330 @@
+////Boss das dungeuns
+////DG SHARD
+
+//Boss de Covetous
+
+[chardef c_boss_ancient_wyrm]
+ID=c_ancient_wyrm
+NAME=Dragao Anciao de Covetous
+SOUND=snd_monster_dragon1
+ICON=i_pet_dragon
+DAM=146,182
+RESDISPDNID=c_dragon_red
+RESLEVEL=2
+RESDISPDNHUE=78
+ARMOR=100
+CAN=MT_USEHANDS|MT_WALK|MT_FLY
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman,t_corpse
+MOVERATE=50
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Ancient Wyrm Boss
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_rosite,{3,5}
+	ITEM=i_reag_batwing,{150 260}
+	ITEM=i_reag_ginseng,{150 260}
+	ITEM=i_roseite_platemail,{1 1},R4
+	ITEM=i_rosite_kryss,{1 1}, R6
+
+
+//Boss Deceit
+
+
+[chardef c_boss_moloch]
+ID=c_Moloch
+name=Boss Moloch de Deceit
+SOUND=snd_monster_daemon1
+ICON=i_pet_fourarmed_daemon
+ARMOR=68
+DAM=41,61
+RESOURCES=1 i_ore_iron
+CAN=MT_WALK|MT_USEHANDS
+FOODTYPE=1 t_meat_raw
+DESIRES=999 t_corpse
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+MOVERATE=60
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Moloch Boss
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_onyx,{3,5}
+	ITEM=i_reag_garlic,{150 260}
+	ITEM=i_reag_mandrake_root,{150 260}
+	ITEM=i_onix_shield_heater,{1 1},R4
+	ITEM=i_onix_kryss,{1 1}, R6
+
+
+//Boss Despise
+
+[chardef c_boss_multicolored]
+ID=c_multicolored_horde_minion
+name=Multi Colored Despise Boss
+SOUND=snd_monster_daemon1
+ICON=i_pet_hordedaemon
+DAM=1,40
+ARMOR=20
+RESOURCES=15 i_ribs_raw
+CAN=MT_WALK|MT_RUN|MT_USEHANDS|MT_EQUIP
+FOODTYPE=1 t_meat_raw
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Multi Colored Boss
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_blooddiamond,{3,5}
+	ITEM=i_reag_eye_of_newt,{150 260}
+	ITEM=i_reag_pumice,{150 260}
+	ITEM=i_azurite_shield_heater,{1 1},R4
+	ITEM=i_azurite_kryss,{1 1}, R6
+
+//Boss Destard
+
+[chardef c_boss_wyvern_mutant]
+ID=c_wyvern_mutant
+name=Dragao Mutante de Destard
+SOUND=snd_monster_dragon1
+ICON=i_pet_mutantwyvern
+DAM=20,43
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+ARMOR=40
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_USEHANDS|MT_FLY
+FOODTYPE=40 t_meat_raw
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman
+AVERSIONS=e_carnivores3
+MOVERATE=40
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Wyvern Boss
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_adamantium,{3,5}
+	ITEM=i_reag_pig_iron,{150 260}
+	ITEM=i_reag_sulfur_ash,{150 260}
+	ITEM=i_adamantium_shield_heater,{1 1},R10
+	ITEM=i_adamantium_kryss,{1 1}, R10
+
+//Boss Sorcerer
+
+
+[chardef c_boss_ethereal]
+ID=c_Ethereal_Warrior
+name=Boss Arcanjo Guerreiro
+SOUND=snd_pixie
+ICON=i_pet_forestlord
+ARMOR=80
+DAM=47,74
+CAN=MT_WALK|MT_RUN|MT_USEHANDS|MT_EQUIP
+RESOURCES=100 i_feather
+FOODTYPE=1 t_meat_raw
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Arcanjo Guerreiro Boss
+
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_adamantium,{3,5}
+	ITEM=i_reag_spider_silk,{150 260}
+	ITEM=i_reag_nox_crystal,{150 260}
+	ITEM=i_titanium_shield_heater,{1 1},R10
+	ITEM=i_titanium_kryss,{1 1}, R10
+
+
+//Boss Shame
+
+[CHARDEF c_boss_yamandon]
+ID=c_yamandon
+Name=Yamandon Shame Boss
+ICON=i_pet_yamandon
+ARMOR=18
+SOUND=snd_yomotsu
+CAN=MT_WALK|MT_RUN
+DAM=14,40
+RESDISPDNID=c_man
+RESLEVEL=3
+RESDISPDNHUE=33
+CATEGORY=Dungeuns Boss
+SUBSECTION=SE
+DESCRIPTION=Yamandon Boss
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_titanium,{3,5}
+	ITEM=i_reag_spider_silk,{150 260}
+	ITEM=i_reag_nox_crystal,{150 260}
+	ITEM=i_titanium_shield_heater,{1 1},R10
+	ITEM=i_titanium_kryss,{1 1}, R10
+	ITEM=i_golden_shield_heater,{1 1},R3
+	ITEM=i_golden_kryss,{1 1}, R4
+
+//Boss Wrong
+
+
+[chardef c_boss_orc_brute]
+ID=c_orc_brute
+NAME=Orc Brute Boss of Wrong
+SOUND=snd_monster_orc1
+ICON=i_pet_orc
+DAM=72,91
+ARMOR=45
+RESOURCES=15 i_ribs_raw
+CAN=MT_WALK|MT_USEHANDS|MT_RUN
+FOODTYPE=1 t_meat_raw
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+CATEGORY=Dungeuns Boss
+SUBSECTION=LBR
+DESCRIPTION=Orc Brute Boss
+
+
+ON=@Create
+ STR={3999 4000}
+ DEX={400 600}
+ INT={500 600}
+ Events=+e_poison_immune
+ PARRYING={100.0 200.0}
+ MAGERY={100.0 200.0}
+ MAGICRESISTANCE={100.0 200.0}
+ TACTICS={100.0 200.0}
+ WRESTLING={100.0 200.0}
+ NPC=brain_monster
+
+ FAME={9000 10000}
+ KARMA={-8000 -9999}
+
+ON=@NpcRestock
+
+	ITEM=i_mapa_ts, {1 1}, R7
+	ITEM=i_gold,{14000 15000}
+	ITEM=i_ore_onix,{3,5}
+	ITEM=i_reag_spider_silk,{150 260}
+	ITEM=i_reag_nox_crystal,{150 260}
+	ITEM=i_onix_shield_heater,{1 1},R10
+	ITEM=i_onix_kryss,{1 1}, R10
+	ITEM=i_silver_shield_heater,{1 1},R3
+	ITEM=i_silver_kryss,{1 1}, R4
+
+[EOF]

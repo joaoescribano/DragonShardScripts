@@ -1,0 +1,39 @@
+// Dragon Shard - The Second Age
+// http://dgshard.com.br
+
+// by Owner Destiny
+// staff_destiny@dgshard.com.br
+
+// Sistema de anti plevel-hack
+
+// Configurações
+[DEFNAME plevel_hack_conf]
+pleveled_accounts 	conta1,conta2,conta3,conta4
+
+[FUNCTION deleteacc]
+account.plevel 1
+account.block 1
+account.delete
+
+[FUNCTION hasRightPlevel]
+if (<account.plevel> > 1)
+	local.validPlevel = 0;
+
+	if (strmatch(*<account.name>*, <def.pleveled_accounts>))
+		local.validPlevel 1
+	endif
+
+	if (<eval <local.validPLevel>> == 0)
+		deleteacc
+		sysmessage @077a Sua conta com privilegios hackeados foi deletada!
+	endif
+endif
+
+[EVENTS e_anti_plevel_hacking]
+on=@itemclick
+timerf 1 hasRightPlevel
+
+on=@itemdclick
+timerf 1 hasRightPlevel
+
+[EOF]

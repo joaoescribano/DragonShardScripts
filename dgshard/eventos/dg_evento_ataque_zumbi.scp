@@ -1,0 +1,330 @@
+// Evento Ataque Zumbi 1.0
+
+// Dragon Shard - The Second Age
+// http://www.dgshard.com.br
+
+// By Owner Destiny
+
+// Criar X Respaws de grupos de zumbis (3-8)
+// Quando um zumbi "morde" alguem, a pessoa fica infectada e em 2 minutos morre e vira um zumbi
+// Vai existir "antidotos" espalhados no mapa, para tirar a infeccao do player
+// O objetivo do evento é sobreviver em grupo e matar todos os zumbis coletando a maior quantidade de recursos possíveis
+
+[Defname conf_atq_zumbi]
+zumbi_entrada           677,2227,-2,1
+zumbi_delay_infeccao    180 // 3 minutos
+
+// Respawns de zumbis
+zumbi_qtd_respaws       12
+
+zumbi_res_1             622,2230,0,1
+zumbi_res_2             607,2247,0,1
+zumbi_res_3             603,2278,0,1
+zumbi_res_4             589,2206,0,1
+zumbi_res_5             574,2197,0,1
+zumbi_res_6             595,2172,0,1
+zumbi_res_7             621,2179,0,1
+zumbi_res_8             657,2148,0,1
+zumbi_res_9             617,2127,0,1
+zumbi_res_10            551,2121,0,1
+zumbi_res_11            552,2076,0,1
+zumbi_res_12            643,2067,5,1
+
+[ITEMDEF i_pedra_zumbi]
+ID=i_guildstone
+NAME=Pedra
+TYPE=t_normal
+
+ON=@CREATE
+NAME Evento Ataque Zumbi
+COLOR           0a8b
+tag0.on         0
+tag0.mortos     0
+tag0.zumbis     0
+tag0.players    0
+
+ON=@DCLICK
+VAR.UID <UID>
+
+IF (<src.isgm>)
+    dialog d_zumbi_fechar
+    return 1
+ENDIF
+
+if !(0<tag0.on>)
+    src.sysmessage @0a8b Evento Ataque Zumbi Fechado
+ return 1
+endif
+
+tag0.players <eval <tag0.players>+1>
+
+src.events +e_ataque_zumbi_player
+src.tag0.uid_zumbi <uid>
+src.go <def.zumbi_entrada>
+src.sysmessage Aguarde o evento iniciar.
+return 1
+
+ON=@Timer
+if !(0<tag0.zumbis>)
+    f_respawn_zumbi
+    serv.b @0799 Os zumbis ja estao por toda parte, preparem se para sobreviver!
+    serv.b @0799 10 segundos para liberar.
+    timer 10
+else
+    f_ataque_liberar
+    serv.b @0799 Entrada na cidade liberada! Boa Sorte!
+endif
+return 1
+
+[FUNCTION f_zumbi_verificar_vitoria]
+if !(0<args>)
+    return 1
+endif
+
+local.uid       <args>
+local.mortos    <UID.<local.uid>.tag0.mortos>
+local.zumbis    <UID.<local.uid>.tag0.zumbis>
+local.players   <UID.<local.uid>.tag0.players>
+
+if (<local.mortos> >= <local.players>)
+    // Todos os players mortos
+    serv.b @077a Dragon Shard - T2A
+    serv.b @0799 Nao foi dessa vez, nenhum jogador voltou com vida do evento.
+elif (<local.zumbis> <= 0)
+    // Todos os zumbis mortos
+    serv.b @077a Dragon Shard - T2A
+    serv.b @0799 Parabens aos sobreviventes do ataque zumbi!!!
+    f_zumbi_players_venceram
+endif
+return 1
+
+[FUNCTION f_ataque_liberar]
+serv.newitem i_gold
+new.attr 094
+new.p <def.zumbi_entrada>
+new.f_liberar_players_zumbi
+
+[FUNCTION f_liberar_players_zumbi]
+forclients 6144
+    if (<isevent.e_ataque_zumbi_player>)
+        tag0.liberado 1
+        sysmessage @0799 Saida Liberada, mantenha-se em grupo!
+    endif
+endfor
+remove
+
+[FUNCTION f_zumbi_players_venceram]
+serv.newitem i_gold
+new.attr 094
+new.p <def.zumbi_entrada>
+new.f_limpar_zumbis
+new.f_player_vencedor
+
+[FUNCTION f_player_vencedor]
+forclients 6144
+    if (<isevent.e_ataque_zumbi_player>)
+        tag0.vencedor 1
+        tag0.colocado 1
+
+        tag0.uid_zumbi 0
+        events=-e_ataque_zumbi_player
+        sysmessage @0799 Obrigado por participar do evento e parabens pela vitoria!
+        go <def.eventos_where_saida>
+    endif
+endfor
+remove
+
+[FUNCTION f_respawn_zumbi]
+for x 1 <eval <def.zumbi_qtd_respaws>>
+    for y 1 <r3,8>
+        f_novo_zumbi <def.zumbi_res_<eval <local.x>>>
+        tag0.zumbis <eval <tag0.zumbis>+1>
+    endfor
+endfor
+
+[FUNCTION f_novo_zumbi]
+if !(0<args>)
+    return 1
+endif
+
+serv.newnpc c_zumbi_infectado
+new.tag0.uid_zumbi <uid>
+new.events=+e_ataque_zumbi_monstro
+new.p <args>
+new.update
+
+[FUNCTION f_ataque_infectar]
+if !(<restest 1 i_mem_infeccao>)
+    emote mordido por um zumbi
+    serv.newitem i_mem_infeccao
+    new.timer <def.zumbi_delay_infeccao>
+    new.cont <uid>
+    //new.equip
+else
+    if (<findid.i_mem_infeccao.timer> > 30)
+        emote ficando cada vez mais doente
+        findid.i_mem_infeccao.timer <eval <findid.i_mem_infeccao.timer>-30>
+    else
+        findid.i_mem_infeccao.timer 1
+    endif
+endif
+
+[ITEMDEF i_mem_infeccao]
+ID=i_memory
+TYPE=t_script
+NAME=Delay de infeccao
+
+ON=@CREATE
+TYPE=t_eq_script
+ATTR=080
+
+ON=@TIMER
+serv.f_novo_zumbi <cont.p>
+TRY UID.<cont.tag0.uid_zumbi>.tag0.mortos <eval <UID.<cont.tag0.uid_zumbi>.tag0.mortos>+1>
+TRY UID.<cont.tag0.uid_zumbi>.tag0.zumbis <eval <UID.<cont.tag0.uid_zumbi>.tag0.zumbis>+1>
+
+serv.b @0799 <cont.name> morreu, e virou um zumbi.
+
+cont.tag0.perdedor 1
+cont.tag0.uid_zumbi 0
+cont.events=-e_ataque_zumbi_player
+cont.go <def.eventos_where_saida>
+cont.sysmessage @0799 Obrigado por participar.
+
+remove
+return 1
+
+[CHARDEF c_zumbi_infectado]
+id=c_zombie
+NAME=Zumbi
+SOUND=snd_MONSTER_ZOMBIE1
+ICON=i_pet_ZOMBIE
+ANIM=078c7f
+CAN=MT_WALK
+DAM=2,8
+ARMOR=9
+
+RESOURCES=10 t_eerie_stuff
+FOODTYPE=20 t_meat_raw
+DESIRES=i_gold,t_meat_raw, t_corpse
+AVERSIONS=t_TRAP
+
+BLOODCOLOR=colors_green
+TEVENTS=e_undead
+
+ON=@Create
+    NPC=brain_undead
+    STR={46 70}
+    DEX={31 50}
+    INT={26 40}
+    PARRYING={20.0 30.0}
+    MAGICRESISTANCE={15.0 40.0}
+    TACTICS={35.0 50.0}
+    WRESTLING={35.0 50.0}
+    FAME=300
+    KARMA={-2000 -3999}
+
+ON=@NPCRestock
+    ITEM=loot_ZOMBIE
+    
+[DIALOG d_zumbi_fechar]
+50,50
+resizepic 0 0 9200 335 83
+dtext 71 0 1913 Dragon Shard - The Second Age
+dtext 38 21 1952 Fechar entrada e liberar Zumbis?
+button 230 50 241 243 1 0 0
+button 40 50 247 248 1 0 1
+
+[DIALOG d_zumbi_fechar button]
+ON=0
+return 1
+
+ON=1
+src.invis 1
+src.go <def.zumbi_entrada>
+timer 60
+serv.b @07a1 Evento: Ataque Zumbi.
+serv.b @07a1 1 min para liberar os zumbis, se pretejam.
+return 1
+
+[FUNCTION f_limpar_zumbis]
+FORCHARS 6144
+    IF (<baseid> == c_zumbi_infectado)
+        REMOVE
+    ENDIF
+ENDFOR
+
+[AREADEF a_townSkaraBrae_1]
+EVENTS=r_default,r_default_rock,r_default_water,r_default_tree,r_default_grass
+NAME=Skara Brae 1
+GROUP=Skara Brae 1
+FLAGS=0180
+P=632,2233,0,1
+
+RECT=541,2108,645,2227,1
+RECT=714,2132,767,2366,1
+RECT=873,2372,913,2429,1
+RECT=868,2304,885,2388,1
+RECT=645,2128,682,2220,1
+RECT=767,2150,837,2305,1
+RECT=632,2220,714,2259,1
+RECT=560,2222,633,2264,1
+RECT=571,2258,627,2300,1
+RECT=803,2305,868,2371,1
+RECT=767,2305,804,2327,1
+TAG.GUARDOWNER=the town
+
+[EVENTS e_ataque_zumbi_monstro]
+ON=@Death
+TRY UID.<tag0.uid_zumbi>.tag0.zumbis <eval <UID.<tag0.uid_zumbi>.tag0.zumbis>-1>
+serv.f_zumbi_verificar_vitoria <tag0.uid_zumbi>
+
+[EVENTS e_ataque_zumbi_player]
+on=@Kill
+if (<argo.baseid> == c_zumbi_infectado)
+    serv.b @0799 Zumbi morto por <name>
+endif
+
+on=@UserWarMode
+if !(<tag0.liberado>) || (<tag0.liberado> != 1)
+    sysmessage @07a1 Aguarde a liberacao da staff.
+    return
+endif 
+
+on=@HitTry
+if (<src.isevent.e_ataque_zumbi_player>)
+    sysmessage @07a1 Voce nao pode atacar uma pessoa do seu grupo.
+    return 1
+endif
+
+on=@GetHit
+if (<src.baseid> c_zumbi_infectado)
+    f_ataque_infectar
+endif
+
+[FUNCTION contador_zumbi]
+if (<isevent.e_ataque_zumbi_player>)
+    sdialog d_zumbi_contador
+else
+    sysmessage @0799 Somente para quem participa do evento Ataque Zumbi.
+    return 1
+endif
+
+[DIALOG d_zumbi_contador]
+0,0
+page 0
+resizepic 344 5 9200 133 149
+checkertrans 348 9 123 94
+tilepic 388 126 4655
+tilepic 413 116 7400
+tilepic 328 127 4655
+tilepic 394 128 4651
+tilepic 340 105 8428
+tilepic 370 105 8428
+tilepic 400 105 8428
+tilepic 384 114 7396
+dtext 350 15 52 Ataque Zumbi
+dtext 350 45 37  Zumbis: <eval <UID.<tag0.uid_zumbi>.tag0.zumbis>>
+dtext 350 75 37 Players: <eval <UID.<tag0.uid_zumbi>.tag0.players>-<UID.<tag0.uid_zumbi>.tag0.mortos>>
+
+[EOF]

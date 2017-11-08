@@ -1,0 +1,30 @@
+//*********************Guild Chat*********************************
+[FUNCTION gc]
+IF <memoryfindtype.memory_guild.link.uid>
+	IF (<TAG0.guild_time> > <SERV.TIME>)
+		SYSMESSAGE You must wait to perform another action.
+		RETURN 1
+	ENDIF
+  SERV.ALLCLIENTS guild_c <memoryfindtype.memory_guild.link.abbrev>  <name> : <args>
+  TAG.guild_time = <EVAL(<SERV.TIME> + 30)>
+ELSE
+  SYSMESSAGE Voce nao tem uma guilda!
+ENDIF
+
+[FUNCTION gco]
+IF <memoryfindtype.memory_guild.link.uid>
+ SERV.ALLCLIENTS guild_c_on
+ENDIF
+
+[FUNCTION guild_c_on]
+IF <memoryfindtype.memory_guild.link.uid> == <src.memoryfindtype.memory_guild.link.uid>
+ SRC.SYSMESSAGE @55 <NAME>
+ SRC.SYSMESSAGE @50 (<P.X>,<P.Y>,<P.Z> <REGION.NAME> )
+ENDIF
+
+[FUNCTION guild_c]
+IF <memoryfindtype.memory_guild.link.uid> == <src.memoryfindtype.memory_guild.link.uid>
+  SYSMESSAGE @044 "<args>"
+ENDIF
+
+[EOF]

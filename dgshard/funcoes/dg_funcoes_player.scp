@@ -1,0 +1,501 @@
+[FUNCTION status]
+
+src.sysmessage @009fb Por favor, para arrumar seus status, utilize a pedra localizada na Help Room. Obrigado!
+return 1
+
+
+[FUNCTION fixpoison]
+FLAGS = <FLAGS> - statf_poisoned
+UPDATE
+
+[FUNCTION cor]
+VAR.COR={077a 07a1 07a2 07a3 07a4 07a5 07a6 07a7 07a8 07a9 07b1 07b2 07b3 07b4 07b5 07b6 07b7 07b8 07b9 0481 0790 0791 0792 0793 0794 0795 0796 0797 0798 0799 0800 0801 0802 0803 0804 0805 0806 0807 0808 0809 0810}
+color <var.cor>
+
+[FUNCTION usebands]
+if <findID.i_bandage>
+    findID.i_bandage.use
+endif 
+
+
+[FUNCTION equipar]
+
+if <findtype.t_weapon_fence>
+    findtype.t_weapon_fence.equip 
+endif 
+
+////////////mace///////////////
+
+if <findtype.t_weapon_mace_smith>
+    findtype.t_weapon_mace_smith.equip 
+endif 
+
+
+/////////machado//////////////
+
+
+if <findtype.t_weapon_axe>
+    findtype.t_weapon_axe.equip 
+endif 
+
+///////////////arco///////////////
+
+
+if <findtype.t_weapon_bow>
+    findtype.t_weapon_bow.equip 
+endif 
+
+///////////heavycrossbow//////////
+
+
+if <findtype.t_weapon_xbow>
+    findtype.t_weapon_xbow.equip 
+endif 
+
+//////////Sword////////
+if <findtype.t_weapon_sword>
+    findtype.t_weapon_sword.equip 
+endif 
+
+/////escudos///////////
+
+if <findtype.t_shield>
+    findtype.t_shield.equip 
+endif 
+
+[FUNCTION disarm]
+//sysmessage @077a Comando desabilitado, monte o macro direto no UO ou no Assistente.
+//return 1
+
+IF !(<flags> & STATF_FREEZE) && !(<flags> & STATF_STONE) && !(<flags> & STATF_DEAD)
+  unequipHands
+ENDIF
+
+[FUNCTION online]
+SRC.SYSMESSAGE @65 Players On-Line : <eval <SERV.CLIENTS>>
+src.sysmessage @65 Record online: <EVAL(<VAR.CLIENTS>)>
+
+//<SERV.CLIENTS>
+
+[FUNCTION infoconta]
+IF <SRC.UID> == <UID>
+ DIALOG d_infoconta
+ENDIF
+
+[DIALOG d_infoconta]
+0,0
+page 0
+resizepic 21 66 9200 455 302
+gumppictiled 41 144 416 214 2624
+checkertrans 41 144 416 214
+gumppictiled 47 76 400 47 2624
+checkertrans 47 76 400 47
+resizepic 54 82 9200 386 35
+text 61 90 2099 0
+text 50 150 1952 1
+text 50 180 1952 2
+text 50 211 1952 3
+text 50 240 1952 4
+text 50 270 1952 5
+text 50 300 1952 6
+text 50 330 1952 7
+button 390 335 247 248 1 0 1 
+
+[DIALOG d_infoconta text]
+Status da conta <SRC.NAME> - Dragon Shard
+Login: <src.account>
+Senha: <src.account.password>
+Player: <src.name>
+Tempo conectado : <SRC.ACCOUNT.TOTALCONNECTTIME> minutos
+Tempo da ultima conexao : <SRC.ACCOUNT.LASTCONNECTTIME> minutos
+Primeira conexao : <SRC.ACCOUNT.FIRSTCONNECTDATE>
+Ultima conexao : <SRC.ACCOUNT.LASTCONNECTDATE>
+
+[DIALOG d_infoconta button]
+
+ON=1 
+SRC.SYSMESSAGE @009fb Menu de Informacoes fechado.
+RETURN 1 
+
+[itemdef i_stone_status]
+id=i_grave_stone
+type=t_normal
+
+category=Vendor Stones 
+subsection=Gambling
+description=Slot Machine
+
+on=@create
+color=009fb
+attr=attr_static
+
+ON=@DCLICK
+if (<distance> > 3) 
+  src.sysmessage @009fb Voce esta muito longe da pedra.
+  return 1
+else
+status1
+  return 1
+endif
+
+[FUNCTION status1]
+dialog d_status1
+
+[DIALOG d_status1]
+0,0
+page 0
+resizepic 21 66 9200 455 442
+gumppictiled 41 317 416 140 2624
+checkertrans 41 317 416 140
+gumppictiled 41 144 416 95 2624
+checkertrans 41 144 416 95
+gumppictiled 47 76 400 47 2624
+checkertrans 47 76 400 47
+resizepic 54 82 9200 386 35
+text 61 90 2099 0
+text 50 150 1952 1
+text 50 180 1952 2
+text 50 210 1952 3
+text 50 330 1952 4
+text 50 360 1952 5
+text 50 390 1952 6
+gumppictiled 47 259 400 47 2624
+checkertrans 47 259 400 47
+resizepic 54 265 9200 386 35
+text 61 274 2099 7
+text 50 420 1952 8
+text 242 474 0 9
+button 374 474 2714 2715 1 0 1
+gumppic 444 5 10410
+gumppic 444 209 10411
+gumppic 444 417 10412
+button 40 474 4017 4018 1 0 2
+
+[DIALOG d_status1 text]
+Status do char:  <SRC.NAME> - Dragon Shard
+Str: <SRC.STR>
+Dex: <SRC.DEX>
+Int: <SRC.INT>
+Kills: <SRC.KILLS>
+Fame: <SRC.FAME>
+Karma: <SRC.KARMA>
+Outros Status:
+Deaths: <SRC.DEATHS>
+Arrumar Status: 
+
+[DIALOG d_status1 button]
+ON=1
+
+IF (<SRC.FLAGS> & statf_freeze) || (<SRC.FLAGS> & statf_invisible) || (<SRC.FLAGS> & statf_sleeping) || (<SRC.FLAGS> & statf_war) || (<SRC.FLAGS> & statf_poisoned) || (<SRC.FLAGS> & statf_stone) || (<SRC.FLAGS> & statf_dead)
+ SRC.SYSMESSAGE Voce nao pode arrumar status nesse estado
+ELSE
+ SRC.FINDLAYER(1).UNEQUIP 
+ SRC.FINDLAYER(2).UNEQUIP 
+ SRC.FINDLAYER(3).UNEQUIP
+ SRC.FINDLAYER(4).UNEQUIP 
+ SRC.FINDLAYER(5).UNEQUIP
+ SRC.FINDLAYER(6).UNEQUIP
+ SRC.FINDLAYER(7).UNEQUIP
+ SRC.FINDLAYER(8).UNEQUIP 
+ SRC.FINDLAYER(10).UNEQUIP 
+ SRC.FINDLAYER(12).UNEQUIP
+ SRC.FINDLAYER(13).UNEQUIP
+ SRC.FINDLAYER(17).UNEQUIP
+ SRC.FINDLAYER(18).UNEQUIP
+ SRC.FINDLAYER(19).UNEQUIP 
+ SRC.FINDLAYER(20).UNEQUIP 
+ SRC.FINDLAYER(22).UNEQUIP        
+ SRC.FINDLAYER(23).UNEQUIP 
+ SRC.FINDLAYER(24).UNEQUIP 
+ SRC.SPELLEFFECT=s_dispel,100
+
+ SRC.STR=100
+ SRC.INT=100
+ SRC.DEX=100
+ SRC.MODSTR=0
+ SRC.MODDEX=0
+ SRC.MODINT=0
+ SRC.MAXHITS=100
+ SRC.MAXMANA=100
+ SRC.MAXSTAM=100
+
+ SRC.SYSMESSAGE @009fb Seu status Foi arrumado!
+
+ENDIF
+RETURN 1 
+
+ON=2
+
+SRC.SYSMESSAGE @009fb Menu de Status fechado.
+RETURN 1
+
+
+[function senha]
+IF (<SRC.UID> == <UID>)
+ dialog d_password
+ENDIF
+RETURN 1
+
+[DIALOG d_password]
+100,100
+nomove
+noclose
+page 0
+resizepic 107 148 9200 345 203
+gumppictiled 125 219 310 118 2624
+checkertrans 125 219 310 118
+gumppictiled 131 157 298 48 2624
+checkertrans 131 157 298 48
+resizepic 138 163 9200 285 35
+text 168 170 2627 0
+gumppictiled 144 234 272 24 1143
+textentry 154 235 262 23 0 0 1
+button 130 298 4023 4025 1 0 1
+text 165 298 2627 2
+
+[DIALOG d_password text]
+Digite abaixo a sua nova senha:
+Apague
+Clique em Ok para alterar
+
+[dialog d_password button]
+ON=1
+SRC.TAG.MUDAR=<ARGTXT[0]>
+SRC.dialog d_password2
+RETURN 1
+
+
+[dialog d_password2]
+100,100
+nomove
+noclose
+page 0
+resizepic 138 183 9200 314 132
+gumppictiled 143 250 302 55 2624
+checkertrans 143 250 302 55
+gumppictiled 155 192 280 45 2624
+checkertrans 155 192 280 45
+resizepic 162 198 9200 266 32
+text 173 204 2627 0
+button 206 271 4023 4025 1 0 1
+text 144 271 2627 1
+button 344 271 4020 4021 1 0 2
+text 378 271 32 2
+
+[DIALOG d_password2 text]
+A sua nova senha sera: <SRC.TAG.MUDAR>
+Alterar
+Cancelar
+
+
+[dialog d_password2 button]
+ON=1
+
+IF (STRMATCH(*Apague*,<SRC.TAG.MUDAR>))
+ SRC.SYSMESSAGE @009fb Senha Invalida.
+ RETURN 1
+ENDIF
+
+IF (STRMATCH(*EOF*,<SRC.TAG.MUDAR>))
+ SRC.SYSMESSAGE @009fb Senha Invalida.
+ RETURN 1
+ENDIF
+
+ SRC.PASSWORD=<SRC.TAG.MUDAR>
+ SRC.SYSMESSAGE @009fb Sua senha foi alterada para: <SRC.TAG.MUDAR>
+ SRC.TAG.MUDAR=
+
+RETURN 1
+
+ON=2
+ SRC.SYSMESSAGE @009fb Sua senha nao foi alterada!
+ SRC.TAG.MUDAR=
+RETURN 1
+
+[FUNCTION itens]
+src.strip
+SRC.tag.lastpack=<src.findlayer.21>
+SRC.findlayer.21.ATTR=0
+SRC.findlayer.21.COLOR=063
+SRC.findlayer.21.CONT <SRC.FINDLAYER.29>
+src.newitem=i_backpack
+new.attr 04
+new.equip
+new.open
+
+[FUNCTION joias]
+FINDLAYER(8).unequip
+FINDLAYER(10).unequip
+FINDLAYER(14).unequip
+FINDLAYER(18).unequip
+
+[FUNCTION comandos]
+DIALOG d_comandos
+
+///////////GUMP COMANDOS//////////////////
+[DIALOG d_comandos]
+0,0
+page 0
+resizepic 79 101 9200 339 278
+gumppictiled 90 119 309 235 2624
+text 212 100 167 0
+checkertrans 100 132 293 208
+text 100 170 162 1
+text 100 250 162 2
+text 197 355 167 3
+gumppic 383 42 10441
+text 100 290 162 4
+text 100 130 162 5
+text 100 210 162 6
+
+[DIALOG d_comandos text]
+Comandos:
+.tomarcure - Toma potion de cure
+.tomarinvis - Toma potion de invisibility
+Dragon Shard
+.tomarmana - Toma potion de mana
+.tomarheal - Toma potion de heal
+.tomarrefresh - Toma potion de refresh
+
+[FUNCTION tomarmana]
+IF (<FINDLAYER.21.FINDID.i_potion_ManaTotal.UID>)
+ FINDLAYER.21.FINDID.i_potion_ManaTotal.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_mana.UID>)
+ FINDLAYER.21.FINDID.i_potion_mana.USE
+ELSE
+ SYSMESSAGE @009fb O item nao foi encontrado na sua mochila.
+ENDIF
+
+[FUNCTION tomarheal]
+IF (<FINDLAYER.21.FINDID.i_potion_HealLess.UID>)
+ FINDLAYER.21.FINDID.i_potion_HealLess.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_Heal.UID>)
+ FINDLAYER.21.FINDID.i_potion_Heal.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_HealGreat.UID>)
+ FINDLAYER.21.FINDID.i_potion_HealGreat.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_Healtotal.UID>)
+ FINDLAYER.21.FINDID.i_potion_Healtotal.USE
+ELSE
+ SYSMESSAGE @009fb O item nao foi encontrado na sua mochila.
+ENDIF
+
+[FUNCTION tomarcure]
+IF (<FINDLAYER.21.FINDID.i_potion_curetotal.UID>)
+ FINDLAYER.21.FINDID.i_potion_curetotal.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_curegreat.UID>)
+ FINDLAYER.21.FINDID.i_potion_curegreat.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_cure.UID>)
+ FINDLAYER.21.FINDID.i_potion_cure.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_cureless.UID>)
+ FINDLAYER.21.FINDID.i_potion_cureless.USE
+ELSE
+ SYSMESSAGE @009fb O item nao foi encontrado na sua mochila.
+ENDIF
+
+[FUNCTION tomarrefresh]
+IF (<FINDLAYER.21.FINDID.i_potion_refreshtotal.UID>)
+ FINDLAYER.21.FINDID.i_potion_refreshtotal.USE
+ELIF (<FINDLAYER.21.FINDID.i_potion_refresh.UID>)
+ FINDLAYER.21.FINDID.i_potion_refresh.USE
+ELSE
+ SYSMESSAGE @009fb O item nao foi encontrado na sua mochila.
+ENDIF
+
+[FUNCTION tomarinvis]
+IF (<FINDLAYER.21.FINDID.i_potion_invisibility.UID>)
+ FINDLAYER.21.FINDID.i_potion_invisibility.USE
+ELSE
+ SYSMESSAGE @009fb O item nao foi encontrado na sua mochila.
+ENDIF
+
+[FUNCTION SPELLS]
+IF !(<argn>)
+TAG.SPELL 1
+DIALOG D_SPELLS
+ELSE
+TAG.SPELL <argn>
+DIALOG D_SPELLS
+ENDIF
+
+[DIALOG D_SPELLS]
+150,130
+resizepic 0 10 9300 290 295
+resizepic 10 20 9350 270 275
+resizepic 20 30 9300 250 255
+tilepic 125 215 <SERV.SPELL.<TAG.SPELL>.RUNE_ITEM>
+dtext 90 30 1152 <SERV.SPELL.<TAG.SPELL>.NAME>
+dtext 90 50 1152 <SERV.SPELL.<TAG.SPELL>.RUNES>
+dtext 90 70 1152 <FVAL <SERV.SPELL.<TAG.SPELL>.SKILLREQ>> magery
+dtext 90 90 1152 <FVAL <SERV.SPELL.<TAG.SPELL>.CAST_TIME>> segs
+dtext 90 110 1152 <SERV.SPELL.<TAG.SPELL>.MANAUSE>
+dtext 90 130 1152 <SERV.SPELL.<TAG.SPELL>.EFFECT>
+dtext 90 150 1152 <SERV.SPELL.<TAG.SPELL>.DURATION>
+//<FVAL (<SERV.SPELL.<TAG.SPELL>.DURATION> / 60)> mins (<FVAL (<SERV.SPELL.<TAG.SPELL>.DURATION>)> segs)
+tilepic 80 170 <SERV.SPELL.<TAG.SPELL>.SCROLL_ITEM>
+dtext 30 30 059 Nome:
+dtext 30 50 059 Runas:
+dtext 30 70 059 Skill:
+dtext 30 90 059 Delay:
+dtext 30 110 059 Mana:
+dtext 30 130 059 Efeito:
+dtext 30 150 059 Duracao:
+dtext 30 170 059 Scroll:
+dtext 137 260 059 <EVAL <TAG.SPELL>>
+IF <TAG.SPELL>>1
+button 30 245 4014 4015 1 0 1
+ENDIF
+IF <TAG.SPELL><64
+button 230 245 4005 4006 1 0 2
+ENDIF
+
+[DIALOG D_SPELLS BUTTON]
+ON=1
+IF <TAG.SPELL>>1
+TAG.SPELL -= 1
+DIALOG D_SPELLS
+ENDIF
+ON=2
+IF <TAG.SPELL><64
+TAG.SPELL += 1
+DIALOG D_SPELLS
+ENDIF
+
+
+[FUNCTION sayEvent]
+say @07a1 <isevent.<args>>
+
+[FUNCTION floorType]
+for s <SERV.MAP(<p.x>,<p.y>).statics>
+   sysmessage @077a <eval <local.s>>: <SERV.MAP(<p.x>,<p.y>).statics.<eval <local.s>-1>.baseid> <SERV.MAP(<p.x>,<p.y>).statics.<eval <local.s>-1>.id> <SERV.MAP(<p.x>,<p.y>).statics.<eval <local.s>-1>.type>
+endfor
+
+
+[FUNCTION isOnWater]
+local.retorno 0
+for x -6 6
+  for y -6 6
+     local.px <eval <p.x> + <local.x>>
+     local.py <eval <p.y> + <local.y>>
+     local.terrain = <SERV.MAP(<eval <local.px>>,<eval <local.py>>,0).terrain>
+
+     if ((<local.terrain> == 0a8) ||(<local.terrain> == 0a9) ||(<local.terrain> == 0aa) ||(<local.terrain> == 0ab) ||(<local.terrain> == 0136) ||(<local.terrain> == 0137))
+      local.retorno 1
+     endif
+  endfor
+endfor
+return <eval <local.retorno>>
+
+[FUNCTION getId]
+if (0<args> <= 0)
+  args <baseid>
+endif
+
+if (<hval <DEF0.<ARGS>>&09c000000>)
+  return <hval <DEF0.<ARGS>> &~ 09c000000>
+endif
+if (<hval <DEF0.<ARGS>>&08c000000>)
+  return <hval <DEF0.<ARGS>> &~ 08c000000>
+endif
+return <args>
+
+[EOF]

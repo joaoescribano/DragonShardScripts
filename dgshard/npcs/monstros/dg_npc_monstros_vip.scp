@@ -1,0 +1,574 @@
+//////////////Monstros Vips////////////////
+
+//Feito por Owner Dragon
+
+//Dragon Easy Shard
+
+//www.dgshard.com
+
+[EVENTS e_poison_immune_vip] 
+
+ON=@GETHIT 
+
+IF (<ARGN2>&08) 
+say Voces sao muitos Nbs, acham mesmo que irao me matar no poison so porque pagam vip? Estao Enganados!!!
+say An Nox
+ ANIM=12
+ SpellEffect s_cure,1000 
+ SOUND=snd_SPELL_CURE
+ RETURN 1 
+ENDIF
+RETURN 0
+
+
+[chardef c_paroxysmus_vip] 
+ID=c_chief_paroxysmus
+name=Chief Paroxysmus Vip
+SOUND=snd_monster_daemon1
+ICON=i_worldgem_bit
+RESLEVEL=5
+RESDISPDNHUE=33
+RESDISPDNID=c_man
+DAM=4,20
+RESOURCES=15 i_ribs_raw 
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+CAN=MT_WALK|MT_USEHANDS|MT_EQUIP
+CATEGORY=New Monsters
+SUBSECTION=ML
+DESCRIPTION=Chief Paroxysmus
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-5000 -6999} 
+	STR={80 100}
+	MAXHITS=100
+	INT={100 200} 
+	DEX={50 100} 
+	PARRYING={60.0 95.0}
+	MAGERY={60.0 75.0}
+	TACTICS={60.0 90.0}
+	WRESTLING={60.0 90.0}
+        EVENTS=+e_poison_immune_vip
+        COLOR=007ac
+
+ON=@NpcRestock
+	ITEM=i_gold,{9000 10000}
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_fireball
+	ADDSPELL=s_fire_field
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_poison_field
+	ADDSPELL=s_paralyze
+        ADDSPELL=s_paralyze_field
+
+[chardef c_treefellow_vip]
+ID=c_treefellow
+NAME=Treefellow Vip
+SOUND=snd_monster_orc1
+ICON=i_pet_treefellow
+DAM=35,45
+RESDISPDNID=c_reaper
+RESLEVEL=3
+RESDISPDNHUE=0ad
+ARMOR=25
+CAN=MT_WALK
+MOVERATE=40
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman,t_corpse
+CATEGORY=New Monsters
+SUBSECTION=AOS
+DESCRIPTION=Treefellow
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-5000 -6999} 
+	STR={271 335}
+	INT={160 220}
+	DEX={71 95}
+	MAGICRESISTANCE={90.0 100.0}
+	TACTICS={80.0 90.0}
+	WRESTLING=100.0
+        COLOR=07a1
+        EVENTS=+e_poison_immune_vip
+
+ON=@NpcRestock
+	ITEM=i_gold,{9000 10000}
+
+[chardef c_wanderer_void_vip]
+ID=c_wanderer_void
+NAME=Wanderer of the Void Vip
+SOUND=snd_monster_wisp1
+ICON=i_pet_wanderervoid
+DAM=20,27
+RESDISPDNID=c_skeleton
+RESLEVEL=3
+RESDISPDNHUE=33
+ARMOR=35
+CAN=MT_USEHANDS|MT_WALK|MT_RUN
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman,t_corpse
+CATEGORY=New Monsters
+SUBSECTION=AOS
+DESCRIPTION=Wanderer of the Void
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-5000 -6999} 
+	STR={111 211}
+	MAXHITS={350 450}
+	INT={300 400}
+	DEX={101 125} 
+	MAGICRESISTANCE={60.0 65.0}
+	TACTICS=70.0
+	WRESTLING=70.0
+	MAGERY=700
+	ITEMNEWBIE=i_spellbook
+	ADDCIRCLE 6,1
+        COLOR=00853
+        EVENTS=+e_poison_immune_vip
+
+ON=@NpcRestock
+	ITEM=i_gold,{9000 10000}
+
+[chardef c_abyssmal_horror_vip]
+ID=c_abyssmal_horror
+NAME=Abyssmal Horror Vip
+SOUND=snd_monster_slime1
+ICON=i_pet_abysmallhorror
+DAM=25,27
+RESDISPDNID=c_sea_serpent
+RESLEVEL=3
+RESDISPDNHUE=55
+ARMOR=30
+CAN=MT_USEHANDS|MT_WALK|MT_RUN|MT_SWIM
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman,t_corpse
+CATEGORY=New Monsters
+SUBSECTION=AOS
+DESCRIPTION=Abyssmal Horror
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-5000 -6999} 
+	STR={250 350}
+	MAXHITS={500 600}
+	INT=200
+	DEX={170 210} 
+	MAGICRESISTANCE={70.0 80.0}
+	TACTICS=80.0
+	WRESTLING=100.0
+        COLOR=0080e
+        EVENTS=+e_poison_immune_vip  
+
+ON=@NpcRestock
+	ITEM=i_gold,{295 345}
+	ITEM=random_jewel,3
+	ITEM=random_jewel,{1 2}
+
+[chardef c_Troglodyte_vip] 
+ID=c_Troglodyte
+name=Troglodyte Vip
+//SOUND=snd_monster_daemon1
+ICON=i_worldgem_bit
+RESLEVEL=5
+RESDISPDNHUE=33
+RESDISPDNID=c_man
+DAM=4,10
+ARMOR=15
+RESOURCES=15 i_ribs_raw
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+CAN=MT_WALK|MT_RUN|MT_USEHANDS|MT_EQUIP
+CATEGORY=New Monsters
+SUBSECTION=ML
+DESCRIPTION=Troglodyte
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-5000 -6999} 
+	STR={80,120}
+	MAXHITS=150
+	INT={50 80} 
+	DEX={80 110} 
+	PARRYING={60.0 95.0}
+	MAGICRESISTANCE={50.0 70.0}
+	MAGERY={60.0 75.0}
+	TACTICS={60.0 90.0}
+	WRESTLING={60.0 90.0}
+        EVENTS=+e_poison_immune_vip  
+
+ON=@NpcRestock
+	ITEM=i_gold,{9000 10000}
+
+[chardef c_Fetid_Essence_vip] 
+ID=c_Fetid_Essence
+name=Fetid Essence Vip
+//SOUND=snd_monster_daemon1
+ICON=i_worldgem_bit
+RESLEVEL=5
+RESDISPDNHUE=33
+RESDISPDNID=c_man
+DAM=4,10
+ARMOR=15
+RESOURCES=15 i_ribs_raw 
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP,t_eerie_stuff
+CAN=MT_WALK
+CATEGORY=New Monsters
+SUBSECTION=ML
+DESCRIPTION=Fetid Essence
+
+ON=@Create 
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-3000 -5000} 
+	STR={70 90}
+	MAXHITS=150
+	INT={100 200} 
+	DEX={100 200} 
+	PARRYING={60.0 95.0}
+	MAGICRESISTANCE={50.0 70.0}
+	MAGERY={60.0 75.0}
+	TACTICS={60.0 90.0}
+	WRESTLING={60.0 90.0}
+        EVENTS=+e_poison_immune_vip  
+
+ON=@NpcRestock
+	ITEM=i_gold,{9000 10000}
+
+[chardef c_minotaur_captain_vip]  
+ID=c_minotaur_captain
+name=Minotaur Captain Vip
+ICON=i_pet_dragon 
+DAM=25,38 
+ARMOR=60 
+RESOURCES=15 i_ribs_raw,10 i_hide 
+CAN=MT_WALK|MT_RUN 
+RESLEVEL=5
+RESDISPDNHUE=33
+RESDISPDNID=c_orc
+FOODTYPE=55 i_ribs_raw  
+AVERSIONS=e_carnivores3 
+CATEGORY=New Monsters
+SUBSECTION=ML
+DESCRIPTION=Minotaur Captain
+
+
+on=@create
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-3000 -5000} 
+	STR={150 300}
+	MAXHITS=300
+	INT={100 200} 
+	DEX={100 200} 
+	PARRYING={60.0 95.0}
+	MAGICRESISTANCE={50.0 70.0}
+	MAGERY={60.0 75.0}
+	TACTICS={60.0 90.0}
+	WRESTLING={60.0 90.0}
+        EVENTS=+e_poison_immune_vip  
+
+ON=@NpcRestock
+	ITEM=i_gold,{10000 15000}
+
+[chardef c_reaper_redux_vip]
+ID=c_reaper_redux  
+name=Reaper Redux Vip
+ICON=020fa 
+DAM=10,15 
+ARMOR=40 
+RESOURCES=3 i_log,10 i_kindling 
+CAN=MT_WALK|MT_RUN 
+RESLEVEL=5
+RESDISPDNHUE=33
+RESDISPDNID=c_reaper
+FOODTYPE=55 i_kindling  
+DESIRES=c_reaper 
+AVERSIONS=e_carnivores3 
+CATEGORY=New Monsters
+SUBSECTION=ML
+DESCRIPTION=Reaper Redux
+
+on=@create
+	NPC=brain_monster
+	FAME={100 3000} 
+	KARMA={-3000 -5000} 
+	STR={150 300}
+	MAXHITS=300
+	INT={100 200} 
+	DEX={100 200} 
+	PARRYING={60.0 95.0}
+	MAGICRESISTANCE={50.0 70.0}
+	MAGERY={60.0 75.0}
+	TACTICS={60.0 90.0}
+	WRESTLING={60.0 90.0}
+        COLOR=007b1
+        EVENTS=+e_poison_immune_vip  
+
+ON=@NpcRestock
+	ITEM=i_gold,{10000 15000}
+
+[CHARDEF c_dragon_vip]
+ID=03b
+NAME=Dragon Vip
+SOUND=snd_MONSTER_DRAGON1
+ICON=i_pet_DRAGON
+ANIM=03f9c7f
+CAN=MT_WALK|MT_FIRE_IMMUNE
+DAM=9,29
+ARMOR=30
+RESOURCES=99 i_ribs_raw, 8 i_reag_dragon_blood, 20 i_hide
+FOODTYPE=80 t_meat_raw,t_gem
+//SHELTER=r_caves,r_dungeon
+DESIRES=i_gold
+AVERSIONS=r_water,r_civilization
+CATEGORY=Monsters
+SUBSECTION=Dragons and Drakes
+DESCRIPTION=Dragon (Red)
+
+ON=@Create
+	NPC=brain_dragon
+	COLOR=00baa
+	STR={795 825}
+	DEX={85 105}
+	INT={435 475}
+	PARRYING={55.0 95.0}
+	MAGICRESISTANCE={99.0 100.0}
+	TACTICS={98.0 100.0}
+	WRESTLING={90.0 93.0}
+	TAMING=120.0
+	FAME={3000 9000}
+	KARMA={-5000 -5999}
+        EVENTS=+e_poison_immune_vip  
+
+
+ON=@NPCRestock
+	ITEM=i_gold,{10000 15000}
+
+/////////////////////////////////////////////////PRISMA VIP////////////////////////////////////////////
+
+[chardef c_prisma_vip] 
+ID=999
+name=Multi Colored Prisma Vip
+SOUND=snd_monster_daemon1
+ICON=i_pet_hordedaemon
+DAM=1,40
+ARMOR=20
+RESOURCES=1 i_vip_egg, 50000 i_gold, 2 i_ovo_mantle, 50000 i_gold, 2 i_ovo_mantle, 1000 i_coin_silver
+CAN=MT_WALK|MT_RUN|MT_USEHANDS|MT_EQUIP
+FOODTYPE=1 t_meat_raw 
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman 
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+CATEGORY=New Monsters
+SUBSECTION=LBR
+DESCRIPTION=Multi Colored Horde Daemon
+
+ON=@Create 
+STR={2000 2500}
+DEX={400 600}
+INT={500 600}
+EVENTS=+e_poison_immune_vip 
+PARRYING={100.0 200.0}
+MAGERY={100.0 200.0}
+MAGICRESISTANCE={100.0 200.0}
+TACTICS={100.0 200.0}
+WRESTLING={100.0 200.0}
+FAME={9000 10000}
+KARMA={-8000 -9999}
+NPC=brain_monster
+
+/////////////////////////////////////////////TINTA VIP//////////////////////////////////////////////////
+
+[ITEMDEF i_tinta_vip]
+ID=0fab
+TYPE=t_script
+NAME=Tinta Vip Special
+WEIGHT=10
+SKILLMAKE=TAILORING 100.0, t_sewing_kit
+
+CATEGORY=Novos itens vip
+SUBSECTION=Tinta Vip
+DESCRIPTION=Tinta Vip
+
+ON=@CREATE
+TAG.CARGA=5
+COLOR=00ba4
+
+ON=@CLICK
+MESSAGE [<TAG.CARGA>] Cargas]
+
+
+ON=@DCLICK
+TARGET
+MESSAGE [<TAG.CARGA>] Cargas]
+RETURN 1
+
+ON=@TARGON_CHAR
+IF (<TAG.CARGA>=05)
+	SRC.FINDLAYER(layer_hair).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_beard).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_wrist).COLOR=<COLOR>
+	TAG.CARGA=04
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=04)
+	SRC.FINDLAYER(layer_hair).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_beard).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_wrist).COLOR=<COLOR>
+	TAG.CARGA=03
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=03)
+	SRC.FINDLAYER(layer_hair).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_beard).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_wrist).COLOR=<COLOR>
+	TAG.CARGA=02
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=02)
+	SRC.FINDLAYER(layer_hair).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_beard).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_wrist).COLOR=<COLOR>
+	TAG.CARGA=01
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=01)
+	SRC.FINDLAYER(layer_hair).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_beard).COLOR=<COLOR>
+	SRC.FINDLAYER(layer_wrist).COLOR=<COLOR>
+	REMOVE
+	RETURN 1
+ENDIF
+
+ON=@TARGON_ITEM
+
+IF ! (<SRC.TARG.CONT>==<SRC.FINDLAYER(21).UID>)
+ SRC.SYSMESSAGE <SRC.TARG.NAME> tem que estar na bag.
+ RETURN 1
+ENDIF
+
+IF (<TAG.CARGA>=05)
+	IF (<SRC.TARG.BASEID>=i_br_RUNEBOOK) || (<SRC.TARG.BASEID>=i_mask_polar_bear) || (<SRC.TARG.BASEID>=i_mask_Brown_bear) || (<SRC.TARG.BASEID>=i_mask_black_bear) || (<SRC.TARG.BASEID>=i_vip_dragon) || (<SRC.TARG.BASEID>=i_champion_robe) || (<SRC.TARG.BASEID>=i_mask_polar_bear_magic) || (<SRC.TARG.BASEID>=i_mask_black_bear_magic) || (<SRC.TARG.BASEID>=i_mask_brown_bear_magic) || (<SRC.TARG.BASEID>=i_mana_mask) || (<SRC.TARG.BASEID>=i_mana_mask_bear) || (<SRC.TARG.BASEID>=i_mantle_dragon)
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=04
+	RETURN 1
+	ENDIF
+	IF (<SRC.TARG.DYE>=00)
+		SRC.SYSMESSAGE=Esse item nao pode ser pintado.
+		RETURN 1
+	ENDIF
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=04
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=04)
+	IF (<SRC.TARG.BASEID>=i_br_RUNEBOOK) || (<SRC.TARG.BASEID>=i_mask_polar_bear) || (<SRC.TARG.BASEID>=i_mask_Brown_bear) || (<SRC.TARG.BASEID>=i_mask_black_bear) || (<SRC.TARG.BASEID>=i_vip_dragon) || (<SRC.TARG.BASEID>=i_champion_robe) || (<SRC.TARG.BASEID>=i_mask_polar_bear_magic) || (<SRC.TARG.BASEID>=i_mask_black_bear_magic) || (<SRC.TARG.BASEID>=i_mask_brown_bear_magic) || (<SRC.TARG.BASEID>=i_mana_mask) || (<SRC.TARG.BASEID>=i_mana_mask_bear) || (<SRC.TARG.BASEID>=i_mantle_dragon)
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=03
+	RETURN 1
+	ENDIF
+
+	IF (<SRC.TARG.DYE>=00)
+		SRC.SYSMESSAGE=Esse item nao pode ser pintado.
+		RETURN 1
+	ENDIF
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=03
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=03)
+	IF (<SRC.TARG.BASEID>=i_br_RUNEBOOK) || (<SRC.TARG.BASEID>=i_mask_polar_bear) || (<SRC.TARG.BASEID>=i_mask_Brown_bear) || (<SRC.TARG.BASEID>=i_mask_black_bear) || (<SRC.TARG.BASEID>=i_vip_dragon) || (<SRC.TARG.BASEID>=i_champion_robe) || (<SRC.TARG.BASEID>=i_mask_polar_bear_magic) || (<SRC.TARG.BASEID>=i_mask_black_bear_magic) || (<SRC.TARG.BASEID>=i_mask_brown_bear_magic) || (<SRC.TARG.BASEID>=i_mana_mask) || (<SRC.TARG.BASEID>=i_mana_mask_bear) || (<SRC.TARG.BASEID>=i_mantle_dragon)
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=02
+	RETURN 1
+	ENDIF
+
+	IF (<SRC.TARG.DYE>=00)
+		SRC.SYSMESSAGE=Esse item nao pode ser pintado.
+		RETURN 1
+	ENDIF
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=02
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=02)
+	IF (<SRC.TARG.BASEID>=i_br_RUNEBOOK) || (<SRC.TARG.BASEID>=i_mask_polar_bear) || (<SRC.TARG.BASEID>=i_mask_Brown_bear) || (<SRC.TARG.BASEID>=i_mask_black_bear) || (<SRC.TARG.BASEID>=i_vip_dragon) || (<SRC.TARG.BASEID>=i_champion_robe) || (<SRC.TARG.BASEID>=i_mask_polar_bear_magic) || (<SRC.TARG.BASEID>=i_mask_black_bear_magic) || (<SRC.TARG.BASEID>=i_mask_brown_bear_magic) || (<SRC.TARG.BASEID>=i_mana_mask) || (<SRC.TARG.BASEID>=i_mana_mask_bear) || (<SRC.TARG.BASEID>=i_mantle_dragon)
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=01
+	RETURN 1
+	ENDIF
+
+	IF (<SRC.TARG.DYE>)=00
+		SRC.SYSMESSAGE=Esse item nao pode ser pintado.
+		RETURN 1
+	ENDIF
+	SRC.TARG.COLOR=<COLOR>
+	TAG.CARGA=01
+	RETURN 1
+ENDIF
+IF (<TAG.CARGA>=01)
+	IF (<SRC.TARG.BASEID>=i_br_RUNEBOOK) || (<SRC.TARG.BASEID>=i_mask_polar_bear) || (<SRC.TARG.BASEID>=i_mask_Brown_bear) || (<SRC.TARG.BASEID>=i_mask_black_bear) || (<SRC.TARG.BASEID>=i_vip_dragon) || (<SRC.TARG.BASEID>=i_champion_robe) || (<SRC.TARG.BASEID>=i_mask_polar_bear_magic) || (<SRC.TARG.BASEID>=i_mask_black_bear_magic) || (<SRC.TARG.BASEID>=i_mask_brown_bear_magic) || (<SRC.TARG.BASEID>=i_mana_mask) || (<SRC.TARG.BASEID>=i_mana_mask_bear) || (<SRC.TARG.BASEID>=i_mantle_dragon)
+	SRC.TARG.COLOR=<COLOR>
+	REMOVE
+	RETURN 1
+	ENDIF
+
+	IF (<SRC.TARG.DYE>=00)
+		SRC.SYSMESSAGE=Esse item nao pode ser pintado.
+		RETURN 1
+	ENDIF
+	SRC.TARG.COLOR=<COLOR>
+	REMOVE
+	RETURN 1
+ENDIF
+
+[ITEMDEF i_vip_egg]
+ID=i_fruit_coconut
+NAME=Prisma Vip Color
+TYPE=t_script
+TDATA1=i_ribs_cooked
+VALUE=1
+WEIGHT=5
+CATEGORY=Novos Itens Diversos
+SUBSECTION=Prisma Egg Color
+DESCRIPTION=Vip eff
+
+
+ON=@CREATE
+COLOR=00ba4
+
+
+ON=@DCLICK
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @009fb O <name> tem q estar na sua bag.
+return 1
+endif
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @009fb Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+SRC.SYSMESSAGE @009fb Clique em um Dye Tub para despejar a tinta especial do <name>
+TARGET
+RETURN 1
+
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.DISPID>=i_dye_tub
+SRC.NEWITEM=i_tinta_vip
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @009fb Voce quebrou o ovo com Sucesso!!! A tinta foi despejada.
+SRC.CONSUME 1 i_vip_egg
+SRC.TARG.REMOVE
+RETURN 1
+ELSE
+SRC.SYSMESSAGE @009fb Isto nao eh um Dye Tub
+return 1
+ENDIF
+
+[EOF]

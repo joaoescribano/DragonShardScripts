@@ -1,0 +1,307 @@
+[FUNCTION BUCETA]
+//IF (<ACTION> == skill_magery)
+	//SAY TO NO MAGERY HAHAHAHA!
+	ACT=<TAG.ACT>
+	TAG.ACT=
+//ENDIF
+
+[FUNCTION TERECA]
+IF (<ACTION> == skill_magery)
+	TAG.ACT=<ACT.UID>
+ENDIF
+
+[ITEMDEF i_memory_healing_healer]
+ID=i_memory
+TYPE=t_eq_script
+LAYER=30 /// JOAO VIADO PQ N PODE O LAYER ORIGINAL?
+NAME=Healer timer
+
+ON=@CREATE
+	ATTR=08
+
+ON=@EQUIP
+	TIMER=2
+
+ON=@TIMER
+	REMOVE
+	RETURN 1
+
+[ITEMDEF i_memory_healing_patient]
+ID=i_memory 
+TYPE=t_eq_script 
+LAYER=30
+NAME=Healing Patient Timer 
+
+ON=@CREATE
+	ATTR=08 
+	MORE1=10
+
+ON=@TIMER
+	IF (<CONT.flags>&statf_freeze)
+		CONT.SYSMESSAGE @95,,1 Voce esta paralizado para utilizar bandagem...
+		REMOVE
+		RETURN 1
+	ENDIF
+
+	IF (<CONT.flags>&statf_poisoned)
+		CONT.SYSMESSAGE @95,,1 Voce esta envenenado para utilizar bandagem...
+		REMOVE
+		RETURN 1
+	ENDIF
+
+	IF (<CONT.HITS> = 0)
+		CONT.SYSMESSAGE 95,,1 Voce nao obteve sucesso em usar a bandagem e esta morto!
+		REMOVE
+		rETURN 1
+	ENDIF
+
+	IF <CONT.MAXHITS> <= <CONT.HITS>
+		CONT.SYSMESSAGE 95,,1 <Cont.targ.name> ja possue life cheios!
+		REMOVE
+		rETURN 1
+	ELSEIF (<CONT.HITS> + <MORE>) >= <CONT.MAXHITS>
+		MORE= (<CONT.MAXHITS> +- <CONT.HITS>)
+		CONT.HITS = <CONT.MAXHITS>
+	    CONT.EFFECT 3,i_fx_HEAL_EFFECT,6,15,1
+		CONT.SYSMESSAGE @95,,1 Voce curou <MORE> lifes em usar a bandagem!
+	ELSE
+		CONT.HITS += <MORE>
+	cont.EFFECT 3,i_fx_HEAL_EFFECT,6,15,1
+		CONT.SYSMESSAGE @95,,1 Voce curou <MORE> lifes em usar a bandagem!
+	ENDIF
+
+	IF (<CONT.HEALING> < 100.0)
+		DORAND 3
+			CONT.HEALING=(<CONT.HEALING>+0.1)
+			Return 0
+			Return 0
+		ENDDO
+		REMOVE
+		Return 1
+	ENDIF
+	REMOVE
+	RETURN 1
+
+ON=@UNEQUIP
+	SRC.CONSUME 1 i_bandage
+	SERV.NEWITEM i_bandage_bloody
+	NEW.BOUNCE
+
+[TYPEDEF T_BANDAGE] /// BANDAGEM NOVA
+ON=@DCLICK
+IF (!<SRC.RESTEST i_bandage>)
+	SRC.SYSMESSAGE 95,,1 As bandagens devem estar dentro de sua bag para utiliza-las!
+	Return 1
+ENDIF
+
+IF (<SRC.RESTEST i_memory_healing_patient>)
+	SRC.SYSMESSAGE @95,,1 Voce deve aguardar para utilizar novamente!
+	Return 1
+ELSE
+	SRC.SYSMESSAGE @95,,1 Em quem voce deseja aplicar a bandagem?
+	TARGET=
+	Return 1
+ENDIF
+
+ON=@TARGON_ITEM
+IF ((<SRC.TARG.TYPE>==t_water)||(<SRC.TARG.TYPE>==t_water_wash)
+	Return 0
+Else
+	SRC.SYSMESSAGE @95,,1 Bandagem nao pode ser aplicada em items!
+	Return 1
+ENDIF
+
+ON=@TARGON_CHAR
+if !( <SRC.TARG.CanSeeLos> )
+	SRC.ACTION=-1
+	SRC.sysmessage @95,,1 Voce nao tem linha de visao com <src.targ.name>.
+	return 1
+ELSEIF (<SRC.TARG.BODY>==c_ghost_man)
+	SRC.HEALDEATH
+	Return 1
+ELSEIF (<SRC.TARG.BODY>==c_ghost_woman)
+	SRC.HEALDEATH
+	Return 1
+ELSEIF (<SRC.TARG.hits> >= <src.targ.str>)
+	SRC.SYSMESSAGE @95,,1 <SRC.TARG.NAME> ja possue seus lifes cheios!
+	Return 1
+ELSEIF (<SRC.TARG.DISTANCE> > 3)
+	SRC.SYSMESSAGE @95,,1 Voce esta muito longe de <SRC.TARG.NAME> para cura-lo!
+	Return 1
+ELSEIF (<SRC.TARG.FINDID.i_rune_poison>)
+	SRC.SYSMESSAGE @95,,1 <SRC.TARG.NAME> esta envenenado para utilizar bandagem...
+	RETURN 1
+ELSEIF (<SRC.TARG.NPC> > 0)
+	SRC.FUNCAO_VETERINARY
+	RETURN 1
+ELSEIF (<SRC.HEALING> < 49.9 )
+	SRC.HEALL
+	Return 1
+ELSEIF (<SRC.HEALING> < 69.9 )
+	SRC.HEALM
+	Return 1
+ELSEIF (<SRC.HEALING> < 89.9 )
+	SRC.HEALM2
+	Return 1
+ELSEIF (<SRC.HEALING> <= 99.9 )
+	SRC.HEALG
+	Return 1
+ELSEIF (<SRC.HEALING> >= 100.0 )
+	SRC.HEALGF
+	Return 1
+ENDIF
+
+[FUNCTION HEALL]
+IF (RAND(2)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={1 5} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+[FUNCTION HEALM]
+IF (RAND(5)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={2 8} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+[FUNCTION HEALM2]
+IF (RAND(6)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={2 10} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+[FUNCTION HEALG]
+IF (RAND(10)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={4 10} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+
+[FUNCTION HEALGf]
+IF (RAND(15)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={20 25} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+[ITEMDEF i_delay_ress]
+NAME=Delay Ress
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@EQUIP
+TIMER=2
+
+ON=@UNEQUIP
+if !( <SRC.TARG.CanSeeLos> ) || (<SRC.TARG.DISTANCE> > 2)
+	SRC.SYSMESSAGE Voce precisa estar ao lado do espirito de <SRC.TARG.NAME> para ressucita-lo!
+	SRC.ACTION=-1
+	Return 1
+ELSE
+	SRC.CONSUME=50 i_bandage
+	SRC.TARG.RESURRECT
+	SRC.SYSMESSAGE Voce obteve sucesso em ressucitar <SRC.TARG.NAME>!
+	SRC.SOUND=snd_SPELL_HEAL
+	SRC.TARG.EFFECT 3,i_fx_heal_effect,6,15,1
+ENDIF
+
+ON=@TIMER
+	REMOVE
+	Return 1
+
+[FUNCTION FUNCAO_VETERINARY]
+IF (<SRC.Veterinary> > 99.9)
+	SRC.VETER1000
+	Return 1
+ELSEIF (<SRC.Veterinary> > 69.9)
+	SRC.VETER60
+	Return 1
+ELSEIF (<SRC.Veterinary> < 50.0)
+	SRC.VETER50
+	Return 1
+ENDIF
+
+[FUNCTION VETER50]
+IF (RAND(8)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem em <SRC.TARG.NAME>!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={10 15} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+	DORAND 3
+		SRC.Veterinary=(<SRC.Veterinary>+0.1)
+		RETURN 0
+		RETURN 0
+	ENDDO
+ENDIF
+
+[FUNCTION VETER60]
+IF (RAND(6)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem em <SRC.TARG.NAME>!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={10 15} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+	DORAND 3
+		SRC.Veterinary=(<SRC.Veterinary>+0.1)
+		RETURN 0
+		RETURN 0
+	ENDDO
+ENDIF
+
+[FUNCTION VETER1000]
+IF (RAND(15)==1)
+SRC.SYSMESSAGE @33 Voce nao obteve sucesso em usar a bandagem em <SRC.TARG.NAME>!
+ELSE
+SRC.TARG.TERECA
+SRC.TARG.NEWITEM i_memory_healing_patient 
+SRC.TARG.ACT.MORE={20 25} 
+SRC.TARG.ACT.TIMER=3
+SRC.TARG.ACT.CONT=<SRC.TARG.UID>
+SRC.TARG.BUCETA
+ENDIF
+
+[FUNCTION CHECKHITSAGAIN]
+IF (<HITS> > <STR>)
+	HITS=<STR>
+ENDIF
+
+[EOF]

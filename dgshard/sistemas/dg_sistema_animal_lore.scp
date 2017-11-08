@@ -1,0 +1,125 @@
+[DIALOG d_alore]
+10,10
+dialogclose d_alore
+page 0
+gumppic 100 100 2080 0
+gumppic 118 137 2081 0
+gumppic 118 207 2081 0
+gumppic 118 277 2081 0
+gumppic 118 347 2083 0
+gumppic 140 138 2091 0
+gumppic 140 335 2091 0
+button 240 77 2093 2093 2 0 0
+dHTMLGUMP 147 108 210 18 0 0  <SRC.ACT.NAME>
+PAGE 1
+xmfhtmlgump 147 150 160 18 1049593 0 0
+xmfhtmlgump 153 168 160 18 1049578 0 0
+dhtmlgump 280 168 75 18 0 0 <SRC.ACT.HITS>/<SRC.ACT.MAXHITS>
+xmfhtmlgump 153 186 160 18 1049579 0 0
+dhtmlgump 280 186 75 18 0 0 <SRC.ACT.STAM>/<SRC.ACT.MAXSTAM>
+xmfhtmlgump 153 204 160 18 1049580 0 0
+dhtmlgump 280 204 75 18 0 0 <SRC.ACT.MANA>/<SRC.ACT.MAXMANA>
+xmfhtmlgump 153 222 160 18 1028335 0 0
+dhtmlgump 320 222 35 18 0 0 <SRC.ACT.STR>
+xmfhtmlgump 153 240 160 18 3000113 0 0
+dhtmlgump 320 240 35 18 0 0 <SRC.ACT.DEX>
+xmfhtmlgump 153 258 160 18 3000112 0 0
+dhtmlgump 320 258 35 18 0 0 <SRC.ACT.INT>
+gumppic 128 278 2086 
+xmfhtmlgump 147 276 160 18 3001016 0 0
+xmfhtmlgump 153 294 160 18 1049581 0 0
+dhtmlgump 320 294 35 18 0 0 <SRC.ACT.AR>
+gumppic 128 152 2086
+button 340 358 5601 5605 0 2 0
+button 317 358 5603 5607 0 1 0
+PAGE 2
+gumppic 128 152 2086
+xmfhtmlgump 147 150 160 18 3001030 0 0
+xmfhtmlgump 153 168 160 18 1044103 0 0
+dhtmlgump 320 168 35 18 0 0 <SRC.ACT.WRESTLING>
+xmfhtmlgump 153 186 160 18 1044087 0 0
+dhtmlgump 320 186 35 18 0 0 <SRC.ACT.TACTICS>
+xmfhtmlgump 153 204 160 18 1044086 0 0
+dhtmlgump 320 204 35 18 0 0 <SRC.ACT.MAGICRESISTANCE>
+xmfhtmlgump 153 222 160 18 1044061 0 0
+dhtmlgump 320 222 35 18 0 0 <SRC.ACT.ANATOMY>
+xmfhtmlgump 153 240 160 18 1044090 0 0
+dhtmlgump 320 240 35 18 0 0 <SRC.ACT.POISONING>
+gumppic 128 260 2086
+xmfhtmlgump 147 258 160 18 3001032 0 0
+xmfhtmlgump 153 276 160 18 1044085 0 0
+dhtmlgump 320 276 35 18 0 0 <SRC.ACT.MAGERY>
+xmfhtmlgump 153 294 160 18 1044076 0 0
+dhtmlgump 320 294 35 18 0 0 <SRC.ACT.EVALUATINGINTEL>
+xmfhtmlgump 153 312 160 18 1044106 0 0
+dhtmlgump 320 312 35 18 0 0 <SRC.ACT.MEDITATION> 
+button 340 358 5601 5605 0 3 0
+button 317 358 5603 5607 0 1 0
+PAGE 3
+gumppic 128 152 2086
+xmfhtmlgump 147 150 160 18 1049563 0 0
+CALL FOODCHECK <SRC.ACT.FOODTYPE>
+xmfhtmlgump 153 168 160 18 <dLOCAL.CLILOC> 0 0
+gumppic 128 188 2086
+xmfhtmlgump 147 186 160 18 1049569 0 0
+xmfhtmlgump 153 204 160 18 3000340 0 0
+button 340 358 5601 5605 0 1 0
+button 317 358 5603 5607 0 2 0
+
+
+
+[FUNCTION foodcheck]
+IF  (<STREAT <ARGV[0]>>== t_meat_raw)
+LOCAL.CLILOC 1049564
+ELIF ((<STREAT <ARGV[0]>>== t_fruit) || (<STREAT <ARGV[0]>>== t_crops))
+LOCAL.CLILOC 1049565
+ELIF ((<STREAT <ARGV[0]>>== t_grass) || (<STREAT <ARGV[0]>>== t_grain))
+LOCAL.CLILOC 1049566
+ELSE
+LOCAL.CLILOC 3000340
+ENDIF
+
+[FUNCTION osialore]
+if (<src.animallore>>980) || !(<src.obody>=c_man) & !(<src.obody>=c_woman)
+src.dialog d_alore
+endif
+
+[FUNCTION osianatomy]
+if (<src.anatomy>>980) || (<src.obody>=c_man) & (<src.obody>=c_woman)
+src.dialog d_anatomy
+endif
+
+[DIALOG d_anatomy]
+10,10
+dialogclose d_anatomy
+page 0
+gumppic 100 100 2080 0
+gumppic 118 137 2081 0
+gumppic 118 207 2081 0
+gumppic 118 277 2081 0
+gumppic 118 347 2083 0
+gumppic 140 138 2091 0
+gumppic 140 335 2091 0
+button 240 77 2093 2093 2 0 0
+dHTMLGUMP 147 108 210 18 0 0  <SRC.ACT.NAME>
+PAGE 1
+xmfhtmlgump 147 150 160 18 1049593 0 0
+xmfhtmlgump 153 168 160 18 1049578 0 0
+dhtmlgump 280 168 75 18 0 0 <SRC.ACT.HITS>/<SRC.ACT.MAXHITS>
+xmfhtmlgump 153 186 160 18 1049579 0 0
+dhtmlgump 280 186 75 18 0 0 <SRC.ACT.STAM>/<SRC.ACT.MAXSTAM>
+xmfhtmlgump 153 204 160 18 1049580 0 0
+dhtmlgump 280 204 75 18 0 0 <SRC.ACT.MANA>/<SRC.ACT.MAXMANA>
+xmfhtmlgump 153 222 160 18 1028335 0 0
+dhtmlgump 320 222 35 18 0 0 <SRC.ACT.STR>
+xmfhtmlgump 153 240 160 18 3000113 0 0
+dhtmlgump 320 240 35 18 0 0 <SRC.ACT.DEX>
+xmfhtmlgump 153 258 160 18 3000112 0 0
+dhtmlgump 320 258 35 18 0 0 <SRC.ACT.INT>
+gumppic 128 278 2086 
+xmfhtmlgump 147 276 160 18 3001016 0 0
+xmfhtmlgump 153 294 160 18 1049581 0 0
+dhtmlgump 320 294 35 18 0 0 <SRC.ACT.AR>
+gumppic 128 152 2086
+
+[EOF]

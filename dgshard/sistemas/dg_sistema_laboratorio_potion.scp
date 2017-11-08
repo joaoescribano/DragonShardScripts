@@ -1,0 +1,439 @@
+// Laboratorio de Potions V1.2
+
+// Dragon Easy Shard
+// HTTP://dgshard.com
+// By Admin Destiny
+// 14/01/2008 - 20:24
+
+// Fix da versão
+
+// 1.2
+// Adcionei a função que devolve os potes vazios
+// Arrumei as Potions que o sistema usa
+
+// 1.1
+// Editei os textos
+// Editei as cores
+// adcionei mais segurança ao sistema
+
+//////////// Configurações do sistema
+
+[DEFNAME potion_congig]
+pot_gm 0		// player precisa de 100.0 de Alchemy para usar?. (0=Não 1=Sim)
+pot_use_delay 1		// Usar delay entra as transformações? (0=Não 1=Sim)
+pot_delay_time 1	// Segundos dos delays
+pot_amount 2		// Quantas potions para transformar? EX: 2 (Precisa 2 Heal potions Para fazer uma Greater Heal Potion) 
+pot_empty_dar 1		// Depois de transformar a potion, devolver os potes vazios?
+pot_empty_num 1		// numero de Empty Bottle sera devolvido. EX: 1 (Voce usa 2 potions para fazer uma e sobra 1 vazio)
+
+// As proximas configurações servem somente se o sistema estiver com: pot_gm 0
+
+pot_1_2 600		// Skill nescessária para transformar uma Lesser potion em uma Normal potion.
+pot_2_3 800		// Skill nescessária para transformar uma Normal potioin em uma Greater potion.
+pot_3_4 1000		// Skill nescessária para transformar uma Greater potion em uma Deadly/Total potion.
+
+// Configure os ID's das Potion
+
+// Cure Potions
+pot_cure_lesser i_potion_cureless
+pot_cure_normal i_potion_cure
+pot_cure_greater i_potion_curegreat
+pot_cure_total i_potion_curetotal
+
+// Heal Potions
+pot_Heal_lesser i_potion_Healless
+pot_Heal_normal i_potion_Heal
+pot_Heal_greater i_potion_Healgreat
+pot_Heal_total i_potion_HealTotal
+
+// Poison Potions
+pot_Poison_lesser i_potion_Poisonless
+pot_Poison_normal i_potion_Poison
+pot_Poison_greater i_potion_Poisongreat
+pot_Poison_deadly i_potion_PoisonDeadly
+
+// Refresh Potions
+pot_Refresh_normal i_potion_Refresh
+pot_Refresh_greater i_potion_RefreshTotal
+
+// Mana Potions
+pot_Mana_normal i_potion_Mana
+pot_Mana_greater i_potion_ManaTotal
+
+// Frases
+
+pot_txt_01 Selecione a potion para transformar. Voce deve ter
+pot_txt_02 potions em sua Backpack.
+pot_txt_03 Voce nao possue skill suficiente. (Alchemy 100.0)
+pot_txt_04 Somente Potions.
+pot_txt_05 Target Cancelado.
+pot_txt_06 Voce nao possue skill suficiente. (Alchemy 
+pot_txt_07 Voce nao possue potions suficiente em sua backpack.
+
+// Frases das Tranformações de Potions
+
+pot_txt_08 Voce transformou Lesser Cure potions em 1 Cure Potion
+pot_txt_09 Voce transformou Cure potions em 1 Greater Cure Potion
+pot_txt_10 Voce transformou Greater Cure potions em 1 Total Cure Potion
+
+pot_txt_11 Voce transformou Lesser Heal potions em 1 Heal Potion
+pot_txt_12 Voce transformou Heal potions em 1 Greater Heal Potion
+pot_txt_13 Voce transformou Greater Heal potions em 1 Total Heal Potion
+
+pot_txt_14 Voce transformou Lesser Poison potions em 1 Poison Potion
+pot_txt_15 Voce transformou Poison potions em 1 Greater Poison Potion
+pot_txt_16 Voce transformou Greater Poison potions em 1 Deadly Poison Potion
+
+pot_txt_17 Voce transformou Refresh potions em 1 Total Refresh Potion
+
+pot_txt_18 Voce transformou Mana potions em 1 Total Mana Potion
+
+pot_txt_19 Somente Potions.
+pot_txt_20 Voce deve esperar
+pot_txt_21 segundos.
+pot_txt_22 Esta potion nao pode ser transformada.
+
+// Item para transformar
+
+[ITEMDEF 04b94]
+defname=i_lab
+type=t_normal
+name=Lab
+FLIP=0
+
+[ITEMDEF i_lab_potion]
+ID=6237
+TYPE=t_normal
+NAME=Laboratorio de Potions
+VALUE=10000
+
+ON=@CREATE
+COLOR=07a1
+ATTR=00004
+
+ON=@DCLICK
+if (<src.restest i_pot_transform_delay>)
+ src.sysmessage @07a1 <def.pot_txt_20> <eval <def.pot_delay_time>> <def.pot_txt_21>
+ return 1
+endif
+
+IF (<def.pot_gm>==1)
+ IF (<src.alchemy>==1000)
+  target @07a1 <def.pot_txt_01> <eval <def.pot_amount>> <def.pot_txt_02>
+ ELSE
+  src.sysmessage @07a1 <def.pot_txt_03>
+  return 1
+ ENDIF
+ELSE
+ TARGET @07a1 <def.pot_txt_01> <eval <def.pot_amount>> <def.pot_txt_02>
+ENDIF
+RETURN 1
+
+ON=@TARGON_CHAR
+src.sysmessage @07a1 <def.pot_txt_04>
+return 1
+
+ON=@TARGON_GROUND
+src.sysmessage @07a1 <def.pot_txt_04>
+return 1
+
+ON=@TARGON_CANCEL
+src.sysmessage @07a1 <def.pot_txt_05>
+return 1
+
+ON=@TARGON_ITEM
+if !(<src.targ.type>==t_potion)
+ src.sysmessage @07a1 <def.pot_txt_19>
+ return 1
+endif
+
+var.created 0
+
+if (<src.targ.defname>==<def.pot_cure_total>)
+ src.sysmessage @07a1 <def.pot_txt_22>
+ return 1
+endif
+
+if (<src.targ.defname>==<def.pot_heal_total>)
+ src.sysmessage @07a1 <def.pot_txt_22>
+ return 1
+endif
+
+if (<src.targ.defname>==<def.pot_Poison_deadly>)
+ src.sysmessage @07a1 <def.pot_txt_22>
+ return 1
+endif
+
+if (<src.targ.defname>==<def.pot_refresh_greater>)
+ src.sysmessage @07a1 <def.pot_txt_22>
+ return 1
+endif
+
+if (<src.targ.defname>==<def.pot_mana_greater>)
+ src.sysmessage @07a1 <def.pot_txt_22>
+ return 1
+endif
+
+// Transformar Lesser Cure Potions
+if (<src.targ.defname>==<def.pot_cure_lesser>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_1_2>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_1_2>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_cure_lesser>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_cure_lesser>
+ src.newitem <def.pot_cure_normal>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_08>
+endif
+
+// Transformar Cure Potions
+if (<src.targ.defname>==<def.pot_cure_normal>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_2_3>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_2_3>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_cure_normal>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_cure_normal>
+ src.newitem <def.pot_cure_greater>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_09>
+endif
+
+// Transformar Greater Cure Potions
+if (<src.targ.defname>==<def.pot_cure_greater>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_3_4>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_3_4>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_cure_greater>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_cure_greater>
+ src.newitem <def.pot_cure_total>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_10>
+endif
+
+// Transformar Lesser heal Potions
+if (<src.targ.defname>==<def.pot_heal_lesser>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_1_2>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_1_2>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_heal_lesser>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_heal_lesser>
+ src.newitem <def.pot_heal_normal>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_11>
+endif
+
+// Transformar heal Potions
+if (<src.targ.defname>==<def.pot_heal_normal>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_2_3>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_2_3>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_heal_normal>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_heal_normal>
+ src.newitem <def.pot_heal_greater>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_12>
+endif
+
+// Transformar Greater heal Potions
+if (<src.targ.defname>==<def.pot_heal_greater>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_3_4>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_3_4>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_heal_greater>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_heal_greater>
+ src.newitem <def.pot_heal_total>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_13>
+endif
+
+// Transformar Lesser poison Potions
+if (<src.targ.defname>==<def.pot_poison_lesser>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_1_2>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_1_2>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_poison_lesser>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_poison_lesser>
+ src.newitem <def.pot_poison_normal>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_14>
+endif
+
+// Transformar poison Potions
+if (<src.targ.defname>==<def.pot_poison_normal>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_2_3>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_2_3>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_poison_normal>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_poison_normal>
+ src.newitem <def.pot_poison_greater>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_15>
+endif
+
+// Transformar Greater poison Potions
+if (<src.targ.defname>==<def.pot_poison_greater>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_3_4>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_3_4>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_poison_greater>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_poison_greater>
+ src.newitem <def.pot_poison_deadly>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_16>
+endif
+
+// Transformar refresh Potions
+if (<src.targ.defname>==<def.pot_refresh_normal>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_3_4>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_3_4>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_refresh_normal>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_refresh_normal>
+ src.newitem <def.pot_refresh_greater>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_17>
+endif
+
+// Transformar mana Potions
+if (<src.targ.defname>==<def.pot_mana_normal>)
+ if !(0<def.gm>)
+  if (<src.alchemy> < <def.pot_3_4>)
+   src.sysmessage @07a1 <def.pot_txt_06> <fval <def.pot_3_4>>)
+   return 1
+  endif
+ endif
+ if !(<src.restest <def.pot_amount> <def.pot_mana_normal>>)
+  src.sysmessage @07a1 <def.pot_txt_07>
+  return 1
+ endif
+ src.consume <def.pot_amount> <def.pot_mana_normal>
+ src.newitem <def.pot_mana_greater>
+ src.act.bounce
+ var.created 1
+ src.sysmessage @07a1 <def.pot_txt_18>
+endif
+
+// Verifica se usa delay
+
+if (<var.created>==1)
+ if (<def.pot_empty_dar>==1)
+  src.newitem 0f0e
+  new.amount <def.pot_empty_num>
+  new.cont <src.uid>
+ endif
+
+ if (<def.pot_use_delay>==1)
+  src.newitem i_pot_transform_delay
+  new.timer <def.pot_delay_time>
+  src.act.equip
+ endif
+
+endif
+
+RETURN 1
+
+[ITEMDEF i_pot_transform_delay]
+ID=i_memory
+TYPE=t_eq_script
+NAME=Delay de transformacao
+
+On=@TIMER
+remove
+return 1
+
+// bag de potions
+
+[template tm_bag_potions]
+DEFNAME=bag_potions
+CONTAINER=i_bag
+name=Potions
+color=00
+
+ITEM=i_potion_cureless, 100
+ITEM=i_potion_cure, 100
+ITEM=i_potion_curegreat, 100
+ITEM=i_potion_curetotal, 100
+ITEM=i_potion_healless, 100
+ITEM=i_potion_heal, 100
+ITEM=i_potion_healgreat, 100
+ITEM=i_potion_healtotal, 100
+ITEM=i_potion_Poisonless, 100
+ITEM=i_potion_Poison, 100
+ITEM=i_potion_Poisongreat, 100
+ITEM=i_potion_Poisondeadly, 100
+ITEM=i_potion_Refresh, 100
+ITEM=i_potion_RefreshTotal, 100
+ITEM=i_potion_mana, 100
+ITEM=i_potion_manatotal, 100
+
+[EOF]

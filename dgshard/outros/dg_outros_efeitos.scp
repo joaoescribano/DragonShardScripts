@@ -1,0 +1,617 @@
+[FUNCTION ef_facas]
+SERV.NEWITEM=i_fx_blade_field
+NEW.COLOR=01
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+
+
+[FUNCTION ef_divine]
+
+SERV.NEWITEM=01ed9
+NEW.COLOR=00ac4
+NEW.TYPE t_normal
+NEW.TIMER=4
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+
+
+SERV.NEWITEM=01ef4
+NEW.COLOR=00ac4
+NEW.TYPE t_normal
+NEW.TIMER=4
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE E
+
+SRC.NEWITEM=i_fx_sparkle
+SRC.ACT.COLOR=00ac4
+SRC.ACT.TYPE t_normal
+SRC.ACT.TIMER=3
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_move_never|attr_decay
+
+
+[FUNCTION ef_lava]
+
+SRC.NEWITEM=i_fire_column
+SRC.ACT.COLOR=00823
+SRC.ACT.TYPE t_normal
+SRC.ACT.morex=20
+SRC.ACT.morey=090
+SRC.ACT.morez=4
+SRC.ACT.TIMER=2
+SRC.ACT.P=<SRC.P>
+SRC.ACT.ATTR=attr_move_never|attr_decay
+
+[FUNCTION ef_nakrin]
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_spin_head
+NEW.COLOR=0079c
+NEW.TYPE t_normal
+NEW.TIMER=3
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE 3E
+
+[FUNCTION ef_escuridao]
+SERV.NEWITEM=i_fx_smoke
+NEW.COLOR=01
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+
+[FUNCTION ef_energia_mal]
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE W
+
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE N
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE 3E
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE W
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE E
+
+SERV.NEWITEM=i_fx_vortex_full
+NEW.COLOR=00
+NEW.TYPE t_normal
+NEW.TIMER=2
+NEW.ATTR=attr_move_never|attr_decay
+NEW.P = <P>
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE S
+NEW.MOVE 3E
+
+
+[function ef_ice_winds]
+effect 3,i_fx_sparkle,0,16,0,0b22,5
+sector.allclients sendpacket 0c0 00 D0 D0 W0375a W<src.p.x> W<src.p.y> B<eval(<src.p.z>+2)> W<eval(<src.p.x>+4)> W<eval(<src.p.y>)> B<eval(<src.p.z>+10+{1 15})> B0 B16 00 00 00 B0 D07a1 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W0375a W<src.p.x> W<src.p.y> B<eval(<src.p.z>+2)> W<eval(<src.p.x>)> W<eval(<src.p.y>+4)> B<eval(<src.p.z>+10+{1 15})> B0 B16 00 00 00 B0 D07a1 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W0375a W<src.p.x> W<src.p.y> B<eval(<src.p.z>+2)> W<eval(<src.p.x>-2)> W<eval(<src.p.y>)> B<eval(<src.p.z>+10+{1 15})> B0 B16 00 00 00 B0 D07a1 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W0375a W<src.p.x> W<src.p.y> B<eval(<src.p.z>+2)> W<eval(<src.p.x>)> W<eval(<src.p.y>-2)> B<eval(<src.p.z>+10+{1 15})> B0 B16 00 00 00 B0 D07a1 D5
+
+
+[function ef_spirits]
+sector.allclients sendpacket 0c0 00 D0 D0 W036d4 W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<src.p.x>+4)> W<eval(<src.p.y>)> B<eval(<src.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D1152 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W036d4 W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<src.p.x>)> W<eval(<src.p.y>+4)> B<eval(<src.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D1152 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W036d4 W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<src.p.x>-2)> W<eval(<src.p.y>)> B<eval(<src.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D1152 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W036d4 W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<src.p.x>)> W<eval(<src.p.y>-2)> B<eval(<src.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D1152 D5
+
+
+[function miz]
+targetfg ef_try <args> // need an item object, suggested: 03709 which is the flamestrike effect.
+
+[function ef_try]
+sector.allclients sendpacket 0c0 00 D0 D0 W<args> W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<targp.x>+2)> W<eval(<targp.y>+6)> B<eval(<targp.z>+10+{1 15})> B0 B13 00 00 00 B0 D05c0 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W<args>  W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<argo.p.x>-2)> W<eval(<argo.p.y>-6)> B<eval(<argo.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D05c0 D5
+sector.allclients sendpacket 0c0 00 D0 D0 W<args>  W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<argo.p.x>+4)> W<eval(<argo.p.y>-3)> B<eval(<argo.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D05c0 D0
+sector.allclients sendpacket 0c0 00 D0 D0 W<args>  W<src.p.x> W<src.p.y> B<eval(<src.p.z>+9)> W<eval(<argo.p.x>-4)> W<eval(<argo.p.y>+3)> B<eval(<argo.p.z>+10+{1 15})> B0 B13 00 00 00 B0 D05c0 D0
+
+
+[FUNCTION fxt] 
+var.target=0
+var.effect=<hval <argv[0]>> 
+var.speed=0
+var.duration=016 
+var.hue=<hval <argv[1]>> 
+var.rendermode=<hval <argv[2]>> 
+var.src=0
+var.explode=0
+local.diff=4 
+for x 0 4 
+  for y 0 4 
+// var.speed += 1 // uncomment for 'X' effect 
+    effecttest <eval <p.x> + <local.x> +- <local.diff>> <eval <p.y> + <local.y> +- <local.diff>> <eval <p.z> +5> 
+    effecttest <eval <p.x> +- <local.x> + <local.diff>> <eval <p.y> + <local.y> +- <local.diff>> <eval <p.z> +5> 
+    effecttest <eval <p.x> + <local.x> +- <local.diff>> <eval <p.y> +- <local.y> + <local.diff>> <eval <p.z> +5> 
+    effecttest <eval <p.x> +- <local.x> + <local.diff>> <eval <p.y> +- <local.y> + <local.diff>> <eval <p.z> +5> 
+  endfor 
+endfor 
+effecttest_clean 
+
+[FUNCTION effecttest] 
+local.t_x=<argn1> 
+local.t_y=<argn2> 
+sector.allclients sendpacket 0c0 00 D<var.src> D<var.target> W<var.effect> W<p.x> W<eval <p.y>> B<qval <argn3>?<argn3>:<p.z>> W<local.t_x> W<local.t_y> B<qval <argn3>?<argn3>:<p.z>> B<var.speed> B<var0.duration> 00 00 00 B<qval <var0.explode>?<var.explode>:0> D<hval <var.hue> - 1> D<var.rendermode> 
+
+[FUNCTION effecttest_clean] 
+var.target 
+var.effect 
+var.speed 
+var.hue 
+var.rendermode 
+var.src 
+var.explode 
+
+//.fxt 036b0,025,2 // <<--- test, 036b0 is the explosion anim
+
+[function flexeffect]
+// type,id,speed,frames,explode,hue,fixdir,render,srcx,srcy,srcz,destx,desty,destz,?distance
+forchars <argv[14]>
+     if !(<brain>)
+         sendpacket 0c0 <argv[0]> d0 d0 w<argv[1]> w<argv[8]> w<argv[9]> <argv[10]> w<argv[11]> w<argv[12]> <argv[13]> <argv[2]> <argv[3]> w0 <argv[6]> <argv[4]> d<argv[5]> d<argv[7]>
+     endif
+endfor
+
+
+[ITEMDEF i_fire_columcarai]
+name=blosh
+ID=i_fx_field_fire
+TYPE=t_fire
+CATEGORY=Animations
+SUBSECTION=Fire Column
+DESCRIPTION=@
+DUPELIST=0370a,0370b,0370c,0370d,0370e,0370f,03710,03711,03712,03713,03714,03715,03716,03717,03718,03719,0371a,0371b,0371c,0371d,0371e,0371f,03720,03721,03722,03723,03724,03725,03726,03727
+
+ON=@CREATE
+COLOR=0
+
+ON=@STEP
+IF (<SRC.NPC> != 0)
+ELSE
+SRC.HITS=(<SRC.HITS>-{20 22})
+
+[ITEMDEF i_fx_smoke_explosiondrake]
+NAME=Drake Explosion Smoke
+ID=i_fx_explode
+TYPE=0l
+CATEGORY=Animations
+SUBSECTION=Smoke
+DESCRIPTION=@
+DUPELIST=03729,0372a,0372b,0372c,0372d,0372e,0372f,03730,03731,03732,03733,03734
+
+ON=@CREATE
+COLOR=0
+MORE=0
+
+ON=@STEP
+SRC.EFFECT 3,i_fx_explode,6,15,1
+SRC.HITS=(<SRC.HITS>-{15 25})
+src.sound snd_SPELL_EXPLOSION
+
+[ITEMDEF i_fx_smoke_frozen]
+NAME=Frozen Smoke
+ID=i_fx_smoke
+TYPE=0l
+CATEGORY=Animations
+SUBSECTION=Smoke
+DESCRIPTION=@
+DUPELIST=03729,0372a,0372b,0372c,0372d,0372e,0372f,03730,03731,03732,03733,03734
+
+ON=@CREATE
+COLOR=00b83
+MORE=0
+
+ON=@STEP
+SRC.SPELLEFFECT s_paralyze 300.0
+SRC.SOUND=snd_SPELL_PARALYZE
+
+[ITEMDEF i_fx_poison_frozen]
+NAME=POISON Frozen Smoke
+ID=i_floor_sandstone
+TYPE=0l
+CATEGORY=Animations
+SUBSECTION=Smoke
+DESCRIPTION=@
+
+ON=@CREATE
+ATTR=00080
+timer=1
+
+ON=@STEP
+SRC.EVENTS=+e_poison_fix
+src.TAG.POISONADO=2
+SRC.SPELLEFFECT s_paralyze 10.0
+SRC.DAMAGE=1
+REMOVE
+
+[FUNCTION EFFECTTO]
+FORCLIENTS 18
+ //IF (<ACCOUNT.RESDISP> >= 4)
+  SENDPACKET 0C0 00 D00 D00 W<ARGV[0]> W<ARGV[1]> W<ARGV[2]> B<ARGV[3]> W<ARGV[4]> W<ARGV[5]> B<ARGV[6]> B<ARGV[7]> B00 W00 B<ARGV[8]> B<ARGV[9]> D<ARGV[10]> D<ARGV[11]>
+ //ENDIF
+ENDFOR
+
+[FUNCTION FX_PROJECT]
+SERV.NEWITEM I_FX_PROJECT_MEMORY
+NEW.LINK <ARGV[0]>
+NEW.TAG0.EFFECT_DAMAGE <ARGV[1]>
+NEW.MOREX <ARGV[2]>
+IF (!<ISEMPTY <ARGV[3]>>)
+ NEW.TAG0.EFFECT <ARGV[3]>
+ENDIF
+IF (!<ISEMPTY <ARGV[4]>>)
+ NEW.TAG0.EFFECT_COLOR <ARGV[4]>
+ENDIF
+NEW.TAG0.SOURCE <UID>
+NEW.P <P>
+NEW.TIMER 0
+
+[ITEMDEF I_FX_PROJECT_MEMORY]
+ID I_GOLD
+TYPE T_EQ_SCRIPT
+NAME FX Project Memory
+ON=@CREATE
+ATTR 090
+MOREX 5
+TAG0.EFFECT I_FX_FIREBALL
+TAG0.EFFECT_COLOR 0
+ON=@EQUIP
+TIMER 0
+ON=@TIMER
+IF (<MOREX>)
+ MOREX --
+ REF1 <TAG0.SOURCE>
+ // FOR 5
+  EFFECTTO <TAG0.EFFECT>,<REF1.P.X>,<REF1.P.Y>,<EVAL <REF1.P.Z>+8>,<EVAL <LINK.P.X>>,<EVAL <LINK.P.Y>>,<EVAL <LINK.P.Z>+8>,1,0,<TAG0.EFFECT_COLOR>,0,0
+ // ENDFOR
+ LINK.DAMAGE <TAG0.EFFECT_DAMAGE>,01,<REF1>
+ IF (!<MOREX>)
+  REMOVE
+ ELSE
+  TIMERD 1
+ ENDIF
+ RETURN 1
+ENDIF
+
+
+// .fx_megatorm 100,i_fx_fireball,0,10
+[FUNCTION FX_MEGATORM] // REPETICOES,ITEM,COR,DISTANCIA // MEGA HA - EXPLOSION BALL NO FINAL
+FOR <ARGV[0]>
+ LOCAL.X <EVAL <P.X>+<R-<ARGV[3]>,<ARGV[3]>> -5>
+ LOCAL.Y <EVAL <P.Y>+<R-<ARGV[3]>,<ARGV[3]>>>
+ LOCAL.T <R1,4>
+ TIMERF <LOCAL.T>,EFFECTTO <ARGV[1]>,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,<ARGV[2]>,0,0
+ SERV.NEWITEM i_fx_explode_ball
+ NEW.COLOR 0
+ NEW.ATTR 010
+ NEW.TIMERF <EVAL <LOCAL.T>+1>,P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>
+ NEW.TIMERF <EVAL <LOCAL.T>+3>,REMOVE
+ENDFOR
+RETURN 1
+
+//.FX_ZTORM 100,i_fx_fireball
+[FUNCTION FX_ZTORM] // REPETICOES,ITEM,COR,DISTANCIA // MEDUSA - PARALYZE NO FINAL
+FOR <ARGV[0]>
+ LOCAL.X <EVAL <P.X>+<R-<ARGV[3]>,<ARGV[3]>> -5>
+ LOCAL.Y <EVAL <P.Y>+<R-<ARGV[3]>,<ARGV[3]>>>
+ LOCAL.T <R1,4>
+ TIMERF <LOCAL.T>,EFFECTTO <ARGV[1]>,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,<ARGV[2]>,0,0
+ SERV.NEWITEM i_fx_smoke_frozen
+ NEW.COLOR 0
+ NEW.ATTR 010
+ NEW.TIMERF <EVAL <LOCAL.T>+1>,P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>
+ NEW.TIMERF <EVAL <LOCAL.T>+3>,REMOVE
+ TIMERF 3, sound snd_SPELL_ENERGY_BOLT
+ENDFOR
+RETURN 1
+
+// .fx_xtorm 100,i_arrow_x,0,10
+[FUNCTION FX_XTORM] // REPETICOES,ITEM,COR,DISTANCIA // ZORANDER - EXPLOSION NO FINAL
+FOR <ARGV[0]>
+ LOCAL.X <EVAL <P.X>+<R-<ARGV[3]>,<ARGV[3]>> -5>
+ LOCAL.Y <EVAL <P.Y>+<R-<ARGV[3]>,<ARGV[3]>>>
+ LOCAL.T <R1,4>
+ TIMERF <LOCAL.T>,EFFECTTO <ARGV[1]>,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,<ARGV[2]>,0,0
+ SERV.NEWITEM i_fx_smoke_explosiondrake
+ NEW.COLOR 0
+ NEW.ATTR 010
+ NEW.TIMERF <EVAL <LOCAL.T>+1>,P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>
+ NEW.TIMERF <EVAL <LOCAL.T>+3>,REMOVE
+ TIMERF 3, sound 773
+ENDFOR
+RETURN 1
+
+//  .fx_storm 250,i_fx_fireball,0,10
+[FUNCTION FX_STORM] // REPETICOES,ITEM,COR,DISTANCIA
+FOR <ARGV[0]>
+ LOCAL.X <EVAL <P.X>+<R-<ARGV[3]>,<ARGV[3]>> -5>
+ LOCAL.Y <EVAL <P.Y>+<R-<ARGV[3]>,<ARGV[3]>>>
+ LOCAL.T <R1,4>
+ TIMERF <LOCAL.T>,EFFECTTO <ARGV[1]>,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,<ARGV[2]>,0,0
+ SERV.NEWITEM i_fire_columcarai
+ NEW.COLOR 0
+ NEW.ATTR 010
+ NEW.TIMERF <EVAL <LOCAL.T>+1>,P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>
+ NEW.TIMERF <EVAL <LOCAL.T>+3>,REMOVE
+ENDFOR
+RETURN 1
+
+//.FX_ROUND 10,i_arrow_x,0
+[FUNCTION FX_ROUND] // DISTANCIA,ITEM,COR
+LOCAL.R <dARGV[0]>
+FOR X -<LOCAL.R> <LOCAL.R>
+ FOR Y -<LOCAL.R> <LOCAL.R>
+  LOCAL.PX <EVAL <P.X>+<LOCAL.X>>
+  LOCAL.PY <EVAL <P.Y>+<LOCAL.Y>>
+  LOCAL.RADIUS <EVAL ((<ABS <LOCAL.X>>*44)@2)+((<ABS <LOCAL.Y>>*44)@2)>
+  LOCAL.RADIUS <EVAL SQRT(<LOCAL.RADIUS>)>
+  IF (<LOCAL.RADIUS> >= <EVAL (<LOCAL.R>)*44>) && (<EVAL <LOCAL.RADIUS>> <= <EVAL ((<LOCAL.R>)*44)+44>)  // || ((<ABS <LOCAL.X>> == <LOCAL.R>) || (<ABS <LOCAL.Y>> == <LOCAL.R>))
+   EFFECTTO <ARGV[1]>,<P.X>,<P.Y>,<EVAL <P.Z>+10>,<LOCAL.PX>,<LOCAL.PY>,<EVAL <P.Z>+10>,1,0,0,<EVAL <ARGV[2]>-1>,0
+  ENDIF
+ ENDFOR
+ENDFOR
+RETURN 1
+
+[ITEMDEF I_STONE_EFFECT]
+ID I_GRAVESTONE_2
+TYPE T_EQ_SCRIPT
+NAME TESTE
+ON=@CREATE
+ATTR 010
+ON=@DCLICK
+TIMER 1
+RETURN 1
+ON=@TIMER
+FOR 10
+ LOCAL.X <EVAL <P.X>+<R-7,7>>
+ LOCAL.Y <EVAL <P.Y>+<R-7,7>>
+ TIMERF <R0,2>,EFFECTTO I_FX_FIREBALL,<LOCAL.X>,<LOCAL.Y>,<EVAL <P.Z>+50>,<EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>,1,0,0,0,0
+ SERV.NEWITEM I_FX_VORTEX
+ NEW.COLOR 077A
+ NEW.ATTR 010
+ NEW.P <EVAL <LOCAL.X>+5>,<EVAL <LOCAL.Y>>,<P.Z>
+ NEW.TIMERF 2,REMOVE
+ENDFOR
+TIMER 1
+RETURN 1
+
+[FUNCTION EX]
+// IF STRMATCH(lvb,<ACCOUNT>)
+ FXT <ARGV[0]>, <ARGV[1]>, <ARGV[2]>,<ARGV[3]>,<ARGV[4]>
+ // SRC.INVIS
+// ENDIF
+
+[FUNCTION EFFECTTEST] 
+local.t_x=<argn1> 
+local.t_y=<argn2> 
+sector.allclients sendpacket 0c0 00 D<var.src> D<var.target> W<var.effect> W<p.x> W<eval <p.y>> B<qval <argn3>?<argn3>:<p.z>> W<local.t_x> W<local.t_y> B<qval <argn3>?<argn3>:<p.z>> B<var.speed> B<var0.duration> 00 00 00 B<qval <var0.explode>?<var.explode>:0> D<hval <var.hue> - 1> D<var.rendermode> 
+
+[FUNCTION FXT]
+var.target=0
+var.effect=<hval <argv[0]>>
+var.speed=<max 1,<argv[3]>>
+var.duration=016
+var.hue=<hval <argv[1]>>
+var.rendermode=<hval <argv[2]>>
+var.src=0
+var.explode=<max 0,<argv[4]>>
+local.diff=4
+for x 0 4
+  for y 0 4
+    //var.speed += 1 // Enable this if you want the 'X' effect
+    effecttest <eval <p.x> + <local.x> +- <local.diff>> <eval <p.y> + <local.y> +- <local.diff>> <eval <p.z> + 10>
+    effecttest <eval <p.x> +- <local.x> + <local.diff>> <eval <p.y> + <local.y> +- <local.diff>> <eval <p.z> + 10>
+    effecttest <eval <p.x> + <local.x> +- <local.diff>> <eval <p.y> +- <local.y> + <local.diff>> <eval <p.z> + 10>
+    effecttest <eval <p.x> +- <local.x> + <local.diff>> <eval <p.y> +- <local.y> + <local.diff>> <eval <p.z> + 10>
+  endfor
+endfor
+var.target
+var.effect
+var.speed
+var.hue
+var.rendermode
+var.src
+var.explode
+
+[FUNCTION FIXTREES]
+FORITEMS 6144
+ IF (<TYPE> == T_FOLIAGE) || (<TYPE> == T_TREE)
+  ATTR |= 010
+ ENDIF
+ENDFOR
+
+// CAPTURE THE FLAGS
+
+[DEFNAME CTF_CONFIG]
+CTF_TEAM_COLOR_1		044
+CTF_TEAM_COLOR_2		026
+CTF_TEAM_COLOR_3		035
+CTF_TEAM_COLOR_4		063
+
+[ITEMDEF I_STONE_CTF_1]
+ID 01173
+NAME CTF Stone Team 1
+TYPE T_STONE_CTF
+TAG0.TEAM 1
+ON=@CREATE
+ATTR 010
+COLOR <DEF0.CTF_TEAM_COLOR_<dTAG0.TEAM>>
+TAG0.FLAG 1
+
+[ITEMDEF I_STONE_CTF_2]
+ID 01173
+NAME CTF Stone Team 2
+TYPE T_STONE_CTF
+TAG0.TEAM 2
+ON=@CREATE
+ATTR 010
+COLOR <DEF0.CTF_TEAM_COLOR_<dTAG0.TEAM>>
+TAG0.FLAG 1
+
+[ITEMDEF I_STONE_CTF_3]
+ID 01173
+NAME CTF Stone Team 3
+TYPE T_STONE_CTF
+TAG0.TEAM 3
+ON=@CREATE
+ATTR 010
+COLOR <DEF0.CTF_TEAM_COLOR_<dTAG0.TEAM>>
+TAG0.FLAG 1
+
+[ITEMDEF I_STONE_CTF_4]
+ID 01173
+NAME CTF Stone Team 4
+TYPE T_STONE_CTF
+TAG0.TEAM 4
+ON=@CREATE
+ATTR 010
+COLOR <DEF0.CTF_TEAM_COLOR_<dTAG0.TEAM>>
+TAG0.FLAG 1
+
+[FUNCTION ABS]
+IF <EVAL <ARGS>> < 0
+ RETURN <EVAL -<ARGS>>
+ENDIF
+RETURN <ARGS>
+
+[FUNCTION ANIMFODA]
+timerf 1,FX_ROUND 4,i_fx_firesnake,0a86
+timerf 2,FX_ROUND 4,i_fx_firesnake,0a86
+timerf 3,FX_ROUND 4,i_fx_firesnake,0a86
+timerf 4,FX_ROUND 4,i_fx_firesnake,0a86
+
+[EOF]

@@ -1,0 +1,7 @@
+[Events e_fix_manto]
+ON=@StatChange
+if (<argn1> == 0)
+    return 1
+endif
+
+[EOF]

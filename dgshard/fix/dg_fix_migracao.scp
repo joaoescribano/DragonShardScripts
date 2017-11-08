@@ -1,0 +1,259 @@
+//Então... a idéia da migração é regular a economia e manter o shard estavel para os mais de 100 players conectados.
+//
+//Como regular a economia?
+//
+//1) Gold Coins
+//Temos mais de 100kk in-game (entre gold, cheques e dinheiro em npc) então precisamos reduzir este valor...
+//
+//Vamos pegar todos o gold do shard, e dividi-lo por 10, assim segue de forma "justa" a economia do shard.
+//
+//2) Silver Coins
+//
+//Foi adicionada uma quantidade de silver coins praticamente insignificante em todos os
+//monstros (dragoes de 4 a 8 coins) para iniciar uma nova "moeda no servidor".
+//
+//Vamos pegar todos os silver coins do servidor e dividir por 100, regulando assim 
+//
+//Gold no server foi balanceado, o shard continha 51.671.485 e agora o shard contem: 5.167.148
+//Cheque no server foi balanceado, o shard continha 1.000.000 e agora o shard contem: 100.000
+//Silver Coin no server foi balanceado, o shard continha 221.780 e agora o shard contem: 2.217
+
+
+[FUNCTION f_balancear_economia]
+local.tot_gold
+local.toto_cheque
+local.tot_sc
+
+FORINSTANCES i_gold
+	local.tot_gold += <amount>
+	amount = <eval <amount>/10>
+ENDFOR
+serv.log Gold no server foi balanceado, o shard continha <eval <local.tot_gold>> e agora o shard contem: <eval <local.tot_gold>/10>
+
+FORINSTANCES i_cashiers_check
+	local.tot_cheque += <more>
+	amount = <eval <amount>/10>
+ENDFOR
+serv.log Cheque no server foi balanceado, o shard continha <eval <local.tot_cheque>> e agora o shard contem: <eval <local.tot_cheque>/10>
+
+FORINSTANCES i_coin_silver
+	local.tot_sc += <amount>
+	amount = <eval <amount>/10>
+ENDFOR
+serv.log Silver Coin no server foi balanceado, o shard continha <eval <local.tot_sc>> e agora o shard contem: <eval <local.tot_sc>/10>
+
+[EVENTS e_contar_monstros]
+
+[EVENTS e_fix_items]
+ON=@ItemEquip
+	if (<act.convertedNewId> != 0)
+		var.newid = <act.convertedNewId>
+		serv.newitem <var.newid>
+		new.equip
+		act.remove
+	endif
+	if (<act.isWeapon> == 1)
+		if (<act.speed> != <serv.itemdef.<act.baseid>.speed>) || (<act.dam.hi> != <serv.itemdef.<act.baseid>.dam.hi>) || (<act.dam.lo> != <serv.itemdef.<act.baseid>.dam.lo>)
+			serv.newitem <act.baseid>
+			new.equip
+			act.remove
+		endif
+	endif
+
+[FUNCTION fix_armors]
+FORCONTTYPE t_armor
+	remove
+ENDFOR
+FORCONTTYPE t_shield
+	remove
+ENDFOR
+
+
+[FUNCTION convertedNewId]
+if (<baseid> == i_bone_machete)
+	return i_iron_bone_machete
+elif (<baseid> == i_axe_exec)
+	return i_iron_axe_exec
+elif (<baseid> == i_axe_battle)
+	return i_iron_axe_battle
+elif (<baseid> == i_axe)
+	return i_iron_axe
+elif (<baseid> == i_axe_double)
+	return i_iron_axe_double
+elif (<baseid> == i_bardiche)
+	return i_iron_bardiche
+elif (<baseid> == i_dagger)
+	return i_iron_dagger
+elif (<baseid> == i_mace)
+	return i_iron_mace
+elif (<baseid> == i_sword_broad)
+	return i_iron_sword_broad
+elif (<baseid> == i_sword_long)
+	return i_iron_sword_long
+elif (<baseid> == i_spear)
+	return i_iron_spear
+elif (<baseid> == i_axe_war)
+	return i_iron_axe_war
+elif (<baseid> == i_scimitar)
+	return i_iron_scimitar
+elif (<baseid> == i_sword_long_b)
+	return i_iron_sword_long_b
+elif (<baseid> == i_sword_viking)
+	return i_iron_sword_viking
+elif (<baseid> == i_axe_battle_large)
+	return i_iron_axe_battle_large
+elif (<baseid> == i_katana)
+	return i_iron_katana
+elif (<baseid> == i_kryss)
+	return i_iron_kryss
+elif (<baseid> == i_spear_short)
+	return i_iron_spear_short
+elif (<baseid> == i_war_fork)
+	return i_iron_war_fork
+elif (<baseid> == i_mace_war)
+	return i_iron_mace_war
+elif (<baseid> == i_hammer_war)
+	return i_iron_hammer_war
+elif (<baseid> == i_maul)
+	return i_iron_maul
+elif (<baseid> == i_hammer_pick)
+	return i_iron_hammer_pick
+elif (<baseid> == i_halberd)
+	return i_iron_halberd
+elif (<baseid> == i_cutlass)
+	return i_iron_cutlass
+elif (<baseid> == i_axe_two_hand)
+	return i_iron_axe_two_hand
+elif (<baseid> == i_scythe)
+	return i_iron_scythe
+elif (<baseid> == i_bone_harvester)
+	return i_iron_bone_harvester
+elif (<baseid> == i_scepter)
+	return i_iron_scepter
+elif (<baseid> == i_staff_bladed)
+	return i_iron_staff_bladed
+elif (<baseid> == i_pike)
+	return i_iron_pike
+elif (<baseid> == i_staff_bladed_double)
+	return i_iron_staff_bladed_double
+elif (<baseid> == i_lance)
+	return i_iron_lance
+elif (<baseid> == i_crescent_blade)
+	return i_iron_crescent_blade
+elif (<baseid> == i_sword_paladin)
+	return i_iron_sword_paladin
+elif (<baseid> == i_no_dachi)
+	return i_iron_no_dachi
+elif (<baseid> == i_wakizashi)
+	return i_iron_wakizashi
+elif (<baseid> == i_tetsubo)
+	return i_iron_tetsubo
+elif (<baseid> == i_lajatang)
+	return i_iron_lajatang
+elif (<baseid> == i_daisho)
+	return i_iron_daisho
+elif (<baseid> == i_tekagi)
+	return i_iron_tekagi
+elif (<baseid> == i_kama)
+	return i_iron_kama
+elif (<baseid> == i_sai)
+	return i_iron_sai
+elif (<baseid> == i_elven_spellblade)
+	return i_iron_elven_spellblade
+elif (<baseid> == i_sword_assassin_spike)
+	return i_iron_sword_assassin_spike
+elif (<baseid> == i_sword_leafblade)
+	return i_iron_sword_leafblade
+elif (<baseid> == i_sword_warcleaver)
+	return i_iron_sword_warcleaver
+elif (<baseid> == i_mace_diamond)
+	return i_iron_mace_diamond
+elif (<baseid> == i_rune_blade)
+	return i_iron_rune_blade
+elif (<baseid> == i_radiant_scimitar)
+	return i_iron_radiant_scimitar
+elif (<baseid> == i_ornate_axe)
+	return i_iron_ornate_axe
+elif (<baseid> == i_elven_machete)
+	return i_iron_elven_machete
+elif (<baseid> == i_chainmail_coif)
+	return i_iron_chainmail_coif
+elif (<baseid> == i_chainmail_leggings)
+	return i_iron_chainmail_leggings
+elif (<baseid> == i_chainmail_tunic)
+	return i_iron_chainmail_tunic
+elif (<baseid> == i_ringmail_leggings)
+	return i_iron_ringmail_leggings
+elif (<baseid> == i_ringmail_sleeves)
+	return i_iron_ringmail_sleeves
+elif (<baseid> == i_ringmail_gloves)
+	return i_iron_ringmail_gloves
+elif (<baseid> == i_ringmail_tunic)
+	return i_iron_ringmail_tunic
+elif (<baseid> == i_platemail_arms)
+	return i_iron_platemail_arms
+elif (<baseid> == i_platemail_leggings)
+	return i_iron_platemail_leggings
+elif (<baseid> == i_platemail_helm)
+	return i_iron_platemail_helm
+elif (<baseid> == i_platemail_gorget)
+	return i_iron_platemail_gorget
+elif (<baseid> == i_platemail_gloves)
+	return i_iron_platemail_gloves
+elif (<baseid> == i_platemail_chest)
+	return i_iron_platemail_chest
+elif (<baseid> == i_armor_female_plate)
+	return i_iron_armor_female_plate
+elif (<baseid> == i_helm_closed)
+	return i_iron_helm_closed
+elif (<baseid> == i_helm_open)
+	return i_iron_helm_open
+elif (<baseid> == i_bascinet)
+	return i_iron_bascinet
+elif (<baseid> == i_helm_nose)
+	return i_iron_helm_nose
+elif (<baseid> == i_helm_kabuto)
+	return i_iron_helm_kabuto
+elif (<baseid> == i_helm_kabuto_decorative)
+	return i_iron_helm_kabuto_decorative
+elif (<baseid> == i_shield_round_bronze)
+	return i_iron_shield_round_bronze
+elif (<baseid> == i_shield_buckler)
+	return i_iron_shield_buckler
+elif (<baseid> == i_shield_kite_metal)
+	return i_iron_shield_kite_metal
+elif (<baseid> == i_shield_heater)
+	return i_iron_shield_heater
+elif (<baseid> == i_shield_kite_wood)
+	return i_iron_shield_kite_wood
+elif (<baseid> == i_shield_round_metal)
+	return i_iron_shield_round_metal
+elif (<baseid> == i_shield_dupre)
+	return i_iron_shield_dupre
+endif
+return 0
+
+[FUNCTION removeChampionOldItems]
+FORINSTANCES i_champion_waraxe
+	if (<eval <cont>> == 0) // Esta no chão
+		serv.newitem i_coin_silver,1500
+		new.p <p>
+		new.update
+	else
+		serv.newitem i_coin_silver,1500,<cont.uid>
+	endif
+	remove
+ENDFOR
+
+FORINSTANCES i_champion_robe
+	if (<eval <cont>> == 0) // Esta no chão
+		serv.newitem i_coin_silver,2000
+		new.p <p>
+		new.update
+	else
+		serv.newitem i_coin_silver,2000,<cont.uid>
+	endif
+	remove
+ENDFOR
+
+[EOF]

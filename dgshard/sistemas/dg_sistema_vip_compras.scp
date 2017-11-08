@@ -1,0 +1,1668 @@
+// Sistema Compras 2.0
+// By Owner Destiny - João Escribano
+// staff_destiny@dgshard.com
+// Dragon Shard
+// http://www.dgshard.com.br
+
+[FUNCTION validar_compra] // Funo para os GM's com plavel acima de 6 (admim e owner) adcionarem tickets de compra
+if (<src.isgm>)
+ SRC.DIALOG d_validar_compra
+ RETURN 1
+ENDIF
+RETURN 1
+
+[DIALOG d_validar_compra]
+0,0
+page 0
+resizepic 160 140 9200 290 83
+tilepic 567 198 3636
+gumppic 175 190 2440
+dtext 190 140 1913 Dragon Shard - Validar Compra
+dtext 175 165 1952 # de tickets que serao dados para o player:
+dtextentry 181 192 156 20 1913 1 3
+button 362 190 247 248 1 0 1
+
+[DIALOG d_validar_compra button] // Funes da Dialog
+ON=1
+IF (<ISNUM <argtxt[1]>>)
+ src.newitem i_ticket_target
+ new.tag0.tickets <eval <argtxt[1]>>
+ SRC.ACT.EQUIP
+ SRC.SYSMESSAGE @07a1 Selecione o player para dar os tickets.
+ELSE
+ SRC.SYSMESSAGE @07a1 Somente Numeros.
+RETURN 1
+ENDIF
+
+[ITEMDEF i_ticket_target] // Item que tive que criar para por o Traget corretamente.
+ID=i_memory
+NAME=Target Ticket Memory
+TYPE=t_eq_script
+
+ON=@CREATE
+attr=attr_newbie
+TIMER=30
+
+On=@TIMER
+REMOVE
+RETURN 1
+
+On=@EQUIP
+TARGET
+
+On=@TARGON_CHAR
+var.uid=<src.targ.uid>
+SRC.SYSMESSAGE @07a1 <var.uid>
+
+if !(0<src.targ.account.tag0.tickets>)
+ SRC.SYSMESSAGE @07a1 O player nao possuia tickets
+ELSE
+ SRC.SYSMESSAGE @07a1 O player possuia <eval <src.targ.account.tag0.tickets>> tickets
+ SRC.SYSMESSAGE @07a1 Agora <eval <src.targ.account.tag0.tickets>+<tag0.tickets>> tickets
+ENDIF
+
+src.targ.account.tag0.tickets += <eval <tag0.tickets>>
+
+SRC.TARG.sysmessage @07a1 Voce recebeu seus <eval <tag0.tickets>> tickets de compras do Dragon Shard!!!
+SRC.TARG.sysmessage @07a1 Va na help room para comprar suas coisas ou conferir seus tickets.
+
+RETURN 1
+
+///////////// Pedra de Compras
+
+[ITEMDEF i_pedra_compras]
+ID=0ed4
+NAME=Pedra
+TYPE=t_normal
+
+On=@CREATE
+NAME @0a7a Pedra de Compras
+COLOR=0a7a
+
+On=@DCLICK
+src.dialog d_compras
+return 1
+
+///////////// Dialog de Compras
+
+[DIALOG d_compras]
+0,0
+page 0
+resizepic 602 298 9200 120 30
+resizepic 602 258 9200 120 30
+resizepic 602 218 9200 120 30
+resizepic 602 178 9200 120 30
+resizepic 602 138 9200 120 30
+resizepic 143 85 9250 477 391
+resizepic 159 100 9200 280 28
+resizepic 449 100 9200 155 28
+checkertrans 156 135 451 329
+gumppic 93 98 10440
+dtext 175 103 2993 Dragon Shard - T2A - Sistema de compras
+dtext 458 104 2993 Você tem <eval <account.tag0.tickets>> Tickets
+dtext 627 144 2993 Dias VIP
+dtext 627 184 2993 Itens VIP
+dtext 627 224 2993 Tintas
+dtext 627 264 2993 Animais
+dtext 627 304 2993 Outros
+button 687 143 4005 4006 0 1 0
+button 687 183 4005 4006 0 2 0
+button 687 223 4005 4006 0 3 0
+button 687 263 4005 4006 0 4 0
+button 687 303 4005 4006 0 5 0
+page 1
+resizepic 170 235 9200 120 120
+resizepic 325 235 9200 120 120
+resizepic 471 235 9200 120 120
+dtext 205 255 1926 15 DIAS
+dtext 190 275 2993 10 Tickets
+dtext 360 255 1926 30 DIAS
+dtext 345 275 2993 15 Tickets
+dtext 506 255 1926 90 DIAS
+dtext 491 275 2993 40 Tickets
+button 197 306 247 248 1 0 1
+button 352 306 247 248 1 0 2
+button 498 306 247 248 1 0 3
+page 2
+resizepic 162 141 9200 120 100
+resizepic 162 251 9200 120 100
+resizepic 162 361 9200 120 100
+resizepic 323 141 9200 120 100
+resizepic 323 251 9200 120 100
+resizepic 323 361 9200 120 100
+resizepic 479 141 9200 120 100
+resizepic 479 251 9200 120 100
+resizepic 479 361 9200 120 100
+dtext 176 203 2993 15
+dtext 164 219 2993 Tickets
+dtext 198 145 1926 Mining
+dtext 176 313 2993 15
+dtext 164 329 2993 Tickets
+dtext 189 255 1926 Poisoning
+dtext 176 423 2993 15
+dtext 164 439 2993 Tickets
+dtext 198 365 1926 Taming
+dtext 337 203 2993 15
+dtext 325 219 2993 Tickets
+dtext 341 145 1926 Bowcrafting
+dtext 337 313 2993 15
+dtext 325 329 2993 Tickets
+dtext 339 254 1926 Blacksmithing
+dtext 337 423 2993 15
+dtext 325 439 2993 Tickets
+dtext 348 365 1926 Carpentry
+dtext 493 203 2993 15
+dtext 481 219 2993 Tickets
+dtext 515 145 1926 Cooking
+dtext 493 313 2993 15
+dtext 481 329 2993 Tickets
+dtext 490 255 1926 Lumberjacking
+dtext 493 423 2993 25
+dtext 481 439 2993 Tickets
+dtext 509 365 1926 Manto VIP
+tilepichue 200 172 3717 1914
+tilepichue 368 179 3921 1914
+tilepichue 517 179 4232 1914
+tilepichue 195 289 4232 1914
+tilepichue 193 398 4232 1914
+tilepichue 360 400 4232 1914
+tilepichue 359 286 4020 1914
+tilepichue 511 286 3907 1914
+tilepichue 514 390 9860 1914
+button 218 215 247 248 1 0 4
+button 218 325 247 248 1 0 5
+button 218 435 247 248 1 0 6
+button 379 215 247 248 1 0 7
+button 379 325 247 248 1 0 8
+button 379 435 247 248 1 0 9
+button 535 215 247 248 1 0 10
+button 535 325 247 248 1 0 11
+button 535 435 247 248 1 0 12
+page 3
+resizepic 162 141 9200 120 100
+resizepic 162 251 9200 120 100
+resizepic 162 361 9200 120 100
+resizepic 323 141 9200 120 100
+resizepic 323 251 9200 120 100
+resizepic 323 361 9200 120 100
+resizepic 479 141 9200 120 100
+resizepic 479 251 9200 120 100
+resizepic 479 361 9200 120 100
+dtext 176 204 2993 10
+dtext 164 220 2993 Tickets
+dtext 176 314 2993 10
+dtext 164 330 2993 Tickets
+dtext 176 423 2993 10
+dtext 164 439 2993 Tickets
+dtext 337 204 2993 10
+dtext 325 220 2993 Tickets
+dtext 337 314 2993 10
+dtext 325 330 2993 Tickets
+dtext 337 423 2993 10
+dtext 325 439 2993 Tickets
+dtext 493 204 2993 10
+dtext 481 220 2993 Tickets
+dtext 493 314 2993 10
+dtext 481 330 2993 Tickets
+dtext 493 423 2993 10
+dtext 481 439 2993 Tickets
+tilepichue 190 163 4011 2996
+tilepichue 354 163 4011 2949
+tilepichue 509 163 4011 2960
+tilepichue 190 273 4011 1948
+tilepichue 354 273 4011 2717
+tilepichue 509 273 4011 2721
+tilepichue 190 383 4011 2716
+tilepichue 354 383 4011 2916
+tilepichue 509 383 4011 1994
+button 218 325 247 248 1 0 13
+button 218 215 247 248 1 0 14
+button 218 435 247 248 1 0 15
+button 379 215 247 248 1 0 16
+button 379 325 247 248 1 0 17
+button 379 435 247 248 1 0 18
+button 535 215 247 248 1 0 19
+button 535 325 247 248 1 0 20
+button 535 435 247 248 1 0 21
+page 4
+resizepic 162 141 9200 120 100
+resizepic 162 251 9200 120 100
+resizepic 162 361 9200 120 100
+resizepic 323 141 9200 120 100
+resizepic 323 251 9200 120 100
+resizepic 323 361 9200 120 100
+resizepic 479 141 9200 120 100
+resizepic 479 251 9200 120 100
+resizepic 479 361 9200 120 100
+tilepic 497 271 11669
+dtext 176 203 2993 15
+dtext 164 219 2993 Tickets
+dtext 175 145 1926 Unicorn
+dtext 176 313 2993 15
+dtext 164 329 2993 Tickets
+dtext 174 255 1926 Skeletal Mount
+dtext 176 423 2993 15
+dtext 164 439 2993 Tickets
+dtext 198 365 1926 Beetle
+dtext 337 203 2993 15
+dtext 325 219 2993 Tickets
+dtext 350 145 1926 Ridgeback
+dtext 337 313 2993 15
+dtext 325 329 2993 Tickets
+dtext 367 254 1926 Kirin
+dtext 337 423 2993 15
+dtext 325 439 2993 Tickets
+dtext 340 365 1926 Armored Steed
+dtext 493 203 2993 15
+dtext 481 219 2993 Tickets
+dtext 495 145 1926 Swamp Dragon
+dtext 493 313 2993 15
+dtext 481 329 2993 Tickets
+dtext 506 257 1926 Reptalon
+dtext 493 423 2993 15
+dtext 481 439 2993 Tickets
+dtext 516 365 1926 Cu Sidhe
+tilepic 193 165 9678
+tilepic 356 159 9749
+tilepic 492 169 9753
+tilepic 183 277 9751
+tilepic 183 387 9743
+tilepic 359 392 11676
+tilepic 341 280 9632
+tilepic 520 388 11670
+button 218 215 247 248 1 0 22
+button 218 325 247 248 1 0 23
+button 218 435 247 248 1 0 24
+button 379 215 247 248 1 0 25
+button 379 325 247 248 1 0 26
+button 379 435 247 248 1 0 27
+button 535 215 247 248 1 0 28
+button 535 325 247 248 1 0 29
+button 535 435 247 248 1 0 30
+page 5
+resizepic 162 141 9200 120 100
+resizepic 162 251 9200 120 100
+resizepic 162 361 9200 120 100
+resizepic 323 141 9200 120 100
+resizepic 323 251 9200 120 100
+resizepic 323 361 9200 120 100
+resizepic 479 141 9200 120 100
+resizepic 479 251 9200 120 100
+resizepic 479 361 9200 120 100
+dtext 176 203 2993 10
+dtext 164 219 2993 Tickets
+dtext 206 145 1926 1k
+dtext 176 313 2993 35
+dtext 164 329 2993 Tickets
+dtext 172 252 1926 Kit Ferramentas
+dtext 176 423 2993 40
+dtext 164 439 2993 Tickets
+dtext 183 365 1926 KIT Cavalos
+dtext 337 203 2993 25
+dtext 325 219 2993 Tickets
+dtext 367 145 1926 2.5k
+dtext 337 313 2993 35
+dtext 325 329 2993 Tickets
+dtext 341 255 1926 Kit de Tintas
+dtext 337 423 2993 40
+dtext 325 439 2993 Tickets
+dtext 344 366 1926 KIT Lhamas
+dtext 493 203 2993 50
+dtext 481 219 2993 Tickets
+dtext 522 145 1926 5k
+dtext 493 313 2993 XX
+dtext 481 329 2993 Tickets
+dtext 493 255 1926 AGUARDE
+dtext 493 423 2993 40
+dtext 481 439 2993 Tickets
+dtext 500 367 1926 KIT Zostrich
+tilepic 191 170 3826
+tilepic 348 171 3826
+tilepic 366 171 3826
+tilepic 505 169 3826
+tilepic 527 167 3826
+tilepic 515 176 3826
+tilepichue 196 284 3702 1944
+tilepichue 357 284 3702 1953
+tilepichue 513 282 5359 1948
+tilepic 192 390 8484
+tilepic 354 386 8438
+tilepic 515 385 8502
+button 218 215 247 248 1 0 31
+button 218 325 247 248 1 0 32
+button 218 435 247 248 1 0 33
+button 379 215 247 248 1 0 34
+button 379 325 247 248 1 0 35
+button 379 435 247 248 1 0 36
+button 535 215 247 248 1 0 37
+button 535 325 247 248 1 0 38
+button 535 435 247 248 1 0 39
+
+[DIALOG d_compras text]
+
+[DIALOG d_compras button]
+ON=1
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+if !(0<restest i_vip>)
+    var.tempo <eval 15*3600*24>
+ELSE
+    var.tempo <EVAL <findid.i_vip.timer>+<eval 15*3600*24>>
+    consume 1 i_vip
+ENDIF
+serv.newitem i_vip
+new.timer <var.tempo>
+new.tag0.uid <uid>
+new.cont <uid>
+new.equip
+tag.vip 1
+sysmessage @0a89 Voce camprou dias VIP`s no Dragon Shard - The Second Age.
+sysmessage @07a1 Use o comando .vip para ver quantos dias voce possue de VIP.
+return 1
+
+ON=2
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+if !(0<restest i_vip>)
+    var.tempo <eval 30*3600*24>
+ELSE
+    var.tempo <EVAL <findid.i_vip.timer>+<eval 30*3600*24>>
+ consume 1 i_vip
+ENDIF
+serv.newitem i_vip
+new.timer <var.tempo>
+new.tag0.uid <uid>
+new.cont <uid>
+new.equip
+tag.vip 1
+sysmessage @0a89 Voce camprou dias VIP`s no Dragon Shard - The Second Age.
+sysmessage @07a1 Use o comando .vip para ver quantos dias voce possue de VIP.
+return 1
+
+ON=3
+if (<testart_tickets 40> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 40
+if (<var.erro>)
+ return 1
+endif
+if !(0<restest i_vip>)
+    var.tempo <eval 90*3600*24>
+ELSE
+    var.tempo <EVAL <findid.i_vip.timer>+<eval 90*3600*24>>
+ consume 1 i_vip
+ENDIF
+serv.newitem i_vip
+new.timer <var.tempo>
+new.tag0.uid <uid>
+new.cont <uid>
+new.equip
+tag.vip 1
+sysmessage @0a89 Voce camprou dias VIP`s no Dragon Shard - The Second Age.
+sysmessage @07a1 Use o comando .vip para ver quantos dias voce possue de VIP.
+return 1
+
+// Página 2 - Itens VIP
+
+on=4
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_vip_pickaxe
+new.attr 04
+new.equip
+
+on=5
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_amu_vip_poison
+new.attr 04
+new.equip
+
+on=6
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_amu_vip_taming
+new.attr 04
+new.equip
+
+on=7
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_Vip_dagger
+new.attr 04
+new.equip
+
+on=8
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_vip_hammer
+new.attr 04
+new.equip
+
+on=9
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_amu_vip_Carpentry
+new.attr 04
+new.equip
+
+on=10
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_amu_vip_cooking
+new.attr 04
+new.equip
+
+on=11
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_vip_hatchet
+new.attr 04
+new.equip
+
+on=12
+if (<testart_tickets 25> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 25
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_vip_dragon
+new.attr 04|attr_nodroptrade
+new.tag0.novo 1
+new.color 077a
+new.equip
+
+// Página 3 - Tintas
+ON=13
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 1948
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=14
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2996
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=15
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2716
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=16
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2949
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=17
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2717
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=18
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2916
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=19
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2960
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=20
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 2721
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+ON=21
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_dye_tub_especial
+new.color 1994
+new.tag0.tipo 99
+new.tag0.cargas 5
+new.cont <uid>
+
+// Página 4 - Animais
+ON=22
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 025ce
+new.type t_animal_vida
+new.tag0.name Unicornio
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_unicorn
+new.attr 04
+new.dispid 025ce
+new.name Unicornio
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=23
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 02617
+new.type t_animal_vida
+new.tag0.name Skeletal Mount
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_skeletal_mount
+new.attr 04
+new.dispid 02617
+new.name Skeletal Mount
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=24
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 0260f
+new.type t_animal_vida
+new.tag0.name Giant Beetle
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_giant_beetle
+new.attr 04
+new.dispid 0260f
+new.name Giant Beetle
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=25
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 02615
+new.type t_animal_vida
+new.tag0.name Ridgeback
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_ridgeback
+new.attr 04
+new.dispid 02615
+new.name Ridgeback
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=26
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 025a0
+new.type t_animal_vida
+new.tag0.name Kirin
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_kirin
+new.attr 04
+new.dispid 025a0
+new.name Kirin
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=27
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 02d9c
+new.type t_animal_vida
+new.tag0.name Armored Steed
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_armor_steed
+new.attr 04
+new.name Armored Steed
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=28
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 02619
+new.type t_animal_vida
+new.tag0.name Swamp Dragon
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_swamp_dragon
+new.attr 04
+new.dispid 02619
+new.name Swamp Dragon
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=29
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_pet_reptalon
+new.type t_animal_vida
+new.tag0.name Reptalon
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_m_reptalon
+new.attr 04
+new.name Reptalon
+new.color 00
+new.cont <uid>
+new.more2 1
+
+ON=15
+if (<testart_tickets 15> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 15
+if (<var.erro>)
+ return 1
+endif
+serv.newitem 02d96
+new.type t_animal_vida
+new.tag0.name Cu Sidhe
+new.tag0.vidas 3
+new.tag0.dono <uid>
+new.tag0.fame 0
+new.tag0.karma 0
+new.tag0.food 100
+new.tag0.id c_cu_sidhe
+new.attr 04
+new.name Cu Sidhe
+new.color 00
+new.cont <uid>
+new.more2 1
+
+// Página 5 - Outros
+ON=31
+if (<testart_tickets 10> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+
+verificar_tickets 10
+if (<var.erro>)
+ return 1
+endif
+
+vip_money 1000
+
+
+ON=32
+if (<testart_tickets 35> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 35
+if (<var.erro>)
+ return 1
+endif
+serv.newitem i_kit_ferramentas
+new.cont <uid>
+
+ON=33
+if (<testart_tickets 40> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 40
+if (<var.erro>)
+ return 1
+endif
+VAR.COR={1948 2996 2716 2949 2717 2916 2960 2721 1994}
+SERV.NEWITEM i_bag
+NEW.COLOR=<var.cor>
+NEW.CONT <src.uid>
+NEW.NAME @<new.color> Kit de cavalos
+var.uid <NEW.UID>
+
+serv.newitem 0211f
+new.tag0.name Cavalo da Agua
+new.tag0.id c_cavalo_agua
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0a37
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 0211f
+new.tag0.name Cavalo da Floresta
+new.tag0.id c_cavalo_florest
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 00a1d
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 0211f
+new.tag0.name Cavalo do Fogo
+new.tag0.id c_cavalo_fogo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 077a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 0211f
+new.tag0.name Cavalo do Gelo
+new.tag0.id c_cavalo_gelo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b22
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 0211f
+new.tag0.name Cavalo do Pacifico
+new.tag0.id c_cavalo_pacifico
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b0a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 0211f
+new.tag0.name Cavalo do Vento
+new.tag0.id c_cavalo_vento
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 06060
+new.cont <var.uid>
+new.more2 1
+
+ON=34
+if (<testart_tickets 25> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 25
+if (<var.erro>)
+ return 1
+endif
+
+vip_money 2500
+
+ON=35
+if (<testart_tickets 35> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 35
+if (<var.erro>)
+ return 1
+endif
+VAR.COR={1948 2996 2716 2949 2717 2916 2960 2721 1994}
+SERV.NEWITEM i_bag
+NEW.COLOR=<var.cor>
+NEW.CONT <src.uid>
+NEW.NAME @<new.color> Kit de tintas
+var.uid <NEW.UID>
+
+//Gelo
+serv.newitem i_dye_tub_especial
+new.color 0b22
+new.tag0.tipo 01
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Obscure
+serv.newitem i_dye_tub_especial
+new.color 082f
+new.tag0.tipo 02
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Black
+serv.newitem i_dye_tub_especial
+new.color 01
+new.tag0.tipo 03
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Fogo
+serv.newitem i_dye_tub_especial
+new.color 00a6b
+new.tag0.tipo 04
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Venom
+serv.newitem i_dye_tub_especial
+new.color 07a5
+new.tag0.tipo 05
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Violet
+serv.newitem i_dye_tub_especial
+new.color 00a4c
+new.tag0.tipo 06
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Blood
+serv.newitem i_dye_tub_especial
+new.color 07b1
+new.tag0.tipo 07
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Pacific
+serv.newitem i_dye_tub_especial
+new.color 0b0a
+new.tag0.tipo 08
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//White
+serv.newitem i_dye_tub_especial
+new.color 0481
+new.tag0.tipo 09
+new.tag0.cargas 2
+new.cont <var.uid>
+
+//Agua
+serv.newitem i_dye_tub_especial
+new.color 0812
+new.tag0.tipo 10
+new.tag0.cargas 2
+new.cont <var.uid>
+
+ON=36
+if (<testart_tickets 40> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 40
+if (<var.erro>)
+ return 1
+endif
+VAR.COR={1948 2996 2716 2949 2717 2916 2960 2721 1994}
+SERV.NEWITEM i_bag
+NEW.COLOR=<var.cor>
+NEW.CONT <src.uid>
+NEW.NAME @<new.color> Kit de Lhamas
+var.uid <NEW.UID>
+
+serv.newitem 020f6
+new.tag0.name Lhama da Agua
+new.tag0.id c_lhama_agua
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0a37
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 020f6
+new.tag0.name Lhama da Floresta
+new.tag0.id c_lhama_florest
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 00a1d
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 020f6
+new.tag0.name Lhama do Fogo
+new.tag0.id c_lhama_fogo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 077a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 020f6
+new.tag0.name Lhama do Gelo
+new.tag0.id c_lhama_gelo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b22
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 020f6
+new.tag0.name Lhama do Pacifico
+new.tag0.id c_lhama_pacifico
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b0a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 020f6
+new.tag0.name Lhama do Vento
+new.tag0.id c_lhama_vento
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 06060
+new.cont <var.uid>
+new.more2 1
+
+ON=37
+if (<testart_tickets 50> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 50
+if (<var.erro>)
+ return 1
+endif
+vip_money 5000
+
+ON=38
+sysmessage @07a1 Paciencia jovem gafanhoto!
+
+ON=39
+if (<testart_tickets 40> == 0)
+	sysmessage @07a1 Voce nao tem tickets vip para efetuar a compra.
+	return 1
+endif
+verificar_tickets 40
+if (<var.erro>)
+ return 1
+endif
+VAR.COR={1948 2996 2716 2949 2717 2916 2960 2721 1994}
+SERV.NEWITEM i_bag
+NEW.COLOR=<var.cor>
+NEW.CONT <src.uid>
+NEW.NAME @<new.color> Kit de Zostrich
+var.uid <NEW.UID>
+
+serv.newitem 02136
+new.tag0.name Zostrich da Agua
+new.tag0.id c_zostrich_agua
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0a37
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 02136
+new.tag0.name Zostrich da Floresta
+new.tag0.id c_zostrich_florest
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 00a1d
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 02136
+new.tag0.name Zostrich do Fogo
+new.tag0.id c_zostrich_fogo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 077a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 02136
+new.tag0.name Zostrich do Gelo
+new.tag0.id c_zostrich_gelo
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b22
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 02136
+new.tag0.name Zostrich do Pacifico
+new.tag0.id c_zostrich_pacifico
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 0b0a
+new.cont <var.uid>
+new.more2 1
+
+serv.newitem 02136
+new.tag0.name Zostrich do Vento
+new.tag0.id c_zostrich_vento
+new.name <new.tag0.name>
+new.type t_shrinkado
+new.color 06060
+new.cont <var.uid>
+new.more2 1
+
+[FUNCTION vip_money]
+VAR.COR={1948 2996 2716 2949 2717 2916 2960 2721 1994}
+SERV.NEWITEM i_bag
+NEW.COLOR=<var.cor>
+NEW.CONT <src.uid>
+NEW.NAME @<new.color> bag
+NEW.f_dinheiro_sc <ARGS>
+
+///////////// fUno para verificar se possue os Tickets na conta
+
+[FUNCTION testart_tickets]
+if !(0<args>)
+ return 0
+endif
+
+if !(0<account.tag0.tickets>)
+ return 0
+endif
+
+if (<eval <account.tag0.tickets>> < <eval <args>>)
+ return 0
+endif
+
+return 1
+
+
+[FUNCTION verificar_tickets]
+if !(0<args>)
+ sysmessage @0a89 ERRO: Comunique os Administradores sobre o erro e agurarde.
+ var.erro 1
+ return 1
+endif
+
+if !(0<account.tag0.tickets>)
+ sysmessage @0a89 Voce nao possue tickets de compras, acesse o site para compra-los.
+ var.erro 1
+ return 1
+endif
+
+if (<eval <account.tag0.tickets>> < <eval <args>>)
+ var.erro 1
+ sysmessage @07a1 Voce nao possue tickets de compras suficientes para essa compra, acesse o site para compra-los.
+ return 1
+endif
+
+account.tag0.tickets <eval <account.tag0.tickets>-<args>>
+var.erro 0
+
+/// Robe VIP
+
+[ITEMDEF i_vip_dragon]
+ID=02687
+NAME=Vip Dragon
+TYPE=t_clothing
+WEIGHT=0.3
+ARMOR=72
+DYE=1
+
+ON=@CREATE
+ATTR attr_newbie
+COLOR=0455
+HITPOINTS=9999
+
+ON=@DAMAGE
+HITS = <MAXHITS>
+RETURN 1
+
+ON=@EQUIP
+IF (<LINK> == 04fffffff)
+    LINK = <SRC.UID>
+ENDIF
+
+IF (<LINK> == <SRC.UID>)
+	//if (<src.tag0.vip> == 0)
+		//src.sysmessage @077a,0,1 Você só pode usar este poderoso manto, enquanto tiver tempo vip ativo em seu char.
+	    //CONT <src.findlayer.21.uid>
+	    //UPDATEX
+		//return 1
+	//endif
+
+    Name=<SRC.NAME> Vip Dragon
+    SRC.MODSTR += 15
+    SRC.MODINT += 15
+    SRC.MODDEX += 15
+    SRC.SOUND=snd_SPELL_BLESS
+ELSE
+    IF (<LINK.FINDLAYER(21).UID> != 0)
+        SRC.SYSMESSAGE Esse mantle nao lhe pertence.
+        CONT = <LINK.FINDLAYER(21).UID>
+
+        SERV.newitem i_robe
+		new.equip
+		new.remove
+    ENDIF
+ENDIF
+RETURN 0
+
+ON=@UNEQUIP
+IF (<LINK> == <SRC.UID>)
+    SRC.MODSTR -= 15
+    SRC.MODINT -= 15
+    SRC.MODDEX -= 15
+    SRC.SOUND=snd_SPELL_BLESS
+ENDIF
+RETURN 0
+
+///////////////////////////////////Ferramentas Vip DG/////////////////////////////////////////////////
+
+
+[ITEMDEF i_vip_pickaxe]
+ID=i_pickaxe
+Name=Vip Pickaxe
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Mining, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Pickaxe
+
+ON=@CREATE
+HITPOINTS={200 400}
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Mining=(<SRC.Mining> +150)
+
+ON=@UNEQUIP
+SRC.Mining=(<SRC.Mining> -150)
+
+[ITEMDEF i_vip_hatchet]
+ID=i_hatchet
+Name=Vip hatchet
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Lumberjacking, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Hatcher
+
+ON=@CREATE
+HITPOINTS={200 400}
+color=1914
+
+ON=@Damage
+HITS <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Lumberjacking=(<SRC.Lumberjacking> +150)
+
+ON=@UNEQUIP
+SRC.Lumberjacking=(<SRC.Lumberjacking> -150)
+
+[ITEMDEF i_vip_hammer]
+ID=i_hammer_sledge
+Name=Vip smith's hammer
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Blacksmithing, 100.0 ArmsLore, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Smith's Hammer
+
+ON=@CREATE
+HITPOINTS={200 400}
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+RETURN 1
+
+ON=@EQUIP
+SRC.Blacksmithing=(<SRC.Blacksmithing> +150)
+
+ON=@UNEQUIP
+SRC.Blacksmithing=(<SRC.Blacksmithing> -150)
+
+[ITEMDEF i_amu_vip_taming]
+ID=i_necklace_gold
+Name=Vip Amulet of Taming
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 AnimalLore, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Amulet of Taming
+
+ON=@CREATE
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Taming=(<SRC.Taming> +150)
+
+ON=@UNEQUIP
+SRC.Taming=(<SRC.Taming> -150)
+
+[ITEMDEF i_amu_vip_Carpentry]
+ID=i_necklace_gold
+Name=Vip amulet of Carpentry
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Carpentry, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Amulet of Carpentry
+
+ON=@CREATE
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Carpentry=(<SRC.Carpentry> +150)
+
+ON=@UNEQUIP
+SRC.Carpentry=(<SRC.Carpentry> -150)
+
+[ITEMDEF i_amu_vip_cooking]
+ID=i_necklace_gold
+Name=Vip Amulet of Cooking
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Cooking, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Amulet of Cooking
+
+ON=@CREATE
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Cooking=(<SRC.Cooking> +150)
+
+ON=@UNEQUIP
+SRC.Cooking=(<SRC.Cooking> -150)
+
+[ITEMDEF i_amu_vip_poison]
+ID=i_necklace_gold
+Name=Vip Amulet of Poisoning
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Poisoning, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Amulet of Poisoning
+
+ON=@CREATE
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+RETURN 1
+
+ON=@EQUIP
+SRC.Poisoning=(<SRC.Poisoning> +150)
+
+ON=@UNEQUIP
+SRC.Poisoning=(<SRC.Poisoning> -150)
+
+[ITEMDEF i_Vip_dagger]
+ID=i_dagger
+Name=Vip dagger
+WEIGHT=1
+
+SKILLMAKE=TINKERING 100.0, 80.0 MAGERY, 100.0 Bowcraft, t_tinker_tools
+RESOURCES=20 i_ingot_gold, 3 i_gem_amethyst
+
+CATEGORY=Novos Itens Tinker
+SUBSECTION=Vip itens
+DESCRIPTION=Vip Dagger
+
+ON=@CREATE
+HITPOINTS={200 400}
+color=1914
+
+ON=@Damage
+HITS = <MAXHITS>
+return 1
+
+ON=@EQUIP
+SRC.Bowcraft=(<SRC.Bowcraft> +150)
+
+ON=@UNEQUIP
+SRC.Bowcraft=(<SRC.Bowcraft> -150)
+
+//Kit de ferramentas
+
+[TEMPLATE i_kit_ferramentas]
+CONTAINER=i_bag
+NAME=@0798 Kit Ferramentas
+COLOR=0798
+ITEM=i_golden_pickaxe
+ATTR=04
+ITEM=i_golden_hammer
+ATTR=04
+ITEM=i_golden_hatchet
+ATTR=04
+ITEM=i_golden_dagger
+ATTR=04
+ITEM=i_amu_golden_carpentry
+ATTR=04
+ITEM=i_amu_golden_poison
+ATTR=04
+ITEM=i_amu_golden_taming
+ATTR=04
+ITEM=i_amu_golden_cooking
+ATTR=04
+
+// Sistema de vida de animais
+
+[TYPEDEF t_animal_vida]
+on=@click
+if (<more2>)
+    if (<src.uid> == <tag0.dono>)
+        message  <tag0.name> [<eval <tag0.vidas>> Vidas]
+    else
+        message  <tag0.name>
+    endif
+    return 1
+else
+ message <name>
+ return 1
+endif
+
+on=@dclick
+if (<more2>)
+	if (<src.curfollower> >= <src.maxfollower>)
+		src.sysmessage @07a1 Voce ja tem muitos pets soltos.
+		return 1
+	endif
+
+	src.curfollower += 1
+
+	serv.newnpc <tag0.id>
+	new.name <tag0.name>
+ 	new.karma <tag0.karma>
+ 	new.fame <tag0.fame>
+ 	new.food <tag0.food>
+ 	new.color <color>
+ 	new.maxhits 5000
+ 	new.hits 5000
+ 	new.tag0.vidas = <tag0.vidas>
+ 	new.tag0.dono = <tag0.dono>
+ 	new.p <src.p>
+ 	new.anim 5
+	new.bark 3
+
+	local.montariauid = <new.uid>
+
+	serv.newitem i_memory
+	new.color = memory_ipet
+	new.more1 = 04
+	new.more2 = <serv.time>
+	new.morep = <p>
+	new.link = <src.uid>
+	new.cont = <local.montariauid>
+
+	// Fix auto-mount
+	src.dclick <local.montariauid>
+
+	// Fix auto-shrink
+	uid.<local.montariauid>.events=+e_animal_vida
+
+	remove
+	return 1
+else
+    return 1
+endif
+
+[EVENTS e_animal_vida]
+on=@Death
+if (<tag0.vidas> > 1)
+    tag0.vidas -=1
+    serv.newitem <icon>
+    new.type t_animal_vida
+    new.tag0.name <name>
+    new.tag0.vidas <tag0.vidas>
+    new.tag0.dono <tag0.dono>
+    new.tag0.fame <fame>
+    new.tag0.karma <karma>
+    new.tag0.food <food>
+    new.tag0.id <id>
+    new.tag0.icon <icon>
+    new.dispid <dispid>
+    new.name <name>
+    new.color <color>
+    new.cont <tag0.dono>
+    new.more2 1
+    remove
+    return 1
+endif
+
+[EOF]

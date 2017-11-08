@@ -1,0 +1,515 @@
+[CHARDEF c_cavalo_floresta]
+ID=c_horse_gray
+ICON=i_pet_horse_gray
+NAME=Cavalo da Floresta
+DAM=3,4
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
+
+DESIRES=c_horse_gray,c_man,c_woman
+TEVENTS=e_pet_injection
+AVERSIONS=e_carnivores3
+
+CATEGORY=Montarias
+DESCRIPTION=Cavalo
+SUBSECTION=Cavalo da Floresta
+
+ON=@Create
+	COLOR=00a1d
+	STR={100 110}
+	DEX={115 125}
+	INT={7 8}
+	MAXHITS={300 350}
+	PARRYING={26.0 45.0}
+	MAGICRESISTANCE={50.0 60.0}
+	TACTICS={30.0 40.0}
+	WRESTLING={30.0 44.0}
+	TAMING=100.0
+	NPC=brain_animal
+	FAME=0
+	KARMA={-5000 -6000}
+
+[CHARDEF c_lhama_floresta]
+ID=c_llama
+ICON=i_pet_llama
+NAME=Lhama da Floresta
+DAM=3,4
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
+
+DESIRES=c_llama,c_man,c_woman
+TEVENTS=e_pet_injection
+AVERSIONS=e_carnivores3
+
+CATEGORY=Montarias
+DESCRIPTION=Lhama
+SUBSECTION=Lhama da Floresta
+
+ON=@Create
+	COLOR=00a1d
+	STR={100 110}
+	DEX={115 125}
+	INT={7 8}
+	MAXHITS={300 350}
+	PARRYING={26.0 45.0}
+	MAGICRESISTANCE={50.0 60.0}
+	TACTICS={30.0 40.0}
+	WRESTLING={30.0 44.0}
+	TAMING=100.0
+	NPC=brain_animal
+	FAME=0
+	KARMA={-5000 -6000}
+
+[CHARDEF c_orn_floresta]
+ID=c_ostard_desert
+ICON=i_pet_ostard_forest_2
+NAME=Ostard da Floresta
+DAM=3,4
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
+
+DESIRES=c_ostard_desert,c_man,c_woman
+TEVENTS=e_pet_injection
+AVERSIONS=e_carnivores3
+
+CATEGORY=Montarias
+DESCRIPTION=Orn
+SUBSECTION=Ostard da Floresta
+
+ON=@Create
+	COLOR=00a1d
+	STR={100 110}
+	DEX={115 125}
+	INT={7 8}
+	MAXHITS={300 350}
+	PARRYING={26.0 45.0}
+	MAGICRESISTANCE={50.0 60.0}
+	TACTICS={30.0 40.0}
+	WRESTLING={30.0 44.0}
+	TAMING=100.0
+	NPC=brain_animal
+	FAME=0
+	KARMA={-5000 -6000}
+
+[CHARDEF c_zostrich_floresta]
+ID=c_ostard_frenzied
+ICON=i_pet_ostard_frenzied_2
+NAME=Zostrich da Floresta
+DAM=3,4
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
+
+DESIRES=c_ostard_frenzied,c_man,c_woman
+TEVENTS=e_pet_injection
+AVERSIONS=e_carnivores3
+
+CATEGORY=Montarias
+DESCRIPTION=Zostrich
+SUBSECTION=Zostrich da Floresta
+
+ON=@Create
+	COLOR=00a1d
+	STR={100 110}
+	DEX={115 125}
+	INT={7 8}
+	MAXHITS={300 350}
+	PARRYING={26.0 45.0}
+	MAGICRESISTANCE={50.0 60.0}
+	TACTICS={30.0 40.0}
+	WRESTLING={30.0 44.0}
+	TAMING=100.0
+	NPC=brain_animal
+	FAME=0
+	KARMA={-5000 -6000}
+
+[CHARDEF c_urso_floresta]
+ID=c_bear_polar
+ICON=i_pet_bear_polar
+NAME=Urso da Floresta
+DAM=3,4
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
+
+DESIRES=c_bear_polar,c_man,c_woman
+TEVENTS=e_pet_injection
+AVERSIONS=e_carnivores3
+
+CATEGORY=Montarias
+DESCRIPTION=Urso
+SUBSECTION=Urso da Floresta
+
+ON=@Create
+	COLOR=00a1d
+	STR={100 110}
+	DEX={115 125}
+	INT={7 8}
+	MAXHITS={300 350}
+	PARRYING={26.0 45.0}
+	MAGICRESISTANCE={50.0 60.0}
+	TACTICS={30.0 40.0}
+	WRESTLING={30.0 44.0}
+	TAMING=100.0
+	NPC=brain_animal
+	FAME=0
+	KARMA={-5000 -6000}
+
+
+////////////////////// Guardioes
+
+[CHARDEF c_guardiao_cavalo_floresta]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+	STR=115
+	DEX=115
+	INT=115
+	MAXHITS={300 350}
+
+	tag0.montaria c_cavalo_floresta
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+	tag0.ai_drink_cure = 1
+	tag0.ai_drink_heal = 1
+	tag0.ai_can_cure = 1
+
+	ARCHERY={90.0 140.0}
+	MAGERY={90.0 100.0}
+	Swordsmanship={90.0 100.0}
+	TACTICS={90.0 100.0}
+	PARRYING={90.0 100.0}
+	HIDING={90.0 100.0}
+	POISONING={90.0 100.0}
+
+	KARMA={-10000 -3000}
+	FAME={-10000 -3000}
+
+	EVENTS=+e_guardiao_montaria
+	NPC=brain_monster
+
+	ITEM=i_mt_horse_brown_dk
+	COLOR=00a1d
+
+	ITEMNEWBIE=i_onix_platemail_arms
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_leggings
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gorget
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gloves
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_chest
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_sword_viking
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_shield_heater
+	COLOR=00a1d
+	ITEMNEWBIE=i_death_bow
+	NAME=a bow
+	COLOR=00a1d
+	ITEMNEWBIE=i_mask_bear
+	COLOR=00a1d
+	ITEMNEWBIE=02687
+	color=00a1d
+
+ON=@NPCRESTOCK
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+[CHARDEF c_guardiao_lhama_floresta]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+	STR=115
+	DEX=115
+	INT=115
+	MAXHITS={300 350}
+
+	tag0.montaria c_lhama_floresta
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+	tag0.ai_drink_cure = 1
+	tag0.ai_drink_heal = 1
+	tag0.ai_can_cure = 1
+
+	ARCHERY={90.0 140.0}
+	MAGERY={90.0 100.0}
+	Swordsmanship={90.0 100.0}
+	TACTICS={90.0 100.0}
+	PARRYING={90.0 100.0}
+	HIDING={90.0 100.0}
+	POISONING={90.0 100.0}
+
+	KARMA={-10000 -3000}
+	FAME={-10000 -3000}
+
+	EVENTS=+e_guardiao_montaria
+	NPC=brain_monster
+
+	ITEM=i_mt_llama
+	COLOR=00a1d
+
+	ITEMNEWBIE=i_onix_platemail_arms
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_leggings
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gorget
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gloves
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_chest
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_sword_viking
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_shield_heater
+	COLOR=00a1d
+	ITEMNEWBIE=i_death_bow
+	NAME=a bow
+	COLOR=00a1d
+	ITEMNEWBIE=i_mask_bear
+	COLOR=00a1d
+	ITEMNEWBIE=02687
+	color=00a1d
+
+ON=@NPCRESTOCK
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+[CHARDEF c_guardiao_orn_floresta]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+	STR=115
+	DEX=115
+	INT=115
+	MAXHITS={300 350}
+
+	tag0.montaria c_orn_floresta
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+	tag0.ai_drink_cure = 1
+	tag0.ai_drink_heal = 1
+	tag0.ai_can_cure = 1
+
+	ARCHERY={90.0 140.0}
+	MAGERY={90.0 100.0}
+	Swordsmanship={90.0 100.0}
+	TACTICS={90.0 100.0}
+	PARRYING={90.0 100.0}
+	HIDING={90.0 100.0}
+	POISONING={90.0 100.0}
+
+	KARMA={-10000 -3000}
+	FAME={-10000 -3000}
+
+	EVENTS=+e_guardiao_montaria
+	NPC=brain_monster
+
+	ITEM=i_mt_ostard_desert
+	COLOR=00a1d
+
+	ITEMNEWBIE=i_onix_platemail_arms
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_leggings
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gorget
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gloves
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_chest
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_sword_viking
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_shield_heater
+	COLOR=00a1d
+	ITEMNEWBIE=i_death_bow
+	NAME=a bow
+	COLOR=00a1d
+	ITEMNEWBIE=i_mask_bear
+	COLOR=00a1d
+	ITEMNEWBIE=02687
+	color=00a1d
+
+ON=@NPCRESTOCK
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+[CHARDEF c_guardiao_zostrich_floresta]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+	STR=115
+	DEX=115
+	INT=115
+	MAXHITS={300 350}
+
+	tag0.montaria c_zostrich_floresta
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+	tag0.ai_drink_cure = 1
+	tag0.ai_drink_heal = 1
+	tag0.ai_can_cure = 1
+
+	ARCHERY={90.0 140.0}
+	MAGERY={90.0 100.0}
+	Swordsmanship={90.0 100.0}
+	TACTICS={90.0 100.0}
+	PARRYING={90.0 100.0}
+	HIDING={90.0 100.0}
+	POISONING={90.0 100.0}
+
+	KARMA={-10000 -3000}
+	FAME={-10000 -3000}
+
+	EVENTS=+e_guardiao_montaria
+	NPC=brain_monster
+
+	ITEM=i_mt_ostard_frenzied
+	COLOR=00a1d
+
+	ITEMNEWBIE=i_onix_platemail_arms
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_leggings
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gorget
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gloves
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_chest
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_sword_viking
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_shield_heater
+	COLOR=00a1d
+	ITEMNEWBIE=i_death_bow
+	NAME=a bow
+	COLOR=00a1d
+	ITEMNEWBIE=i_mask_bear
+	COLOR=00a1d
+	ITEMNEWBIE=02687
+	color=00a1d
+
+ON=@NPCRESTOCK
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+[CHARDEF c_guardiao_urso_floresta]
+NAME=#NAMES_HUMANMALE
+SOUND=snd_HUMAN_M_DIE_01
+ID=C_MAN
+DAM=20,40
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@Create
+	STR=115
+	DEX=115
+	INT=115
+	MAXHITS={300 350}
+
+	tag0.montaria c_urso_floresta
+
+	// AI
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+	tag0.ai_drink_cure = 1
+	tag0.ai_drink_heal = 1
+	tag0.ai_can_cure = 1
+
+	ARCHERY={90.0 140.0}
+	MAGERY={90.0 100.0}
+	Swordsmanship={90.0 100.0}
+	TACTICS={90.0 100.0}
+	PARRYING={90.0 100.0}
+	HIDING={90.0 100.0}
+	POISONING={90.0 100.0}
+
+	KARMA={-10000 -3000}
+	FAME={-10000 -3000}
+
+	EVENTS=+e_guardiao_montaria
+	NPC=brain_monster
+
+	ITEM=i_mt_polar_bear
+	COLOR=00a1d
+
+	ITEMNEWBIE=i_onix_platemail_arms
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_leggings
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gorget
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_gloves
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_platemail_chest
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_sword_viking
+	COLOR=00a1d
+	ITEMNEWBIE=i_onix_shield_heater
+	COLOR=00a1d
+	ITEMNEWBIE=i_death_bow
+	NAME=a bow
+	COLOR=00a1d
+	ITEMNEWBIE=i_mask_bear
+	COLOR=00a1d
+	ITEMNEWBIE=02687
+	color=00a1d
+
+ON=@NPCRESTOCK
+	ITEMNEWBIE=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+
+[EOF]

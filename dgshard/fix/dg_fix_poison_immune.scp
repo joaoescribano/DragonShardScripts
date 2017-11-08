@@ -1,0 +1,12 @@
+[EVENTS e_poison_immune_dragoes]
+ON=@GETHIT 
+IF (<ARGN2>&08) 
+	say An Nox
+	consume i_efeito_poison
+	ANIM=12
+	SpellEffect s_cure,1000 
+	SOUND=snd_SPELL_CURE
+	RETURN 1 
+ENDIF
+
+[EOF]

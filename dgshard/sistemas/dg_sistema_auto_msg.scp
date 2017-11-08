@@ -1,0 +1,275 @@
+[itemdef i_auto_msg]
+NAME=Auto Msg
+ID=I_gravestone_17
+TYPE=t_script
+WEIGHT=0
+
+ON=@CREATE
+ATTR=090
+TIMER=-1
+TAG.TIMER = 120
+TAG.MSG = 1
+TAG.TITULO = Titulo
+TAG.MSG1 = Mensagem1
+TAG.MSG2 = Mensagem2
+TAG.MSG3 = Mensagem3
+TAG.MSG4 = Mensagem4
+TAG.MSG5 = Mensagem5
+TAG.MSG6 = Mensagem6
+TAG.MSG7 = Mensagem7
+TAG.MSG8 = Mensagem8
+TAG.MSG9 = Mensagem9
+TAG.TITULOCOLOR=100
+TAG.MSG1COLOR=070
+TAG.MSG2COLOR=070
+TAG.MSG3COLOR=070
+TAG.MSG4COLOR=070
+TAG.MSG5COLOR=070
+TAG.MSG6COLOR=070
+TAG.MSG7COLOR=070
+TAG.MSG8COLOR=070
+TAG.MSG9COLOR=070
+
+ON=@TIMER
+SERV.ALLCLIENTS SYSMESSAGE <TAG.TITULOCOLOR> <TAG.TITULO>
+
+IF <TAG.MSG> == 1
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG1COLOR> <TAG.MSG1>
+ TAG.MSG = 2
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 2
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG2COLOR> <TAG.MSG2>
+ TAG.MSG = 3
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 3
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG3COLOR> <TAG.MSG3>
+ TAG.MSG = 4
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 4
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG4COLOR> <TAG.MSG4>
+ TAG.MSG = 5
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 5
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG5COLOR> <TAG.MSG5>
+ TAG.MSG = 6
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 6
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG6COLOR> <TAG.MSG6>
+ TAG.MSG = 7
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 7
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG7COLOR> <TAG.MSG7>
+ TAG.MSG = 8
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 8
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG8COLOR> <TAG.MSG8>
+ TAG.MSG = 9
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+IF <TAG.MSG> == 9
+ SERV.ALLCLIENTS SYSMESSAGE <TAG.MSG9COLOR> <TAG.MSG9>
+ TAG.MSG = 1
+ TIMER <TAG.TIMER>
+ RETURN 1
+ENDIF
+
+TIMER <TAG.TIMER>
+RETURN 1
+
+ON=@CLICK
+ SRC.SYSMESSAGE Message in <timer> seconds.
+
+ON=@DCLICK
+IF (<SRC.ACCOUNT.PLEVEL> >= 4)
+ dialog d_stone_msg
+ELSE
+ SRC.SYSMESSAGE Voce nao pode configurar mensagens.
+ENDIF
+RETURN 1
+
+[DIALOG d_stone_msg]
+10,10
+PAGE 0
+resizepic 0 0 3600 630 510
+
+resizepic 020 050 3000 590 360
+
+resizepic 110 078 3000 480 22   // titulo
+resizepic 110 108 3000 480 22   // msg1
+resizepic 110 138 3000 480 22   // msg2
+resizepic 110 168 3000 480 22   // msg3
+resizepic 110 198 3000 480 22   // msg4
+resizepic 110 228 3000 480 22   // msg5
+resizepic 110 258 3000 480 22   // msg6
+resizepic 110 288 3000 480 22   // msg7
+resizepic 110 318 3000 480 22   // msg8
+resizepic 110 348 3000 480 22   // msg9
+
+resizepic 40 078 3000 60 22   // titulo color
+resizepic 40 108 3000 60 22   // msg1 color
+resizepic 40 138 3000 60 22   // msg2 color
+resizepic 40 168 3000 60 22   // msg3 color
+resizepic 40 198 3000 60 22   // msg4 color
+resizepic 40 228 3000 60 22   // msg5 color
+resizepic 40 258 3000 60 22   // msg6 color
+resizepic 40 288 3000 60 22   // msg7 color
+resizepic 40 318 3000 60 22   // msg8 color
+resizepic 40 348 3000 60 22   // msg9 color
+
+resizepic 110 378 3000 80 22    // Timer
+
+text 260 020 095 00  // Mensagens Dimension
+text 140 460 995 01  // Aceitar
+text 440 460 995 02  // Sair
+text 140 420 995 03  // Stone ON
+text 440 420 995 04  // Stone OFF
+text 045 380 995 05  // Timer
+text 055 055 995 06  // Cor
+text 260 055 995 07  // Mensagem
+
+textentry 115 080 460 25 0 01 08  // titulo
+textentry 115 110 460 25 0 02 09  // msg1
+textentry 115 140 460 25 0 03 10  // msg2
+textentry 115 170 460 25 0 04 11  // msg3
+textentry 115 200 460 25 0 05 12  // msg4
+textentry 115 230 460 25 0 06 13  // msg5
+textentry 115 260 460 25 0 07 14  // msg6
+textentry 115 290 460 25 0 08 15  // msg7
+textentry 115 320 460 25 0 09 16  // msg8
+textentry 115 350 460 25 0 10 17  // msg9
+textentry 115 380 460 25 0 11 18  // Timer
+
+textentry 045 080 050 25 0 12 19  // titulo color
+textentry 045 110 050 25 0 13 20  // msg1 color
+textentry 045 140 050 25 0 14 21  // msg2 color
+textentry 045 170 040 25 0 15 22  // msg3 color
+textentry 045 200 040 25 0 16 23  // msg4 color
+textentry 045 230 040 25 0 17 24  // msg5 color
+textentry 045 260 040 25 0 18 25  // msg6 color
+textentry 045 290 040 25 0 19 26  // msg7 color
+textentry 045 320 040 25 0 20 27  // msg8 color
+textentry 045 350 040 25 0 21 28  // msg9 color
+
+button 100 460 4005 4006 1 0 1   // Aceitar
+button 400 460 4005 4006 1 0 2   // Sair
+button 100 420 4005 4006 1 0 3   // Stone ON
+button 400 420 4005 4006 1 0 4   // Stone OFF
+button 400 500 4005 4006 1 0 5   // Listar Cores
+
+[DIALOG d_stone_msg TEXT]
+Mensagens Dragon
+Aceitar
+Sair
+Stone ON
+Stone OFF
+Timer
+Cor
+Mensagem
+<TAG.TITULO>
+<TAG.MSG1>
+<TAG.MSG2>
+<TAG.MSG3>
+<TAG.MSG4>
+<TAG.MSG5>
+<TAG.MSG6>
+<TAG.MSG7>
+<TAG.MSG8>
+<TAG.MSG9>
+<EVAL(<TAG.TIMER>)>
+<TAG.TITULOCOLOR>
+<TAG.MSG1COLOR>
+<TAG.MSG2COLOR>
+<TAG.MSG3COLOR>
+<TAG.MSG4COLOR>
+<TAG.MSG5COLOR>
+<TAG.MSG6COLOR>
+<TAG.MSG7COLOR>
+<TAG.MSG8COLOR>
+<TAG.MSG9COLOR>
+
+[DIALOG d_stone_msg BUTTON]
+ON=0
+SRC.SYSMESSAGE Fechado
+ON=1
+SRC.SYSMESSAGE Salvando configuracoes.
+TAG.TITULO = <ARGTXT[1]>
+TAG.MSG1 = <ARGTXT[2]>
+TAG.MSG2 = <ARGTXT[3]>
+TAG.MSG3 = <ARGTXT[4]>
+TAG.MSG4 = <ARGTXT[5]>
+TAG.MSG5 = <ARGTXT[6]>
+TAG.MSG6 = <ARGTXT[7]>
+TAG.MSG7 = <ARGTXT[8]>
+TAG.MSG8 = <ARGTXT[9]>
+TAG.MSG9 = <ARGTXT[10]>
+TAG.TIMER = <ARGTXT[11]>
+TAG.TITULOCOLOR = <ARGTXT[12]>
+TAG.MSG1COLOR = <ARGTXT[13]>
+TAG.MSG2COLOR = <ARGTXT[14]>
+TAG.MSG3COLOR = <ARGTXT[15]>
+TAG.MSG4COLOR = <ARGTXT[16]>
+TAG.MSG5COLOR = <ARGTXT[17]>
+TAG.MSG6COLOR = <ARGTXT[18]>
+TAG.MSG7COLOR = <ARGTXT[19]>
+TAG.MSG8COLOR = <ARGTXT[20]>
+TAG.MSG9COLOR = <ARGTXT[21]>
+dialog d_stone_msg
+
+ON=2
+SRC.SYSMESSAGE Sair
+
+ON=3
+SRC.SYSMESSAGE Stone is ON.
+TIMER <TAG.TIMER>
+dialog d_stone_msg
+
+ON=4
+SRC.SYSMESSAGE Stone is OFF.
+TIMER -1
+dialog d_stone_msg
+
+ON=5
+SRC.NEWITEM i_lista_color
+SRC.ACT.TIMER 1
+SRC.ACT.EQUIP
+
+[itemdef i_lista_color]
+NAME=Lista de Cores
+ID=I_MEMORY
+TYPE=t_eq_script
+WEIGHT=0
+
+ON=@TIMER
+
+TAG.COLOR_CONTA=<TAG.COLOR_CONTA> + 1
+TAG.COLOR_MENSA=@<EVAL(<TAG.COLOR_CONTA>)>
+
+CONT.SYSMESSAGE <TAG.COLOR_MENSA> <TAG.COLOR_MENSA>
+
+TIMER 1
+RETURN 1
+
+[EOF]

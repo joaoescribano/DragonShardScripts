@@ -1,0 +1,1020 @@
+[ITEMDEF i_daemon_flame]
+ID=i_pet_daemon
+NAME=Dragon Heart
+TYPE=t_normal
+
+ON=@CREATE
+COLOR=077a
+Name=@077a Dragon Heart
+Timer=1200
+
+ON=@CLICK
+
+if (<eval <timer>/60>==0)
+message @07a1 Faltam <timer> Segundos...
+endif
+
+if (<eval <timer>/60>>1)
+message @07a1 Faltam <eval <timer>/60> minutos...
+endif
+
+if (<eval <timer>/60>==1)
+message @07a1 Falta <eval <timer>/60> minuto...
+endif
+
+
+ON=@DCLICK
+IF (<timer>>0)
+src.sysmessage @07a1 Espere o tempo acabar...
+return 1
+endif
+DORAND 34
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_ice
+	SRC.SYSMESSAGE @07a1 Voce Danificou o heart na hora de retirar.
+	SRC.NEWITEM=i_heart_fire
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_white
+	SRC.NEWITEM=i_heart_black
+	SRC.NEWITEM=i_heart_ice
+	SRC.NEWITEM=i_heart_fire
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_ice
+	SRC.NEWITEM=i_heart_fire
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.SYSMESSAGE @07a1 Voce Danificou o heart na hora de retirar.
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_ice
+	SRC.NEWITEM=i_heart_fire
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_ice
+	SRC.NEWITEM=i_heart_fire
+	SRC.NEWITEM=i_heart_venon
+	SRC.NEWITEM=i_heart_evil
+	SRC.NEWITEM=i_heart_mystic
+	SRC.NEWITEM=i_heart_ice
+	SRC.NEWITEM=i_heart_fire
+ENDDO
+SRC.ACT.BOUNCE
+Remove
+return 1
+
+ON=@TIMER
+return 1
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART BLACK ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+[ITEMDEF i_heart_Black]
+ID=i_fruit_coconut
+NAME=Black Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=00960
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+SRC.SYSMESSAGE @0481 OU
+SRC.SYSMESSAGE @0480 Clique em otro heart para misturar as tintas
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.BASEID>==i_heart_ice)
+SRC.NEWITEM=i_heart_ocean
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_fire)
+SRC.NEWITEM=i_heart_older
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_venon)
+SRC.NEWITEM=i_heart_leaf
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_mystic)
+SRC.NEWITEM=i_heart_wizard
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_evil)
+SRC.NEWITEM=i_heart_ruby
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_black
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_black
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART WHITE ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+[ITEMDEF i_heart_white]
+ID=i_fruit_coconut
+NAME=White Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0481
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+SRC.SYSMESSAGE @0481 OU
+SRC.SYSMESSAGE @0480 Clique em otro heart para misturar as tintas
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.BASEID>==i_heart_ice)
+SRC.NEWITEM=i_heart_frozen
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_fire)
+SRC.NEWITEM=i_heart_sun
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_venon)
+SRC.NEWITEM=i_heart_emerald
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_mystic)
+SRC.NEWITEM=i_heart_violet
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.BASEID>==i_heart_evil)
+SRC.NEWITEM=i_heart_royal
+SRC.ACT.BOUNCE
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+return 1
+endif
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_white
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_white
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART VENON ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[ITEMDEF i_heart_venon]
+ID=i_fruit_coconut
+NAME=Venon Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=07a5
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_venon
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_venon
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART EMERALD ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_emerald]
+ID=i_fruit_coconut
+NAME=Emerald Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0802
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_emerald
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_emerald
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART LEAF ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+[ITEMDEF i_heart_leaf]
+ID=i_fruit_coconut
+NAME=Leaf Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0817
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_leaf
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_leaf
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART FIRE ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+[ITEMDEF i_heart_fire]
+ID=i_fruit_coconut
+NAME=Fire Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=077a
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_fire
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_fire
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART SUN ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+[ITEMDEF i_heart_sun]
+ID=i_fruit_coconut
+NAME=Sun Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0a44
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_sun
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_sun
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART OLDER ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_older]
+ID=i_fruit_coconut
+NAME=Older Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=080d
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_older
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_older
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART ICE ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_ice]
+ID=i_fruit_coconut
+NAME=Ice Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0480
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_ice
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_ice
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART FROZEN ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_frozen]
+ID=i_fruit_coconut
+NAME=Frozen Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0800
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_frozen
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_frozen
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART OCEAN ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_ocean]
+ID=i_fruit_coconut
+NAME=Ocean Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0814
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_ocean
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_ocean
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART MYSTIC ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+[ITEMDEF i_heart_mystic]
+ID=i_fruit_coconut
+NAME=Mystic Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0ae2
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_mystic
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_mystic
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART VIOLET ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+[ITEMDEF i_heart_violet]
+ID=i_fruit_coconut
+NAME=Violet Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0807
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_violet
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_violet
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART WIZARD ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+[ITEMDEF i_heart_wizard]
+ID=i_fruit_coconut
+NAME=Wizard Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0818
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_wizard
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_wizard
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART EVIL ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+[ITEMDEF i_heart_evil]
+ID=i_fruit_coconut
+NAME=Evil Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0ac6
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_evil
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_evil
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART ROYAL ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+[ITEMDEF i_heart_royal]
+ID=i_fruit_coconut
+NAME=Royal Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0a8d
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_royal
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_royal
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// HEART RUBY ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_heart_ruby]
+ID=i_fruit_coconut
+NAME=Ruby Heart
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0799
+
+ON=@DCLICK
+
+if ! (<src.targ.cont>==<src.findlayer(21).UID>)
+src.sysmessage @07a1 O <name> tem q estar na sua bag.
+return 1
+endif
+
+IF (<SRC.TAILORING><1000)
+SRC.SYSMESSAGE @07a1 Voce precisa de 100.0 de Tailoring para usar isto.
+RETURN 1
+ENDIF
+
+SRC.SYSMESSAGE @077a Clique em um Dye Tub para pintar o balde
+TARGET
+RETURN 1
+
+On=@Targon_item
+
+IF (<SRC.TARG.baseid>=i_dye_tub)
+SRC.NEWITEM=i_Tinta_ruby
+SRC.ACT.BOUNCE
+SRC.SYSMESSAGE @07a1 Voce Pintou o Balde
+SRC.CONSUME 1 i_heart_ruby
+SRC.TARG.REMOVE
+Return 1
+ELSE
+SRC.SYSMESSAGE @07a1 Este item nao pode ser pintado e nem misturado
+RETURN 1
+ENDIF
+
+On=@Targon_char
+src.sysmessage @07a1 Impossivel utilizar isso em um char
+return 1
+
+
+
+
+[EOF]

@@ -1,0 +1,1978 @@
+// Ore: Gold - Weapons
+
+[ITEMDEF i_gold_bone_machete]
+ID=i_bone_machete
+NAME=Gold Bone Machete
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_gold,1 i_bone
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_exec]
+ID=i_axe_exec
+NAME=Gold Executioner's Axe
+TYPE=t_weapon_axe
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_battle]
+ID=i_axe_battle
+NAME=Gold Battle Axe
+TYPE=t_weapon_axe
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe]
+ID=i_axe
+NAME=Gold Axe
+TYPE=t_weapon_axe
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_double]
+ID=i_axe_double
+NAME=Gold Double Axe
+TYPE=t_weapon_axe
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_bardiche]
+ID=i_bardiche
+NAME=Gold Bardiche
+TYPE=t_weapon_sword
+DAM=14,15
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_dagger]
+ID=i_dagger
+NAME=Gold Dagger
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_mace]
+ID=i_mace
+NAME=Gold Mace
+TYPE=t_weapon_mace_smith
+DAM=10,12
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_broad]
+ID=i_sword_broad
+NAME=Gold Broad Sword
+TYPE=t_weapon_sword
+DAM=12,12
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_long]
+ID=i_sword_long
+NAME=Gold Long Sword
+TYPE=t_weapon_sword
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_spear]
+ID=i_spear
+NAME=Gold Spear
+TYPE=t_weapon_fence
+DAM=11,12
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_war]
+ID=i_axe_war
+NAME=Gold War Axe
+TYPE=t_weapon_axe
+DAM=12,12
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_scimitar]
+ID=i_scimitar
+NAME=Gold Scimitar
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_long_b]
+ID=i_sword_long_b
+NAME=Gold Long Sword
+TYPE=t_weapon_sword
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_viking]
+ID=i_sword_viking
+NAME=Gold Viking Sword
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Gold Large Battle Axe
+TYPE=t_weapon_axe
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_katana]
+ID=i_katana
+NAME=Gold Katana
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_kryss]
+ID=i_kryss
+NAME=Gold Kryss
+TYPE=t_weapon_sword
+DAM=8,10
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_spear_short]
+ID=i_spear_short
+NAME=Gold Short Spear
+TYPE=t_weapon_fence
+DAM=8,11
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_war_fork]
+ID=i_war_fork
+NAME=Gold War Fork
+TYPE=t_weapon_fence
+DAM=10,11
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_mace_war]
+ID=i_mace_war
+NAME=Gold War Mace
+TYPE=t_weapon_mace_smith
+DAM=13,14
+SKILL=Macefighting
+SPEED=26
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_hammer_war]
+ID=i_hammer_war
+NAME=Gold War Hammer
+TYPE=t_weapon_mace_smith
+DAM=14,15
+SKILL=Macefighting
+SPEED=28
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_maul]
+ID=i_maul
+NAME=Gold Maul
+TYPE=t_weapon_mace_smith
+DAM=12,13
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_hammer_pick]
+ID=i_hammer_pick
+NAME=Gold Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_halberd]
+ID=i_halberd
+NAME=Gold Halberd
+TYPE=t_weapon_sword
+DAM=15,16
+SKILL=Swordsmanship
+SPEED=24
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_cutlass]
+ID=i_cutlass
+NAME=Gold Cutlass
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Gold Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=13,14
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_scythe]
+ID=i_scythe
+NAME=Gold Scythe
+TYPE=t_weapon_sword
+DAM=12,15
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_bone_harvester]
+ID=i_bone_harvester
+NAME=Gold Bone Harvester
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_scepter]
+ID=i_scepter
+NAME=Gold Scepter
+TYPE=t_weapon_mace_smith
+DAM=12,14
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_staff_bladed]
+ID=i_staff_bladed
+NAME=Gold Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=12,13
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_pike]
+ID=i_pike
+NAME=Gold Pike
+TYPE=t_weapon_fence
+DAM=12,13
+SKILL=Fencing
+SPEED=36
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Gold Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=10,11
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_lance]
+ID=i_lance
+NAME=Gold Lance
+TYPE=t_weapon_fence
+DAM=14,15
+SKILL=Fencing
+SPEED=21
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_crescent_blade]
+ID=i_crescent_blade
+NAME=Gold Crescent Blade
+TYPE=t_weapon_sword
+DAM=9,12
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_paladin]
+ID=i_sword_paladin
+NAME=Gold Paladin Sword
+TYPE=t_weapon_sword
+DAM=13,15
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_no_dachi]
+ID=i_no_dachi
+NAME=Gold No-dachi
+TYPE=t_weapon_sword
+DAM=13,15
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_wakizashi]
+ID=i_wakizashi
+NAME=Gold Wakizashi
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_tetsubo]
+ID=i_tetsubo
+NAME=Gold Testsubo
+TYPE=t_weapon_mace_smith
+DAM=10,12
+SKILL=Macefighting
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Macefighting
+DESCRIPTION=Gold Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_lajatang]
+ID=i_lajatang
+NAME=Gold Lajatang
+TYPE=t_weapon_fence
+DAM=13,15
+SKILL=Fencing
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_daisho]
+ID=i_daisho
+NAME=Gold Daisho
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_tekagi]
+ID=i_tekagi
+NAME=Gold Tekagi
+TYPE=t_weapon_fence
+DAM=8,10
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_kama]
+ID=i_kama
+NAME=Gold Kama
+TYPE=t_weapon_sword
+DAM=8,9
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sai]
+ID=i_sai
+NAME=Gold Sai
+TYPE=t_weapon_fence
+DAM=8,9
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Gold Elven Spellblade
+TYPE=t_weapon_fence
+DAM=10,12
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Gold Assassin Spike
+TYPE=t_weapon_fence
+DAM=8,10
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Gold Leaf Bladed
+TYPE=t_weapon_fence
+DAM=11,12
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Gold War Cleaver
+TYPE=t_weapon_fence
+DAM=11,12
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Fencing
+DESCRIPTION=Gold War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_mace_diamond]
+ID=i_mace_diamond
+NAME=Gold Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_rune_blade]
+ID=i_rune_blade
+NAME=Gold Rune Blade
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Gold Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_ornate_axe]
+ID=i_ornate_axe
+NAME=Gold Ornate Axe
+TYPE=t_weapon_axe
+DAM=15,16
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+[ITEMDEF i_gold_elven_machete]
+ID=i_elven_machete
+NAME=Gold Elven Machete
+TYPE=t_weapon_sword
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_gold,1 i_log
+SKILLMAKE=Blacksmithing 70.0
+CanUse=can_u_human|can_u_elf
+ReqStr=60
+
+CATEGORY=Provisions - Weapons - Gold
+SUBSECTION=Swordsmanship
+DESCRIPTION=Gold Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+
+// Ore: Gold - Armors
+
+[ITEMDEF i_gold_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Gold Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Chainmails
+DESCRIPTION=Gold Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_gold_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Gold Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Chainmails
+DESCRIPTION=Gold Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_gold_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Gold Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Chainmails
+DESCRIPTION=Gold Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_gold_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Gold Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Ringmails
+DESCRIPTION=Gold Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_gold_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Gold Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Ringmails
+DESCRIPTION=Gold Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_gold_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Gold Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Ringmails
+DESCRIPTION=Gold Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_gold_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Gold Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Ringmails
+DESCRIPTION=Gold Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_arms]
+ID=i_platemail_arms
+NAME=Gold Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Gold Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_helm]
+ID=i_platemail_helm
+NAME=Gold Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Gold Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Gold Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_platemail_chest]
+ID=i_platemail_chest
+NAME=Gold Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Platemails
+DESCRIPTION=Gold Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_helm_closed]
+ID=i_helm_closed
+NAME=Gold Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_gold_helm_open]
+ID=i_helm_open
+NAME=Gold Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_bascinet]
+ID=i_bascinet
+NAME=Gold Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=8
+    RESPOISON=0
+
+[ITEMDEF i_gold_helm_nose]
+ID=i_helm_nose
+NAME=Gold Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=5
+    RESPOISON=0
+
+[ITEMDEF i_gold_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Gold Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Gold Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Helmets
+DESCRIPTION=Gold Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Gold Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_buckler]
+ID=i_shield_buckler
+NAME=Gold Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Gold Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_heater]
+ID=i_shield_heater
+NAME=Gold Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Gold Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_gold,2 i_log
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Gold Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_gold
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_gold_shield_dupre]
+ID=i_shield_dupre
+NAME=Gold Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_gold,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 70.0
+canuse=can_u_human|can_u_elf
+ReqStr=60
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Gold
+SUBSECTION=Shields
+DESCRIPTION=Gold Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_gold
+    HITPOINTS={500 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+

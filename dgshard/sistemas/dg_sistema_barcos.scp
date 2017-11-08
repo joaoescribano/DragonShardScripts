@@ -1,0 +1,219 @@
+[FUNCTION navegar]
+ref1=<region.uid>
+if (<ref1.type> == t_ship) && (<ref1.more1> == <src.uid> )
+     if ( <ref1.pilot> == <src.uid> )
+          src.consume 1 i_memory_ship_navigate
+          src.sysmessage Voce parou de controlar o barco com o mouse.
+          ref1.pilot=0
+     else
+          ref1.pilot=<src.uid>
+          if (<src.FindLayer.layer_horse>)
+               src.dismount
+          endif
+          serv.newitem = i_memory_ship_navigate
+          new.equip
+
+          src.sysmessage Voce esta controlando o barco com o mouse, para parar utilize novamente o comando .navegar
+     endif
+else
+     src.sysmessage Voce precisa estar no seu barco para usar este comando.
+endif
+
+[ITEMDEF i_memory_ship_navigate]
+id=03e96
+name=Ship Navigate Memory
+TYPE=t_eq_horse
+layer=25
+CATEGORY=Ship Parts
+SUBSECTION=Navigate
+DESCRIPTION=Navigate memory
+
+[function f_tele_barco]
+if (<flags> & statf_freeze) || (<flags> & statf_war)
+    sysmessage Voce nao pode usar recall neste estado.
+    return 0
+endif
+go <eval <UID.<argn1>.p.x>>,<eval <UID.<argn1>.p.y>o+1>,<eval <UID.<argn1>.p.z>+5>
+
+[TYPEDEF t_ship_tiller]
+ON=@Dclick
+IF !(<src.isgm>)
+ IF (<src.uid>==<LINK.MORE1>)
+  SDIALOG d_ship_pod 1
+ ELSE
+  SDIALOG d_ship_pod 2
+ ENDIF
+else
+ SDIALOG d_ship_pod 1
+endif
+return 1
+
+[TYPEDEF T_SHIP]
+ON=@Dclick
+IF !(<src.isgm>)
+ IF (<src.uid>==<MORE1>)
+  LINK.SDIALOG d_ship_pod 1
+ ELSE
+  LINK.SDIALOG d_ship_pod 2
+ ENDIF
+else
+ LINK.SDIALOG d_ship_pod 1
+endif
+return 1
+
+[DIALOG d_ship_pod]
+200,200
+PAGE 0
+resizepic 20 20 3600 220 170
+checkertrans 20 20 220 170
+dtext 95 35 88 Ship System
+PAGE 1
+dtext 40 60 1152 Nome:
+dtext 80 60 2010 <link.name>
+button 40 90 093A 0939 1 0 1
+dtext 55 85 1152 Dono:
+dtext 90 85 2010 <uid.<link.more1>.name>
+button 40 120 093A 0939 1 0 2
+dtext 55 115 1152 Redeed
+button 40 150 093A 0939 1 0 3
+dtext 55 145 1152 Controle remoto
+
+PAGE 2
+dtext 40 60 1152 Nome:
+dtext 80 60 2010 <link.name>
+dtext 55 90 1152 Dono:
+dtext 90 90 2010 <uid.<link.more1>.name>
+
+[DIALOG d_ship_pod BUTTON]
+ON=1
+link.targetf transfer_owner_boat
+src.sysmessage Quem vai ser o novo dono?
+
+ON=2
+serv.newitem=i_deed_ship
+new.more=<link.baseid>
+new.name=<link.name> deed
+new.bounce
+link.remove
+ENDIF
+
+ON=3
+src.sysmessage Utilize o comando .navegar para controlar o barco.
+return 1
+
+[FUNCTION transfer_owner_boat]
+IF (<argo.uid>==<src>)
+src.sysmessage Voce nao pode dar seu barco para voce mesmo.
+ELIF (<distance> > 10)
+src.sysmessage O Barco esta longe demais!
+ELIF !(<argo.canseelos>)
+src.sysmessage Voce nao consegue ver o alvo.
+ELIF !(<argo.isplayer>)
+src.sysmessage Voce deve escolher um player!
+ELIF (<argo.barcos>==2)
+src.sysmessage <argo.name> ja tem 2 barcos.
+ELSE
+try uid.<more1>.removeboat <uid> <argo.uid>
+try uid.<argo.uid>.sysmessage @07a3 <uid.<more1>.name> lhe deu esse barco.
+more1=<argo.uid>
+timer -1
+ENDIF
+
+[FUNCTION f_count_barcos]
+FOR 0 <eval <SRC.RESCOUNT>-1>
+    IF (<UID.<SRC.FINDCONT(<LOCAL._FOR>).LINK>.ISITEM>)
+        IF STRMATCH("t_ship","<UID.<SRC.FINDCONT(<LOCAL._FOR>).LINK>.TYPE>")
+   LOCAL.FOUND ++
+  ENDIF
+ ENDIF
+ENDFOR
+return <LOCAL.FOUND>
+
+[TYPEDEF T_KEY]
+ON=@DCLICK
+if (<link.type> == t_ship)
+    if (<src.flags> & statf_freeze) || (<src.flags> & statf_war)
+        src.sysmessage Voce nao pode usar recall neste estado.
+        return 0
+    endif
+    if (<src.magery> < 50.0)
+        src.sysmessage Voce nao tem skill suficiente para usar a magia Recall.
+        return 0
+    endif
+    if (<src.restest 1 i_teleport_barco_delay>)
+        src.sysmessage Voce nao pode dar recall tao rapido.
+        return 0
+    endif
+    if (<src.mana> >= 11 )
+        src.mana -= 11
+        src.anim 18
+        src.sound snd_SPELL_RECALL
+        src.say Kal Ort Por
+        src.events =+e_tele_barco
+        src.newitem i_teleport_barco_delay
+        new.cont <src.uid>
+        new.timer 4
+        new.tag0.link <link>
+        new.equip
+    else
+        src.sysmessage Voce nao tem mana suficiente para usar recall.
+    endif
+endif
+RETURN 1
+
+ON=@CLICK
+IF !<more>
+return 0
+else
+message @044 <uid.<more>.region.name> em <uid.<more>.p>
+RETURN 1
+
+[EVENTS e_tele_barco]
+ON=@SkillStart
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+sysmessage @07a1 Recall para o barco cancelado.
+
+ON=@Hit
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@GetHit
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@Death
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@UserWarMode
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+ON=@SpellCast
+EVENTS -e_tele_barco
+CONSUME i_teleport_barco_delay
+SYSMESSAGE @07a1 Recall para o barco cancelado.
+
+[ITEMDEF i_teleport_barco_delay]
+NAME=Delay Barco Tele
+ID=i_worldgem_bit
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=080
+TIMER=1
+
+ON=@Timer
+cont.f_tele_barco <tag0.link>
+cont.events -e_tele_barco
+remove
+return 1
+
+[EOF]

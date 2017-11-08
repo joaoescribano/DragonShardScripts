@@ -1,0 +1,250 @@
+﻿// Sistema para fixar os status buggados
+// Dragon Easy Shard
+// Por Admin Destiny
+// http://www.dgshard.com
+[FUNCTION f_fix_status]
+if !(0<restest i_fix_status>)
+ newitem i_fix_status
+ new.equip
+endif
+
+[ITEMDEF i_fix_status]
+ID=i_memory
+NAME=FIX Status
+TYPE=t_eq_script
+
+ON=@CREATE
+attr=attr_newbie
+TIMER=3
+
+ON=@TIMER
+IF (STRMATCH(*ghost*,*<CONT.BODY>*))
+    TIMER=3
+ELSE
+    cont.maxhits <cont.str>
+    cont.maxmana <cont.int>
+    cont.maxstam <cont.dex>
+    TIMER 3
+ENDIF
+return 1
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////// GO PLAYER ABREVIACAO BY DANIEL               //////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[FUNCTION GP]
+FORPLAYERS 600000
+IF (STRMATCH(*<ARGS>*,*<NAME>*))
+SRC.GO=<P>
+SRC.P
+ENDIF
+ENDFOR
+
+///////////////////////////////////////////////////////////////////
+///////////////// FUNCAO TELETO //////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
+[function teleto]
+TARGETF TELETO_TARG
+SYSMESSAGE @04a3 Quem voce quer mover?
+ 
+[function teleto_targ]
+TARGETFG TELETO_TARG2 <ARGO.UID>
+SYSMESSAGE Para onde mover <ARGO.NAME>?
+ 
+[function teleto_targ2]
+IF (<ARGO.ISPLAYER>)
+TARGETFG TELETO_TARG2 <ARGO.UID>
+SYSMESSAGE Para onde mover <ARGO.NAME>?
+ELSE
+TRY UID.<ARGN1>.GO <TARGP>
+ENDIF
+
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+[FUNCTION arrumar]
+if (<RESTEST i_rune_polymorph>)
+    sysmessage @07a1,0,1 Você não pode usar este comando enquanto estiver em polumorph...
+    return 1
+endif
+
+if (<flags>&statf_dead)
+    sysmessage @07a1,0,1 Você não pode usar este comando enquanto for um fantasma.
+    return 1
+endif
+
+IF (<flags>&statf_freeze)
+    sysmessage @07a1,0,1 Você não pode arrumar seus status nestes condições.
+    return 1
+endif
+
+IF (<flags>&statf_stone)
+    sysmessage @07a1,0,1 Você não pode arrumar seus status nestes condições.
+    return 1
+endif
+
+REF1=<UID>
+
+FOR x 1 24
+    if !(<eval <local.x>> == 11) && !(<eval <local.x>> == 15) && !(<eval <local.x>> == 16) && !(<eval <local.x>> == 21) && !(<eval <local.x>> == 21)
+        ref1.findlayer(<eval <local.x>>).cont <ref1.findlayer(21).uid>
+        ref1.findlayer(<eval <local.x>>).updatex
+    endif
+endfor
+ref1.findlayer(21).updatex
+
+str 100
+modstr 0
+maxhits 100
+
+dex 100
+moddex 0
+maxstam 100
+
+int 100
+modint 0
+maxmana 100
+
+RESPHYSICAL 0
+RESCOLD 0
+RESFIRE 0
+RESENERGY 0
+RESPOISON 0
+
+updatex
+
+sysmessage @07a1,0,1 Seu status foram corrigidos, seu itens estão em sua bag e suas resistências foram resetadas!
+return 1
+
+[ITEMDEF i_deed_troca_char]
+id i_deed
+name Deed de troca de char
+type t_normal
+
+ON=@Create
+color 0794
+
+ON=@DClick
+if !(0<tag0.char>)
+    target Selecione o char para copiar os dados
+else
+    target Selecione o char para transferir os dados
+endif
+return 1
+
+ON=@TargOn_char
+if !(0<tag0.char>)
+    tag0.char <src.targ.uid>
+    tag0.Alchemy = <src.targ.Alchemy>
+    tag0.Anatomy = <src.targ.Anatomy>
+    tag0.AnimalLore = <src.targ.AnimalLore>
+    tag0.Taming = <src.targ.Taming>
+    tag0.Archery = <src.targ.Archery>
+    tag0.Armslore = <src.targ.Armslore>
+    tag0.Begging = <src.targ.Begging>
+    tag0.Blacksmithing = <src.targ.Blacksmithing>
+    tag0.Bowcraft = <src.targ.Bowcraft>
+    tag0.Camping = <src.targ.Camping>
+    tag0.Carpentry = <src.targ.Carpentry>
+    tag0.Cartography = <src.targ.Cartography>
+    tag0.Cooking = <src.targ.Cooking>
+    tag0.DetectingHidden = <src.targ.DetectingHidden>
+    tag0.Enticement = <src.targ.Enticement>
+    tag0.EvaluatingIntel = <src.targ.EvaluatingIntel>
+    tag0.Fencing = <src.targ.Fencing>
+    tag0.Fishing = <src.targ.Fishing>
+    tag0.Forensics = <src.targ.Forensics>
+    tag0.Healing = <src.targ.Healing>
+    tag0.Herding = <src.targ.Herding>
+    tag0.Hiding = <src.targ.Hiding>
+    tag0.Inscription = <src.targ.Inscription>
+    tag0.ItemID = <src.targ.ItemID>
+    tag0.LockPicking = <src.targ.LockPicking>
+    tag0.Lumberjacking = <src.targ.Lumberjacking>
+    tag0.Macefighting = <src.targ.Macefighting>
+    tag0.Magery = <src.targ.Magery>
+    tag0.MagicResistance = <src.targ.MagicResistance>
+    tag0.Meditation = <src.targ.Meditation>
+    tag0.Mining = <src.targ.Mining>
+    tag0.Musicianship = <src.targ.Musicianship>
+    tag0.Parrying = <src.targ.Parrying>
+    tag0.Peacemaking = <src.targ.Peacemaking>
+    tag0.Poisoning = <src.targ.Poisoning>
+    tag0.Provocation = <src.targ.Provocation>
+    tag0.RemoveTrap = <src.targ.RemoveTrap>
+    tag0.Snooping = <src.targ.Snooping>
+    tag0.SpiritSpeak = <src.targ.SpiritSpeak>
+    tag0.Stealing = <src.targ.Stealing>
+    tag0.Stealth = <src.targ.Stealth>
+    tag0.Swordsmanship = <src.targ.Swordsmanship>
+    tag0.Tactics = <src.targ.Tactics>
+    tag0.Tailoring = <src.targ.Tailoring>
+    tag0.TasteID = <src.targ.TasteID>
+    tag0.Tinkering = <src.targ.Tinkering>
+    tag0.Tracking = <src.targ.Tracking>
+    tag0.Veterinary = <src.targ.Veterinary>
+    tag0.Wrestling = <src.targ.Wrestling>
+    tag0.Necromancy = <src.targ.Necromancy>
+else
+    if (<src.targ.uid> == <tag0.char>)
+        src.sysmessage @07a1 Voce nao pode transferir os dados para o mesmo char
+        return 1
+    endif
+    src.targ.Alchemy = <tag0.Alchemy>
+    src.targ.Anatomy = <tag0.Anatomy>
+    src.targ.AnimalLore = <tag0.AnimalLore>
+    src.targ.Taming = <tag0.Taming>
+    src.targ.Archery = <tag0.Archery>
+    src.targ.Armslore = <tag0.Armslore>
+    src.targ.Begging = <tag0.Begging>
+    src.targ.Blacksmithing = <tag0.Blacksmithing>
+    src.targ.Bowcraft = <tag0.Bowcraft>
+    src.targ.Camping = <tag0.Camping>
+    src.targ.Carpentry = <tag0.Carpentry>
+    src.targ.Cartography = <tag0.Cartography>
+    src.targ.Cooking = <tag0.Cooking>
+    src.targ.DetectingHidden = <tag0.DetectingHidden>
+    src.targ.Enticement = <tag0.Enticement>
+    src.targ.EvaluatingIntel = <tag0.EvaluatingIntel>
+    src.targ.Fencing = <tag0.Fencing>
+    src.targ.Fishing = <tag0.Fishing>
+    src.targ.Forensics = <tag0.Forensics>
+    src.targ.Healing = <tag0.Healing>
+    src.targ.Herding = <tag0.Herding>
+    src.targ.Hiding = <tag0.Hiding>
+    src.targ.Inscription = <tag0.Inscription>
+    src.targ.ItemID = <tag0.ItemID>
+    src.targ.LockPicking = <tag0.LockPicking>
+    src.targ.Lumberjacking = <tag0.Lumberjacking>
+    src.targ.Macefighting = <tag0.Macefighting>
+    src.targ.Magery = <tag0.Magery>
+    src.targ.MagicResistance = <tag0.MagicResistance>
+    src.targ.Meditation = <tag0.Meditation>
+    src.targ.Mining = <tag0.Mining>
+    src.targ.Musicianship = <tag0.Musicianship>
+    src.targ.Parrying = <tag0.Parrying>
+    src.targ.Peacemaking = <tag0.Peacemaking>
+    src.targ.Poisoning = <tag0.Poisoning>
+    src.targ.Provocation = <tag0.Provocation>
+    src.targ.RemoveTrap = <tag0.RemoveTrap>
+    src.targ.Snooping = <tag0.Snooping>
+    src.targ.SpiritSpeak = <tag0.SpiritSpeak>
+    src.targ.Stealing = <tag0.Stealing>
+    src.targ.Stealth = <tag0.Stealth>
+    src.targ.Swordsmanship = <tag0.Swordsmanship>
+    src.targ.Tactics = <tag0.Tactics>
+    src.targ.Tailoring = <tag0.Tailoring>
+    src.targ.TasteID = <tag0.TasteID>
+    src.targ.Tinkering = <tag0.Tinkering>
+    src.targ.Tracking = <tag0.Tracking>
+    src.targ.Veterinary = <tag0.Veterinary>
+    src.targ.Wrestling = <tag0.Wrestling>
+    src.targ.Necromancy = <tag0.Necromancy>
+    src.sysmessage @07a1 Os chars foram transferidos
+    remove
+endif
+return 1
+
+[EOF]

@@ -1,0 +1,1978 @@
+// Ore: Rosite - Weapons
+
+[ITEMDEF i_rosite_bone_machete]
+ID=i_bone_machete
+NAME=Rosite Bone Machete
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_rosite,1 i_bone
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Bone Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_exec]
+ID=i_axe_exec
+NAME=Rosite Executioner's Axe
+TYPE=t_weapon_axe
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Executioner's Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_battle]
+ID=i_axe_battle
+NAME=Rosite Battle Axe
+TYPE=t_weapon_axe
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=Y
+RESOURCES=9 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe]
+ID=i_axe
+NAME=Rosite Axe
+TYPE=t_weapon_axe
+DAM=13,15
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=10 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_double]
+ID=i_axe_double
+NAME=Rosite Double Axe
+TYPE=t_weapon_axe
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=17 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Double Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_bardiche]
+ID=i_bardiche
+NAME=Rosite Bardiche
+TYPE=t_weapon_sword
+DAM=16,17
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.3
+TWOHANDS=Y
+RESOURCES=18 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Bardiche
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_dagger]
+ID=i_dagger
+NAME=Rosite Dagger
+TYPE=t_weapon_fence
+DAM=9,10
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=4 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Dagger
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_mace]
+ID=i_mace
+NAME=Rosite Mace
+TYPE=t_weapon_mace_smith
+DAM=11,13
+SKILL=Macefighting
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=6 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_broad]
+ID=i_sword_broad
+NAME=Rosite Broad Sword
+TYPE=t_weapon_sword
+DAM=13,14
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=12 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Broad Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_long]
+ID=i_sword_long
+NAME=Rosite Long Sword
+TYPE=t_weapon_sword
+DAM=14,15
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.1
+TWOHANDS=N
+RESOURCES=16 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_spear]
+ID=i_spear
+NAME=Rosite Spear
+TYPE=t_weapon_fence
+DAM=12,14
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_war]
+ID=i_axe_war
+NAME=Rosite War Axe
+TYPE=t_weapon_axe
+DAM=13,14
+SKILL=Swordsmanship
+SPEED=33
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=11 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite War Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_scimitar]
+ID=i_scimitar
+NAME=Rosite Scimitar
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_long_b]
+ID=i_sword_long_b
+NAME=Rosite Long Sword
+TYPE=t_weapon_sword
+DAM=14,15
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Long Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_viking]
+ID=i_sword_viking
+NAME=Rosite Viking Sword
+TYPE=t_weapon_sword
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Viking Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_battle_large]
+ID=i_axe_battle_large
+NAME=Rosite Large Battle Axe
+TYPE=t_weapon_axe
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=11 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Large Battle Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_katana]
+ID=i_katana
+NAME=Rosite Katana
+TYPE=t_weapon_sword
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=8 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Katana
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_kryss]
+ID=i_kryss
+NAME=Rosite Kryss
+TYPE=t_weapon_sword
+DAM=9,11
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Kryss
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_spear_short]
+ID=i_spear_short
+NAME=Rosite Short Spear
+TYPE=t_weapon_fence
+DAM=9,12
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=6 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Short Spear
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_war_fork]
+ID=i_war_fork
+NAME=Rosite War Fork
+TYPE=t_weapon_fence
+DAM=11,12
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite War Fork
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_mace_war]
+ID=i_mace_war
+NAME=Rosite War Mace
+TYPE=t_weapon_mace_smith
+DAM=15,16
+SKILL=Macefighting
+SPEED=26
+VALUE=4
+WEIGHT=1.7
+TWOHANDS=N
+RESOURCES=14 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite War Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_hammer_war]
+ID=i_hammer_war
+NAME=Rosite War Hammer
+TYPE=t_weapon_mace_smith
+DAM=16,17
+SKILL=Macefighting
+SPEED=28
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=16 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite War Hammer
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_maul]
+ID=i_maul
+NAME=Rosite Maul
+TYPE=t_weapon_mace_smith
+DAM=13,15
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=10 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite Maul
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_hammer_pick]
+ID=i_hammer_pick
+NAME=Rosite Hammer Pick
+TYPE=t_weapon_mace_pick
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Hammer Pick
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_halberd]
+ID=i_halberd
+NAME=Rosite Halberd
+TYPE=t_weapon_sword
+DAM=17,18
+SKILL=Swordsmanship
+SPEED=24
+VALUE=4
+WEIGHT=2.4
+TWOHANDS=Y
+RESOURCES=20 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Halberd
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_cutlass]
+ID=i_cutlass
+NAME=Rosite Cutlass
+TYPE=t_weapon_sword
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=8 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Cutlass
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_axe_two_hand]
+ID=i_axe_two_hand
+NAME=Rosite Tow Handed Axe
+TYPE=t_weapon_axe
+DAM=15,16
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=16 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Tow Handed Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_scythe]
+ID=i_scythe
+NAME=Rosite Scythe
+TYPE=t_weapon_sword
+DAM=14,17
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Scythe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_bone_harvester]
+ID=i_bone_harvester
+NAME=Rosite Bone Harvester
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.3
+TWOHANDS=N
+RESOURCES=10 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Bone Harvester
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_scepter]
+ID=i_scepter
+NAME=Rosite Scepter
+TYPE=t_weapon_mace_smith
+DAM=13,16
+SKILL=Macefighting
+SPEED=31
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=10 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite Scepter
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_staff_bladed]
+ID=i_staff_bladed
+NAME=Rosite Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=13,15
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_pike]
+ID=i_pike
+NAME=Rosite Pike
+TYPE=t_weapon_fence
+DAM=13,15
+SKILL=Fencing
+SPEED=36
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Pike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_staff_bladed_double]
+ID=i_staff_bladed_double
+NAME=Rosite Double Bladed Staff
+TYPE=t_weapon_mace_sharp
+DAM=11,12
+SKILL=Swordsmanship
+SPEED=43
+VALUE=4
+WEIGHT=0.2
+TWOHANDS=Y
+RESOURCES=16 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Double Bladed Staff
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_lance]
+ID=i_lance
+NAME=Rosite Lance
+TYPE=t_weapon_fence
+DAM=16,17
+SKILL=Fencing
+SPEED=21
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=N
+RESOURCES=20 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Lance
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_crescent_blade]
+ID=i_crescent_blade
+NAME=Rosite Crescent Blade
+TYPE=t_weapon_sword
+DAM=10,13
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.1
+TWOHANDS=Y
+RESOURCES=14 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Crescent Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_paladin]
+ID=i_sword_paladin
+NAME=Rosite Paladin Sword
+TYPE=t_weapon_sword
+DAM=15,17
+SKILL=Swordsmanship
+SPEED=28
+VALUE=4
+WEIGHT=1.6
+TWOHANDS=Y
+RESOURCES=24 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Paladin Sword
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_no_dachi]
+ID=i_no_dachi
+NAME=Rosite No-dachi
+TYPE=t_weapon_sword
+DAM=15,17
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=Y
+RESOURCES=18 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite No-dachi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_wakizashi]
+ID=i_wakizashi
+NAME=Rosite Wakizashi
+TYPE=t_weapon_sword
+DAM=10,12
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=N
+RESOURCES=8 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Wakizashi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_tetsubo]
+ID=i_tetsubo
+NAME=Rosite Testsubo
+TYPE=t_weapon_mace_smith
+DAM=11,13
+SKILL=Macefighting
+SPEED=40
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=27 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Macefighting
+DESCRIPTION=Rosite Testsubo
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_lajatang]
+ID=i_lajatang
+NAME=Rosite Lajatang
+TYPE=t_weapon_fence
+DAM=15,17
+SKILL=Fencing
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=25 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Lajatang
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_daisho]
+ID=i_daisho
+NAME=Rosite Daisho
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=Y
+RESOURCES=1 i_katana,1 i_wakizashi
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Daisho
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_tekagi]
+ID=i_tekagi
+NAME=Rosite Tekagi
+TYPE=t_weapon_fence
+DAM=9,11
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Tekagi
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_kama]
+ID=i_kama
+NAME=Rosite Kama
+TYPE=t_weapon_sword
+DAM=9,10
+SKILL=Swordsmanship
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=14 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Kama
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sai]
+ID=i_sai
+NAME=Rosite Sai
+TYPE=t_weapon_fence
+DAM=9,10
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=12 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Sai
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_elven_spellblade]
+ID=i_elven_spellblade
+NAME=Rosite Elven Spellblade
+TYPE=t_weapon_fence
+DAM=11,13
+SKILL=Fencing
+SPEED=40
+VALUE=4
+WEIGHT=0.5
+TWOHANDS=Y
+RESOURCES=14 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Elven Spellblade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_assassin_spike]
+ID=i_sword_assassin_spike
+NAME=Rosite Assassin Spike
+TYPE=t_weapon_fence
+DAM=9,11
+SKILL=Fencing
+SPEED=45
+VALUE=4
+WEIGHT=0.4
+TWOHANDS=N
+RESOURCES=9 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Assassin Spike
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_leafblade]
+ID=i_sword_leafblade
+NAME=Rosite Leaf Bladed
+TYPE=t_weapon_fence
+DAM=12,14
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=12 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite Leaf Bladed
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_sword_warcleaver]
+ID=i_sword_warcleaver
+NAME=Rosite War Cleaver
+TYPE=t_weapon_fence
+DAM=12,14
+SKILL=Fencing
+SPEED=38
+VALUE=4
+WEIGHT=0.8
+TWOHANDS=N
+RESOURCES=18 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Fencing
+DESCRIPTION=Rosite War Cleaver
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_mace_diamond]
+ID=i_mace_diamond
+NAME=Rosite Diamond Mace
+TYPE=t_weapon_mace_sharp
+DAM=13,16
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=1.0
+TWOHANDS=N
+RESOURCES=20 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Diamond Mace
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_rune_blade]
+ID=i_rune_blade
+NAME=Rosite Rune Blade
+TYPE=t_weapon_sword
+DAM=14,16
+SKILL=Swordsmanship
+SPEED=36
+VALUE=4
+WEIGHT=0.7
+TWOHANDS=Y
+RESOURCES=15 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Rune Blade
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_radiant_scimitar]
+ID=i_radiant_scimitar
+NAME=Rosite Radiant Scimitar
+TYPE=t_weapon_sword
+DAM=11,13
+SKILL=Swordsmanship
+SPEED=40
+VALUE=4
+WEIGHT=0.9
+TWOHANDS=N
+RESOURCES=15 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Radiant Scimitar
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_ornate_axe]
+ID=i_ornate_axe
+NAME=Rosite Ornate Axe
+TYPE=t_weapon_axe
+DAM=17,18
+SKILL=Swordsmanship
+SPEED=31
+VALUE=4
+WEIGHT=1.2
+TWOHANDS=Y
+RESOURCES=18 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Ornate Axe
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+[ITEMDEF i_rosite_elven_machete]
+ID=i_elven_machete
+NAME=Rosite Elven Machete
+TYPE=t_weapon_sword
+DAM=12,14
+SKILL=Swordsmanship
+SPEED=38
+VALUE=4
+WEIGHT=0.6
+TWOHANDS=N
+RESOURCES=14 i_ingot_rosite,1 i_log
+SKILLMAKE=Blacksmithing 80.0
+CanUse=can_u_human|can_u_elf
+ReqStr=70
+
+CATEGORY=Provisions - Weapons - Rosite
+SUBSECTION=Swordsmanship
+DESCRIPTION=Rosite Elven Machete
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+
+// Ore: Rosite - Armors
+
+[ITEMDEF i_rosite_chainmail_coif]
+ID=i_chainmail_coif
+NAME=Rosite Chainmail Coif
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Chainmails
+DESCRIPTION=Rosite Chainmail Coif
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_rosite_chainmail_leggings]
+ID=i_chainmail_leggings
+NAME=Rosite Chainmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=18 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Chainmails
+DESCRIPTION=Rosite Chainmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_rosite_chainmail_tunic]
+ID=i_chainmail_tunic
+NAME=Rosite Chainmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Chainmails
+DESCRIPTION=Rosite Chainmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_rosite_ringmail_leggings]
+ID=i_ringmail_leggings
+NAME=Rosite Ringmail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=16 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Ringmails
+DESCRIPTION=Rosite Ringmail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_rosite_ringmail_sleeves]
+ID=i_ringmail_sleeves
+NAME=Rosite Ringmail Sleeves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=14 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Ringmails
+DESCRIPTION=Rosite Ringmail Sleeves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_rosite_ringmail_gloves]
+ID=i_ringmail_gloves
+NAME=Rosite Ringmail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Ringmails
+DESCRIPTION=Rosite Ringmail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_rosite_ringmail_tunic]
+ID=i_ringmail_tunic
+NAME=Rosite Ringmail Tunic
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=15.0
+RESOURCES=18 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Ringmails
+DESCRIPTION=Rosite Ringmail Tunic
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_arms]
+ID=i_platemail_arms
+NAME=Rosite Platemail Arms
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=18 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Arms
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_leggings]
+ID=i_platemail_leggings
+NAME=Rosite Platemail Leggings
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=20 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Leggings
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_helm]
+ID=i_platemail_helm
+NAME=Rosite Platemail Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_gorget]
+ID=i_platemail_gorget
+NAME=Rosite Platemail Gorget
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Gorget
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_gloves]
+ID=i_platemail_gloves
+NAME=Rosite Platemail Gloves
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=2.0
+RESOURCES=12 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Gloves
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_platemail_chest]
+ID=i_platemail_chest
+NAME=Rosite Platemail Chest
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=25 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Platemails
+DESCRIPTION=Rosite Platemail Chest
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_helm_closed]
+ID=i_helm_closed
+NAME=Rosite Closed Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Closed Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=4
+    RESPOISON=0
+
+[ITEMDEF i_rosite_helm_open]
+ID=i_helm_open
+NAME=Rosite Open Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Open Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_bascinet]
+ID=i_bascinet
+NAME=Rosite Bascinet
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Bascinet
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=10
+    RESPOISON=0
+
+[ITEMDEF i_rosite_helm_nose]
+ID=i_helm_nose
+NAME=Rosite Nose Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=15 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Nose Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=6
+    RESPOISON=0
+
+[ITEMDEF i_rosite_helm_kabuto]
+ID=i_helm_kabuto
+NAME=Rosite Kabuto Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Kabuto Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_helm_kabuto_decorative]
+ID=i_helm_kabuto_decorative
+NAME=Rosite Kabuto Decorative Helm
+TYPE=t_armor
+FLIP=1
+VALUE=4
+WEIGHT=10.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Helmets
+DESCRIPTION=Rosite Kabuto Decorative Helm
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=7
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_round_bronze]
+ID=i_shield_round_bronze
+NAME=Rosite Round Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=12 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Round Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_buckler]
+ID=i_shield_buckler
+NAME=Rosite Buckler Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=5.0
+RESOURCES=10 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Buckler Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_kite_metal]
+ID=i_shield_kite_metal
+NAME=Rosite Kite Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=7.0
+RESOURCES=16 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Kite Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_heater]
+ID=i_shield_heater
+NAME=Rosite Heater Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=8.0
+RESOURCES=18 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Heater Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_kite_wood]
+ID=i_shield_kite_wood
+NAME=Rosite Kit Wood Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=9.0
+RESOURCES=7 i_ingot_rosite,2 i_log
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Kit Wood Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_round_metal]
+ID=i_shield_round_metal
+NAME=Rosite Round Metal Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=6.0
+RESOURCES=14 i_ingot_rosite
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Round Metal Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=3
+    RESPOISON=0
+
+[ITEMDEF i_rosite_shield_dupre]
+ID=i_shield_dupre
+NAME=Rosite Dupre's Shield
+TYPE=t_shield
+FLIP=1
+VALUE=4
+WEIGHT=14.0
+RESOURCES=10 i_ingot_rosite,2 i_ingot_gold,2 i_ingot_silver
+SKILLMAKE=Blacksmithing 80.0
+canuse=can_u_human|can_u_elf
+ReqStr=70
+TEVENTS=t_equipitem
+
+CATEGORY=Provisions - Armors - Rosite
+SUBSECTION=Shields
+DESCRIPTION=Rosite Dupre's Shield
+
+ON=@Create
+    ATTR=attr_identified
+    COLOR=color_o_rosite
+    HITPOINTS={600 800}
+    RESCOLD=0
+    RESFIRE=0
+    RESENERGY=0
+    RESPHYSICAL=2
+    RESPOISON=0
+

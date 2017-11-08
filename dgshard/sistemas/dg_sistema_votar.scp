@@ -1,0 +1,37 @@
+[FUNCTION votar]
+src.sysmessage @009fb Comando desabilitado.
+return 0
+
+IF (<SRC.FINDID.i_mem_vote>)
+	IF <eval <src.findid.i_mem_vote.timer>/3600>>1
+		SRC.SYSMESSAGE @,3,1 Voce ja votou e faltam cerca de <eval <src.findid.i_mem_vote.timer>/3600> horas para voce votar novamente.
+	ELSE
+		SRC.SYSMESSAGE @,3,1 Voce ja votou e faltam cerca de <eval <src.findid.i_mem_vote.timer>/3600> horas para voce votar novamente.
+	ENDIF
+else
+	weblink uogateway.com/shard.php?id=1076&act=vote
+	SRC.SYSMESSAGE @,3,1 Obrigado por ter Votado!!
+	SRC.SYSMESSAGE @,3,1 Voce ganhou 100 Silver Coins.
+	src.newitem i_mem_vote
+	SRC.ACT.equip
+	src.newitem i_coin_silver
+	new.amount 100
+	new.bounce
+endif
+
+[itemdef i_mem_vote]
+ID=i_memory
+TYPE=t_eq_script
+NAME=vote timer
+
+ON=@CREATE
+	ATTR=attr_decay|attr_invis
+
+ON=@EQUIP
+	TIMER=84600
+
+ON=@TIMER
+	cont.sysmessage Voce ja pode votar denovo no DragonShard pelo UOGateweay, utilize o comando .votar para acessar o site!
+	remove
+
+[EOF]

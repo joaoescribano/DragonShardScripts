@@ -1,0 +1,16 @@
+[TYPEDEF t_fish_pole]
+ON=@TargOn_Char
+src.sysmessage @077a Voce nao pode pescar ai.
+return 1
+
+ON=@TargOn_Item
+src.sysmessage @077a Voce nao pode pescar ai.
+return 1
+
+ON=@TargOn_Ground
+if (<eval <SERV.MAP(<src.targp.x>,<src.targp.y>).statics>> > 0)
+	src.sysmessage @077a Voce nao pode pescar ai.
+	return 1
+endif
+
+[EOF]

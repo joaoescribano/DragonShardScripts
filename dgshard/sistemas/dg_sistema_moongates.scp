@@ -1,0 +1,240 @@
+//////////////////SISTEMA DE MOONGATES///////////////////
+//////////////////Dragon Shard  ///////////////////
+/////////////////Owner Dragon       ///////////////////
+////////////////www.dgshard.com    ///////////////////
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[defname moongate_locations]
+moongate_location_1 1336,1997,5   //Britain
+moongate_location_2 2842,2113   //Bucaneer's den
+moongate_location_3 2456,1209,5   //Cove
+moongate_location_4 1499,3772,5    //Jhelom
+moongate_location_5 2701,692,5    //Minoc/Vesper
+moongate_location_6 4467,1283,5    //Moonglow
+moongate_location_7 3634,1204,0,0    //Nujel'm
+moongate_location_8 3065,3598    //Serpents hold
+moongate_location_9 643,2067,5    //Skara brae
+moongate_location_10 1828,2948,-20    //Trinsic
+moongate_location_11 771,752,5   //Yew
+moongate_location_12 1366,889    //Wind
+moongate_location_13 3564,2140,34    //Magincia
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[function moongates_add]
+local.gate=1
+While (<def0.moongate_location_<dlocal.gate>>)
+  serv.newitem i_moongate
+   new.p=<def0.moongate_location_<dlocal.gate>>
+   new.tag0.gate=<dlocal.gate>
+   new.update
+  local.gate += 1
+endwhile
+  local.gate -= 1
+src.smsg <dlocal.gate> Moongates adicionados aos lugares.
+
+
+[function moongates_remove]
+Foritems 6144
+  If (<baseid>==i_moongate)
+    remove
+    local.gate += 1
+  endif
+endfor
+src.smsg <dlocal.gate> Moongates foram removidos.
+
+
+[function f_moongate_getflag]
+local.dblme=1
+For 1 <eval <args>-1>
+  local.dblme *= 2
+endfor
+//serv.log <hval <qval (<args>==1) ? 1:<dlocal.dblme>>>
+return <hval <qval (<args>==1) ? 1:<dlocal.dblme>>>
+
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[itemdef i_moongate]
+id=i_moongate_blue
+NAME=Moongate Portal
+type=t_normal
+
+on=@create
+attr=attr_static
+
+on=@step
+  trigger @dclick
+  src.knockback 1
+return 1
+
+on=@dclick
+  src.tag0.moongates |= <f_moongate_getflag <tag0.gate>>
+If (<distance> > 2)
+  src.sysmessage Voce esta muito longe para usar o portal.
+elif (<src.findid.i_mem_moongatedelay>)
+  src.sysmessageua 55 0 0 1 O portal precisa de <src.findid.i_mem_moongatedelay.timer> segundos para recolher a energia necessaria para teleportar voce.
+elif (<src.hits> < <src.str>)&&(<src.tag0.pk>==1)&&(!<src.flags>&statf_dead)&&(!<src.isgm>)
+  src.sysmessageua 022 0 0 1 Voce precisa estar com o life full para usar o portal!
+else
+  sdialog d_moongate_portal
+endif
+return 1
+
+CATEGORY=!Tds Staff Items
+SUBSECTION=Game Stones
+DESCRIPTION=Facets Gates
+
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[ITEMDEF i_mem_moongatedelay]
+name=MoonGate Delay
+id=i_memory
+type=t_eq_script
+
+on=@timer
+If (<link.distance <cont.uid>> < 4)
+  cont.go <tag0.p>
+  cont.move s
+  cont.sysmessage @009fb Voce usou o moongate para <cont.region.name>!
+else
+  cont.sysmessageua 022 0 0 1 Voce estava muito longe do portal para voce poder usa-lo.
+endif
+cont.events -e_moongate_cancel
+remove
+return 1
+
+CATEGORY=!Tds Memory Items
+SUBSECTION=Tds Staff Items
+DESCTIPTION=MoonGates Memory
+
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[dialog d_moongate_portal]
+80,0
+resizepic 0 0 3600 410 430
+resizepic 10 10 2620 390 410
+gumppic 14 35 01598 //0824
+dtext 100 15 0052 A <serv.name> Moongates
+
+dtext 130 185 <qval (<src.tag0.moongates>&<f_moongate_getflag 1>) ? 1152:022> Britain
+  button 115 188 1210 1209 1 0 1
+dtext 190 220 <qval (<src.tag0.moongates>&<f_moongate_getflag 2>) ? 1152:022> Bucaneer's den
+  button 220 240 1210 1209 1 0 2
+dtext 190 150 <qval (<src.tag0.moongates>&<f_moongate_getflag 3>) ? 1152:022> Cove
+  button 175 153 1210 1209 1 0 3
+dtext 135 380 <qval (<src.tag0.moongates>&<f_moongate_getflag 5>) ? 1152:022> Jhelom
+  button 120 383 1210 1209 1 0 4
+dtext 225 100 <qval (<src.tag0.moongates>&<f_moongate_getflag 6>) ? 1152:022> Minoc/Vesper
+  button 210 103 1210 1209 1 0 5
+dtext 330 160 <qval (<src.tag0.moongates>&<f_moongate_getflag 7>) ? 1152:022> Moonglow
+  button 350 150 1210 1209 1 0 6
+//dtext 280 130 <qval (<src.tag0.moongates>&<f_moongate_getflag 8>) ? 1152:022> Nujel'm
+//  button 290 150 1210 1209 1 0 7
+dtext 200 338 <qval (<src.tag0.moongates>&<f_moongate_getflag 9>) ? 1152:022> Serpents hold
+  button 235 358 1210 1209 1 0 8
+dtext 20 215 <qval (<src.tag0.moongates>&<f_moongate_getflag 10>) ? 1152:022> Skara brae
+  button 50 235 1210 1209 1 0 9
+dtext 160 295 <qval (<src.tag0.moongates>&<f_moongate_getflag 11>) ? 1152:022> Trinsic
+  button 145 298 1210 1209 1 0 10
+dtext 95 110 <qval (<src.tag0.moongates>&<f_moongate_getflag 12>) ? 1152:022> Yew
+  button 80 113 1210 1209 1 0 11
+//dtext 125 130 <qval (<src.tag0.moongates>&<f_moongate_getflag 13>) ? 1152:022> Wind
+//  button 110 133 1210 1209 1 0 12
+dtext 305 230 <qval (<src.tag0.moongates>&<f_moongate_getflag 14>) ? 1152:022> Magincia
+  button 290 233 1210 1209 1 0 13
+
+dtext 31 395 1152 Exit
+  button 16 398 1209 1210 1 0 0
+
+
+
+[dialog d_moongate_portal button]
+
+onbutton=0
+
+
+onbutton=1,200
+if (<src.hits> < <src.str>)&&(!<src.flags>&statf_dead)&&(!<src.isgm>)
+  src.sysmessageua 022 0 0 1 Voce precisa estar com o life full para usar o portal!
+elif (<distance> > 3)
+  src.sysmessage Voce esta muito longe do portal.
+else
+  serv.newitem i_mem_moongatedelay
+   new.cont=<src.uid>
+   new.link=<uid>
+   new.tag.p=<def0.moongate_location_<argn>>
+   new.timerd=<qval (<src.isgm>) ? 1:40>
+  src.events +e_moongate_cancel
+endif
+return 1
+
+
+
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+[EVENTS e_moongate_cancel]
+on=@gethit
+sysmessageua 022 0 0 1 O moongate perdeu a sua energia para o seu transporte.
+findid.i_mem_moongatedelay.remove
+events -e_moongate_cancel
+return 0
+
+on=@hittry
+sysmessageua 022 0 0 1 O moongate perdeu a sua energia para o seu transporte.
+findid.i_mem_moongatedelay.remove
+events -e_moongate_cancel
+return 0
+
+on=@spellcast
+sysmessageua 022 0 0 1 O moongate perdeu a sua energia para o seu transporte.
+findid.i_mem_moongatedelay.remove
+events -e_moongate_cancel
+return 0
+
+on=@skilluse
+sysmessageua 022 0 0 1 O moongate perdeu a sua energia para o seu transporte.
+findid.i_mem_moongatedelay.remove
+events -e_moongate_cancel
+return 0
+
+on=@USERWARMODE
+sysmessageua 022 0 0 1 O moongate perdeu a sua energia para o seu transporte.
+findid.i_mem_moongatedelay.remove
+events -e_moongate_cancel
+return 0
+
+
+
+
+//####################################################
+//              KNOCKBACK
+//####################################################
+[function knockback]
+serv.newitem i_gold
+  new.attr=090
+  new.p=<p>
+doswitch <dir>
+  new.move 0,1
+  new.move -1,1
+  new.move -1,0
+  new.move -1,-1
+  new.move 0,-1
+  new.move 1,-1
+  new.move 1,0
+  new.move 1,1
+enddo
+  new.morez=<z>
+  new.fix
+local.allow=<qval (<argn>) ? 5:3>
+If (<new.morez>==<new.z>)||(<eval ((<new.morez>-<new.z>)*(<new.morez>-<new.z>))> <= <dlocal.allow>)
+  p=<new.p>
+  update
+endif
+new.remove
+
+[eof]

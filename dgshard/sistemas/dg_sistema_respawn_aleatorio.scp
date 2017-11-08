@@ -1,0 +1,333 @@
+// Dragon Shard - T2A
+// http://dgshard.com.br
+// Por Staff Destiny
+// Sistema de respanws 1.0
+
+[DEFNAME config_respawns]
+resp_total_mounts   35
+resp_timer          60*60*6
+resp_dis_max_npc    5 // X tiles ele volta pro resp
+resp_dis_max_guard  15 // X tiles ele volta pro resp
+
+// ID's das montarias
+resp_mount_1_id     c_guardiao_cavalo_pacifico
+resp_mount_2_id     c_guardiao_lhama_pacifico
+resp_mount_3_id     c_guardiao_orn_pacifico
+resp_mount_4_id     c_guardiao_zostrich_pacifico
+resp_mount_5_id     c_guardiao_urso_pacifico
+resp_mount_6_id     c_guardiao_cavalo_fogo
+resp_mount_7_id     c_guardiao_lhama_fogo
+resp_mount_8_id     c_guardiao_orn_fogo
+resp_mount_9_id     c_guardiao_zostrich_fogo
+resp_mount_10_id    c_guardiao_urso_fogo
+resp_mount_11_id    c_guardiao_cavalo_agua
+resp_mount_12_id    c_guardiao_lhama_agua
+resp_mount_13_id    c_guardiao_orn_agua
+resp_mount_14_id    c_guardiao_zostrich_agua
+resp_mount_15_id    c_guardiao_urso_agua
+resp_mount_16_id    c_guardiao_cavalo_vento
+resp_mount_17_id    c_guardiao_lhama_vento
+resp_mount_18_id    c_guardiao_orn_vento
+resp_mount_19_id    c_guardiao_zostrich_vento
+resp_mount_20_id    c_guardiao_urso_vento
+resp_mount_21_id    c_guardiao_cavalo_gelo
+resp_mount_22_id    c_guardiao_lhama_gelo
+resp_mount_23_id    c_guardiao_orn_gelo
+resp_mount_24_id    c_guardiao_zostrich_gelo
+resp_mount_25_id    c_guardiao_urso_gelo
+resp_mount_26_id    c_guardiao_cavalo_floresta
+resp_mount_27_id    c_guardiao_lhama_floresta
+resp_mount_28_id    c_guardiao_orn_floresta
+resp_mount_29_id    c_guardiao_zostrich_floresta
+resp_mount_30_id    c_guardiao_urso_floresta
+resp_mount_31_id    c_guardiao_cavalo_rosite
+resp_mount_32_id    c_guardiao_lhama_rosite
+resp_mount_33_id    c_guardiao_orn_rosite
+resp_mount_34_id    c_guardiao_zostrich_rosite
+resp_mount_35_id    c_guardiao_urso_rosite
+//resp_mount_31_id    c_unicornio
+
+// Raridade das montarias
+resp_mount_1_rar     3
+resp_mount_2_rar     6
+resp_mount_3_rar     9
+resp_mount_4_rar     12
+resp_mount_5_rar     15
+resp_mount_6_rar     18
+
+resp_mount_7_rar     21
+resp_mount_8_rar     24
+resp_mount_9_rar     27
+resp_mount_10_rar    30
+resp_mount_11_rar    33
+resp_mount_12_rar    36
+
+resp_mount_13_rar    39
+resp_mount_14_rar    42
+resp_mount_15_rar    45
+resp_mount_16_rar    48
+resp_mount_17_rar    51
+resp_mount_18_rar    54
+
+resp_mount_19_rar    57
+resp_mount_20_rar    60
+resp_mount_21_rar    63
+resp_mount_22_rar    66
+resp_mount_23_rar    69
+resp_mount_24_rar    72
+
+resp_mount_25_rar    75
+resp_mount_26_rar    78
+resp_mount_27_rar    81
+resp_mount_28_rar    84
+resp_mount_29_rar    87
+resp_mount_30_rar    90
+
+resp_mount_31_rar    63
+resp_mount_32_rar    66
+resp_mount_33_rar    69
+resp_mount_34_rar    72
+resp_mount_35_rar    75
+
+[function f_mais_proximo]
+var.valor <argv[0]>
+var.uid <argv[1]>
+var.ret 100
+var.resp 0
+
+for x 1 <def.resp_total_mounts>
+    if (<UID.<var.uid>.tag0.resp_<eval <local.x>>> == 1)
+        var.raridade <eval <def.resp_mount_<eval <local.x>>_rar>>
+        if (<var.valor> > <var.raridade>)
+            var.diff <eval <var.valor>-<var.raridade>>
+        else
+            var.diff <eval <var.raridade>-<var.valor>>
+        endif
+    
+        if (<eval <var.diff>> <= <eval <var.ret>>)
+            var.ret=<var.diff>
+            var.resp=<eval <local.x>>
+        endif
+    endif
+endfor
+return <eval <var.resp>>
+
+[ITEMDEF i_respawn_montaria]
+id 041f6
+name Respawn de Montaria
+type t_normal
+
+ON=@Click
+if (<src.isgm>)
+    message @07a1 <ftime <timer>>
+endif
+
+ON=@Create
+tag0.tem=0
+color 026
+attr=attr_static|attr_newbie|attr_invis
+
+//FOR x 1 <def.resp_total_mounts>
+//    tag0.resp_<eval <local.x>> = 1
+//ENDFOR
+
+ON=@Timer
+if !0<tag0.tem>)
+    f_remove_guardian
+    
+    var.rand = {1 100}
+    var.resp = <f_mais_proximo <var.rand>,<UID>>
+
+    serv.newnpc <def.resp_mount_<eval <var.resp>>_id>
+    var.uid = <serv.new.uid>
+    serv.new.p <p>
+    serv.new.karma <eval (<def.resp_mount_<eval <var.resp>>_rar>*100)*-1>
+    serv.new.events=+e_respawn
+    serv.new.name <serv.new.name>, guardiao do <serv.chardef.<serv.new.tag0.montaria>.name>
+    serv.new.update
+
+    serv.newitem i_memory_novo_resp
+    serv.new.cont <var.uid>
+    serv.new.link <uid>
+    serv.new.equip
+    
+    // Adiciona os guardioes
+    for x 1 8
+        serv.newnpc c_elemental_guardiao
+        serv.new.color <UID.<var.uid>.findlayer(layer_robe).color>
+        serv.new.p <p>
+        serv.new.update
+        
+        var.uidg = <serv.new.uid>
+        
+        serv.newitem i_memory_novo_resp
+        serv.new.cont <var.uidg>
+        serv.new.link <uid>
+        serv.new.equip
+    endfor
+    
+    tag0.tem=1
+    tag0.uid=<var.uid>
+    timer 1
+else
+    if !(0<uid.<tag0.uid>>) || (<uid.<tag0.uid>.memoryfindtype.memory_ipet>)
+        tag0.tem=0
+        tag0.uid=0
+        timer {86400 259200}
+        f_remove_guardian // Remove os guardioes
+    else
+        timer 1
+    endif
+endif
+return 1
+
+ON=@DClick
+if (<src.isgm>)
+    dialog_conf_resp <uid>
+endif
+return 1
+
+[function dialog_conf_resp]
+sdialog d_conf_resp
+
+[DIALOG d_conf_resp]
+0,0
+page 0
+resizepic 60 52 9200 330 260
+button 200 280 4023 4024 1 0 99
+CALL pagina_resp <uid>
+
+[DIALOG d_conf_resp button]
+ON=99
+for x 1 <eval <def.resp_total_mounts>>
+    if (<ARGCHK[<eval <local.x>>]> == 1)
+        tag0.resp_<eval <local.x>> = 1
+    else
+        tag0.resp_<eval <local.x>> = 0
+    endif
+    forchars 30
+        if (<isevent.e_respawn>)
+            remove
+        endif
+    endfor
+    timer 1
+endfor
+
+[FUNCTION pagina_resp]
+local.uid <argn1>
+local.paginas = <eval <def.resp_total_mounts>/10>
+if (<eval <local.paginas>*10> < <eval <def.resp_total_mounts>>)
+    local.paginas += 1
+endif
+
+local.pagina 1
+local.y=70
+local.resp=1
+for x 1 <eval <local.paginas>>
+    page <eval <local.x>>
+    
+    if (<eval <local.x>*10> > <eval <def.resp_total_mounts>> )
+        local.loop = <eval 10-<eval <local.x>*10>-<eval <def.resp_total_mounts>>>
+    else
+        local.loop = 10
+    endif
+    
+    for xx 1 <eval <local.loop>>
+        dtext 100 <eval <local.y>> 52 <def.resp_mount_<eval <local.resp>>_id> (Raridade: <eval <def.resp_mount_<eval <local.resp>>_rar>>/100)
+        
+        if !(0<UID.<local.uid>.tag0.resp_<eval <local.resp>>>)
+            local.check=0
+        else
+            local.check=1
+        endif
+    
+        checkbox 70 <eval <local.y>> 210 211 <eval <local.check>> <eval <local.resp>>
+    
+        if (<local.pagina> > 1)
+            button 65 280 4014 4015 0 <eval <local.pagina>-1> 0 // Pagina anterior
+        endif
+        if (<eval <local.pagina>+1> <= <eval <local.paginas>>)
+            button 355 280 4005 4006 0 <eval <local.pagina>+1> 0 // Proxima pagina
+        endif
+        
+        local.resp +=1
+        local.y +=20
+    endfor
+    local.y = 70
+    local.pagina +=1
+endfor
+
+[FUNCTION f_remove_guardian]
+FORCHARS <def.resp_dis_max_guard>
+    IF (<baseid> == c_elemental_guardiao)
+        REMOVE
+    ENDIF
+ENDFOR
+
+[ITEMDEF i_memory_novo_resp]
+id=i_memory
+name Memoria do respawn
+type=t_eq_script
+layer=30
+
+on=@create
+attr=08
+morex=4
+timer=3
+
+ON=@Timer
+if (<cont.baseid> == c_elemental_guardiao)
+    if (<DISTANCE <link>> > <def.resp_dis_max_guard>)
+        cont.go <link.p>
+    endif
+else
+    if (<DISTANCE <link>> > <def.resp_dis_max_npc>)
+        cont.go <link.p>
+    endif   
+endif
+timer 1
+return 1
+
+[EVENTS e_respawn]
+
+[CHARDEF c_elemental_guardiao]
+NAME=Elemental Guardiao
+ID=c_elem_air
+SOUND=snd_ELEMENTL_AIRELEM1
+ICON=i_pet_elem_air
+DAM=8,16
+ARMOR=25
+RESOURCES=8 t_magic
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+FOODTYPE=
+//SHELTER==r_mountains
+DESIRES=r_mountains
+
+ON=@Create
+    STR={150 300}
+    DEX={100 150}
+    INT={100 150}
+    MAXHITS={200 300}
+    PARRYING={100.0 100.0}
+    MAGERY={60.0 75.0}
+    MAGICRESISTANCE={60.0 75.0}
+    TACTICS={60.0 80.0}
+    WRESTLING={60.0 80.0}
+    NPC=brain_monster
+    FAME={100 2000}
+    KARMA={-3000 -3999}
+    ITEMNEWBIE=i_spellbook    // knows fire type spells.
+    ADDSPELL=s_magic_arrow
+    ADDSPELL=s_energy_bolt
+    ADDSPELL=s_fireball
+    ADDSPELL=s_flamestrike
+    ADDSPELL=s_poison
+    ADDSPELL=s_paralyze
+
+ON=@NPCRestock
+    ITEM=loot_EFREET
+    CATEGORY=Novos Monstros
+    SUBSECTION=Elementals
+    DESCRIPTION=Elemental Guardiao geral
+
+[EOF]

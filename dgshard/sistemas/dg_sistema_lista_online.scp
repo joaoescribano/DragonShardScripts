@@ -1,0 +1,775 @@
+// Falta:
+// Filtros Guilda, Amigos, Blocks
+// filtros busca: online, offline
+// Inserir PM no BD
+// Arrumar Gump da Busca
+// Op ao de ADD AMG
+
+[DEFNAME cor]
+BFONT_bwhite    <basefont color="#ff0515">
+
+[FUNCTION PRIVATE]
+SRC.SYSMESSAGE @,,1 Comando desabilitado.
+RETURN 1
+
+[FUNCTION pm]
+if <src.findid.anti_flood_pm.more1> >= 5
+    src.sysmessage @,,1 Desculpe, voce enviou muitas PM's em um curto espaco de tempo e ficara bloqueado deste servico por alguns minutos. Tente novamente mais tarde.
+    return 1
+endif
+IF !<ARGV>
+LIST
+RETURN 1
+ENDIF
+CTAG.PMOK=
+IF (STRMATCH(*<ASC ,>*,<ASC <ARGS>>)) 
+SRC.SYSMESSAGE @,,1 Contem um caractere invalido.
+RETURN 1
+ELIF (STRMATCH(<name>,<args>))
+SRC.SYSMESSAGE @,,1 Voce nao pode enviar mensagens particulares a si mesmo.
+RETURN 1 
+ENDIF
+SERV.f_ALLCHARS PEEMEE2 <ARGS>, <UID>
+IF !(<CTAG0.PMOK>)
+SYSMESSAGE @,,1 Nao foi encontrado nenhum jogador com o nome "<args>" no servidor.
+ENDIF
+CTAG.PMOK=
+RETURN 1
+
+[FUNCTION f_ALLCHARS]
+        for h <serv.accounts>
+                local.i=0
+                if (<serv.account.<eval <local.h> +-1>.chars>)
+                        for i <serv.account.<eval <local.h> +-1>.chars>
+                                ref1 <serv.account.<eval <local.h> +-1>.char.<eval <local.i> +-1>.uid>
+                                ref1.<args>
+                        endfor
+                endif
+        endfor
+return 1
+
+[FUNCTION PEEMEE2]
+REF1=<ARGV[1]>
+IF (STRMATCH(<name>,<argv[0]>)) 
+ IF (<CHECKINBLOCKLIST <REF1>>)
+ RETURN 1
+ ENDIF
+  IF (<TAG0.BLOCKPM>) && (<REF1.ACCOUNT.PLEVEL> < 2)
+  RETURN 1
+  ENDIF
+   Dialog d_playermsg, 2
+ IF (<REF1.TAG0.BLOCKPM>) || (<REF1.CHECKINBLOCKLIST <UID>>)
+ REF1.SYSMESSAGE @,,1 Se voce enviar uma PM invisivel, ou para uma pessoa bloqueada, esta pessoa podera te responder.
+ ENDIF
+REF1.CTAG.PMOK 1
+ENDIF
+RETURN 1
+
+[DEFNAME admin_strings]
+admin_plevel_3 "Seer"
+admin_plevel_4 "Game Master"
+admin_plevel_5 "Developer"
+admin_plevel_6 "Administrator"
+admin_plevel_7 "Owner"
+
+[DEFNAME msg_toggles]
+gm_one_way 0 //Can players use reply to GM messages? 1 = no 0 = yes
+msg_self 1 //players can message themselves? handy for reminders 1= yes 0 = no
+list_staff 0 //Do staff show to players on the list? 1=yes 0=no
+
+[FUNCTION lista]
+LIST
+
+[FUNCTION list]
+ctag.list_numplayers=0
+ctag.list_page2=1
+serv.allclients list_getplayers
+ctag.list_numpages=<eval (((<ctag0.list_numplayers>-1) / 20) + 1)> // 20 players per page
+dialog d_default_list
+
+[FUNCTION listsearch]
+ctag.list_numplayersse=0
+ctag.listse_page2=1
+serv.f_allchars list_getplayerssearch <ARGS>
+ctag.list_numpagesse=<eval (((<ctag0.list_numplayersse>-1) / 20) + 1)> // 20 players per page
+dialog d_default_listsearch 1,<ARGS>
+
+[FUNCTION listpermanent]
+dialog d_default_list
+
+[FUNCTION list_getplayers]
+// List players in CTAGs on the caller
+IF !(<def.list_staff>)
+if (<account.plevel> > <src.account.plevel>) || ((<tag0.private>) && !(<sRC.isgm>))
+return
+elif !(<TAG0.BLOCKPM>) && !(<CHECKINBLOCKLIST <SRC.UID>>) || (<SRC.ACCOUNT.PLEVEL> > 1)
+src.ctag0.list_numplayers += 1
+try src.ctag.list_p<eval (<src.ctag0.list_numplayers>)>=<uid>
+endif
+ELSE
+if (<tag0.private>) && !(<sRC.isgm>)
+return
+else
+src.ctag0.list_numplayers += 1
+try src.ctag.list_p<eval (<src.ctag0.list_numplayers>)>=<uid>
+endif
+ENDIF
+
+[FUNCTION list_getplayerssearch]
+IF (STRMATCH(*<ARGS>*, <NAME>))
+// List players in CTAGs on the caller
+IF !(<def.list_staff>)
+if (<account.plevel> > <src.account.plevel>) || ((<tag0.private>) && !(<sRC.isgm>))
+return
+elif (!(<TAG0.BLOCKPM>) && !(<CHECKINBLOCKLIST <SRC.UID>>)) || (<SRC.ACCOUNT.PLEVEL> > 1)
+src.ctag0.list_numplayersse += 1
+try src.ctag.listse_p<eval (<src.ctag0.list_numplayersse>)>=<uid>
+endif
+ELSE
+if (<tag0.private>) && !(<sRC.isgm>)
+return
+else
+src.ctag0.list_numplayersse += 1
+try src.ctag.listse_p<eval (<src.ctag0.list_numplayersse>)>=<uid>
+endif
+ENDIF
+ENDIF
+
+[FUNCTION list_getplayers_list]
+// Function I used to list page system
+for x 1 50
+try ctag.list_p<eval <local.x>>=01
+end
+ctag.list_numplayers=50
+
+[DIALOG d_default_listsearch]
+0,0
+NOMOVE
+src.dialogclose d_default_list
+page 0
+resizepic 2 2 3500 265 580
+dhtmlgump 15 18 235 60 0 0 <def.center><def.U>DG Shard<def.UE><def.br>Jogadores Online<def.br>Total Listado: <eval <ctag0.list_numplayersse>> / <serv.clients>
+resizepic 13 90 3500 240 45
+button 215 105 04B9 04BA 1 0 4
+resizepic 13 127 3500 240 80
+dhtmlgump 36 141 190 20 0 0 <def.center><def.u>Filtros
+button 36 164 2103 2104 1 0 1
+dhtmlgump 50 161 190 20 0 0 Jogadores Online
+button 36 182 2103 2104 1 0 1
+dhtmlgump 50 179 190 20 0 0 Jogadores Offline
+//button 36 200 2103 2104 1 0 1
+//dhtmlgump 50 197 190 20 0 0 Jogadores Offline
+dtextentry 36 102 170 17 0 30 <ARGS>
+page 1 // Player data
+dhtmlgump 15 72 130 20 0 0 <def.center>Seu Status:
+IF (<SRC.TAG0.BLOCKPM>)
+dhtmlgump 130 72 55 30 0 0 <DEF.B><DEF.BFONT_DRED>OFFLINE
+button 205 70 4010 4009 1 0 3
+ELSE
+dhtmlgump 130 72 50 30 0 0 <DEF.B><DEF.BFONT_DGREEN>ONLINE
+button 205 70 4009 4010 1 0 3
+ENDIF
+//list_rendersedialog
+obj=<local.oldobj>
+dhtmlgump 84 550 95 20 0 0 <DEF.B>Pagina <eval <ctag0.list_page2>> / <eval <ctag0.list_numpagesse>>
+if (<ctag0.list_page2> > 1)
+// Back button
+button 64 550 5603 5607 1 0 1
+endif
+if (<ctag0.list_page2> < <ctag0.list_numpagesse>)
+// Forward button
+button 180 550 5601 5605 1 0 2
+endif
+
+[DIALOG d_default_listsearch text]
+Lista de Jogadores
+www.dgshard.com.br
+ONLINE
+
+[DIALOG d_default_listsearch button]
+
+on=0
+src.clearctags list_p
+src.ctag.list_numpages=
+src.ctag.list_numplayers=
+src.clearctags listse_p
+src.ctag.list_numpagesse=
+src.ctag.list_numplayersse=
+
+on=1 // Back button
+ctag.listse_page2 -= 1
+if (<ctag0.listse_page2> < 1)
+// Bad! And shouldnt happen
+sysmessage Error: list_page2 valor foi muito baixo, por favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.listse_page2=1
+endif
+dialog d_default_listsearch 1,<ARGTXT[30]>
+
+on=2 // Forward button
+ctag.listse_page2 += 1
+if (<ctag0.listse_page2> > <ctag0.list_numpagesse>)
+// Bad! Should also not happen
+sysmessage Error: listse_page2 valor foi muito alto, por favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.listse_page2=<ctag0.list_numpagesse>
+endif
+dialog d_default_listsearch 1,<ARGTXT[30]>
+
+on=3
+IF (<SRC.TAG0.BLOCKPM>)
+SRC.TAG.BLOCKPM=
+SRC.SYSMESSAGE @478,,1 Voce esta visivel para todos os membros.
+SRC.LIST
+ELSE
+SRC.TAG.BLOCKPM=1
+SRC.SYSMESSAGE @32,,1 Voce se tornou invisivel para todos os membros.
+SRC.LIST
+ENDIF
+
+on=4
+SRC.DIALOGCLOSE d_default_listsearch
+SRC.LISTSEARCH <ARGTXT[30]>
+
+on=1001,5000 // Player buttons
+if <src.findid.anti_flood_pm.more1> >= 5
+    src.sysmessage @,,1 Desculpe, voce enviou muitas PM's em um curto espaco de tempo e ficara bloqueado deste servico por alguns minutos. Tente novamente mais tarde.
+    src.clearctags list_p
+    src.ctag.list_numpages=
+    src.ctag.list_numplayers=
+    src.clearctags listse_p
+    src.ctag.list_numpagesse=
+    src.ctag.list_numplayersse=
+    return 1
+endif
+try uid.<ctag0.listse_p<eval <argn> - 1000>>.dialog d_playermsg, 2
+
+on=5001,10000 //block buttons
+IF !(<CHECKINBLOCKLIST <ctag0.listse_p<eval <argn> - 5000>>>)
+ IF (<ctag0.listse_p<eval <argn> - 5000>>==<uid>)
+  SRC.SYSMESSAGE @32,,1 Voce nao pode se bloquear.
+  SRC.LISTSEARCH <ARGTXT[30]>
+  RETURN 1
+ ENDIF
+SRC.ADDTOBLOCKLIST <ctag0.listse_p<eval <argn> - 5000>>
+ELSE
+SRC.REMOVEFROMBLOCKLIST <ctag0.listse_p<eval <argn> - 5000>>
+ENDIF
+SRC.LISTSEARCH <ARGTXT[30]>
+
+[DIALOG d_default_list]
+//dhtmlgump x y width height has_background has_scrollbar text
+0,0
+NOMOVE
+src.dialogclose d_default_list
+page 0
+resizepic 2 2 3500 265 580
+dhtmlgump 15 18 235 60 0 0 <def.center><def.U>DG Shard<def.UE><def.br>Jogadores Online<def.br>Total Listado: <QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? <Serv.clients>: <eval <ctag0.list_numplayers>>> / <serv.clients>
+resizepic 13 90 3500 240 45
+button 215 105 04B9 04BA 1 0 4
+dtextentry 36 102 170 17 0 30 Buscar
+page 1 // Player data
+dhtmlgump 15 72 130 20 0 0 <def.center>Seu Status:
+IF (<SRC.TAG0.BLOCKPM>)
+dhtmlgump 130 72 55 30 0 0 <DEF.B><DEF.BFONT_DRED>OFFLINE
+button 205 70 4010 4009 1 0 3
+ELSE
+dhtmlgump 130 72 50 30 0 0 <DEF.B><DEF.BFONT_DGREEN>ONLINE
+button 205 70 4009 4010 1 0 3
+ENDIF
+list_renderdialog2
+obj=<local.oldobj>
+dhtmlgump 84 550 95 20 0 0 <DEF.B>Pagina <eval <ctag0.list_page2>> / <eval <ctag0.list_numpages>>
+if (<ctag0.list_page2> > 1)
+// Back button
+button 64 550 5603 5607 1 0 1
+endif
+if (<ctag0.list_page2> < <ctag0.list_numpages>)
+// Forward button
+button 180 550 5601 5605 1 0 2
+endif
+
+[DIALOG d_default_list button]
+
+on=0
+src.clearctags list_p
+src.ctag.list_numpages=
+src.ctag.list_numplayers=
+
+on=1 // Back button
+ctag.list_page2 -= 1
+if (<ctag0.list_page2> < 1)
+// Bad! And shouldnt happen
+sysmessage Error: list_page2 valor foi muito baixo, por favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.list_page2=1
+endif
+dialog d_default_list
+
+on=2 // Forward button
+ctag.list_page2 += 1
+if (<ctag0.list_page2> > <ctag0.list_numpages>)
+// Bad! Should also not happen
+sysmessage Error: list_page2 valor foi muito alto, por favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.list_page2=<ctag0.list_numpages>
+endif
+dialog d_default_list
+
+on=3
+IF (<SRC.TAG0.BLOCKPM>)
+SRC.TAG.BLOCKPM=
+SRC.SYSMESSAGE @478,,1 Voce esta visivel para todos os membros.
+dialog d_default_list
+ELSE
+SRC.TAG.BLOCKPM=1
+SRC.SYSMESSAGE @32,,1 Voce se tornou invisivel para todos os membros.
+dialog d_default_list
+ENDIF
+
+on=4
+SRC.DIALOGCLOSE d_default_list
+SRC.LISTSEARCH <ARGTXT[30]>
+
+on=1001,5000 // Player buttons
+if <src.findid.anti_flood_pm.more1> >= 5
+    src.sysmessage @,,1 Desculpe, voce enviou muitas PM's em um curto espaco de tempo e ficara bloqueado deste servico por alguns minutos. Tente novamente mais tarde.
+    src.clearctags list_p
+    src.ctag.list_numpages=
+    src.ctag.list_numplayers=
+    return 1
+endif
+try uid.<ctag0.list_p<eval <argn> - 1000>>.dialog d_playermsg, 2
+
+on=5001,10000 //block buttons
+IF !(<CHECKINBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>>)
+ IF (<ctag0.list_p<eval <argn> - 5000>>==<uid>)
+  SRC.SYSMESSAGE @32,,1 Voce nao pode se bloquear.
+  SRC.LISTPERMANENT
+  RETURN 1
+ ENDIF
+SRC.ADDTOBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>
+ELSE
+SRC.REMOVEFROMBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>
+ENDIF
+SRC.LISTPERMANENT
+
+[DIALOG d_spherelist]
+100,100
+src.dialogclose d_spherelist
+// Let's not break some (perhaps) scripts using OBJ
+local.oldobj=<obj>
+page 0 // Basic layout
+GUMPPIC 10 10 027 // Background
+dtext 30 15 1152 <serv.servname>
+dtext 30 35 1152 Total Listado: <QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? <Serv.clients>: <eval <ctag0.list_numplayers>>> / <serv.clients>
+page 1 // Player data
+dtext 10 55 1152 Msg
+dtext 65 55 1152 Player
+dtext 228 55 1152 Block
+IF (<SRC.TAG0.BLOCKPM>)
+dtext 170 36 32 OFF
+button 200 35 4010 4009 1 0 3
+ELSE
+dtext 170 36 478 ON
+button 200 35 4009 4010 1 0 3
+ENDIF
+list_renderdialog
+obj=<local.oldobj>
+if (<ctag0.list_page2> > 1)
+// Back button
+button 28 276 5603 5607 1 0 1
+endif
+if (<ctag0.list_page2> < <ctag0.list_numpages>)
+// Forward button
+button 210 276 4005 4006 1 0 2
+endif
+dtext 105 275 1152 Page <eval <ctag0.list_page2>> / <eval <ctag0.list_numpages>>
+
+[FUNCTION list_renderdialog]
+local.y=140
+for x <eval ((<ctag0.list_page2> - 1) * 20) + 1> <eval (<ctag0.list_page2> * 20)>
+if (<local.x> > <QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? <Serv.clients>: <ctag0.list_numplayers>>)
+return
+endif
+obj=<ctag0.list_p<eval <local.x>>>
+local.hue=0480
+IF !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.TAG0.BLOCKPM>>) && !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.CHECKINBLOCKLIST <UID>>>)
+IF (<OBJ.UID>==<SRC.UID>)
+IF (<def.msg_self>)
+button 30 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dtext 75 <local.y> 0779 <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+dtext 75 <local.y> 0779 <QVAL <OBJ.FINDID.i_ru?e_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ELSE
+IF (<OBJ.ACCOUNT.PLEVEL> > <SRC.ACCOUNT.PLEVEL>)
+dtext 75 <local.y> <local.hue> <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+button 30 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dtext 75 <local.y> <local.hue> <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ENDIF
+button 200 <local.y> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4021: 4022> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4022: 4021> 1 0 <eval (5000 + <local.x>)> // block
+local.y += 20
+ENDIF
+end
+
+[FUNCTION list_renderdialog2]
+local.y=138
+for x <eval ((<ctag0.list_page2> - 1) * 20) + 1> <eval (<ctag0.list_page2> * 20)>
+if (<local.x> > <QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? <Serv.clients>: <ctag0.list_numplayers>>)
+return
+endif
+obj=<ctag0.list_p<eval <local.x>>>
+local.y2=<eval <local.y> + 3>
+IF !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.TAG0.BLOCKPM>>) && !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.CHECKINBLOCKLIST <UID>>>)
+IF (<OBJ.UID>==<SRC.UID>)
+IF (<def.msg_self>)
+button 190 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dhtmlgump 20 <local.y2> 145 20 0 0 <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+dhtmlgump 20 <local.y2> 145 20 0 0 <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ELSE
+IF (<OBJ.ACCOUNT.PLEVEL> > <SRC.ACCOUNT.PLEVEL>)
+dhtmlgump 20 <local.y2> 145 20 0 0 <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+button 190 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dhtmlgump 20 <local.y2> 145 20 0 0 <QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ENDIF
+button 220 <local.y> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4021: 4022> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4022: 4021> 1 0 <eval (5000 + <local.x>)> // block
+local.y += 20
+ENDIF
+end
+
+[FUNCTION list_rendersedialog]
+local.y=140
+IF !(<ctag0.list_numplayersse>)
+dtext 10 <eval <local.y> + 5> 32 Nenhum resultado encontrado.
+RETURN 1
+ENDIF
+for x <eval ((<ctag0.listse_page2> - 1) * 20) + 1> <eval (<ctag0.listse_page2> * 20)>
+if (<local.x> > <ctag0.list_numplayersse>)
+return
+endif
+obj=<ctag0.listse_p<eval <local.x>>>
+local.y2=<eval <local.y> + 3>
+IF !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.TAG0.BLOCKPM>>) && !(<QVAL <EVAL QVAL(<SRC.ACCOUNT.PLEVEL>,2,0,1,1)>? 0: <OBJ.CHECKINBLOCKLIST <UID>>>)
+IF (<OBJ.UID>==<SRC.UID>)
+IF (<def.msg_self>)
+button 10 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dhtmlgump 65 <local.y2> 145 20 0 0 <DEF.BFONT_DRED><QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+dhtmlgump 65 <local.y2> 145 20 0 0 <DEF.BFONT_DRED><QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ELSE
+IF (<OBJ.ACCOUNT.PLEVEL> > <SRC.ACCOUNT.PLEVEL>)
+dhtmlgump 65 <local.y2> 145 20 0 0 <DEF.BFONT_DRED><QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ELSE
+button 10 <local.y> 4011 4013 1 0 <eval (1000 + <local.x>)>
+dhtmlgump 65 <local.y2> 145 20 0 0 <DEF.BFONT_DRED><QVAL <OBJ.FINDID.i_rune_incognito.UID> ? <OBJ.FINDID.i_rune_incognito.NAME> : <obj.name>>
+ENDIF
+ENDIF
+button 228 <local.y> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4021: 4022> <QVAL <CHECKINBLOCKLIST <OBJ>>? 4022: 4021> 1 0 <eval (5000 + <local.x>)> // block
+local.y += 20
+ENDIF
+end
+
+[DIALOG d_spherelist BUTTON]
+on=1 // Back button
+ctag.list_page2 -= 1
+if (<ctag0.list_page2> < 1)
+// Bad! And shouldnt happen
+sysmessage Error: list_page2 valor foi muito baixo, por favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.list_page2=1
+endif
+dialog d_spherelist
+
+on=2 // Forward button
+ctag.list_page2 += 1
+if (<ctag0.list_page2> > <ctag0.list_numpages>)
+// Bad! Should also not happen
+sysmessage Error: list_page2 valor foi muito alto, po? favor informe (<ctag0.list_page2> / <ctag0.list_numpages>)
+ctag.list_page2=<ctag0.list_numpages>
+endif
+dialog d_spherelist
+
+on=3
+IF (<SRC.TAG0.BLOCKPM>)
+SRC.TAG.BLOCKPM=
+SRC.SYSMESSAGE @478,,1 Voce esta visivel para todos os membros.
+SRC.LIST
+ELSE
+SRC.TAG.BLOCKPM=1
+SRC.SYSMESSAGE @32,,1 Voce se tornou invisivel para todos os membros.
+SRC.LIST
+ENDIF
+
+on=1001,5000 // Player buttons
+try uid.<ctag0.list_p<eval <argn> - 1000>>.dialog d_playermsg, 2
+
+on=5001,10000 //block buttons
+IF !(<CHECKINBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>>)
+ IF (<ctag0.list_p<eval <argn> - 5000>>==<uid>)
+  SRC.SYSMESSAGE @32,,1 Voce nao pode se bloquear.
+  SRC.LIST
+  RETURN 1
+ ENDIF
+SRC.ADDTOBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>
+ELSE
+SRC.REMOVEFROMBLOCKLIST <ctag0.list_p<eval <argn> - 5000>>
+ENDIF
+SRC.LIST
+
+
+[DIALOG d_playermsg]
+100,100
+PAGE 0
+resizepic 83 51 3500 242 262
+resizepic 97 137 3500 213 164
+resizepic 97 65 3500 213 82
+dhtmlgump 140 272 58 18 0 0 Enviar
+button 120 272 2117 2118 1 0 1
+dtextentry 119 153 170 113 0 0 
+dhtmlgump 114 79 179 56 0 00 <def.center>Mensagem para:<def.br><name><def.br><qval <isonline>? <def.bfont_green>: <def.bfont_red>>Esta pessoa esta <qval <isonline>? online: offline>.
+
+[DIALOG d_playermsg button]
+on=1
+IF (<TAG0.BLOCKPM> || <CHECKINBLOCKLIST <SRC.UID>>) && (<SRC.ACCOUNT.PLEVEL>==1)
+SRC.SYSMESSAGE @,,1 Aconteceu um erro no envio desta mensagem. Tente novamente mais tarde.
+RETURN 1
+ENDIF
+IF (<isempty <ARGTXT[0]>>)
+SRC.SYSMESSAGE @,,1 Voce nao pode enviar uma mensagem em branco.
+dialog d_playermsg
+return 1
+ENDIF
+if <src.restest anti_flood_pm>
+   if <src.findid.anti_flood_pm.more1> >= 5
+       src.sysmessage @,,1 Desculpe, voce enviou muitas PM's em um curto espaco de tempo e ficara bloqueado deste servico por alguns minutos. Tente novamente mais tarde.
+       return 1
+   endif
+   src.findid.anti_flood_pm.trigger @newpm
+else
+   serv.newitem anti_flood_pm
+   src.new.equip
+endif
+FOR 1 <eval <TAG0.PMNUMBER> + 1>
+IF (<ISEMPTY <TAG.REPLY<dLOCAL._FOR>>>)
+tag0.reply<dLOCAL._FOR> = <src.uid>,<serv.rtime.FORMAT %d/%m/%Y %H:%M:%S>,"<argtxt[0]>"
+tag0.pmnumber ++
+SRC.SYSMESSAGE @,,1 Mensagem enviada. Numero na fila: <dLOCAL._FOR>
+SYSMESSAGE @,,1 Voce tem <dLOCAL._FOR> mensagens na fila.
+if !<isonline>
+SRC.SYSMESSAGE @,,1 Sua mensagem nao foi entregue! Como o jogador esta offline ela sera entregue em sua proxima conexao.
+ENDIF
+EVENTS +e_guardapm
+IF !<isdialogopen d_pm>
+TRYSRC <UID> dialogclose d_pm_notify
+TRYSRC <UID> sdialog d_pm_notify
+ENDIF
+SRC.SOUND 74
+RETURN 1
+ENDIF 
+ENDFOR
+
+[FUNCTION f_insertpm_callback]
+IF (<ARGN2> == 0)
+    SERV.LOG The command failed to execute. (<ARGS>)
+ELSE
+    SERV.LOG The command succeeded. (<ARGS>)
+ENDIF
+RETURN
+
+[DIALOG d_pm_notify]
+20,20
+SRC.SOUND 0234
+NOCLOSE
+NOMOVE
+NODISPOSE
+
+PAGE 0
+resizepic 0 0 3500 195 72
+tilepic 4 23 4029
+tilepic 24 26 4031
+dhtmlgump 45 9 139 41 0 0 <def.center><qval (<TAG0.PMNUMBER> < 2)? Nova mensagem: Novas mensagens>.<def.br>Total: <dTAG0.PMNUMBER> <qval (<TAG0.PMNUMBER> < 2)? mensagem: mensagens>.
+button 63 48 2103 2104 1 0 1
+dhtmlgump 80 44 121 21 0 0 Ler mensagem.
+
+[DIALOG d_pm_notify BUTTON]
+ON=1
+IF !(STRCMPI(<arrayshow 0,<tag.reply1>>,SISTEMA))
+SRC.DIALOG d_pm
+ELSE
+REF1=<arrayshow 0,<tag.reply1>>
+IF (<SRC.ACCOUNT.PLEVEL> <= <REF1.ACCOUNT.PLEVEL>)
+REF1.SYSMESSAGE @,,1 <SRC.NAME> acaba de abrir sua PM enviada em <arrayshow 1,<SRC.tag.reply1>> 
+ENDIF
+SRC.DIALOG d_pm
+ENDIF
+
+[DIALOG d_pm]
+100,100
+PAGE 0
+ref1=<arrayshow 0,<tag.reply1>>
+if (<ref1.account.plevel> > 1)
+local.staff 1
+endif
+resizepic 83 51 3500 242 <qval <local.staff>? 282: 262>
+resizepic 97 <qval <local.staff>? 157: 137> 3500 213 164
+resizepic 97 65 3500 213 <qval <local.staff>? 102: 82>
+dhtmlgump 140 <qval <local.staff>? 292: 272> 58 18 0 0 Responder
+button 120 <qval <local.staff>? 292: 272> 2117 2118 1 0 1
+dhtmlgump 119 <qval <local.staff>? 173: 153> 170 113 0 0 <arrayshow 2,<tag.reply1>>
+dhtmlgump 114 79 179 <qval <local.staff>? 76: 56> 0 00 <def.center>De: <ref1.name><qval <local.staff>?<def.br>*MENSAGEM DA STAFF*><def.br><arrayshow 1,<tag.reply1>><def.br><qval <ref1.isonline>? <def.bfont_green>: <def.bfont_red>>Esta pessoa esta <qval <ref1.isonline>? online: offline>.
+
+[DIALOG d_pm BUTTON]
+ON=0
+f_msg_queue
+
+ON=1
+if <src.findid.anti_flood_pm.more1> >= 5
+    src.sysmessage @,,1 Desculpe, voce enviou muitas PM's em um curto espaco de tempo e ficara bloqueado deste servico por alguns minutos. Tente novamente mais tarde.
+else
+REF1=<arrayshow 0,<tag.reply1>>
+REF1.SDialog d_playermsg, 2
+endif
+f_msg_queue
+
+[FUNCTION f_msg_queue]
+LOCAL.CONDICAO 1
+WHILE (<LOCAL.CONDICAO>==1)
+LOCAL.CT ++
+IF (<ISEMPTY <TAG.REPLY<eval <LOCAL.CT> + 1>>>)
+TAG.REPLY<dLOCAL.CT>=
+LOCAL.CONDICAO=0
+ELSE
+TAG.REPLY<dLOCAL.CT>=<TAG.REPLY<eval <LOCAL.CT> + 1>>
+ENDIF
+ENDWHILE
+tag0.pmnumber --
+IF (<ISEMPTY <TAG.REPLY1>>)
+SRC.SYSMESSAGE @,,1 Voce leu todas suas mensagens.
+SRC.EVENTS -e_guardapm
+ELSE
+SRC.SYSMESSAGE @,,1 Voce ainda tem mensagens na lista de espera.
+SDIALOG d_pm_notify
+ENDIF 
+
+[FUNCTION ADDTOBLOCKLIST]
+IF <ISEMPTY <TAG.BLOCKLIST>>
+TAG.BLOCKLIST=<ARGS>
+ELSE
+TAG.BLOCKLIST=<TAG.BLOCKLIST>,<ARGS>
+ENDIF
+SRC.SYSMESSAGE @478,,1 <UID.<ARGS>.NAME> foi adicionado a sua block list.
+RETURN 1
+
+[FUNCTION REMOVEFROMBLOCKLIST]
+REMOVEFROMBLOCKLIST2 <ARGS>,<TAG.BLOCKLIST>
+
+[FUNCTION REMOVEFROMBLOCKLIST2]
+IF (<ARGV>==2) && (<ARGV[0]>==<ARGV[1]>)
+ TAG.BLOCKLIST=
+ELSE
+ FOR 1 <EVAL <ARGV> - 1>
+ LOCAL.BLOCK<dLOCAL._FOR>=<ARGV[<dLOCAL._FOR>]>
+ LOCAL.COUNT ++
+ ENDFOR
+ FOR 1 <LOCAL.COUNT>
+ IF !(<LOCAL.BLOCK<dLOCAL._FOR>>==<ARGV[0]>)
+ IF <ISEMPTY <CTAG.RESULT>>
+ CTAG.RESULT=<LOCAL.BLOCK<dLOCAL._FOR>>
+ ELSE
+ CTAG.RESULT=<CTAG.RESULT>,<LOCAL.BLOCK<dLOCAL._FOR>>
+ ENDIF
+ ENDIF
+ ENDFOR
+ENDIF
+TAG.BLOCKLIST=<CTAG.RESULT>
+CTAG.RESULT=
+
+[FUNCTION CHECKINBLOCKLIST]
+IF <ISEMPTY <TAG.BLOCKLIST>>
+RETURN 0
+ELSE
+RETURN <CHECKINBLOCKLIST2 <ARGS>,<TAG.BLOCKLIST>>
+ENDIF 
+
+[FUNCTION CHECKINBLOCKLIST2]
+FOR 1 <EVAL <ARGV> - 1>
+IF (<ARGV[0]>==<ARGV[<dLOCAL._FOR>]>)
+RETURN "1"
+ENDIF
+ENDFOR 
+RETURN 0
+
+[FUNCTION arrayshow]
+RETURN <ARGV[<EVAL <ARGV[0]> + 1>]>
+
+[FUNCTION guardarpm]
+WHILE !(<LOCAL.STOP>)
+  LOCAL.COUNT ++
+  TAG.GUARDAPM<dLOCAL.COUNT>=<CTAG.REPLY<dLOCAL.COUNT>>
+  IF (<ISEMPTY <CTAG.REPLY<eval <LOCAL.COUNT> + 1>>>)
+  LOCAL.STOP 1
+  ENDIF
+ENDWHILE
+
+[FUNCTION recuperapm]
+WHILE !(<LOCAL.STOP>)
+LOCAL.COUNT ++
+CTAG.REPLY<dLOCAL.COUNT>=<TAG.GUARDAPM<dLOCAL.COUNT>>
+TAG.GUARDAPM<dLOCAL.COUNT>=
+IF (<ISEMPTY <TAG.GUARDAPM<eval <LOCAL.COUNT> + 1>>>)
+LOCAL.STOP 1
+ENDIF
+ENDWHILE
+
+[EVENTS e_guardapm]
+On=@LOGIN
+recuperapm
+DIALOG d_pm_notify
+
+On=@LOGOUT
+guardarpm
+
+[FUNCTION pmforall]
+SERV.ALLCLIENTS pmforall2 <ARGS>
+
+[FUNCTION pmforall2]
+LOCAL.CONDICAO=1
+WHILE (<LOCAL.CONDICAO>==1)
+LOCAL.CT ++
+IF (<ISEMPTY <CTAG.REPLY<dLOCAL.CT>>>)
+ctag0.reply<dLOCAL.CT> = SISTEMA,<serv.rtime.FORMAT %d/%m/%Y %H:%M:%S>,"<args>"
+SYSMESSAGE @07a1,,1 Voce tem <dLOCAL.CT> mensagens na fila.
+EVENTS +e_guardapm
+TRYSRC <UID> sdialog d_pm_notify
+SRC.SOUND 74
+LOCAL.CT=0
+LOCAL.CONDICAO=0
+RETURN 1
+ENDIF 
+ENDWHILE
+
+[ITEMDEF anti_flood_pm]
+NAME=Anti Flood PM
+ID=i_memory
+TYPE=t_eq_script
+LAYER=layer_special
+
+ON=@Create
+  ATTR=attr_decay
+  MORE1=1
+
+ON=@EQUIP
+  TIMER=120
+
+ON=@NEWPM
+  MORE1 ++
+  IF <MORE1> >= 5
+    TIMER=300
+  ENDIF
+
+ON=@Timer
+  REMOVE
+  RETURN 0

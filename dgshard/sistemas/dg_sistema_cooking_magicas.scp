@@ -1,0 +1,314 @@
+//Scriptado by Technoghost
+//#########################################################
+//#######################Magic Foods#######################
+//#########################################################
+
+//Str Foods
+
+[ITEMDEF i_magic_pig_roast_str5]
+ID=i_pig_roast
+NAME=Porco Cozido de forca +5
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 10 i_reag_mandrake_root, 10 i_reag_nightshade
+SKILLMAKE=COOKING 100.0, MAGERY 80.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Stronger Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=5,0,0,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_str10]
+ID=i_pig_roast
+NAME=Porco Cozido de Forca +10
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 30 i_reag_mandrake_root, 30 i_reag_nightshade
+SKILLMAKE=COOKING 100.0, MAGERY 90.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Stronger Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=10,0,0,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_str15]
+ID=i_pig_roast
+NAME=Porco Cozido de Forca +15
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 50 i_reag_mandrake_root, 50 i_reag_nightshade
+SKILLMAKE=COOKING 100.0, MAGERY 100.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Stronger Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=15,0,0,0,60
+    RETURN 1
+
+
+// dex Foods
+
+[ITEMDEF i_magic_pig_roast_Dex5]
+ID=i_pig_roast
+NAME=Porco Cozido de Dex +5
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 10 i_reag_mandrake_root, 10 i_reag_blood_moss
+SKILLMAKE=COOKING 100.0, MAGERY 80.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,5,0,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_dex10]
+ID=i_pig_roast
+NAME=Porco Cozido de Dex +10
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 30 i_reag_mandrake_root, 30 i_reag_blood_moss
+SKILLMAKE=COOKING 100.0, MAGERY 90.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,10,0,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_dex15]
+ID=i_pig_roast
+NAME=Porco Cozido de Dex +15
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 50 i_reag_mandrake_root, 50 i_reag_blood_moss
+SKILLMAKE=COOKING 100.0, MAGERY 100.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,15,0,0,60
+    RETURN 1
+
+
+// Int Foods
+
+[ITEMDEF i_magic_pig_roast_Int5]
+ID=i_pig_roast
+NAME=Porco Cozido de Int +5
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 10 i_reag_mandrake_root, 10 i_reag_ginseng
+SKILLMAKE=COOKING 100.0, MAGERY 80.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,0,5,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_Int10]
+ID=i_pig_roast
+NAME=Porco Cozido de Int +10
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 30 i_reag_mandrake_root, 30 i_reag_ginseng
+SKILLMAKE=COOKING 100.0, MAGERY 90.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,0,10,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_Int15]
+ID=i_pig_roast
+NAME=Porco Cozido de Int +15
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 50 i_reag_mandrake_root, 50 i_reag_ginseng
+SKILLMAKE=COOKING 100.0, MAGERY 100.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Agility Roast Pig
+
+ON=@CREATE
+COLOR=0455
+
+ON=@DCLICK
+    f_magic_cooking=0,0,15,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_pig_roast_bless]
+ID=i_pig_roast
+NAME=Porco Cozido of Bless
+VALUE=5
+RESOURCES=1 i_pig_roast_raw, 100 i_reag_garlic, 100 i_reag_mandrake_root
+SKILLMAKE=COOKING 110.0, MAGERY 100.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Bless Roast Pig
+
+ON=@CREATE
+COLOR=0481
+
+ON=@DCLICK
+    f_magic_cooking=10,10,10,0,60
+    RETURN 1
+
+
+[ITEMDEF i_magic_fish_mana]
+ID=i_fish_cut_cooked
+NAME=File de Peixe de Mana
+VALUE=5
+RESOURCES=1 i_fish_cut_raw, 10 i_reag_eye_of_newt
+SKILLMAKE=COOKING 110.0, MAGERY 100.0, ALCHEMY 80.0
+TYPE=T_SCRIPT
+WEIGHT=1.0
+CATEGORY=Items by Professions
+SUBSECTION=Cook
+DESCRIPTION=Fish Steak of Mana
+
+ON=@CREATE
+COLOR=0480
+
+ON=@DCLICK
+    f_magic_cooking=0,0,0,15,60
+    RETURN 1
+
+//#########################################################
+//###################Efeito das comidas####################
+//#########################################################
+
+[ITEMDEF i_magic_food_control]
+NAME=Magic Food Control
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=0
+
+ON=@Create
+ATTR=attr_invis
+
+ON=@Equip
+    IF <MOREX> > 0
+        SRC.MODSTR += <MOREX>
+    ENDIF
+
+    IF <MOREY> > 0
+        SRC.MODDEX += <MOREY>
+    ENDIF
+
+    IF <MOREZ> > 0
+        SRC.MODINT += <MOREZ>
+    ENDIF
+
+    IF <MOREM> > 0
+        IF <SRC.MANA> < 150
+            SRC.MANA += <MOREM>
+        ENDIF
+    ENDIF
+
+    SOUND=snd_SPELL_BLESS
+
+ON=@Unequip
+    IF <MOREX> > 0
+        SRC.MODSTR -= <MOREX>
+    ENDIF
+
+    IF <MOREY> > 0
+        SRC.MODDEX -= <MOREY>
+    ENDIF
+
+    IF <MOREZ> > 0
+        SRC.MODINT -= <MOREZ>
+    ENDIF
+
+    SOUND=snd_SPELL_BLESS
+
+ON=@Timer
+REMOVE
+RETURN 1
+
+[FUNCTION f_magic_cooking]
+    IF !(<TOPOBJ.UID> == <SRC.UID>)
+        SRC.SYSMESSAGE Item deve estar na sua backpack.
+        RETURN 1
+    ENDIF
+
+    IF <SRC.RESTEST 1 i_magic_food_control>
+        SRC.SYSMESSAGE Voce ja esta sob efeito de uma comida.
+        RETURN 1
+    ENDIF
+
+    SRC.ANIM 34
+    SRC.SOUND 60
+
+    SRC.NEWITEM=i_magic_food_control
+    NEW.MOREX = <ARGV[0]>
+    NEW.MOREY = <ARGV[1]>
+    NEW.MOREZ = <ARGV[2]>
+    NEW.MOREM = <ARGV[3]>
+    NEW.TIMER = <ARGV[4]>
+    NEW.EQUIP
+
+    IF (<AMOUNT> <= 1)
+        REMOVE
+    ELSE
+        AMOUNT -= 1
+    ENDIF
+    FIX
+
+[EOF]

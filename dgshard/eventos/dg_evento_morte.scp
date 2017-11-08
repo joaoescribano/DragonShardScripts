@@ -1,0 +1,337 @@
+// Dragon Easy Shard
+// Evento Comissl da Morte
+// Verso 1.0
+// By Owner Destiny
+// http://www.dgshard.com
+
+//////////Configuraes
+
+[DIALOG D_LOCAL_COMISSAL]
+0,0
+page 0
+page 1
+gumppic 288 124 10
+gumppic 303 131 50930
+gumppic 305 132 12
+gumppic 305 131 60970
+text 365 364 0 0
+text 367 364 2 0
+gumppic 523 336 2361
+text 462 330 52 1
+gumppic 453 213 5124
+gumppic 604 213 5125
+dhtmlgump 455 217 147 105 5 1 Comensal com <eval <VAR.LIFECOMISSAL>> hits de vida e esta localizado em: <VAR.REGIONCOMISSAL>
+page 2
+page 3
+page 4
+page 5
+page 6
+page 7
+page 8
+page 9
+
+[DIALOG D_LOCAL_COMISSAL TEXT]
+Comensal da Morte
+Ativo
+
+[FUNCTION COMENSAL]
+FORCHARS 6000
+IF (<BASEID>=c_comissal_Morte)
+VAR.REGIONCOMISSAL=<REGION.NAME> <P>
+VAR.LIFECOMISSAL=<HITS>
+SRC.DIALOG D_LOCAL_COMISSAL
+Return 1
+ELSE
+SRC.MESSAGE @07a1 Nao existe Comensal ativo no momento.. Aguarde!
+Return 1
+ENDIF
+ENDFOR
+
+[PLEVEL 1]
+COMENSAL
+
+[DEFNAME config_Morte]
+morte_uid       040027b90    //UID da pedra invisivel do evento
+morte_scrolls   1        //Numero de scrolls nescessrios para transformalo em FULL
+morte_gold      200        //Quantidade (em K) nescessria para a criao do Scroll Full
+morte_skill     tailoring    //Skill nescessria para criar o Scroll Foull
+morte_robe_1    15        //Numero de CLOTHES nescessrios para a criao do Robe
+morte_robe_2    1        //Numero de Scrolls Fulls nescessrios para criar o Robe
+morte_robe_3    1100        //Quantidade de Tailoring nescessria para criar o robe
+morte_robe_4    1000        //Quantidade de magery nescessria para criar o robe
+
+//////////Pedra do Evento
+
+[ITEMDEF i_pedra_evento_morte]
+ID=0ED4
+TYPE=t_normal
+NAME=Comensal da Morte
+
+ON=@CREATE
+color=color_o_adamantium
+TIMER=3
+
+ON=@CLICK
+MESSAGE @07a1 Comensal da Morte
+return 1
+
+ON=@DCLICK
+dialog d_comissal_morte
+return 1
+
+ON=@TIMER
+timer -1
+resetar_comensal
+return 1
+
+//////////Funo resetar_comensal
+
+[FUNCTION resetar_comensal]
+DORAND 21
+ var.where 1126,3469,00     // Jhelom
+ var.where 3582,2825,55     // Occlo
+ var.where 4679,3703,33     // Fire Island
+ var.where 5251,68,14       // Wind
+ var.where 4211,563,42      // Honesty Shine
+ var.where 5557,825,45      // Despise Level 3
+ var.where 970,356          // Yew Territory
+ var.where 3368,628,8       // Windemere Woods
+ var.where 2524,3596        // Temple Isle
+ var.where 5681,4001,22     // Wastelands
+ var.where 2798,3491        // serpent's Hold
+ var.where 1156,2217,4      // Hedge Maze
+ var.where 2312,1198        //Cove
+ var.where 1314,1748,10     //Ponte Britain
+ var.where 1370,1472,10     //Cemit Britain
+ var.where 3012,3377,15     //Serpent's Hold
+ var.where 5804,3194,-15    //Papua
+ var.where 2667,461,15      //Ponte minoc
+ var.where 2093,2670,7      //Trinsic
+ var.where 4467,1286        //Moonglow Moongate
+ var.where 2765,863         //Vesper Cemitery
+ENDDO
+
+tag0.where <var.where>
+
+var.uid <def.morte_uid>
+
+serv.allclients sysmessage @07a1 O Comensal da Morte Apareceu no Mapa, boa sorte procurando!
+serv.newnpc c_comissal_morte
+serv.new.update
+serv.new.p <var.where>
+serv.new.update
+
+TRY UID.<var.uid>.tag0.uid_morte = <serv.new.uid>
+TRY UID.<var.uid>.tag0.morto
+
+return 0
+
+//////////Comissl da Morte
+
+[CHARDEF c_comissal_Morte]
+ID=c_man
+NAME=Comensal da Morte
+DAM=30,50
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+
+ON=@CREATE
+    NPC=brain_monster
+
+    tag0.ai_block_paralyze = 1
+    tag0.ai_block_paralyze_field = 1
+    tag0.ai_block_fire_field = 1
+    tag0.ai_block_poison = 1
+    tag0.ai_block_poison_field = 1
+
+    STR={1200 1500}
+    DEX={100 250}
+    INT={100 250}
+    MAXHITS=4500
+
+    Swordsmanship={90.0 110.0}
+    TACTICS={90.0 110.0}
+    PARRYING={90.0 110.0}
+    HIDING={90.0 110.0}
+    POISONING={90.0 110.0}
+    FENCING={90.0 110.0}
+    ARCHERY=110.0
+
+    KARMA=-10000
+    FAME=8000
+
+    ITEM=i_mt_horse_brown_dk
+    COLOR=color_o_adamantium
+    ITEMNEWBIE=i_adamantium_platemail_gorget
+    ITEMNEWBIE=i_adamantium_platemail_arms
+    ITEMNEWBIE=i_adamantium_platemail_gloves
+    ITEMNEWBIE=i_adamantium_platemail_chest
+    ITEMNEWBIE=i_adamantium_platemail_leggings
+    ITEMNEWBIE=i_spellbook
+    ADDSPELL=s_magic_arrow
+    ADDSPELL=s_energy_bolt
+    ADDSPELL=s_fireball
+    ADDSPELL=s_flamestrike
+    ADDSPELL=s_poison
+    ADDSPELL=s_paralyze
+    ITEMNEWBIE=i_death_bow
+    NAME=a bow
+    COLOR=color_o_adamantium
+
+ON=@NPCRestock
+    ITEMNEWBIE=i_mask_bear
+    COLOR=color_o_adamantium
+    ITEMNEWBIE=i_morte_foice
+    ITEMNEWBIE=i_morte_robe
+    ITEM=i_pergaminho_morte,{1 2}
+    ITEM=i_pano_morte,{1 2}
+
+ON=@DEATH
+    var.uid <def.morte_uid>
+    TRY UID.<var.uid>.tag0.morto 1
+    TRY UID.<var.uid>.timer 604800
+    serv.allclients sysmessage @07a1 O Comensal da Morte foi morto!!! Dentro de 7 dias ele resurgira.
+return 0
+
+//////////Pergaminho da Morte
+
+[ITEMDEF i_pergaminho_morte]
+ID=0e34
+name=Pergaminho da Morte
+type=t_normal
+
+ON=@CREATE
+color color_o_adamantium
+
+on=@CLICK
+message @07a1 Pergaminho da Morte
+return 1
+
+ON=@DCLICK
+src.sysmessage @07a1 Use este pergaminho na pedra do Comensal da Morte, na Commerce Room.
+return 1
+
+//////////Pano da Morte
+
+[ITEMDEF i_pano_morte]
+ID=0175d
+name=Pano da Morte
+type=t_normal
+
+ON=@CREATE
+color color_o_adamantium
+
+on=@CLICK
+message @07a1 Pano da Morte
+return 1
+
+ON=@DCLICK
+src.sysmessage @07a1 Use este pano na pedra do Comensal da Morte, na Commerce Room.
+return 1
+
+//////////Gump
+
+[DIALOG d_comissal_morte]
+0,0
+page 0
+resizepic 54 167 9200 460 396
+gumppictiled 68 180 431 369 2624
+checkertrans 68 180 431 369
+resizepic 84 193 9200 400 343
+gumppic 334 231 12 1317
+gumppic 334 231 50970 2318
+gumppic 332 232 50930 1759
+gumppictiled 92 204 227 204 2624
+checkertrans 92 204 227 204
+htmlgump 101 212 209 187 0 1 1
+text 112 442 591 1
+button 92 444 2117 2118 1 0 1
+gumppic 482 111 10441
+text 139 510 2072 2
+button 454 203 2708 2709 1 0 0
+
+[DIALOG d_comissal_morte text]
+Esse e o mantle Comensal da Morte, ao equipa-lo ele aumentara os seguintes Status: STR +15, INT +12 e DEX +10. Para pegar esse manto sera necessario ter um pergaminho FULL, para saber como transformar o pergaminho FULL visite o site. E alem do pergaminho sera necessario ter 15 Panos da morte que vem no Loot do guardiao da morte. O guardiao da morte nascera das cinzas de 2 em 2 dias, e sera avisado a todos os guerreiros de Sosaria.
+Clique aqui para pegar o Manto.
+Dragon Easy Shard - www.dgshard.com.br
+
+[DIALOG d_comissal_morte button]
+ON=0
+SRC.SYSMESSAGE @009FB Menu fechado.
+
+ON=1
+IF !(<src.tag0.morte_robe> <1)
+ SRC.SYSMESSAGE @009FB Voce ja possui um Robe da Morte
+ELSE
+IF !(<SRC.RESTEST 15 i_pano_morte>) || !(<SRC.RESTEST 1 i_pergaminho_morte>)
+ SRC.SYSMESSAGE @009FB Voce nao tem 15 Panos da morte ou 1 pergaminho da morte.
+ELSE
+ SRC.TAG0.morte_robe 1
+ SRC.NEWITEM i_morte_robe
+ SRC.ACT.CONT <SRC.UID>
+ SRC.ACT.BOUNCE
+ SRC.CONSUME 15 i_pano_morte
+ SRC.CONSUME 1 i_pergaminho_morte
+ SRC.SYSMESSAGE @009FB Voce conseguiu o Manto da Morte!
+ENDIF
+ ENDIF
+
+//////////Morte Robe
+
+[itemdef i_morte_robe]
+Name=Manto da Morte
+id=02687
+type=t_clothing
+VALUE=400000
+ARMOR=50
+DYE=1
+
+ON=@Create
+ATTR=00004
+HITPOINTS={1000 1500}
+COLOR=color_o_adamantium
+
+ON=@EQUIP
+IF (0<TAG.UID> == 0)
+ TAG.UID = <SRC.UID>
+ENDIF
+
+IF (0<TAG.UID> == 0<SRC.UID>)
+    Name=Manto da Morte do <SRC.NAME>
+    src.modstr +=15
+    src.modint +=12
+    src.moddex +=10
+    src.sound=snd_SPELL_BLESS
+ELSE
+ SRC.SYSMESSAGE Esse manto nao tem efeito em voce.
+ENDIF
+
+ON=@unequip
+IF (0<TAG.UID> == 0<SRC.UID>)
+    src.modstr -=15
+    src.modint -=12
+    src.moddex -=10
+    src.sound=snd_SPELL_BLESS
+ENDIF
+
+//////////Morte Foice
+
+[ITEMDEF i_morte_foice]
+id=i_scythe
+name=Foice da Morte
+WEIGHT=0
+TYPE=T_WEAPON_fence
+FLIP=1
+DAM=30,60
+SKILL=Swordsmanship
+REQSTR=100
+TWOHANDS=N
+SPEED=45
+
+ON=@Create
+ATTR=00004
+HITPOINTS=5000
+COLOR=color_o_adamantium
+
+// FIM
+
+[EOF]

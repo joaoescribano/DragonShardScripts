@@ -1,0 +1,1423 @@
+[ITEMDEF i_deed_adv_alchemy]
+DEFNAME=i_deed_adv_alchemy
+Name=Deed para Laborotorio  de Alquimia
+VALUE=4500
+type=115
+Id=i_deed
+
+ON=@Create
+more=i_adv_alchemy
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Deed to advanced kit alchemy
+DESCRIPTION=Advanced Kit Alchemy
+
+[ITEMDEF i_adv_alchemy]
+ID=6237 //04b94
+Name=Laboratorio de Alquimia
+VALUE=4500
+
+ON=@DCLICK
+SRC.MENU M_ALCHEMYMENU
+return 1
+
+[MENU M_ALCHEMYMENU]
+Alchemy Menu
+
+ON=i_keg_small Kegs
+SRC.MENU ALCHEMYCONTAINER
+
+//ON=i_dishing_stump Advanced Keg
+//SRC.MENU ALCHEMYCONTAINERADV
+
+[MENU ALCHEMYCONTAINER]
+Kegs
+
+//ON=Container_explosiongreat Full Keg de Greater Explosion
+//if (<src.restest 1000 i_reag_sulfur_ash>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+//SRC.CONSUME=1000 i_reag_sulfur_ash
+//SRC.CONSUME=1 i_keg_small
+//SRC.NEWITEM=Container_explosiongreat
+//Src.sound 32
+//SRC.ACT.BOUNCE
+//RETURN 1
+//else
+//SRC.MESSAGE Voce precisa ter 1000 Sulfurus Ash, um Keg vazio e 100.0 de alchemy para o Keg de Great Explosion
+//endif
+
+//ON=Container_explosionmax Full Keg de Lava Bomb
+//if (<src.restest 5000 i_reag_sulfur_ash>) & (<src.restest i_keg_small>) & (<src.restest 1000 i_reag_volcanic_ash>) & (<SRC.ALCHEMY>>99.9)
+//SRC.CONSUME=5000 i_reag_sulfur_ash
+//SRC.CONSUME=1000 i_reag_volcanic_ash
+//SRC.CONSUME=1 i_keg_small
+//SRC.NEWITEM=Container_explosionmax
+//Src.sound 32
+//SRC.ACT.BOUNCE
+//RETURN 1
+//else
+//SRC.MESSAGE Voce precisa ter 5000 Sulfurus Ash, 1000 Volcanics Ash, um Keg vazio e 100.0 de alchemy para o Keg de Lava Bomb.
+//endif
+
+ON=Container_explosionless @07b2 Full Keg Lesser Explosion
+if (<src.restest 1000 i_reag_sulfur_ash>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=1000 i_reag_sulfur_ash
+SRC.NEWITEM=Container_explosionless
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Sulfur Ash, um Keg vazio e 100.0 de alchemy para o Keg de Lesser Explosion.
+endif
+
+ON=Container_cure @0002c Full Keg de Cure
+if (<src.restest 300 i_reag_garlic>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=300 i_reag_garlic
+SRC.NEWITEM=Container_cure
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 300 Garlic, um Keg vazio e 100.0 de alchemy para o Keg de Cure.
+endif
+
+ON=Container_curegreat @0002c Full Keg de Greater Cure
+if (<src.restest 500 i_reag_garlic>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=500 i_reag_garlic
+SRC.NEWITEM=Container_curegreat
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 500 Garlic, um Keg vazio e 100.0 de alchemy para o Keg de Greater Cure.
+endif
+
+ON=Container_curetotal @0002c Full Keg de Total Cure
+if (<src.restest 1000 i_reag_garlic>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=1000 i_reag_garlic
+SRC.NEWITEM=Container_curetotal
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Garlic, um Keg vazio e 100.0 de alchemy para o Keg de Total Cure.
+endif
+
+ON=Container_poisonless @0787 Full Keg de Lesser Poison
+if (<src.restest 300 i_reag_nightshade>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+f_loopsound 020,4,1
+SRC.CONSUME=300 i_reag_nightshade
+SRC.CONSUME=1 i_keg_small
+SRC.NEWITEM=Container_poisonless
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 300 Nightshade, um Keg vazio e 100.0 de alchemy para o Keg de Lesser Poison
+endif
+
+ON=Container_poison @0787 Full Keg de Poison
+if (<src.restest 500 i_reag_nightshade>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=500 i_reag_nightshade
+SRC.NEWITEM=Container_poison
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 500 Nightshade, um Keg vazio e 100.0 de alchemy para o Keg de Poison.
+endif
+
+ON=Container_poisongreat @0787 Full Keg de Greater Poison
+if (<src.restest 1000 i_reag_nightshade>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=1000 i_reag_nightshade
+SRC.NEWITEM=Container_poisongreat
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Nightshade, um Keg vazio e 100.0 de alchemy para o Keg de Greater Poison.
+endif
+
+ON=Container_poisondeadly @0787 Full Keg de Deadly Poison
+if (<src.restest 2000 i_reag_nightshade>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=2000 i_reag_nightshade
+SRC.NEWITEM=Container_poisondeadly
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 2000 Nightshade, um Keg vazio e 100.0 de alchemy para o Keg de Deadly Poison.
+endif
+
+ON=Container_heal @0ff Full Keg de Heal
+if (<src.restest 300 i_reag_ginseng>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=300 i_reag_ginseng
+SRC.NEWITEM=Container_heal
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 300 Ginseng, um Keg vazio e 100.0 de alchemy para o Keg de Heal.
+endif
+
+ON=Container_healgreat @0ff Full Keg de Greater Heal
+if (<src.restest 1000 i_reag_ginseng>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=1000 i_reag_ginseng
+SRC.NEWITEM=Container_healgreat
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Ginseng, um Keg vazio e 100.0 de alchemy para o Keg de Greater Heal.
+endif
+
+ON=Container_healtotal @0ff Full Keg de Total Heal
+if (<src.restest 2000 i_reag_ginseng>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=2000 i_reag_ginseng
+SRC.NEWITEM=Container_healtotal
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 2000 Ginseng, um Keg vazio e 100.0 de alchemy para o Keg de Total Heal.
+endif
+
+ON=Container_refresh @012 Full Keg de Refresh
+if (<src.restest 500 i_reag_black_pearl>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=500 i_reag_black_pearl
+SRC.NEWITEM=Container_refresh
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 500 Black Pearl, um Keg vazio e 100.0 de alchemy para o Keg de Refresh.
+endif
+
+ON=Container_refreshtotal @0823 Full Keg de Total Refresh
+if (<src.restest 1000 i_reag_black_pearl>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=1000 i_reag_black_pearl
+SRC.NEWITEM=Container_refreshtotal
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Black Pearl, um Keg vazio e 100.0 de alchemy para o Keg de Total Refresh.
+endif
+
+ON=Container_invisibility @07a1 Full Keg de Invisibility
+if (<src.restest 300 i_reag_wyrm_heart>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=300 i_reag_wyrm_heart
+SRC.NEWITEM=Container_invisibility
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 300 Wyrms Heart, um Keg vazio e 100.0 de alchemy para o Keg de Invisibility.
+endif
+
+ON=Container_mana @07a0 Full Keg de Mana Refresh
+if (<src.restest 300 i_reag_Eye_of_newt>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=300 i_reag_Eye_of_newt
+SRC.NEWITEM=Container_mana
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 300 Eyes Of Newt, um Keg vazio e 100.0 de alchemy para o Keg de Mana Refresh.
+endif
+
+
+ON=Container_manatotal @007c0 Full Keg de Total Mana Refresh
+if (<src.restest 600 i_reag_Eye_of_newt>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=600 i_reag_Eye_of_newt
+SRC.NEWITEM=Container_manatotal
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 600 Eyes Of Newt, um Keg vazio e 100.0 de alchemy para o Keg de Total Mana Refresh.
+endif
+
+
+ON=Container_shrink @079c Full Keg de Shrink
+if (<src.restest 200 i_reag_batwing>) & (<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+SRC.CONSUME=200 i_reag_batwing
+SRC.CONSUME=1 i_keg_small
+SRC.NEWITEM=Container_shrink
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 200 BatWings, um Keg vazio e 100.0 de alchemy para o Keg de Shrink.
+endif
+
+
+[MENU ALCHEMYCONTAINERADV]
+Advanced Kegs
+
+ON=Container_manaboost Full Keg de Mana Boost
+if (<src.restest 1000 i_reag_dragon_blood>) & (<src.restest 1000 i_reag_fertile_dirt>) &(<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+
+SRC.CONSUME=1000 i_reag_dragon_blood
+SRC.CONSUME=1000 i_reag_fertile_dirt
+SRC.NEWITEM=Container_manaboost
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Dragons Blood, 1000 Fertile Dirt, um Keg vazio e 100.0 de alchemy para o Keg de Mana Boost
+endif
+
+
+ON=Container_lifeboost Full Keg de Life Boost
+if (<src.restest 1000 i_reag_brimstone>) & (<src.restest 1000 i_reag_ginseng>) &(<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+
+SRC.CONSUME=1000 i_reag_brimstone
+SRC.CONSUME=1000 i_reag_ginseng
+SRC.NEWITEM=Container_lifeboost
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 Brimstones,1000 Ginsengs, um Keg vazio e 100.0 de alchemy para o Keg de Life Boost
+endif
+
+
+ON=Container_refiling Full Keg de Refiling
+if (<src.restest 1000 i_reag_blackmoor>) & (<src.restest 1000 i_reag_bone>) &(<src.restest i_keg_small>) & (<SRC.ALCHEMY>>99.9)
+SRC.CONSUME=1 i_keg_small
+
+SRC.CONSUME=1000 i_reag_blackmoor
+SRC.CONSUME=1000 i_reag_bone
+SRC.NEWITEM=Container_refiling
+Src.sound 32
+SRC.ACT.BOUNCE
+RETURN 1
+else
+SRC.MESSAGE Voce precisa ter 1000 BlackMoors,1000 Bones, um Keg vazio e 100.0 de alchemy para o Keg de Refiling
+endif
+
+
+
+
+
+
+// Container
+
+[ITEMDEF Container_explosionless]
+ID=i_keg_small
+NAME=Full Keg de Lesser Explosion
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=07b2
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Lesser Explosion
+
+ON=@DCLICK
+IF !(<src.restest 100 i_bottle_empty>)
+ src.sysmessage @07a1 Voce nao possue 100 potions vazias na sua backpack.
+ return 1
+endif
+src.consume 100 i_bottle_empty
+SRC.NEWITEM tm_explosion
+SRC.ACT.BOUNCE
+REMOVE
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+[TEMPLATE tm_explosion]
+container=i_bag
+COLOR=07b2
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+ITEM=i_potion_explosionless
+
+[ITEMDEF Container_explosiongreat]
+ID=i_keg_small
+NAME=Full Keg de Greater Explosion
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=079c
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Greater Explosion
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_explosiongreat
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Greater Explosion (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_explosionmax]
+ID=i_keg_small
+NAME=Full Keg de Lava Bomb
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=077a
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Lava Bomb
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_explosionmax
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Lava Bomb (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+
+[ITEMDEF Container_cure]
+ID=i_keg_small
+NAME=Full Keg de Cure
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=01e0
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Cure
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_cure
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Cure (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+
+[ITEMDEF Container_curegreat]
+ID=i_keg_small
+NAME=Full Keg de Greater Cure
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=01e0
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Greater Cure
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_curegreat
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Greater Cure (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_curetotal]
+ID=i_keg_small
+NAME=Full Keg de Total Cure
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=01e0
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Total Cure
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_curetotal
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Total Cure (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+
+
+[ITEMDEF Container_poisonless]
+ID=i_keg_small
+NAME=Full Keg de Lesser Poison
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=044
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Lesser Poison
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_poisonless
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Lesser Poison (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_poison]
+ID=i_keg_small
+NAME=Full Keg de Poison
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=044
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Poison
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_poison
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Poison (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_poisongreat]
+ID=i_keg_small
+NAME=Full Keg de Greater Poison
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=044
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Greater POison
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_poisongreat
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Greater Poison (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+[ITEMDEF Container_poisondeadly]
+ID=i_keg_small
+NAME=Full Keg de Deadly Poison
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=044
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Deadly POison
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_poisondeadly
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Deadly Poison (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_heal]
+ID=i_keg_small
+NAME=Full Keg de Heal
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=0ff
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Heal
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_heal
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Heal (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+[ITEMDEF Container_healgreat]
+ID=i_keg_small
+NAME=Full Keg de Greater Heal
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=0ff
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Greater Heal
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_healgreat
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Greater Heal (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_healtotal]
+ID=i_keg_small
+NAME=Full Keg de Total Heal
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=0ff
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Total Heal
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_healtotal
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Total Heal (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+[ITEMDEF Container_refresh]
+ID=i_keg_small
+NAME=Full Keg de Refresh
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=012
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Refresh
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_refresh
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Refresh (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_refreshtotal]
+ID=i_keg_small
+NAME=Full Keg de Total Refresh
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=012
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Total Refresh
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_refreshtotal
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Total Refresh (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_Invisibility]
+ID=i_keg_small
+NAME=Full Keg de Invisibility
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=07a1
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Invisibility
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_Invisibility
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Invisibility (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_mana]
+ID=i_keg_small
+NAME=Full Keg de Mana Refresh
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=07a0
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Mana Refresh
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_mana
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Mana Refresh (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_manatotal]
+ID=i_keg_small
+NAME=Full Keg de Total Mana Refresh
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=007c0
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Total Mana Refresh
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_manatotal
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Total Mana Refresh (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_shrink]
+ID=i_keg_small
+NAME=Full Keg de Shrink
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=076
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Shrink
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_shrink
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Shrink (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_manaboost]
+ID=i_keg_small
+NAME=Full Keg de Mana Boost
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=0532
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Mana Boost
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_manaboost
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Mana Boost (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+
+[ITEMDEF Container_lifeboost]
+ID=i_keg_small
+NAME=Full Keg de Life Boost
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=026
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Life Boost
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_lifeboost
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Life Boost (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+
+[ITEMDEF Container_refiling]
+ID=i_keg_small
+NAME=Full Keg de Refiling
+TYPE=t_normal
+WEIGHT=1
+
+ON=@CREATE
+COLOR=017F
+MORE=100
+
+CATEGORY=Novos itens Alchemy
+SUBSECTION=Kegs
+DESCRIPTION=Keg de Refiling
+
+ON=@DCLICK
+
+IF !(<SRC.RESTEST 1 i_bottle_empty>)
+ SRC.MESSAGE Voce precisa de pelo menos 1 Empty Bottle para pegar uma pocao.
+ RETURN 1
+ENDIF
+
+IF (<SRC.FINDID.i_bottle_empty.amount> >= <more>)
+  TAG.POTION = <MORE>
+ELSE
+  TAG.POTION = <SRC.FINDID.i_bottle_empty.amount>
+ENDIF
+
+NEWITEM=i_potion_refiling
+NEW.AMOUNT=<TAG.POTION>
+NEW.BOUNCE
+
+MORE=<MORE> - <TAG.POTION>
+SRC.CONSUME <TAG.POTION> i_bottle_empty
+
+SRC.SOUND=snd_Z_END_LIQUID
+
+NAME=Keg de Refiling (<more> potions)
+
+IF (<more>=0)
+ SRC.MESSAGE O seu Keg esvaziou.
+ REMOVE
+ENDIF
+
+RETURN 1
+
+[EOF]

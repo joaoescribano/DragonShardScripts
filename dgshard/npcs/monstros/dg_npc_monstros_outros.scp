@@ -1,0 +1,525 @@
+[chardef 785]
+defname=c_Moloch
+name=Moloch
+SOUND=snd_monster_daemon1
+ICON=i_pet_fourarmed_daemon
+ARMOR=68
+DAM=41,61
+RESOURCES=1 i_ore_iron
+CAN=MT_WALK|MT_USEHANDS
+FOODTYPE=1 t_meat_raw
+DESIRES=999 t_corpse
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+MOVERATE=60
+CATEGORY=New Monsters
+SUBSECTION=LBR
+DESCRIPTION=Moloch
+
+ON=@Create
+	NPC=brain_monster
+	FAME=6800
+	KARMA=-6800
+	STR={331 360}
+	MAXHITS={171 200}
+	INT={41 64}
+	DEX={66 85}
+	MAGICRESISTANCE={65.0 75.0}
+	TACTICS={75.0 90.0}
+	WRESTLING={70.0 90.0}
+
+ON=@NpcRestock
+	ITEM=i_gold,{300 350}
+	ITEM=random_weapon_sword_normal
+
+[chardef 792]
+defname=c_chaos_daemon
+name=Chaos Daemon
+SOUND=snd_monster_daemon1
+ICON=i_pet_chaosdaemon
+DAM=22,32
+RESDISPDNID=c_man
+RESLEVEL=2
+RESDISPDNHUE=33
+ARMOR=60
+RESOURCES=15 i_ribs_raw,10 i_hide
+CAN=MT_WALK|MT_USEHANDS|MT_FLY|MT_RUN
+FOODTYPE=40 t_meat_raw
+DESIRES=i_gold,e_notoriety,e_horses,c_man,c_woman
+AVERSIONS=e_carnivores3
+CATEGORY=New Monsters
+SUBSECTION=LBR
+DESCRIPTION=Chaos Daemon
+
+ON=@Create
+	NPC=brain_monster
+	FAME={100 3000}
+	KARMA={-5000 -6999}
+	STR={106 130}
+	MAXHITS={91 110}
+	INT={56 80}
+	DEX={170 200}
+	MAGICRESISTANCE={85.0 95.0}
+	TACTICS={70.0 80.0}
+	WRESTLING={95.0 100.0}
+
+[CHARDEF 03ca]
+DEFNAME=c_grim_reaper
+NAME=Grim Reaper
+CAN=MT_WALK|MT_SWIM|MT_GHOST|MT_USEHANDS
+SOUND=snd_MONSTER_GHOST1
+BLOODCOLOR=colors_green
+TEVENTS=e_undead
+DESCRIPTION=Grim Reaper
+SUBSECTION=Undeads
+CATEGORY=Monsters
+
+ON=@Create
+	COLOR=colors_black
+	NPC=brain_monster
+	KARMA={-5000 -3000}
+	FAME={1000 2000}
+	STR={130 150}
+	INT={170 190}
+	DEX={100 150}
+
+[CHARDEF 0d]
+DEFNAME=c_elem_air
+NAME=Air Elemental
+SOUND=snd_ELEMENTL_AIRELEM1
+ICON=i_pet_elem_air
+ANIM=079dff
+DAM=5,13
+ARMOR=20
+CAN=MT_WALK|MT_FLY
+FOODTYPE=
+//SHELTER=r_mountains
+DESIRES=r_mountains
+BLOODCOLOR=colors_white
+CATEGORY=Monsters
+SUBSECTION=Elementals
+DESCRIPTION=Air Elemental
+
+ON=@Create
+	NPC=brain_monster
+	FAME={1000 6000}
+	KARMA={-4000 -4999}
+	//ALIGNMENT=EVIL
+	STR={125 155}
+	DEX={165 185}
+	INT={71 95}
+	PARRYING={65.0 75.0}
+	MAGERY={60.0 75.0}
+	MAGICRESISTANCE={60.0 75.0}
+	TACTICS={60.0 80.0}
+	WRESTLING={60.0 80.0}
+	//SPELLCIRCLES=3 7
+
+ON=@NPCRestock
+	ITEM=loot_elem_air
+
+[CHARDEF 0e]
+// Should eat metals and ores.
+DEFNAME=c_elem_earth
+NAME=Earth Elemental
+SOUND=snd_ELEMENTL_ERTHEL1
+ICON=i_pet_elem_earth
+ANIM=079c7f
+DAM=5,20
+ARMOR=17
+RESOURCES=8 tm_rocks
+CAN=MT_WALK|MT_GHOST
+FOODTYPE=15 t_arock,t_coin,t_ore,t_ingot
+//SHELTER=r_mountains,r_caves,r_dungeon
+DESIRES=r_caves
+BLOODCOLOR=colors_brown
+CATEGORY=Monsters
+SUBSECTION=Elementals
+DESCRIPTION=Earth Elemental
+
+ON=@Create
+	NPC=brain_monster
+	FAME={1000 6000}
+	KARMA={-3000 -3999}
+	//ALIGNMENT=EVIL
+	STR={125 155}
+	DEX={66 85}
+	INT={71 92}
+	PARRYING={40.0 65.0}
+	MAGICRESISTANCE={50.0 95.0}
+	TACTICS={60.0 100.0}
+	WRESTLING={60.0 100.0}
+	MINING=80.0
+
+ON=@NPCRestock
+	ITEM=loot_elem_earth
+
+[CHARDEF 0f]
+DEFNAME=c_elem_fire
+NAME=Fire Elemental
+SOUND=snd_ELEMENTL_FIRELEM1
+ICON=i_pet_elem_fire
+ANIM=079dff
+DAM=4,12
+ARMOR=20
+RESOURCES=8 t_MAGIC
+CAN=MT_WALK|MT_FIRE_IMMUNE|MT_RUN|MT_USEHANDS
+FOODTYPE=t_fire
+//SHELTER=t_LAVA
+DESIRES=t_LAVA
+BLOODCOLOR=colors_red
+CATEGORY=Monsters
+SUBSECTION=Elementals
+DESCRIPTION=Fire Elemental
+
+ON=@Create
+	NPC=brain_monster
+	STR={125 155}
+	DEX={165 185}
+	INT={71 95}
+	PARRYING={55.0 65.0}
+	MAGERY={60.0 75.0}
+	MAGICRESISTANCE={60.0 75.0}
+	TACTICS={80.0 100.0}
+	WRESTLING={70.0 100.0}
+	FAME={1000 6000}
+	KARMA={-4000 -4999}
+	//ALIGNMENT=EVIL
+	//SPELLCIRCLE=3 5
+	ITEMNEWBIE=i_light_source
+	ITEMNEWBIE=i_spellbook	// knows fire type spells.
+	ADDSPELL=s_magic_arrow
+	ADDSPELL=s_fireball
+	ADDSPELL=s_fire_field
+	ADDSPELL=s_explosion
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_meteor_swarm
+	ADDSPELL=s_summon_elem_fire
+	ADDSPELL=s_fire_bolt
+
+ON=@NPCRestock
+	ITEM=loot_elem_fire
+
+ON=@Death
+	// Create death explosion to damage those nearby.
+	NEWITEM=i_fx_explode
+	act.TYPE=T_EXPLOSION
+	act.ATTR=ATTR_MOVE_NEVER | ATTR_CAN_DECAY
+	act.LINK=<uid>
+	act.morex=10 // damage
+	act.morey=090 // wFlags DAMAGE_GENERAL
+	act.morez=2 // iDist
+	act.p=<p>
+	act.TIMERD=1 // immediate decay
+
+[CHARDEF 010]
+DEFNAME=c_elem_water
+NAME=Water Elemental
+SOUND=snd_ELEMENTL_WATREL1
+ICON=i_pet_elem_water
+ANIM=079dff
+DAM=4,12
+ARMOR=20
+RESOURCES=8 t_MAGIC
+CAN=MT_WALK|MT_SWIM|MT_USEHANDS
+FOODTYPE=t_water_wash
+//SHELTER=r_water
+DESIRES=r_WATER
+BLOODCOLOR=colors_blue
+CATEGORY=Monsters
+SUBSECTION=Elementals
+DESCRIPTION=Water Elemental
+
+ON=@Create
+	NPC=brain_monster
+	FAME={1000 6000}
+	KARMA={-3000 -3999}
+	STR={125 155}
+	DEX={66 85}
+	INT={71 95}
+	PARRYING={55.0 65.0}
+	MAGERY={60.0 75.0}
+	MAGICRESISTANCE={60.0 75.0}
+	TACTICS={55.0 65.0}
+	WRESTLING={70.0 90.0}
+	//ALIGNMENT=EVIL
+	//SPELLCIRCLES=3 7
+
+ON=@NPCRestock
+	ITEM=loot_elem_water
+
+[CHARDEF 01071]
+DEFNAME=c_h_sprte_mage
+NAME=#NAMES_ELF_FEMALE the Sprite Mage
+ID=C_WOMAN
+DAM=6,10
+//ARMOR=
+DESIRES=i_gold,e_notoriety
+AVERSIONS=t_TRAP
+//ALIGNMENT=EVIL
+CAN=MT_WALK|MT_FLY|MT_FEMALE
+TSPEECH=spk_human_prime
+TSPEECH=spk_human_default
+CATEGORY=Civilized
+SUBSECTION=Sprite-Elf (Evil)
+DESCRIPTION=Sprite Mage
+
+ON=@Create
+	COLOR=045e
+	STR={86 90}
+	DEX={91 100}
+	INT={71 85}
+	WRESTLING={58.0 78.0}
+	MAGICRESISTANCE={60.0 80.0}
+	MAGERY={65.0 85.0}
+	NPC=brain_thief
+	KARMA={-1500 -6000}
+	FAME={1200 3200}
+	ITEMNEWBIE=i_hair_PONYTAIL
+	COLOR=0597
+
+ON=@NPCRestock
+	ITEM=i_robe
+	COLOR=0599
+	ITEM=i_sandals
+	COLOR=0599
+	ITEM=random_coin_purse
+	ITEM=random_scroll
+	ITEM=random_scroll
+
+
+[CHARDEF c_dragon_muller]
+NAME=Dragon Muller
+ID=c_DRAGON_RED
+SOUND=snd_MONSTER_DRAGON1
+ICON=i_pet_dragon
+CAN=MT_WALK|MT_FLY|MT_FIRE_IMMUNE|MT_USEHANDS
+DAM=2,10
+ARMOR=35
+range=1
+
+FOODTYPE=80 t_meat_raw
+DESIRES=i_gold
+RESOURCES=99 i_ribs_raw,2 i_reag_dragon_blood, 4 i_dragon_hide
+////SHELTER=r_caves,r_dungeon
+AVERSIONS=r_civilization,r_water
+
+CATEGORY=Monsters
+SUBSECTION=Dragons and Drakes
+DESCRIPTION=Ice Dragon
+
+ON=@Create
+NPC=brain_dragon
+COLOR=color_ice
+STR={795 825}
+DEX={85 105}
+INT={385 425}
+//ALIGNMENT=EVIL
+tag.lastattackdistance=01
+
+ARCHERY=130.0
+PARRYING={55.0 95.0}
+MAGERY={99.0 100.0}
+MAGICRESISTANCE={99.0 100.0}
+TACTICS={99.0 100.0}
+WRESTLING={90.0 93.0}
+TAMING=100.0
+
+FAME={500 1200}
+KARMA={-4999 -5999}
+
+ITEMNEWBIE=i_spellbook	// knows fire type spells.
+ADDSPELL=s_fire_bolt
+ADDSPELL=s_flamestrike
+ADDSPELL=s_meteor_swarm
+ADDSPELL=s_mass_dispel
+ADDSPELL=s_mana_vampire
+ADDSPELL=s_chain_lightning
+ITEMNEWBIE=i_drake_bow
+
+on=@Spellcast
+argN1=43 // EXPLOSION
+
+ON=@EnvironChange
+IF (<RESTEST i_drake_bow>) /// SISTEMA ANTI CRASH SPHERE
+RETURN 0
+ELSE
+SERV.NEWITEM=i_drake_bow
+NEW.BOUNCE
+ENDIF
+
+ON=@SkillStart
+SOUND 364
+
+IF ((<tag0.lastattackdistance> <= 3) && (rand(2) == 1)
+	ACTION=Skill_Wrestling
+ENDIF
+
+IF (<eval <tag0.lastattackdistance>> >= 4) && (<restest t_weapon_bow>) && (rand(2) == 1)
+	if (<action> == Skill_Swordsmanship) || (<action> == Skill_Macefighting) || (<action> == Skill_Fencing) || (<action> == Skill_Wrestling)
+		ACTION=SKILL_ARCHERY
+		findtype.t_weapon_bow.equip
+		update
+	endif
+ENDIF
+
+ON=@GetHIT
+tag.lastattackdistance=<DISTANCE>
+
+[ITEMDEF i_drake_bow]
+Name=drake Bow
+ID=i_bow
+TYPE=T_WEAPON_BOW
+DAM=5,10
+SPEED=20
+SKILL=Archery
+REQSTR=100
+TWOHANDS=Y
+WEIGHT=1
+TDATA4=i_fx_fireball
+
+ON=@Create
+HITPOINTS={1000 5000}
+COLOR=077a
+ATTR=attr_newbie
+MORE2=00
+
+ON=@equip
+IF (<SRC.NPC>=0) && !(<src.isgm>)
+SRC.MESSAGE [ANTI BUG] ARCO DE NPC ITEM REMOVIDO!
+REMOVE
+ELSE
+ATTR=attr_newbie
+ENDIF
+
+ON=@DAMAGE
+SRC.EFFECT 3,i_fx_explode,6,15,1
+src.damage {15 25},dam_fire,<uid>
+src.sound snd_SPELL_EXPLOSION
+
+if (rand(5) = 1)
+	src.sound snd_SPELL_EXPLOSION
+	src.newitem i_fx_smoke_explosiondrake
+	src.act.morep <src.p>
+	src.act.morey=(<src.act.morey>+{1 2})
+	src.act.morex=(<src.act.morex>+{1 2})
+	src.act.p <src.act.morep>
+	src.act.attr=012
+	SRC.act.timer=2
+	src.newitem i_fx_smoke_explosiondrake
+	src.act.morep <src.p>
+	src.act.morey=(<src.act.morey>+{1 4}) // primeiro de baixo esquerda
+	src.act.morex=(<src.act.morex>+{1 4})
+	src.act.p <src.act.morep>
+	src.act.attr=012
+	SRC.act.timer=2
+	src.newitem i_fx_smoke_explosiondrake
+	src.act.morep <src.p>
+	src.act.morey=(<src.act.morey>+{1 3}) // primeiro de cima esquerda
+	src.act.morex=(<src.act.morex>-{1 2})
+	src.act.p <src.act.morep>
+	src.act.attr=012
+	SRC.act.timer=2
+	src.newitem i_fx_smoke_explosiondrake
+	src.act.morep <src.p>
+	src.act.morey=(<src.act.morey>-{1 4}) // primeiro de cima direita
+	src.act.morex=(<src.act.morex>-{1 3})
+	src.act.p <src.act.morep>
+	src.act.attr=012
+	SRC.act.timer=2
+	src.newitem i_fx_smoke_explosiondrake
+	src.act.morep <src.p>
+	src.act.morey=(<src.act.morey>-{1 2})  // primeiro de cima esquerda
+	src.act.morex=(<src.act.morex>+{1 2})
+	src.act.p <src.act.morep>
+	src.act.attr=012
+	SRC.act.timer=2
+endif
+
+[ITEMDEF i_fx_smoke_explosiondrake]
+NAME=Drake Explosion Smoke
+ID=i_fx_explode
+TYPE=0l
+CATEGORY=Animations
+SUBSECTION=Smoke
+DESCRIPTION=@
+DUPELIST=03729,0372a,0372b,0372c,0372d,0372e,0372f,03730,03731,03732,03733,03734
+
+ON=@CREATE
+COLOR=0
+MORE=0
+
+ON=@STEP
+SRC.EFFECT 3,i_fx_explode,6,15,1
+src.damage {15 25},dam_fire,<uid>
+src.sound snd_SPELL_EXPLOSION
+
+ON=@Timer
+remove
+return 1
+
+
+[CHARDEF c_guardian_lord_mustang]
+ID=C_MAN
+NAME=#NAMES_DREAD_LORD Lord Magic Guardian
+SOUND=snd_HUMAN_M_DIE_01
+CAN=MT_WALK|MT_RUN|MT_EQUIP|MT_USEHANDS
+DAM=1
+ARMOR=65
+RANGE=1
+AVERSIONS=t_TRAP,t_eerie_stuff
+
+ON=@Create
+	COLOR=00
+	STR=250
+	DEX=130
+	INT=250
+	tag.lastattackdistance=06
+
+	ARCHERY=160.0
+	MAGICRESISTANCE=100.0
+	MAGERY=100.0
+	Swordsmanship=160.0
+	TACTICS={80.0 95.0}
+	PARRYING={75.0 100.0}
+	HIDING=100.0
+	POISONING=100.0
+
+	NPC=brain_monster
+
+	KARMA={-8000 -10000}
+	FAME={300 500}
+
+	ITEMNEWBIE=i_chainmail_coif
+	ITEMNEWBIE=i_chainmail_tunic
+	ITEMNEWBIE=i_chainmail_leggings
+	ITEMNEWBIE=i_ringmail_gloves
+	ITEMNEWBIE=i_bow
+	NAME=a bow
+	COLOR=0a87
+	ITEMNEWBIE=i_onix_axe
+	NAME=a axe
+	COLOR=0a87
+	ITEMNEWBIE=i_robe
+	COLOR=0a87
+
+	ITEMNEWBIE=i_mt_horse_gray
+	COLOR=00
+	ITEMNEWBIE=i_beard_short_med
+	COLOR=match_hair
+
+	tag0.ai_block_paralyze = 1
+	tag0.ai_block_paralyze_field = 1
+	tag0.ai_block_fire_field = 1
+	tag0.ai_block_poison = 1
+	tag0.ai_block_poison_field = 1
+
+ON=@NPCRESTOCK
+	ITEM=i_gold,{1000 1200}
+	ITEM=i_spellbook
+	ADDSPELL=s_flamestrike
+	ADDSPELL=s_paralyze
+	ADDSPELL=s_lightning
+
+[EOF]

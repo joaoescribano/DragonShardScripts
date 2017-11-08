@@ -1,0 +1,377 @@
+[defname page_sys]
+//Some options
+dlg_grey_border 1 	//Dialog have grey border? (1 = yes | 0 = no)
+delete_after_msg 1 	//Delete the page after send predefined messages? (1 = yes | 0 = no)
+queue_message 1		//Show how many pages are in queue when use .pag
+
+//Dialog texts
+dlg_text_titlet Lista de Page		//Title of tweak page
+dlg_text_reason Motivo:			//Reason
+dlg_text_delete Deletar			//Delete text 
+dlg_text_Go_p_p Va ate i o player	//Go player Pos
+dlg_text_Go_p_o Va a page de origin 	//Go page origin
+dlg_text_Pre_re Mandar Resposta		//Predefined response
+dlg_text_pag_ls Lista de Page		//Page list
+dlg_text_your_p Sua page:		//Your page text in answer page
+dlg_text_was_as Resposta do GM:		//was answered text in answer page
+dlg_text_by_who By: 			//By who was answred?
+dlg_text_mi_dlg Staff			//Mini dialog "message" text
+dlg_text_ti_ela Tempo Passado:		//Time Elapsed text
+dlg_text_wipe_p Tem certeza?		//Wipe text dialog(.pag wipe)
+dlg_text_wipe_t Apagar lista		//Text showed in index page to wipe all pages
+dlg_text_descri Descreva seu problema
+dlg_text_jail	Jail
+dlg_text_ujail	Unjail
+dlg_text_ban	Ban
+dlg_text_uban	Unban
+dlg_text_bring	Trazer o player
+dlg_text_handle	Handle (desativado)
+
+//Message texts
+MSG_text_del_all Todas as pages foram apagadas // Message after wipe pages
+msg_text_Page_del Page deletada 		//Deleted page message
+msg_text_msg_sent Menssagem enviada		//Msg sent message
+msg_text_and_dele E a page deletada		//sent msg + And deleted message (need def.delete_after_msg = 1)
+msg_text_no_pages Nao existe pages 	//No pages message
+msg_text_xx_pag_1 Existe		//x pages message Part 1
+msg_text_xx_pag_2 Pages em espera			//x pages message Part 2
+//Part1 xxPages part2
+//look down to more info
+
+//NOTE: when the pages are wiped, the server log in console some details
+
+[function pag]
+tag0.page=
+if (<serv.gmpages>)
+sdialog d_page
+IF (<def.queue_message>)
+sysmessage @,,1 <def.msg_text_xx_pag_1> <eval <serv.gmpages>> <def.msg_text_xx_pag_2>
+endif
+Else
+sysmessage @,,1 <def.msg_text_no_pages>
+endif
+
+[dialog d_page]
+200,50
+local.b=0
+nomove
+if (<def.dlg_grey_border>)
+resizepic 20 20 9200 370 420
+endif
+gumppictiled 30 30 350 400 2624
+checkertrans 31 31 348 398
+//alphablack 30 30 350 400 //Will remove the border ( one pixel  / not remove the grey border )
+for 0 3
+IF (<ispage <tag0.page>+<local._for>>)
+button 40 <eval 50+(<local._for>*90)> 4005 4006 1 0 <eval <local._for>+1>
+dhtmlgump 75 <eval 50+(<local._for>*90)> 300 80 1 1 <serv.gmpage.<eval (<local._for>+<tag0.page>)>.account> <qval <serv.account.<serv.gmpage.<eval (<local._for>+<tag0.page>)>.account>.block> ? <def.bfont_lred>[block]<def.eme>><qval <serv.account.<serv.gmpage.<eval (<local._for>+<tag0.page>)>.account>.priv>&0800 ? <def.bfont_lred>[jail]<def.eme>> <def.bfont_lred>[<def.u><uid.<STRARG <serv.gmpage.<eval (<local._for>+<tag0.page>)>.reason>>.name><def.ue>]<def.bfont_black> : <strsub 0 250 <STREAT <serv.gmpage.<eval (<local._for>+<tag0.page>)>.reason>>>...
+local.b += 1
+endif
+endfor
+IF (<local.b> == 4) && (<serv.gmpages> >= 5)
+button 350 408 4005 4006 1 0 5
+endif
+IF !(<tag0.page> == 0)
+button 30 408 4014 4015 1 0 6
+endif
+Button 150 408 4026 4027 1 0 7
+dhtmlgump 181 411 200 20 0 0 <def.bfont_white><def.dlg_text_wipe_t>
+
+
+[dialog d_page button]
+
+on=1 4
+tag.pages=<Eval <argn1>+<tag0.page>-1>
+//sysmessage @03b2 Tweaking: <serv.gmpage.<tag.pages>.account> //test if script have bad section
+sdialog d_page_tweak
+
+on=5
+tag0.page += 4
+IF <tag0.page> > <serv.gmpages>
+tag.page=<serv.gmpages>
+endif
+sdialog d_page
+
+on=6
+tag.page -= 4
+IF <tag0.page> < 0
+tag0.page=0
+endif
+sdialog d_page
+
+on=7
+sdialog d_page_wipe
+
+
+[DIALOG d_page_tweak]
+190,40
+NOMOVE
+page 0
+ref1=<STRARG <serv.gmpage.<tag.pages>.reason>>
+if (<def.dlg_grey_border>)
+resizepic 31 20 9200 370 472
+endif
+gumppictiled 41 30 350 452 2624
+checkertrans 42 31 348 450
+dhtmlgump 45 33 340 20 0 0 <def.bfont_white><def.center><def.dlg_text_titlet>
+dhtmlgump 130 100 248 100 1 1 <STREAT <serv.gmpage.<tag.pages>.reason>>
+dtext 80 100 1152 <def.dlg_text_reason>
+dtext 80 210 1152 <def.dlg_text_delete>
+dtext 80 233 1152 <def.dlg_text_go_p_p>
+dtext 80 256 1152 <def.dlg_text_go_p_o>
+gumppictiled 89 329 290 109 3004
+dtext 80 303 1152 <def.dlg_text_pre_re>
+button 48 209 4005 4006 1 0 1
+button 48 232 4005 4006 1 0 2
+button 48 255 4005 4006 1 0 3
+if <ref1.account.priv> &0800
+dtext 232 210 1152 <def.dlg_text_ujail>
+else
+dtext 232 210 1152 <def.dlg_text_jail>
+endif
+if <ref1.account.block>
+dtext 232 233 022 <def.dlg_text_uban>
+else
+dtext 232 233 022 <def.dlg_text_ban>
+endif
+dtext 232 256 1152 <def.dlg_text_bring>
+button 200 209 4005 4006 1 0 7
+if <account.plevel> >= 5
+button 200 232 4005 4006 1 0 8
+endif
+button 200 255 4005 4006 1 0 9
+
+dtext 80 278 1152 <def.dlg_text_handle>
+//button 48 278 4005 4006 1 0 6
+
+button 48 302 4005 4006 1 0 4
+dtext 80 450 1152 <def.dlg_text_pag_ls>
+button 48 449 4011 4002 1 0 5
+dtextentry 92 332 283 102 0 1 
+ 
+
+[DIALOG d_page_tweak button]
+ON=0
+tag.page=
+tag.pages=
+pag
+
+ON=1
+try gmpage.<eval <tag0.pages>>.handle
+try gmpage.<eval <tag0.pages>>.d
+tag.page=
+sysmessage @,,1 <def.msg_text_page_del>
+
+ON=2
+go <uid.<STRARG <serv.gmpage.<eval <tag0.pages>>.reason>>.p>
+tag.page=
+
+ON=3
+GO <serv.gmpage.<eval <tag0.pages>>.p>
+tag.page=
+
+ON=4
+try serv.account.<serv.gmpage.<eval <tag0.pages>>.account>.tag.resposta = <argtxt[1]>
+try serv.account.<serv.gmpage.<eval <tag0.pages>>.account>.tag.gmpage = <serv.gmpage.<eval <tag0.pages>>.reason>
+try serv.account.<serv.gmpage.<eval <tag0.pages>>.account>.tag.responsavel = <name><def.br><def.br><def.bfont_black><def.dlg_text_ti_ela> <def.bfont_red><timeformat 1,<eval <serv.gmpage.<eval <tag0.pages>>.time>>>
+if <uid.<STRARG <serv.gmpage.<eval <tag0.pages>>.reason>>.isonline>
+trysrc <STRARG <serv.gmpage.<eval <tag0.pages>>.reason>> sdialog d_recebe_page
+endif
+F_LOGIN_page <serv.gmpage.<eval <tag0.pages>>.account>
+IF (<def.delete_after_msg>)
+try gmpage.<eval <tag0.page>>.handle 
+try gmpage.<eval <tag0.page>>.d 	
+endif
+sysmessage @,,1 <def.msg_text_msg_sent> <qval (<def.delete_after_msg>) ? <def.msg_text_and_dele> :>
+tag.pages=
+
+
+ON=5
+tag.page=
+tag.pages=
+pag
+ 
+//on=6 //handle
+
+on=7
+//ref1 = player
+//[default] = quem esta mechendo na page
+ref1=<STRARG <serv.gmpage.<eval <tag0.pages>>.reason>>
+
+if <ref1.account.priv> &0800
+ref1.forgive
+else
+ref1.jail
+go <ref1.p>
+move 2
+endif
+sDIALOG d_page_tweak
+
+on=8
+//ref1 = player
+//[default] = quem esta mechendo na page
+ref1=<STRARG <serv.gmpage.<eval <tag0.pages>>.reason>>
+
+if <ref1.account.block>
+ref1.account.block 0
+else
+ref1.account.block 1
+ref1.kick
+endif
+sDIALOG d_page_tweak
+
+on=9
+//ref1 = player
+//[default] = quem esta mechendo na page
+ref1=<STRARG <serv.gmpage.<eval <tag0.pages>>.reason>>
+
+ref1.go <p>
+
+[function ispage]
+IF !(STRCMP("<serv.gmpage.<eval <args>>.status>","0"))
+return "0"
+else
+return "1"
+endif
+
+[FUNCTION find_page]
+FOR 0 <eval <serv.clients>-1>
+	IF (<serv.CLIENT.<LOCAL._FOR>>)
+		IF (STRMATCH("<args>","<serv.client.<eval <local._for>>.name>"))
+			OBJ=<serv.client.<eval <local._for>>.uid>
+		ENDIF
+	ENDIF
+ENDFOR
+
+IF !(<OBJ> == 00)
+  IF (<OBJ.ISONLINE>)
+  trysrc <OBJ> sdialog d_recebe_page
+  ENDIF
+obj=0
+ENDIF
+
+[function alphablack]
+gumppictiled <argv[0]> <argv[1]> 2624 <argv[2]> <argv[3]>
+checkertrans <argv[0]> <argv[1]> <argv[2]> <argv[3]>
+
+
+[DIALOG d_recebe_page]
+20,20
+NOMOVE
+page 0
+resizepic 15 15 2620 100 84
+checkertrans 20 20 90 74
+gumppictiled 26 26 22 60 3504
+gumppictiled 27 27 20 58 2624
+button 27 28 2002 2002 1 0 1
+dhtmlgump 48 45 80 20 0 0 <def.bfont_white><def.dlg_text_mi_dlg><def.bfonte>
+
+[DIALOG d_recebe_page button]
+ON=1
+sdialog d_ler_page_recebida
+
+
+[DIALOG d_ler_page_recebida]
+0,0
+NOMOVE
+NOCLOSE
+page 0
+resizepic 82 122 9200 606 203
+alphablack 92 132 586 183
+htmlgump 99 141 571 138 0 1 1
+button 347 295 247 248 1 0 1
+
+[DIALOG d_ler_page_recebida text]
+<def.bfont_red><src.name><def.bfont_black>, <def.dlg_text_your_p> <def.bfont_blue><STREAT <src.account.tag.gmpage>><def.bfont_black><def.br> <def.dlg_text_was_as> <def.bfont_red><src.account.tag.resposta><def.br><def.br><def.bfont_black><def.dlg_text_by_who> <def.bfont_red><src.account.tag.responsavel>
+
+[DIALOG d_ler_page_recebida button]
+ON=1
+src.account.tag.resposta=
+src.account.tag.gmpage=
+src.account.tag.responsavel=
+F_LOGIN_page_del <src.account>
+src.sysmessage @,,1 <def.msg_text_page_del>
+
+[FUNCTION F_LOGIN_page]
+FOR 0 <EVAL <SERV.ACCOUNT.<ARGS>.CHARS>-1>
+local.uid=<SERV.ACCOUNT.<ARGS>.CHAR.<EVAL <LOCAL._FOR>>.UID> 
+try uid.<local.uid>.events +e_page
+ENDFOR
+
+[events e_page]
+on=@login
+IF !(STRMATCH("<account.tag0.resposta>","0"))
+sdialog d_recebe_page
+endif
+
+[FUNCTION F_LOGIN_page_del]
+FOR 0 <EVAL <SERV.ACCOUNT.<ARGS>.CHARS>-1>
+local.uid=<SERV.ACCOUNT.<ARGS>.CHAR.<EVAL <LOCAL._FOR>>.UID> 
+try uid.<local.uid>.events -e_page
+ENDFOR
+
+
+[FUNCTION TIMEFORMAT]
+IF (<ARGN2> > 86400)
+LOCAL.TIME <EVAL <ARGN2>/86400>d <EVAL <EVAL <ARGN2>%86400>/3600>h <EVAL <EVAL <EVAL <ARGN2>%86400>%3600>/60>m <EVAL <EVAL <EVAL <ARGN2>%86400>%3600>%60>s
+ELSEIF (<ARGN2> > 3600)
+LOCAL.TIME <EVAL <ARGN2>/3600>h <EVAL <EVAL <ARGN2>%3600>/60>m <EVAL <EVAL <ARGN2>%3600>%60>s
+ELSEIF (<ARGN2> > 60)
+LOCAL.TIME <EVAL <ARGN2>/60>m <EVAL <ARGN2>%60>s
+ELSE
+LOCAL.TIME <ARGN2>s
+ENDIF
+RETURN <LOCAL.TIME>
+
+[DIALOG d_page_wipe]
+250,250
+NOMOVE
+page 0
+resizepic 0 0 2620 273 138
+dhtmlgump 5 7 263 100 1 1 <def.dlg_text_wipe_p>
+button 205 109 247 248 1 0 1
+button 141 109 241 241 1 0 2
+
+[DIALOG d_page_wipe text]
+<def.dlg_text_wipe_p>
+
+[DIALOG d_page_wipe button]
+ON=1 //OKAY - delete
+serv.log @<name> : Deleting ALL PAGES(<eval <serv.gmpages>> : <serv.rtime>
+FOR 0 <eval <serv.gmpages>-1>
+try gmpage.<local._for>.handle
+try gmpage.<local._for>.d
+ENDFOR
+sysmessage @,,1 <def.dlg_text_del_al>
+
+
+ON=2 //CANCEL
+src.pag
+
+
+[function f_player_page]
+sDIALOG d_page_send
+
+[DIALOG d_page_send]
+0,0
+page 0
+alphablack 79 136 581 168
+gumppictiled 91 169 554 121 9354
+dtext 95 142 1152 <def.dlg_text_descri>
+dtextentry 98 175 540 108 0 0 
+button 326 296 247 248 1 0 1
+
+[DIALOG d_page_send button]
+ON=0
+helppage
+ON=1
+if !(<IsEmpty <argtxt[0]>>)
+gmpage add <uid> <argtxt[0]>
+SRC.NEWITEM i_page_delay
+SRC.ACT.EQUIP
+else
+helppage
+endif
+
+
+[EOF]

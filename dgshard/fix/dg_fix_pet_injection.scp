@@ -1,0 +1,18 @@
+[FUNCTION f_check_pet_name_injection]
+IF STRMATCH( "*@*", "<NAME>" )
+	OBJ = <MEMORYFINDTYPE.memory_ipet.LINK>
+	OBJ.JAIL
+	OBJ.TITLE = "Injection nome pet"
+	SERV.LOG = "Injection (nome animal com @) Nome : <OBJ.NAME> Account <OBJ.ACCOUNT> IP <OBJ.ACCOUNT.LASTIP>"
+	REMOVE
+	RETURN 1
+ENDIF
+
+[EVENTS e_pet_injection]
+ON=@Click
+f_check_pet_name_injection
+
+ON=@DClick
+f_check_pet_name_injection
+
+[EOF]

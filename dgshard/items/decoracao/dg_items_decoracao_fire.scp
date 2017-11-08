@@ -1,0 +1,2226 @@
+/////////////////////////Cadeiras Fire/////////////////////
+
+[ITEMDEF i_cadeira_1a_fire]
+ID=0b32
+TYPE=t_chair
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Throne
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+RESOURCES=25 i_log_fire, 10 i_cloth
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_1b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_1b_fire]
+ID=0b33
+TYPE=t_chair
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+RESOURCES=25 i_log_fire, 10 i_cloth
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_1a_fire
+UPDATE
+
+//******************************************
+
+[ITEMDEF i_cadeira_2a_fire]
+ID=0b2e
+TYPE=t_chair
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+RESOURCES=20 i_log_fire
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_2b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_2b_fire]
+ID=0b2f
+TYPE=t_chair
+WEIGHT=3
+RESOURCES=20 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_2c_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_2c_fire]
+ID=0b30
+TYPE=t_chair
+WEIGHT=3
+RESOURCES=20 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_2d_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_2d_fire]
+ID=0b31
+TYPE=t_chair
+WEIGHT=3
+RESOURCES=20 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_2a_fire
+UPDATE
+
+//*******************************************
+
+[ITEMDEF i_cadeira_3a_fire]
+ID=0b4e
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Chair (Gray Cushion)
+RESOURCES=17 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_3b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_3b_fire]
+ID=0b4f
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=17 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_3c_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_3c_fire]
+ID=0b50
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=17 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_3d_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_3d_fire]
+ID=0b51
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=17 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_3a_fire
+UPDATE
+
+// ******************************************************
+
+[ITEMDEF i_cadeira_4a_fire]
+ID=0b52
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Chair (Gray Cushion)
+RESOURCES=15 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_4b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_4b_fire]
+ID=0b53
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=15 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_4c_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_4c_fire]
+ID=0b54
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=15 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_4d_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_4d_fire]
+ID=0b55
+TYPE=t_chair
+DYE=1
+VALUE={50 70}
+WEIGHT=3
+RESOURCES=15 i_log_fire, 7 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_4a_fire
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_5a_fire]
+ID=0b56
+TYPE=T_CHAIR
+RESOURCES=15 i_log_fire
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Chair (Light Wood)
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_5b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_5b_fire]
+ID=0b57
+TYPE=T_CHAIR
+RESOURCES=15 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_5c_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_5c_fire]
+ID=0b58
+TYPE=T_CHAIR
+RESOURCES=15 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_5d_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_5d_fire]
+ID=0b59
+TYPE=T_CHAIR
+RESOURCES=15 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_5a_fire
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_6a_fire]
+id=0b5a
+TYPE=T_CHAIR
+RESOURCES=12 i_log_fire
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Chair
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_6b_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_6b_fire]
+ID=0b5b
+TYPE=T_CHAIR
+RESOURCES=12 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_6c_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_6c_fire]
+ID=0b5c
+TYPE=T_CHAIR
+RESOURCES=12 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_6d_fire
+UPDATE
+
+//************
+
+[ITEMDEF i_cadeira_6d_fire]
+ID=0b5d
+TYPE=T_CHAIR
+RESOURCES=12 i_log_fire
+WEIGHT=3
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_6a_fire
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_7a_fire]
+id=0a2a
+TYPE=T_CHAIR
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Barstool (Cross Bars)
+RESOURCES=8 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+
+[ITEMDEF i_cadeira_8a_fire]
+id=0b2c
+TYPE=T_CHAIR
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Wooden Bench (Dark)
+RESOURCES=15 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_8b_fire
+UPDATE
+
+[ITEMDEF i_cadeira_8b_fire]
+ID=0b2d
+TYPE=T_CHAIR
+WEIGHT=3
+RESOURCES=15 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_8a_fire
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_9a_fire]
+id=0b91
+TYPE=T_CHAIR
+RESOURCES=75 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_9b_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_9b_fire]
+ID=0b92
+TYPE=T_CHAIR
+RESOURCES=75 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_9a_fire
+ATTR=attr_move_always
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_10a_fire]
+id=0b93
+TYPE=T_CHAIR
+RESOURCES=75 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_10b_fire
+ATTR=attr_move_always
+UPDATE
+
+//********************************************
+
+[ITEMDEF i_cadeira_10b_fire]
+ID=0b94
+TYPE=T_CHAIR
+RESOURCES=75 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_10a_fire
+ATTR=attr_move_always
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_11a_fire]
+id=2911
+TYPE=T_CHAIR
+RESOURCES=40 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_11b_fire
+UPDATE
+
+//***********************************************
+
+[ITEMDEF i_cadeira_11b_fire]
+ID=2912
+TYPE=T_CHAIR
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_11c_fire
+UPDATE
+
+//**********************************************
+
+[ITEMDEF i_cadeira_11c_fire]
+ID=2917
+TYPE=T_CHAIR
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_11d_fire
+UPDATE
+
+//**********************************************
+
+[ITEMDEF i_cadeira_11d_fire]
+ID=2918
+TYPE=T_CHAIR
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_11a_fire
+UPDATE
+
+// **********************************************
+
+[ITEMDEF i_cadeira_12a_fire]
+id=0b62
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Cadeiras
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12b_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_12b_fire]
+ID=0b63
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12c_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_12c_fire]
+ID=0b64
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12d_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_12d_fire]
+ID=0b68
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12e_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_12e_fire]
+ID=0b69
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12f_fire
+ATTR=attr_move_always
+UPDATE
+
+[ITEMDEF i_cadeira_12f_fire]
+ID=0b6a
+TYPE=T_CHAIR
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_cadeira_12a_fire
+ATTR=attr_move_always
+UPDATE
+
+////////////////////////////////////////MESAS//////////////////////////////////////////////
+
+[ITEMDEF i_mesa_1a_fire]
+id=0190e
+TYPE=T_DOOR
+RESOURCES=5 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=5
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bar Door
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_1b_fire
+UPDATE
+
+[ITEMDEF i_mesa_1b_fire]
+ID=0190f
+TYPE=T_DOOR
+RESOURCES=5 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=5
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_1a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_2a_fire]
+id=01910
+WEIGHT=4
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bar
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2b_fire
+UPDATE
+
+[ITEMDEF i_mesa_2b_fire]
+ID=01911
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2c_fire
+UPDATE
+
+[ITEMDEF i_mesa_2c_fire]
+ID=01912
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2d_fire
+UPDATE
+
+[ITEMDEF i_mesa_2d_fire]
+ID=01913
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2e_fire
+UPDATE
+
+[ITEMDEF i_mesa_2e_fire]
+ID=01918
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2f_fire
+UPDATE
+
+[ITEMDEF i_mesa_2f_fire]
+ID=01919
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2g_fire
+UPDATE
+
+[ITEMDEF i_mesa_2g_fire]
+ID=0191a
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2h_fire
+UPDATE
+
+[ITEMDEF i_mesa_2h_fire]
+ID=0191b
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2i_fire
+UPDATE
+
+[ITEMDEF i_mesa_2i_fire]
+ID=0191c
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2j_fire
+UPDATE
+
+[ITEMDEF i_mesa_2j_fire]
+ID=0191d
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2k_fire
+UPDATE
+
+[ITEMDEF i_mesa_2k_fire]
+ID=0191e
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2l_fire
+UPDATE
+
+[ITEMDEF i_mesa_2l_fire]
+ID=0191f
+WEIGHT=4
+RESOURCES=35 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_2a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_3a_fire]
+id=0b34
+TYPE=t_table
+WEIGHT=3
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Nightstand, end piece
+RESOURCES=20 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+[ITEMDEF i_mesa_4a_fire]
+id=0b7c
+TYPE=T_CHAIR
+RESOURCES=43 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_4b_fire
+UPDATE
+
+[ITEMDEF i_mesa_4b_fire]
+ID=0b8f
+TYPE=T_CHAIR
+RESOURCES=43 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_4a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_5a_fire]
+id=0b7d
+TYPE=T_CHAIR
+RESOURCES=50 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_5b_fire
+UPDATE
+
+[ITEMDEF i_mesa_5b_fire]
+ID=0b90
+TYPE=T_CHAIR
+RESOURCES=50 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_5a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_6a_fire]
+id=2889
+TYPE=T_CHAIR
+RESOURCES=30 i_log_fire
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bench
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_6b_fire
+UPDATE
+
+[ITEMDEF i_mesa_6b_fire]
+ID=2890
+TYPE=T_CHAIR
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_6c_fire
+UPDATE
+
+[ITEMDEF i_mesa_6c_fire]
+ID=2891
+TYPE=T_CHAIR
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_6d_fire
+UPDATE
+
+[ITEMDEF i_mesa_6d_fire]
+ID=2892
+TYPE=T_CHAIR
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_6a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_7a_fire]
+id=4491
+TYPE=T_CHAIR
+RESOURCES=40 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bench
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+[ITEMDEF i_mesa_8a_fire]
+id=4495
+TYPE=T_CHAIR
+RESOURCES=20 i_log_fire, 10 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Bench
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_8b_fire
+UPDATE
+
+[ITEMDEF i_mesa_8b_fire]
+ID=4496
+TYPE=T_CHAIR
+RESOURCES=20 i_log_fire, 10 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_8c_fire
+UPDATE
+
+[ITEMDEF i_mesa_8c_fire]
+ID=4497
+TYPE=T_CHAIR
+RESOURCES=20 i_log_fire, 10 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_8d_fire
+UPDATE
+
+[ITEMDEF i_mesa_8d_fire]
+ID=4498
+TYPE=T_CHAIR
+RESOURCES=20 i_log_fire, 10 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_8a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_mesa_9a_fire]
+id=0118d
+TYPE=t_table
+RESOURCES=40 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=7
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Table (Red Runner)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+[ITEMDEF i_mesa_10a_fire]
+id=4492
+TYPE=t_table
+RESOURCES=40 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=7
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Table (Red Runner)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+[ITEMDEF i_mesa_11a_fire]
+id=0118e
+TYPE=t_table
+RESOURCES=40 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=7
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Table (Red Runner)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+// **********************************************
+[ITEMDEF i_mesa_12a_fire]
+id=011dc
+TYPE=t_table
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=30
+CATEGORY=Decoration - Furniture
+SUBSECTION=Mesas
+DESCRIPTION=Table (Log)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_12b_fire
+UPDATE
+
+[ITEMDEF i_mesa_12b_fire]
+ID=011dd
+TYPE=t_table
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=30
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_12c_fire
+UPDATE
+
+[ITEMDEF i_mesa_12c_fire]
+ID=011df
+TYPE=t_table
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=30
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_12d_fire
+UPDATE
+
+[ITEMDEF i_mesa_12d_fire]
+ID=011e0
+TYPE=t_table
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=30
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_mesa_12a_fire
+UPDATE
+
+////////////////////////////////////ARMÁRIOS/////////////////////////////////////////////////////
+
+[ITEMDEF i_armario_1a_fire]
+id=0a4d
+RESOURCES=40 i_log_fire, 3 i_ingot_iron
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04e
+WEIGHT=25
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Armoire (Dark Wood)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_1b_fire
+UPDATE
+
+[ITEMDEF i_armario_1b_fire]
+ID=0a51
+RESOURCES=40 i_log_fire, 3 i_ingot_iron
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04e
+WEIGHT=25
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_1a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_2a_fire]
+id=0a4f
+TYPE=T_CONTAINER
+TDATA2=04f
+RESOURCES=35 i_log_fire, 3 i_ingot_iron
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=9
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Armoire (Light Wood)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_2b_fire
+UPDATE
+
+[ITEMDEF i_armario_2b_fire]
+ID=0a53
+TYPE=T_CONTAINER
+TDATA2=04f
+RESOURCES=35 i_log_fire, 3 i_ingot_iron
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+WEIGHT=9
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_2a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_3a_fire]
+id=0a9d
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Empty)
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_3b_fire
+UPDATE
+
+[ITEMDEF i_armario_3b_fire]
+ID=0a9e
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Empty)
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_3a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_4a_fire]
+id=0a2c
+RESOURCES=20 i_log_fire
+TYPE=T_CONTAINER
+TDATA2=051
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Chest of Drawers (Light Wood)(SW)
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_4b_fire
+UPDATE
+
+[ITEMDEF i_armario_4b_fire]
+ID=0a34
+RESOURCES=20 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=051
+WEIGHT=20
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_4a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_5a_fire]
+id=0a30
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=048
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Chest of Drawers (Dark Wood) (SW)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_5b_fire
+UPDATE
+
+[ITEMDEF i_armario_5b_fire]
+ID=0a38
+RESOURCES=30 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=048
+WEIGHT=20
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_5a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_6a_fire]
+id=0a97
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04d
+WEIGHT=10
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Books)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_6b_fire
+UPDATE
+
+[ITEMDEF i_armario_6b_fire]
+ID=0a9c
+RESOURCES=45 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04d
+WEIGHT=10
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_6a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_7a_fire]
+id=0a3c
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Empty)
+RESOURCES=60 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_7b_fire
+UPDATE
+
+[ITEMDEF i_armario_7b_fire]
+ID=0a3d
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=60 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_7c_fire
+UPDATE
+
+[ITEMDEF i_armario_7c_fire]
+ID=0a44
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=60 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_7d_fire
+UPDATE
+
+[ITEMDEF i_armario_7d_fire]
+ID=0a45
+TYPE=T_CONTAINER
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=60 i_log_fire, 5 i_ingot_silver
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_7a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_8a_fire]
+id=0a32
+RESOURCES=10 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04d
+WEIGHT=10
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Books)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_8b_fire
+UPDATE
+
+[ITEMDEF i_armario_8b_fire]
+ID=0a3a
+RESOURCES=10 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_CONTAINER
+TDATA2=04d
+WEIGHT=10
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_8a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_9a_fire]
+id=0a64
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_BED
+TDATA2=04d
+VALUE={120 150}
+WEIGHT=10
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Books)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_9b_fire
+UPDATE
+
+[ITEMDEF i_armario_9b_fire]
+ID=0a65
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_BED
+TDATA2=04d
+VALUE={120 150}
+WEIGHT=10
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_9a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_10a_fire]
+id=0a60
+RESOURCES=40 i_log_fire
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_BED
+TDATA2=04d
+VALUE={120 150}
+WEIGHT=10
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Books)
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_10b_fire
+UPDATE
+
+[ITEMDEF i_armario_10b_fire]
+ID=0a61
+RESOURCES=40 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+TYPE=T_BED
+TDATA2=04d
+VALUE={120 150}
+WEIGHT=10
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_10a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_11a_fire]
+id=0a82
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Empty)
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11b_fire
+UPDATE
+
+[ITEMDEF i_armario_11b_fire]
+ID=0a83
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11c_fire
+UPDATE
+
+[ITEMDEF i_armario_11c_fire]
+ID=0a84
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11d_fire
+UPDATE
+
+[ITEMDEF i_armario_11d_fire]
+ID=0a85
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11e_fire
+UPDATE
+
+[ITEMDEF i_armario_11e_fire]
+ID=0a86
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11f_fire
+UPDATE
+
+[ITEMDEF i_armario_11f_fire]
+ID=0a87
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11g_fire
+UPDATE
+
+[ITEMDEF i_armario_11g_fire]
+ID=0a88
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11h_fire
+UPDATE
+
+[ITEMDEF i_armario_11h_fire]
+ID=0a89
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11i_fire
+UPDATE
+
+[ITEMDEF i_armario_11i_fire]
+ID=0a8a
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11j_fire
+UPDATE
+
+[ITEMDEF i_armario_11j_fire]
+ID=0a8b
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11l_fire
+UPDATE
+
+[ITEMDEF i_armario_11l_fire]
+ID=0a8c
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11m_fire
+UPDATE
+
+[ITEMDEF i_armario_11m_fire]
+ID=0a8d
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11n_fire
+UPDATE
+
+[ITEMDEF i_armario_11n_fire]
+ID=0a8e
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11o_fire
+UPDATE
+
+[ITEMDEF i_armario_11o_fire]
+ID=0a8f
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11p_fire
+UPDATE
+
+[ITEMDEF i_armario_11p_fire]
+ID=0a90
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11q_fire
+UPDATE
+
+[ITEMDEF i_armario_11q_fire]
+ID=0a91
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=100 i_log_fire, 60 i_cloth 
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_11a_fire
+UPDATE
+// **********************************************
+[ITEMDEF i_armario_12a_fire]
+id=011f0
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+CATEGORY=Decoration - Furniture
+SUBSECTION=Armarios
+DESCRIPTION=Bookcase (Dark Wood) (Empty)
+RESOURCES=30 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_12b_fire
+UPDATE
+
+[ITEMDEF i_armario_12b_fire]
+ID=011f1
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=30 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_12c_fire
+UPDATE
+
+[ITEMDEF i_armario_12c_fire]
+ID=011f2
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=30 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_12d_fire
+UPDATE
+
+[ITEMDEF i_armario_12d_fire]
+ID=011f3
+TYPE=T_BED
+TDATA2=04d
+TDATA2=04d
+WEIGHT=20
+RESOURCES=30 i_log_fire, 30 i_cloth
+SKILLMAKE=CARPENTRY 100.0, t_carpentry
+
+ON=@CREATE
+COLOR=color_l_fire
+
+ON=@DROPON_GROUND
+id=i_armario_12a_fire
+UPDATE
+
+////////////////////////////////SKILL MENU CADEIRAS///////////////////////////////////////////////////
+
+[SKILLMENU sm_cadeiras_fire]
+Cadeiras Fire
+
+ON=i_cadeira_1a_fire Cadeiras Color
+SKILLMENU=sm_cadeiras_fire
+
+//fazendo o item
+
+ON=i_cadeira_1a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_1a_fire
+
+ON=i_cadeira_1b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_1b_fire
+
+ON=i_cadeira_2a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_2a_fire
+
+ON=i_cadeira_2b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_2b_fire
+
+ON=i_cadeira_2c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_2c_fire
+
+ON=i_cadeira_2d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_2d_fire
+
+ON=i_cadeira_3a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_3a_fire
+
+ON=i_cadeira_3b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_3b_fire
+
+ON=i_cadeira_3c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_3c_fire
+
+ON=i_cadeira_3d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_3d_fire
+
+ON=i_cadeira_4a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_4a_fire
+
+ON=i_cadeira_4b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_4b_fire
+
+ON=i_cadeira_4c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_4c_fire
+
+ON=i_cadeira_4d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_4d_fire
+
+ON=i_cadeira_5a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_5a_fire
+
+ON=i_cadeira_5b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_5b_fire
+
+ON=i_cadeira_5c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_5c_fire
+
+ON=i_cadeira_5d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_5d_fire
+
+ON=i_cadeira_6a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_6a_fire
+
+ON=i_cadeira_6b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_6b_fire
+
+ON=i_cadeira_6c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_6c_fire
+
+ON=i_cadeira_6d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_6d_fire
+
+ON=i_cadeira_7a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_7a_fire
+
+ON=i_cadeira_8a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_8a_fire
+
+ON=i_cadeira_8b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_8b_fire
+
+ON=i_cadeira_9a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_9a_fire
+
+ON=i_cadeira_9b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_9b_fire
+
+ON=i_cadeira_10a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_10a_fire
+
+ON=i_cadeira_10b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_10b_fire
+
+ON=i_cadeira_11a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_11a_fire
+
+ON=i_cadeira_11b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_11b_fire
+
+ON=i_cadeira_11c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_11c_fire
+
+ON=i_cadeira_11d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_11d_fire
+
+ON=i_cadeira_12a_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12a_fire
+
+ON=i_cadeira_12b_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12b_fire
+
+ON=i_cadeira_12c_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12c_fire
+
+ON=i_cadeira_12d_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12d_fire
+
+ON=i_cadeira_12e_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12e_fire
+
+ON=i_cadeira_12f_fire <name> (<resmake>)
+MAKEITEM=i_cadeira_12f_fire
+
+////////////////////////////////////////////SKILLMENU MESAS///////////////////////////////
+
+[SKILLMENU sm_mesas_fire]
+Mesas Fire
+
+ON=i_mesa_1a_fire Cadeiras Color
+SKILLMENU=sm_mesas_fire
+
+//Fazendo o item
+
+ON=i_mesa_1a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_1a_fire
+
+ON=i_mesa_1b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_1b_fire
+
+ON=i_mesa_2a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2a_fire
+
+ON=i_mesa_2b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2b_fire
+
+ON=i_mesa_2c_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2c_fire
+
+ON=i_mesa_2d_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2d_fire
+
+ON=i_mesa_2e_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2e_fire
+
+ON=i_mesa_2f_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2f_fire
+
+ON=i_mesa_2g_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2g_fire
+
+ON=i_mesa_2h_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2h_fire
+
+ON=i_mesa_2i_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2i_fire
+
+ON=i_mesa_2j_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2j_fire
+
+ON=i_mesa_2k_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2k_fire
+
+ON=i_mesa_2l_fire <name> (<resmake>)
+MAKEITEM=i_mesa_2l_fire
+
+ON=i_mesa_3a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_3a_fire
+
+ON=i_mesa_4a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_4a_fire
+
+ON=i_mesa_4b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_4b_fire
+
+ON=i_mesa_5a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_5a_fire
+
+ON=i_mesa_5b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_5b_fire
+
+ON=i_mesa_6a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_6a_fire
+
+ON=i_mesa_6b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_6b_fire
+
+ON=i_mesa_6c_fire <name> (<resmake>)
+MAKEITEM=i_mesa_6c_fire
+
+ON=i_mesa_6d_fire <name> (<resmake>)
+MAKEITEM=i_mesa_6d_fire
+
+ON=i_mesa_7a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_7a_fire
+
+ON=i_mesa_8a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_8a_fire
+
+ON=i_mesa_8b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_8b_fire
+
+ON=i_mesa_8c_fire <name> (<resmake>)
+MAKEITEM=i_mesa_8c_fire
+
+ON=i_mesa_8d_fire <name> (<resmake>)
+MAKEITEM=i_mesa_8d_fire
+
+ON=i_mesa_9a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_9a_fire
+
+ON=i_mesa_10a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_10a_fire
+
+ON=i_mesa_11a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_11a_fire
+
+ON=i_mesa_12a_fire <name> (<resmake>)
+MAKEITEM=i_mesa_12a_fire
+
+ON=i_mesa_12b_fire <name> (<resmake>)
+MAKEITEM=i_mesa_12b_fire
+
+ON=i_mesa_12c_fire <name> (<resmake>)
+MAKEITEM=i_mesa_12c_fire
+
+ON=i_mesa_12d_fire <name> (<resmake>)
+MAKEITEM=i_mesa_12d_fire
+
+/////////////////SKILLMENU ARMÀRIOS/////////////////////////////////////////////////
+
+[SKILLMENU sm_armarios_fire]
+Armarios Fire
+
+ON=i_armario_1a_fire Armarios Color
+SKILLMENU=sm_armarios_fire
+
+//Fazendo o item
+
+ON=i_armario_1a_fire <name> (<resmake>)
+MAKEITEM=i_armario_1a_fire
+
+ON=i_armario_1b_fire <name> (<resmake>)
+MAKEITEM=i_armario_1b_fire
+
+ON=i_armario_2a_fire <name> (<resmake>)
+MAKEITEM=i_armario_2a_fire
+
+ON=i_armario_2b_fire <name> (<resmake>)
+MAKEITEM=i_armario_2b_fire
+
+ON=i_armario_3a_fire <name> (<resmake>)
+MAKEITEM=i_armario_3a_fire
+
+ON=i_armario_3b_fire <name> (<resmake>)
+MAKEITEM=i_armario_3b_fire
+
+ON=i_armario_4a_fire <name> (<resmake>)
+MAKEITEM=i_armario_4a_fire
+
+ON=i_armario_4b_fire <name> (<resmake>)
+MAKEITEM=i_armario_4b_fire
+
+ON=i_armario_5a_fire <name> (<resmake>)
+MAKEITEM=i_armario_5a_fire
+
+ON=i_armario_5b_fire <name> (<resmake>)
+MAKEITEM=i_armario_5b_fire
+
+ON=i_armario_6a_fire <name> (<resmake>)
+MAKEITEM=i_armario_6a_fire
+
+ON=i_armario_6b_fire <name> (<resmake>)
+MAKEITEM=i_armario_6b_fire
+
+ON=i_armario_7a_fire <name> (<resmake>)
+MAKEITEM=i_armario_7a_fire
+
+ON=i_armario_7b_fire <name> (<resmake>)
+MAKEITEM=i_armario_7b_fire
+
+ON=i_armario_7c_fire <name> (<resmake>)
+MAKEITEM=i_armario_7c_fire
+
+ON=i_armario_7d_fire <name> (<resmake>)
+MAKEITEM=i_armario_7d_fire
+
+ON=i_armario_8a_fire <name> (<resmake>)
+MAKEITEM=i_armario_8a_fire
+
+ON=i_armario_8b_fire <name> (<resmake>)
+MAKEITEM=i_armario_8b_fire
+
+ON=i_armario_9a_fire <name> (<resmake>)
+MAKEITEM=i_armario_9a_fire
+
+ON=i_armario_9b_fire <name> (<resmake>)
+MAKEITEM=i_armario_9b_fire
+
+ON=i_armario_10a_fire <name> (<resmake>)
+MAKEITEM=i_armario_10a_fire
+
+ON=i_armario_10b_fire <name> (<resmake>)
+MAKEITEM=i_armario_10b_fire
+
+ON=i_armario_11a_fire <name> (<resmake>)
+MAKEITEM=i_armario_11a_fire
+
+ON=i_armario_11b_fire <name> (<resmake>)
+MAKEITEM=i_armario_11b_fire
+
+ON=i_armario_11c_fire <name> (<resmake>)
+MAKEITEM=i_armario_11c_fire
+
+ON=i_armario_11d_fire <name> (<resmake>)
+MAKEITEM=i_armario_11d_fire
+
+ON=i_armario_11e_fire <name> (<resmake>)
+MAKEITEM=i_armario_11e_fire
+
+ON=i_armario_11f_fire <name> (<resmake>)
+MAKEITEM=i_armario_11f_fire
+
+ON=i_armario_11g_fire <name> (<resmake>)
+MAKEITEM=i_armario_11g_fire
+
+ON=i_armario_11h_fire <name> (<resmake>)
+MAKEITEM=i_armario_11h_fire
+
+ON=i_armario_11i_fire <name> (<resmake>)
+MAKEITEM=i_armario_11i_fire
+
+ON=i_armario_11j_fire <name> (<resmake>)
+MAKEITEM=i_armario_11j_fire
+
+ON=i_armario_11l_fire <name> (<resmake>)
+MAKEITEM=i_armario_11l_fire
+
+ON=i_armario_11m_fire <name> (<resmake>)
+MAKEITEM=i_armario_11m_fire
+
+ON=i_armario_11n_fire <name> (<resmake>)
+MAKEITEM=i_armario_11n_fire
+
+ON=i_armario_11o_fire <name> (<resmake>)
+MAKEITEM=i_armario_11o_fire
+
+ON=i_armario_11p_fire <name> (<resmake>)
+MAKEITEM=i_armario_11p_fire
+
+ON=i_armario_11q_fire <name> (<resmake>)
+MAKEITEM=i_armario_11q_fire
+
+ON=i_armario_12a_fire <name> (<resmake>)
+MAKEITEM=i_armario_12a_fire
+
+ON=i_armario_12b_fire <name> (<resmake>)
+MAKEITEM=i_armario_12b_fire
+
+ON=i_armario_12c_fire <name> (<resmake>)
+MAKEITEM=i_armario_12c_fire
+
+ON=i_armario_12d_fire <name> (<resmake>)
+MAKEITEM=i_armario_12d_fire
+
+
+
+
+
+

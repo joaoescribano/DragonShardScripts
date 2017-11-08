@@ -1,0 +1,316 @@
+[itemdef i_cajado_tamming]
+ID=i_crook_thin
+NAME=Cajado de Treinador
+TYPE=T_WEAPON_MACE_CROOK
+VALUE=1000
+
+on=@create
+COLOR=079a
+tag0.uid 0
+tag0.n 0
+tag0.percisa 0
+
+ON=@DAMAGE
+HITS = <MAXHITS>
+RETURN 1
+
+On=@DCLICK
+hits = <maxhits>
+color 079a
+EQUIP
+if (<src.restest i_mem_taming>)
+    src.sysmessage Aguarde para usar novamente.
+    return 1
+endif
+target Selecione o animal para domesticar.
+return 1
+
+ON=@TARGON_ITEM
+src.sysmessage Somente animais
+
+return 1
+
+ON=@TARGON_GROUND
+src.sysmessage Somente animais
+return 1
+
+ON=@TARGON_CHAR
+if (<src.targ.isplayer>)
+    src.sysmessage Selecione somente animais, jogadores nao sao domesticaveis.
+    return 1
+endif
+
+if (<src.targ.npc> != brain_animal)
+    if (<src.targ.npc> != 13)
+        src.sysmessage Voce so pode domesticar animais
+        return 1
+    endif
+endif
+
+if (<src.targ.distance> > 6)
+    src.sysmessage Voce esta longe do animal.
+    return 1
+endif
+
+if (<src.targ.p.z> > <src.p.z>)
+    var.altura = <eval <src.targ.p.z> - <src.p.z>>
+elseif (<src.targ.p.z> < <src.p.z>)
+    var.altura = <eval <src.p.z> - <src.targ.p.z>>
+else
+    var.altura = 0
+endif
+
+if (<var.altura> > 15)
+    src.sysmessage Voce nao pode tamar este animal de um andar diferente.
+    return 1
+endif
+
+if (<src.targ.taming> == 0)
+    src.sysmessage Voce nao pode tamar este animal.
+    return 1
+endif
+
+if (<src.taming> < <src.targ.taming>)
+    src.sysmessage Voce nao tem habilidade sufuciente para tentar domesticar este animal.
+    return 1
+endif
+
+if (<src.flags> & statf_war)
+    src.Sysmessage Voce nao pode domesticar um animal preocupado batalhas
+    return 1
+endif
+
+if (<src.flags> & statf_invisible)
+    src.sysmessage Voce nao pode tamar invisivel.
+    return 1
+endif
+
+if (<src.targ.memoryfindtype.memory_ipet>)
+    src.sysmessage Este animal pertence a alguem.
+    return 1
+endif
+
+if !(<src.targ.canseelos <src>>)
+    src.sysmessage O animal nao esta na sua linha de visao.
+    return 1
+endif
+
+if (<src.targ.npc> == 13)
+    src.sysmessage @07a1 Voce nao pode domesticar este animal.
+    return 1
+endif
+
+if (<tag0.uid> != <src.targ.uid>)
+    tag0.uid <src.targ.uid>
+    tag0.n 0
+    if (<src.targ.npc> == 13)
+        var.x <eval <eval <src.targ.taming>+<src.targ.int>>/30> // 50=Easy 30=Mediun 15=Hard
+        var.y <eval <eval <src.taming>>/100> // 150=Easy 100=Medium 50=Hard
+    else
+        var.x <eval <eval <src.targ.taming>+<src.targ.int>>/50> // 50=Easy 30=Mediun 15=Hard
+        var.y <eval <eval <src.taming>>/150> // 150=Easy 100=Medium 50=Hard
+    endif
+    tag0.precisa <eval <var.x>-<var.y>>
+endif
+
+tag0.n +=1
+
+if (<src.tag0.vip> == 1)
+    src.sysmessage Tentativa N.: <eval <tag0.n>>
+    src.sysmessage Precisa de #: <eval <tag0.precisa>>
+endif
+
+src.events=+e_tamando
+src.targ.newitem i_mem_taming
+src.targ.new.equip
+src.targ.new.link=<src.targ.uid>
+src.targ.new.tag0.uid=<src.uid>
+src.targ.new.tag0.uid_c=<uid>
+src.targ.new.timer 1
+if (<tag0.n> >= <tag0.precisa>)
+    src.targ.new.tag0.status 1
+    tag0.precisa 0
+    tag0.n 0
+    tag0.uid 0
+else
+    src.targ.new.tag0.status 0
+endif
+
+return 1
+
+[itemdef i_mem_taming]
+id=i_memory
+NAME=Taming Delay
+type=t_eq_script
+layer=30
+
+on=@create
+attr=08
+morex=4
+
+on=@timer
+if (<link.p.z> > <UID.<tag0.uid>.p.z>)
+    var.altura = <eval <link.p.z> - <UID.<tag0.uid>.p.z>>
+elseif (<link.p.z> < <UID.<tag0.uid>.p.z>)
+    var.altura = <eval <UID.<tag0.uid>.p.z> - <link.p.z>>
+else
+    var.altura = 0
+endif
+
+if (<link.distance <tag0.uid>> > 8) || (<var.altura> > 15)
+    if (<UID.<tag0.uid_c>.tag0.n> >= 1)  
+        TRY UID.<tag0.uid_c>.tag0.n = <eval <UID.<tag0.uid_c>.tag0.n>-1>
+    endif
+    cont.sysmessage Voce se afastou demais do animal
+    
+    cont.action = -1
+    events=-e_tamando
+    remove
+    return 0
+endif
+
+if (<link.memoryfindtype.memory_ipet>)
+    cont.sysmessage Este animal pertence a alguem.
+    cont.action = -1
+    events=-e_tamando
+    remove
+    return 0
+endif
+
+if !(<link.canseelos <cont.uid>>)
+    cont.sysmessage O animal nao esta na sua linha de visao.
+    cont.action -1
+    cont.events=-e_tamando
+    remove
+    return 1
+endif
+
+if (<link.npc> == brain_animal)
+    if (<morex> != 0)
+        dorand 4
+            Cont.Say Eu nao quero te machucar
+            Cont.Say Eu sempre quis ter voce
+            Cont.Say Aqui <link.Name>
+            Cont.Say Vem aqui <link.Name>
+        enddo
+        timer 2
+        morex=<morex> +-1
+        return 1
+    endif
+
+    if (<tag0.status> == 1)
+        FOR 0 <eval <LINK.RESCOUNT>-1>
+            IF (<UID.<LINK.FINDCONT(<LOCAL._FOR>).LINK>.ISITEM>)
+                IF STRMATCH("t_spawn_char","<UID.<LINK.FINDCONT(<LOCAL._FOR>).LINK>.TYPE>") || STRMATCH("i_memory_novo_resp","<UID.<LINK.FINDCONT(<LOCAL._FOR>).UID>.BASEID>")
+                    TRY UID.<LINK.FINDCONT(<LOCAL._FOR>)>.REMOVE
+                ENDIF
+            ENDIF
+        ENDFOR
+
+        link.karma=0
+        link.flags=<link.flags>&~statf_war
+        link.f_makepetof <cont.uid>
+        
+        cont.sysmessage <link.Name> te aceitou como dono.
+        if (<UID.<tag0.uid>.taming> < 1000)
+            cont.skillgain taming <fval <cont.taming>/2>
+        endif
+    else
+        cont.sysmessage <link.Name> nao te aceitou como dono.
+        var.taming cont.taming
+        if (<eval <UID.<tag0.uid>.taming>> < 1000)
+            cont.skillgain taming <fval <cont.taming>/2>
+        endif
+    endif
+//elseif (<link.npc> == 13)
+    //if <morex>!=0
+    //    dorand 4
+    //        Cont.Say Calma <link.name> nao quero brigar.
+    //        Cont.Say Fique calmo <link.Name>.
+    //        Cont.Say Venha aqui <link.Name>.
+    //        Cont.Say Isso <link.Name>.
+    //    enddo
+    //    timer 2
+    //    morex=<morex> +-1
+    //    return 1
+    //endif
+    //
+    //if (<tag0.status> == 1)
+    //    FOR 0 <eval <LINK.RESCOUNT>-1>
+    //        IF (<UID.<LINK.FINDCONT(<LOCAL._FOR>).LINK>.ISITEM>)
+    //            IF STRMATCH("t_spawn_char","<UID.<LINK.FINDCONT(<LOCAL._FOR>).LINK>.TYPE>")
+    //                TRY UID.<LINK.FINDCONT(<LOCAL._FOR>)>.REMOVE
+    //            ENDIF
+    //        ENDIF
+    //    ENDFOR
+    //    
+    //    link.karma=0
+    //    link.flags=<link.flags>&~statf_war
+    //    link.f_makepetof <cont.uid>
+    //    
+    //    cont.sysmessage <link.Name> te aceitou como dono.
+    //    if (<UID.<tag0.uid>.taming> < 1000)
+    //        cont.skillgain taming <fval <cont.taming>/2>
+    //    endif
+    //else
+    //    cont.sysmessage <link.Name> nao te aceitou como dono.
+    //    if (<UID.<tag0.uid>.taming> < 1000)
+    //        cont.skillgain taming <fval <cont.taming>/2>
+    //    endif
+    //endif
+endif
+events=-e_tamando
+cont.action = -1
+remove
+return 0
+
+[EVENTS e_tamando]
+//on=@LogOut
+//if (<restest i_mem_taming>)
+//    consume i_mem_taming
+//    findid.i_cajado_tamming.tag0.n -= 1
+//    events=-e_tamando
+//    sysmessage Voce parou de tamar.
+//endif
+
+on=@Death
+if (<restest i_mem_taming>)
+    consume i_mem_taming
+    findid.i_cajado_tamming.tag0.n -= 1
+    events=-e_tamando
+    sysmessage Voce parou de tamar.
+endif
+
+on=@SpeellCast
+if (<restest i_mem_taming>)
+    consume i_mem_taming
+    findid.i_cajado_tamming.tag0.n -= 1
+    events=-e_tamando
+    sysmessage Voce parou de tamar.
+endif
+
+on=@UserWarMode
+if (<restest i_mem_taming>)
+    consume i_mem_taming
+    findid.i_cajado_tamming.tag0.n -= 1
+    events=-e_tamando
+    sysmessage Voce parou de tamar.
+endif
+
+on=@Attack
+if (<restest i_mem_taming>)
+    consume i_mem_taming
+    findid.i_cajado_tamming.tag0.n -= 1
+    events=-e_tamando
+    sysmessage Voce parou de tamar.
+endif
+
+on=@GetHit
+if (<restest i_mem_taming>)
+    consume i_mem_taming
+    findid.i_cajado_tamming.tag0.n -= 1
+    events=-e_tamando
+    sysmessage Voce parou de tamar.
+endif
+
+[EOF]

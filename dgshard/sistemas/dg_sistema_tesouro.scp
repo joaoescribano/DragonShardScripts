@@ -1,0 +1,1055 @@
+﻿// Sistema de caça ao tesouro 2.0
+// Ultima Online Brasil
+
+[DEFNAME dg_respawns]
+// Undeads
+respawn.undead.all = {c_zombie 1 c_skeleton 1 c_skeleton_w_axe 1 c_skeleton_w_sword 1 c_skeletonarcher 1 c_spectre 1 c_bogle 1 c_ghoul 1 c_ghost 1 c_skeleton_mage 1 c_gore_fiend 1 c_wraith 1 c_phantom 1 c_wailing_banshee 1 c_patchwork_skeleton 1 c_lich 1 c_flesh_golem 1 c_skeleton_knight 1 c_lich_ancient 1 c_revenant_lion 1 c_lady_of_snow 1 c_mummy 1 c_dream_wraith 1 c_gargoyle_undead 1 c_vampire 1 c_rotting_corpse 1 c_lich_lord 1 c_lich_primeval 1 c_skeletal_dragon 1}
+respawn.undead.easy = {c_zombie 1 c_skeleton 1 c_skeleton_w_axe 1 c_skeleton_w_sword 1 c_skeletonarcher 1 c_spectre 1 c_bogle 1 c_ghoul 1 c_ghost 1 c_skeleton_mage 1 c_gore_fiend 1 c_wraith 1}
+respawn.undead.medium = {c_phantom 1 c_wailing_banshee 1 c_patchwork_skeleton 1 c_lich 1 c_flesh_golem 1 c_skeleton_knight 1 c_lich_ancient 1}
+respawn.undead.hard = {c_revenant_lion 1 c_lady_of_snow 1 c_mummy 1 c_dream_wraith 1 c_gargoyle_undead 1 c_vampire 1 c_rotting_corpse 1 c_lich_lord 1 c_lich_primeval 1 c_skeletal_dragon 1}
+// Dragões
+respawn.dragon.all = {c_drake 1 c_drake_red 1 c_dragon_greendrake 1 c_dragon_bluedrake 1 c_dragon_copperdrake 1 c_dragon_silverdrake 1 c_dragon_blackdrake 1 c_dragon_fairy 1 c_dragon_golddrake 1 c_dragon 1 c_dragon_red 1 c_dragon_ice 1 c_dragon_wolf 1 c_wyrm_white 1 c_skeletal_dragon 1 c_dragon_greater 1 c_hydra 1 c_dragon_wyrm 1 c_wyrm_ancient 1 c_reptile_lord 1}
+respawn.dragon.easy = {c_drake 1 c_drake_red 1 c_dragon_greendrake 1 c_dragon_bluedrake 1 c_dragon_copperdrake 1 c_dragon_silverdrake 1 c_dragon_blackdrake 1 c_dragon_fairy 1 c_dragon_golddrake 1}
+respawn.dragon.medium = {c_dragon 1 c_dragon_red 1 c_dragon_ice 1 c_dragon_wolf 1 c_wyrm_white 1}
+respawn.dragon.hard = {c_skeletal_dragon 1 c_dragon_greater 1 c_hydra 1 c_dragon_wyrm 1 c_wyrm_ancient 1 c_reptile_lord 1}
+// Elementais
+respawn.elemental.all = {c_elemental_sand_vortex 1 c_crystal_elemental 1 c_elemental_ice 1 c_rai_ju 1 c_elemental_fire 1 c_elemental_earth 1 c_elemental_air 1 c_elemental_water 1 c_kaze_kemono 1 c_elemental_acid 1 c_efreet 1 c_elemental_snow 1 c_elemental_swamp 1 c_elemental_lava 1 c_elemental_poison 1 c_elemental_blood 1}
+respawn.elemental.easy = {c_elemental_sand_vortex 1 c_crystal_elemental 1 c_elemental_ice 1 c_rai_ju 1 c_elemental_fire 1}
+respawn.elemental.medium = {c_elemental_earth 1 c_elemental_air 1 c_elemental_water 1 c_kaze_kemono 1 c_elemental_acid 1 c_efreet 1}
+respawn.elemental.hard = {c_elemental_snow 1 c_elemental_swamp 1 c_elemental_lava 1 c_elemental_poison 1 c_elemental_blood 1}
+// Gigantes
+respawn.giants.all = {c_frost_ettin 1 c_ettin 1 c_ettin_w_hammer 1 c_troll_w_axe 1 c_troll 1 c_ogre 1 c_troll_w_mace 1 c_frost_troll 1 c_ettin_lord 1 c_cyclops 1 c_cyclops_king 1 c_titan 1 c_ogre_lord 1}
+respawn.giants.easy = {c_frost_ettin 1 c_ettin 1 c_ettin_w_hammer 1 c_troll_w_axe 1 c_troll 1 c_ogre 1 c_troll_w_mace 1}
+respawn.giants.medium = {c_frost_troll 1 c_ettin_lord 1 c_cyclops 1}
+respawn.giants.hard = {c_cyclops_king 1 c_titan 1 c_ogre_lord 1}
+// Orcs
+respawn.orcs.all = {c_orc_w_club 1 c_orc 1 c_orc_scout 1 c_orc_mage 1 c_orc_captain 1 c_orc_lord 1 c_orc_bomber 1 c_orc_chopper 1 c_orc_brute 1}
+respawn.orcs.easy = {c_orc_w_club 1 c_orc 1 c_orc_scout 1}
+respawn.orcs.medium = {c_orc_mage 1 c_orc_captain 1 c_orc_lord 1}
+respawn.orcs.hard = {c_orc_bomber 1 c_orc_chopper 1 c_orc_brute 1}
+// Aranhas
+respawn.spiders.all = {c_terathan_drone 1 c_spider_frost 1 c_spider_giant 1 c_spider_trapdoor 1 c_terathan_warrior 1 c_spider_dread 1 c_spider_wolf 1 c_terathan_matriarch 1 c_terathan_assassin 1 c_terathan_avenger 1}
+respawn.spiders.easy = {c_terathan_drone 1 c_spider_frost 1 c_spider_giant 1}
+respawn.spiders.medium = {c_spider_trapdoor 1 c_terathan_warrior 1 c_spider_dread 1 c_spider_wolf 1}
+respawn.spiders.hard = {c_terathan_matriarch 1 c_terathan_assassin 1 c_terathan_avenger 1}
+// Demonios
+respawn.demons.all = {c_demon_horde_minion 1 c_imp 1 c_demon_chaos 1 c_demon_arcane 1 c_gibberling 1 c_gargoyle 1 c_maddening_horror 1 c_gargoyle_stone 1 c_ravager 1 c_gargoyle_enforcer 1 c_gargoyle_undead 1 c_gargoyle_enslaved 1 c_demon_moloch 1 c_fan_dancer 1 c_gargoyle_fire 1 c_demon_ice 1 c_tsuki_wolf 1 c_demon_horde_large 1 c_demon 1 c_succubus 1 c_gargoyle_destroyer 1 c_devourer_souls 1 c_demon_balron 1}
+respawn.demons.easy = {c_demon_horde_minion 1 c_imp 1 c_demon_chaos 1 c_demon_arcane 1 c_gibberling 1 c_gargoyle 1 c_maddening_horror 1 c_gargoyle_stone 1 c_ravager 1 c_gargoyle_enforcer 1}
+respawn.demons.medium = {c_gargoyle_undead 1 c_gargoyle_enslaved 1 c_demon_moloch 1 c_fan_dancer 1 c_gargoyle_fire 1 c_demon_ice 1 c_tsuki_wolf 1 c_demon_horde_large 1 c_demon 1}
+respawn.demons.hard = {c_succubus 1 c_gargoyle_destroyer 1 c_devourer_souls 1 c_demon_balron 1}
+
+[DEFNAME tesouro_conf]
+tesouro.itens_mapa = {01773 1 01774 1 01777 1 01778 1 0177B 1 0177C 1}
+
+tesouro.dificuldade.1.cor = 468
+tesouro.dificuldade.2.cor = 298
+tesouro.dificuldade.3.cor = 53
+tesouro.dificuldade.4.cor = 43
+tesouro.dificuldade.5.cor = 38
+tesouro.dificuldade.6.cor = 077a
+tesouro.dificuldade.7.cor = 07a1
+tesouro.dificuldade.8.cor = 078f
+tesouro.dificuldade.9.cor = 0794
+tesouro.dificuldade.10.cor = 0793
+
+tesouro.dificuldade.1.skill = 250
+tesouro.dificuldade.2.skill = 350
+tesouro.dificuldade.3.skill = 450
+tesouro.dificuldade.4.skill = 550
+tesouro.dificuldade.5.skill = 650
+tesouro.dificuldade.6.skill = 750
+tesouro.dificuldade.7.skill = 850
+tesouro.dificuldade.8.skill = 950
+tesouro.dificuldade.9.skill = 1050
+tesouro.dificuldade.10.skill = 1100
+
+tesouro.dificuldade.1.monstros.nivel.1.quantidade = 6
+tesouro.dificuldade.1.monstros.nivel.2.quantidade = 4
+tesouro.dificuldade.1.monstros.nivel.3.quantidade = 2
+
+tesouro.dificuldade.2.monstros.nivel.1.quantidade = 7
+tesouro.dificuldade.2.monstros.nivel.2.quantidade = 5
+tesouro.dificuldade.2.monstros.nivel.3.quantidade = 3
+
+tesouro.dificuldade.3.monstros.nivel.1.quantidade = 9
+tesouro.dificuldade.3.monstros.nivel.2.quantidade = 7
+tesouro.dificuldade.3.monstros.nivel.3.quantidade = 5
+
+tesouro.dificuldade.4.monstros.nivel.1.quantidade = 11
+tesouro.dificuldade.4.monstros.nivel.2.quantidade = 9
+tesouro.dificuldade.4.monstros.nivel.3.quantidade = 7
+
+tesouro.dificuldade.5.monstros.nivel.1.quantidade = 13
+tesouro.dificuldade.5.monstros.nivel.2.quantidade = 11
+tesouro.dificuldade.5.monstros.nivel.3.quantidade = 9
+
+tesouro.dificuldade.6.monstros.nivel.1.quantidade = 15
+tesouro.dificuldade.6.monstros.nivel.2.quantidade = 13
+tesouro.dificuldade.6.monstros.nivel.3.quantidade = 11
+
+tesouro.dificuldade.7.monstros.nivel.1.quantidade = 17
+tesouro.dificuldade.7.monstros.nivel.2.quantidade = 15
+tesouro.dificuldade.7.monstros.nivel.3.quantidade = 13
+
+tesouro.dificuldade.8.monstros.nivel.1.quantidade = 19
+tesouro.dificuldade.8.monstros.nivel.2.quantidade = 17
+tesouro.dificuldade.8.monstros.nivel.3.quantidade = 15
+
+tesouro.dificuldade.9.monstros.nivel.1.quantidade = 21
+tesouro.dificuldade.9.monstros.nivel.2.quantidade = 19
+tesouro.dificuldade.9.monstros.nivel.3.quantidade = 17
+
+tesouro.dificuldade.10.monstros.nivel.1.quantidade = 23
+tesouro.dificuldade.10.monstros.nivel.2.quantidade = 21
+tesouro.dificuldade.10.monstros.nivel.3.quantidade = 19
+
+[ITEMDEF i_bottle_map]
+ID=099F
+TYPE=t_normal
+NAME=Bottle with map
+
+ON=@Create
+Color {1 1000}
+
+ON=@Dclick
+if !(<src.isplayer>)
+    return 1
+endif
+
+serv.newitem i_tresure_map
+serv.new.cont <src.findlayer(21)>
+serv.new.bounce
+
+remove
+return 1
+
+[itemdef i_tresure_map]
+NAME=Mapa do tesouro
+ID=i_map_rolled
+VALUE=5000
+TYPE=t_normal
+WEIGHT=3
+
+ON=@Create
+attr=04
+tag0.status = 1
+tag0.dificuldade <f_tesouro_dificuldade>
+
+
+ON=@DropOn_Ground
+IF (<tag0.status> == 2)
+	dispid i_map
+endif
+
+ON=@Click
+message <name>
+message @07ad <qval <src.cartography> < 1000 ?Nao Decifrado:Dificuldade <eval <tag0.dificuldade>>>
+if (<tag0.status> == 2)
+	message @07a3 <ftime <uid.<tag0.timer>.more1>>
+endif
+return 1
+
+ON=@DClick
+IF (<tag0.status> == 1)
+	If (<eval <src.cartography>> < <def.tesouro.dificuldade.<eval <tag0.dificuldade>>.skill>)
+		src.sysmessage Voce precisa de <fval <def.tesouro.dificuldade.<eval <tag0.dificuldade>>.skill>> de Cartography para ler o mapa.
+		return 1
+	endif
+
+	f_tesouro_definir_local
+
+	tag.status=2
+	color <def.tesouro.dificuldade.<eval <tag0.dificuldade>>.cor>
+	dispid i_map
+	update
+
+	src.newitem i_tresure_timer
+	src.new.tag0.mapa = <uid>
+	src.new.tag0.tesouro = <link>
+	src.new.equip
+	
+	tag0.timer = <src.new.uid>
+	
+	src.sysmessage @07a1 Voce tem 30 minutos para encontrar o tesouro! Boa Sorte!
+	return 1
+elif (<tag0.status> == 2)
+	if (<src.tracking> >= 950) && (<src.distance <link>> <= 100)
+		src.ctag0.tracker = <link.uid>
+		src.f_tresure_tracker
+	endif
+	dialog d_tesouro_mapa
+	return 1
+endif
+
+[FUNCTION f_tresure_tracker]
+dialogclose d_tracking_minimap
+
+REF1 = <src.tag0.tracker>
+
+if (<ref1> == 0)
+	src.ctag0.tracking_distancia
+	src.ctag0.tracker
+	return 1
+endif
+
+if (0<src.tag0.tracking_distancia> == 0)
+	src.tag0.tracking_distancia = 100
+endif
+
+if (<src.tag0.tracking_distancia> <= 100)
+	src.SDIALOG d_tracking_minimap,3823
+	src.timerf 1 f_tresure_tracker
+else
+	src.ctag0.tracking_distancia
+	src.ctag0.tracker
+	src.sysmessage Voce esta muito longe do tesouro para abrir o mini-map.
+endif
+
+[DIALOG d_tesouro_mapa]
+0,0
+page 0
+resizepic 0 376 9200 404 97
+resizepic 10 10 9350 147 169
+
+if (<src.tracking> < 500)
+	local.diff = 10
+elif (<src.tracking> >= 500) && (<src.tracking> < 700)
+	local.diff = 7
+elif (<src.tracking> >= 700) && (<src.tracking> < 800)
+	local.diff = 5
+elif (<src.tracking> >= 800) && (<src.tracking> < 950)
+	local.diff = 3
+elif (<src.tracking> >= 950)
+	local.diff = 1
+endif
+dhtmlgump 10 400 383 61 0 1 Dificuldade <eval <tag0.dificuldade>><def.br>Tome cuidado, mostros estarão te espeando no local!<def.br>ObS: Não esqueça de levar uma picareta (Pickaxe) para procurar pelo tesouro!<def.br>Tempo restante: <ftime <uid.<tag0.timer>.more1>><def.br>Região: <LINK.REGION.NAME><def.br>Aproximadamente em: <eval <morex>+{-<eval <local.diff>> <eval <local.diff>>}>,<eval <morey>+{-<eval <local.diff>> <eval <local.diff>>}>
+
+page 1
+gumppic 10 10 5528
+gumppic <EVAL (10+((<src.p.x>*100)/1337))> <EVAL (10+((<src.p.y>*100)/1067))> 11411
+dtext <EVAL (4+((<src.p.x>*100)/1337))> <EVAL ((<src.p.y>*100)/1067)+25> 32 Você
+gumppic <EVAL (10+((<morex>*100)/1337))> <EVAL (10+((<morey>*100)/1067))> 11401
+dtext <EVAL (((<morex>*100)/1337))-6> <EVAL (((<morey>*100)/1067))-10> 57 Tesouro
+
+[ITEMDEF i_tresure_timer]
+NAME=Tresure Timer
+ID=i_handr_1
+TYPE=T_EQ_SCRIPT
+WEIGHT=0
+LAYER=layer_special
+
+ON=@Create
+ATTR=attr_invis|attr_decay
+
+ON=@Equip
+more1=1800
+timer 1
+
+ON=@Timer
+ref1 = <tag0.mapa>
+ref2 = <tag0.tesouro>
+
+if (<eval <tag0.encontrado>> > 0) || (<eval strlen(<ref1.name>)> == 1) || (<eval strlen(<ref2.name>)> == 1) || (<more1> <= 0)
+	if (<eval strlen(<ref1.name>)> > 1)
+		TRY ref1.remove
+	endif
+
+	if (<eval strlen(<ref2.name>)> > 1)
+		TRY ref2.remove
+	endif
+
+	if !(<tag0.encontrado>)
+		cont.sysmessage Mercenarios encontraram o tesouro que voce estava procurando antes que voce.
+	endif
+
+	remove
+else
+	more1 -=1
+	timer 1
+endif
+return 1
+
+[FUNCTION f_tesouro_definir_local]
+serv.newitem <def.tesouro.itens_mapa>
+new.tag0.nivel=0
+new.randlocation
+new.attr=attr_invis
+new.attr attr_invis|attr_static|attr_newbie
+morep=<new.p>
+new.link = <uid>
+link <new.uid>
+
+[FUNCTION randlocation]
+dorand 6
+	P=<eval {792 1336}>,<eval {640 2432}>
+	P=<eval {664 2801}>,<eval {424 1000}>
+	P=<eval {3856 4308}>,<eval {192 756}>
+	P=<eval {3300 3744}>,<eval {2390 2896}>
+	P=<eval {4376 4728}>,<eval {3092 3636}>
+	P=<eval {4100 4676}>,<eval {3640 3876}>
+ENDDO
+
+LOCAL.TMP=<OBJ>
+OBJ=<region.uid>
+
+IF (<obj.type>==t_multi)
+	OBJ=<LOCAL.TMP>
+	RANDLOCATION
+	RETURN 1
+ELIF (<region.flags>&region_flag_guarded) || (<region.flags>&region_flag_safe) || (<isneartype t_rock>) || (<isneartype t_tree>) || (<isneartype t_door>) || (<isneartype t_wall>) || (<isneartype t_water>) || (<isneartype t_multi 10>) || (<serv.map(<p>).terrain>==0244) || (<serv.map(<p>).type>==t_water)
+	OBJ=<LOCAL.TMP>
+	RANDLOCATION
+	RETURN 1
+ENDIF
+
+FIX
+OBJ=<LOCAL.TMP>
+
+[TYPEDEF t_weapon_mace_pick]
+on=@DClick
+if (<src.findlayer(1).id> != i_pickaxe)
+	equip
+endif
+
+tag0.zindex <src.p>
+
+forcont <src.findlayer.21.uid> 10
+    if (<baseid> == i_tresure_map) && (<tag0.status> == 2)
+    	if (<eval <src.distance <morep>>> <= 1) && (<tag0.nivel> == 0)
+	    	if !(<src.ctag0.cavando>)
+	    		src.dialogclose d_tracking_minimap
+	    		src.dialogclose d_tesouro_mapa
+		    	src.sysmessage Voce comecou a procurar o tesouro.
+		    	src.ctag0.cavando = 1
+		        src.f_tresure_dig,<uid>
+		        return 1
+	        else
+	        	src.sysmessage Aguarde, voce ja esta procurando o tesouro.
+	        	return 1
+	    	endif
+    	endif
+    endif
+endfor
+
+[FUNCTION f_tresure_dig]
+ref1 = <args>
+
+src.f_loopanim 9,3,1,<ref1>
+
+if (<serv.map(<ref1.link.p.x>,<ref1.link.p.y>).type> == t_snow)
+	src.f_loopsound {833 834},1,1
+	src.f_loopsound {833 834},2,1
+	src.f_loopsound {833 834},3,1
+	src.f_loopsound {833 834},4,1
+elif (<serv.map(<ref1.link.p.x>,<ref1.link.p.y>).type> == t_grass)
+	src.f_loopsound {825 826},1,1
+	src.f_loopsound {825 826},2,1
+	src.f_loopsound {825 826},3,1
+	src.f_loopsound {825 826},4,1
+elif (<serv.map(<ref1.link.p.x>,<ref1.link.p.y>).type> == t_sand)
+	src.f_loopsound {831 832},1,1
+	src.f_loopsound {831 832},2,1
+	src.f_loopsound {831 832},3,1
+	src.f_loopsound {831 832},4,1
+else
+	src.f_loopsound {827 828},1,1
+	src.f_loopsound {827 828},2,1
+	src.f_loopsound {827 828},3,1
+	src.f_loopsound {827 828},4,1
+endif
+
+// Fix de posição
+src.face <ref1.link>
+src.timerf 1,face <ref1.link>
+src.timerf 2,face <ref1.link>
+src.timerf 3,face <ref1.link>
+src.timerf 3,f_tresure_find_box,<ref1>
+
+[FUNCTION f_tresure_find_box]
+ref1 = <argv[0]>
+local.p = <ref1.link.p>
+
+src.sysmessage Voce encontrou o bau do tesouro perdido!
+src.sysmessage Cuidado: Voce tem 30 minutos para abrir o bau, monstros vao aparecer para tentar te impedir!
+
+serv.newitem i_tresure_chest_<eval <ref1.tag0.dificuldade>>
+serv.new.type t_tresure_chest
+serv.new.name Bau do Tesouro
+serv.new.tag0.dificuldade = <ref1.tag0.dificuldade>
+serv.new.tag0.nivel = 0
+serv.new.tag0.mortos = 0
+serv.new.p <local.p>
+serv.new.attr=attr_static
+serv.new.timer 1800
+serv.new.update
+
+// Remove os itens da busca
+TRY UID.<ref1.tag0.timer>.tag0.encontrado = 1
+src.ctag0.cavando
+return 1
+
+[TYPEDEF t_tresure_chest]
+ON=@Click
+	message @07a1 Bau do tesouro
+	if (<tag0.nivel> > 0) && (<tag0.nivel> < 4)
+		message @07a1 Level: <eval <tag0.nivel>> de 3
+	else
+		message @07a1 <qval <eval <tag0.nivel>> < 4?Trancado:Aberto>
+	endif
+	message @077a <ftime <timer>>
+	return 1
+
+ON=@DClick
+	if !(<tag0.nivel>) || (<eval <tag0.mortos>> >= <eval <def.tesouro.dificuldade.<eval <tag0.dificuldade>>.monstros.nivel.<eval <tag0.nivel>>.quantidade>>)
+		if (<eval <tag0.nivel>> == 0)
+			timer=900
+			tag0.nivel = 1
+			message @077a Voce tem 15 minutos para matar os monstros.
+		elif (<eval <tag0.nivel>> == 1)
+			tag0.nivel = 2
+			timer +=1200
+			message @077a Mais 20 minutos foram adicionados para o bau desaparecer.
+		elif (<eval <tag0.nivel>> == 2)
+			tag0.nivel = 3
+			timer +=1800
+			message @077a Mais 30 minutos foram adicionados para o bau desaparecer.
+		elif (<eval <tag0.nivel>> == 3)
+			timer = 300
+			tag0.nivel = 4
+			message @977a Voce conquistou o tesouro e tem 5 minuto para pegar sua recompensa!
+		endif
+
+		update
+
+		if (<eval <tag0.nivel>> < 4)
+			tag0.mortos = 0
+			say @07a1 Em 5 segundos a proxima wave de monstros aparecerá!
+			timerf 5,f_tresure_keeper_spawn,<tag0.dificuldade>,<tag0.nivel>
+			return 1
+		else
+			type t_container
+			return 0
+		endif
+	else
+		src.sysmessage Alguns monstros ainda nao foram mortos.
+		return 1
+	endif
+
+ON=@Timer
+	FORCHARS 30
+    	IF (<isevent.e_tresure_keeper>) || (<isevent.e_champion_chefe>)
+	        REMOVE
+	    ENDIF
+	ENDFOR
+
+	return 1
+
+[TYPEDEF t_container]
+ON=@Timer
+if (<baseid> == i_chest_gothic) && (<tag0.nivel> > 0)
+	remove
+	return 1
+endif
+
+[FUNCTION f_tresure_keeper_spawn]
+local.dificuldade = <argv[0]>
+local.nivel = <argv[1]>
+
+if (<local.dificuldade> == 1)
+	local.restype=undead
+elif (<local.dificuldade> == 2)
+	local.restype=<qval rand(3) == 1 ? orcs : undead>
+elif (<local.dificuldade> == 3)
+	local.restype=<qval rand(3) == 1 ? spider : orcs>
+elif (<local.dificuldade> == 4)
+	local.restype=<qval rand(3) == 1 ? giants : spiders>
+elif (<local.dificuldade> == 5)
+	local.restype=<qval rand(3) == 1 ? demons : giants>
+elif (<local.dificuldade> == 6)
+	local.restype=<qval rand(3) == 1 ? dragons : demons>
+else
+	local.restype=0
+endif
+
+for x 1 <eval <def.tesouro.dificuldade.<eval <local.dificuldade>>.monstros.nivel.<eval <local.nivel>>.quantidade>>
+	if (<eval <local.nivel>> == 3)
+		local.respdif=hard
+	elif (<eval <local.nivel>> == 2)
+		local.respdif=medium
+	else
+		local.respdif=easy
+	endif
+
+	if (<local.dificuldade> > 6)
+		DORAND 9
+			serv.newnpc <def.respawn.undead.<local.respdif>>
+			serv.newnpc <def.respawn.dragon.<local.respdif>>
+			serv.newnpc <def.respawn.elemental.<local.respdif>>
+			serv.newnpc <def.respawn.giants.<local.respdif>>
+			serv.newnpc <def.respawn.orcs.<local.respdif>>
+			serv.newnpc <def.respawn.giants.<local.respdif>>
+			serv.newnpc <def.respawn.spiders.<local.respdif>>
+			serv.newnpc <def.respawn.demons.<local.respdif>>
+			serv.newnpc <def.respawn.undead.<local.respdif>>
+		ENDDO
+	else
+		serv.newnpc <def.respawn.<local.restype>.<local.respdif>>
+	endif
+
+	new.events=+e_tresure_keeper
+	new.tag0.tesouro <uid>
+	new.p <p.x>,<p.y>,<p.z>
+	new.home <p.x>,<p.y>,<p.z>
+	new.homedist 6
+	new.update
+endfor
+RETURN 1
+
+[EVENTS e_tresure_keeper]
+ON=@DEATH
+	ref1=<tag0.tesouro>
+	ref1.tag0.mortos +=1
+
+ON=@DeathCorpse
+	argo.tag0.tresure = 1
+
+[DIALOG	d_tracking_minimap]
+50,50
+PAGE 0
+
+REF1 = <src.ctag0.tracker>
+
+resizepic 30 30 9200 140 140
+checkertrans 30 30 140 140
+gumppic 0 0 9007
+
+if !(<argn1>)
+	tilepichue 79 87 <ref1.icon> <eval <ref1.color>>
+else
+	tilepichue 79 87 <argn1> 0
+endif
+
+resizepic 20 187 9200 163 16
+dtext 26 185 0 Distancia
+
+local.distancia = <f_tracking_check_distance <REF1.p.x>,<REF1.p.y>>
+src.ctag0.tracking_distancia = <local.distancia>
+
+f_tracking_minimap_distancia <local.distancia>
+if (<local.distancia> > 2)
+	f_tracking_minimap_seta <f_tracking_check_direction <REF1.p.x>,<REF1.p.y>>	
+endif
+
+[DIALOG	d_tracking_minimap BUTTON]
+ON=0
+// Funções do servidor que utilizan o tracker
+src.timerf stop f_tracking_tracker
+src.timerf stop f_tresure_tracker
+	
+[FUNCTION f_tracking_check_direction]
+local.dX = <EVAL <ARGN1> - <src.p.x>>
+local.dY = <EVAL <src.p.y> - <ARGN2>>
+if ((<local.dX> == 0) && (<local.dY> == 0))
+	return 8
+elseif ((<local.dX> == 0) && (<local.dY> > 0))
+	return 0
+elseif ((<local.dX> == 0) && (<local.dY> < 0))
+	return 4
+elseif ((<local.dY> == 0) && (<local.dX> < 0))
+	return 6
+elseif ((<local.dY> == 0) && (<local.dX> > 0))
+	return 2
+elseif ((<local.dY> != 0) && (<local.dX> != 0))
+	local.dir = <FLOATVAL <dlocal.dY> / <dlocal.dX>>
+	if ((<local.dY> > 0) && ((<local.dir> > <FLOATVAL 2.414>) || (<local.dir> < <FLOATVAL -2.414>)))
+		return 0
+	elseif ((<local.dX> > 0) && (<local.dY> > 0) && (<local.dir> >= <FLOATVAL 0.414>) && (<local.dir> <= <FLOATVAL 2.414>))
+		return 1
+	elseif ((<local.dX> > 0) && (<local.dir> > <FLOATVAL -0.414>) && (<local.dir> < <FLOATVAL 0.414>))
+		return 2
+	elseif ((<local.dX> > 0) && (<local.dY> < 0) && (<local.dir> >= <FLOATVAL -2.414>) && (<local.dir> <= <FLOATVAL -0.414>))
+		return 3
+	elseif ((<local.dY> < 0) && ((<local.dir> > <FLOATVAL 2.414>) || (<local.dir> < <FLOATVAL -2.414>)))
+		return 4
+	elseif ((<local.dX> < 0) && (<local.dY> < 0) && (<local.dir> >= <FLOATVAL 0.414>) && (<local.dir> <= <FLOATVAL 2.414>))
+		return 5
+	elseif ((<local.dX> < 0) && (<local.dir> > <FLOATVAL -0.414>) && (<local.dir> < <FLOATVAL 0.414>))
+		return 6
+	elseif ((<local.dX> < 0) && (<local.dY> > 0) && (<local.dir> >= <FLOATVAL -2.414>) && (<local.dir> <= <FLOATVAL -0.414>))
+		return 7
+	endif
+endif
+
+[FUNCTION f_tracking_check_distance]
+local.dis = <EVAl SQRT(<EVAL ((<ARGN1> - <src.p.x>)@2) + ((<ARGN2> - <src.p.y>)@2)>)>
+return <local.dis>
+
+[FUNCTION f_tracking_minimap_seta]
+doswitch <ARGN1>
+	gumppic 106 47 4501
+	gumppic 117 76 4502
+	gumppic 103 106 4503
+	gumppic 76 118 4504
+	gumppic 46 106 4505
+	gumppic 34 76 4506
+	gumppic 45 45 4507
+	gumppic 76 34 4500
+enddo
+
+[FUNCTION f_tracking_minimap_distancia]
+if ((<ARGN1> >= 0) && (<ARGN1> <= 2))
+	tilepic 61 190 12694
+	tilepic 76 190 12694
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 2) && (<ARGN1> <= 5))
+	tilepic 61 190 12697
+	tilepic 76 190 12694
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 5) && (<ARGN1> <= 11))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12694
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 11) && (<ARGN1> <= 23))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12694
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 23) && (<ARGN1> <= 47))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12694
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 47) && (<ARGN1> <= 95))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12694
+	tilepic 151 190 12694
+elseif ((<ARGN1> > 95) && (<ARGN1> <= 191))
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12697
+	tilepic 151 190 12694
+elseif (<ARGN1> > 191)
+	tilepic 61 190 12697
+	tilepic 76 190 12697
+	tilepic 91 190 12697
+	tilepic 106 190 12697
+	tilepic 121 190 12697
+	tilepic 136 190 12697
+	tilepic 151 190 12697
+endif
+
+/// TEMPLATE DE TESOURO LVL 1
+[TEMPLATE i_tresure_chest_1]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 1
+
+ITEM=i_gold,{3000 5000}
+ITEM=i_coin_silver,{10 20}
+ITEM=i_arrow,{100 150}
+ITEM=i_reag_ginseng,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_reag_garlic,{100 150}
+ITEM=i_bust_multiface,R11
+ITEM=i_statue_farie.R11
+ITEM=i_brazier,R11
+ITEM=i_ingot_bronze,{5 10},R11
+ITEM=i_plant_cactus_potted,R11
+ITEM=i_origami1,R21
+
+/// TEMPLATE DE TESOURO LVL 2
+[TEMPLATE i_tresure_chest_2]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 2
+
+ITEM=i_gold,{5000 10000}
+ITEM=i_coin_silver,{20 30}
+ITEM=i_sculpture_stone_sm,R16
+ITEM=i_bonsai_3,R11
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_tree_small_potted,R15
+ITEM=i_ingot_rosite,{10 15},R15
+ITEM=i_ingot_silver,{10 15},R15
+ITEM=i_origami6,R15
+ITEM=i_mask_polar_bear_magic,R15
+ITEM=i_arrow,{100 150}
+
+/// TEMPLATE DE TESOURO LVL 3
+[TEMPLATE i_tresure_chest_3]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 3
+
+ITEM=i_gold,{8000 15000}
+ITEM=i_reag_batwing,{100 150}
+ITEM=i_reag_blackmoor,{100 150}
+ITEM=i_reag_spider_silk.{100 150}
+ITEM=i_coin_silver,{30 40}
+ITEM=i_ingot_azurite,{5 10},R15
+ITEM=i_BANNER_TATTERED,R15
+ITEM=i_tapestry_3,R20
+ITEM=i_rosite_axe_battle,R15
+ITEM=i_bust_stone_small,R15
+ITEM=i_sconce,R15
+ITEM=i_mask_Brown_bear,R30
+ITEM=i_amu_Silver_poison,R20
+ITEM=i_arrow,{100 150}
+
+/// TEMPLATE DE TESOURO LVL 4
+[TEMPLATE i_tresure_chest_4]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 4
+
+ITEM=i_gold,{10000 18000}
+ITEM=i_brazier_dragon,R15
+ITEM=i_reag_blood_vial,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root, {100 150}
+ITEM=i_log_mystic,{10 20},R50
+ITEM=i_log_black,{10 20},R50
+ITEM=i_mask_polar_bear,R40
+ITEM=i_statue_stone_blessed,R5
+ITEM=i_candle_of_love,R30
+ITEM=i_ingot_onix,{5 10},R20
+ITEM=i_ingot_azurite,{10 15},R50
+ITEM=i_mini_fountain_life,R10
+ITEM=i_arrow,{100 150}
+
+/// TEMPLATE DE TESOURO LVL 5
+[TEMPLATE i_tresure_chest_5]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 5
+
+ITEM=i_gold,{20000 30000}
+ITEM=i_reag_blood_vial,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_log_elven,{10 15},R50
+ITEM=i_log_black,{10 15},R50
+ITEM=i_log_death,{5 10},R50
+ITEM=i_ingot_blooddiamond,{5 10},R50
+ITEM=i_ingot_titanium,{5 10},R50
+ITEM=i_mask_polar_bear,R40
+ITEM=i_tapestry_spirituality,R30
+ITEM=i_statue_plinth,R15
+ITEM=i_blooddiamond_bone_machete,R15
+ITEM=i_onix_sword_leafblade,R15
+ITEM=i_acorn_decor,R30
+ITEM=i_arrow,{100 150}
+ITEM=i_potion_ManaTotal,{5 10}
+ITEM=i_potion_Refresh,{5 10}
+ITEM=i_potion_Invisibility,{5 10}
+
+/// TEMPLATE DE TESOURO LVL 6
+[TEMPLATE i_tresure_chest_6]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 6
+
+ITEM=i_gold,{35000 43000}
+ITEM=i_reag_ginseng,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_reag_garlic,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_log_elven,{10 15},R50
+ITEM=i_log_death,{5 10},R50
+ITEM=i_log_fire,{5 10},R50
+ITEM=i_tapestry_compassion,R30
+ITEM=i_mini_sacrificial_altar,R15
+ITEM=i_crystal_formation,R10
+ITEM=i_PITCHFORK_Vento,R5
+ITEM=i_onix_tekagi,R20
+ITEM=03db1,R15
+ITEM=i_ingot_blooddiamond,{5 10},R50
+ITEM=i_ingot_titanium,{5 10},R50
+ITEM=i_painting_japan1,R20
+ITEM=i_arrow,{100 150}
+ITEM=i_potion_ManaTotal,{5 10}
+ITEM=i_potion_Refresh,{5 10}
+ITEM=i_potion_Invisibility,{5 10}
+ITEM=i_potion_Cure,{5 10}
+ITEM=i_statue_pushme_pullyou,R15
+ITEM=i_statue_garg,R15
+
+/// TEMPLATE DE TESOURO LVL 7
+[TEMPLATE i_tresure_chest_7]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 7
+
+ITEM=i_gold,{45000 50000}
+ITEM=i_reag_blood_vial,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_ginseng,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_reag_garlic,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_tapestry_honor,R15
+ITEM=i_elven_dresser,R15
+ITEM=i_mace_war_gelo,R5
+ITEM=i_onix_mace_diamond,R20
+ITEM=022c9,R10
+ITEM=i_statue_stone_contribution,R10
+ITEM=i_decorative_shield_2,R30
+ITEM=i_trophy_bearhead,R40
+ITEM=i_fan_small,R15
+ITEM=i_log_elven,{10 15},R50
+ITEM=i_log_death,{5 10},R50
+ITEM=i_log_fire,{5 10},R50
+ITEM=i_painting_japan2,R20
+ITEM=i_ingot_blooddiamond,{5 10},R50
+ITEM=i_ingot_titanium,{5 10},R50
+ITEM=i_fire_crossbow,R20
+ITEM=i_arrow,{100 150}
+ITEM=i_potion_ManaTotal,{10 15}
+ITEM=i_potion_Refresh,{10 15}
+ITEM=i_potion_Invisibility,{10 15}
+ITEM=i_potion_Cure,{10 15}
+ITEM=i_potion_shrink{10 15}
+ITEM=i_island_totem,R15
+
+/// TEMPLATE DE TESOURO LVL 8
+[TEMPLATE i_tresure_chest_8]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 8
+
+ITEM=i_gold,{55000 60000}
+ITEM=i_reag_blood_vial,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_ginseng,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_reag_garlic,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_log_elven,{10 15},R50
+ITEM=i_log_death,{5 10},R50
+ITEM=i_log_fire,{5 10},R50
+ITEM=i_ingot_blooddiamond,{5 10},R50
+ITEM=i_ingot_titanium,{5 10},R50
+ITEM=i_ingot_adamantium,{5 10},R50
+ITEM=i_painting_japan4,R15
+ITEM=i_unsettling_portrait,R15
+ITEM=i_HALBERD_escuridao,R5
+ITEM=i_blooddiamond_spear,R15
+ITEM=i_blooddiamond_platemail_arms,R20
+ITEM=i_tapestry_sacrifice,R15
+ITEM=i_elven_washbasin,R20
+ITEM=i_gargish_mirror,R10
+ITEM=i_sculpture_stone_sm_2,R15
+ITEM=i_anel_great_dex,R20
+ITEM=i_Golden_hammer,R20
+ITEM=i_arrow,{200 250}
+ITEM=Container_healtotal,R30
+ITEM=i_potion_ManaTotal,{20 25}
+ITEM=i_potion_Refresh,{20 25}
+ITEM=i_potion_Invisibility,{20 25}
+ITEM=i_potion_Curetotal{20 25}
+ITEM=i_potion_shrink{20 25}
+ITEM=i_statue_seahorse,R5
+ITEM=i_amu_tesouro,R20
+
+/// TEMPLATE DE TESOURO LVL 9
+[TEMPLATE i_tresure_chest_9]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 9
+
+ITEM=i_gold,{50000 55000}
+ITEM=i_gold,{30000 35000}
+ITEM=i_statue_arcanist,R15
+ITEM=i_curtain_long_animated,R10
+ITEM=i_disturbing_portrait,R10
+ITEM=i_bookshelf_elven,R5
+ITEM=i_throne_crystal,R5
+ITEM=i_table_ter_mur,R5
+ITEM=i_sculpture_stone_sm_3,R15
+ITEM=i_sculpture_samurai,R15
+ITEM=i_reag_blood_vial,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_ginseng,{100 150}
+ITEM=i_reag_spider_silk,{100 150}
+ITEM=i_reag_garlic,{100 150}
+ITEM=i_reag_blood_moss,{100 150}
+ITEM=i_reag_black_pearl,{100 150}
+ITEM=i_reag_mandrake_root,{100 150}
+ITEM=i_log_elven,{10 15},R50
+ITEM=i_log_death,{5 10},R50
+ITEM=i_log_fire,{5 10},R50
+ITEM=i_ingot_blooddiamond,{10 15},R50
+ITEM=i_ingot_titanium,{10 15},R50
+ITEM=i_ingot_adamantium,{10 15},R50
+ITEM=i_mask_polar_bear,R40
+ITEM=i_anel_bless,R20
+ITEM=i_elfic_bow,R30
+ITEM=i_arrow,{300 350}
+ITEM=i_titanium_axe_double,R15
+ITEM=i_adamantium_spear,R15
+ITEM=i_WAR_FORK_trovao,R5
+ITEM=Container_refreshtotal,R30
+ITEM=i_potion_ManaTotal,{30 35}
+ITEM=i_potion_Refresh,{30 35}
+ITEM=i_potion_Invisibility,{30 35}
+ITEM=i_potion_Curetotal{30 35}
+ITEM=i_potion_shrink{30 35}
+ITEM=i_statue_crystal_2,R5
+ITEM=i_sculpture_gargoyle,R5
+ITEM=i_statue_garg_bust,R15
+ITEM=i_statue_griffin,R3
+ITEM=i_amu_tesouro2,R20
+
+
+/// TEMPLATE DE TESOURO LVL 10
+[TEMPLATE i_tresure_chest_10]
+CONTAINER=i_chest_gothic
+CATEGORY=Item Templates
+SUBSECTION=Treasure Templates
+DESCRIPTION=Random Treasure lvl 10
+
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_gold,{48000 50000}
+ITEM=i_spiked_post
+ITEM=i_statue_fire_demon
+ITEM=i_spiked_column
+ITEM=i_trophy_dragonhead
+ITEM=i_wall_panel
+ITEM=i_haunted_mirror
+ITEM=i_chair_ter_mur
+ITEM=i_Golden_hatchet
+ITEM=i_amu_Golden_taming
+ITEM=i_fire_bow
+ITEM=i_death_crossbow
+ITEM=i_reag_blood_vial,{200 250}
+ITEM=i_reag_blood_moss,{200 250}
+ITEM=i_reag_ginseng,{200 250}
+ITEM=i_reag_spider_silk,{200 250}
+ITEM=i_reag_garlic,{200 250}
+ITEM=i_reag_blood_moss,{200 250}
+ITEM=i_reag_black_pearl{200 250}
+ITEM=i_reag_mandrake_root,{200 250}
+ITEM=i_log_elven{20 25}
+ITEM=i_log_death,{20 25}
+ITEM=i_log_fire,{20 25}
+ITEM=i_ingot_blooddiamond,{20 25}
+ITEM=i_ingot_titanium,{20 25}
+ITEM=i_ingot_adamantium,{20 25}
+ITEM=i_mask_polar_bear
+ITEM=i_arrow,{400 550}
+ITEM=i_axe_double_facas
+ITEM=i_sword_viking_inferno
+ITEM=Container_invisibility
+ITEM=i_potion_ManaTotal,{140 145}
+ITEM=i_potion_Refresh,{140 145}
+ITEM=i_potion_Invisibility,{140 145}
+ITEM=i_potion_Curetotal{140 145}
+ITEM=i_potion_shrink{140 145}
+ITEM=i_altar_crystal
+ITEM=i_statue_crystal_3
+ITEM=i_statue_ou
+ITEM=i_statue_medusa
+ITEM=i_statue_gargoyle_horse
+ITEM=i_statue_water
+ITEM=i_gargoyle_lord
+ITEM=i_statue_gargoyle_gryphon
+ITEM=i_adamantium_platemail_arms
+ITEM=i_adamantium_platemail_leggings
+ITEM=i_adamantium_platemail_helm
+ITEM=i_adamantium_platemail_gorget
+ITEM=i_adamantium_platemail_gloves
+ITEM=i_adamantium_platemail_chest
+
+
+[FUNCTION f_tesouro_dificuldade]
+local.rand = <eval <r1,15100>/100>
+local.dificuldade = 0
+
+if (<eval <local.rand>> <= 103)
+	local.dificuldade = 1
+elif (<eval <local.rand>> >= 104) && (<eval <local.rand>> <= 113)
+	local.dificuldade = 2
+elif (<eval <local.rand>> >= 114) && (<eval <local.rand>> <= 122)
+	local.dificuldade = 3
+elif (<eval <local.rand>> >= 123) && (<eval <local.rand>> <= 130)
+	local.dificuldade = 4
+elif (<eval <local.rand>> >= 131) && (<eval <local.rand>> <= 136)
+	local.dificuldade = 5
+elif (<eval <local.rand>> >= 137) && (<eval <local.rand>> <= 141)
+	local.dificuldade = 6
+elif (<eval <local.rand>> >= 142) && (<eval <local.rand>> <= 145)
+	local.dificuldade = 7
+elif (<eval <local.rand>> >= 146) && (<eval <local.rand>> <= 148)
+	local.dificuldade = 8
+elif (<eval <local.rand>> >= 149) && (<eval <local.rand>> <= 150)
+	local.dificuldade = 9
+else
+	local.dificuldade = 10
+endif
+
+return <local.dificuldade>
+
+[EOF]

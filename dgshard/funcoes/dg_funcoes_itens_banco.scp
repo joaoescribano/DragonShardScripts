@@ -1,0 +1,46 @@
+[function guardabanco]
+IF (<FINDLAYER(25)>)
+	SERV.NEWITEM=<UID.<FINDLAYER(25).MORE2>.ICON>
+	NEW.COLOR=<UID.<FINDLAYER(25).MORE2>.COLOR>
+	NEW.NAME=<UID.<FINDLAYER(25).MORE2>.NAME>
+	NEW.MORE1=<UID.<FINDLAYER(25).MORE2>.ID>
+	NEW.CONT <findlayer(21).uid>
+	FINDLAYER(25).REMOVE          
+ENDIF
+
+FOR 24
+	IF (<LOCAL._FOR>!=9) && (<LOCAL._FOR>!=11) && (<LOCAL._FOR>!=15) && (<LOCAL._FOR>!=16) && (<LOCAL._FOR>!=21)
+		IF (<FINDLAYER.<LOCAL._FOR>>)
+			If !(<findlayer.<local._for>.attr>& attr_move_never|attr_invis)
+				try Findlayer.<local._for>.CONT <findlayer(21).uid>
+			endif
+		ENDIF
+	ENDIF
+ENDFOR
+obj <findlayer.21.uid>
+findlayer.21.cont=<findlayer.29>
+obj.attr=
+obj.color {1 500}
+obj.name Bag Evento
+bankself
+updatex
+
+[itemdef i_gate_entrada_evento5]
+id=i_moongate_red
+type=t_normal
+name=Entrada Evento
+
+CATEGORY=Itens Novos
+SUBSECTION=Geral
+DESCRIPTION=Gate ENtrada
+
+on=@step
+src.guardabanco
+src.go 5991,1056
+src.message Seus itens foram para o bank!
+SERV.NEWITEM I_BACKPACK
+
+on=@CREATE
+ATTR=attr_static
+
+[EOF]

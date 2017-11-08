@@ -1,0 +1,13 @@
+[ITEMDEF i_bank_arena]
+ID=i_grave_Stone
+NAME=Banco da arena
+TYPE=t_script
+
+ON=@CREATE
+COLOR=0
+ATTR=attr_static
+
+ON=@Dclick
+src.bank
+
+[EOF]

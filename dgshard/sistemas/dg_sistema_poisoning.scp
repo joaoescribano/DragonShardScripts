@@ -1,0 +1,474 @@
+// Dragon shard - The Second Age
+// http://dgshard.com.br
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////// SISTEMA DE POISON - by Daniel Muller ///////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////// CONFERIR NO SPEHERE_SPELL SE O POISON TA COM AS FLAGS CORRETAS!
+//////////// FLAGS=spellflag_nounparalyze | SPELLFLAG_TARG_CHAR | SPELLFLAG_RESIST //// | SPELLFLAG_HARM | spellflag_targ_noself
+[TYPEDEF T_POTION]
+ON=@DCLICK
+IF (<ATTR> & attr_move_never)
+    SRC.SYSMESSAGE @009fb Voce nao pode tomar esta pocao.
+    RETURN 1
+endif
+
+IF (!<SRC.RESTEST <BASEID>>)
+SRC.SYSMESSAGE @0481,,1 Voce deve utilizar esta pocao de dentro de sua bag!
+Return 1
+ENDIF
+IF (<SRC.POISONING> < 50.0)&&(STRMATCH(*Poison*,*<NAME>*))&&(RAND(2)=2)
+SRC.SYSMESSAGE @0481,,1 Voce errou a tentativa de usar essa pocao devido sua skill...
+SRC.CONSUME=<BASEID>
+SRC.SOUND 909
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<SRC.POISONING> < 80.0)&&(STRMATCH(*Poison*,*<NAME>*))&&(RAND(6)=2)
+SRC.SYSMESSAGE @0481,,1 Voce errou a tentativa de usar essa pocao devido sua skill...
+SRC.CONSUME=<BASEID>
+SRC.SOUND 909
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<SRC.POISONING> < 90.0)&&(STRMATCH(*Poison*,*<NAME>*))&&(RAND(8)=2)
+SRC.SYSMESSAGE @0481,,1 Voce errou a tentativa de usar essa pocao devido sua skill...
+SRC.CONSUME=<BASEID>
+SRC.SOUND 909
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<SRC.POISONING> < 100.0)&&(STRMATCH(*Poison*,*<NAME>*))&&(RAND(10)=2)
+SRC.SYSMESSAGE @0481,,1 Voce errou a tentativa de usar essa pocao devido sua skill...
+SRC.CONSUME=<BASEID>
+SRC.SOUND 909
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ENDIF
+
+///ELSEIF (<AMOUNT> > 1)
+////SRC.SYSMESSAGE @0481,,1 Voce deve utilizar esta pocao uma a uma!
+////Return 1
+IF (STRMATCH(*Poison*,*<NAME>*))
+TARGET @0481,,1 Qual arma voce deseja aplicar <name>?
+TAG.BASEID=<BASEID>
+RETURN 1
+ENDIF
+
+ON=@TARGON_ITEM
+IF !(<SRC.RESTEST <src.targ.baseid>>)
+SRC.SYSMESSAGE @0481,,1 Voce deve selecionar armas em sua bag!
+Return 1
+ENDIF
+
+IF !((<SRC.TARG.TYPE>=T_WEAPON_SWORD) || (<SRC.TARG.TYPE>=T_WEAPON_FENCE))
+SRC.SYSMESSAGE @0481,,1 Voce so pode aplicar veneno em Fences e Swords.
+Return 1
+ELSEIF (STRMATCH(*Poison*,*<SRC.TARG.EVENTS>*))
+SRC.SYSMESSAGE @0481,,1 <SRC.TARG.NAME> ja possue um veneno em sua lamina!
+Return 1
+ELSEIF (<BASEID>=i_potion_PoisonLess) /// LESSER
+SRC.CHECK_SKILLPOISON
+SRC.TARG.TAG.POISONN=20
+SRC.TARG.EVENTS=+POISON_LESS
+SRC.EMOTE aply <name> in <src.targ.name>
+SRC.CONSUME=<TAG.BASEID>
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<BASEID>=i_potion_Poison) /// POISON NORMAL
+SRC.CHECK_SKILLPOISON
+SRC.TARG.TAG.POISONN=15
+SRC.TARG.EVENTS=+POISON_NORMAL
+SRC.EMOTE aply <name> in <src.targ.name>
+SRC.CONSUME=<TAG.BASEID>
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<BASEID>=i_potion_PoisonGreat) /// POISON GREAT
+SRC.CHECK_SKILLPOISON
+SRC.TARG.TAG.POISONN=15
+SRC.TARG.EVENTS=+POISON_GREATER
+SRC.EMOTE aply <name> in <src.targ.name>
+SRC.CONSUME=<TAG.BASEID>
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ELSEIF (<BASEID>=i_potion_PoisonDeadly)
+SRC.CHECK_SKILLPOISON
+SRC.TARG.TAG.POISONN=10
+SRC.TARG.EVENTS=+POISON_DEADLY
+SRC.EMOTE aply <name> in <src.targ.name>
+SRC.CONSUME=<TAG.BASEID>
+SERV.NEWITEM=i_bottle_empty
+NEW.BOUNCE
+Return 1
+ENDIF
+
+[TYPEDEF POISON_LESS]
+ON=@CLICK
+IF (<TAG.POISONN>=0)
+EVENTS=-POISON_LESS
+SAY <Name> perdeu o Lesser Poison..
+Return 1
+ELSE
+MESSAGE @00034 [Lesser Poison Cargas: <EVAL <TAG.POISONN>>]
+ENDIF
+
+ON=@DAMAGE
+IF (<TAG.POISONN>=0)
+SAY <Name> perdeu o Lesser Poison..
+EVENTS=-POISON_LESS
+ELSEIF (RAND(4)=2)
+TAG.POISONN=(<TAG.POISONN>-1)
+SRC.SPELLEFFECT s_poison 20.0
+SRC.FINDID.i_rune_poison.MORE1=6969 // Nao tirar com magia cure
+SRC.FINDID.i_rune_poison.MORE2=20
+SRC.FINDID.i_RUNE_poison.TIMER={5 6}
+ENDIF
+
+[TYPEDEF POISON_NORMAL]
+ON=@CLICK
+IF (<TAG.POISONN>=0)
+EVENTS=-POISON_NORMAL
+SAY <Name> perdeu o Poison..
+Return 1
+ELSE
+MESSAGE @00034 [Poison Cargas: <EVAL <TAG.POISONN>>]
+ENDIF
+
+ON=@DAMAGE
+IF (<TAG.POISONN>=0)
+SAY <Name> perdeu o Poison..
+EVENTS=-POISON_NORMAL
+ELSEIF (RAND(3)=2)
+TAG.POISONN=(<TAG.POISONN>-1)
+SRC.SPELLEFFECT s_poison 30.0
+SRC.FINDID.i_rune_poison.MORE1=6969 // Nao tirar com magia cure
+SRC.FINDID.i_rune_poison.MORE2=40
+SRC.FINDID.i_RUNE_poison.TIMER={4 5}
+ENDIF
+
+[TYPEDEF POISON_GREATER]
+ON=@CLICK
+IF (<TAG.POISONN>=0)
+EVENTS=-POISON_GREATER
+SAY <Name> perdeu o Greater Poison..
+Return 1
+ELSE
+MESSAGE @00034 [Greater Poison Cargas: <EVAL <TAG.POISONN>>]
+ENDIF
+
+ON=@DAMAGE
+IF (<TAG.POISONN>=0)
+SAY <Name> perdeu o Poison..
+EVENTS=-POISON_GREATER
+ELSEIF (RAND(2)=2)
+TAG.POISONN=(<TAG.POISONN>-1)
+SRC.SPELLEFFECT s_poison 40.0
+SRC.FINDID.i_rune_poison.MORE1=6969 // Nao tirar com magia cure
+SRC.FINDID.i_rune_poison.MORE2=50
+SRC.FINDID.i_RUNE_poison.TIMER={3 4}
+ENDIF
+
+[TYPEDEF POISON_DEADLY]
+ON=@CLICK
+IF (<TAG.POISONN>=0)
+EVENTS=-POISON_DEADLY
+SAY <Name> perdeu o Deadly Poison..
+Return 1
+ELSE
+MESSAGE @00034 [Deadly Poison Cargas: <EVAL <TAG.POISONN>>]
+ENDIF
+
+ON=@DAMAGE
+IF (<TAG.POISONN>=0)
+SAY <Name> perdeu o Deadly Poison..
+EVENTS=-POISON_DEADLY
+ELSEIF (RAND(2)=1)
+TAG.POISONN=(<TAG.POISONN>-1)
+SRC.SPELLEFFECT s_poison 50.0
+SRC.FINDID.i_rune_poison.MORE1=6969 // Nao tirar com magia cure
+SRC.FINDID.i_rune_poison.MORE2=800
+SRC.FINDID.i_RUNE_poison.TIMER={2 3}
+ENDIF
+
+[FUNCTION CHECK_SKILLPOISON]
+IF (<SRC.POISONING> < 100.0)
+DORAND 5
+RETURN 0
+RETURN 0
+RETURN 0
+SRC.POISONING=(<SRC.POISONING>+0.1)
+Return 0
+ENDDO
+ENDIF
+
+/////////////////////////////////////////////////////////////////////
+// Sistema de Poisoning
+[EVENTS e_poison_immune]
+ON=@GETHIT 
+IF (<ARGN2>&08) 
+say An Nox
+ ANIM=12
+ SpellEffect s_cure,1000 
+ SOUND=snd_SPELL_CURE
+ RETURN 1 
+ENDIF
+RETURN 0
+
+[EVENTS e_poison]
+ON=@SKILLSELECT
+IF (<ARGN>=30)
+  SRC.SYSMESSAGE De dois cliques na pocao para envenenar uma arma.
+  RETURN=1
+ENDIF
+
+ON=@DEATH
+IF (<SRC.RESTEST i_efeito_poison>)
+ SRC.CONSUME i_efeito_poison
+ENDIF
+
+ON=@HIT
+IF !(<region.flags> & region_flag_safe)
+  IF !(<src.restest i_efeito_poison>)
+    IF (<FINDLAYER(layer_hand1).MORE2>==24) && (RAND(3)==1)
+     SRC.EMOTE Poisonado por Lesser Poison
+     SRC.EFFECT 3,i_fx_glow_spike,6,15,0
+     SRC.NEWITEM i_efeito_poison
+     SRC.ACT.LINK <uid>
+     SRC.ACT.MORE=5
+     SRC.ACT.EQUIP
+     SRC.ACT.TIMER=1
+
+     SRC.FLAGS |=statf_poisoned
+     SRC.update
+
+     FINDLAYER(layer_hand1).tag0.poison_cargas = <eval <FINDLAYER(layer_hand1).tag0.poison_cargas>-1>
+     if (<eval <FINDLAYER(layer_hand1).tag0.poison_cargas>> <= 0)
+       FINDLAYER(layer_hand1).name <SERV.ITEMDEF.<FINDLAYER(layer_hand1).baseid>.name>
+       FINDLAYER(layer_hand1).MORE2 0
+       FINDLAYER(layer_hand1).cleartags poison_
+     endif
+    ENDIF
+
+    IF (<FINDLAYER(layer_hand1).MORE2>==25) && (RAND(3)==1)
+     SRC.EMOTE Poisonado por Poison
+     SRC.EFFECT 3,i_fx_glow_spike,6,15,0
+     SRC.NEWITEM i_efeito_poison
+     SRC.ACT.LINK <uid>
+     SRC.ACT.MORE=6
+     SRC.ACT.EQUIP
+     SRC.ACT.TIMER=1
+
+     SRC.FLAGS |=statf_poisoned
+     SRC.update
+
+     FINDLAYER(layer_hand1).tag0.poison_cargas = <eval <FINDLAYER(layer_hand1).tag0.poison_cargas>-1>
+     if (<eval <FINDLAYER(layer_hand1).tag0.poison_cargas>> <= 0)
+       FINDLAYER(layer_hand1).name <SERV.ITEMDEF.<FINDLAYER(layer_hand1).baseid>.name>
+       FINDLAYER(layer_hand1).MORE2 0
+       FINDLAYER(layer_hand1).cleartags poison_
+     endif
+    ENDIF
+
+    IF (<FINDLAYER(layer_hand1).MORE2>==26) && (RAND(3)==1)
+     SRC.EMOTE Poisonado por Greater Poison
+     SRC.EFFECT 3,i_fx_glow_spike,6,15,0
+     SRC.NEWITEM i_efeito_poison
+     SRC.ACT.LINK <uid>
+     SRC.ACT.MORE=7
+     SRC.ACT.EQUIP
+     SRC.ACT.TIMER=1
+
+     SRC.FLAGS |=statf_poisoned
+     SRC.update
+
+     FINDLAYER(layer_hand1).tag0.poison_cargas = <eval <FINDLAYER(layer_hand1).tag0.poison_cargas>-1>
+     if (<eval <FINDLAYER(layer_hand1).tag0.poison_cargas>> <= 0)
+       FINDLAYER(layer_hand1).name <SERV.ITEMDEF.<FINDLAYER(layer_hand1).baseid>.name>
+       FINDLAYER(layer_hand1).MORE2 0
+       FINDLAYER(layer_hand1).cleartags poison_
+     endif
+    ENDIF
+
+    IF (<FINDLAYER(layer_hand1).MORE2>==27) && (RAND(3)==1)
+     SRC.EMOTE Poisonado por Deadly Poison
+     SRC.EFFECT 3,i_fx_glow_spike,6,15,0
+     SRC.NEWITEM i_efeito_poison
+     SRC.ACT.LINK <uid>
+     SRC.ACT.MORE=8
+     SRC.ACT.EQUIP
+     SRC.ACT.TIMER=1
+
+     SRC.FLAGS |=statf_poisoned
+     SRC.update
+
+     FINDLAYER(layer_hand1).tag0.poison_cargas = <eval <FINDLAYER(layer_hand1).tag0.poison_cargas>-1>
+     if (<eval <FINDLAYER(layer_hand1).tag0.poison_cargas>> <= 0)
+       FINDLAYER(layer_hand1).name <SERV.ITEMDEF.<FINDLAYER(layer_hand1).baseid>.name>
+       FINDLAYER(layer_hand1).MORE2 0
+       FINDLAYER(layer_hand1).cleartags poison_
+     endif
+    ENDIF
+  endif
+ENDIF
+
+RETURN 0
+
+[ITEMDEF i_efeito_poison]
+NAME=Efeito Poison
+ID=0181d
+LAYER=70
+
+ON=@CREATE
+ATTR=attr_invis|attr_decay
+MORE=0
+MORE2=0
+
+ON=@TIMER
+ if (<CONT.flags>&statf_invisible) || (<CONT.restest 1 i_rune_invisibility>)
+  CONT.flags = <CONT.flags> - statf_invisible
+  CONT.consume 1 i_rune_invisibility
+  CONT.update
+  CONT.sysmessage Voce foi revelado
+ endif
+ IF (<MORE2> > 90)
+  CONT.SYSMESSAGE O veneno saio do seu corpo
+  MORE2=0
+  REMOVE
+  RETURN=1
+ ENDIF
+
+ CONT.EMOTE=are poisoned 
+ CONT.ANIM=20
+
+ IF (<MORE> == 05)     //Lesser Poison
+  cont.damage 4,dam_poison,<link.uid>,0,0,0,100,0
+  MORE2=<MORE2>+4
+ ENDIF
+
+ IF (<MORE> == 06)     //Poison
+  cont.damage 8,dam_poison,<link.uid>,0,0,0,100,0
+  MORE2=<MORE2>+8
+ ENDIF
+
+ IF (<MORE> == 07)    //Greater Poison
+  cont.damage 12,dam_poison,<link.uid>,0,0,0,100,0
+  MORE2=<MORE2>+12
+ ENDIF
+
+ IF (<MORE> == 08)    //Deadly Poison
+  cont.damage 16,dam_poison,<link.uid>,0,0,0,100,0
+  MORE2=<MORE2>+16
+ ENDIF
+
+ TIMER=6
+
+RETURN=1
+
+ON=@Destroy
+CONT.FLAGS = <CONT.FLAGS> - statf_poisoned
+cont.update
+
+
+[ITEMDEF i_delay_poisoning]
+ID=0181d
+NAME=Delay Poisoning
+TYPE=T_EQ_SCRIPT
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+ON=@EQUIP
+TIMER=6
+
+[ITEMDEF i_cloth_box]
+ID=01422
+name=Cloth Box
+WEIGHT=0.5
+VALUE=2
+type=T_CLOTHING
+SKILLMAKE=TAILORING 15.0, t_sewing_kit
+RESOURCES=4 i_cloth
+
+ON=@CREATE
+COLOR=0185
+
+ON=@dclick
+src.sysmessage Use  Atidote potion para fazer um cloth box with antidote
+return=1
+
+
+[ITEMDEF i_cloth_box_antidote]
+NAME=Cloth box with antidote
+TYPE=t_normal
+ID=01422
+WEIGHT=0
+DYE=0
+VALUE=15
+
+ON=@DCLICK
+
+TARGET
+SRC.SYSMESSAGE Selecione a arma para remover o veneno
+RETURN=1
+
+ON=@CREATE
+COLOR=09b
+
+ON=@TARGON_CHAR
+RETURN=1
+
+ON=@TARGON_ITEM
+IF <SRC.TARG.CONT>=0
+ src.sysmessage <src.targ.name> tem q esta na sua bag para remover o veneno.
+ RETURN 1
+ENDIF
+
+IF !(<src.targ.cont>==<src.findlayer(21).UID>)
+ src.sysmessage <src.targ.name> tem q esta na sua bag para remover o veneno.
+ RETURN 1
+ENDIF
+
+IF (STRMATCH(*POISON_LESS*,*<SRC.TARG.EVENTS>*))
+SRC.ANIM 10
+SRC.TARG.MESSAGE Voce limpou <src.targ.name> do Lesser poison..
+SRC.TARG.EVENTS=-POISON_LESS
+SRC.SOUND 80
+REMOVE
+Return 1
+ELSEIF (STRMATCH(*POISON_NORMAL*,*<SRC.TARG.EVENTS>*))
+SRC.ANIM 10
+SRC.TARG.MESSAGE Voce limpou <src.targ.name> do Poison..
+SRC.TARG.EVENTS=-POISON_NORMAL
+SRC.SOUND 80
+REMOVE
+Return 1
+ELSEIF (STRMATCH(*POISON_GREATER*,*<SRC.TARG.EVENTS>*))
+SRC.ANIM 10
+SRC.TARG.MESSAGE Voce limpou <src.targ.name> do Great Poison..
+SRC.TARG.EVENTS=-POISON_GREATER
+SRC.SOUND 80
+REMOVE
+Return 1
+ELSEIF (STRMATCH(*POISON_DEADLY*,*<SRC.TARG.EVENTS>*))
+SRC.ANIM 10
+SRC.TARG.MESSAGE Voce limpou <src.targ.name> do Deadly Poison..
+SRC.TARG.EVENTS=-POISON_DEADLY
+SRC.SOUND 80
+REMOVE
+Return 1
+ENDIF
+
+[function isPoisoned]
+if (<restest i_efeito_poison>) || (<flags> & statf_poisoned)
+  return 1
+endif
+return 0
+
+[EOF]

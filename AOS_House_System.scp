@@ -1,0 +1,3504 @@
+///////////////////////////////////////
+//           AOS HOUSE SYSTEM        //
+//                    //
+//  Created by Coruja            //
+//  coruja747 @ sphereserver.net forum    //
+//  Script Version: 4.7            //
+//  Last update: 30/09/2008        //
+//  Plase don't remove this header    //
+//                    //
+/////////////////////////////////////////
+//                    //
+//            INSTALL NOTES        //
+//                    //
+// This script is "drag & drop", just    //
+// set the defnames below and put it in    //
+// your scripts folder.            //
+//      Works only on Sphere 056b    //
+//                    //
+// To enable the auto-decay of invalid    //
+// houses (houses without owners, duo    //
+// account delection), just put:    //
+//     SRC.remove_invalid_houses    //
+// on the "sphere_serv_triggers.scp"    //
+// script, at the section:        //
+//     "f_onchar_delete"        //
+//                    //
+// To enable the House Placement Tools,    //
+// just add the item            //
+//      "i_house_placement_tool"    //
+// on your architect npc stock, on the    //
+// script "sphere_template_vend.scp"    //
+// at the VENDOR_S_DEED_TEMPLATE list.    //
+// To enable the Interior Decorator,    //
+// just add the item            //
+//    "i_house_interior_decorator"    //
+// on the same npc stock.        //
+//                    //
+// This script is compatible with    //
+// Custom Vendor systems. If you have    //
+// problems on interactivity with your    //
+// vendors, just modify the function    //
+// "IsHouseVendor" in this script.    //
+//                    //
+//////////////////////////////////////////
+
+[DEFNAME HOUSE_SYSTEM]
+//Misc Settings
+HOUSE_USE_DEEDS            0    //When a house got demolished, you want get back your house deed or the house value in gold? (0=House Value in Gold / 1=House Deed)
+HOUSE_DECAY_TIMER        30    //House decay timer, in days (0=Decay Off)
+DEMOLITION_PEND_DECAY        7    //House decay timer for Demolition Pending houses, in days (Houses can only be pended to demolition by a Game Master)
+MAX_ACCOUNT_HOUSES        2    //Max number of houses allowed per account
+ACCOUNT_OWNERSHIP        1    //All character of the house owner account will get owner access in the house (0=Off / 1=On)
+HOUSE_USE_TRASHBARREL        1    //Enable house command to place trash barrel? (1=On / 0=Off)
+
+//House Placement Settings
+PLACEMENT_MIN_DIST_AREA        1    //Minimum area distance allowed between placed houses (Default=1)
+PLACEMENT_MIN_DIST_FRONT    5    //Minimum front distance allowed between placed houses (Default=5)
+
+//Storage Settings
+USE_GLOBAL_STORAGE        0    //Use Global Storage Limit value or calculate it by the house area? (0=Calculate by House Area / 1=Global Value)
+GLOBAL_SECURE_STORAGE        600    //Global max secured storage allowed per house (secure containers + items inside secure containers)
+GLOBAL_LOCKDOWNS        100    //Global max locked items allowed per house (this value will cont on Secure Storage Limit)
+
+//Access Settings
+HOUSE_DOOR_ACCESS        1    //Owner of the house can change the door access? (1=On / 0=Off)
+MAX_HOUSE_COOWNERS        15    //Max number of co-owners allowed per house
+MAX_HOUSE_FRIENDS        50    //Max number of friends allowed per house
+MAX_HOUSE_BANS            50    //Max number of bans allowed per house
+MAX_HOUSE_ACCESS        50    //Max number of players on access list allowed per house
+HOUSE_USE_DEPTH_OF_FIELD    0    //Allow enter on private houses only who is in access list
+HOUSE_USE_BAN_ENGINE        1    //Enable house ban engine? (1=On / 0=Off)
+
+//Addictional Features
+ALLOW_BANKING            1    //Enable banking from the house sign? (1=On / 0=Off)
+USE_NOTICE_SYSTEM        1    //Notice player using dialog when your house decay or when it removed from the house access list (0=Off / 1=On)
+
+//AOS House Customization Settings
+SIGN_CHANGE_PUBLIC_ONLY        0    //Only public houses can change house sign? (1=Yes / 0=No)
+HOUSE_AOS_CUSTOMIZATION        1    //Enable AOS Customization system? (1=On / 0=Off)
+HOUSE_COMPONENT_PRICE          500    //Price per component in gp's (Default=500)
+HOUSE_ALLOW_CONVERTION        0    //Classic houses can be converted into custom foundations? (1=Yes / 0=No)
+
+//Custom Vendor Settings
+HOUSE_USE_VENDORS        1    //Enable house interactivity with custom vendors (1=On / 0=Off)
+HOUSE_VENDORS_PUBLIC_ONLY    0    //Vendors can be placed only on public houses? (1=On / 0=Off)
+HOUSE_USE_GLOBAL_MAXVENDORS    1    //Use Global Vendor Limit or calculate it by the house area? (0=Calculate by House Area / 1=Global Value)
+HOUSE_GLOBAL_MAXVENDORS        5    //Max number of vendors allowed per house
+
+/////////////////////////////////////////
+
+[FUNCTION IsHouseVendor]        //Configure this function to recognize your vendor script
+IF ((<NPC>==brain_human) || (<NPC>==brain_vendor))    //Do not use (<OWNER.ISPLAYER>), Sphere cannot recognize OWNER when the vendor got created.
+ return 1
+ELSE
+ return 0
+ENDIF
+
+[FUNCTION HouseVendorRemove]        //Function called on vendor before the house remove it
+SERV.NEWITEM i_deed
+NEW.NAME=Deed for Custom Vendor
+NEW.MORE=<DISPID>
+NEW.P=<P>
+REMOVE
+
+/////////////////////////////////////////
+
+[DEFNAME Avaible_Houses]        //Avaible houses on House Placement Tool
+house_classic_1             "i_multi_house_stone_plaster_small"
+house_classic_2             "i_multi_house_stone_small"
+house_classic_3             "i_multi_house_stone_brick_small"
+house_classic_4             "i_multi_house_stone_wood_small"
+house_classic_5             "i_multi_house_wood_plaster_small"
+house_classic_6             "i_multi_house_wood_thatched_small"
+house_classic_7             "i_multi_shop_stone_small"
+house_classic_8             "i_multi_shop_marble_small"
+house_classic_9             "i_multi_tower_wizard"
+house_classic_10            "i_multi_house_patio_sand"
+house_classic_11            "i_multi_villa_2story"
+house_classic_12            "i_multi_cabin_log_2story"
+house_classic_13            "i_multi_house_3room"
+house_classic_14            "i_multi_house_wood_plaster_2story"
+house_classic_15            "i_multi_house_stone_plaster_2story"
+house_classic_16            "i_multi_shop_blacksmithy_large"
+house_classic_17            "i_multi_house_patio_marble"
+house_classic_18            "i_multi_tower"
+house_classic_19            "i_multi_small_guildhouse"
+house_classic_20            "i_multi_big_guildhouse"
+house_classic_21            "i_multi_medium_guildhouse"
+house_classic_22            "i_multi_keep"
+house_classic_23            "i_multi_castle"
+house_classic_24            "i_multi_large_guildhouse"
+
+house_custom_2story_1        "i_multi_foundation_7x7"
+house_custom_2story_2        "i_multi_foundation_7x8"
+house_custom_2story_3        "i_multi_foundation_7x9"
+house_custom_2story_4        "i_multi_foundation_7x10"
+house_custom_2story_5        "i_multi_foundation_7x11"
+house_custom_2story_6        "i_multi_foundation_7x12"
+house_custom_2story_7        "i_multi_foundation_8x7"
+house_custom_2story_8        "i_multi_foundation_8x8"
+house_custom_2story_9        "i_multi_foundation_8x9"
+house_custom_2story_10        "i_multi_foundation_8x10"
+house_custom_2story_11        "i_multi_foundation_8x11"
+house_custom_2story_12        "i_multi_foundation_8x12"
+house_custom_2story_13        "i_multi_foundation_8x13"
+house_custom_2story_14        "i_multi_foundation_9x7"
+house_custom_2story_15        "i_multi_foundation_9x8"
+house_custom_2story_16        "i_multi_foundation_9x9"
+house_custom_2story_17        "i_multi_foundation_9x10"
+house_custom_2story_18        "i_multi_foundation_9x11"
+house_custom_2story_19        "i_multi_foundation_9x12"
+house_custom_2story_20        "i_multi_foundation_9x13"
+house_custom_2story_21        "i_multi_foundation_10x7"
+house_custom_2story_22        "i_multi_foundation_10x8"
+house_custom_2story_23        "i_multi_foundation_10x9"
+house_custom_2story_24        "i_multi_foundation_10x10"
+house_custom_2story_25        "i_multi_foundation_10x11"
+house_custom_2story_26        "i_multi_foundation_10x12"
+house_custom_2story_27        "i_multi_foundation_10x13"
+house_custom_2story_28        "i_multi_foundation_11x7"
+house_custom_2story_29        "i_multi_foundation_11x8"
+house_custom_2story_30        "i_multi_foundation_11x9"
+house_custom_2story_31        "i_multi_foundation_11x10"
+house_custom_2story_32        "i_multi_foundation_11x11"
+house_custom_2story_33        "i_multi_foundation_11x12"
+house_custom_2story_34        "i_multi_foundation_11x13"
+house_custom_2story_35        "i_multi_foundation_12x7"
+house_custom_2story_36        "i_multi_foundation_12x8"
+house_custom_2story_37        "i_multi_foundation_12x9"
+house_custom_2story_38        "i_multi_foundation_12x10"
+house_custom_2story_39        "i_multi_foundation_12x11"
+house_custom_2story_40        "i_multi_foundation_12x12"
+house_custom_2story_41        "i_multi_foundation_12x13"
+house_custom_2story_42        "i_multi_foundation_13x8"
+house_custom_2story_43        "i_multi_foundation_13x9"
+house_custom_2story_44        "i_multi_foundation_13x10"
+house_custom_2story_45        "i_multi_foundation_13x11"
+house_custom_2story_46        "i_multi_foundation_13x12"
+house_custom_2story_47        "i_multi_foundation_13x13"
+
+house_custom_3story_1        "i_multi_foundation_9x14"
+house_custom_3story_2        "i_multi_foundation_10x14"
+house_custom_3story_3        "i_multi_foundation_10x15"
+house_custom_3story_4        "i_multi_foundation_11x14"
+house_custom_3story_5        "i_multi_foundation_11x15"
+house_custom_3story_6        "i_multi_foundation_11x16"
+house_custom_3story_7        "i_multi_foundation_12x14"
+house_custom_3story_8        "i_multi_foundation_12x15"
+house_custom_3story_9        "i_multi_foundation_12x16"
+house_custom_3story_10        "i_multi_foundation_12x17"
+house_custom_3story_11        "i_multi_foundation_13x14"
+house_custom_3story_12        "i_multi_foundation_13x15"
+house_custom_3story_13        "i_multi_foundation_13x16"
+house_custom_3story_14        "i_multi_foundation_13x17"
+house_custom_3story_15        "i_multi_foundation_13x18"
+house_custom_3story_16        "i_multi_foundation_14x9"
+house_custom_3story_17        "i_multi_foundation_14x10"
+house_custom_3story_18        "i_multi_foundation_14x11"
+house_custom_3story_19        "i_multi_foundation_14x12"
+house_custom_3story_20        "i_multi_foundation_14x13"
+house_custom_3story_21        "i_multi_foundation_14x14"
+house_custom_3story_22        "i_multi_foundation_14x15"
+house_custom_3story_23        "i_multi_foundation_14x16"
+house_custom_3story_24        "i_multi_foundation_14x17"
+house_custom_3story_25        "i_multi_foundation_14x18"
+house_custom_3story_26        "i_multi_foundation_15x10"
+house_custom_3story_27        "i_multi_foundation_15x11"
+house_custom_3story_28        "i_multi_foundation_15x12"
+house_custom_3story_29        "i_multi_foundation_15x13"
+house_custom_3story_30        "i_multi_foundation_15x14"
+house_custom_3story_31        "i_multi_foundation_15x15"
+house_custom_3story_32        "i_multi_foundation_15x16"
+house_custom_3story_33        "i_multi_foundation_15x17"
+house_custom_3story_34        "i_multi_foundation_15x18"
+house_custom_3story_35        "i_multi_foundation_16x11"
+house_custom_3story_36        "i_multi_foundation_16x12"
+house_custom_3story_37        "i_multi_foundation_16x13"
+house_custom_3story_38        "i_multi_foundation_16x14"
+house_custom_3story_39        "i_multi_foundation_16x15"
+house_custom_3story_40        "i_multi_foundation_16x16"
+house_custom_3story_41        "i_multi_foundation_16x17"
+house_custom_3story_42        "i_multi_foundation_16x18"
+house_custom_3story_43        "i_multi_foundation_17x12"
+house_custom_3story_44        "i_multi_foundation_17x13"
+house_custom_3story_45        "i_multi_foundation_17x14"
+house_custom_3story_46        "i_multi_foundation_17x15"
+house_custom_3story_47        "i_multi_foundation_17x16"
+house_custom_3story_48        "i_multi_foundation_17x17"
+house_custom_3story_49        "i_multi_foundation_17x18"
+house_custom_3story_50        "i_multi_foundation_18x13"
+house_custom_3story_51        "i_multi_foundation_18x14"
+house_custom_3story_52        "i_multi_foundation_18x15"
+house_custom_3story_53        "i_multi_foundation_18x16"
+house_custom_3story_54        "i_multi_foundation_18x17"
+house_custom_3story_55        "i_multi_foundation_18x18"
+
+
+[DEFNAME Classic_Houses_Convertion]    //Don't make changes here
+convertion_i_multi_house_stone_plaster_small    "i_multi_foundation_7x7"
+convertion_i_multi_house_stone_small        "i_multi_foundation_7x7"
+convertion_i_multi_house_stone_brick_small    "i_multi_foundation_7x7"
+convertion_i_multi_house_stone_wood_small    "i_multi_foundation_7x7"
+convertion_i_multi_house_wood_plaster_small    "i_multi_foundation_7x7"
+convertion_i_multi_house_wood_thatched_small    "i_multi_foundation_7x7"
+convertion_i_multi_shop_stone_small        "i_multi_foundation_7x7"
+convertion_i_multi_shop_marble_small        "i_multi_foundation_7x7"
+convertion_i_multi_tower_wizard            "i_multi_foundation_8x7"
+convertion_i_multi_house_patio_sand        "i_multi_foundation_12x8"
+convertion_i_multi_villa_2story            "i_multi_foundation_11x11"
+convertion_i_multi_cabin_log_2story        "i_multi_foundation_8x13"
+convertion_i_multi_house_3room            "i_multi_foundation_14x14"
+convertion_i_multi_house_wood_plaster_2story    ""
+convertion_i_multi_house_stone_plaster_2story    ""
+convertion_i_multi_shop_blacksmithy_large    "i_multi_foundation_15x14"
+convertion_i_multi_house_patio_marble        "i_multi_foundation_15x14"
+convertion_i_multi_tower            ""
+convertion_i_multi_keep                ""
+convertion_i_multi_castle            ""
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[ITEMDEF 0bd1]
+DEFNAME=i_sign_brass
+TYPE=t_sign_gump
+CAN=CAN_I_DCIGNORELOS
+CATEGORY=Decoration - Signs
+SUBSECTION=Blank
+DESCRIPTION=Brass Blank
+DUPELIST=0bd2
+
+ON=@Create
+TIMERF 1,HouseCheckPlacement
+TIMER=30
+
+ON=@DClick
+IF (<DISTANCE> > 20)
+ SRC.SYSMESSAGE @,,1 Voce deve estar dentro de vinte passos da casa para abrir a placa.
+ return 1
+ENDIF
+IF (STRMATCH(*ghost*,*<SRC.BODY>*)) /////// ALTERADO POR DANIEL (<ATTR> & statf_dead)
+  src.sysmessage @,,1 Voce nao pode abrir a placa da casa estando morto.
+    return 1
+ENDIF
+IF (<LINK.TYPE> == t_multi) || (<LINK.TYPE> == t_multi_custom)
+ IF ((<SRC.ACCOUNT.PLEVEL> >= 4) && (<SRC.ISGM>))
+   SDIALOG d_house_information
+   return 1
+ ELIF (<HousePlayerAccess <SRC>> >= 2) && (<src.region.isevent.r_house_system> == 1)
+   SRC.SYSMESSAGE @,,1 Bem Vindo, <SRC.NAME>.
+   IF (<DEF.HOUSE_DECAY_TIMER> > 0) && (<isempty <TAG.DEMOLITION_PENDING>>)
+    TIMER=<eval <DEF.HOUSE_DECAY_TIMER>*24*60*60>
+   ENDIF
+   SDIALOG d_house_information
+   return 1
+ ENDIF
+ TAG0.VISITS ++
+ SDIALOG d_house_visitor
+ return 1
+ENDIF
+
+ON=@ClientToolTip
+SRC.ADDCLILOC 1042971,A House Sign
+SRC.ADDCLILOC 1061639,<NAME>
+SRC.ADDCLILOC 1061640,<UID.<LINK.MORE1>.NAME>
+SRC.ADDCLILOC <QVAL (<TAG0.Public>)? 1061641:1061642>
+return 1
+
+ON=@ContextMenuRequest
+IF (<DEF.HOUSE_USE_VENDORS>) && (<TAG0.VENDORS>)
+ SRC.AddContextEntry 747,6211
+ENDIF
+
+ON=@ContextMenuSelect
+IF (<DISTANCE> > 5)
+ SRC.SYSMESSAGE @,,1 Voce deve estar dentro de cinco passos da casa para usar esta opcao.
+ return 1
+ENDIF
+SDIALOG d_house_vendor_list
+
+ON=@Timer
+IF !(<MORE2>)
+ REF1=<LINK.MORE1>
+ IF (<LINK.TAG0.PLACEMENT> != i_gold)
+  SERV.NEWITEM <LINK.TAG0.PLACEMENT>
+  NEW.CONT=<UID.<LINK.MORE1>.FINDLAYER.21>
+ ENDIF
+ IF (<REF1.ISONLINE>)
+  TRYSRC <REF1> DIALOGCLOSE d_house_placement
+ ENDIF
+ REF1.NOTICE Passou muito tempo, e a casa que voce criou foi deletada. Tente Novamente!
+ LINK.REMOVE
+ELIF (<DEF.HOUSE_DECAY_TIMER>) || (<TAG0.DEMOLITION_PENDING>)
+ TRY UID.<MORE2>.NOTICE=Sua casa '<NAME>' deu decay em: <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>> because <QVAL (<STRARG <TAG0.DEMOLITION_PENDING>>)? Se voce nao remove-la em um periodo de: <dSTRARG <dTAG0.DEMOLITION_PENDING>> dia(s) determinada pela staff para remover esta casa.:Sua casa esta inativa por <dDEF.HOUSE_DECAY_TIMER> days>.
+ FOR <DEF.MAX_HOUSE_COOWNERS>
+  TRY UID.<TAG0.CO_OWNER_<dLOCAL._FOR>>.NOTICE=Voce foi removido da lista de sub-dono da casa: '<NAME>' porque ela deu decay em: <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ ENDFOR
+ FOR <DEF.MAX_HOUSE_FRIENDS>
+  TRY UID.<TAG0.FRIEND_<dLOCAL._FOR>>.NOTICE=Voce foi removido da lista de amigos da casa: '<NAME>' porque ela deu decay em: <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ ENDFOR
+ LINK.f_house_demolish 1
+ LINK.REMOVE
+ENDIF
+
+
+[ITEMDEF 0100e]
+DEFNAME=i_key_copper
+WEIGHT=0.1
+TYPE=T_KEY
+CATEGORY=Provisions - Miscellaneous
+SUBSECTION=Keys
+DESCRIPTION=Copper Key
+
+ON=@Click
+MESSAGE (<LINK.NAME>)
+
+ON=@DClick
+return 1
+
+
+[FUNCTION HouseCheckPlacement]
+REF1=<LINK.MORE1>    //Owner
+REF1.HouseRemoveKeys
+IF (<LINK.HouseCheckNearArea>)
+  REF1.SYSMESSAGE @,,1 A casa nao pode ser criada aqui. Ou algo esta bloqueando a casa, ou a casa nao seria valida no terreno.
+  IF !(<REF1.ISGM>)
+    IF (<LINK.TAG0.PLACEMENT> != i_gold)
+     SERV.NEWITEM <LINK.TAG.PLACEMENT>
+     NEW.CONT=<REF1.FINDLAYER.21>
+    ENDIF
+    LINK.REMOVE
+    return 1
+  ENDIF
+ELSE
+  REF1.SYSMESSAGE @,,1 Este e um local valido.
+ENDIF
+TRYSRC <REF1> DIALOG d_house_placement
+
+
+[FUNCTION HouseRemoveKeys]
+FOR 0 <FINDLAYER.21.RESCOUNT>
+ REF1=<FINDLAYER.21.FINDCONT(<LOCAL._FOR>)>
+ IF (<REF1.DISPID>==i_key_copper)
+  IF STRMATCH("t_multi*","<REF1.LINK.TYPE>")
+   REF1.REMOVE
+  ENDIF
+ ENDIF
+ENDFOR
+FOR 0 <FINDLAYER.29.RESCOUNT>
+ REF1=<FINDLAYER.29.FINDCONT(<LOCAL._FOR>)>
+ IF (<REF1.DISPID>==i_key_copper)
+  IF STRMATCH("t_multi*","<REF1.LINK.TYPE>")
+   REF1.REMOVE
+  ENDIF
+ ENDIF
+ENDFOR
+
+
+[DIALOG d_house_placement]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dhtmlgump 10 10 400 20 0 0 <DEF.L1>basefont color="#f70000"<DEF.R1><DEF.CENTER>WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>Voce esta prestes a colocar uma nova casa.  Colocar esta casa ira <DEF.U>CONDENAR<DEF.UE> todas e quaisquer de suas outras casas que voce pode ter.<DEF.BR><DEF.BR>Alem disso, voce nao sera capaz de colocar uma outra casa ou ter transferida para voce ter uma (1) semana da vida real.<DEF.BR><DEF.BR>Depois que voce aceita esses termos, esses efeitos nao podem ser revertidos.  Re-deeding ou transferindo sua nova casa <DEF.U>nao<DEF.UE> ira condenar sua outra casa e o temporizador de uma semana sera removido.<DEF.BR><DEF.BR>Se voce esta absolutamente certo que voce deseja continuar, clique no botao OK abaixo. Se voce nao deseja por esta casa, clique em CANCELAR.
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCELAR
+
+[DIALOG d_house_placement BUTTON]
+ON=0
+IF (<LINK.TAG0.PLACEMENT> != i_gold)
+ SERV.NEWITEM <LINK.TAG0.PLACEMENT>
+ NEW.BOUNCE
+ENDIF
+LINK.REMOVE
+
+ON=1
+IF (<LINK.TAG0.PLACEMENT> == i_gold)
+  IF (<SRC.ISGM>)
+   SRC.SYSMESSAGE @,,1 <LINK.VALUE> ouro teria sido retirado do seu banco se nao foi um GM.
+  ELIF (<SRC.BANKBALANCE> < <LINK.VALUE>)
+   SRC.SYSMESSAGE @,,1 Voce nao tem dinheiro suficiente no banco para comprar esta casa. Tente uma casa menor, ou adicione mais dinheiro no seu banco.
+   LINK.REMOVE
+   return 1
+  ELSE
+   SRC.GOLD -= <LINK.VALUE>
+   SRC.UPDATE
+   SRC.SYSMESSAGE @,,1 <LINK.VALUE> ouro foi removido deu banco.
+  ENDIF
+ENDIF
+MORE2=<SRC>
+LINK.MORE2=<UID>
+LINK.TAG.PLACEMENT=
+TIMER=<eval <DEF.HOUSE_DECAY_TIMER>*24*60*60>
+TAG.BUILTON=<serv.rtime.format %d>-<serv.rtime.format %m>-<serv.rtime.format %Y> <strsub 11 8 <serv.rtime>>
+TAG.STORAGE_LIMIT=<dAREA>
+REGION.EVENTS=+r_house_system
+IF (<LINK.TYPE>==t_multi_custom)
+ LINK.HousePlaceFoundationStairs
+ENDIF
+
+[FUNCTION HousePlaceFoundationStairs]
+TAG.COMPONENTS=<COMPONENTS>
+ARGS=<MULTIREGION>
+FOR <ARGV2> <eval <ARGV0>+1>
+ ADDITEM 1873,<LOCAL._FOR>,<ARGV3>,0
+ENDFOR
+COMMIT
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[FUNCTION RenderHouseDialogBackground]
+resizepic 0 0 5054 420 440
+gumppictiled 10 10 400 100 2624
+checkertrans 10 10 400 100
+gumppictiled 10 120 400 260 2624
+checkertrans 10 120 400 260
+gumppictiled 10 390 400 40 2624
+checkertrans 10 390 400 40
+button 250 410 4005 4007 1 0 0
+dtext 285 410 1152 FECHAR
+gumppic 10 10 100
+dhtmlgump 30 43 105 40 0 0 <DEF.CENTER><NAME><DEF.CENTERE>
+IF (<HousePlayerAccess <SRC>> >= 2)
+ button 150 10 4005 4007 1 0 1
+ dtext 195 10 1152 INFORMACAO
+ button 150 30 4005 4007 1 0 2
+ dtext 195 30 1152 SEGURANCA
+ button 150 50 4005 4007 1 0 3
+ dtext 195 50 1152 ARMAZENAMENTO
+ button 150 70 4005 4007 1 0 4
+ dtext 195 70 1152 CUSTOMIZAR
+ button 150 90 4005 4007 1 0 5
+ dtext 195 90 1152 DONO
+ IF !(<TAG0.Public>) && (<DEF.HOUSE_USE_DEPTH_OF_FIELD>)
+  button 10 390 4005 4007 1 0 9
+  dtext 45 390 1152 Conceder Acesso
+  button 10 410 4005 4007 1 0 10
+  dtext 45 410 1152 Revogar Acesso
+ ELIF (<DEF.HOUSE_USE_BAN_ENGINE>)
+  button 10 390 4005 4007 1 0 7
+  dtext 45 390 1152 Banir
+  button 10 410 4005 4007 1 0 8
+  dtext 45 410 1152 Lista de Ban
+ ENDIF
+ IF (<DEF.ALLOW_BANKING>)
+  button 250 390 4005 4007 1 0 6
+  dtext 285 390 1152 Abrir Banco
+ ENDIF
+ENDIF
+
+
+[FUNCTION DefaultHouseDialogButtons]
+IF (<ARGS>==1)
+  DIALOG d_house_information
+  return 1
+ELIF (<ARGS>==2)
+  DIALOG d_house_security
+  return 1
+ELIF (<ARGS>==3)
+  DIALOG d_house_storage
+  return 1
+ELIF (<ARGS>==4)
+  DIALOG d_house_customize
+  return 1
+ELIF (<ARGS>==5)
+  DIALOG d_house_ownership
+  return 1
+ELIF (<ARGS>==6)
+  IF (<DISTANCE> < 20)
+SRC.SYSMESSAGE @,,1 Novo sistema de Banker Home, voce somente pode acessar 3x a cada 12 horas!
+SRC.DIALOG D_BANKER
+SRC.TIMERF 4,SRC.DIALOGCLOSE D_BANKER
+   ////SRC.BANKSELF
+  ELSE
+   SRC.SYSMESSAGE @,,1 Voce esta muito longe da placa da casa.
+  ENDIF
+  return 1
+ELIF (<ARGS>==7)
+SRC.SYSMESSAGE @,,1 Os banimentos estao suspensos, decisao da Staff!
+////  SRC.SYSMESSAGE @,,1 Clique em quem deseja banir dessa casa.
+////  SRC.TARGETF f_house_banish <UID>
+  return 1
+ELIF (<ARGS>==8)
+  DIALOG d_house_security 2,-1,1
+  return 1
+ELIF (<ARGS>==9)
+  SRC.SYSMESSAGE @,,1 Clique em quem deseja garantir acesso.
+  SRC.TARGETF f_house_grant_access <UID>
+  return 1
+ELIF (<ARGS>==10)
+  DIALOG d_house_security 2,1,1
+  return 1
+ENDIF
+
+[DIALOG D_BANKER]
+0,0
+nomove
+page 0
+page 1
+gumppic 396 301 2500
+text 449 404 32 0
+text 450 406 0 1
+text 445 325 0 2
+text 447 347 1 3
+text 482 371 0 4
+button 460 374 1209 1210 1 0 1
+page 2
+page 3
+page 4
+page 5
+page 6
+page 7
+page 8
+page 9
+
+[DIALOG D_BANKER TEXT]
+Dragon Shard T2A
+Dragon Shard T2A
+Bank House System
+Aberturas <EVAL <SRC.FINDID.i_DELAY_BANKER.MORE2>> de 3!
+Abrir Bank
+
+[DIALOG D_BANKER BUTTON]
+ON=1
+IF !(<SRC.RESTEST i_DELAY_BANKER>)
+SERV.NEWITEM=i_DELAY_BANKER
+NEW.MORE2=1
+NEW.EQUIP
+SRC.BANKSELF
+Return 1
+ELSEIF (<SRC.FINDID.i_DELAY_BANKER.MORE2> > 2)
+SRC.SYSMESSAGE @,,1 Voce deve aguardar <eval <SRC.FINDID.i_DELAY_BANKER.TIMER>/3600> horas para acessar o bank de casa!
+Return 1
+ELSE
+SRC.FINDID.i_DELAY_BANKER.MORE2=(<SRC.FINDID.i_DELAY_BANKER.MORE2>+1)
+SRC.BANKSELF
+Return 1
+ENDIF
+
+[ITEMDEF i_DELAY_BANKER]
+ID=i_memory 
+TYPE=t_eq_script 
+NAME=DELAY BANKER HOUSE
+
+ON=@CREATE
+ATTR=0002
+MORE2=00
+
+ON=@EQUIP
+TIMER=43200
+
+ON=@UNEQUIP
+SRC.SYSMESSAGE @,,1 Voce ja pode utilizar o Bank de sua casa!
+
+ON=@TIMER
+REMOVE
+RETURN 1
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[DIALOG d_house_information]
+50,40
+
+page 0
+RenderHouseDialogBackground
+button 150 10 4006 4007 1 0 1
+dtext 195 10 5 INFORMACAO
+
+page 1
+dtext 20 130 1152 DONO: 
+dtext 210 130 1152 <UID.<MORE2>.NAME>
+dtext 20 170 <QVAL (<TAG0.DEMOLITION_PENDING>)? 37 Esta casa e inadequada:5 Esta casa esta devidamente > colocada.
+dtext 20 190 5 Esta casa tem um design moderno.
+dtext 20 210 5 Esta e uma casa <QVAL (<LINK.TYPE> != t_multi_custom)? pre:custom>-construida.
+dtext 20 230 5 Esta casa e <QVAL !(<TAG0.Public>)? privada:aberta ao publico>.
+IF (<TAG0.DEMOLITION_PENDING>)
+ dtext 20 250 37 Esta casa esta condenada.
+ dtext 20 270 37 Esta casa ira dar decay em: <eval <TIMER>/86400> dias, <eval (<TIMER>%86400)/3600> horas e <eval ((<TIMER>%86400)%3600)/60> minutos.
+ELIF (<DEF.HOUSE_DECAY_TIMER>) && (<TIMER> > 0)
+ dtext 20 250 5 Esta casa ira dar decay em: <eval <TIMER>/86400> dias, <eval (<TIMER>%86400)/3600> horas e <eval ((<TIMER>%86400)%3600)/60> minutos.
+ELSE
+ dtext 20 250 5 Esta casa e atualizada automaticamente.
+ENDIF
+dtext 20 290 5 Construida em:
+dtext 250 290 1152 <TAG0.BUILTON>
+IF (<TAG0.LastTraded>)
+ dtext 20 310 5 Ultima Compra:
+ dtext 250 310 1152 <TAG0.LastTraded>
+ENDIF
+dtext 20 330 5 Valor da casa:
+dtext 250 330 1152 <LINK.HouseValue> gps
+dtext 20 360 5 Numero de visita que esta casa teve:
+dtext 350 360 1152 <dTAG0.VISITS>
+
+[DIALOG d_house_information BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_security]
+50,40
+
+page 0
+RenderHouseDialogBackground
+button 150 30 4006 4007 1 0 2
+dtext 195 30 5 SEGURANCA
+
+page 1
+IF (<IsOwner <SRC>>)
+ button 10 150 4005 4007 1 0 11
+ dtext 45 150 1152 Adicionar Sub-Dono
+ button 10 170 4005 4007 1 0 14
+ dtext 45 170 1152 Remover Sub-Dono
+ button 10 190 4005 4007 1 0 21
+ dtext 45 190 1152 Limpar Lista de Sub-Dono
+ELSE
+ dtext 45 150 998 Adicionar Sub-Dono
+ dtext 45 170 998 Remover Sub-Dono
+ dtext 45 190 998 Limpar Lista de Sub-Dono
+ENDIF
+
+button 10 220 4005 4007 1 0 15
+dtext 45 220 1152 Ver lista de amigos
+IF (<HousePlayerAccess <SRC>> >= 3)
+ button 10 130 4005 4007 1 0 13
+ dtext 45 130 1152 Ver lista de Sub-Donos
+ button 10 240 4005 4007 1 0 12
+ dtext 45 240 1152 Adicionar Amigo
+ button 10 260 4005 4007 1 0 16
+ dtext 45 260 1152 Remover Amigo
+ button 10 280 4005 4007 1 0 22
+ dtext 45 280 1152 Limpar lista de amigos
+ELSE
+ dtext 45 130 998 Ver lista de Sub-Donos
+ dtext 45 240 998 Adicionar Amigo
+ dtext 45 260 998 Remover Amigo
+ dtext 45 280 998 Limpar lista de amigos
+ENDIF
+
+IF !(<TAG0.Public>) && (<DEF.HOUSE_USE_DEPTH_OF_FIELD>)
+ button 10 310 4005 4007 1 0 19
+ dtext 45 310 1152 Ver lista de acesso
+ IF (<HousePlayerAccess <SRC>> >= 3)
+  button 10 330 4005 4007 1 0 24
+  dtext 45 330 1152 Limpar lista de acesso
+ ELSE
+  dtext 45 330 998 Limpar lista de acesso
+ ENDIF
+ELIF (<DEF.HOUSE_USE_BAN_ENGINE>)
+ button 10 310 4005 4007 1 0 17
+ dtext 45 310 1152 ver lista de Banidos
+ IF (<HousePlayerAccess <SRC>> >= 3)
+  button 10 330 4005 4007 1 0 23
+  dtext 45 330 1152 Limpar lista de banidos
+ ELSE
+  dtext 45 330 998 Limpar lista de banidos
+ ENDIF
+ENDIF
+
+IF (<IsOwner <SRC>>)
+ IF !(<TAG0.Public>)
+  dtext 245 130 5 Mudar para privado
+  button 210 150 4005 4007 1 0 31
+  dtext 245 150 1152 Mudar para publica
+ ELSE
+  button 210 130 4005 4007 1 0 31
+  dtext 245 130 1152 Mudar para privado
+  dtext 245 150 5 Mudar para publica
+ ENDIF
+ELSE
+ IF !(<TAG0.Public>)
+  dtext 245 130 5 Mudar para privado
+  dtext 245 150 998 Mudar para publica
+ ELSE
+  dtext 245 130 998 Mudar para privado
+  dtext 245 150 5 Mudar para publica
+ ENDIF
+ENDIF
+
+page 2
+IF (0<ARGS>)
+ RenderDialogAccessList <ARGS>
+ENDIF
+
+
+[DIALOG d_house_security BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+ON=11
+SRC.SYSMESSAGE @,,1 Clique em quem deseja por como Sub-Dono dessa Casa.
+SRC.TARGETF f_house_add_coowner <UID>
+
+ON=12
+SRC.SYSMESSAGE @,,1 Clique em quem deseja por como Amigo dessa Casa.
+SRC.TARGETF f_house_add_friend <UID>
+
+ON=13 20
+IF (<ARGN>==13)        //Co-Owner View
+ DIALOG d_house_security 2,3
+ELIF (<ARGN>==14)    //Co-Owner Remove
+ DIALOG d_house_security 2,3,1
+ELIF (<ARGN>==15)    //Friend View
+ DIALOG d_house_security 2,2
+ELIF (<ARGN>==16)    //Friend Remove
+ DIALOG d_house_security 2,2,1
+ELIF (<ARGN>==17)    //Ban View
+ DIALOG d_house_security 2,-1
+ELIF (<ARGN>==18)    //Ban Remove
+ DIALOG d_house_security 2,-1,1
+ELIF (<ARGN>==19)    //Access View
+ DIALOG d_house_security 2,1
+ELIF (<ARGN>==20)    //Access Remove
+ DIALOG d_house_security 2,1,1
+ENDIF
+
+ON=21
+SDIALOG d_house_clear_coowners
+
+ON=22
+DIALOG d_house_clear_friends
+
+ON=23
+DIALOG d_house_clear_bans
+
+ON=24
+DIALOG d_house_clear_access_list
+
+ON=31
+IF !(<TAG0.Public>)
+ TAG.Public=1
+ RESENDTOOLTIP
+ DIALOG d_house_type 1
+ELSE
+ IF (<DEF.HOUSE_USE_VENDORS>) && (<DEF.HOUSE_VENDORS_PUBLIC_ONLY>) && (<TAG0.VENDORS>)
+  DIALOG d_house_type 3
+ ELSE
+  TAG.Public=
+  RESENDTOOLTIP
+  IF (<DEF.SIGN_CHANGE_PUBLIC_ONLY>) && (<DISPID> != 0bd2)
+   DISPID=0bd2
+   UPDATEX
+  ENDIF
+  DIALOG d_house_type 2
+ ENDIF
+ENDIF
+
+ON=100 199
+REF1=<HouseGetAccessRef -1,<eval <ARGN>-100>>
+IF (<REF1>)
+ SRC.SYSMESSAGE @,,1 Foi Banido.
+ HouseUpdateAccessListNumber <TAG.Access.<REF1>>
+ TRY TAG.Access.<REF1>=
+ TAG0.Access.Total.-1 --
+ENDIF
+SDIALOG d_house_security 2,-1,1
+
+ON=200 299
+REF1=<HouseGetAccessRef 1,<eval <ARGN>-200>>
+IF (<REF1>)
+ SRC.SYSMESSAGE @,,1 O Convite foi Revogado
+ HouseUpdateAccessListNumber <TAG.Access.<REF1>>
+ TRY TAG.Access.<REF1>=
+ TAG0.Access.Total.1 --
+ENDIF
+SDIALOG d_house_security 2,1,1
+
+ON=300 399
+REF1=<HouseGetAccessRef 2,<eval <ARGN>-300>>
+IF (<REF1>)
+ SRC.SYSMESSAGE @,,1 Amigo removido da lista.
+ REF1.NOTICE=Voce foi removido da lista de amigos da casa '<NAME>' em: <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ HouseUpdateAccessListNumber <TAG.Access.<REF1>>
+ TRY TAG.Access.<REF1>=
+ TAG0.Access.Total.2 --
+ENDIF
+SDIALOG d_house_security 2,2,1
+
+ON=400 499
+REF1=<HouseGetAccessRef 3,<eval <ARGN>-400>>
+IF (<REF1>)
+ SRC.SYSMESSAGE @,,1 Sub-Dono removido da lista.
+ REF1.NOTICE=Voce foi removido da lista de Sub-Dono da casa '<NAME>' em: <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ HouseUpdateAccessListNumber <TAG.Access.<REF1>>
+ TRY TAG.Access.<REF1>=
+ TAG0.Access.Total.3 --
+ENDIF
+SDIALOG d_house_security 2,3,1
+
+
+[FUNCTION RenderDialogAccessList]
+LOCAL.ACCESS=<ARGV[0]>
+IF (0<ARGV[1]>)
+ LOCAL.REMOVE=<ARGV[1]>
+ LOCAL.BUTTON=<eval (<QVAL (<ARGV[0]>!=-1)? <ARGV[0]>:<eval <ARGV[0]>+1>>+1)*100>
+ENDIF
+ARGS=<HouseAccessList <ARGV[0]>>
+
+dhtmlgump 10 120 400 20 0 0 <DEF.CENTER><DEF.BFONT_WHITE><DEF.Access_<dLOCAL.ACCESS>> LISTA<DEF.CENTERE>
+LOCAL.PAGE=2
+LOCAL.Y=150
+IF (<TAG0.Access.Total.<dLOCAL.ACCESS>>)
+  IF !(<LOCAL.REMOVE>)
+    FOR <TAG0.Access.Total.<dLOCAL.ACCESS>>
+     dtext 15 <LOCAL.Y> 1152 * <UID.<ARGV<dLOCAL._FOR>>.NAME>
+     LOCAL.Y += 20
+     CALL RenderDialogAccessListPage
+    ENDFOR
+  ELSE
+    FOR <TAG0.Access.Total.<dLOCAL.ACCESS>>
+     REF1=<ARGV[<LOCAL._FOR>]>
+     dtext 45 <LOCAL.Y> 1152 * <REF1.NAME>
+     button 10 <LOCAL.Y> 4005 4007 1 0 <eval <STREAT <TAG.Access.<REF1>>>+<LOCAL.BUTTON>>
+     LOCAL.Y += 20
+     CALL RenderDialogAccessListPage
+    ENDFOR
+  ENDIF
+ENDIF
+
+[FUNCTION RenderDialogAccessListPage]
+IF (<LOCAL.Y> > 340)
+ LOCAL.Y=140
+ button 40 360 4005 4007 0 <eval <LOCAL.PAGE>+1> 0
+ LOCAL.PAGE ++
+ page <LOCAL.PAGE>
+ button 10 360 4014 4016 0 <eval <LOCAL.PAGE>-1> 0
+ dhtmlgump 10 120 400 20 0 0 <DEF.CENTER><DEF.BFONT_WHITE><DEF.Access_<dLOCAL.ACCESS>> LISTA<DEF.CENTERE>
+ENDIF
+
+[DEFNAME AccessName]
+Access_-1    "BANIDOS"
+Access_1    "ACCESSO"
+Access_2    "AMIGOS"
+Access_3    "SUB-DONOS"
+
+[FUNCTION HouseUpdateAccessListNumber]
+LOCAL.ACCESS=<ARGV[0]>
+LOCAL.NUMBER=<ARGV[1]>
+FOR 0 <eval <TAGCOUNT>-1>
+ IF !STRCMP("<STRSUB 0 6 <TAGAT.<LOCAL._FOR>.KEY>>","access")
+   IF (<LOCAL.ACCESS>==<STRARG <TAGAT.<LOCAL._FOR>.VAL>>) && (<LOCAL.NUMBER> < 0<STREAT <TAGAT.<LOCAL._FOR>.VAL>>)
+    ARGS=<TAGAT.<LOCAL._FOR>.VAL>
+    TRY TAG.<TAGAT.<LOCAL._FOR>.KEY>=<ARGV[0]>,<eval <ARGV[1]>-1>
+   ENDIF
+ ENDIF
+ENDFOR
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_storage]
+50,40
+
+page 0
+RenderHouseDialogBackground
+button 150 50 4006 4007 1 0 3
+dtext 195 50 5 ARMAZENAMENTO
+
+page 1
+dhtmlgump 10 130 400 20 0 0 <DEF.CENTER><DEF.BFONT_WHITE>HOUSE STORAGE SUMMARY<DEF.CENTERE>
+IF (<TAG0.STORAGE_INCREASE>)
+ dtext 10 150 1152 Aumentar Armazenamento
+ dtext 310 150 1152 <dTAG0.STORAGE_INCREASE>%
+ENDIF
+dtext 10 170 1152 Maximo de Bau Seguros
+dtext 310 170 1152 <House_MaxSecureStorage>
+//dtext 10 190 998 Used by Moving Crate
+//dtext 310 190 998 0
+dtext 10 210 1152 Itens Trancados
+dtext 310 210 1152 <dTAG0.LOCKED_ITEMS>
+dtext 10 230 1152 Containers Seguros
+dtext 310 230 1152 <dTAG0.SECURE_CONT>
+dtext 10 250 1152 Available Storage
+dtext 310 250 1152 <House_AvaibleStorage>
+dtext 10 290 1152 Maximum Lockdowns
+dtext 310 290 1152 <House_MaxLockdowns>
+dtext 10 310 1152 Available Lockdowns
+dtext 310 310 1152 <House_AvaibleLockdowns>
+IF (<DEF.HOUSE_USE_VENDORS>)
+ dtext 10 350 1152 Vendor Count
+ dtext 310 350 1152 <dTAG0.VENDORS> / <HouseMaxVendors>
+ENDIF
+
+
+[DIALOG d_house_storage BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_customize]
+50,40
+
+page 0
+RenderHouseDialogBackground
+button 150 70 4006 4007 1 0 4
+dtext 195 70 5 CUSTOMIZE
+
+page 1
+//dtext 45 180 998 Relocate Moving Crate
+IF (<IsOwner <SRC>>)
+  IF (<DEF.HOUSE_AOS_CUSTOMIZATION>) && (<DEF.HOUSE_ALLOW_CONVERTION>) && !(<isempty <DEF.convertion_<LINK.DISPID>>>)
+   dtext 45 120 1152 Converter em Customizable House
+   button 10 120 4005 4007 1 0 20
+  ELSE
+   dtext 45 120 998 Converter em Customizable House
+  ENDIF
+  IF (<DEF.HOUSE_AOS_CUSTOMIZATION>) && (<LINK.TYPE>==t_multi_custom)
+   dtext 45 160 1152 Personalize esta casa
+   button 10 160 4005 4007 1 0 21
+   dtext 45 230 1152 Mude a placa da casa
+   button 10 230 4005 4007 1 0 24
+   dtext 45 250 1152 Mudanca de poste desinalizacao
+   button 10 250 4005 4007 1 0 25
+   dtext 45 280 1152 Mudar o estilo da fundacao
+   button 10 280 4005 4007 1 0 26
+  ELSE
+   Dtext 45 160 998 Personalizar esta Casa
+   Dtext 45 230 998 Substituicao do cabide do sinal da casa
+   Dtext 45 250 998 Alterar a sinalizacao
+   Dtext 45 280 998 Alterar o Estilo da Fundacao
+  ENDIF
+  IF ((<DEF.SIGN_CHANGE_PUBLIC_ONLY>) && (<TAG0.Public>)) || !(<DEF.SIGN_CHANGE_PUBLIC_ONLY>)
+   button 10 210 4005 4007 1 0 23
+   dtext 45 210 1152 Mude a placa da casa
+  ELSE
+   dtext 45 210 998 Mude a placa da casa
+  ENDIF
+  button 10 310 4005 4007 1 0 27
+  dtext 45 310 1152 Renomear a casa
+ELSE
+  Dtext 45 120 998 Converter em Customizable House
+  Dtext 45 160 998 Personalizar esta Casa
+  Dtext 45 210 998 Alterar o sinal da casa
+  Dtext 45 230 998 Substituicao do cabide do sinal da casa
+  Dtext 45 250 998 Alterar a sinalizacao
+  Dtext 45 280 998 Alterar o Estilo da Fundacao
+  Dtext 45 310 998 Renomear a casa
+ENDIF
+
+
+[DIALOG d_house_customize BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+ON=20 27
+IF (<DISTANCE> > 15)
+ SRC.SYSMESSAGE @,,1 Voce esta muito longe da placa da casa.
+ return 1
+ELIF (<IsOwner <SRC>>)
+ IF (<ARGN>==20)
+   IF (<DEF.HOUSE_AOS_CUSTOMIZATION>) && (<DEF.HOUSE_ALLOW_CONVERTION>) && !(<isempty <DEF.convertion_<LINK.DISPID>>>)
+    SDIALOG d_house_convertion
+   ENDIF
+   return 1
+ ELIF (<ARGN>==21)
+   IF (<DEF.HOUSE_AOS_CUSTOMIZATION>) && (<LINK.TYPE> == t_multi_custom)
+    IF (<SRC.ACCOUNT.RESDISP> < 3)
+     SRC.SYSMESSAGE @,,1 Sua conta deve ter a atualizacao Age of Shadows para fazer isso
+     return 1
+    ELIF (<LINK.DESIGNER>)
+     SRC.SYSMESSAGE @,,1 <UID.<LINK.DESIGNER>.NAME> is designing this house.
+     return 1
+    ELIF !(<SRC.ISEVENT.e_house_customize>)
+     SRC.EVENTS +e_house_customize
+     SRC.DSPEECH +spk_house_customize
+    ENDIF
+    REF1=<LINK>
+    FORCLIENTS 18
+      IF (<REGION.UID>==<REF1>)
+       GOUID <REF1.MORE2>
+       MOVE S
+       FIX
+      ENDIF
+    ENDFOR
+    SRC.GO <P>
+    LINK.CUSTOMIZE
+   ENDIF
+   return 1
+ ELIF (<ARGN>==22)
+   //Nothing
+ ELIF (<ARGN>==23)
+   SDIALOG d_house_features 2    //Change House Sign
+ ELIF (<ARGN>==24)
+   IF (<LINK.TYPE>==t_multi_custom)
+    SDIALOG d_house_features 5    //Change House Sign Hanger
+   ENDIF
+ ELIF (<ARGN>==25)
+   IF (<LINK.TYPE>==t_multi_custom)
+    SDIALOG d_house_features 6    //Change Signpost
+   ENDIF
+ ELIF (<ARGN>==26)
+   IF (<LINK.TYPE>==t_multi_custom)
+    SDIALOG d_house_features 8    //Change Foundation Style
+   ENDIF
+ ELIF (<ARGN>==27)
+   SRC.SYSMESSAGE @,,1 What dost thou wish the sign to say?
+   SRC.PROMPTCONSOLE f_change_house_name
+ ENDIF
+ENDIF
+
+
+[FUNCTION f_change_house_name]
+IF (<TARG.TYPE>==t_sign_gump)
+  IF !(<isempty <ARGS>>)
+    IF STRMATCH("[a-z]*","<ARGS>")
+     SYSMESSAGE @,,1 Sign changed.
+     TARG.NAME=<ARGS>
+     TARG.RESENDTOOLTIP
+    ELSE
+     SYSMESSAGE @,,1 Invalid name.
+    ENDIF
+  ELSE
+    SYSMESSAGE @,,1 Cancelled.
+  ENDIF
+  TARG.DIALOG d_house_customize
+ELSE
+  SYSMESSAGE @,,1 Ocorreu um erro, tente novamente.
+ENDIF
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_ownership]
+50,40
+
+page 0
+RenderHouseDialogBackground
+button 150 90 4006 4007 1 0 5
+dtext 195 90 5 OWNERSHIP
+
+page 1
+IF (<IsOwner <SRC>>)
+ button 10 130 4005 4007 1 0 21
+ dtext 45 130 1152 Demolir casa
+ button 10 150 4005 4007 1 0 22
+ dtext 45 150 1152 Transferir Casa
+ELSE
+ dtext 45 130 998 Demolir casa
+ dtext 45 150 998 Transferir Casa
+ENDIF
+//dtext 45 190 998 Make Primary
+
+IF (<SRC.ISGM>)
+ dtext 125 250 1152 GAME MASTER OPTIONS
+ dtext 45 300 1152 Reason:
+ gumppictiled 90 300 310 36 9264
+ checkertrans 90 300 310 36
+ IF (<isempty <TAG.DEMOLITION_PENDING>>)
+  button 10 280 4005 4007 1 0 31
+  dtext 45 280 1152 Pend this house for Demolition on __ day(s)
+  dtextentry 253 280 15 20 1152 0 <dDEF.DEMOLITION_PEND_DECAY>
+  dtextentry 93 300 300 36 1152 1
+ ELSE
+  button 10 280 4005 4007 1 0 32
+  dtext 45 280 5 Cancel Demolition Pending State
+  dhtmlgump 93 300 300 36 0 0 <DEF.BFONT_WHITE><QVAL (<isempty <STREAT <TAG.DEMOLITION_PENDING>>>)? Not specified:<STREAT <TAG.DEMOLITION_PENDING>>>
+ ENDIF
+ENDIF
+
+
+[DIALOG d_house_ownership BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+ON=21
+IF (<IsOwner <SRC>>)
+ SDIALOG d_house_demolish
+ENDIF
+
+ON=22
+IF !(<SRC.ISGM>)
+ IF (<TAG0.VENDORS>)
+  SRC.SYSMESSAGE @,,1 You cannot trade this house while you still have personal vendors inside.
+  return 1
+ ELIF (<TAG0.DEMOLITION_PENDING>)
+  SRC.SYSMESSAGE @,,1 This house has been marked for demolition, and it cannot be transferred.
+  return 1
+ ENDIF
+ENDIF
+SRC.DIALOGCLOSE d_house_ownership
+SRC.SYSMESSAGE @,,1 Target the person to whom you wish to give this house.
+SRC.TARGETF f_house_transfer <UID>
+
+ON=31
+IF (<SRC.ACCOUNT.PLEVEL> < 2)
+ return 1
+ELIF (<isnum <ARGTXT[0]>>)
+ IF (<ARGTXT[0]> < 100)
+  SRC.SYSMESSAGE @,,1 This house is now Pended for Demolition. It will decay automatically in <dARGTXT[0]> days if the Owner not demolish it.
+  TIMER=<ARGTXT[0]>*24*60*60
+  TAG.DEMOLITION_PENDING=<ARGTXT[0]> <ARGTXT[1]>
+  SDIALOG d_house_ownership
+  TRY UID.<MORE2>.NOTICE=Your house '<SRC.TARG.NAME>' was Pended for Demolition on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>> and it will decay in <dARGTXT[0]> days if you not demolish it manually.
+ ENDIF
+ENDIF
+
+ON=32
+IF (<SRC.ACCOUNT.PLEVEL> < 2)
+ return 1
+ENDIF
+SRC.SYSMESSAGE @,,1 You cancel the Demolition Pending state of this house.
+TAG.DEMOLITION_PENDING=
+SDIALOG d_house_ownership
+TRY UID.<MORE2>.NOTICE=Your house Demolition Pending state for '<SRC.TARG.NAME>' was canceled on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>> and it will not be condemned anymore.
+IF (<DEF.HOUSE_DECAY_TIMER> > 0)
+ TIMER=<eval <DEF.HOUSE_DECAY_TIMER>*24*60*60>
+ELSE
+ TIMER=-1
+ENDIF
+
+
+[FUNCTION house_find_guild]
+LOCAL.REGION=<REGION.UID>
+FORITEMS 40
+  IF (<REGION.UID>==<LOCAL.REGION>)
+    IF (<TYPE>==t_stone_guild)
+     return 1
+    ENDIF
+  ENDIF
+ENDFOR
+return 0
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_vendor_list]
+50,40
+
+page 0
+RenderHouseDialogBackground
+
+page 1
+dhtmlgump 10 120 400 20 0 0 <DEF.CENTER><DEF.BFONT_WHITE>SHOPS<DEF.CENTERE>
+LOCAL.Y=150
+LOCAL.PAGE=1
+FOR <TAG0.VENDORS>
+ dtext 45 <LOCAL.Y> 5 <UID.<TAG0.VENDOR<dLOCAL._FOR>>.TAG.NAMESHOP>
+ button 10 <LOCAL.Y> 4005 4007 1 0 <eval <LOCAL._FOR>+100>
+ LOCAL.Y += 20
+ CALL RenderDialogVendorListPage
+ENDFOR
+
+[FUNCTION RenderDialogVendorListPage]
+IF (<LOCAL.Y> > 340)
+ LOCAL.Y=150
+ button 40 360 4005 4007 0 <eval <LOCAL.PAGE>+1> 0
+ LOCAL.PAGE ++
+ page <LOCAL.PAGE>
+ button 10 360 4014 4016 0 <eval <LOCAL.PAGE>-1> 0
+ dhtmlgump 10 120 400 20 0 0 <DEF.CENTER><DEF.BFONT_WHITE>SHOPS<DEF.CENTERE>
+ENDIF
+
+
+[DIALOG d_house_vendor_list BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+ON=100 200
+SRC.DClick <TAG0.VENDOR<eval <ARGN>-100>>
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_features]
+50,40
+
+page 0
+RenderHouseDialogBackground
+
+page 1    //Change House Sign 1/3
+button 10 360 4005 4007 0 2 0
+button 30 130 4005 4007 1 0 11
+tilepic 50 130 2980
+button 90 130 4005 4007 1 0 12
+tilepic 110 130 2982
+button 150 130 4005 4007 1 0 13
+tilepic 170 130 2984
+button 210 130 4005 4007 1 0 14
+tilepic 230 130 2986
+button 270 130 4005 4007 1 0 15
+tilepic 290 130 2988
+button 330 130 4005 4007 1 0 16
+tilepic 350 130 2990
+button 30 190 4005 4007 1 0 17
+tilepic 50 190 2992
+button 90 190 4005 4007 1 0 18
+tilepic 110 190 2994
+button 150 190 4005 4007 1 0 19
+tilepic 170 190 2996
+button 210 190 4005 4007 1 0 20
+tilepic 230 190 2998
+button 270 190 4005 4007 1 0 21
+tilepic 290 190 3000
+button 330 190 4005 4007 1 0 22
+tilepic 350 190 3002
+button 30 250 4005 4007 1 0 23
+tilepic 50 250 3004
+button 90 250 4005 4007 1 0 24
+tilepic 110 250 3006
+button 150 250 4005 4007 1 0 25
+tilepic 170 250 3008
+button 210 250 4005 4007 1 0 26
+tilepic 230 250 3010
+button 270 250 4005 4007 1 0 27
+tilepic 290 250 3012
+button 330 250 4005 4007 1 0 28
+tilepic 350 250 3014
+
+page 2    //Change House Sign 2/3
+button 10 360 4005 4007 0 3 0
+button 30 130 4005 4007 1 0 29
+tilepic 50 130 3016
+button 90 130 4005 4007 1 0 30
+tilepic 110 130 3018
+button 150 130 4005 4007 1 0 31
+tilepic 170 130 3020
+button 210 130 4005 4007 1 0 32
+tilepic 230 130 3022
+button 270 130 4005 4007 1 0 33
+tilepic 290 130 3024
+button 330 130 4005 4007 1 0 34
+tilepic 350 130 3026
+button 30 190 4005 4007 1 0 35
+tilepic 50 190 3028
+button 90 190 4005 4007 1 0 36
+tilepic 110 190 3030
+button 150 190 4005 4007 1 0 37
+tilepic 170 190 3032
+button 210 190 4005 4007 1 0 38
+tilepic 230 190 3034
+button 270 190 4005 4007 1 0 39
+tilepic 290 190 3036
+button 330 190 4005 4007 1 0 40
+tilepic 350 190 3038
+button 30 250 4005 4007 1 0 41
+tilepic 50 250 3040
+button 90 250 4005 4007 1 0 42
+tilepic 110 250 3042
+button 150 250 4005 4007 1 0 43
+tilepic 170 250 3044
+button 210 250 4005 4007 1 0 44
+tilepic 230 250 3046
+button 270 250 4005 4007 1 0 45
+tilepic 290 250 3048
+button 330 250 4005 4007 1 0 46
+tilepic 350 250 3050
+
+page 3    //Change House Sign 3/3
+button 10 360 4005 4007 0 1 0
+button 30 130 4005 4007 1 0 47
+tilepic 50 130 3052
+button 90 130 4005 4007 1 0 48
+tilepic 110 130 3054
+button 150 130 4005 4007 1 0 49
+tilepic 170 130 3056
+button 210 130 4005 4007 1 0 50
+tilepic 230 130 3058
+button 270 130 4005 4007 1 0 51
+tilepic 290 130 3060
+button 330 130 4005 4007 1 0 52
+tilepic 350 130 3062
+button 30 190 4005 4007 1 0 53
+tilepic 50 190 3064
+button 90 190 4005 4007 1 0 54
+tilepic 110 190 3066
+button 150 190 4005 4007 1 0 55
+tilepic 170 190 3068
+button 210 190 4005 4007 1 0 56
+tilepic 230 190 3070
+button 270 190 4005 4007 1 0 57
+tilepic 290 190 3072
+button 330 190 4005 4007 1 0 58
+tilepic 350 190 3074
+button 30 250 4005 4007 1 0 59
+tilepic 50 250 3076
+button 90 250 4005 4007 1 0 60
+tilepic 110 250 3078
+button 150 250 4005 4007 1 0 61
+tilepic 170 250 3080
+button 210 250 4005 4007 1 0 62
+tilepic 230 250 3082
+button 270 250 4005 4007 1 0 63
+tilepic 290 250 3084
+button 330 250 4005 4007 1 0 64
+tilepic 350 250 3086
+
+page 4    //Change House Sign Hanger
+button 50 180 4005 4007 1 0 70
+tilepic 70 180 2968
+button 150 180 4005 4007 1 0 71
+tilepic 170 180 2970
+button 250 180 4005 4007 1 0 72
+tilepic 270 180 2972
+button 50 260 4005 4007 1 0 73
+tilepic 70 260 2974
+button 150 260 4005 4007 1 0 74
+tilepic 170 260 2976
+button 250 260 4005 4007 1 0 75
+tilepic 270 260 2978
+
+page 5    //Change Signpost 1/2
+button 10 360 4005 4007 0 6 0
+button 15 130 4005 4007 1 0 80
+tilepic 25 130 9
+button 65 130 4005 4007 1 0 81
+tilepic 75 130 29
+button 115 130 4005 4007 1 0 82
+tilepic 125 130 54
+button 165 130 4005 4007 1 0 83
+tilepic 175 130 90
+button 215 130 4005 4007 1 0 84
+tilepic 225 130 147
+button 265 130 4005 4007 1 0 85
+tilepic 275 130 169
+button 315 130 4005 4007 1 0 86
+tilepic 325 130 177
+button 365 130 4005 4007 1 0 87
+tilepic 375 130 204
+button 15 240 4005 4007 1 0 88
+tilepic 25 240 251
+button 65 240 4005 4007 1 0 89
+tilepic 75 240 257
+button 115 240 4005 4007 1 0 90
+tilepic 125 240 263
+button 165 240 4005 4007 1 0 91
+tilepic 175 240 298
+button 215 240 4005 4007 1 0 92
+tilepic 225 240 347
+button 265 240 4005 4007 1 0 93
+tilepic 275 240 424
+button 315 240 4005 4007 1 0 94
+tilepic 325 240 441
+button 365 240 4005 4007 1 0 95
+tilepic 375 240 466
+
+page 6    //Change Signpost 2/2
+button 10 360 4005 4007 0 5 0
+button 15 130 4005 4007 1 0 96
+tilepic 25 130 514
+button 65 130 4005 4007 1 0 97
+tilepic 75 130 600
+button 115 130 4005 4007 1 0 98
+tilepic 125 130 601
+button 165 130 4005 4007 1 0 99
+tilepic 175 130 602
+button 215 130 4005 4007 1 0 100
+tilepic 225 130 603
+button 265 130 4005 4007 1 0 101
+tilepic 275 130 660
+button 315 130 4005 4007 1 0 102
+tilepic 325 130 666
+button 365 130 4005 4007 1 0 103
+tilepic 375 130 672
+button 15 240 4005 4007 1 0 104
+tilepic 25 240 898
+button 65 240 4005 4007 1 0 105
+tilepic 75 240 970
+button 115 240 4005 4007 1 0 106
+tilepic 125 240 974
+button 165 240 4005 4007 1 0 107
+tilepic 175 240 982
+
+page 7    //Change Foundation Style
+button 15 180 4005 4007 1 0 120
+tilepic 40 180 014
+button 95 180 4005 4007 1 0 121
+tilepic 120 180 0bd
+button 175 180 4005 4007 1 0 122
+tilepic 200 180 02fd
+button 255 180 4005 4007 1 0 123
+tilepic 280 180 041
+button 335 180 4005 4007 1 0 124
+tilepic 360 180 065
+//IF (<SERV.FeatureML> & 01)
+// button 15 280 4005 4007 1 0 125
+// tilepic 40 280 02df7
+// button 95 280 4005 4007 1 0 126
+// tilepic 120 280 02dfb
+//ENDIF
+//IF (<SERV.FeatureML> & 02)
+// button 175 280 4005 4007 1 0 127
+// tilepic 200 280 03672
+// button 255 280 4005 4007 1 0 128
+// tilepic 280 280 03676
+//ENDIF
+
+
+[DIALOG d_house_features BUTTON]
+ON=1 10
+DefaultHouseDialogButtons <ARGN>
+
+ON=11 64
+LOCAL.SIGN=2980
+LOCAL.SIGN += <eval (<ARGN>-11)*2>
+DISPID=<dLOCAL.SIGN>
+UPDATEX
+SDIALOG d_house_customize
+
+ON=70 75
+LOCAL.SIGN=2968
+LOCAL.SIGN += <eval (<ARGN>-70)*2>
+REF1=<UID>
+FORITEMS 30
+ IF (<REGION.UID>==<REF1.REGION.UID>)  
+  IF (<DISPIDDEC> >= 2968) && (<DISPIDDEC> <= 2978) && (<LINK>==<REGION.UID>)
+   DISPID=<dLOCAL.SIGN>
+   UPDATEX
+  ENDIF
+ ENDIF
+ENDFOR
+SDIALOG d_house_customize
+
+ON=80 107
+IF (<ARGN>==80)
+ LOCAL.SIGN=9
+ELIF (<ARGN>==81)
+ LOCAL.SIGN=29
+ELIF (<ARGN>==82)
+ LOCAL.SIGN=54
+ELIF (<ARGN>==83)
+ LOCAL.SIGN=90
+ELIF (<ARGN>==84)
+ LOCAL.SIGN=147
+ELIF (<ARGN>==85)
+ LOCAL.SIGN=169
+ELIF (<ARGN>==86)
+ LOCAL.SIGN=177
+ELIF (<ARGN>==87)
+ LOCAL.SIGN=204
+ELIF (<ARGN>==88)
+ LOCAL.SIGN=251
+ELIF (<ARGN>==89)
+ LOCAL.SIGN=257
+ELIF (<ARGN>==90)
+ LOCAL.SIGN=263
+ELIF (<ARGN>==91)
+ LOCAL.SIGN=298
+ELIF (<ARGN>==92)
+ LOCAL.SIGN=347
+ELIF (<ARGN>==93)
+ LOCAL.SIGN=424
+ELIF (<ARGN>==94)
+ LOCAL.SIGN=441
+ELIF (<ARGN>==95)
+ LOCAL.SIGN=466
+ELIF (<ARGN>==96)
+ LOCAL.SIGN=514
+ELIF (<ARGN>==97)
+ LOCAL.SIGN=600
+ELIF (<ARGN>==98)
+ LOCAL.SIGN=601
+ELIF (<ARGN>==99)
+ LOCAL.SIGN=602
+ELIF (<ARGN>==100)
+ LOCAL.SIGN=603
+ELIF (<ARGN>==101)
+ LOCAL.SIGN=660
+ELIF (<ARGN>==102)
+ LOCAL.SIGN=666
+ELIF (<ARGN>==103)
+ LOCAL.SIGN=672
+ELIF (<ARGN>==104)
+ LOCAL.SIGN=898
+ELIF (<ARGN>==105)
+ LOCAL.SIGN=970
+ELIF (<ARGN>==106)
+ LOCAL.SIGN=974
+ELIF (<ARGN>==107)
+ LOCAL.SIGN=982
+ENDIF
+REF1=<HouseSignPost>
+IF (<REF1>)
+ REF1.DISPID=<dLOCAL.SIGN>
+ REF1.UPDATEX
+ENDIF
+SDIALOG d_house_customize
+
+ON=120 128
+IF (<ARGN>==120)
+ HouseChangeFoundationStyle 0017,0016,0015,0014        //Wood
+ELIF (<ARGN>==121)
+ HouseChangeFoundationStyle 00c0,00bf,00be,00bd        //Bright Wood
+ELIF (<ARGN>==122)
+ HouseChangeFoundationStyle 0300,02fe,02ff,02fd        //Dungeon
+ELIF (<ARGN>==123)
+ HouseChangeFoundationStyle 0044,0042,0043,0041        //Brick
+ELIF (<ARGN>==124)
+ HouseChangeFoundationStyle 0066,0063,0064,0065        //Stone
+ELIF (<ARGN>==125) //ML
+ HouseChangeFoundationStyle 02df8,02dfa,02df9,02df7    //Elven Grey
+ELIF (<ARGN>==126)
+ HouseChangeFoundationStyle 02dfc,02dfe,02dfd,02dfb    //Elven Natural
+ELIF (<ARGN>==127) //ML 9th age
+ HouseChangeFoundationStyle 03673,03670,03671,03672    //Crystal
+ELIF (<ARGN>==128)
+ HouseChangeFoundationStyle 03677,03674,03675,03676    //Shadow
+ENDIF
+SDIALOG d_house_customize
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[DIALOG d_house_visitor]
+200,200
+
+gumppic 10 10 100
+dhtmlgump 30 43 105 40 0 0 <DEF.CENTER><NAME><DEF.CENTERE>
+
+
+
+
+[DIALOG d_house_type]
+160,150
+noclose
+
+page 0
+resizepic 0 0 5054 320 180
+gumppictiled 10 10 300 20 2624
+checkertrans 10 10 300 20
+dhtmlgump 10 10 300 20 0 0 <DEF.L1>basefont color="#f70000"<DEF.R1><DEF.CENTER>NOTICE
+gumppictiled 10 40 300 100 2624
+checkertrans 10 40 300 100
+gumppictiled 10 150 300 20 2624
+checkertrans 10 150 300 20
+button 10 150 4005 4007 1 0 1
+dtext 40 150 1152 OKAY
+
+page 1
+dhtmlgump 10 40 300 100 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>This house is now public. <QVAL (<DEF.HOUSE_USE_VENDORS> && <DEF.HOUSE_VENDORS_PUBLIC_ONLY>)? The owner may now place vendors and vendor rental contracts.>
+
+page 2
+dhtmlgump 10 40 300 100 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>This house is now private.
+
+page 3
+dhtmlgump 10 40 300 100 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>You have vendors working out of this building. It cannot be declared private until there are no vendors in place.
+
+[DIALOG d_house_type BUTTON]
+ON=1
+SDIALOG d_house_security
+
+
+
+
+[DIALOG d_house_clear_coowners]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dtext 180 10 026 WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 You are about to remove ALL co-owners from your house. Are you certain you wish to clear the co-owner list?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_clear_coowners BUTTON]
+ON=0
+SDIALOG d_house_security
+
+ON=1
+ARGS=<HouseAccessList 3>
+FOR <TAG0.Access.Total.3>
+ REF1=<ARGV[<LOCAL._FOR>]>
+ REF1.NOTICE=You got removed from the Co-Owner access list of the house '<SRC.TARG.NAME>' on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ TRY TAG.Access.<REF1>=
+ENDFOR
+TAG0.Access.Total.3=
+SDIALOG d_house_security
+SRC.SYSMESSAGE @,,1 All co-owners have been removed from this house.
+
+
+
+
+[DIALOG d_house_clear_friends]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dtext 180 10 026 WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 If you go ahead with this option, all of the current friendships will be removed from the house, and any vendors associated with said friends will be made unwelcome. Are you sure you want to do this?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_clear_friends BUTTON]
+ON=0
+SDIALOG d_house_security
+
+ON=1
+ARGS=<HouseAccessList 2>
+FOR <TAG0.Access.Total.2>
+ REF1=<ARGV[<LOCAL._FOR>]>
+ REF1.NOTICE=You got removed from the Friend access list of the house '<SRC.TARG.NAME>' on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+ TRY TAG.Access.<REF1>=
+ENDFOR
+TAG0.Access.Total.2=
+SDIALOG d_house_security
+SRC.SYSMESSAGE @,,1 All friends have been removed from this house.
+
+
+
+
+[DIALOG d_house_clear_bans]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dtext 180 10 026 WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 You are about to lift all bans for this house.  Are you sure you wish to do this?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_clear_bans BUTTON]
+ON=0
+SDIALOG d_house_security
+
+ON=1
+ARGS=<HouseAccessList -1>
+FOR <TAG0.Access.Total.-1>
+ TRY TAG.Access.<ARGV[<dLOCAL._FOR>]>=
+ENDFOR
+TAG0.Access.Total.-1=
+SDIALOG d_house_security
+SRC.SYSMESSAGE @,,1 All bans for this house have been lifted.
+
+
+
+
+[DIALOG d_house_clear_access_list]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dtext 180 10 026 CUIDADO
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 This will revoke access from everyone on this list and immediately eject them from the house.  Those players will no longer be able to enter the house.  Are you sure you wish to clear the house access list?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_clear_access_list BUTTON]
+ON=0
+SDIALOG d_house_security
+
+ON=1
+ARGS=<HouseAccessList 1>
+FOR <TAG0.Access.Total.1>
+ REF1=<ARGV[<LOCAL._FOR>]>
+ IF (<REF1.REGION.UID>==<REGION.UID>)
+  REF1.P=<P>
+  REF1.MOVE S
+  REF1.FIX
+  REF1.SYSMESSAGE @,,1 Your access to this house has been revoked.
+ ENDIF
+ TRY TAG.Access.<REF1>=
+ENDFOR
+TAG0.Access.Total.1=
+SDIALOG d_house_security
+SRC.SYSMESSAGE @,,1 This house's Access List has been cleared.
+
+
+
+
+[DIALOG d_house_demolish]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dhtmlgump 10 10 400 20 0 0 <DEF.L1>basefont color="#f70000"<DEF.R1><DEF.CENTER>WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>You are about to demolish your house. You will be refunded the house's value directly to your bank box. All items in the house will remain behind and can be freely picked up by anyone until decay. Once the house is demolished, anyone can attempt to place a new house on the vacant. Are you sure you wish to continue?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_demolish BUTTON]
+ON=1
+IF (<house_find_guild>)
+ SRC.SYSMESSAGE @,,1 You cannot demolish a house with a guildstone inside.
+ELIF (<TAG0.VENDORS>)
+ SRC.SYSMESSAGE @,,1 You cannot demolish a house with a vendor inside.
+ELSE
+ IF (<DISTANCE> < 15)
+   SRC.P=<P>
+   SRC.UPDATEX
+   FOR <DEF.MAX_HOUSE_COOWNERS>
+    TRY UID.<TAG0.CO_OWNER_<dLOCAL._FOR>>.NOTICE=You got removed from the Co-Owner access list of the house '<SRC.TARG.NAME>' because it was demolished on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+   ENDFOR
+   FOR <DEF.MAX_HOUSE_FRIENDS>
+    TRY UID.<TAG0.FRIEND_<dLOCAL._FOR>>.NOTICE=You got removed from the Friend access list of the house '<SRC.TARG.NAME>' because it was demolished on <serv.rtime.format %d>/<serv.rtime.format %m>/<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>.
+   ENDFOR
+   LINK.f_house_demolish
+ ELSE
+   SRC.SYSMESSAGE @,,1 You are too far away from the house sign.
+ ENDIF
+ENDIF
+
+
+[FUNCTION f_house_demolish]
+IF (<isempty <ARGS>>)
+  REF1=<QVAL (<SRC>)? <SRC>:<MORE1>>
+  IF (<DEF.HOUSE_USE_DEEDS>) && !STRMATCH("*foundation*","<BASEID>")
+    SERV.NEWITEM i_deed_<STRSUB 8 30 <BASEID>>
+    NEW.CONT=<REF1.FINDLAYER.21>
+    REF1.SYSMESSAGE @,,1 You put the house deed on your backpack.
+  ELSE
+    REF1.GOLD += <HouseValue>
+    REF1.SYSMESSAGE @,,1 <HouseValue> gold has been deposited into your bank box.
+  ENDIF
+ENDIF
+
+LOCAL.REGION=<REGION.UID>
+FORCHARS 40
+  IF (<REGION.UID>==<LOCAL.REGION>)
+    IF (<IsHouseVendor>)
+     HouseVendorRemove
+    ENDIF
+    TIMERF 1,FIX
+  ENDIF
+ENDFOR
+FORPLAYERS 40
+  IF (<REGION.UID>==<LOCAL.REGION>)
+   TIMERF 1,FIX
+  ENDIF
+ENDFOR
+FORITEMS 40
+  IF (<REGION.UID>==<LOCAL.REGION>) && (<ISSTORAGE>)
+    TIMER=<eval <SERV.DecayTimer>*60>
+    ATTR=<ATTR>&~attr_move_never
+    EVENTS -t_locked_down
+    EVENTS -t_access_owner
+    EVENTS -t_access_coowner
+    EVENTS -t_access_friend
+    EVENTS -t_access_guild
+    TAG.ALWAYSSEND=
+    ATTR=<ATTR>|attr_decay
+    UPDATE
+    TIMERF 1,FIX
+  ENDIF
+ENDFOR
+REMOVE
+
+
+
+[DIALOG d_house_convertion]
+110,100
+noclose
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dhtmlgump 10 10 400 20 0 0 <DEF.L1>basefont color="#f70000"<DEF.R1><DEF.CENTER>WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1>You are about to turn your house into a customizable house.  You will be refunded the value of this house, and then be charged the cost of the equivalent customizable dirt lot.  All of your possessions in the house will be transported to a Moving Crate.  Deed-based house add-ons will be converted back into deeds.  Vendors and barkeeps will also be stored in the Moving Crate.  Your house will be leveled to its foundation, and you will be able to build new walls, windows, doors, and stairs.  Are you sure you wish to continue?
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_convertion BUTTON]
+ON=0
+SDIALOG d_house_customize
+
+ON=1
+IF !(<SRC.ISGM>)
+ LOCAL.Price.Old=<LINK.VALUE>
+ LOCAL.Price.New=<SERV.ITEMDEF.<DEF.convertion_<LINK.DISPID>>.VALUE>
+ LOCAL.Cost=<eval <LOCAL.Price.New>-<LOCAL.Price.Old>>
+ IF (<LOCAL.Cost> > 0)
+  IF (<SRC.BANKBALANCE> < <LOCAL.Cost>)
+   SRC.SYSMESSAGE @,,1 You do not have enough funds in your bank to cover the difference between your old house and your new one.
+   return 1
+  ENDIF
+  SRC.SYSMESSAGE @,,1 <dLOCAL.Cost> gold has been withdrawn from your bank box.
+  SRC.GOLD -= <LOCAL.Cost>
+ ELSE
+  SRC.SYSMESSAGE @,,1 <eval <LOCAL.Cost>*-1> gold has been deposited into your bank box.
+  SRC.GOLD += <eval <LOCAL.Cost>*-1>
+ ENDIF
+ SRC.UPDATE
+ENDIF
+SERV.NEWITEM <DEF.convertion_<LINK.DISPID>>
+LOCAL.P=<LINK.P>
+REF1=<LINK>
+LINK=
+REF1.REMOVE
+NEW.P=<LOCAL.P>
+NEW.MORE1=<SRC>
+NEW.MORE2=<UID>
+NEW.MULTICREATE
+NEW.HousePlaceFoundationStairs
+HouseConvertSign
+SRC.NOTICE You have successfully replaced your original house with a new house.  The value of the replaced house has been deposited into your bank box.  All of the items in your original house have been relocated to a Moving Crate in the new house.  Any deed-based house add-ons have been converted back into deeds.  Vendors and barkeeps in the house, if any, have been stored in the Moving Crate as well.  Use the <DEF.B>Get Vendor<DEF.BE> context-sensitive menu option on your character to retrieve them.  These containers can be used to re-create the vendor in a new location.  Any barkeepers have been converted into deeds.
+
+[FUNCTION HouseConvertSign]
+REF1=<UID>
+FORITEMS 40
+ IF (<REGION.UID>==<REF1.REGION.UID>)
+  IF (<TYPE>==t_sign_gump) && (<UID> != <REF1>)
+   REF1.P=<P>
+   REF1.LINK=<LINK>
+   REMOVE
+   return 1
+  ENDIF
+ ENDIF
+ENDFOR
+
+
+
+[DIALOG d_house_transfer]
+110,100
+noclose
+CTAG.HOUSE.TRANSFER=<ARGS>
+
+resizepic 0 0 5054 420 280
+gumppictiled 10 10 400 20 2624
+checkertrans 10 10 400 20
+dtext 180 10 026 WARNING
+gumppictiled 10 40 400 200 2624
+checkertrans 10 40 400 200
+dhtmlgump 10 40 400 200 0 1 <DEF.BFONT_YELLOW>Another player is attempting to initiate a house trade with you.  In order for you to see this window, both you and the other person are standing within two paces of the house to be traded.  If you click OKAY below, a house trade scroll will appear in your trade window and you can complete the transaction.  This scroll is a distinctive blue color and will show the name of the house, the name of the owner of that house, and the sextant coordinates of the center of the house when you hover your mouse over it.  In order for the transaction to be successful, you both must accept the trade and you both must remain within two paces of the house sign.<DEF.BR><DEF.BR>If you are absolutely certain you wish to proceed, click the button next to OKAY below. If you do not wish to trade for this house, click CANCEL.
+
+gumppictiled 10 250 400 20 2624
+checkertrans 10 250 400 20
+button 10 250 4005 4007 1 0 1
+dtext 40 250 1152 OKAY
+button 210 250 4005 4007 1 0 0
+dtext 240 250 1152 CANCEL
+
+[DIALOG d_house_transfer BUTTON]
+ON=0 1
+REF1=<CTAG0.HOUSE.TRANSFER>
+CTAG0.HOUSE.TRANSFER=
+IF (<ARGN>==1)
+ IF (<FINDTYPE.t_eq_trade_window>)
+  SYSMESSAGE @,,1 You cannot trade a house while you have other trades pending.
+  return 1
+ ELIF (<SRC.FINDTYPE.t_eq_trade_window>)
+  SRC.SYSMESSAGE @,,1 You cannot trade a house while you have other trades pending.
+  return 1
+ ENDIF
+ SRC.EVENTS=+e_house_transfer
+ SERV.NEWITEM i_deed
+ NEW.ATTR=attr_move_never
+ NEW.COLOR=0480
+ NEW.LINK=<REF1>
+ NEW.MORE1=<SRC>
+ NEW.TYPE=t_trade_house_deed
+ NEW.TIMERF 2,TRIGGER @Timer
+ SRC.TRYSRC <UID> TradeWindow <NEW>
+ENDIF
+
+[EVENTS e_house_transfer]
+ON=@TradeAccepted
+  DIALOGCLOSE d_house_demolish
+  DIALOGCLOSE d_house_ownership
+
+  FOR 1 <qval <ARGN1> > 0 ? <argn1> : 1>
+
+    IF (<REF<dLOCAL._FOR>.TYPE>==t_trade_house_deed)
+      UID.<REF<dLOCAL._FOR>>.TRIGGER @HouseTraded
+      UID.<REF<dLOCAL._FOR>>.REMOVE
+    ENDIF
+
+  ENDFOR
+
+  EVENTS=-e_house_transfer
+
+
+
+[DIALOG d_house_access]
+50,50
+REF1=<UID.<REGION.UID>.MORE2>
+REF2=<UID.<REGION.UID>.MORE1>
+
+resizepic 0 0 5054 220 180
+gumppictiled 10 10 200 20 5124
+gumppictiled 10 40 200 20 5124
+gumppictiled 10 70 200 100 5124
+checkertrans 10 10 200 160
+dhtmlgump 10 10 200 20 0 0 <DEF.BFONT_white><DEF.CENTER>SET ACCESS<DEF.CENTERE>
+dhtmlgump 10 40 50 20 0 0 <DEF.BFONT_white>Owner:
+dhtmlgump 55 40 155 20 0 0 <DEF.BFONT_white><DEF.CENTER><REF2.NAME>
+
+IF (<REF1.IsOwner <SRC>>)
+ button 10 70 <QVAL (<TAG0.Access>==4)? 4006 4007:4005 4007> 1 0 1
+ dhtmlgump 45 70 200 20 0 0 <QVAL (<TAG0.Access>==4)? <def.bfont_red>:<def.bfont_white>>Owner Only
+ENDIF
+
+button 10 90 <QVAL (<TAG0.Access>==3)? 4006 4007:4005 4007> 1 0 2
+dhtmlgump 45 90 200 20 0 0 <QVAL (<TAG0.Access>==3)? <def.bfont_red>:<def.bfont_white>>Co-Owners
+
+button 10 110 <QVAL (<TAG0.Access>==2)? 4006 4007:4005 4007> 1 0 3
+dhtmlgump 45 110 200 20 0 0 <QVAL (<TAG0.Access>==2)? <def.bfont_red>:<def.bfont_white>>Friends
+
+IF (<REF2.GUILD>)
+ IF (<REF1.IsOwner <SRC>>)
+  button 10 130 <QVAL (<TAG0.Access>==5)? 4006 4007:4005 4007> 1 0 4
+  dhtmlgump 45 130 200 20 0 0 <QVAL (<TAG0.Access>==5)? <def.bfont_red>:<def.bfont_white>>Guild Members
+ ENDIF
+ENDIF
+
+button 10 150 <QVAL (<TAG0.Access>==0)? 4006 4007:4005 4007> 1 0 5
+dhtmlgump 45 150 200 20 0 0 <QVAL (<TAG0.Access>==0)? <def.bfont_red>:<def.bfont_white>>Anyone
+
+
+[DIALOG d_house_access BUTTON]
+ON=0
+SRC.SYSMESSAGE @,,1 Access level unchanged.
+
+ON=1 5
+REF1=<UID.<REGION.UID>.MORE2>
+IF (<ARGN> < 5)
+ IF (<TYPE>==t_container) && (<ISSTORAGE> != 2)
+  IF !(<REF1.House_AvaibleLockdowns>) || (<RESCOUNT> > <REF1.House_AvaibleStorage>)
+   SRC.SYSMESSAGE @,,1 This action would exceed the secure storage limit of the house.
+   return 1
+  ENDIF
+  REF1.TAG0.SECURE_CONT += <RESCOUNT>
+ ENDIF
+ENDIF
+IF (<ARGN>==1)
+  IF (<REF1.HousePlayerAccess <SRC>> < 4)
+   return 1
+  ENDIF
+  TAG.Access=4
+ELIF (<ARGN>==2)
+  IF (<REF1.HousePlayerAccess <SRC>> < 3)
+   return 1
+  ENDIF
+  TAG.Access=3
+ELIF (<ARGN>==3)
+  TAG.Access=2
+ELIF (<ARGN>==4)
+  TAG.Access=5
+ELIF (<ARGN>==5)
+  TAG.Access=
+ENDIF
+TIMER=-1
+UPDATE
+SRC.SYSMESSAGE @,,1 New access level set.
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[REGIONTYPE r_house_system]
+ON=@Enter
+src.events=+e_fix_magia_casa
+REF1=<UID.<UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>>==-1)
+  SRC.SYSMESSAGE @,,1 You are banned from this house!
+  return 1
+ELIF (<SRC.ISPLAYER>)
+  IF (<SRC.ISGM>)
+   return 0
+  ELIF (<DEF.HOUSE_USE_DEPTH_OF_FIELD>) && !(<REF1.TAG0.Public>) && (<REF1.HousePlayerAccess <SRC>> < 1)
+   return 1
+  ELIF (<UID.<UID>.TYPE>==t_multi_custom)
+   IF (<UID.<UID>.DESIGNER>)
+    return 1
+   ENDIF
+  ENDIF
+  return 0
+ELSE
+  IF (<SRC.IsHouseVendor>)
+   IF (<REF1.TAG0.VENDORS> >= <UID.<UID>.HouseMaxVendors>) || ((<DEF.HOUSE_VENDORS_PUBLIC_ONLY>) && !(<REF1.TAG0.Public>))
+    SRC.TIMERF 1,HouseVendorRemove
+    SRC.TIMERF 1,REMOVE
+   ELSE
+    SRC.TAG.House=<UID>
+    SRC.EVENTS +e_aos_house_vendor
+    REF1.TAG0.VENDORS ++
+    REF1.TAG.VENDOR<dREF1.TAG0.VENDORS>=<SRC>
+   ENDIF
+  ELIF (<DEF.HOUSE_USE_DEPTH_OF_FIELD>) && !(<REF1.TAG0.Public>) && (<SRC.OWNER> != <REF1.MORE2>)
+   return 1
+  ENDIF
+ENDIF
+
+ON=@exit
+src.events=-e_fix_magia_casa
+
+[EVENTS e_aos_house_vendor]
+ON=@RegionLeave
+return 1
+
+ON=@Destroy
+REF1=<UID.<TAG0.House>.MORE2>
+FOR <REF1.TAG0.VENDORS>
+  IF (<REF1.TAG0.Vendor<dLOCAL._FOR>>==<UID>)
+    TRY REF1.TAG0.VENDOR<dLOCAL._FOR>=
+    FOR x <LOCAL._FOR> <REF1.TAG0.VENDORS>
+     TRY REF1.TAG.VENDOR<dLOCAL.X>=<REF1.TAG.VENDOR<eval <LOCAL.X>+1>>
+    ENDFOR
+    REF1.TAG0.VENDORS --
+  ENDIF
+ENDFOR
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[FUNCTION HouseAddAccess]    //uid,access
+IF !(<TAG0.Access.<ARGV0>>)
+ TRY TAG0.Access.Total.<ARGV1> = <eval <TAG0.Access.Total.<ARGV1>>+1>
+ENDIF
+TRY TAG.Access.<ARGV0>=<ARGV1>,<dTAG0.Access.Total.<ARGV1>>
+
+[FUNCTION HouseGetAccessRef]    //access,number
+FOR 0 <eval <TAGCOUNT>-1>
+ IF !STRCMP("<STRSUB 0 6 <TAGAT.<LOCAL._FOR>.KEY>>","access")
+   IF (<ARGV0>==<STRARG <TAGAT.<LOCAL._FOR>.VAL>>) && (<ARGV1>==<STREAT <TAGAT.<LOCAL._FOR>.VAL>>)
+    return <STRSUB 7 0 <TAGAT.<LOCAL._FOR>.KEY>>
+   ENDIF
+ ENDIF
+ENDFOR
+
+[FUNCTION HouseAccessList]    //access
+FOR 0 <eval <TAGCOUNT>-1>
+ IF !STRCMP("<STRSUB 0 6 <TAGAT.<LOCAL._FOR>.KEY>>","access") && STRCMP("<STRSUB 7 5 <TAGAT.<LOCAL._FOR>.KEY>>","total")
+  IF (<ARGV0>==<STRARG <TAGAT.<LOCAL._FOR>.VAL>>)
+   LOCAL.LIST .= ,<STRSUB 7 0 <TAGAT.<LOCAL._FOR>.KEY>>
+  ENDIF
+ ENDIF
+ENDFOR
+return <LOCAL.LIST>
+
+[FUNCTION HousePlayerAccess]    //uid
+IF (<MORE2> == <ARGS>) || ((<DEF.ACCOUNT_OWNERSHIP>) && !STRCMP("<UID.<MORE2>.ACCOUNT>","<UID.<ARGS>.ACCOUNT>")) || (<UID.<ARGS>.ISGM>)
+ return 4
+ELSE
+ return <STRARG <TAG0.Access.<ARGS>>>
+ENDIF
+
+
+[FUNCTION IsOwner]
+IF (<HousePlayerAccess <ARGS>>==4)
+ return 1
+ENDIF
+return 0
+
+[FUNCTION IsCoOwner]
+IF (<HousePlayerAccess <ARGS>>==3)
+ return 1
+ENDIF
+return 0
+
+[FUNCTION IsFriend]
+IF (<HousePlayerAccess <ARGS>>==2)
+ return 1
+ENDIF
+return 0
+
+[FUNCTION IsBanned]
+IF !(<DEF.HOUSE_USE_BAN_ENGINE>) || (<HousePlayerAccess <ARGS>> != -1)
+ return 0
+ENDIF
+return 1
+
+[FUNCTION HasAccess]
+IF !(<DEF.HOUSE_USE_DEPTH_OF_FIELD>) || (<HousePlayerAccess <ARGS>> > 0)
+ return 1
+ENDIF
+return 0
+
+
+[FUNCTION CanAccess]
+IF (<UID.<UID.<REGION.UID>.MORE2>.HousePlayerAccess <SRC>> >= <TAG0.Access>) || ((<TAG0.Access>==5) && (<SRC.GUILD> == <UID.<UID.<REGION.UID>.MORE1>.GUILD>))
+ return 1
+ENDIF
+return 0
+
+[FUNCTION IsStorage]
+IF (<TYPE>==t_door_locked) || (<TYPE>==t_door) || (<TYPE>==t_sign_gump) || (<TYPE>==t_corpse) || (<TYPE>==t_spell)
+ return 0
+ELIF (<ISEVENT.t_locked_down>)
+ IF !(<TAG0.Access>)
+  return 1
+ ELSE
+  return 2
+ ENDIF
+ELSE
+ return 0
+ENDIF
+
+[FUNCTION IsOnHouse]
+IF ((<UID.<REGION.UID>.TYPE>==t_multi) || (<UID.<REGION.UID>.TYPE>==t_multi_custom)) && (<Z> != <SERV.MAP(<P.X>,<P.Y>,<P.M>).TERRAIN.Z>)
+ return 1
+ELSE
+ return 0
+ENDIF
+
+
+[FUNCTION House_MaxSecureStorage]
+IF (<DEF.USE_GLOBAL_STORAGE>)
+ return <eval (<dDEF.GLOBAL_SECURE_STORAGE>+<MulDiv <DEF.GLOBAL_SECURE_STORAGE>,<TAG0.STORAGE_INCREASE>,100>)>
+ELSE
+ return <eval (<TAG0.STORAGE_LIMIT>+<MulDiv <TAG0.STORAGE_LIMIT>,<TAG0.STORAGE_INCREASE>,100>)>
+ENDIF
+
+[FUNCTION House_AvaibleStorage]
+return <eval <House_MaxSecureStorage>-(<TAG0.LOCKED_ITEMS>+<TAG0.SECURE_CONT>)>
+
+[FUNCTION House_MaxLockdowns]
+return <eval <House_MaxSecureStorage>/2>
+
+[FUNCTION House_AvaibleLockdowns]
+LOCAL.LOCKDOWNS=<House_MaxLockdowns>-<TAG0.LOCKED_ITEMS>
+IF (<House_AvaibleStorage> > <LOCAL.LOCKDOWNS>)
+ return <dLOCAL.LOCKDOWNS>
+ELSE
+ return <House_AvaibleStorage>
+ENDIF
+
+
+[FUNCTION f_house_add_coowner]
+REF1=<ARGS>
+IF !(<ARGO.ISPLAYER>)
+ SRC.SYSMESSAGE @,,1 That can't be the co-owner of the house.
+ return 1
+ELIF (<REF1.TAG0.Access.Total.3> >= <DEF.MAX_HOUSE_COOWNERS>)
+ SRC.SYSMESSAGE @,,1 Your co-owner list is full!
+ return 1
+ELIF (<REF1.IsOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is already the house owner!
+ return 1
+ELIF (<REF1.IsCoOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is already on your co-owner list!
+ return 1
+ELIF (<REF1.IsFriend <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is a friend of the house. Remove them first.
+ return 1
+ELIF (<REF1.IsBanned <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is banned!  Unban them first.
+ return 1
+ENDIF
+REF1.HouseAddAccess <ARGO>,3
+SRC.SYSMESSAGE @,,1 You made <ARGO.NAME> a co-owner of the house.
+ARGO.SYSMESSAGE @,,1 You have been made a co-owner of this house.
+
+
+[FUNCTION f_house_add_friend]
+REF1=<ARGS>
+IF !(<ARGO.ISPLAYER>)
+ SRC.SYSMESSAGE @,,1 That can't be a friend of the house.
+ return 1
+ELIF (<REF1.TAG0.Access.Total.2> >= <DEF.MAX_HOUSE_FRIENDS>)
+ SRC.SYSMESSAGE @,,1 Your friends list is full!
+ return 1
+ELIF (<REF1.IsOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is already the house owner!
+ return 1
+ELIF (<REF1.IsCoOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is already on your co-owner list!
+ return 1
+ELIF (<REF1.IsFriend <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is already on your friends list!
+ return 1
+ELIF (<REF1.IsBanned <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is banned!  Unban them first.
+ return 1
+ENDIF
+REF1.HouseAddAccess <ARGO>,2
+SRC.SYSMESSAGE @,,1 You made <ARGO.NAME> a friend of the house.
+ARGO.SYSMESSAGE @,,1 You have been made a friend of this house.
+
+
+[FUNCTION f_house_grant_access]
+REF1=<ARGS>
+IF !(<ARGO.ISPLAYER>)
+ SRC.SYSMESSAGE @,,1 That is not a player.
+ return 1
+ELIF (<REF1.TAG0.Access.Total.1> >= <DEF.MAX_HOUSE_ACCESS>)
+ SRC.SYSMESSAGE @,,1 The access list limit for this house has been reached!
+ return 1
+ELIF (<REF1.IsBanned <ARGO>>)
+ SRC.SYSMESSAGE @,,1 This person is banned!  Unban them first.
+ return 1
+ELIF (<REF1.HousePlayerAccess <ARGO>>)
+ SRC.SYSMESSAGE @,,1 That person already has access to this house.
+ return 1
+ENDIF
+REF1.HouseAddAccess <ARGO>,1
+ARGO.SYSMESSAGE @,,1 You have been granted access to this house.
+
+
+[FUNCTION f_house_banish]
+REF1=<ARGS>
+IF (<ARGO.ISITEM>)
+ SRC.SYSMESSAGE @,,1 You cannot ban that.
+ return 1
+ELIF (<REF1.TAG0.Access.Total.-1> >= <DEF.MAX_HOUSE_BANS>)
+ SRC.SYSMESSAGE @,,1 The ban limit for this house has been reached!
+ return 1
+ELIF (<ARGO>==<SRC>)
+ SRC.SYSMESSAGE @,,1 You can't ban yourself!
+ return 1
+ELIF (<REF1.IsBanned <ARGO>>)
+ SRC.SYSMESSAGE @,,1 <ARGO.NAME> is already banned from this house!
+ return 1
+ELIF (<ARGO.IsHouseVendor>)
+ SRC.SYSMESSAGE @,,1 You can't ban a house vendor!
+ return 1
+ELIF (<REF1.IsOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't ban the house owner!
+ return 1
+ELIF (<REF1.IsCoOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't ban a house co-owner!
+ return 1
+ELIF (<REF1.IsFriend <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't ban a house friend!
+ return 1
+ELIF (<ARGO.REGION.UID> != <REF1.REGION.UID>)
+ SRC.SYSMESSAGE @,,1 You may not eject someone who is not in your house!
+ return 1
+ELIF (<ARGO.isPlayer> == 0) && (<ARGO.isNpc> == 0)
+  src.sysmessage @,,1 You cannot eject monsters
+  return 1
+ENDIF
+REF1.HouseAddAccess <ARGO>,-1
+ARGO.GO <REF1.P>
+ARGO.MOVE S
+ARGO.FIX
+SRC.SYSMESSAGE @,,1 <ARGO.NAME> has been banned from this house.
+ARGO.SYSMESSAGE @,,1 You have been banned from this house.
+
+
+[FUNCTION f_house_eject]
+REF1=<ARGS>
+IF (<ARGO.ISITEM>)
+ SRC.SYSMESSAGE @,,1 You cannot eject that from the house!
+ return 1
+ELIF (<ARGO.REGION.UID> != <REF1.REGION.UID>)
+ SRC.SYSMESSAGE @,,1 <ARGO.NAME> is not in your house.
+ return 1
+ELIF (<ARGO>==<SRC>)
+ SRC.SYSMESSAGE @,,1 You can't eject yourself!
+ return 1
+ELIF (<REF1.IsOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't eject the house owner!
+ return 1
+ELIF (<REF1.IsCoOwner <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't eject a house co-owner!
+ return 1
+ELIF (<REF1.IsFriend <ARGO>>)
+ SRC.SYSMESSAGE @,,1 You can't eject a house friend!
+ return 1
+ENDIF
+ARGO.GO <REF1.P>
+ARGO.FIX
+SRC.SYSMESSAGE @,,1 <ARGO.NAME> has been ejected from this house.
+ARGO.SYSMESSAGE @,,1 You have been ejected from this house. If you persist in entering, you may be banned from the house.
+
+
+[FUNCTION f_house_lock]
+IF !(<ARGO.ISITEM>)
+  SRC.SYSMESSAGE @,,1 Voce nao pode bloquear isso!
+ELIF (<ARGO.CONT>) || (<SRC.REGION.UID> != <ARGO.REGION.UID>) || !(<ARGO.IsOnHouse>)
+  SRC.SYSMESSAGE @,,1 Isso nao esta em sua casa.
+ELIF (<ARGO.LINK>==<ARGO.REGION.UID>) || (<ARGO.TYPE>==t_door_locked) || (<ARGO.TYPE>==t_door) || (<ARGO.TYPE>==t_sign_gump) || (<ARGO.TYPE>==t_corpse) || (<ARGO.TYPE>==t_spell) || (<ARGO.BASEID>==i_horse_dung)
+  SRC.SYSMESSAGE @,,1 Voce nao pode bloquear isso!
+ELIF (<ARGO.ATTR> & attr_move_never)
+  SRC.SYSMESSAGE @,,1 Isso ja esta bloqueado.
+ELIF !(<UID.<ARGS>.House_AvaibleLockdowns>)
+  SRC.SYSMESSAGE @,,1 Isso excederia o limite máximo de bloqueio para esta casa.
+ELSE
+  ARGO.HouseSetLockedProps 1
+ENDIF
+
+[FUNCTION f_house_secure]
+IF !(<ARGO.ISITEM>)
+  SRC.SYSMESSAGE @,,1 Voce nao pode colocar isso seguro.
+  return 1
+ELIF (<ARGO.TYPE>==t_container)
+  LOCAL.RESCOUNT=<ARGO.RESCOUNT>
+ENDIF
+IF (<ARGO.CONT>) || (<SRC.REGION.UID> != <ARGO.REGION.UID>) || !(<ARGO.IsOnHouse>)
+  SRC.SYSMESSAGE @,,1 Isso nao esta em sua casa.
+ELIF (<ARGO.LINK>==<ARGO.REGION.UID>) || (<ARGO.TYPE>==t_door_locked) || (<ARGO.TYPE>==t_door) || (<ARGO.TYPE>==t_sign_gump) || (<ARGO.TYPE>==t_corpse) || (<ARGO.TYPE>==t_spell) || (<ARGO.BASEID>==i_horse_dung)
+  SRC.SYSMESSAGE @,,1 Voce nao pode colocar isso seguro.
+ELIF !(<CanAccess>)
+  SRC.SYSMESSAGE @,,1 Voce nao pode alterar o acesso para isso.
+ELIF (<ARGO.ATTR> & attr_move_never) && (<ARGO.TYPE> != t_container)
+  SRC.SYSMESSAGE @,,1 Isso já esta bloqueado e nao pode ser protegido.
+ELIF (<ARGO.ISSTORAGE>)
+  ARGO.SDIALOG d_house_access
+ELIF !(<UID.<ARGS>.House_AvaibleLockdowns>) || (<LOCAL.RESCOUNT> >= <UID.<ARGS>.House_AvaibleStorage>)
+  SRC.SYSMESSAGE @,,1 Esta acao excederia o limite de armazenamento seguro da casa.
+ELSE
+  ARGO.HouseSetLockedProps 1
+  IF (<ARGO.TYPE> == t_container)
+   ARGO.TAG.Access=3
+   UID.<ARGS>.TAG0.SECURE_CONT += <LOCAL.RESCOUNT>
+   ARGO.SDIALOG d_house_access
+  ENDIF
+ENDIF
+
+[FUNCTION f_house_release]
+IF !(<ARGO.ISITEM>)
+  SRC.SYSMESSAGE @,,1 Isso nao esta trancado ...
+ELIF (<ARGO.REGION.UID> != <UID.<ARGS>.REGION.UID>)
+  SRC.SYSMESSAGE @,,1 Isso nao esta em sua casa.
+ELIF !(<ARGO.ISSTORAGE>)
+  SRC.SYSMESSAGE @,,1 Isso nao esta trancado ...
+ELIF (<UID.<ARGS>.HousePlayerAccess <SRC>> < <ARGO.TAG0.Access>)
+  SRC.SYSMESSAGE @,,1 Voce nao tem privilégio para liberar isso.
+ELSE
+  IF (<ARGO.IsStorage>==2)
+   ARGO.TAG.Access=
+   UID.<ARGS>.TAG0.SECURE_CONT -= <ARGO.RESCOUNT>
+  ENDIF
+  ARGO.HouseSetLockedProps 0
+ENDIF
+
+[FUNCTION HouseSetLockedProps]
+IF (<ARGS>)
+  IF (<CAN> & can_i_block)
+   TAG.AlwaysSend=1
+  ENDIF
+  ATTR=<ATTR>&~attr_decay
+  ATTR=<ATTR>|attr_move_never
+  TIMER=-1
+  EVENTS +t_locked_down
+  UID.<UID.<REGION.UID>.MORE2>.TAG0.LOCKED_ITEMS ++
+  UPDATEX
+  return 1
+ELSE
+  TAG.AlwaysSend=
+  TAG.Decor.Z=
+  ATTR=<ATTR>&~attr_move_never
+  EVENTS -t_locked_down
+  UID.<UID.<REGION.UID>.MORE2>.TAG0.LOCKED_ITEMS --
+
+  IF !(<REGION.FLAGS> & region_flag_nodecay)
+    ATTR=<ATTR>|attr_decay
+    TIMER=<eval <SERV.DecayTimer>*60>
+  ENDIF
+
+  if (<attr> & attr_move_never)
+    attr = <attr>&~attr_move_never
+  endif
+
+  UPDATEX
+  return 1
+ENDIF
+
+
+[FUNCTION f_house_transfer]
+IF !(<ARGO.ISPLAYER>)
+ SRC.SYSMESSAGE @,,1 Somente os jogadores podem possuir uma casa!
+ return 1
+ENDIF
+REF1=<ARGS>
+IF (<ARGO>==<SRC>)
+ SRC.SYSMESSAGE @,,1 Voce nao pode transferir uma casa para si mesmo!
+ return 1
+ELIF ((<ARGO.IsOnHouse>) || (<SRC.IsOnHouse>)) || ((<ARGO.DISTANCE <REF1>> > 2) || (<SRC.DISTANCE <REF1>> > 2))
+ SRC.SYSMESSAGE @,,1 A fim de transferir a casa, voce e o destinatário deve estar fora do edifício e dentro de dois passos do sinal de casa.
+ return 1
+ELIF (<ARGO.CHECK_ACCOUNT_TYPEDEF t_multi*> >= <DEF.MAX_ACCOUNT_HOUSES>)
+ SRC.SYSMESSAGE @,,1 <ARGO.NAME> Já tem casas <dDEF.MAX_ACCOUNT_HOUSES> e nao pode possuir outro!
+ return 1
+ENDIF
+SRC.SYSMESSAGE @,,1 Aguarde enquanto o outro jogador verifica a transferência.
+SRC.TRYSRC <ARGO> DIALOG d_house_transfer 0,<REF1>
+
+[TYPEDEF t_trade_house_deed]
+ON=@Click
+MESSAGE Contrato de Transferência de Casa
+MESSAGE Nome da Casa <LINK.NAME>
+MESSAGE Dono: <UID.<LINK.MORE2>.NAME>
+MESSAGE Localizacao: <LINK.SEXTANTP> //<LINK.REGION.REGION.NAME> (<LINK.P>)
+return 1
+
+ON=@ClientToolTip
+SRC.ADDCLILOC 1061112,<LINK.NAME>
+SRC.ADDCLILOC 1061113,<UID.<LINK.MORE2>.NAME>
+SRC.ADDCLILOC 1061114,<STRARG <LINK.SEXTANTP>> <STREAT <LINK.SEXTANTP>>
+
+ON=@Timer
+IF (<CONT.TYPE>==t_eq_trade_window)
+ TIMERF 2,trigger @Timer
+ELSE
+ UID.<MORE1>.EVENTS=-e_house_transfer
+ REMOVE
+ENDIF
+return 1
+
+ON=@HouseTraded
+REF1=<MORE1>        //New Owner
+REF2=<LINK.MORE2>    //Old Owner
+REF1.EVENTS=-e_house_transfer
+REF2.SYSMESSAGE @,,1 Voce transferiu a propriedade da casa.
+REF1.SYSMESSAGE @,,1 Voce é agora o proprietário desta casa. O co-proprietário da casa, o amigo, a proibicao e as listas de acesso foram apagados. Voce deve verificar as configuracões de seguranca em todas as portas e teleporters em casa.
+LINK.TAG.LastTraded=<serv.rtime.format %d>-<serv.rtime.format %m>-<serv.rtime.format %Y> <strsub 11 0 <serv.rtime>>
+LINK.MORE2=<REF1>
+LINK.LINK.MORE1=<REF1>
+FOR 0 <eval <REF2.COUNT>-1>
+ IF (<REF2.FINDCONT.<LOCAL._FOR>.LINK>==<LINK.LINK>)
+  REF2.FINDCONT.<dLOCAL._FOR>.CONT=<REF1>
+ ENDIF
+ENDFOR
+LINK.CLEARTAGS Access
+
+
+[FUNCTION remove_invalid_houses]
+FOR 0 <eval <COUNT>-1>
+ IF (<FINDCONT.<LOCAL._FOR>.LINK.ISITEM>)
+   IF STRMATCH("t_multi*","<FINDCONT.<LOCAL._FOR>.LINK.TYPE>")
+    UID.<UID.<FINDCONT.<LOCAL._FOR>.LINK>.MORE2>.TIMER=1
+   ENDIF
+ ENDIF
+ENDFOR
+
+[FUNCTION check_account_typedef]
+FOR 0 <eval <ACCOUNT.CHARS>-1>
+ LOCAL.RETURN += <ACCOUNT.CHAR.<LOCAL._FOR>.f_check_typedefs <ARGS>>
+ENDFOR
+return <LOCAL.RETURN>
+
+[FUNCTION f_check_typedefs]
+FOR 0 <eval <RESCOUNT>-1>
+ IF (<UID.<FINDCONT(<LOCAL._FOR>).LINK>.ISITEM>)
+  IF STRMATCH("<ARGS>","<UID.<FINDCONT(<LOCAL._FOR>).LINK>.TYPE>")
+   LOCAL.FOUND ++
+  ENDIF
+ ENDIF
+ENDFOR
+return <LOCAL.FOUND>
+
+
+[FUNCTION area]
+IF (<SERV.ITEMDEF.<ARGS>.MULTIREGION>)
+ ARGS=<SERV.ITEMDEF.<ARGS>.MULTIREGION>
+ return <eval ((<ARGV0>*-1)+<ARGV2>+1)*((<ARGV1>*-1)+<ARGV3>)>
+ELIF (<UID.<REGION.UID>.MULTIREGION>)
+ ARGS=<UID.<REGION.UID>.MULTIREGION>
+ return <eval ((<ARGV0>*-1)+<ARGV2>+1)*((<ARGV1>*-1)+<ARGV3>)>
+ENDIF
+
+[FUNCTION area.x]
+IF (<SERV.ITEMDEF.<ARGS>.MULTIREGION>)
+ ARGS=<SERV.ITEMDEF.<ARGS>.MULTIREGION>
+ return <eval (<ARGV0>*-1)+<ARGV2>+1>
+ELIF (<UID.<REGION.UID>.MULTIREGION>)
+ ARGS=<UID.<REGION.UID>.MULTIREGION>
+ return <eval (<ARGV0>*-1)+<ARGV2>+1>
+ENDIF
+
+[FUNCTION area.y]
+IF (<SERV.ITEMDEF.<ARGS>.MULTIREGION>)
+ ARGS=<SERV.ITEMDEF.<ARGS>.MULTIREGION>
+ return <eval (<ARGV1>*-1)+<ARGV3>>
+ELIF (<UID.<REGION.UID>.MULTIREGION>)
+ ARGS=<UID.<REGION.UID>.MULTIREGION>
+ return <eval (<ARGV1>*-1)+<ARGV3>>
+ENDIF
+
+
+[FUNCTION HouseMaxVendors]
+IF !(<DEF.HOUSE_USE_GLOBAL_MAXVENDORS>)
+ return <eval (<AREA.X>+<AREA.Y>)/2>
+ELSE
+ return <dDEF.HOUSE_GLOBAL_MAXVENDORS>
+ENDIF
+
+
+[FUNCTION HouseSignPost]
+REF1=<REGION.UID>
+FORITEMS 30
+ IF (<REGION.UID>==<REF1.REGION.UID>)
+  IF (<LINK>==<REGION.UID>) && (<TYPE>==t_wall) && (<DISPIDDEC> < 1000)
+   return <UID>
+  ENDIF
+ ENDIF
+ENDFOR
+
+
+[FUNCTION HouseFloor]
+LOCAL.TERRAIN=<eval <SERV.MAP(<P.X>,<P.Y>,<P.M>).TERRAIN.Z>+6>
+IF (<ARGS> > <LOCAL.TERRAIN>)
+ return <eval 1+(<ARGS>-<LOCAL.TERRAIN>)/20>
+ENDIF
+return 0
+
+
+[FUNCTION HouseCheckNearArea]
+ARGS=<UID.<REGION.UID>.MULTIREGION>
+SERV.NEWNPC c_pig
+NEW.FLAGS=statf_invul|statf_insubstantial
+FOR 0 7
+ NEW.P=<UID.<REGION.UID>.P>
+ DOSWITCH <LOCAL._FOR>
+  NEW.MOVE <ARGV0> <ARGV1>
+  NEW.MOVE 0 <ARGV1>
+  NEW.MOVE <ARGV2> <ARGV1>
+  NEW.MOVE <ARGV2> 0
+  NEW.MOVE <ARGV2> <ARGV3>
+  NEW.MOVE 0 <ARGV3>
+  NEW.MOVE <ARGV0> <ARGV3>
+  NEW.MOVE <ARGV0> 0
+ ENDDO
+ DOSWITCH <LOCAL._FOR>
+  LOCAL.CLEAR=<NEW.CANMOVE nw>
+  LOCAL.CLEAR=<NEW.CANMOVE n>
+  LOCAL.CLEAR=<NEW.CANMOVE ne>
+  LOCAL.CLEAR=<NEW.CANMOVE e>
+  LOCAL.CLEAR=<NEW.CANMOVE se>
+  LOCAL.CLEAR=<NEW.CANMOVE s>
+  LOCAL.CLEAR=<NEW.CANMOVE sw>
+  LOCAL.CLEAR=<NEW.CANMOVE w>
+ ENDDO
+ IF (<NEW.IsOnRoad>) || !(<LOCAL.CLEAR>) || (<NEW.ISNEARTYPE t_tree 1>)
+  NEW.REMOVE
+  return 1
+ ENDIF
+ENDFOR
+IF (<DEF.PLACEMENT_MIN_DIST_AREA>)
+  LOCAL.AREA=<DEF.PLACEMENT_MIN_DIST_AREA>
+  FOR 0 7
+   NEW.P=<UID.<REGION.UID>.P>
+   DOSWITCH <LOCAL._FOR>
+    NEW.MOVE <eval <ARGV0>+(<LOCAL.AREA>*-1)> <eval <ARGV1>+(<LOCAL.AREA>*-1)>
+    NEW.MOVE 0 <eval <ARGV1>+(<LOCAL.AREA>*-1)>
+    NEW.MOVE <eval <ARGV2>+<LOCAL.AREA>> <eval <ARGV1>+(<LOCAL.AREA>*-1)>
+    NEW.MOVE <eval <ARGV2>+<LOCAL.AREA>> 0
+    NEW.MOVE <eval <ARGV2>+<LOCAL.AREA>> <eval <ARGV3>+<LOCAL.AREA>>
+    NEW.MOVE 0 <eval <ARGV3>+<LOCAL.AREA>>
+    NEW.MOVE <eval <ARGV0>+(<LOCAL.AREA>*-1)> <eval <ARGV3>+<LOCAL.AREA>>
+    NEW.MOVE <eval <ARGV0>+(<LOCAL.AREA>*-1)> 0
+   ENDDO
+   IF STRMATCH("t_multi*","<UID.<NEW.REGION.UID>.TYPE>")
+    NEW.REMOVE
+    return 2
+   ENDIF
+  ENDFOR
+ENDIF
+IF (<DEF.PLACEMENT_MIN_DIST_FRONT>)
+  LOCAL.FRONT=<DEF.PLACEMENT_MIN_DIST_FRONT>
+  FOR 0 5
+   NEW.P=<UID.<REGION.UID>.P>
+   DOSWITCH <LOCAL._FOR>
+    NEW.MOVE <ARGV2> <eval <ARGV3>+<LOCAL.FRONT>>
+    NEW.MOVE 0 <eval <ARGV3>+<LOCAL.FRONT>>
+    NEW.MOVE <ARGV0> <eval <ARGV3>+<LOCAL.FRONT>>
+    NEW.MOVE <ARGV0> <eval <ARGV1>+(<LOCAL.FRONT>*-1)>
+    NEW.MOVE 0 <eval <ARGV1>+(<LOCAL.FRONT>*-1)>
+    NEW.MOVE <ARGV2> <eval <ARGV1>+(<LOCAL.FRONT>*-1)>
+   ENDDO
+   IF STRMATCH("t_multi*","<UID.<NEW.REGION.UID>.TYPE>")
+    NEW.REMOVE
+    return 3
+   ENDIF
+  ENDFOR
+ENDIF
+NEW.REMOVE
+return 0
+
+[FUNCTION IsOnRoad]
+LOCAL.TERRAIN=<SERV.MAP(<P.X>,<P.Y>,<P.M>).TERRAIN>
+IF (<LOCAL.TERRAIN> >= 113) && (<LOCAL.TERRAIN> <= 140)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 232) && (<LOCAL.TERRAIN> <= 235)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 332) && (<LOCAL.TERRAIN> <= 335)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 353) && (<LOCAL.TERRAIN> <= 372)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 496) && (<LOCAL.TERRAIN> <= 499)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 622) && (<LOCAL.TERRAIN> <= 633)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 638) && (<LOCAL.TERRAIN> <= 641)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 804) && (<LOCAL.TERRAIN> <= 940)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 1351) && (<LOCAL.TERRAIN> <= 1366)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 1431) && (<LOCAL.TERRAIN> <= 1446)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 1966) && (<LOCAL.TERRAIN> <= 1969)
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 1090) && (<LOCAL.TERRAIN> <= 1145)    // Sand stones
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 1281) && (<LOCAL.TERRAIN> <= 1296)    // Sand stones
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 9) && (<LOCAL.TERRAIN> <= 21)        // Furrows
+ return 1
+ELIF (<LOCAL.TERRAIN> >= 336) && (<LOCAL.TERRAIN> <= 348)    // Furrows
+ return 1
+ELSE
+ return 0
+ENDIF
+
+
+[FUNCTION HouseValue]
+IF (<TYPE> != t_multi_custom)
+ return <VALUE>
+ELSE
+ return <eval <VALUE>+(((<QVAL (<isempty <ARGS>>)? <COMPONENTS>:<ARGS>> - <TAG0.COMPONENTS>)-<AREA.X>-1)*<DEF.HOUSE_COMPONENT_PRICE>)>
+ENDIF
+
+
+[FUNCTION HouseChangeFoundationStyle]
+REF1=<REGION.UID>
+REF1.REVERT
+LOCAL.ITEM=<ARGS>
+ARGS=<REF1.MULTIREGION>
+REF1.AddItem <STRARG <LOCAL.ITEM>>,<ARGV0>,<ARGV1>,0
+LOCAL.ITEM=<STREAT <LOCAL.ITEM>>
+FOR <ARGV2> <eval <ARGV0>+1>
+ REF1.AddItem <STRARG <LOCAL.ITEM>>,<LOCAL._FOR>,<ARGV1>,0
+ REF1.AddItem <STRARG <LOCAL.ITEM>>,<LOCAL._FOR>,<eval <ARGV3>-1>,0
+ENDFOR
+LOCAL.ITEM=<STREAT <LOCAL.ITEM>>
+FOR <eval <ARGV3>-1> <eval <ARGV1>+1>
+ REF1.AddItem <STRARG <LOCAL.ITEM>>,<ARGV0>,<LOCAL._FOR>,0
+ REF1.AddItem <STRARG <LOCAL.ITEM>>,<ARGV2>,<LOCAL._FOR>,0
+ENDFOR
+LOCAL.ITEM=<STREAT <LOCAL.ITEM>>
+REF1.AddItem <STRARG <LOCAL.ITEM>>,<ARGV2>,<eval <ARGV3>-1>,0
+REF1.Commit
+
+
+[FUNCTION TradeWindow] //Credits to Terrikate for provide the function engine
+REF1=<SRC>
+REF2=<UID>
+REF3=<ARGS>
+IF (<REF1>==<REF2>) || !((<REF1.ISPLAYER>) && (<REF2.ISPLAYER>))
+ return 1
+ENDIF
+
+REF1.OPENTRADEWINDOW <REF2>,<REF3>
+
+//FOR 2
+// SERV.NEWITEM i_bulletin_board
+// LOCAL.TRADE_WINDOW_<dLOCAL._FOR>=<NEW>
+// NEW.TYPE t_eq_trade_window
+// REF<LOCAL._FOR>.EQUIP <NEW>
+//ENDFOR
+//
+//
+//UID.<LOCAL.TRADE_WINDOW_1>.LINK=<LOCAL.TRADE_WINDOW_2>
+//UID.<LOCAL.TRADE_WINDOW_2>.LINK=<LOCAL.TRADE_WINDOW_1>
+//REF1.SENDPACKET 06F W02F B0 D<REF2> D<LOCAL.TRADE_WINDOW_1> D<LOCAL.TRADE_WINDOW_2> B1 <TradeWindow_PacketSplit <REF2.NAME>>
+//REF2.SENDPACKET 06F W02F B0 D<REF1> D<LOCAL.TRADE_WINDOW_2> D<LOCAL.TRADE_WINDOW_1> B1 <TradeWindow_PacketSplit <REF1.NAME>>
+//IF (<REF3>)
+// REF3.CONT=<LOCAL.TRADE_WINDOW_1>
+//ENDIF
+
+[FUNCTION TradeWindow_PacketSplit]
+LOCAL.LENGHT=<eval STRLEN(<ARGS>)>
+ARGS=<ASC <ARGS>>
+FOR <eval (30-<LOCAL.LENGHT>)>
+ ARGS .= " 00"
+ENDFOR
+return <ARGS>
+
+
+[FUNCTION CodexOfWisdomDialog]
+return <DEF.L1>a href = "?ForceTopic<ARGV0>"<DEF.R1><STREAT <ARGS>><DEF.L1>/a<DEF.R1>
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[SPEECH spk_player_casa]
+//ON=bank*
+//IF !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+// return 0
+//ENDIF
+//REF1=<UID.<SRC.REGION.UID>.MORE2>
+//IF -(<REF1.HousePlayerAccess <SRC>> >= 2)
+//    src.bank
+//ENDIF
+//return 0
+
+ON=trancar item*
+IF !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 3)
+ IF (<REF1.House_AvaibleLockdowns>)
+  SRC.TARGETF f_house_lock <REF1>
+  SRC.SYSMESSAGE @,,1 O que voce deseja TRANCAR?
+ ELSE
+  SRC.SYSMESSAGE @,,1 Nao e possivel proteger mais itens porque atinge o limite de Armazenamento da Casa.
+ ENDIF
+ENDIF
+
+ON=por seguro*
+IF !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 3)
+ IF (<REF1.House_AvaibleLockdowns>)
+  SRC.TARGETF f_house_secure <REF1>
+  SRC.SYSMESSAGE @,,1 Escolha o item que deseja proteger
+ ELSE
+  SRC.SYSMESSAGE @,,1 nao é possível proteger mais itens porque atinge o limite de Armazenamento da Casa.
+ ENDIF
+ENDIF
+
+ON=soltar item*
+IF !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 3)
+ SRC.TARGETF f_house_release <REF1>
+ SRC.SYSMESSAGE @,,1 Escolha o item que deseja liberar!
+ENDIF
+
+ON=banir*
+IF !(<DEF.HOUSE_USE_BAN_ENGINE>) || !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 2)
+ SRC.TARGETF f_house_banish <REF1>
+ SRC.SYSMESSAGE @,,1 Selecione o indivíduo para banir desta casa
+ENDIF
+
+ON=sair*
+IF !(<DEF.HOUSE_USE_BAN_ENGINE>) || !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 2)
+ SRC.TARGETF f_house_eject <REF1>
+ SRC.SYSMESSAGE @,,1 Selecione o indivíduo para sair de sua casa!
+ENDIF
+
+ON=por lixeira*
+IF !(<DEF.HOUSE_USE_TRASHBARREL>) || !STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+  return 0
+ENDIF
+REF1=<UID.<SRC.REGION.UID>.MORE2>
+IF (<REF1.HousePlayerAccess <SRC>> >= 3)
+  IF ((<SRC.ISNEARTYPE t_door 1>) || (<SRC.ISNEARTYPE t_door_locked 1>))
+    SRC.SYSMESSAGE @,,1 Voce nao pode colocar um barril de lixo perto de uma porta.
+    return 0
+  ELSE
+    FORITEMS 40
+     IF (<BASEID>==i_trash_barrel) && (<UID.<REGION.UID>.MORE2>==<REF1>)
+      P=<SRC.P>
+      return 0
+     ENDIF
+    ENDFOR
+    SERV.NEWITEM i_trash_barrel
+    NEW.P=<SRC.P>
+    NEW.LINK=<NEW.REGION.UID>
+    SRC.SYSMESSAGE @,,1 Voce tem um novo barril de lixo. Três minutos depois de colocar algo no barril, o lixo será esvaziado. Esteja prevenido, isso é permanente!
+  ENDIF
+ENDIF
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[ITEMDEF i_trash_barrel]
+ID=i_barrel_open
+NAME=trash barrel
+
+ON=@Create
+COLOR=946
+ATTR=attr_static
+
+ON=@Timer
+IF !(<ATTR> & attr_decay)
+ IF (<COUNT>)
+  MESSAGE @,,1 Esvaziando o lixo!
+  EMPTY
+  return 1
+ ENDIF
+ENDIF
+
+ON=@DropOn_Self
+IF (<RESCOUNT> >= 50)
+ TOPOBJ.MESSAGE @,,1 O lixo esta cheio! Esvaziando!
+ EMPTY
+ELSE
+ TOPOBJ.MESSAGE @,,1 O item será excluído em três minutos.
+ TIMER=180
+ENDIF
+
+
+[TYPEDEF t_weapon_sword]
+ON=@TargOn_Item
+IF (<ARGO.BASEID>==i_trash_barrel) && (<ARGO.CanSeeLOS>)
+ REF1=<UID.<ARGO.REGION.UID>.MORE2>
+ IF (<REF1.IsOwner <SRC>>) || (<REF1.IsCoOwner <SRC>>)
+  SRC.FACE <ARGO>
+  ARGO.SOUND 011c
+  ARGO.REMOVE
+  SRC.SYSMESSAGE @,,1 Voce destrói o item.
+ ENDIF
+ return 1
+ENDIF
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[TYPEDEF t_door_locked]
+ON=@Click
+IF (<DEF.HOUSE_DOOR_ACCESS>)
+ IF !(<SERV.FeatureAOS> & 04) || (<SRC.ACCOUNT.RESDISP> < 2)
+  IF (<UID.<UID.<REGION.UID>.MORE2>.IsOwner <SRC>>)
+   SDIALOG d_house_access
+  ENDIF
+ ENDIF
+ENDIF
+
+ON=@ContextMenuRequest
+IF (<DEF.HOUSE_DOOR_ACCESS>)
+ IF (<UID.<UID.<REGION.UID>.MORE2>.IsOwner <SRC>>)
+  SRC.AddContextEntry 101,6203
+ ENDIF
+ENDIF
+
+ON=@ContextMenuSelect
+SDIALOG d_house_access
+
+ON=@DClick
+REF1=<UID.<REGION.UID>.MORE2>
+LOCAL.RequiredAccess=<TAG0.Access>
+
+IF (<DISTANCE> > 8)
+ SRC.SYSMESSAGE @,,1 Voce deve estar dentro de 8 passos para abrir a porta da casa.
+ return 1
+ENDIF
+
+IF !(<REF1.TAG0.Public>) && !(<TAG0.Access>)
+ LOCAL.RequiredAccess=1
+ENDIF
+
+IF (<REF1.HousePlayerAccess <SRC>> >= <LOCAL.RequiredAccess>) || ((<TAG0.Access>==5) && (<SRC.GUILD> == <UID.<REF1.MORE2>.GUILD>))
+ TIMER=0
+ return 1
+ENDIF
+
+
+[TYPEDEF t_locked_down]
+ON=@ClientToolTip
+SRC.ADDCLILOC <QVAL (<TAG0.Access> > 1)? 501643 : 501644>    //locked down & secure
+
+ON=@ContextMenuRequest
+IF (<TYPE> == t_container) && (<TYPE> != t_door_locked)
+ IF (<UID.<UID.<REGION.UID>.MORE2>.HousePlayerAccess <SRC>> >= 3)
+  SRC.AddContextEntry 101,6203
+ ENDIF
+ENDIF
+
+ON=@ContextMenuSelect
+SDIALOG d_house_access
+
+ON=@Click
+IF (<TYPE> != t_door_locked)
+ IF (<TAG0.Access>)
+  MESSAGE @<COLOR> (Locked Down & Secure)
+ ELSE
+  MESSAGE @<COLOR> (Locked Down)
+ ENDIF
+ENDIF
+
+ON=@DClick
+IF (<TAG0.Access>==5) && !(<UID.<UID.<REGION.UID>.MORE1>.GUILD>)
+ TAG.Access=4
+ENDIF
+IF !(<CanAccess>)
+ IF (<TYPE> != t_container)
+  SRC.SYSMESSAGE @,,1 Voce nao tem permissao para acessar.
+ ELSE
+  MESSAGE @,,1 That is secure.
+ ENDIF
+ return 1
+ENDIF
+IF STRMATCH("t_weapon_*","<TYPE>")
+ SRC.SYSMESSAGE @,,1 O item esta bloqueado na estrutura.
+ return 1
+ENDIF
+
+ON=@DropOn_Self
+IF (<TYPE> == t_container) && (<TAG0.Access>)
+ IF (<UID.<UID.<REGION.UID>.MORE2>.House_AvaibleStorage>)
+  TIMERF 1,update_rescount <RESCOUNT>
+ ELSE
+  SRC.SYSMESSAGE @,,1 Voce alcancou o limite de armazenamento da casa.
+  return 1
+ ENDIF
+ENDIF
+
+ON=@PickUp_Self
+IF (<TYPE> == t_container) && (<TAG0.Access>)
+ UID.<UID.<REGION.UID>.MORE2>.TAG0.SECURE_CONT --
+ENDIF
+
+ON=@PickUp_Ground
+TAG.Decor.Z=
+
+ON=@Destroy
+IF STRMATCH("t_multi*","<UID.<REGION.UID>.TYPE>")
+ UID.<UID.<REGION.UID>.MORE2>.TAG0.LOCKED_ITEMS --
+ IF (<TYPE>==t_container)
+  UID.<UID.<REGION.UID>.MORE2>.TAG0.SECURE_CONT -= <RESCOUNT>
+ ENDIF
+ENDIF
+
+
+[FUNCTION update_rescount]
+IF (<RESCOUNT> != <ARGS>)
+ UID.<UID.<REGION.UID>.MORE2>.TAG0.SECURE_CONT ++
+ENDIF
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[FUNCTION notice]
+IF (<ISPLAYER>)
+  IF (<DEF.USE_NOTICE_SYSTEM>)
+    TAG.NOTICE=<ARGS>
+    EVENTS +e_notice
+    IF (<ISONLINE>)
+     TIMERF 1,SDIALOG d_notice
+    ENDIF
+  ELSE
+    IF (<ISONLINE>)
+     SYSMESSAGE @,,1 <ARGS>
+    ENDIF
+  ENDIF
+ENDIF
+
+
+[EVENTS e_notice]
+ON=@Login
+SDIALOG d_notice
+
+
+[DIALOG d_notice]
+160,150
+noclose
+
+resizepic 0 0 5054 320 180
+gumppictiled 10 10 300 20 2624
+checkertrans 10 10 300 20
+dhtmlgump 10 10 300 20 0 0 <DEF.L1>basefont color="#f70000"<DEF.R1><DEF.CENTER>NOTICE
+gumppictiled 10 40 300 100 2624
+checkertrans 10 40 300 100
+gumppictiled 10 150 300 20 2624
+checkertrans 10 150 300 20
+button 10 150 4005 4007 1 0 0
+dtext 40 150 1152 OKAY
+dhtmlgump 10 40 300 100 0 1 <DEF.L1>basefont color="#ffc600"<DEF.R1><TAG0.NOTICE>
+
+[DIALOG d_notice BUTTON]
+ON=0
+TAG.NOTICE=
+EVENTS -e_notice
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+[ITEMDEF i_house_placement_tool]
+ID=014f6
+NAME=House Placement Tool
+VALUE=5000
+DUPELIST=014f5
+
+ON=@DClick
+SDIALOG d_house_placement_tool
+return 1
+
+
+
+
+[DIALOG d_house_placement_tool]
+50,50
+
+page 0
+resizepic 0 0 5054 270 145
+gumppictiled 10 10 250 125 2624
+checkertrans 10 10 250 125
+dhtmlgump 10 10 250 20 0 0 <DEF.BFONT_white><DEF.CENTER>HOUSE PLACEMENT TOOL<DEF.CENTERE>
+button 10 110 4017 4019 1 0 0
+dtext 45 110 1152 Close
+button 10 40 4005 4007 1 0 1
+dtext 45 40 1152 Classic Houses
+button 10 60 4005 4007 1 0 2
+dtext 45 60 1152 2-Story Customizable Houses
+button 10 80 4005 4007 1 0 3
+dtext 45 80 1152 3-Story Customizable Houses
+
+[DIALOG d_house_placement_tool BUTTON]
+ON=1
+SDIALOG d_house_placement_tool_classic
+
+ON=2
+SDIALOG d_house_placement_tool_custom_2story
+
+ON=3
+SDIALOG d_house_placement_tool_custom_3story
+
+
+
+
+[FUNCTION RenderPlacementToolDialogBackground]
+resizepic 0 0 5054 520 420
+gumppictiled 10 10 500 20 2624
+checkertrans 10 10 500 20
+dhtmlgump 10 10 500 20 0 0 <DEF.BFONT_white><DEF.CENTER>HOUSE PLACEMENT TOOL<DEF.CENTERE>
+gumppictiled 10 40 500 20 2624
+checkertrans 10 40 500 20
+dtext 50 40 1152 House Description
+dtext 275 40 1152 Storage
+dtext 350 40 1152 Lockdowns
+dtext 425 40 1152 Cost
+gumppictiled 10 70 500 280 2624
+checkertrans 10 70 500 280
+gumppictiled 10 360 500 20 2624
+checkertrans 10 360 500 20
+dtext 10 360 1152 Bank Balance:
+dtext 250 360 1152 <SRC.BANKBALANCE>
+gumppictiled 10 390 500 20 2624
+checkertrans 10 390 500 20
+button 10 390 4017 4019 1 0 0
+dtext 50 390 1152 Close
+
+[FUNCTION RenderPlacementToolDialogPage]
+IF (<LOCAL.Y> > 340)
+ button 450 390 4005 4007 0 <eval <LOCAL.PAGE>+1> 0
+ dtext 400 390 1152 Next
+ LOCAL.PAGE ++
+ page <LOCAL.PAGE>
+ button 200 390 4014 4016 0 <eval <LOCAL.PAGE>-1> 0
+ dtext 250 390 1152 Previous
+ LOCAL.Y=70
+ENDIF
+
+
+
+[DIALOG d_house_placement_tool_classic]
+50,50
+
+page 0
+RenderPlacementToolDialogBackground
+
+page 1
+LOCAL.PAGE=1
+LOCAL.Y=70
+FOR 1 24
+ IF (<SERV.ITEMDEF.<DEF.house_classic_<dlocal._for>>>)
+  button 10 <LOCAL.Y> 4005 4007 1 0 <local._for>
+  dtext 50 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_classic_<dlocal._for>>.NAME>
+  dtext 275 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_classic_<dlocal._for>>>)>
+  dtext 350 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_classic_<dlocal._for>>>)/2>
+  dtext 425 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_classic_<dlocal._for>>.VALUE>
+  LOCAL.Y += 20
+  CALL RenderPlacementToolDialogPage
+ ENDIF
+ENDFOR
+
+[DIALOG d_house_placement_tool_classic BUTTON]
+ON=0
+SDIALOG d_house_placement_tool
+
+ON=1 24
+SRC.f_house_placement <DEF.house_classic_<ARGN>>
+
+
+
+[DIALOG d_house_placement_tool_custom_2story]
+50,50
+
+page 0
+RenderPlacementToolDialogBackground
+
+page 1
+LOCAL.PAGE=1
+LOCAL.Y=70
+FOR 1 47
+ IF (<SERV.ITEMDEF.<DEF.house_custom_2story_<dlocal._for>>>)
+  button 10 <LOCAL.Y> 4005 4007 1 0 <local._for>
+  dtext 50 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_custom_2story_<dlocal._for>>.NAME>
+  dtext 275 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_custom_2story_<dlocal._for>>>)>
+  dtext 350 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_custom_2story_<dlocal._for>>>)/2>
+  dtext 425 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_custom_2story_<dlocal._for>>.VALUE>
+  LOCAL.Y += 20
+  CALL RenderPlacementToolDialogPage
+ ENDIF
+ENDFOR
+
+[DIALOG d_house_placement_tool_custom_2story BUTTON]
+ON=0
+SDIALOG d_house_placement_tool
+
+ON=1 47
+SRC.f_house_placement <DEF.house_custom_2story_<ARGN>>
+
+
+
+[DIALOG d_house_placement_tool_custom_3story]
+50,50
+
+page 0
+RenderPlacementToolDialogBackground
+
+page 1
+LOCAL.PAGE=1
+LOCAL.Y=70
+FOR 1 55
+ IF (<SERV.ITEMDEF.<DEF.house_custom_3story_<dlocal._for>>>)
+  button 10 <LOCAL.Y> 4005 4007 1 0 <local._for>
+  dtext 50 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_custom_3story_<dlocal._for>>.NAME>
+  dtext 275 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_custom_3story_<dlocal._for>>>)>
+  dtext 350 <LOCAL.Y> 1152 <eval (<AREA <DEF.house_custom_3story_<dlocal._for>>>)/2>
+  dtext 425 <LOCAL.Y> 1152 <SERV.ITEMDEF.<DEF.house_custom_3story_<dlocal._for>>.VALUE>
+  LOCAL.Y += 20
+  CALL RenderPlacementToolDialogPage
+ ENDIF
+ENDFOR
+
+[DIALOG d_house_placement_tool_custom_3story BUTTON]
+ON=0
+SDIALOG d_house_placement_tool
+
+ON=1 55
+SRC.f_house_placement <DEF.house_custom_3story_<ARGN>>
+
+
+////////////////////////////////////////
+
+
+[FUNCTION f_house_placement]
+SERV.NEWITEM i_gold
+NEW.TYPE=t_deed
+NEW.MORE1=<ARGS>
+NEW.CONT <SRC.FINDLAYER.21>
+NEW.REMOVEFROMVIEW
+NEW.TIMERF 60,REMOVE
+NEW.USE
+
+
+[TYPEDEF t_deed]
+ON=@DClick
+IF (<CONT> != <SRC.FINDLAYER.21>)
+  SRC.SYSMESSAGE @,,1 O item estar em sua mochila.
+  return 1
+ELIF !(<SRC.ISGM>)
+  IF STRMATCH("t_multi*","<SERV.ITEMDEF.<MORE1>.TYPE>")
+   IF (<SRC.CHECK_ACCOUNT_TYPEDEF t_multi*> >= <DEF.MAX_ACCOUNT_HOUSES>)
+    SRC.SYSMESSAGE @,,1 Voce já possui <dDEF.MAX_ACCOUNT_HOUSES> house(s), e nao pode colocar outro!
+    return 1
+   ENDIF
+  ENDIF
+ENDIF
+
+ON=@TargOn_Ground
+SRC.TIMERF 1,HouseIsPlaced <MORE1> <BASEID> <SRC.TARGP>
+
+ON=@TargOn_Char
+SRC.SYSMESSAGE @,,1 Voce deve colocar sua casa no chao.
+return 1
+
+ON=@TargOn_Item
+SRC.SYSMESSAGE @,,1 Voce deve colocar sua casa no chao.
+return 1
+
+ON=@TargOn_Cancel
+IF (<DISPID>==i_gold)
+ SRC.SDIALOG d_house_placement_tool
+ REMOVE
+ENDIF
+
+
+[FUNCTION HouseIsPlaced]
+SERV.NEWITEM i_gold
+NEW.P <STREAT <STREAT <ARGS>>>
+NEW.REMOVEFROMVIEW
+REF1=<NEW.REGION.UID>
+IF (<REF1.DISPID>==<STRARG <ARGS>>)
+ REF1.TAG.PLACEMENT=<STRARG <STREAT <ARGS>>>
+ENDIF
+NEW.REMOVE
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[ITEMDEF i_house_interior_decorator]
+ID=0fc1
+NAME=Interior Decorator
+VALUE=10000
+
+ON=@ClientToolTip
+IF (<TAG0.MODE>)
+ SRC.ADDCLILOC <eval 1018322+<TAG0.MODE>>
+ENDIF
+
+ON=@Click
+IF (<TAG0.MODE>==1)
+ MESSAGE (turn)
+ELIF (<TAG0.MODE>==2)
+ MESSAGE (up)
+ELIF (<TAG0.MODE>==3)
+ MESSAGE (down)
+ENDIF
+
+ON=@DClick
+REF1=<REGION.UID>
+IF (<CONT.TOPOBJ> != <SRC>)
+ SRC.SYSMESSAGE @,,1 Isso deve estar em seu pacote para que voce possa usá-lo.
+ return 1
+ELIF !(<SRC.IsOnHouse>) || (<UID.<REF1.MORE2>.HousePlayerAccess <SRC>> < 3)
+ SRC.SYSMESSAGE @,,1 Voce deve estar em sua casa para fazer isso.
+ return 1
+ELIF !(<TAG0.MODE>)
+ SDIALOG d_house_interior_decorator
+ELSE
+ TAG.House=<REGION.UID>
+ TARGET
+ENDIF
+return 1
+
+ON=@TargOn_Char
+TAG.House=
+return 1
+
+ON=@TargOn_Cancel
+TAG.House=
+
+ON=@TargOn_Item
+IF (<ARGO> == <UID>)
+  TAG.House=
+  TAG.Mode=
+  SDIALOG d_house_interior_decorator
+  return 1
+ELSE
+  IF (<SRC.REGION.UID> != <TAG0.HOUSE>) || !(<SRC.IsOnHouse>)
+    SRC.SYSMESSAGE @,,1 Voce deve estar em sua casa para fazer isso.
+  ELIF (<ARGO.CONT>) || (<ARGO.REGION.UID> != <TAG0.HOUSE>) || !(<ARGO.IsOnHouse>)
+    SRC.SYSMESSAGE @,,1 Isso nao esta em sua casa.
+  ELIF !(<ARGO.IsStorage>)
+    SRC.SYSMESSAGE @,,1 Isso nao é bloqueado.
+  ELIF (<ARGO.WEIGHT> > 100)
+    SRC.SYSMESSAGE @,,1 Isso é muito pesado.
+  ELSE
+    TAG.House=
+    IF (<TAG0.Mode>==1)
+      IF (<isempty <ARGO.DUPELIST>>)
+       SRC.SYSMESSAGE @,,1 Voce nao pode virar isso.
+      ELSE
+       ARGO.FLIP
+      ENDIF
+      return 1
+    ELIF (<TAG0.MODE>==2)
+      IF (<ARGO.HouseFloor <ARGO.Z>> != <ARGO.HouseFloor <eval <ARGO.Z>+<ARGO.HEIGHT>+3>>)
+       SRC.SYSMESSAGE @,,1 Voce nao pode levantá-lo mais alto
+      ELSE
+       ARGO.NUDGEUP
+      ENDIF
+      return 1
+    ELIF (<TAG0.MODE>==3)
+      IF (<ARGO.HouseFloor <ARGO.Z>> != <ARGO.HouseFloor <eval <ARGO.Z>-1>>)
+       SRC.SYSMESSAGE @,,1 Voce nao pode baixá-lo mais.
+      ELSE
+       ARGO.NUDGEDOWN
+      ENDIF
+      return 1
+    ENDIF
+  ENDIF
+  return 1
+ENDIF
+
+
+[DIALOG d_house_interior_decorator]
+150,50
+
+resizepic 0 0 2600 200 200
+button 50 45 2152 2154 1 0 1
+dhtmlgump 90 50 70 40 0 0 Turn
+button 50 95 2152 2154 1 0 2
+dhtmlgump 90 100 70 40 0 0 Up
+button 50 145 2152 2154 1 0 3
+dhtmlgump 90 150 70 40 0 0 Down
+
+[DIALOG d_house_interior_decorator BUTTON]
+ON=1 3
+TAG.Mode=<ARGN>
+DClick
+
+//////////////////////////////////////////////////////////////////////////////////
+
+[EVENTS e_house_customize]
+ON=@SkillStart
+SYSMESSAGE @,,1 Voce nao pode fazer isso enquanto personaliza uma casa.
+return 1
+
+ON=@SkillUseQuick
+return 1
+
+ON=@GetHit
+return 1
+
+ON=@Login
+TRIGGER @HouseDesignExit
+
+ON=@DClick
+SYSMESSAGE @,,1 Voce nao pode fazer isso enquanto personaliza uma casa.
+return 1
+
+ON=@ItemDClick
+SYSMESSAGE @,,1 Voce nao pode fazer isso enquanto personaliza uma casa.
+return 1
+
+ON=@HouseDesignCommit
+LOCAL.OLDCOST = <ARGO.HouseValue <ARGN1>>
+LOCAL.NEWCOST = <ARGO.HouseValue <ARGN2>>
+LOCAL.CURCOST = <eval (<LOCAL.NEWCOST> - <LOCAL.OLDCOST>)>
+ARGO.TAG.CUSTOMIZE.INFO=<LOCAL.OLDCOST>,<LOCAL.NEWCOST>,<LOCAL.CURCOST>
+ARGO.SDIALOG d_house_customize_commit
+return 1
+
+ON=@HouseDesignExit
+EVENTS -e_house_customize
+DSPEECH -spk_house_customize
+
+
+[DIALOG d_house_customize_commit]
+50,50
+
+ARGS=<TAG0.CUSTOMIZE.INFO>
+resizepic 0 0 5054 320 320
+gumppictiled 10 10 300 20 2624
+gumppictiled 10 40 300 240 2624
+gumppictiled 10 290 300 20 2624
+checkertrans 10 10 300 300
+dhtmlgump 10 10 300 20 0 0 <DEF.L1>basefont color="#fffC00"<DEF.R1><DEF.CENTER>COMMIT DESIGN
+dhtmlgump 10 40 300 140 0 1 <DEF.L1>basefont color="#ff3ff"<DEF.R1>Voce esta prestes a cometer o seu projeto de casa atual. Para fazer isso, voce deve pagar a diferenca entre o valor atual da casa eo custo dado no menu do construtor de casas. Se o novo custo de sua casa for menor que seu valor antigo, voce receberá um reembolso.
+dhtmlgump 10 190 150 20 0 0 <DEF.L1>basefont color="#fffC00"<DEF.R1>Bank Balance:
+dtext 170 190 55 <SRC.BANKBALANCE>
+dhtmlgump 10 215 150 20 0 0 <DEF.L1>basefont color="#ff3ff"<DEF.R1>Old Value:
+dtext 170 215 90 <dARGV[0]>
+dhtmlgump 10 235 150 20 0 0 <DEF.L1>basefont color="#ff3ff"<DEF.R1>Cost To Commit:
+dtext 170 235 90 <dARGV[1]>
+dhtmlgump 10 260 150 20 0 0 <DEF.L1>basefont color="#f01C00"<DEF.R1>Your Cost:
+dtext 170 260 40 <dARGV[2]>
+button 10 290 4005 4007 1 0 1
+dhtmlgump 45 290 80 20 0 0 <DEF.BFONT_WHITE>OKAY
+button 170 290 4005 4007 1 0 0
+dhtmlgump 205 290 80 20 0 0 <DEF.BFONT_WHITE>CANCEL
+
+[DIALOG d_house_customize_commit BUTTON]
+ON=0 1
+IF (<ARGN>==1)
+ ARGS=<TAG.CUSTOMIZE.INFO>
+ LOCAL.OLDCOST = <dARGV[0]>
+ LOCAL.NEWCOST = <dARGV[1]>
+ LOCAL.CURCOST = <dARGV[2]>
+ IF (<SRC.ISGM>)
+   IF (<LOCAL.CURCOST> < 0)
+    SRC.SYSMESSAGE @,,1 <eval <LOCAL.CURCOST>*-1> Ouro teria sido depositado em seu banco se voce nao fosse um GM.
+   ELIF (<LOCAL.CURCOST> > 0)
+    SRC.SYSMESSAGE @,,1 <dLOCAL.CURCOST> O ouro teria sido retirado do seu banco se voce nao fosse um GM.
+   ENDIF
+ ELSE
+   IF (<SRC.BANKBALANCE> < <LOCAL.CURCOST>)
+    SRC.SYSMESSAGE @,,1 Voce nao tem recursos para este projeto da casa.
+    return 1
+   ENDIF
+   SRC.SYSMESSAGE @,,1 Seu projeto da casa nova foi cometido.
+   IF (<LOCAL.CURCOST> == 0)
+    SRC.SYSMESSAGE @,,1 Como o novo design custa o mesmo que o anterior, nenhum ouro foi retirado de sua conta.
+   ELIF (<LOCAL.CURCOST> < 0)
+    LOCAL.CURCOST = <eval <LOCAL.CURCOST>*-1>
+    SRC.GOLD += <dLOCAL.CURCOST>
+    SRC.SYSMESSAGE @,,1 Como o novo design é mais barato do que o anterior, <dLOCAL.CURCOST> ouro foi devolvido a voce.
+   ELSE
+    SRC.GOLD -= <dLOCAL.CURCOST>
+    SRC.SYSMESSAGE @,,1 <dLOCAL.CURCOST> Ouro foi retirado de sua conta para pagar pela construcao.
+   ENDIF
+ ENDIF
+ COMMIT
+ ENDCUSTOMIZE
+ Fix_CustomizedDoorsType
+ENDIF
+TAG.CUSTOMIZE.INFO=
+
+
+[FUNCTION Fix_CustomizedDoorsType]
+IF !(<UID.<MORE2>.TAG0.Public>)
+ REF1=<REGION.UID>
+ FORITEMS 20
+  IF (<REGION.UID>==<REF1>)
+   IF (<TYPE>==t_door)
+    TYPE=t_door_locked
+   ENDIF
+  ENDIF
+ ENDFOR
+ENDIF
+
+
+[SPEECH spk_house_customize]
+ON=*
+SRC.SYSMESSAGE @,,1 Voce nao pode falar enquanto personaliza sua casa.
+return 1
+
+[EOF]
